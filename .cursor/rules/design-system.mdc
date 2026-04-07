@@ -1,0 +1,48 @@
+---
+description: Regras do Design System para geração de componentes
+globs: src/components/**/*
+---
+
+# Design System Rules
+
+## Stack Obrigatória
+- React 18+ com TypeScript
+- CSS puro com variáveis CSS (design tokens de src/generated/variables.css)
+- Vitest para testes
+- Storybook para documentação
+
+## Tokens
+- SEMPRE importe e use variáveis CSS de src/generated/variables.css
+- NUNCA use valores hardcoded para cores, espaçamentos, fontes ou bordas
+- Unidades em rem (nunca px)
+- Exemplo correto: `color: var(--color-primary)`
+- Exemplo errado: `color: #3B82F6`
+
+## Estrutura de Cada Componente
+Ao criar um componente, SEMPRE gere todos estes arquivos:
+
+src/components/NomeComponente/
+├── NomeComponente.tsx        # Componente React
+├── NomeComponente.module.css # Estilos usando CSS Modules
+├── NomeComponente.test.tsx   # Testes com Vitest
+├── NomeComponente.stories.tsx # Story do Storybook
+└── index.ts
+
+# Re-export
+
+## Convenções de Código
+- Componentes como arrow functions
+- Props tipadas com `interface` (não `type`)
+- Export nomeado (não default)
+- Nomes de arquivos em PascalCase
+
+## Acessibilidade (OBRIGATÓRIO)
+- Todo elemento interativo deve ter `role` e `aria-label`
+- Imagens devem ter `alt`
+- Botões devem funcionar com Enter e Space
+- Contraste mínimo 4.5:1
+
+## Assets do Figma MCP
+- Se o Figma MCP retornar uma URL localhost para imagem/SVG, use diretamente
+- NÃO instale pacotes de ícones externos — use os assets do Figma
+- NÃO crie placeholders se uma URL de asset for fornecida

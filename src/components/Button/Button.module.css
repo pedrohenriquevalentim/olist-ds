@@ -1,0 +1,139 @@
+.button {
+  height: calc(var(--shape-size-32px) * 0.0625rem);
+  max-height: calc(var(--shape-size-32px) * 0.0625rem);
+  min-height: calc(var(--shape-size-32px) * 0.0625rem);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--shape-spacing-12px) * 0.0625rem);
+  border-radius: calc(var(--shape-border-radius-9999px) * 0.0625rem);
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+
+  font-family: var(--light-font-family-base);
+  font-size: calc(var(--font-size-12px) * 0.0625rem);
+  line-height: calc(var(--font-line-height-16px) * 0.0625rem);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.button:disabled {
+  cursor: default;
+}
+
+.withIcon {
+  gap: calc(var(--shape-spacing-4px) * 0.0625rem);
+}
+
+.noIcon {
+  gap: 0;
+}
+
+.label {
+  display: inline-block;
+}
+
+.icon {
+  width: calc(var(--shape-size-16px) * 0.0625rem);
+  height: calc(var(--shape-size-16px) * 0.0625rem);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.icon img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.button:focus-visible {
+  outline: calc(var(--shape-border-width-2px) * 0.0625rem) solid var(--color-blue-500);
+  outline-offset: calc(var(--shape-spacing-4px) * 0.0625rem);
+}
+
+.hasFocus {
+  outline: calc(var(--shape-border-width-2px) * 0.0625rem) solid var(--color-blue-500);
+  outline-offset: calc(var(--shape-spacing-4px) * 0.0625rem);
+}
+
+/* Types */
+.primary {
+  background: var(--color-blue-500);
+  color: var(--color-blue-0);
+}
+
+.secondary {
+  background: var(--color-none-transparent);
+  border: calc(var(--shape-border-width-1px) * 0.0625rem) solid var(--color-gray-300);
+  color: var(--color-gray-600);
+}
+
+.tertiary {
+  background: var(--color-none-transparent);
+  color: var(--color-gray-600);
+}
+
+/* States (forced via prop) */
+.state_enabled.primary:hover,
+.state_hover.primary {
+  background-image: linear-gradient(90deg, var(--effects-hover-brand-900-8) 0%, var(--effects-hover-brand-900-8) 100%),
+    linear-gradient(90deg, var(--color-blue-500) 0%, var(--color-blue-500) 100%);
+}
+
+.state_enabled.primary:active,
+.state_pressed.primary {
+  background-image: linear-gradient(90deg, var(--effects-pressed-brand-900-16) 0%, var(--effects-pressed-brand-900-16) 100%),
+    linear-gradient(90deg, var(--color-blue-500) 0%, var(--color-blue-500) 100%);
+}
+
+.state_disabled.primary,
+.state_disabled.primary:disabled {
+  background: var(--effects-disabled-gray-0);
+  color: var(--color-gray-200);
+}
+
+.state_enabled.secondary:hover,
+.state_hover.secondary,
+.state_enabled.tertiary:hover,
+.state_hover.tertiary {
+  background-image: linear-gradient(90deg, var(--effects-hover-gray-900-4) 0%, var(--effects-hover-gray-900-4) 100%),
+    linear-gradient(90deg, var(--color-none-transparent) 0%, var(--color-none-transparent) 100%);
+  color: var(--color-gray-900);
+}
+
+.state_enabled.secondary:active,
+.state_pressed.secondary,
+.state_enabled.tertiary:active,
+.state_pressed.tertiary {
+  background-image: linear-gradient(90deg, var(--effects-pressed-gray-900-12) 0%, var(--effects-pressed-gray-900-12) 100%),
+    linear-gradient(90deg, var(--color-none-transparent) 0%, var(--color-none-transparent) 100%);
+  color: var(--color-gray-900);
+}
+
+.state_enabled.secondary:hover,
+.state_hover.secondary {
+  border-color: var(--color-gray-500);
+}
+
+.state_enabled.secondary:active,
+.state_pressed.secondary {
+  border-color: var(--color-gray-800);
+}
+
+.state_disabled.secondary,
+.state_disabled.secondary:disabled {
+  border-color: var(--color-gray-100);
+  color: var(--color-gray-200);
+  background: var(--color-none-transparent);
+}
+
+.state_disabled.tertiary,
+.state_disabled.tertiary:disabled {
+  color: var(--color-gray-200);
+  background: var(--color-none-transparent);
+}
+
