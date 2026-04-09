@@ -1,3 +1,5 @@
+"use client";
+
 export { MenuErp } from './components/MenuErp';
 export { Button } from './components/Button';
 export { Checkbox } from './components/Checkbox';
