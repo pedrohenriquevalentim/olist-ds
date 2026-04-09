@@ -1,30 +1,136 @@
-storybook:
-    name: Build + Deploy Storybook
-    needs: quality
+name: Design System — Pipeline AI-First
+
+# Quando roda:
+# - A cada push na branch main
+# - A cada Pull Request apontando para main
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ─────────────────────────────────────────────────────────
+  # JOB 1: Qualidade
+  # Roda lint, gera tokens, gera testes com Gemini, executa testes
+  # ─────────────────────────────────────────────────────────
+  quality:
+    name: Lint + Tokens + Testes
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Baixar código do repositório
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'npm'
 
-      - run: npm ci
-      - run: npm run build:tokens
+      - name: Instalar dependências
+        run: npm ci
 
-      # Gera stories para componentes que não têm
-      - name: Gerar Stories com Gemini
+      - name: Verificar qualidade do código
+        run: npm run lint
+
+      - name: Gerar tokens CSS a partir do Figma
+        run: npm run build:tokens
+
+      - name: Gerar testes com Gemini (componentes sem teste)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: npm run generate:tests
+
+      - name: Rodar todos os testes
+        run: npm run test:run
+
+      - name: Compilar TypeScript
+        run: npm run build
+
+  # ─────────────────────────────────────────────────────────
+  # JOB 2: Storybook
+  # Gera stories, builda o Storybook, publica no GitHub Pages
+  # Só roda se o Job 1 passou
+  # ─────────────────────────────────────────────────────────
+  storybook:
+    name: Build + Deploy Storybook
+    needs: quality
+    runs-on: ubuntu-latest
+
+    # Permissão para publicar no GitHub Pages
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Gerar tokens
+        run: npm run build:tokens
+
+      - name: Gerar stories com Gemini (componentes sem story)
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: npm run generate:stories
 
-      - run: npm run build-storybook
+      - name: Build do Storybook
+        run: npm run build-storybook
 
-      - name: Deploy no GitHub Pages
+      - name: Publicar no GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./storybook-static
+
+  # ─────────────────────────────────────────────────────────
+  # JOB 3: Publicar no NPM Privado
+  # Publica o pacote no GitHub Packages
+  # Só roda no push para main (não em PRs)
+  # Só roda se Jobs 1 e 2 passaram
+  # ─────────────────────────────────────────────────────────
+  publish:
+    name: Publicar no GitHub Packages
+    needs: [quality, storybook]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js com registro do GitHub Packages
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://npm.pkg.github.com'
+          cache: 'npm'
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Gerar tokens
+        run: npm run build:tokens
+
+      - name: Compilar TypeScript
+        run: npm run build
+
+      - name: Publicar pacote
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

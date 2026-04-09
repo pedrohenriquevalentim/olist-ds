@@ -1,0 +1,140 @@
+/* ─── Wrapper ──────────────────────────────────────────────────────────────── */
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--shape-spacing-4px);
+  height: var(--shape-size-40px);
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+}
+
+.checkbox.state_disabled {
+  cursor: default;
+}
+
+/* ─── Input nativo oculto (mantém semântica e foco de teclado) ─────────────── */
+.input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
+/* ─── Área de interação 40×40 ─────────────────────────────────────────────── */
+.boxArea {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--shape-size-40px);
+  height: var(--shape-size-40px);
+  flex-shrink: 0;
+  border-radius: var(--shape-border-radius-12px);
+  background: transparent;
+}
+
+.checkbox.state_hover .boxArea {
+  background-image: linear-gradient(
+    90deg,
+    var(--effects-hover-gray-900-4) 0%,
+    var(--effects-hover-gray-900-4) 100%
+  );
+}
+
+.checkbox.state_pressed .boxArea {
+  background-image: linear-gradient(
+    90deg,
+    var(--effects-pressed-gray-900-12) 0%,
+    var(--effects-pressed-gray-900-12) 100%
+  );
+}
+
+/* ─── Quadrado visual 16×16 ────────────────────────────────────────────────── */
+.box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--shape-size-16px);
+  height: var(--shape-size-16px);
+  border-radius: var(--shape-border-radius-4px);
+  border: var(--shape-border-width-2px) solid var(--color-gray-300);
+  background: transparent;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+/* Estados da borda (unchecked) */
+.checkbox.state_hover .box {
+  border-color: var(--color-gray-500);
+}
+
+.checkbox.state_pressed .box {
+  border-color: var(--color-gray-800);
+}
+
+.checkbox.state_disabled .box {
+  border-color: var(--color-gray-100);
+}
+
+/* Checked */
+.checkbox.isChecked .box {
+  background: var(--color-blue-500);
+  border-color: var(--color-blue-500);
+}
+
+/* Indeterminate */
+.checkbox.isIndeterminate .box {
+  background: var(--color-blue-500);
+  border-color: var(--color-blue-500);
+}
+
+/* Checked ou indeterminate + disabled */
+.checkbox.state_disabled.isChecked .box,
+.checkbox.state_disabled.isIndeterminate .box {
+  background: var(--effects-disabled-gray-900-8);
+  border: none;
+}
+
+/* ─── Foco de teclado (visível apenas via keyboard) ───────────────────────── */
+.input:focus-visible ~ .boxArea .box {
+  outline: var(--shape-border-width-2px) solid var(--color-blue-500);
+  outline-offset: var(--shape-spacing-4px);
+}
+
+/* ─── Ícones internos ────────────────────────────────────────────────────────*/
+.icon {
+  display: block;
+  flex-shrink: 0;
+}
+
+/* Dimensões exatas conforme Figma */
+.checkIcon {
+  width: 0.65625rem;  /* 10.5px */
+  height: 0.53125rem; /* 8.5px */
+}
+
+.indeterminateIcon {
+  width: 0.75rem;     /* 12px */
+  height: 0.125rem;   /* 2px */
+}
+
+/* ─── Label ──────────────────────────────────────────────────────────────── */
+.label {
+  font-family: var(--font-family-jakarta), system-ui, sans-serif;
+  font-size: var(--font-size-14px);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-line-height-16px);
+  color: var(--color-gray-900);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-feature-settings: 'ss03' 1;
+}
+
+.checkbox.state_disabled .label {
+  color: var(--color-gray-200);
+}

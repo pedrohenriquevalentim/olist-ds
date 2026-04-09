@@ -1,518 +1,202 @@
-import React from "react";
 import styles from "./MenuErp.module.css";
 
-type SideMenuKey =
-  | "fechado"
-  | "soluções da olist"
+// ─── Asset URLs (Figma MCP — válidos por 7 dias) ──────────────────────────────
+
+// Logo — estado expandido
+const imgLogoToggle    = "https://www.figma.com/api/mcp/asset/46df82dd-3cba-4104-a56a-c075b6fc0f00";
+const imgLogoWordmark  = "https://www.figma.com/api/mcp/asset/8a55c0f0-e517-410d-bc9c-ddcdf121ef7c";
+// Logo — estado contraído
+const imgLogoCompact   = "https://www.figma.com/api/mcp/asset/64b7be96-f23e-448a-b8b7-56e2e1281d8a";
+
+// Ícones — itens de navegação
+const imgSolucoes      = "https://www.figma.com/api/mcp/asset/9e4bc884-dfe4-4fd2-8932-19a8b5aad114";
+const imgVendas        = "https://www.figma.com/api/mcp/asset/6ac0e1f5-70b6-4fff-aa76-298806863111";
+const imgProdutos      = "https://www.figma.com/api/mcp/asset/577c6ff0-bcaa-47b2-9bc7-5d83a34bad98";
+const imgSuprimentos   = "https://www.figma.com/api/mcp/asset/6480d563-d8eb-4a7d-b57a-ed535a253536";
+const imgServicos      = "https://www.figma.com/api/mcp/asset/642aca33-0801-450c-aa5b-05e24ad750cb";
+const imgFinancas      = "https://www.figma.com/api/mcp/asset/76000550-7e3f-4161-acd4-48422e5f2715";
+const imgContatos      = "https://www.figma.com/api/mcp/asset/ce9369c5-cd10-40af-9332-3086cd85294e";
+const imgRelatorios    = "https://www.figma.com/api/mcp/asset/37008218-2b8d-4012-82af-ea97282387a4";
+const imgAtalhos       = "https://www.figma.com/api/mcp/asset/19582f85-40a8-4f4e-9335-97a0296f17e8";
+
+// Ícones — seção do usuário
+const imgNotificacoes  = "https://www.figma.com/api/mcp/asset/621856e0-980f-481a-a6c3-774c2fd9b30c";
+const imgConfiguracoes = "https://www.figma.com/api/mcp/asset/affde267-ebd6-4aed-b2f0-8fd5c6b11800";
+const imgSuporte       = "https://www.figma.com/api/mcp/asset/5e2438b9-c957-4bce-af4f-5203b12823a2";
+
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+export type MenuErpItemKey =
+  | "solucoes"
   | "vendas"
   | "produtos"
   | "suprimentos"
-  | "serviços"
-  | "finanças"
-  | "clientes e fornecedores"
-  | "relatórios"
-  | "menu do usuário"
-  | "menu de usuário"
-  | "notificações"
-  | "configurações"
-  | "central de suporte";
+  | "servicos"
+  | "financas"
+  | "contatos"
+  | "relatorios"
+  | "atalhos"
+  | "menu-usuario"
+  | "notificacoes"
+  | "configuracoes"
+  | "suporte";
 
 interface MenuItem {
-  key: SideMenuKey;
+  key: MenuErpItemKey;
   label: string;
   iconSrc: string;
-  hasNew?: boolean;
+  isNew?: boolean;
 }
 
-interface PanelItem {
-  label: string;
-  iconSrc?: string;
-}
+// ─── Dados ────────────────────────────────────────────────────────────────────
 
-interface PanelSection {
-  label?: string;
-  items: PanelItem[];
-}
-
-interface PanelContent {
-  title: string;
-  sections: PanelSection[];
-  footer?: React.ReactNode;
-}
-
-const imgToggle = "https://www.figma.com/api/mcp/asset/ec7a6bb1-38d0-4497-b2ff-29163d45c3f3";
-const imgOlist = "https://www.figma.com/api/mcp/asset/30c02535-58e0-43bd-89bb-f680936c4829";
-const imgToggleYellow = "https://www.figma.com/api/mcp/asset/039e8b83-e189-4c40-9d57-80d3422b415e";
-const imgToggleYellowCircle = "https://www.figma.com/api/mcp/asset/c24fc679-a108-4f00-aade-8b6a87f282dc";
-
-const NAV_ITEMS: MenuItem[] = [
-  { key: "soluções da olist", label: "Soluções Olist", iconSrc: "https://www.figma.com/api/mcp/asset/e6a66632-bc79-4122-b54a-0ebaa54f4a9e" },
-  { key: "vendas", label: "Vendas", iconSrc: "https://www.figma.com/api/mcp/asset/424c0c20-d5b3-4d0e-a40e-d15824e77cf3" },
-  { key: "produtos", label: "Produtos", iconSrc: "https://www.figma.com/api/mcp/asset/22b20de7-562a-49ce-be1d-d3fa1ca3327c" },
-  { key: "suprimentos", label: "Suprimentos", iconSrc: "https://www.figma.com/api/mcp/asset/4888e774-f947-41fb-9a9d-9b4e387b48a3" },
-  { key: "serviços", label: "Serviços", iconSrc: "https://www.figma.com/api/mcp/asset/507cde7c-8f2c-4af2-843b-5f706b6a970e" },
-  { key: "finanças", label: "Finanças", iconSrc: "https://www.figma.com/api/mcp/asset/0f8843df-0f65-4d78-a129-130b500295ec" },
-  { key: "clientes e fornecedores", label: "Clientes e fornecedores", iconSrc: "https://www.figma.com/api/mcp/asset/d005b9eb-adaf-4490-8ead-7da2b576016b" },
-  { key: "relatórios", label: "Relatórios", iconSrc: "https://www.figma.com/api/mcp/asset/7375783e-8364-4c95-a9cd-ca8fa667d792" },
-  { key: "fechado", label: "Meus atalhos", iconSrc: "https://www.figma.com/api/mcp/asset/65c3fd0f-02ed-40b4-a313-5a461f4e3a4d" },
+const MAIN_ITEMS: MenuItem[] = [
+  { key: "solucoes",    label: "Soluções Olist",           iconSrc: imgSolucoes    },
+  { key: "vendas",      label: "Vendas",                   iconSrc: imgVendas      },
+  { key: "produtos",    label: "Produtos",                 iconSrc: imgProdutos    },
+  { key: "suprimentos", label: "Suprimentos",              iconSrc: imgSuprimentos },
+  { key: "servicos",    label: "Serviços",                 iconSrc: imgServicos    },
+  { key: "financas",    label: "Finanças",                 iconSrc: imgFinancas    },
+  { key: "contatos",    label: "Clientes e fornecedores",  iconSrc: imgContatos    },
+  { key: "relatorios",  label: "Relatórios",               iconSrc: imgRelatorios  },
+  { key: "atalhos",     label: "Meus atalhos",             iconSrc: imgAtalhos     },
 ];
-
-const USER_ROOT_ITEM: MenuItem = {
-  key: "menu do usuário",
-  label: "Menu do Usuário",
-  iconSrc: "",
-};
 
 const USER_ITEMS: MenuItem[] = [
-  { key: "notificações", label: "Notificações", iconSrc: "https://www.figma.com/api/mcp/asset/2fa32f67-7be2-4b01-bfc0-286959a04532" },
-  { key: "configurações", label: "Configurações", iconSrc: "https://www.figma.com/api/mcp/asset/30b29f4b-3040-4364-915a-a45dd1bb83ba" },
-  { key: "central de suporte", label: "Central de suporte", iconSrc: "https://www.figma.com/api/mcp/asset/45bbd5ae-1e83-4a2a-9ef9-1112146b647b" },
+  { key: "notificacoes",  label: "Notificações",       iconSrc: imgNotificacoes  },
+  { key: "configuracoes", label: "Configurações",      iconSrc: imgConfiguracoes },
+  { key: "suporte",       label: "Central de suporte", iconSrc: imgSuporte       },
 ];
 
-const PANEL_BY_KEY: Record<Exclude<SideMenuKey, "fechado">, PanelContent> = {
-  "soluções da olist": {
-    title: "Soluções da Olist",
-    sections: [
-      {
-        items: [
-          { label: "Conta Digital" },
-          { label: "Envios" },
-          { label: "E-commerce" },
-        ],
-      },
-    ],
-  },
-  vendas: {
-    title: "Vendas",
-    sections: [
-      {
-        items: [
-          { label: "Propostas comerciais" },
-          { label: "Pedidos de venda" },
-          { label: "PDV" },
-          { label: "Nota fiscal (NF-e)" },
-          { label: "Nota consumidor (NFC-e)" },
-        ],
-      },
-      {
-        label: "Ecommerce",
-        items: [
-          { label: "Google Shopping" },
-          { label: "Pedidos no ecommerce" },
-          { label: "Perguntas de pré-venda" },
-          { label: "Pós-venda" },
-        ],
-      },
-      {
-        label: "Operação",
-        items: [
-          { label: "Separação" },
-          { label: "Expedição" },
-          { label: "Devolução" },
-        ],
-      },
-      {
-        label: "Relatórios",
-        items: [
-          { label: "Comissões" },
-          { label: "Margem de contribuição" },
-          { label: "Performance de vendas" },
-        ],
-      },
-    ],
-  },
-  produtos: {
-    title: "Produtos",
-    sections: [
-      {
-        items: [
-          { label: "Meus produtos" },
-          { label: "Anúncios" },
-          { label: "Categorias de produtos" },
-          { label: "Embalagens" },
-          { label: "Promoções" },
-          { label: "Relatórios" },
-        ],
-      },
-    ],
-  },
-  suprimentos: {
-    title: "Suprimentos",
-    sections: [
-      {
-        items: [
-          { label: "Controle de estoque" },
-          { label: "Giro de estoque" },
-        ],
-      },
-      {
-        label: "Compras",
-        items: [
-          { label: "Conferência de compra" },
-          { label: "Ficha de importação (FCI)" },
-          { label: "Necessidade de compra" },
-          { label: "Ordem de compra" },
-          { label: "Notas de entrada" },
-        ],
-      },
-      {
-        label: "Operação",
-        items: [
-          { label: "Ordens de produção" },
-          { label: "Serviços tomados" },
-          { label: "Envios fulfillment" },
-          { label: "Relatórios" },
-        ],
-      },
-    ],
-  },
-  serviços: {
-    title: "Serviços",
-    sections: [
-      {
-        items: [
-          { label: "Cadastro de serviços" },
-          { label: "Contratos" },
-          { label: "Ordens de serviços" },
-          { label: "Nota de serviço" },
-          { label: "Cobranças" },
-          { label: "Relatórios" },
-        ],
-      },
-    ],
-  },
-  finanças: {
-    title: "Finanças",
-    sections: [
-      {
-        items: [
-          { label: "Caixa" },
-          { label: "Conta Digital" },
-          { label: "Contas a pagar" },
-          { label: "Contas a receber" },
-          { label: "Cobranças bancárias" },
-          { label: "Extratos bancários" },
-          { label: "Pix" },
-        ],
-      },
-    ],
-  },
-  "clientes e fornecedores": {
-    title: "Clientes e fornecedores",
-    sections: [
-      {
-        items: [
-          { label: "CRM" },
-          { label: "Agenda" },
-          { label: "Clientes e fornecedores" },
-        ],
-      },
-    ],
-  },
-  relatórios: {
-    title: "Relatórios",
-    sections: [
-      {
-        items: [
-          { label: "Dashboard" },
-          { label: "Vendas" },
-          { label: "Finanças" },
-        ],
-      },
-    ],
-  },
-  "menu do usuário": {
-    title: "Menu do usuário",
-    sections: [
-      {
-        items: [
-          { label: "Dados do usuário" },
-          { label: "Dados da empresa" },
-        ],
-      },
-      {
-        label: "Conta",
-        items: [
-          { label: "Minha conta" },
-          { label: "Upgrade de plano" },
-        ],
-      },
-      {
-        label: "Ferramentas",
-        items: [
-          { label: "Shopping de serviços" },
-          { label: "Ferramentas" },
-        ],
-      },
-    ],
-    footer: (
-      <button type="button" className={styles.logoutButton} aria-label="Sair do sistema">
-        <span className={styles.logoutIcon} aria-hidden="true" />
-        <span className={styles.logoutText}>sair do sistema</span>
-      </button>
-    ),
-  },
-  "menu de usuário": {
-    title: "Menu do usuário",
-    sections: [
-      {
-        items: [
-          { label: "Dados do usuário" },
-          { label: "Dados da empresa" },
-        ],
-      },
-      {
-        label: "Conta",
-        items: [
-          { label: "Minha conta" },
-          { label: "Upgrade de plano" },
-        ],
-      },
-      {
-        label: "Ferramentas",
-        items: [
-          { label: "Shopping de serviços" },
-          { label: "Ferramentas" },
-        ],
-      },
-    ],
-    footer: (
-      <button type="button" className={styles.logoutButton} aria-label="Sair do sistema">
-        <span className={styles.logoutIcon} aria-hidden="true" />
-        <span className={styles.logoutText}>sair do sistema</span>
-      </button>
-    ),
-  },
-  notificações: {
-    title: "Notificações",
-    sections: [
-      {
-        items: [
-          { label: "Novos pedidos disponíveis para separação", iconSrc: "" },
-          { label: "Não foi possível enviar o anúncio “Marcador Preview Teste (39_27)” para integração Amazon", iconSrc: "" },
-          { label: "Anúncio “Túlo AMZ_Fabrica_Test_New” foi enviado para integração Amazon", iconSrc: "" },
-          { label: "Ocorreu um erro ao atualizar o estoque do produto “Coca-cola Original 1,5l” com o ecommerce iFood", iconSrc: "" },
-          { label: "Loja de guias de pagamento processado com erros. Clique aqui para acessar o módulo e conferir o resultado", iconSrc: "" },
-        ],
-      },
-    ],
-    footer: (
-      <button type="button" className={styles.secondaryButton} aria-label="Ler todas as notificações">
-        ler todas
-      </button>
-    ),
-  },
-  configurações: {
-    title: "Configurações",
-    sections: [
-      {
-        items: [
-          { label: "Sistema" },
-          { label: "Painel de automações" },
-          { label: "Integrações" },
-          { label: "Extensões" },
-        ],
-      },
-      {
-        label: "Preferências",
-        items: [],
-      },
-    ],
-    footer: (
-      <div className={styles.preferences}>
-        <div className={styles.prefRow}>
-          <span className={styles.prefLabel}>Menu</span>
-          <div className={styles.segmented} role="radiogroup" aria-label="Preferência de menu">
-            <button type="button" className={styles.segment} aria-checked="false" role="radio">
-              contraido
-            </button>
-            <button type="button" className={`${styles.segment} ${styles.segmentSelected}`} aria-checked="true" role="radio">
-              expandido
-            </button>
-          </div>
-        </div>
-        <div className={styles.prefRow}>
-          <span className={styles.prefLabel}>Tema</span>
-          <div className={styles.segmented} role="radiogroup" aria-label="Preferência de tema">
-            <button type="button" className={`${styles.segment} ${styles.segmentSelected}`} aria-checked="true" role="radio">
-              padrão
-            </button>
-            <button type="button" className={styles.segment} aria-checked="false" role="radio">
-              claro
-            </button>
-            <button type="button" className={styles.segment} aria-checked="false" role="radio">
-              escuro
-            </button>
-          </div>
-        </div>
-      </div>
-    ),
-  },
-  "central de suporte": {
-    title: "Central de suporte",
-    sections: [
-      {
-        items: [
-          { label: "Central de ajuda" },
-          { label: "Suporte" },
-        ],
-      },
-      {
-        label: "Outros recursos",
-        items: [
-          { label: "Novidades da versão" },
-          { label: "Canal de ideias" },
-          { label: "Atalhos do teclado" },
-          { label: "Indique e ganhe" },
-        ],
-      },
-    ],
-  },
-};
+// ─── Props ────────────────────────────────────────────────────────────────────
 
 export interface MenuErpProps {
   className?: string;
-  /** Estado visual do menu no design. */
+  /** Estado expandido (248 px) ou contraído (56 px). */
   variant?: "expanded" | "contracted";
-  /** Item ativo no menu lateral (destaca e abre painel quando aplicável). */
-  activeKey?: SideMenuKey;
-  /** Callback para clique nos itens (menu principal e menu do usuário). */
-  onSelect?: (key: SideMenuKey) => void;
-  /** Texto de acessibilidade para o `<nav>`. */
+  /** Chave do item atualmente selecionado. */
+  activeKey?: MenuErpItemKey | null;
+  /** Iniciais exibidas no avatar do usuário. */
+  userInitials?: string;
+  /** Nome/título exibido ao lado do avatar (variante expandida). */
+  userName?: string;
+  /** Callback acionado ao clicar em qualquer item. */
+  onSelect?: (key: MenuErpItemKey) => void;
+  /** aria-label para o elemento &lt;nav&gt;. */
   ariaLabel?: string;
 }
 
-function cx(...parts: Array<string | false | null | undefined>) {
+// ─── Helper ───────────────────────────────────────────────────────────────────
+
+function cx(...parts: Array<string | false | null | undefined>): string {
   return parts.filter(Boolean).join(" ");
 }
+
+// ─── Componente ───────────────────────────────────────────────────────────────
 
 export const MenuErp = ({
   className,
   variant = "expanded",
-  activeKey = "fechado",
+  activeKey = null,
+  userInitials = "PN",
+  userName = "Menu do Usuário",
   onSelect,
   ariaLabel = "Menu principal",
 }: MenuErpProps) => {
   const isContracted = variant === "contracted";
-  const showPanel = activeKey !== "fechado";
-  const activePanel = activeKey === "fechado" ? null : PANEL_BY_KEY[activeKey as Exclude<SideMenuKey, "fechado">];
-  const isNotificationPanel = activeKey === "notificações";
+
+  const renderItem = (item: MenuItem) => {
+    const isActive = activeKey === item.key;
+    return (
+      <li key={item.key} role="none">
+        <button
+          type="button"
+          className={cx(
+            styles.item,
+            isActive && styles.itemActive,
+            isContracted && styles.itemContracted,
+          )}
+          aria-label={item.label}
+          aria-current={isActive ? "page" : undefined}
+          onClick={() => onSelect?.(item.key)}
+        >
+          <span className={styles.itemIcon} aria-hidden="true">
+            <img alt="" className={styles.itemIconImg} src={item.iconSrc} />
+          </span>
+          {!isContracted && (
+            <span className={styles.itemLabel}>{item.label}</span>
+          )}
+          {!isContracted && item.isNew && (
+            <span className={styles.tagNew} aria-label="novo">novo</span>
+          )}
+        </button>
+      </li>
+    );
+  };
 
   return (
-    <nav className={cx(styles.root, isContracted ? styles.contracted : styles.expanded, className)} aria-label={ariaLabel}>
-      <div className={styles.sidebar}>
-        <div className={styles.logoArea} aria-hidden="true">
-          {isContracted ? (
-            <div className={styles.logoCompact}>
-              <span className={styles.logoToggleWrap}>
-                <img className={styles.logoToggle} alt="" src={imgToggleYellow} />
-                <img className={styles.logoToggleCircle} alt="" src={imgToggleYellowCircle} />
-              </span>
+    <nav
+      className={cx(styles.root, isContracted && styles.rootContracted, className)}
+      aria-label={ariaLabel}
+    >
+      {/* ── Área do logo ── */}
+      <div
+        className={cx(styles.logoArea, isContracted && styles.logoAreaContracted)}
+        aria-hidden="true"
+      >
+        {isContracted ? (
+          <img alt="olist" className={styles.logoCompact} src={imgLogoCompact} />
+        ) : (
+          <div className={styles.logoRow}>
+            <div className={styles.logoMark}>
+              <img alt="" className={styles.logoToggle} src={imgLogoToggle} />
             </div>
-          ) : (
-            <div className={styles.logoFull}>
-              <img className={styles.logoToggle} alt="" src={imgToggle} />
-              <img className={styles.logoWordmark} alt="olist" src={imgOlist} />
-            </div>
-          )}
-        </div>
-
-        <div className={styles.navList} role="list">
-          {NAV_ITEMS.map((item) => {
-            const isActive = activeKey === item.key;
-            return (
-              <button
-                key={item.key}
-                type="button"
-                className={cx(styles.navItem, isActive && styles.navItemSelected, isContracted && styles.navItemIconOnly)}
-                aria-label={item.label}
-                aria-current={isActive ? "page" : undefined}
-                onClick={() => onSelect?.(item.key)}
-              >
-                <span className={styles.navIcon} aria-hidden="true">
-                  <img alt="" src={item.iconSrc} />
-                </span>
-                {!isContracted && <span className={cx(styles.navLabel, isActive && styles.navLabelSelected)}>{item.label}</span>}
-                {!isContracted && item.hasNew && <span className={styles.tagNew} aria-label="novo" />}
-                {isContracted && item.hasNew && <span className={styles.dotNew} aria-label="novo" />}
-              </button>
-            );
-          })}
-        </div>
-
-        <div className={styles.userArea}>
-          <button
-            type="button"
-            className={cx(styles.userRoot, isContracted && styles.navItemIconOnly, activeKey === USER_ROOT_ITEM.key && styles.navItemSelected)}
-            aria-label={USER_ROOT_ITEM.label}
-            aria-current={activeKey === USER_ROOT_ITEM.key ? "page" : undefined}
-            onClick={() => onSelect?.(USER_ROOT_ITEM.key)}
-          >
-            <span className={styles.avatar} aria-hidden="true">
-              <span className={styles.avatarCircle}>PN</span>
-            </span>
-            {!isContracted && <span className={cx(styles.navLabel, activeKey === USER_ROOT_ITEM.key && styles.navLabelSelected)}>{USER_ROOT_ITEM.label}</span>}
-          </button>
-
-          <div className={styles.userList} role="list">
-            {USER_ITEMS.map((item) => {
-              const isActive = activeKey === item.key;
-              return (
-                <button
-                  key={item.key}
-                  type="button"
-                  className={cx(styles.navItem, isActive && styles.navItemSelected, isContracted && styles.navItemIconOnly)}
-                  aria-label={item.label}
-                  aria-current={isActive ? "page" : undefined}
-                  onClick={() => onSelect?.(item.key)}
-                >
-                  <span className={styles.navIcon} aria-hidden="true">
-                    {item.iconSrc ? <img alt="" src={item.iconSrc} /> : null}
-                  </span>
-                  {!isContracted && <span className={cx(styles.navLabel, isActive && styles.navLabelSelected)}>{item.label}</span>}
-                </button>
-              );
-            })}
+            <img alt="olist" className={styles.logoWordmark} src={imgLogoWordmark} />
           </div>
-        </div>
+        )}
       </div>
 
-      {showPanel && activePanel ? (
-        <section className={styles.panel} aria-label={activePanel.title}>
-          <header className={styles.panelHeader}>
-            <h2 className={styles.panelTitle}>{activePanel.title}</h2>
-          </header>
+      {/* ── Lista de navegação principal ── */}
+      <div className={styles.menuArea}>
+        <ul
+          className={styles.itemList}
+          role="list"
+          aria-label="Navegação principal"
+        >
+          {MAIN_ITEMS.map(renderItem)}
+        </ul>
+      </div>
 
-          <div className={styles.panelBody}>
-            {activePanel.sections.map((section, idx) => (
-              <div key={idx} className={styles.panelSection}>
-                {section.label ? (
-                  <div className={styles.sectionDivider} role="heading" aria-level={3}>
-                    <span className={styles.sectionDividerText}>{section.label}</span>
-                  </div>
-                ) : null}
-                <div className={styles.panelItems} role="list">
-                  {section.items.map((it) => (
-                    <button key={it.label} type="button" className={styles.panelItem} aria-label={it.label}>
-                      {it.iconSrc ? (
-                        <span className={styles.panelItemIcon} aria-hidden="true">
-                          <img alt="" src={it.iconSrc} />
-                        </span>
-                      ) : (
-                        <span className={isNotificationPanel ? styles.bullet : styles.placeholderIcon} aria-hidden="true" />
-                      )}
-                      <span className={styles.panelItemLabel}>{it.label}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+      {/* ── Seção do usuário ── */}
+      <div className={cx(styles.userSection, isContracted && styles.userSectionContracted)}>
+        {/* Botão do perfil */}
+        <button
+          type="button"
+          className={cx(
+            styles.item,
+            styles.userBtn,
+            activeKey === "menu-usuario" && styles.itemActive,
+            isContracted && styles.itemContracted,
+          )}
+          aria-label={userName}
+          aria-current={activeKey === "menu-usuario" ? "page" : undefined}
+          onClick={() => onSelect?.("menu-usuario")}
+        >
+          <span className={styles.avatar} aria-hidden="true">{userInitials}</span>
+          {!isContracted && (
+            <span className={styles.itemLabel}>{userName}</span>
+          )}
+        </button>
 
-          {activePanel.footer ? <footer className={styles.panelFooter}>{activePanel.footer}</footer> : null}
-        </section>
-      ) : null}
+        {/* Itens do usuário */}
+        <ul
+          className={styles.itemList}
+          role="list"
+          aria-label="Menu do usuário"
+        >
+          {USER_ITEMS.map(renderItem)}
+        </ul>
+      </div>
     </nav>
   );
 };
-

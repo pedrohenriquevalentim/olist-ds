@@ -1,17 +1,17 @@
 import React from "react";
 import styles from "./Button.module.css";
 
-const imgIconSecondaryEnabled = "https://www.figma.com/api/mcp/asset/9a9bb994-33a7-4ebc-a7b5-c4f53c43e6a9";
-const imgIconTertiaryEnabled = "https://www.figma.com/api/mcp/asset/78b5ea49-d9ac-4f5d-97ee-dae1ff314354";
-const imgIconPrimaryEnabled = "https://www.figma.com/api/mcp/asset/4f733dfc-074e-4a35-9a8e-7095531be208";
-const imgIconSecondaryHover = "https://www.figma.com/api/mcp/asset/171d7845-9d87-4d47-8d96-2165da2ca38c";
-const imgIconTertiaryHover = "https://www.figma.com/api/mcp/asset/f832bb74-33ff-4a4a-9739-d13481e86afa";
-const imgIconPrimaryHover = "https://www.figma.com/api/mcp/asset/fe3d8839-5fa4-4018-a298-98204e75375a";
-const imgIconSecondaryTertiaryPressed = "https://www.figma.com/api/mcp/asset/783ba3f3-31bf-4885-a36b-a8cef61ab46a";
-const imgIconPrimaryPressed = "https://www.figma.com/api/mcp/asset/b8675deb-c653-43b9-9035-0964684d9932";
-const imgIconSecondaryDisabled = "https://www.figma.com/api/mcp/asset/097875fe-1c9a-4269-a038-88c52debd212";
-const imgIconTertiaryDisabled = "https://www.figma.com/api/mcp/asset/6f517949-9e8d-4786-aa07-7465c98d9228";
-const imgIconPrimaryDisabled = "https://www.figma.com/api/mcp/asset/1e157eaf-79f7-4b0e-93ca-ced91329e8d4";
+const imgIconSecondaryEnabled = "https://www.figma.com/api/mcp/asset/c9cce515-7436-43f4-a3f1-6e09a5542e03";
+const imgIconTertiaryEnabled = "https://www.figma.com/api/mcp/asset/64f7cb00-6efe-4f95-9eba-4b93b24f5512";
+const imgIconPrimaryEnabled = "https://www.figma.com/api/mcp/asset/fe9c318c-df24-4768-a7d3-4408fe61c6e4";
+const imgIconSecondaryHover = "https://www.figma.com/api/mcp/asset/837162ee-ef30-4aff-9d31-922f86307952";
+const imgIconTertiaryHover = "https://www.figma.com/api/mcp/asset/46facc35-d988-4dda-abc1-e87299cd63fc";
+const imgIconPrimaryHover = "https://www.figma.com/api/mcp/asset/0340a9d7-0d85-484f-905d-7827811dc2b4";
+const imgIconSecondaryTertiaryPressed = "https://www.figma.com/api/mcp/asset/2da1f071-fc78-42fd-87df-28007827c0bc";
+const imgIconPrimaryPressed = "https://www.figma.com/api/mcp/asset/488a97e0-c9b6-40b5-aecc-c57f1e0ba4f4";
+const imgIconSecondaryDisabled = "https://www.figma.com/api/mcp/asset/8521c7a1-56c3-45a9-9e41-5adf921bb8de";
+const imgIconTertiaryDisabled = "https://www.figma.com/api/mcp/asset/e5a0c676-31ff-4820-a547-d015975514b6";
+const imgIconPrimaryDisabled = "https://www.figma.com/api/mcp/asset/906ad441-9b83-49f6-9c72-e2046a33ee82";
 
 type ButtonType = "primary" | "secondary" | "tertiary";
 type ButtonState = "enabled" | "hover" | "pressed" | "disabled";
