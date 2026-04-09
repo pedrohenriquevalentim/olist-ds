@@ -17,7 +17,7 @@
   },
   "scripts": {
     "build:tokens": "node config.mjs",
-    "build": "npm run build:tokens && tsc",
+    "build": "npm run build:tokens && tsc && node scripts/copy-css.mjs",
     "dev": "vite",
     "generate:tests": "node scripts/generate-tests.mjs --missing",
     "generate:tests:all": "node scripts/generate-tests.mjs --all",
