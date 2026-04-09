@@ -40,7 +40,7 @@
   "keywords": [],
   "author": "Pedro Valentim",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
