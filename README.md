@@ -283,12 +283,18 @@ claude
 No prompt do Claude Code:
 
 ```
-Leia o componente Figma neste link:
-https://www.figma.com/design/XXXX/YYYY?node-id=123:456
-
-Gere o componente React completo seguindo as instruções do CLAUDE.md.
-Inclua o .tsx, .module.css, .test.tsx, .stories.tsx e index.ts.
-Depois de criar todos os arquivos, rode npm run test:run para validar os testes.
+Leia o componente Figma neste link: [COLE O LINK]
+1. Gere um componente React + TypeScript que:
+  - Use os design tokens do meu arquivo src/generated/variables.css
+  - Inclua todas as variantes visíveis no design
+  - Adicione atributos ARIA de acessibilidade
+  - Siga o padrão dos componentes em src/components/
+  - Considere todos os arquivos nessa geração (tsx, css, test, stories, index)
+2. Rode npm run build:tokens
+3. Rode npm run test:run — se falhar, corrija e rode novamente
+4. Rode npm run build-storybook
+5. Exporte o componente no src/index.ts
+6. Faça git add, commit e push
 ```
 
 O Claude Code:
@@ -296,19 +302,9 @@ O Claude Code:
 2. Gera todos os arquivos do componente consumindo tokens CSS
 3. Roda os testes automaticamente
 4. Corrige se houver falhas
-
-### Pipeline completo via prompt
-
-```
-Preciso que você:
-1. Leia o componente Figma neste link: [LINK]
-2. Gere todos os arquivos (tsx, css, test, stories, index)
-3. Rode npm run build:tokens
-4. Rode npm run test:run — se falhar, corrija e rode novamente
-5. Rode npm run build-storybook
-6. Exporte o componente no src/index.ts
-7. Faça git add, commit e push
-```
+5. Cria o Storybook
+6. Exporta o componente dentro de src/index.ts
+7. Faz o git add, commit e push
 
 ---
 
@@ -400,7 +396,7 @@ npm run storybook
 
 Abre em `http://localhost:6006`.
 
-### Estrutura do menu
+### Estrutura do Storybook
 
 ```
 📄 Introduction
