@@ -1,0 +1,28 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction" />
+
+# Olist Design System
+
+Sistema de componentes React construído sobre design tokens exportados do Figma.
+
+## Como usar
+
+Instale o pacote:
+
+```bash
+npm install @pedrohenriquevalentim/olist-ds
+```
+
+Importe os tokens e o componente:
+
+```tsx
+import '@pedrohenriquevalentim/olist-ds/src/generated/variables.css';
+import { Button } from '@pedrohenriquevalentim/olist-ds';
+```
+
+## Princípios
+
+- **Consistência** — Todos os componentes consomem design tokens do Figma
+- **Acessibilidade** — WCAG 2.1 AA em todos os componentes
+- **Composição** — Componentes pequenos que se combinam

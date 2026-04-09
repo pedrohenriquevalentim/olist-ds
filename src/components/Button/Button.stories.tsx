@@ -20,7 +20,7 @@ type Story = StoryObj<typeof Button>;
 
 export const Playground: Story = {
   args: {
-    type: "tertiary",
+    type: "primary",
     state: "enabled",
     icon: "lead",
     hasFocus: false,

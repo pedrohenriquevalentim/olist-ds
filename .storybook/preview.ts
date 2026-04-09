@@ -2,7 +2,17 @@ import '../src/generated/variables.css';
 import type { Preview } from '@storybook/react-vite'
 
 const preview: Preview = {
+  tags: ['autodocs'],
   parameters: {
+    options: {
+      storySort: {
+        order: [
+          'Introduction',
+          'Foundations', ['Colors', 'Typography'],
+          'Components',
+        ],
+      },
+    },
     controls: {
       matchers: {
        color: /(background|color)$/i,

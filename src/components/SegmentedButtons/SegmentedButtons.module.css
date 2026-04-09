@@ -1,0 +1,142 @@
+/* SegmentedButtons.module.css */
+
+/* Root container */
+.root {
+  display: inline-flex;
+  padding: 0;
+  position: relative;
+}
+
+.horizontal {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--shape-spacing-8px);
+}
+
+.vertical {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--shape-spacing-8px);
+}
+
+/* Label row */
+.labelRow {
+  display: flex;
+  height: var(--shape-size-16px);
+  max-height: var(--shape-size-16px);
+  min-height: var(--shape-size-16px);
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.labelRowHorizontal {
+  gap: 0;
+}
+
+.labelRowVertical {
+  gap: var(--shape-spacing-8px);
+}
+
+.labelText {
+  font-family: var(--font-family-jakarta), sans-serif;
+  font-size: var(--font-size-14px);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-line-height-16px);
+  color: var(--color-gray-900);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+  font-feature-settings: 'ss03' 1;
+}
+
+/* Tooltip icon button */
+.tooltipButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--shape-size-16px);
+  height: var(--shape-size-16px);
+  min-width: var(--shape-size-16px);
+  min-height: var(--shape-size-16px);
+  flex-shrink: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.tooltipButton:focus-visible {
+  outline: var(--shape-border-width-2px) solid var(--color-blue-500);
+  outline-offset: var(--shape-spacing-4px);
+}
+
+.tooltipIcon {
+  width: var(--shape-size-16px);
+  height: var(--shape-size-16px);
+  display: block;
+}
+
+/* Segmented control wrapper */
+.control {
+  display: inline-flex;
+  height: var(--shape-size-40px);
+  max-height: var(--shape-size-40px);
+  min-height: var(--shape-size-40px);
+  align-items: center;
+  padding: var(--shape-spacing-4px);
+  gap: var(--shape-spacing-4px);
+  border: var(--shape-border-width-1px) solid var(--color-gray-50);
+  border-radius: var(--shape-border-radius-9999px);
+  flex-shrink: 0;
+}
+
+/* Segment button */
+.segment {
+  display: inline-flex;
+  height: var(--shape-size-32px);
+  max-height: var(--shape-size-32px);
+  min-height: var(--shape-size-32px);
+  align-items: center;
+  justify-content: center;
+  padding: var(--shape-spacing-8px);
+  border-radius: var(--shape-border-radius-9999px);
+  border: none;
+  position: relative;
+  font-family: var(--font-family-jakarta), sans-serif;
+  font-size: var(--font-size-12px);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--font-line-height-16px);
+  white-space: nowrap;
+  font-feature-settings: 'ss03' 1;
+  letter-spacing: 0;
+}
+
+.segmentEnabled {
+  background: var(--color-none-transparent);
+  color: var(--color-gray-600);
+  cursor: pointer;
+}
+
+.segmentEnabled:hover {
+  background: var(--effects-hover-gray-900-4);
+  color: var(--color-gray-900);
+}
+
+.segmentEnabled:active {
+  background: var(--effects-pressed-gray-900-12);
+  color: var(--color-gray-900);
+}
+
+.segmentActive {
+  background: var(--color-blue-50);
+  color: var(--color-blue-600);
+  cursor: default;
+}
+
+.segment:focus-visible {
+  outline: var(--shape-border-width-2px) solid var(--color-blue-500);
+  outline-offset: var(--shape-spacing-4px);
+}

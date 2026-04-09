@@ -1,0 +1,33 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Colors" />
+
+# Cores
+
+Todas as cores são definidas como design tokens no Figma e exportadas via Style Dictionary.
+
+## Gray
+
+| Token | Valor | Exemplo |
+|-------|-------|---------|
+| `--color-gray-0` | #fcfbf8 | <span style={{ display: 'inline-block', width: 24, height: 24, background: '#fcfbf8', border: '1px solid #ccc', borderRadius: 4 }} /> |
+| `--color-gray-100` | #e7e4da | <span style={{ display: 'inline-block', width: 24, height: 24, background: '#e7e4da', borderRadius: 4 }} /> |
+| `--color-gray-500` | #827f73 | <span style={{ display: 'inline-block', width: 24, height: 24, background: '#827f73', borderRadius: 4 }} /> |
+| `--color-gray-900` | #10100f | <span style={{ display: 'inline-block', width: 24, height: 24, background: '#10100f', borderRadius: 4 }} /> |
+
+## Blue (Brand)
+
+| Token | Valor | Exemplo |
+|-------|-------|---------|
+| `--color-blue-400` | #2766ec | <span style={{ display: 'inline-block', width: 24, height: 24, background: '#2766ec', borderRadius: 4 }} /> |
+| `--color-blue-500` | #0a4ee4 | <span style={{ display: 'inline-block', width: 24, height: 24, background: '#0a4ee4', borderRadius: 4 }} /> |
+| `--color-blue-700` | #002d8f | <span style={{ display: 'inline-block', width: 24, height: 24, background: '#002d8f', borderRadius: 4 }} /> |
+
+## Como usar
+
+```css
+.element {
+  color: var(--color-gray-900);
+  background: var(--color-blue-500);
+}
+```

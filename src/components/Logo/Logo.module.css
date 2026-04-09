@@ -1,0 +1,56 @@
+/* ─── Wrapper ──────────────────────────────────────────────────────────────── */
+.logo {
+  position: relative;
+  /* Dimensão de referência do Figma: 160px de largura, aspect-ratio 160:100.881 */
+  width: var(--shape-size-160px);
+  aspect-ratio: 160 / 100.881;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* ─── Camada interna (aspect-ratio container) ──────────────────────────────── */
+.inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* ─── Toggle (ícone amarelo/laranja no canto superior) ─────────────────────── */
+/* inset do Figma: top 22.8% | right 46.99% | bottom 63.93% | left 47.5% */
+.toggle {
+  position: absolute;
+  top: 22.8%;
+  right: 46.99%;
+  bottom: 63.93%;
+  left: 47.5%;
+  overflow: hidden;
+}
+
+/* ─── Círculo interno do toggle ────────────────────────────────────────────── */
+/* inset do Figma: top 0 | right 0 | bottom 34.21% | left 0 */
+.circle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 34.21%;
+  left: 0;
+}
+
+/* ─── Wordmark "olist" ─────────────────────────────────────────────────────── */
+/* inset do Figma: top 29.74% | right 18.25% | bottom 29.74% | left 18.75% */
+.wordmark {
+  position: absolute;
+  top: 29.74%;
+  right: 18.25%;
+  bottom: 29.74%;
+  left: 18.75%;
+}
+
+/* ─── Imagens internas ─────────────────────────────────────────────────────── */
+.img {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+}

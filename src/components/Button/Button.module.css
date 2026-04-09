@@ -1,19 +1,19 @@
 .button {
-  height: calc(var(--shape-size-32px) * 0.0625rem);
-  max-height: calc(var(--shape-size-32px) * 0.0625rem);
-  min-height: calc(var(--shape-size-32px) * 0.0625rem);
+  height: var(--shape-size-32px);
+  max-height: var(--shape-size-32px);
+  min-height: var(--shape-size-32px);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: calc(var(--shape-spacing-12px) * 0.0625rem);
-  border-radius: calc(var(--shape-border-radius-9999px) * 0.0625rem);
+  padding: 0 var(--shape-spacing-12px);
+  border-radius: var(--shape-border-radius-9999px);
   border: 0;
   background: transparent;
   cursor: pointer;
 
-  font-family: var(--light-font-family-base);
-  font-size: calc(var(--font-size-12px) * 0.0625rem);
-  line-height: calc(var(--font-line-height-16px) * 0.0625rem);
+  font-family: var(--font-family-jakarta);
+  font-size: var(--font-size-12px);
+  line-height: var(--font-line-height-16px);
   font-weight: var(--font-weight-medium);
   letter-spacing: 0;
   white-space: nowrap;
@@ -24,7 +24,7 @@
 }
 
 .withIcon {
-  gap: calc(var(--shape-spacing-4px) * 0.0625rem);
+  gap: var(--shape-spacing-4px);
 }
 
 .noIcon {
@@ -33,11 +33,12 @@
 
 .label {
   display: inline-block;
+  font-feature-settings: "ss03" 1;
 }
 
 .icon {
-  width: calc(var(--shape-size-16px) * 0.0625rem);
-  height: calc(var(--shape-size-16px) * 0.0625rem);
+  width: var(--shape-size-16px);
+  height: var(--shape-size-16px);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -51,16 +52,17 @@
 }
 
 .button:focus-visible {
-  outline: calc(var(--shape-border-width-2px) * 0.0625rem) solid var(--color-blue-500);
-  outline-offset: calc(var(--shape-spacing-4px) * 0.0625rem);
+  outline: var(--shape-border-width-2px) solid var(--color-blue-500);
+  outline-offset: var(--shape-spacing-4px);
 }
 
 .hasFocus {
-  outline: calc(var(--shape-border-width-2px) * 0.0625rem) solid var(--color-blue-500);
-  outline-offset: calc(var(--shape-spacing-4px) * 0.0625rem);
+  outline: var(--shape-border-width-2px) solid var(--color-blue-500);
+  outline-offset: var(--shape-spacing-4px);
 }
 
-/* Types */
+/* ─── Types ─────────────────────────────────────────────────────────────── */
+
 .primary {
   background: var(--color-blue-500);
   color: var(--color-blue-0);
@@ -68,7 +70,7 @@
 
 .secondary {
   background: var(--color-none-transparent);
-  border: calc(var(--shape-border-width-1px) * 0.0625rem) solid var(--color-gray-300);
+  border: var(--shape-border-width-1px) solid var(--color-gray-300);
   color: var(--color-gray-600);
 }
 
@@ -77,16 +79,19 @@
   color: var(--color-gray-600);
 }
 
-/* States (forced via prop) */
+/* ─── States ─────────────────────────────────────────────────────────────── */
+
 .state_enabled.primary:hover,
 .state_hover.primary {
-  background-image: linear-gradient(90deg, var(--effects-hover-brand-900-8) 0%, var(--effects-hover-brand-900-8) 100%),
+  background-image:
+    linear-gradient(90deg, var(--effects-hover-brand-900-8) 0%, var(--effects-hover-brand-900-8) 100%),
     linear-gradient(90deg, var(--color-blue-500) 0%, var(--color-blue-500) 100%);
 }
 
 .state_enabled.primary:active,
 .state_pressed.primary {
-  background-image: linear-gradient(90deg, var(--effects-pressed-brand-900-16) 0%, var(--effects-pressed-brand-900-16) 100%),
+  background-image:
+    linear-gradient(90deg, var(--effects-pressed-brand-900-16) 0%, var(--effects-pressed-brand-900-16) 100%),
     linear-gradient(90deg, var(--color-blue-500) 0%, var(--color-blue-500) 100%);
 }
 
@@ -100,7 +105,8 @@
 .state_hover.secondary,
 .state_enabled.tertiary:hover,
 .state_hover.tertiary {
-  background-image: linear-gradient(90deg, var(--effects-hover-gray-900-4) 0%, var(--effects-hover-gray-900-4) 100%),
+  background-image:
+    linear-gradient(90deg, var(--effects-hover-gray-900-4) 0%, var(--effects-hover-gray-900-4) 100%),
     linear-gradient(90deg, var(--color-none-transparent) 0%, var(--color-none-transparent) 100%);
   color: var(--color-gray-900);
 }
@@ -109,7 +115,8 @@
 .state_pressed.secondary,
 .state_enabled.tertiary:active,
 .state_pressed.tertiary {
-  background-image: linear-gradient(90deg, var(--effects-pressed-gray-900-12) 0%, var(--effects-pressed-gray-900-12) 100%),
+  background-image:
+    linear-gradient(90deg, var(--effects-pressed-gray-900-12) 0%, var(--effects-pressed-gray-900-12) 100%),
     linear-gradient(90deg, var(--color-none-transparent) 0%, var(--color-none-transparent) 100%);
   color: var(--color-gray-900);
 }
@@ -136,4 +143,3 @@
   color: var(--color-gray-200);
   background: var(--color-none-transparent);
 }
-

@@ -1,0 +1,334 @@
+/* ─── Root ─────────────────────────────────────────────────────────────── */
+
+.root {
+  display: flex;
+  align-items: stretch;
+  height: calc(var(--shape-size-320px) * 2 + var(--shape-size-224px)); /* 864px */
+  border-radius: var(--shape-border-radius-16px);
+  overflow: hidden;
+  font-family: var(--font-family-jakarta), system-ui, sans-serif;
+}
+
+/* ─── Sidebar ─────────────────────────────────────────────────────────── */
+
+.sidebar {
+  flex-shrink: 0;
+  width: var(--shape-size-248px);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-gray-0);
+  overflow: hidden;
+}
+
+.sidebarContracted {
+  width: var(--shape-size-56px);
+}
+
+/* ─── Logo (88px tall) ───────────────────────────────────────────────── */
+
+.logoArea {
+  flex-shrink: 0;
+  height: 88px;
+  position: relative;
+}
+
+/* Expanded: logo posicionada absolutamente à esquerda */
+.logoExpandedWrap {
+  position: absolute;
+  left: 18px;
+  top: 13px;
+  display: flex;
+  align-items: center;
+  gap: var(--shape-spacing-4px);
+  height: var(--shape-size-32px);
+}
+
+.logoToggle {
+  width: 9px;
+  height: 9px;
+  flex-shrink: 0;
+  display: block;
+  object-fit: contain;
+}
+
+.logoWordmark {
+  height: 27px;
+  width: 67px;
+  display: block;
+  object-fit: contain;
+}
+
+/* Contraído: logo amarela centralizada */
+.logoContractedWrap {
+  position: absolute;
+  inset: var(--shape-spacing-8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoContractedImg {
+  width: var(--shape-size-40px);
+  height: var(--shape-size-40px);
+  display: block;
+  object-fit: contain;
+}
+
+/* ─── Nav list ────────────────────────────────────────────────────────── */
+
+.navList {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: var(--shape-spacing-8px);
+}
+
+/* ─── Nav item ────────────────────────────────────────────────────────── */
+
+.navItem {
+  width: 100%;
+  height: var(--shape-size-40px);
+  display: flex;
+  align-items: center;
+  gap: var(--shape-spacing-12px);
+  padding: var(--shape-spacing-12px);
+  border-radius: var(--shape-border-radius-8px);
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.1s;
+}
+
+/* Em modo contraído o item é quadrado e centralizado */
+.navItemContracted {
+  justify-content: center;
+  gap: 0;
+}
+
+.navItem:hover {
+  background: var(--color-gray-50);
+}
+
+.navItem:focus-visible {
+  outline: var(--shape-border-width-2px) solid var(--color-blue-500);
+  outline-offset: var(--shape-spacing-4px);
+}
+
+.navItemActive {
+  background: var(--color-blue-50);
+}
+
+.navItemActive:hover {
+  background: var(--color-blue-50);
+}
+
+/* ─── Nav icon ────────────────────────────────────────────────────────── */
+
+.navIcon {
+  width: var(--shape-size-16px);
+  height: var(--shape-size-16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.navIconImg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+/* ─── Nav label ───────────────────────────────────────────────────────── */
+
+.navLabel {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-gray-600);
+  font-size: var(--font-size-14px);
+  line-height: var(--font-line-height-20px);
+  font-weight: var(--font-weight-regular);
+}
+
+.navLabelActive {
+  color: var(--color-blue-600);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ─── Seção do usuário (rodapé) ──────────────────────────────────────── */
+
+.userSection {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--shape-spacing-16px);
+  padding:
+    var(--shape-spacing-24px)
+    var(--shape-spacing-8px)
+    var(--shape-spacing-8px);
+}
+
+/* Avatar do usuário */
+.userAvatar {
+  width: var(--shape-size-24px);
+  height: var(--shape-size-24px);
+  border-radius: var(--shape-border-radius-9999px);
+  background: var(--color-blue-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gray-0);
+  font-size: var(--font-size-14px);
+  line-height: var(--font-line-height-16px);
+  font-weight: var(--font-weight-semibold);
+  flex-shrink: 0;
+}
+
+/* ─── Painel lateral ──────────────────────────────────────────────────── */
+
+.panel {
+  flex-shrink: 0;
+  width: var(--shape-size-248px);
+  height: 100%;
+  background: var(--color-gray-0);
+  border-left: var(--shape-border-width-1px) solid var(--color-gray-50);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.panelHeader {
+  height: var(--shape-size-48px);
+  display: flex;
+  align-items: center;
+  padding: var(--shape-spacing-16px);
+  border-bottom: var(--shape-border-width-1px) solid var(--color-gray-50);
+  flex-shrink: 0;
+}
+
+.panelTitle {
+  margin: 0;
+  color: var(--color-gray-900);
+  font-size: var(--font-size-14px);
+  line-height: var(--font-line-height-16px);
+  font-weight: var(--font-weight-semibold);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.panelBody {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.panelSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionDivider {
+  height: var(--shape-size-48px);
+  display: flex;
+  align-items: center;
+  padding: var(--shape-spacing-16px);
+  border-bottom: var(--shape-border-width-1px) solid var(--color-gray-50);
+}
+
+.sectionDividerText {
+  color: var(--color-gray-900);
+  font-size: var(--font-size-14px);
+  line-height: var(--font-line-height-16px);
+  font-weight: var(--font-weight-semibold);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.panelItems {
+  display: flex;
+  flex-direction: column;
+  padding: var(--shape-spacing-8px);
+}
+
+.panelItem {
+  width: 100%;
+  height: var(--shape-size-40px);
+  display: flex;
+  align-items: center;
+  gap: var(--shape-spacing-12px);
+  padding: var(--shape-spacing-12px);
+  border-radius: var(--shape-border-radius-8px);
+  border: 0;
+  background: var(--color-gray-0);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.1s;
+}
+
+.panelItem:hover {
+  background: var(--color-gray-50);
+}
+
+.panelItem:focus-visible {
+  outline: var(--shape-border-width-2px) solid var(--color-blue-500);
+  outline-offset: var(--shape-spacing-4px);
+}
+
+.panelItemIcon {
+  width: var(--shape-size-16px);
+  height: var(--shape-size-16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.panelItemIconImg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.placeholderIcon {
+  width: var(--shape-size-16px);
+  height: var(--shape-size-16px);
+  border-radius: var(--shape-border-radius-4px);
+  background: var(--color-gray-100);
+  display: block;
+}
+
+.panelItemLabel {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-gray-600);
+  font-size: var(--font-size-14px);
+  line-height: var(--font-line-height-20px);
+  font-weight: var(--font-weight-regular);
+}
+
+/* Tag "novo" */
+.tagNew {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--shape-size-24px);
+  padding: 0 var(--shape-spacing-8px);
+  border-radius: var(--shape-border-radius-9999px);
+  background: var(--color-cyan-700);
+  color: var(--color-cyan-0);
+  font-size: var(--font-size-12px);
+  line-height: var(--font-line-height-12px);
+  font-weight: var(--font-weight-medium);
+}
