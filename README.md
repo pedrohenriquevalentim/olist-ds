@@ -250,14 +250,57 @@ npm run test:run             # Roda uma vez e encerra
 npm run test:coverage        # Com relatório de cobertura
 ```
 
-### Build e Publicação
+### Build
 
 ```bash
 npm run build                # Tokens + index.ts + TypeScript + CSS
 npm run build-storybook      # Build estático do Storybook
 npm run pipeline             # Tudo em sequência: tokens → tests → stories → storybook
-npm version patch            # Incrementa versão (1.0.1 → 1.0.2)
-npm publish                  # Publica no GitHub Packages
+```
+
+---
+
+## Publicação
+
+### Comando único
+
+```bash
+npm run release
+```
+
+Executa o pipeline completo e publica uma nova versão automaticamente:
+
+1. Gera tokens CSS
+2. Gera testes e stories faltantes (Gemini)
+3. Roda todos os testes
+4. Builda o Storybook
+5. Compila TypeScript + gera index.ts + copia CSS
+6. Incrementa a versão (patch: 1.0.1 → 1.0.2)
+7. Publica no GitHub Packages
+8. Faz push do código e das tags
+
+### Controle manual de versão
+
+Se precisar de um bump diferente de patch:
+
+```bash
+npm run pipeline                 # valida tudo primeiro
+npm version minor                # 1.0.2 → 1.1.0 (novo componente)
+npm version major                # 1.1.0 → 2.0.0 (breaking change)
+npm publish
+git push && git push --tags
+```
+
+### Atualizar no projeto consumidor
+
+Após publicar, atualize no projeto Next.js:
+
+```bash
+cd olist-ds-next
+npm install @pedrohenriquevalentim/olist-ds@latest
+
+# Ou se estiver usando instalação local:
+npm install ../olist-ds
 ```
 
 ---
@@ -283,8 +326,11 @@ claude
 No prompt do Claude Code:
 
 ```
-Leia o componente Figma neste link: [COLE O LINK]
+Leia o componente Figma neste link:
+https://www.figma.com/design/XXXX/YYYY?node-id=123:456
+
 1. Gere um componente React + TypeScript que:
+  - Siga as instruções do CLAUDE.md
   - Use os design tokens do meu arquivo src/generated/variables.css
   - Inclua todas as variantes visíveis no design
   - Adicione atributos ARIA de acessibilidade
@@ -396,7 +442,7 @@ npm run storybook
 
 Abre em `http://localhost:6006`.
 
-### Estrutura do Storybook
+### Estrutura do menu
 
 ```
 📄 Introduction
@@ -508,14 +554,6 @@ No repositório → Settings → Secrets and variables → Actions:
 
 O `GITHUB_TOKEN` é gerado automaticamente pelo GitHub Actions.
 
-### Publicar manualmente
-
-```bash
-npm version patch    # 1.0.1 → 1.0.2
-npm publish
-git push && git push --tags
-```
-
 ---
 
 ## Criar um Novo Componente (Checklist)
@@ -528,9 +566,8 @@ git push && git push --tags
 3. Rode `npm run generate:all` para gerar teste e story via Gemini
 4. Rode `npm run test:run` para validar
 5. Rode `npm run storybook` para visualizar
-6. Rode `npm run build` — o componente entra automaticamente no `index.ts` e `catalog.ts`
-7. Publique: `npm version patch && npm publish`
-8. No Next.js: `npm install ../olist-ds` — componente aparece no catálogo
+6. Rode `npm run release` para buildar, versionar e publicar automaticamente
+7. No Next.js: `npm install ../olist-ds` — componente aparece no catálogo
 
 ---
 
