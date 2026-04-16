@@ -61,3 +61,31 @@ Após criar/alterar componentes:
 4. git add . && git commit -m "feat: descricao"
 5. npm version patch
 6. git push && git push --tags
+
+## Fluxo Reverso: PRD → Figma
+
+### Ao receber um PRD ou solicitação de tela:
+
+1. Leia o PRD/briefing completo
+2. Identifique os componentes do design system necessários (consulte src/components/)
+3. Identifique os tokens necessários (consulte src/generated/variables.css)
+4. Crie a tela no Figma usando use_figma com:
+   - Variables do arquivo Figma para cores, espaçamento, tipografia
+   - Componentes existentes da biblioteca quando disponíveis
+   - Auto Layout para garantir responsividade
+   - Nomenclatura semântica nos layers (nunca "Frame 1" ou "Group 5")
+
+### Regras para geração de telas:
+- SEMPRE use as Variables do Figma (não hardcode cores)
+- SEMPRE use Auto Layout (nunca posicionamento absoluto)
+- Nomeie cada layer semanticamente: "HeaderContainer", "NavigationSidebar", "ContentArea"
+- Agrupe elementos relacionados em frames com nomes descritivos
+- Siga a hierarquia de espaçamento: 4, 8, 12, 16, 24, 32, 40, 48, 64
+- Use os border-radius definidos nos tokens
+- Fonte primária: Plus Jakarta Sans
+
+### Estrutura padrão de uma tela:
+- Frame principal: 1440x900 (desktop) ou 375x812 (mobile)
+- Sidebar: 280px largura quando aplicável
+- Content area: flex-grow com padding 24px ou 32px
+- Header: altura 64px quando aplicável
