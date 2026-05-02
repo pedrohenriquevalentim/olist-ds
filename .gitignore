@@ -5,7 +5,7 @@ storybook-static/
 .env
 *.log
 .DS_Store
+.npmrc
 
 # Skill do design system (NÃO ignorar — deve ser commitada)
 !.claude/skills/olist-ds-skill/
-.npmrc
