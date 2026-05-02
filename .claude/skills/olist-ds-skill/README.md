@@ -2,7 +2,7 @@
 
 Skill corporativa para criação de telas, componentes e protótipos a partir de SDDs/PRDs usando o design system da Olist.
 
-Inspirada na abordagem do [Pacy Design](https://github.com/lebrunhari/pacy_design) (progressive disclosure com referências separadas) e compatível com a especificação [DESIGN.md do Google Labs](https://github.com/google-labs-code/design.md).
+Compatível com a especificação [DESIGN.md do Google Labs](https://github.com/google-labs-code/design.md).
 
 ## Por que funciona
 
