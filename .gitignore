@@ -5,3 +5,6 @@ storybook-static/
 .env
 *.log
 .DS_Store
+
+# Skill do design system (NÃO ignorar — deve ser commitada)
+!.claude/skills/olist-ds-skill/
