@@ -8,3 +8,4 @@ storybook-static/
 
 # Skill do design system (NÃO ignorar — deve ser commitada)
 !.claude/skills/olist-ds-skill/
+.npmrc
