@@ -1,40 +1,57 @@
 # Olist Design System
 
-Sistema de design construído com um pipeline AI-First que conecta Figma, Claude, Gemini e Next.js para transformar decisões visuais em componentes React prontos para produção.
+Pipeline AI-First que conecta Figma, Claude, Gemini e Next.js para transformar decisões visuais em componentes React prontos para produção — e transformar SDDs em protótipos no Figma automaticamente.
 
-O projeto nasceu da necessidade de criar uma ponte confiável entre design e código. Em vez de traduzir manualmente cada componente do Figma para React, o pipeline usa inteligência artificial em cada etapa: Claude Opus lê os designs via MCP e gera componentes tipados, Gemini Pro cria testes automatizados, e o CI/CD publica tudo sem intervenção manual.
+O design system é um pacote NPM privado (`@pedrohenriquevalentim/olist-ds`) publicado no GitHub Packages. Cada componente consome design tokens exportados do Figma, tem testes gerados por IA, documentação interativa no Storybook, e pode ser instalado em qualquer projeto React ou Next.js.
 
-O resultado é um design system onde cada componente consome design tokens exportados diretamente do Figma, tem testes gerados por IA, documentação interativa no Storybook, e pode ser instalado como pacote NPM em qualquer projeto React ou Next.js.
+A skill integrada permite que crie telas a partir de SDDs usando o design system como base, via Claude.ai ou Claude Code.
 
 ---
 
 ## Arquitetura do Pipeline
 
 ```
-FIGMA
+FIGMA (source of truth)
 │  Variables + Componentes visuais
 │
 ├──→ Tokens Studio (plugin)
-│    Exporta variáveis como JSON
+│    Exporta variáveis como JSON (formato DTCG)
 │
 ├──→ Style Dictionary + sd-transforms
 │    JSON → CSS Custom Properties (variables.css)
+│    Transforms customizados: aspas em font-family, px em valores numéricos
 │
 ├──→ Claude Code + Figma MCP
-│    Lê componente no Figma → Gera React + TypeScript + CSS Modules
+│    Lê componente no Figma → gera React + TypeScript + CSS Modules
 │    Designer revisa e refina
 │
 ├──→ Gemini Pro (API)
-│    Lê código dos componentes → Gera testes (Vitest) e stories (Storybook)
+│    Lê código dos componentes → gera testes (Vitest) e stories (Storybook)
 │
 ├──→ Storybook
 │    Documentação interativa com autodocs, foundations e catálogo visual
 │
-├──→ GitHub Actions (CI/CD)
+├──→ CI/CD (GitHub Actions)
 │    Lint → Tokens → Testes → Storybook → Publicação NPM
 │
-└──→ Next.js (ambiente de consumo)
-     Importa o pacote publicado e renderiza todos os componentes
+├──→ Next.js (ambiente de consumo)
+│    Importa o pacote publicado e renderiza todos os componentes
+│
+└──→ Skill corporativa (auto-sync)
+     Atualiza documentação da skill a cada build
+     Disponível para toda a empresa via Claude.ai ou Claude Code
+```
+
+### Fluxo reverso (PRD → Figma)
+
+```
+SDD / PRD
+│
+├──→ Claude.ai + Conector Figma (sem terminal)
+│    Cola o contexto de tokens + SDD → Claude cria telas no Figma
+│
+└──→ Claude Code + Figma MCP (via terminal)
+     Lê SDD + consulta componentes existentes → gera telas no canvas
 ```
 
 ---
@@ -51,17 +68,16 @@ FIGMA
 | Storybook | 10 | Documentação interativa |
 | Style Dictionary | 5 | Transformação de design tokens |
 | @tokens-studio/sd-transforms | 2 | Ponte entre Tokens Studio e Style Dictionary |
-| Claude Code | — | Geração de componentes via IA (Claude Opus 4.6) |
-| Gemini Pro | — | Geração automática de testes e stories |
+| Claude Code (Opus 4.6) | — | Geração de componentes via Figma MCP |
+| Gemini Pro (API) | 2.5 | Geração automática de testes e stories |
 | Next.js | 16 | Ambiente de consumo e teste |
 | GitHub Actions | — | CI/CD |
-| GitHub Packages | — | Registro NPM privado |
+| GitHub Packages | — | NPM privado |
+| Plus Jakarta Sans | — | Fonte primária (Google Fonts) |
 
 ---
 
 ## Pré-requisitos
-
-Antes de clonar o projeto, instale:
 
 ### Node.js (v22+)
 
@@ -96,70 +112,35 @@ sudo apt-get install git
 npm install -g @anthropic-ai/claude-code
 ```
 
-Requer uma conta Anthropic com acesso ao Claude Pro ou API key.
-
-### Python 3.12+ (para scripts auxiliares)
-
-```bash
-# macOS
-brew install python
-
-# Windows
-winget install Python.Python.3.12
-
-# Linux
-sudo apt-get install python3 python3-pip
-```
+Requer conta Anthropic com acesso ao Claude Pro ou API key.
 
 ---
 
-## Chaves de API necessárias
+## Chaves de API
 
 | Serviço | Onde obter | Variável de ambiente |
 |---|---|---|
-| Figma | Figma → Settings → Personal Access Tokens | Token configurado no MCP |
+| Figma | Figma → Settings → Personal Access Tokens | Configurado no MCP |
 | Gemini Pro | https://aistudio.google.com/apikey | `GEMINI_API_KEY` |
 | GitHub | Settings → Developer settings → Personal access tokens | Token no `.npmrc` |
 
-### Configurar variáveis de ambiente
-
 ```bash
-# Adicione ao ~/.zshrc ou ~/.bashrc
+# Adicione ao ~/.zshrc
 export GEMINI_API_KEY="sua-chave-gemini"
 ```
+
+Token GitHub precisa dos escopos: `repo`, `write:packages`, `read:packages`, `workflow`.
 
 ---
 
 ## Instalação
 
-### 1. Clone o repositório
-
 ```bash
 git clone https://github.com/pedrohenriquevalentim/olist-ds.git
 cd olist-ds
-```
-
-### 2. Instale as dependências
-
-```bash
 npm install
-```
-
-### 3. Gere os design tokens
-
-```bash
-npm run build:tokens
-```
-
-Isso lê os JSONs em `src/tokens/` e gera `src/generated/variables.css` com todas as CSS Custom Properties.
-
-### 4. Verifique a instalação
-
-```bash
 npm run build
 ```
-
-Se compilar sem erros, o ambiente está pronto.
 
 ---
 
@@ -167,52 +148,57 @@ Se compilar sem erros, o ambiente está pronto.
 
 ```
 olist-ds/
-├── .github/
-│   └── workflows/
-│       └── pipeline.yml              # CI/CD (lint → test → storybook → publish)
+├── .github/workflows/pipeline.yml        # CI/CD
+├── .claude/skills/olist-ds-skill/        # Skill corporativa (auto-sync)
+│   ├── SKILL.md                          # Role, escopo, decision flow
+│   ├── DESIGN.md                         # Google Labs spec (cross-tool)
+│   └── references/
+│       ├── OLIST_DS_OVERVIEW.md          # Brand, princípios, tokens rápidos
+│       ├── COLORS.md                     # Sistema de cores com DO/DON'T
+│       ├── TYPOGRAPHY.md                 # Fontes, tamanhos, composições
+│       ├── SPACING.md                    # Escala, layout grid, border-radius
+│       ├── COMPONENTS.md                 # Componentes com props (auto-gerado)
+│       ├── PATTERNS.md                   # Padrões de página (table, form, dashboard)
+│       ├── SOURCE_MAP.md                 # Mapa de arquivos (auto-gerado)
+│       ├── SDD_TO_SCREEN.md             # Guia: SDD → decisões de UI
+│       └── VISUAL_REVIEW_CHECKLIST.md   # Checklist de revisão visual
 ├── .storybook/
-│   ├── main.ts                       # Configuração do Storybook
-│   ├── preview.ts                    # Tokens CSS + ordenação do menu
-│   ├── preview-head.html             # Google Fonts (Plus Jakarta Sans)
-│   ├── manager.ts                    # Tema visual personalizado
-│   └── theme.ts                      # Cores e branding Olist
+│   ├── main.ts                           # Paths + addons
+│   ├── preview.ts                        # Autodocs + tokens + font decorator
+│   ├── preview-head.html                 # Google Fonts
+│   ├── theme.ts                          # Branding Olist
+│   └── manager.ts                        # Aplica tema
 ├── scripts/
-│   ├── generate-tests.mjs            # Gera testes via Gemini Pro
-│   ├── generate-stories.mjs          # Gera stories via Gemini Pro
-│   ├── generate-index.mjs            # Gera src/index.ts + src/catalog.ts
-│   └── copy-css.mjs                  # Copia CSS Modules para dist/
+│   ├── generate-tests.mjs                # Gemini → .test.tsx
+│   ├── generate-stories.mjs              # Gemini → .stories.tsx
+│   ├── generate-index.mjs                # Gera index.ts + catalog.ts
+│   ├── copy-css.mjs                      # Copia .module.css para dist/
+│   └── sync-skill.mjs                    # Atualiza skill com estado atual do DS
 ├── src/
-│   ├── tokens/                       # JSONs exportados do Figma (Tokens Studio)
-│   │   └── base.json
-│   ├── generated/                    # Saída do Style Dictionary (não editar)
+│   ├── tokens/base.json                  # JSON do Tokens Studio (DTCG)
+│   ├── generated/                        # Saída do Style Dictionary (não editar)
 │   │   ├── variables.css
 │   │   └── tokens.js
-│   ├── components/                   # Componentes React
-│   │   ├── Button/
-│   │   │   ├── Button.tsx
-│   │   │   ├── Button.module.css
-│   │   │   ├── Button.test.tsx       # Gerado pelo Gemini
-│   │   │   ├── Button.stories.tsx    # Gerado pelo Gemini
-│   │   │   └── index.ts
-│   │   ├── MenuErp/
-│   │   ├── Checkbox/
-│   │   └── ...
-│   ├── docs/                         # Páginas MDX do Storybook
+│   ├── components/
+│   │   └── [ComponentName]/
+│   │       ├── ComponentName.tsx
+│   │       ├── ComponentName.module.css
+│   │       ├── ComponentName.test.tsx
+│   │       ├── ComponentName.stories.tsx
+│   │       └── index.ts
+│   ├── docs/                             # Páginas MDX do Storybook
 │   │   ├── Introduction.mdx
 │   │   └── foundations/
-│   │       ├── Colors.mdx
-│   │       ├── Typography.mdx
-│   │       └── Spacing.mdx
-│   ├── index.ts                      # Exportações (auto-gerado)
-│   ├── catalog.ts                    # Lista de componentes (auto-gerado)
-│   ├── css-modules.d.ts              # Declaração de tipos para CSS Modules
-│   └── test-setup.ts                 # Setup do Vitest
-├── CLAUDE.md                         # Instruções para o Claude Code
-├── config.mjs                        # Configuração do Style Dictionary
+│   ├── index.ts                          # Auto-gerado
+│   ├── catalog.ts                        # Auto-gerado
+│   ├── css-modules.d.ts                  # Tipos para CSS Modules
+│   └── test-setup.ts                     # Setup do Vitest
+├── CLAUDE.md                             # Instruções para Claude Code
+├── DESIGN.md                             # Google Labs spec
+├── config.mjs                            # Style Dictionary + transforms
 ├── tsconfig.json
 ├── vite.config.ts
-├── package.json
-└── .npmrc
+└── package.json
 ```
 
 ---
@@ -222,163 +208,142 @@ olist-ds/
 ### Desenvolvimento
 
 ```bash
-npm run dev                  # Servidor de desenvolvimento (Vite)
-npm run storybook            # Storybook em http://localhost:6006
+npm run dev                    # Vite dev server (porta 5173)
+npm run storybook              # Storybook (porta 6006)
 ```
 
 ### Tokens
 
 ```bash
-npm run build:tokens         # Gera CSS vars a partir dos JSONs do Figma
+npm run build:tokens           # JSON → CSS Custom Properties
 ```
 
 ### Geração com IA
 
 ```bash
-npm run generate:tests       # Gera testes (apenas componentes sem teste)
-npm run generate:tests:all   # Regenera testes de todos os componentes
-npm run generate:stories     # Gera stories (apenas componentes sem story)
-npm run generate:stories:all # Regenera stories de todos os componentes
-npm run generate:all         # Gera testes + stories faltantes
+npm run generate:tests         # Gemini → testes faltantes
+npm run generate:tests:all     # Regenera todos os testes
+npm run generate:stories       # Gemini → stories faltantes
+npm run generate:stories:all   # Regenera todas as stories
+npm run generate:all           # Testes + stories faltantes
 ```
 
 ### Testes
 
 ```bash
-npm test                     # Vitest em modo watch
-npm run test:run             # Roda uma vez e encerra
-npm run test:coverage        # Com relatório de cobertura
+npm test                       # Vitest watch mode
+npm run test:run               # Roda uma vez
+npm run test:coverage          # Com relatório de cobertura
 ```
 
 ### Build
 
 ```bash
-npm run build                # Tokens + index.ts + TypeScript + CSS
-npm run build-storybook      # Build estático do Storybook
-npm run pipeline             # Tudo em sequência: tokens → tests → stories → storybook
+npm run build                  # Tokens + index + TypeScript + CSS + sync skill
+npm run build-storybook        # Build estático do Storybook
+npm run pipeline               # Build + generate + test + storybook
 ```
 
----
-
-## Publicação
-
-### Comando único
+### Publicação
 
 ```bash
-npm run release
+npm run release                # Pipeline + version patch + publish + push
 ```
 
-Executa o pipeline completo e publica uma nova versão automaticamente:
+Executa em sequência:
 
 1. Gera tokens CSS
 2. Gera testes e stories faltantes (Gemini)
 3. Roda todos os testes
 4. Builda o Storybook
 5. Compila TypeScript + gera index.ts + copia CSS
-6. Incrementa a versão (patch: 1.0.1 → 1.0.2)
-7. Publica no GitHub Packages
-8. Faz push do código e das tags
+6. Sincroniza a skill corporativa
+7. Incrementa versão (patch)
+8. Publica no GitHub Packages
+9. Push do código e das tags
 
 ### Controle manual de versão
 
-Se precisar de um bump diferente de patch:
-
 ```bash
-npm run pipeline                 # valida tudo primeiro
-npm version minor                # 1.0.2 → 1.1.0 (novo componente)
-npm version major                # 1.1.0 → 2.0.0 (breaking change)
+npm run pipeline
+npm version minor              # 1.0.5 → 1.1.0 (novo componente)
+npm version major              # 1.1.0 → 2.0.0 (breaking change)
 npm publish
 git push && git push --tags
 ```
 
-### Atualizar no projeto consumidor
-
-Após publicar, atualize no projeto Next.js:
+### Skill
 
 ```bash
-cd olist-ds-next
-npm install @pedrohenriquevalentim/olist-ds@latest
-
-# Ou se estiver usando instalação local:
-npm install ../olist-ds
+npm run sync:skill             # Atualiza skill com estado atual do DS
 ```
 
 ---
 
 ## Fluxo de Trabalho com Claude Code
 
-### Configuração inicial
+### Configuração
 
 ```bash
-# Configure o modelo
 claude config set model claude-opus-4-6
-
-# Conecte o MCP do Figma
 claude mcp add figma-mcp --url https://mcp.figma.com/mcp
-
-# Inicie o Claude Code na pasta do projeto
 cd olist-ds
 claude
 ```
 
-### Criar um componente a partir do Figma
-
-No prompt do Claude Code:
+### Criar componente a partir do Figma
 
 ```
 Leia o componente Figma neste link:
 https://www.figma.com/design/XXXX/YYYY?node-id=123:456
 
-1. Gere um componente React + TypeScript que:
-  - Siga as instruções do CLAUDE.md
-  - Use os design tokens do meu arquivo src/generated/variables.css
-  - Inclua todas as variantes visíveis no design
-  - Adicione atributos ARIA de acessibilidade
-  - Siga o padrão dos componentes em src/components/
-  - Considere todos os arquivos nessa geração (tsx, css, test, stories, index)
-2. Rode npm run build:tokens
-3. Rode npm run test:run — se falhar, corrija e rode novamente
-4. Rode npm run build-storybook
-5. Exporte o componente no src/index.ts
+Gere o componente React completo seguindo as instruções do CLAUDE.md.
+Inclua o .tsx, .module.css, .test.tsx, .stories.tsx e index.ts.
+Depois rode npm run test:run para validar.
+```
+
+### Pipeline completo via prompt
+
+```
+Preciso que você:
+1. Leia o componente Figma neste link: [LINK]
+2. Gere todos os arquivos (tsx, css, test, stories, index)
+3. Rode npm run build:tokens
+4. Rode npm run test:run — se falhar, corrija e rode novamente
+5. Rode npm run build-storybook
 6. Faça git add, commit e push
 ```
 
-O Claude Code:
-1. Lê o design via MCP do Figma
-2. Gera todos os arquivos do componente consumindo tokens CSS
-3. Roda os testes automaticamente
-4. Corrige se houver falhas
-5. Cria o Storybook
-6. Exporta o componente dentro de src/index.ts
-7. Faz o git add, commit e push
-
 ---
 
-## Geração Automática com Gemini
+## Skill Corporativa
 
-O pipeline usa a API do Gemini Pro para gerar testes unitários e stories do Storybook automaticamente.
+A skill permite que qualquer pessoa da empresa crie telas a partir de SDDs usando o design system. Ela se auto-atualiza a cada `npm run build`.
 
-### Como funciona
+### Por que atinge 90%+ de precisão
 
-1. O script lê cada arquivo `.tsx` em `src/components/`
-2. Envia o código-fonte para a API do Gemini Pro
-3. O Gemini analisa props, variantes e interações
-4. Retorna um arquivo `.test.tsx` ou `.stories.tsx` completo
-5. O script salva na pasta do componente
+1. **Referências separadas** — cada dimensão do design system tem seu arquivo (cores, tipografia, componentes). O agente carrega só o necessário.
+2. **Source Map** — cada regra aponta para o arquivo real no código. O agente não inventa — confirma com evidência.
+3. **SDD to Screen** — guia de tradução que transforma requisitos funcionais em decisões de UI concretas.
 
-### Executar
+Inspirada na abordagem do [Pacy Design](https://github.com/lebrunhari/pacy_design) e compatível com a especificação [DESIGN.md do Google Labs](https://github.com/google-labs-code/design.md).
 
-```bash
-# Variável de ambiente obrigatória
-export GEMINI_API_KEY="sua-chave"
+### Como usar
 
-# Gera apenas os faltantes
-npm run generate:all
-
-# Ou individualmente
-npm run generate:tests
-npm run generate:stories
+**No Claude Code:**
 ```
+Use $olist-ds-specialist para criar a tela deste SDD:
+[COLAR O SDD]
+```
+
+**No Claude.ai (sem terminal):**
+1. Settings → Connectors → Figma → Connect
+2. Customize → Skills → Upload → selecionar pasta da skill
+3. Iniciar conversa e colar o SDD
+
+### Auto-sync
+
+A cada `npm run build`, os arquivos `COMPONENTS.md`, `SOURCE_MAP.md` e `OLIST_DS_OVERVIEW.md` são regenerados pelo script `sync-skill.mjs` com o estado real do codebase. Para atualizar no Claude.ai, re-upload da pasta da skill.
 
 ---
 
@@ -386,44 +351,29 @@ npm run generate:stories
 
 ### Origem
 
-Os tokens são definidos no Figma usando o plugin **Tokens Studio** e exportados como JSON para `src/tokens/base.json`.
+Definidos no Figma com **Tokens Studio** (v2.11.4). Exportados como JSON (DTCG) para `src/tokens/base.json`.
 
 ### Transformação
-
-O Style Dictionary com `@tokens-studio/sd-transforms` converte o JSON em CSS Custom Properties:
 
 ```bash
 npm run build:tokens
 ```
 
-### Saída
+O `config.mjs` usa Style Dictionary + `@tokens-studio/sd-transforms` com transforms customizados:
+- **custom/font-family-quote** — adiciona aspas em nomes com espaço
+- **custom/px-unit** — converte números para px (exceto opacity e font-weight)
 
-`src/generated/variables.css`:
-
-```css
-:root {
-  --color-blue-500: #0a4ee4;
-  --color-gray-0: #fcfbf8;
-  --font-family-jakarta: 'Plus Jakarta Sans';
-  --font-size-16px: 16px;
-  --shape-spacing-16px: 16px;
-  --shape-border-radius-8px: 8px;
-  /* ... */
-}
-```
-
-### Uso nos componentes
+### Uso
 
 ```css
-/* ✅ Correto — usa token */
+/* ✅ Correto */
 .button {
   background: var(--color-blue-500);
   border-radius: var(--shape-border-radius-8px);
-  padding: var(--shape-spacing-8px) var(--shape-spacing-16px);
   font-family: var(--font-family-jakarta), sans-serif;
 }
 
-/* ❌ Errado — valor hardcoded */
+/* ❌ Errado */
 .button {
   background: #0a4ee4;
   border-radius: 8px;
@@ -434,176 +384,64 @@ npm run build:tokens
 
 ## Storybook
 
-### Executar localmente
-
 ```bash
-npm run storybook
+npm run storybook    # http://localhost:6006
 ```
-
-Abre em `http://localhost:6006`.
-
-### Estrutura do menu
 
 ```
 📄 Introduction
-📁 Foundations
-   ├── Colors
-   ├── Typography
-   └── Spacing
-📁 Components
-   ├── Button
-   ├── Checkbox
-   ├── MenuErp
-   └── ...
-```
-
-### Adicionar páginas de documentação
-
-Crie arquivos `.mdx` em `src/docs/`:
-
-```mdx
-import { Meta } from 'storybook/blocks';
-
-<Meta title="Foundations/NomeDaPagina" />
-
-# Título
-
-Conteúdo em Markdown com suporte a JSX.
+📁 Foundations (Colors, Typography, Spacing)
+📁 Components (autodocs)
 ```
 
 ---
 
 ## Ambiente de Consumo (Next.js)
 
-Um projeto Next.js separado serve como ambiente real de teste dos componentes.
-
-### Setup
-
 ```bash
 npx create-next-app@latest olist-ds-next
 cd olist-ds-next
-
-# Configure o registro privado
-echo "@pedrohenriquevalentim:registry=https://npm.pkg.github.com" > .npmrc
-
-# Instale o design system
-npm install @pedrohenriquevalentim/olist-ds
-
-# Ou instale localmente (para desenvolvimento)
-npm install ../olist-ds
+npm install ../olist-ds        # local
+# ou
+npm install @pedrohenriquevalentim/olist-ds   # GitHub Packages
 ```
 
-### Configurar o layout
-
-`app/layout.tsx`:
-
-```tsx
-import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
-import "@pedrohenriquevalentim/olist-ds/src/generated/variables.css";
-import "./globals.css";
-
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-family-jakarta",
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800"],
-});
-
-export const metadata: Metadata = {
-  title: "Olist Design System",
-  description: "Ambiente de consumo e teste do Design System",
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <html lang="pt-BR" className={jakarta.variable}>
-      <body>{children}</body>
-    </html>
-  );
-}
-```
-
-### Importar componentes
-
-```tsx
-import { Button, MenuErp } from '@pedrohenriquevalentim/olist-ds';
-```
-
-O catálogo de componentes (`src/catalog.ts`) permite renderizar todos automaticamente sem editar a página manualmente a cada novo componente.
+O `page.tsx` usa `catalog.ts` para renderizar todos os componentes automaticamente. Novos componentes aparecem sem editar código.
 
 ---
 
 ## CI/CD
 
-O pipeline roda automaticamente a cada push para `main`:
+Pipeline no GitHub Actions:
 
 ```
-Push → Lint → Build Tokens → Gerar Testes (Gemini) → Rodar Testes
-  → Build Storybook → Deploy GitHub Pages → Publicar GitHub Packages
+Push → Lint → Tokens → Testes (Gemini) → Rodar Testes
+  → Storybook → GitHub Pages → GitHub Packages
 ```
 
-### Secrets necessários no GitHub
-
-No repositório → Settings → Secrets and variables → Actions:
-
-| Secret | Valor |
-|---|---|
-| `GEMINI_API_KEY` | Chave da API do Google AI Studio |
-
-O `GITHUB_TOKEN` é gerado automaticamente pelo GitHub Actions.
+Secret necessário: `GEMINI_API_KEY` (repositório → Settings → Secrets → Actions).
 
 ---
 
-## Criar um Novo Componente (Checklist)
+## Criar Novo Componente (Checklist)
 
-1. **No Claude Code**, peça para ler o componente no Figma e gerar os arquivos
-2. Verifique que foram criados:
-   - `src/components/Nome/Nome.tsx`
-   - `src/components/Nome/Nome.module.css`
-   - `src/components/Nome/index.ts`
-3. Rode `npm run generate:all` para gerar teste e story via Gemini
-4. Rode `npm run test:run` para validar
-5. Rode `npm run storybook` para visualizar
-6. Rode `npm run release` para buildar, versionar e publicar automaticamente
-7. No Next.js: `npm install ../olist-ds` — componente aparece no catálogo
+1. Claude Code lê o componente no Figma e gera os arquivos
+2. `npm run generate:all` — testes e stories via Gemini
+3. `npm run test:run` — valida
+4. `npm run storybook` — visualiza
+5. `npm run release` — builda, sincroniza skill, versiona, publica
+6. No Next.js: `npm install ../olist-ds` — componente aparece no catálogo
 
 ---
 
-## Convenções
+## Acesso para Times
 
-### Estrutura de cada componente
-
-```
-src/components/NomeComponente/
-├── NomeComponente.tsx          # Componente React
-├── NomeComponente.module.css   # Estilos com CSS Modules
-├── NomeComponente.test.tsx     # Testes (Vitest + Testing Library)
-├── NomeComponente.stories.tsx  # Story (Storybook CSF3)
-└── index.ts                    # Re-export
-```
-
-### Código
-
-- Componentes como arrow functions com export nomeado
-- Props tipadas com `interface`
-- Nomes de arquivos e componentes em PascalCase
-- Unidades em `rem` nos tokens, nunca `px` hardcoded
-- Descrições de testes e stories em português
-
-### Acessibilidade
-
-- Todo elemento interativo tem `role` e `aria-label`
-- Botões funcionam com Enter e Space
-- Contraste mínimo 4.5:1 (WCAG AA)
-- Imagens têm `alt`
-
-### Tokens
-
-- Usar exclusivamente variáveis CSS de `src/generated/variables.css`
-- Nunca valores hardcoded para cores, espaçamentos, fontes ou bordas
-- Formato: `var(--color-blue-500)`, `var(--shape-spacing-16px)`
+| Método | Instala algo? | Terminal? | Para quem |
+|---|---|---|---|
+| Claude Code + MCP | Sim | Sim | Devs, designers técnicos |
+| Claude.ai + Conector Figma | Não | Não | PMs, designers, CS |
+| Claude.ai + Skill upload | Não | Não | Qualquer pessoa |
+| DESIGN.md no projeto | Não | Não | Qualquer ferramenta AI |
 
 ---
 

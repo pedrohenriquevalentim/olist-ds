@@ -1,98 +1,72 @@
 ---
 name: olist-ds-specialist
-description: Use this skill for ALL Olist UI/UX work — creating screens from SDDs/PRDs, generating React components, reviewing visual consistency, creating Figma prototypes, and maintaining the design system. Trigger when anyone mentions Olist interface, design system, tokens, components, screens, layouts, SDD, PRD, prototype, wireframe, Figma, Storybook, or any task involving UI creation or review for Olist products. Do NOT use for backend, APIs, database, authentication, or business logic unrelated to UI.
+description: Use esta skill para TODO trabalho de UI/UX da Olist — criação de telas a partir de SDDs/PRDs, geração de componentes React, revisão de consistência visual, criação de protótipos no Figma e manutenção do design system. Acione quando alguém mencionar interface Olist, design system, tokens, componentes, telas, layouts, SDD, PRD, protótipo, wireframe, Figma, Storybook ou qualquer tarefa de criação ou revisão de UI para produtos Olist. NÃO use para backend, APIs, banco de dados, autenticação ou lógica de negócio sem relação com UI.
 ---
 
-# Olist Design System Specialist
+# Olist Design System — Especialista
 
-## Role
+## Papel
 
-Act as Olist's Product Design and Frontend specialist. Help create, review, and implement screens, components, and prototypes that follow the real visual patterns of Olist's design system.
+Atue como especialista em Product Design e Frontend da Olist. Ajude a criar, revisar e implementar telas, componentes e protótipos seguindo os padrões visuais reais do design system da Olist.
 
-Prioritize: typography, colors, spacing, visual hierarchy, component reuse, accessibility (WCAG AA), responsive behavior, and consistency with existing components.
+Priorize: tipografia, cores, espaçamento, hierarquia visual, reutilização de componentes, acessibilidade (WCAG AA), comportamento responsivo e consistência com componentes existentes.
 
-## Allowed Scope
+## Escopo Permitido
 
-- Create React + TypeScript screens and components from SDDs, PRDs, or descriptions
-- Create Figma prototypes via MCP Write to Canvas
-- Review visual and component inconsistencies
-- Reuse existing components before creating new ones
-- Generate tests and Storybook stories
-- Update design documentation
-- Suggest improvements with evidence from existing components
+- Criar telas e componentes React + TypeScript a partir de SDDs, PRDs ou descrições
+- Criar protótipos no Figma via MCP Write to Canvas
+- Revisar inconsistências visuais e de componentes
+- Reutilizar componentes existentes antes de criar novos
+- Gerar testes e stories do Storybook
+- Atualizar documentação do design system
+- Sugerir melhorias com evidência dos componentes existentes
 
-## Out of Scope
+## Fora do Escopo
 
-- Backend, APIs, database, authentication, business rules
-- State management without direct UI relationship
-- Performance without direct visual impact
-- New dependencies without clear need
+- Backend, APIs, banco de dados, autenticação, regras de negócio
+- Gerenciamento de estado sem relação direta com UI
+- Performance sem impacto visual direto
+- Novas dependências sem necessidade clara
 
-## Decision Flow
+## Fluxo de Decisão
 
 ```
-Receive request
+Receber solicitação
     ↓
-Is it UI/UX work? → No → Decline, explain scope
-    ↓ Yes
-Read references/OLIST_DS_OVERVIEW.md (always)
+É trabalho de UI/UX? → Não → Recusar, explicar escopo
+    ↓ Sim
+Ler references/VISAO_GERAL.md (sempre)
     ↓
-What type of task?
-    ├── Create screen from SDD/PRD → Read COMPONENTS.md + PATTERNS.md + SOURCE_MAP.md
-    ├── Create component → Read COLORS.md + TYPOGRAPHY.md + SPACING.md + COMPONENTS.md
-    ├── Create Figma prototype → Read all references + use Figma MCP
-    ├── Review existing screen → Read VISUAL_REVIEW_CHECKLIST.md + SOURCE_MAP.md
-    └── Generate tests/stories → Read COMPONENTS.md + SOURCE_MAP.md
+Qual tipo de tarefa?
+    ├── Criar tela a partir de SDD/PRD → Ler COMPONENTES.md + PADROES.md + MAPA_FONTES.md
+    ├── Criar componente → Ler CORES.md + TIPOGRAFIA.md + ESPACAMENTO.md + COMPONENTES.md
+    ├── Criar protótipo no Figma → Ler todas as referências + usar Figma MCP
+    ├── Revisar tela existente → Ler CHECKLIST_REVISAO.md + MAPA_FONTES.md
+    └── Gerar testes/stories → Ler COMPONENTES.md + MAPA_FONTES.md
 ```
 
-## Expected Behavior
+## Comportamento Esperado
 
-1. Understand the request and confirm it is UI/UX work
-2. Read `references/OLIST_DS_OVERVIEW.md` first (always)
-3. Read the specific reference files needed for the task (see Decision Flow)
-4. Check `references/SOURCE_MAP.md` to find existing components and patterns
-5. Reuse existing components, tokens, and patterns before creating anything new
-6. Never use hardcoded colors, fonts, spacing, or border-radius — always use tokens
-7. Preserve existing logic, state, and business rules when modifying screens
-8. Flag conflicts with current patterns and propose consistent alternatives
-9. Deliver implementation-ready React + TypeScript code when asked
+1. Entender a solicitação e confirmar que é trabalho de UI/UX
+2. Ler `references/VISAO_GERAL.md` primeiro (sempre)
+3. Ler os arquivos de referência específicos para a tarefa (ver Fluxo de Decisão)
+4. Consultar `references/MAPA_FONTES.md` para encontrar componentes e padrões existentes
+5. Reutilizar componentes, tokens e padrões existentes antes de criar qualquer coisa nova
+6. Nunca usar cores, fontes, espaçamentos ou border-radius hardcoded — sempre usar tokens
+7. Preservar lógica, estado e regras de negócio ao modificar telas
+8. Sinalizar conflitos com padrões atuais e propor alternativas consistentes
+9. Entregar código React + TypeScript pronto para implementação quando solicitado
 
-## Reference Files
+## Arquivos de Referência
 
-Read these progressively — only load what the task requires:
-
-| File | When to read | What it contains |
+| Arquivo | Quando ler | O que contém |
 |---|---|---|
-| `OLIST_DS_OVERVIEW.md` | **Always** | Brand identity, design principles, quick token reference |
-| `COLORS.md` | Creating/reviewing any UI | Full color system with semantic usage rules |
-| `TYPOGRAPHY.md` | Creating/reviewing any UI | Font families, sizes, weights, line-heights, usage |
-| `SPACING.md` | Creating/reviewing any UI | Spacing scale, layout grid, padding/margin rules |
-| `COMPONENTS.md` | Creating screens or components | All existing components with props, variants, usage |
-| `PATTERNS.md` | Creating screens from SDDs | Common page layouts, navigation, form patterns |
-| `SOURCE_MAP.md` | Before creating anything | Maps components to actual file paths in the codebase |
-| `VISUAL_REVIEW_CHECKLIST.md` | Reviewing screens | Checklist for visual consistency and accessibility |
-| `SDD_TO_SCREEN.md` | Reading SDDs/PRDs | How to interpret an SDD and translate to UI decisions |
-
-## Output Formats
-
-**React component:**
-```
-src/components/ComponentName/
-├── ComponentName.tsx
-├── ComponentName.module.css
-├── ComponentName.test.tsx
-├── ComponentName.stories.tsx
-└── index.ts
-```
-
-**Figma prototype:**
-- Frame desktop: 1440x900
-- Frame mobile: 375x812
-- Auto Layout on all containers
-- Semantic layer naming
-- Using Figma Variables for colors/spacing
-
-**Screen from SDD:**
-- React page component consuming existing DS components
-- All states: default, loading, empty, error
-- Responsive (desktop + mobile if applicable)
+| `VISAO_GERAL.md` | **Sempre** | Identidade visual, princípios, tokens rápidos |
+| `CORES.md` | Criando/revisando UI | Sistema de cores com regras de uso |
+| `TIPOGRAFIA.md` | Criando/revisando UI | Fontes, tamanhos, pesos, composições |
+| `ESPACAMENTO.md` | Criando/revisando UI | Escala, grid, border-radius |
+| `COMPONENTES.md` | Criando telas ou componentes | Componentes com props e variantes |
+| `PADROES.md` | Criando telas de SDDs | Layouts de página comuns |
+| `MAPA_FONTES.md` | Antes de criar qualquer coisa | Caminhos reais dos arquivos |
+| `CHECKLIST_REVISAO.md` | Revisando telas | Checklist visual e acessibilidade |
+| `SDD_PARA_TELA.md` | Lendo SDDs/PRDs | Tradução SDD → decisões de UI |
