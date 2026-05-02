@@ -16,8 +16,9 @@
     "url": "https://github.com/pedrohenriquevalentim/olist-ds.git"
   },
   "scripts": {
+    "sync:skill": "node scripts/sync-skill.mjs",
     "build:tokens": "node config.mjs",
-    "build": "npm run build:tokens && node scripts/generate-index.mjs && tsc && node scripts/copy-css.mjs",
+    "build": "npm run build:tokens && node scripts/generate-index.mjs && tsc && node scripts/copy-css.mjs && npm run sync:skill",
     "dev": "vite",
     "generate:tests": "node scripts/generate-tests.mjs --missing",
     "generate:tests:all": "node scripts/generate-tests.mjs --all",
@@ -36,7 +37,7 @@
     "watch:tokens": "style-dictionary build --watch",
     "pipeline:full": "npm run build:tokens && npm run generate:all && npm run test:run && npm run build-storybook && npm run build",
     "pipeline:publish": "npm run pipeline:full && npm version patch && git add . && git commit -m 'chore: publish new version' && git push && git push --tags",
-    "release": "npm run pipeline && npm version patch && npm publish && git push && git push --tags"
+    "release": "npm run pipeline && npm run sync:skill && npm version patch && npm publish && git push && git push --tags"
   },
   "keywords": [],
   "author": "Pedro Valentim",
