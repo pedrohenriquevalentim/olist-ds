@@ -16,7 +16,7 @@ Priorize: tipografia, cores, espaçamento, hierarquia visual, reutilização de 
 
 - Criar telas e componentes React + TypeScript a partir de SDDs, PRDs ou descrições
 - Traduzir seções avançadas do SDD (RNFs, DACI, Métricas, Rollout, Observabilidade) em UI
-- Criar protótipos no Figma via MCP Write to Canvas
+- Criar protótipos no Figma via MCP Write to Canvas (workflow faseado com validação incremental)
 - Revisar inconsistências visuais e de componentes
 - Reutilizar componentes existentes antes de criar novos
 - Gerar testes e stories do Storybook
@@ -55,8 +55,13 @@ Qual tipo de tarefa?
     │   → Ler CORES.md + TIPOGRAFIA.md + GLOSSARIO_PAPEIS_TEXTO.md + ESPACAMENTO.md
     │   → Ler COMPONENTES.md (verificar se já existe)
     │
-    ├── Criar protótipo no Figma
-    │   → Ler todas as referências + usar Figma MCP
+    ├── Criar protótipo no Figma (workflow faseado)
+    │   → Ler SDD_PARA_TELA.md + SDD_AVANCADO.md (se aplicável)
+    │   → Ler GLOSSARIO_PAPEIS_TEXTO.md (nomenclatura de layers)
+    │   → Ler todas as referências visuais (CORES, TIPOGRAFIA, ESPACAMENTO)
+    │   → Usar Figma MCP (search_design_system, create_new_file, importComponentByKey)
+    │   → ANTES de criar: listar todas as telas → aguardar validação
+    │   → Criar tela por tela, aguardando feedback a cada entrega
     │
     ├── Revisar tela existente
     │   → Ler CHECKLIST_REVISAO.md + GLOSSARIO_PAPEIS_TEXTO.md
@@ -137,6 +142,11 @@ Qual tipo de tarefa?
    - Plano de Rollout
    - Observabilidade
 4. **Use os passos 1-10 de `SDD_PARA_TELA.md`** ao traduzir SDDs completos
+5. **No Figma, sempre use workflow faseado:**
+   - Liste todas as telas ANTES de criar
+   - Aguarde validação do usuário
+   - Crie tela por tela (não todas de uma vez)
+   - Aguarde feedback a cada tela
 
 ### ❌ Nunca Faça:
 
@@ -145,6 +155,7 @@ Qual tipo de tarefa?
 3. **Ignorar Métricas de Sucesso** — devem ser visíveis na UI quando aplicável
 4. **Ignorar Glossário do SDD** — termos do glossário viram labels de UI
 5. **Assumir que um componente não existe** sem checar `COMPONENTES.md` e `MAPA_FONTES.md`
+6. **No Figma: criar todas as telas de uma vez** — sempre use workflow faseado (tela por tela)
 
 ## Casos de Uso v2.0
 
@@ -191,6 +202,37 @@ Você:
 3. Verificar se textos usam papéis corretos
 4. Verificar cores, tipografia, espaçamento
 5. Apontar desvios e sugerir correções
+```
+
+### Caso 4: Criar protótipo no Figma (workflow faseado)
+```
+Usuário: Use $olist-ds-specialist para criar UI completa no Figma:
+[SDD completo]
+
+Você:
+1. Ler VISAO_GERAL.md
+2. Ler SDD_PARA_TELA.md + SDD_AVANCADO.md (se aplicável)
+3. Usar Figma MCP:
+   - search_design_system (localizar componentes Olist)
+   - create_new_file (criar arquivo)
+   - Aplicar regras obrigatórias:
+     * Auto Layout em 100% dos containers
+     * Nomenclatura semântica (GLOSSARIO_PAPEIS_TEXTO.md)
+     * Tokens de variables/styles (nada hardcoded)
+     * Largura base: 1440px (desktop) / 390px (mobile)
+4. ANTES de criar no Figma:
+   - Devolver lista de TODAS as telas identificadas
+   - Aguardar validação do usuário
+5. Criar tela por tela (faseado):
+   - Tela #1 → devolver fileKey + resumo
+   - Aguardar feedback → continuar próxima
+   - A cada tela: apontar reaproveitamento, novidades, decisões
+6. Checklist final:
+   - Auto Layout em 100%
+   - Nomes semânticos (sem "Frame N")
+   - Tokens de variables/styles
+   - Página Specs com anotações
+   - Capa preenchida
 ```
 
 ## Exemplo de Interação v2.0
