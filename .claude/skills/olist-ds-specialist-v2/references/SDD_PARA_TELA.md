@@ -120,6 +120,84 @@ Após construir, verificar:
 - [ ] Acessibilidade: todos elementos interativos têm atributos ARIA
 - [ ] Nada fora do escopo do SDD foi adicionado
 
+## Passo 8: Traduzir Métricas de Sucesso em UI Observável
+
+Se o SDD define métricas de sucesso, **exponha-as na UI** sempre que possível.
+
+| Tipo de Métrica no SDD | Como exibir | Componente |
+|---|---|---|
+| "Reduzir tempo médio de X para Y" | Card de métrica com número atual + meta | Número grande (32px bold) + Caption "Meta: Y" |
+| "Aumentar taxa de Z de X% para Y%" | ProgressBar com % atual | ProgressBar + Caption "Meta: Y%" |
+| "Aumentar NPS de X para Y" | Badge de score + link para histórico | Badge + Link "Ver detalhes" |
+| "Volume de transações" | Gráfico de linha temporal | Chart (biblioteca externa) |
+
+**Exemplo:**
+
+**SDD diz:**
+> Métrica: Reduzir tempo médio de aprovação de 4h para 2h
+
+**UI decision:**
+- Card no topo da página
+- Número: "2h 15min" (verde se < 2h, amarelo se 2-4h, vermelho se > 4h)
+- Caption: "Meta: < 2h | Últimos 30 dias"
+
+**Regra:** Se a métrica é **operacional** (dia a dia), exibir no dashboard principal. Se é **estratégica** (OKRs), criar dashboard executivo separado.
+
+## Passo 9: Mapear Plano de Rollout em Feature Flags e Avisos
+
+Se o SDD menciona rollout gradual, feature flags ou deprecação, **crie UI correspondente**.
+
+| Estratégia de Rollout no SDD | Decisão de UI | Componente |
+|---|---|---|
+| "Feature flag para 10% dos usuários" | Badge "Beta" ao lado do botão | Badge variant blue |
+| "Rollout gradual (fase 1, 2, 3)" | Banner "Novo! Esta feature está em teste" | Banner no topo |
+| "Opt-in para nova versão" | Checkbox "Testar nova interface" nas Configurações | Checkbox + Modal de confirmação |
+| "Deprecação em 30 dias" | Banner de aviso "Será removido em X dias" | Banner amarelo com countdown |
+
+**Exemplo:**
+
+**SDD diz:**
+> Plano de Rollout:
+> - Fase 1: 10% dos sellers (feature flag)
+> - Fase 2: 50% após validação
+> - Fase 3: 100% após 2 semanas
+
+**UI decision:**
+- Badge "Beta" ao lado do botão "Calculadora de Transição"
+- Banner no topo: "⚠️ Esta é uma versão de teste. [Enviar feedback]"
+- Se usuário NÃO está no grupo: botão desabilitado + Tooltip "Em breve para todos"
+
+## Passo 10: Usar o Glossário do SDD como Source of Truth
+
+A seção **Glossário** do SDD define termos de domínio. Esses termos **viram labels de UI**.
+
+### Regra de Ouro:
+**Se o SDD define um termo, use EXATAMENTE esse termo na UI.** Não invente rótulos alternativos.
+
+**Exemplo:**
+
+**SDD diz:**
+> Glossário:
+> - **GMV:** Gross Merchandise Volume
+> - **SKU:** Stock Keeping Unit
+> - **Storage:** Espaço de armazenamento no fulfillment
+
+**UI decision:**
+- Label do dashboard: "GMV" (não "Faturamento" ou "Valor Bruto")
+- Tooltip ao hover: "Gross Merchandise Volume"
+- Label da coluna: "SKU" (não "Código do Produto")
+- Label do gráfico: "Storage Utilizado" (não "Armazenamento")
+
+### Quando Traduzir vs Manter Sigla
+
+| Termo | Decisão | Justificativa |
+|---|---|---|
+| GMV, SKU, NPS | Manter sigla + tooltip | Termos consolidados no mercado |
+| Storage, Fulfillment | Manter em inglês | Jargão interno da Olist |
+| Seller | Manter em inglês | Evitar "vendedor" (ambíguo) |
+
+**Para mais detalhes sobre seções avançadas do SDD (RNFs, DACI, Observabilidade), consulte `SDD_AVANCADO.md`.**
+
 ## Exemplo: SDD → Decisões de tela
 
 **Trecho do SDD:**

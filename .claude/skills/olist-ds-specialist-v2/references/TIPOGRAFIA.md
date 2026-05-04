@@ -1,5 +1,9 @@
 # Tipografia
 
+**⚠️ IMPORTANTE:** Para entender **como nomear cada tipo de texto** (Heading, Label, Error, etc.), leia primeiro `GLOSSARIO_PAPEIS_TEXTO.md`. Este arquivo define apenas os **tokens visuais** (tamanho, peso, altura).
+
+---
+
 ## Família Tipográfica
 
 | Token | Valor | Uso |
@@ -52,13 +56,37 @@ Pesos carregados: 200, 300, 400, 500, 600, 700, 800.
 | `--font-line-height-32px` | 32px | 24px |
 | `--font-line-height-40px` | 40px | 32px |
 
-## Composições Tipográficas
+## Mapeamento: Papéis de Texto → Tokens
 
-Estilos de texto padrão usados no ERP:
+Cada papel de texto (definido em `GLOSSARIO_PAPEIS_TEXTO.md`) tem uma combinação padrão de tokens. Use estas composições como ponto de partida.
+
+| Papel | Tamanho | Peso | Altura | Cor | Classe CSS sugerida |
+|---|---|---|---|---|---|
+| **Heading** | `24px` | `bold` (700) | `32px` | `gray-900` | `.heading` |
+| **Subheading** | `14px` | `regular` (400) | `20px` | `gray-500` | `.subheading` |
+| **Section Title** | `16px` | `semibold` (600) | `24px` | `gray-900` | `.sectionTitle` |
+| **Body** | `14px` | `regular` (400) | `20px` | `gray-900` | `.body` |
+| **Label** | `14px` | `medium` (500) | `20px` | `gray-700` | `.label` |
+| **Helper** | `12px` | `regular` (400) | `16px` | `gray-500` | `.helper` |
+| **Error** | `12px` | `regular` (400) | `16px` | `red-500` | `.error` |
+| **Caption** | `12px` | `regular` (400) | `16px` | `gray-500` | `.caption` |
+| **CTA Label** | `14px` | `semibold` (600) | `20px` | (cor do botão) | `.ctaLabel` |
+| **Link** | `14px` | `regular` (400) | `20px` | `blue-500` | `.link` |
+
+### Casos Especiais
+
+- **Header de Tabela:** `12px` + `semibold` (600) + `16px` + `gray-600`
+- **Badge:** `12px` + `semibold` (600) + `16px` + (cor do badge)
+- **Métrica (Dashboard):** `32px` + `bold` (700) + `40px` + `gray-900`
+- **Placeholder de Input:** `12px` + `regular` (400) + `16px` + `gray-400`
+
+---
+
+## Exemplo de Código
 
 ```css
-/* Título da página */
-.titulo-pagina {
+/* Heading — título principal da tela */
+.heading {
   font-family: var(--font-family-jakarta), sans-serif;
   font-size: var(--font-size-24px);
   font-weight: var(--font-weight-bold);
@@ -66,67 +94,90 @@ Estilos de texto padrão usados no ERP:
   color: var(--color-gray-900);
 }
 
-/* Header de seção */
-.header-secao {
+/* Subheading — texto de apoio abaixo do Heading */
+.subheading {
+  font-family: var(--font-family-jakarta), sans-serif;
+  font-size: var(--font-size-14px);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-line-height-20px);
+  color: var(--color-gray-500);
+}
+
+/* Section Title — título de seção */
+.sectionTitle {
+  font-family: var(--font-family-jakarta), sans-serif;
   font-size: var(--font-size-16px);
   font-weight: var(--font-weight-semibold);
   line-height: var(--font-line-height-24px);
   color: var(--color-gray-900);
 }
 
-/* Texto corpo (padrão) */
-.corpo {
+/* Body — parágrafo de conteúdo */
+.body {
+  font-family: var(--font-family-jakarta), sans-serif;
   font-size: var(--font-size-14px);
   font-weight: var(--font-weight-regular);
   line-height: var(--font-line-height-20px);
   color: var(--color-gray-900);
 }
 
-/* Caption / helper text */
-.caption {
-  font-size: var(--font-size-12px);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--font-line-height-16px);
-  color: var(--color-gray-500);
-}
-
-/* Header de tabela */
-.header-tabela {
-  font-size: var(--font-size-12px);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--font-line-height-16px);
-  color: var(--color-gray-600);
-  text-transform: none; /* nunca uppercase na Olist */
-}
-
-/* Texto de botão */
-.texto-botao {
-  font-size: var(--font-size-14px);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--font-line-height-20px);
-}
-
-/* Label de input */
-.label-input {
+/* Label — rótulo de campo de formulário */
+.label {
+  font-family: var(--font-family-jakarta), sans-serif;
   font-size: var(--font-size-14px);
   font-weight: var(--font-weight-medium);
   line-height: var(--font-line-height-20px);
   color: var(--color-gray-700);
 }
 
-/* Badge */
-.badge {
+/* Helper — texto auxiliar abaixo de campo */
+.helper {
+  font-family: var(--font-family-jakarta), sans-serif;
   font-size: var(--font-size-12px);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-regular);
   line-height: var(--font-line-height-16px);
+  color: var(--color-gray-500);
 }
 
-/* Número de métrica (dashboard) */
-.metrica {
-  font-size: var(--font-size-32px);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--font-line-height-40px);
-  color: var(--color-gray-900);
+/* Error — mensagem de erro de validação */
+.error {
+  font-family: var(--font-family-jakarta), sans-serif;
+  font-size: var(--font-size-12px);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-line-height-16px);
+  color: var(--color-red-500);
+}
+
+/* Caption — texto secundário (timestamps, metadados) */
+.caption {
+  font-family: var(--font-family-jakarta), sans-serif;
+  font-size: var(--font-size-12px);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-line-height-16px);
+  color: var(--color-gray-500);
+}
+
+/* CTA Label — texto dentro de botão */
+.ctaLabel {
+  font-family: var(--font-family-jakarta), sans-serif;
+  font-size: var(--font-size-14px);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-line-height-20px);
+  /* cor herdada do botão */
+}
+
+/* Link — texto clicável inline */
+.link {
+  font-family: var(--font-family-jakarta), sans-serif;
+  font-size: var(--font-size-14px);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-line-height-20px);
+  color: var(--color-blue-500);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
 }
 ```
 
@@ -136,7 +187,15 @@ Estilos de texto padrão usados no ERP:
 - ✅ Use semibold (600) para elementos interativos e headers
 - ✅ Use gray-500 para texto secundário/suporte
 - ✅ Combine cada tamanho com a altura de linha correspondente
+- ✅ **Sempre nomeie o texto usando os papéis de `GLOSSARIO_PAPEIS_TEXTO.md`** (não invente nomes)
 - ❌ Nunca use text-transform: uppercase (não faz parte da identidade Olist)
 - ❌ Nunca use tamanhos fora da escala de tokens
 - ❌ Nunca use itálico para ênfase (use font-weight)
 - ❌ Nunca misture famílias tipográficas na mesma interface
+
+---
+
+**Referência cruzada:**
+- `GLOSSARIO_PAPEIS_TEXTO.md` — definição semântica de cada papel de texto
+- `CORES.md` — paleta de cores para texto
+- `SDD_PARA_TELA.md` — como mapear requisitos em papéis de texto
