@@ -39,7 +39,9 @@
     "watch:tokens": "style-dictionary build --watch",
     "pipeline:full": "npm run build:tokens && npm run generate:all && npm run test:run && npm run build-storybook && npm run build",
     "pipeline:publish": "npm run pipeline:full && npm version patch && git add . && git commit -m 'chore: publish new version' && git push && git push --tags",
-    "release": "npm run pipeline && npm run sync:skill && npm version patch && npm publish && git push && git push --tags"
+    "release": "npm run pipeline && npm run sync:skill && npm version patch && npm publish && git push && git push --tags",
+    "wiki": "node scripts/generate-wiki.mjs",
+    "postrelease": "npm run wiki"
   },
   "keywords": [],
   "author": "Pedro Valentim",

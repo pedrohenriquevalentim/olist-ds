@@ -1,0 +1,50 @@
+{
+    "designSystem": {
+      "masterFile": {
+        "name": "Design System - Fondations, Components & Icons Rebrand (TO-BE)",
+        "fileKey": "HeyN4w209HWh8rfpTDiwyf",
+        "description": "Fundações do rebrand, ícones enovos componentes do design system 2.0",
+        "url": "https://www.figma.com/design/HeyN4w209HWh8rfpTDiwyf/design-system?node-id=16-56&p=f&t=TsSHNhJ5WiND29iC-0"
+      },
+      "additionalFiles": [
+        {
+          "name": "Design System - Components Web (AS-IS)",
+          "fileKey": "QJmwu6sR06xmyGAoBaXuEn",
+          "description": "Componentes web AS-IS",
+          "url": "https://www.figma.com/design/QJmwu6sR06xmyGAoBaXuEn/-design-system--components-web?m=auto"
+        }
+      ],
+      "allowedFiles": [
+        "HeyN4w209HWh8rfpTDiwyf",
+        "QJmwu6sR06xmyGAoBaXuEn"
+      ],
+      "blockedFiles":[],
+      "searchPriority": [
+        "HeyN4w209HWh8rfpTDiwyf",
+        "QJmwu6sR06xmyGAoBaXuEn"
+      ],
+      "notes": [
+        "=== COMO ADICIONAR NOVOS ARQUIVOS ===",
+        "",
+        "1. Abra o arquivo do Figma",
+        "2. Copie a URL da barra de endereço",
+        "3. Extraia o fileKey:",
+        "4. Adicione em 'additionalFiles' com nome e descrição",
+        "5. Adicione o fileKey em 'allowedFiles'",
+        "",
+        "=== PRIORIDADE DE BUSCA ===",
+        "",
+        "searchPriority define a ordem em que Claude busca componentes.",
+        "Primeiro arquivo = maior prioridade.",
+        "",
+        "Exemplo:",
+        "- Se 'Button' existir em Components e em Patterns,",
+        "  o de Components será usado (vem primeiro na lista).",
+        "",
+        "=== BLOQUEIO DE ARQUIVOS ===",
+        "",
+        "blockedFiles: arquivos antigos/deprecados que NÃO devem ser usados.",
+        "Mesmo que existam na org, Claude vai ignorá-los."
+      ]
+    }
+}

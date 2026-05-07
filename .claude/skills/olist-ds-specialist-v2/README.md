@@ -57,12 +57,63 @@ cp -r olist-ds-specialist ~/.claude/skills/
 ```bash
 cp -r olist-ds-specialist .claude/skills/
 git add .claude/skills/
-git commit -m "feat: skill corporativa do design system v2.0"
+git commit -m "feat: skill corporativa do design system v2.1"
 ```
 
 ### No Claude.ai
 
 Customize → Skills → Upload → selecionar pasta
+
+---
+
+## ⚙️ Configuração Inicial (Obrigatório)
+
+Após instalar a skill, você DEVE configurar o arquivo de fonte da verdade do Figma:
+
+### Passo 1: Copiar template
+
+```bash
+cp .claude/skills/olist-ds-specialist/figma-config.example.json .claude/figma-config.json
+```
+
+### Passo 2: Pegar seus fileKeys do Figma
+
+1. Abrir arquivo do Design System no Figma
+2. Copiar URL da barra de endereço:
+   ```
+   https://www.figma.com/design/ABC123XYZ456/nome-do-arquivo
+                                └────┬────┘
+                                 fileKey
+   ```
+3. FileKey é: `ABC123XYZ456`
+
+### Passo 3: Preencher .claude/figma-config.json
+
+Abrir `.claude/figma-config.json` e substituir:
+
+```json
+{
+  "designSystem": {
+    "masterFile": {
+      "fileKey": "ABC123XYZ456"  // ← seu fileKey real
+    },
+    "allowedFiles": [
+      "ABC123XYZ456"  // ← seu fileKey real
+    ],
+    "searchPriority": [
+      "ABC123XYZ456"  // ← seu fileKey real
+    ]
+  }
+}
+```
+
+### Passo 4: Adicionar .claude/figma-config.json ao .gitignore
+
+```bash
+echo '.claude/figma-config.json' >> .gitignore
+```
+
+**Por quê?** Cada pessoa/projeto pode ter fileKeys diferentes. O arquivo de configuração é local.
 
 ## Uso
 

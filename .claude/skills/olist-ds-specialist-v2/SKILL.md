@@ -133,6 +133,7 @@ Qual tipo de tarefa?
 
 1. **Leia `VISAO_GERAL.md` primeiro** — é o mapa de navegação
 2. **Antes de usar Figma MCP, leia `.claude/figma-config.json`:**
+   - **Se o arquivo não existir:** informar usuário para copiar `figma-config.example.json` e preencher
    - Use APENAS os fileKeys em `allowedFiles`
    - Ignore completamente arquivos em `blockedFiles`
    - Respeite a ordem de `searchPriority` (busca no primeiro, depois no segundo, etc.)
