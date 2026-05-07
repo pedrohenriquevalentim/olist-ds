@@ -33,7 +33,7 @@ const WIKI_DIR = join(ROOT, 'wiki');
 const WIKI_PATH = join(WIKI_DIR, 'WIKI.md');
 const PKG_PATH = join(ROOT, 'package.json');
 const COMPONENTS_DIR = join(ROOT, 'src', 'components');
-const SKILL_DIR = join(ROOT, '.claude', 'skills', 'olist-ds-specialist');
+const SKILL_DIR = join(ROOT, '.claude', 'skills', 'olist-ds-specialist-v2');
 const FIGMA_CONFIG_PATH = join(ROOT, '.claude', 'figma-config.json');
 const SCRIPTS_DIR = join(ROOT, 'scripts');
 const ICONS_DIR = join(ROOT, 'src', 'assets', 'icons', 'svgs');
@@ -241,7 +241,7 @@ ${scriptsList}`);
 // Skill
 section('Skill Claude', `### Versão: v${skillVersion}
 
-**Localização:** \`.claude/skills/olist-ds-specialist/\`
+**Localização:** \`.claude/skills/olist-ds-specialist-v2/\`
 
 ### Arquivos da Skill (${skillRootFiles.length + skillRefFiles.length} total)
 
@@ -316,7 +316,7 @@ FileKey: ABC123
 ### Setup
 
 \`\`\`bash
-cp .claude/skills/olist-ds-specialist/figma-config.example.json .claude/figma-config.json
+cp .claude/skills/olist-ds-specialist-v2/figma-config.example.json .claude/figma-config.json
 # Editar com seus fileKeys
 echo '.claude/figma-config.json' >> .gitignore
 \`\`\``);
@@ -355,10 +355,10 @@ zip -r olist-ds-specialist-v${skillVersion}.zip olist-ds-specialist-v2/
 \`\`\`bash
 # 1. Extrair e copiar skill
 unzip olist-ds-specialist-v${skillVersion}.zip
-cp -r olist-ds-specialist-v2/ .claude/skills/olist-ds-specialist/
+cp -r olist-ds-specialist-v2/ .claude/skills/olist-ds-specialist-v2/
 
 # 2. Configurar Figma
-cp .claude/skills/olist-ds-specialist/figma-config.example.json .claude/figma-config.json
+cp .claude/skills/olist-ds-specialist-v2/figma-config.example.json .claude/figma-config.json
 # Editar com fileKeys próprios
 
 # 3. Gitignore

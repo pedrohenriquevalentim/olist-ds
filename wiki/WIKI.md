@@ -1,7 +1,7 @@
 # Olist Design System — Wiki
 
 **Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.7`  
-**Skill:** v?  
+**Skill:** v2.0  
 **Última atualização:** 2026-05-07  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
@@ -34,10 +34,10 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 |---|---|
 | Componentes | 9 |
 | Ícones SVG | 550 |
-| Arquivos da Skill | 0 |
+| Arquivos da Skill | 15 |
 | Arquivos Figma permitidos | 2 |
 | Versão npm | 1.0.7 |
-| Versão skill | ? |
+| Versão skill | 2.0 |
 
 ## Componentes
 
@@ -76,7 +76,7 @@ npm run release
     │
     ├── 1. generate:all (testes + stories via Gemini)
     ├── 2. build (compilação TypeScript)
-    ├── 3. sync:skill (atualiza skill v?)
+    ├── 3. sync:skill (atualiza skill v2.0)
     ├── 4. npm version patch (incrementa versão)
     ├── 5. npm publish (publica no registry)
     └── 6. git push --follow-tags
@@ -121,23 +121,36 @@ npm run release
 
 ## Skill Claude
 
-### Versão: v?
+### Versão: v2.0
 
-**Localização:** `.claude/skills/olist-ds-specialist/`
+**Localização:** `.claude/skills/olist-ds-specialist-v2/`
 
-### Arquivos da Skill (0 total)
+### Arquivos da Skill (15 total)
 
-**Raiz (0):**
+**Raiz (3):**
+- `README.md`
+- `SKILL.md`
+- `figma-config.json`
 
-
-**Referências (0):**
-
+**Referências (12):**
+- `CHECKLIST_REVISAO.md`
+- `COMPONENTES.md`
+- `CORES.md`
+- `ESPACAMENTO.md`
+- `FIGMA_CONFIG.md`
+- `GLOSSARIO_PAPEIS_TEXTO.md`
+- `MAPA_FONTES.md`
+- `PADROES.md`
+- `SDD_AVANCADO.md`
+- `SDD_PARA_TELA.md`
+- `TIPOGRAFIA.md`
+- `VISAO_GERAL.md`
 
 ### Auto-gerados vs Manuais
 
 **Auto-gerados** (por `npm run build`): COMPONENTES.md, MAPA_FONTES.md, VISAO_GERAL.md (parcial)
 
-**Manuais** (não são sobrescritos): 
+**Manuais** (não são sobrescritos): CHECKLIST_REVISAO.md, CORES.md, ESPACAMENTO.md, FIGMA_CONFIG.md, GLOSSARIO_PAPEIS_TEXTO.md, PADROES.md, SDD_AVANCADO.md, SDD_PARA_TELA.md, TIPOGRAFIA.md, VISAO_GERAL.md
 
 ### Regras Críticas
 
@@ -201,7 +214,7 @@ FileKey: ABC123
 ### Setup
 
 ```bash
-cp .claude/skills/olist-ds-specialist/figma-config.example.json .claude/figma-config.json
+cp .claude/skills/olist-ds-specialist-v2/figma-config.example.json .claude/figma-config.json
 # Editar com seus fileKeys
 echo '.claude/figma-config.json' >> .gitignore
 ```
@@ -234,7 +247,7 @@ echo '.claude/figma-config.json' >> .gitignore
 
 ```bash
 cd .claude/skills
-zip -r olist-ds-specialist-v?.zip olist-ds-specialist-v2/
+zip -r olist-ds-specialist-v2.0.zip olist-ds-specialist-v2/
 ```
 
 ### O Que NÃO Vai
@@ -248,11 +261,11 @@ zip -r olist-ds-specialist-v?.zip olist-ds-specialist-v2/
 
 ```bash
 # 1. Extrair e copiar skill
-unzip olist-ds-specialist-v?.zip
-cp -r olist-ds-specialist-v2/ .claude/skills/olist-ds-specialist/
+unzip olist-ds-specialist-v2.0.zip
+cp -r olist-ds-specialist-v2/ .claude/skills/olist-ds-specialist-v2/
 
 # 2. Configurar Figma
-cp .claude/skills/olist-ds-specialist/figma-config.example.json .claude/figma-config.json
+cp .claude/skills/olist-ds-specialist-v2/figma-config.example.json .claude/figma-config.json
 # Editar com fileKeys próprios
 
 # 3. Gitignore
