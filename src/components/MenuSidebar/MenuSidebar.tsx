@@ -1,48 +1,9 @@
 import React from "react";
 import styles from "./MenuSidebar.module.css";
+import { Icon, IconName } from "../Icon";
+import { logoToggleSvg, logoSymbolSvg, logoWordmarkSvg } from "../../assets/logo";
 
-// ─── Asset URLs (Figma MCP) ───────────────────────────────────────────────
-
-// Logo — expanded
-const imgLogoToggle         = "https://www.figma.com/api/mcp/asset/accef28f-6f7c-4b3f-bc87-3b6b0b2e2f32";
-const imgLogoOlist          = "https://www.figma.com/api/mcp/asset/9f214320-1213-4ab8-a54b-ff1c0c158505";
-// Logo — contraído (amarelo)
-const imgLogoContracted     = "https://www.figma.com/api/mcp/asset/2c4961d8-6100-444c-a021-461893c9718b";
-
-// Ícones dos itens principais (estado padrão)
-const imgIconSolucoes       = "https://www.figma.com/api/mcp/asset/992c0ca6-5e6d-4e6e-b7f6-b40c567d8de7";
-const imgIconVendas         = "https://www.figma.com/api/mcp/asset/f8be069a-c622-4b9d-a2f4-58be585d92a7";
-const imgIconVendasActive   = "https://www.figma.com/api/mcp/asset/ff62911a-7afe-446f-8aeb-b68d39c44708";
-const imgIconProdutos       = "https://www.figma.com/api/mcp/asset/d38a0962-23b6-4c9a-8872-1a79b1ca652a";
-const imgIconSuprimentos    = "https://www.figma.com/api/mcp/asset/4d4cbc60-f620-4889-a5a6-88b3118fca66";
-const imgIconServicos       = "https://www.figma.com/api/mcp/asset/be62dabb-647e-4f20-ba81-3f1c089a5730";
-const imgIconFinancas       = "https://www.figma.com/api/mcp/asset/5a61fbfa-e215-494f-8b42-f8263f49a337";
-const imgIconClientes       = "https://www.figma.com/api/mcp/asset/0de167fe-182c-4645-826f-92c21ed51d8b";
-const imgIconRelatorios     = "https://www.figma.com/api/mcp/asset/2c1e66fe-de20-49a3-b5a4-ce2216719692";
-const imgIconAtalhos        = "https://www.figma.com/api/mcp/asset/194f241b-be9a-419c-b557-720c9f60285f";
-
-// Ícones do rodapé
-const imgIconNotificacoes   = "https://www.figma.com/api/mcp/asset/ed095f1b-ec2f-42a5-bd5c-50b2855ef4b3";
-const imgIconConfiguracoes  = "https://www.figma.com/api/mcp/asset/394570e4-f587-48f9-a9b6-cc765460493e";
-const imgIconSuporte        = "https://www.figma.com/api/mcp/asset/f04fd1aa-1cbb-48c7-9df8-45a9e0e866b3";
-
-// Ícones do painel Vendas
-const imgPanPropostas       = "https://www.figma.com/api/mcp/asset/3402bfde-4c43-4f0c-a9c0-53b9cc7b6037";
-const imgPanPedidos         = "https://www.figma.com/api/mcp/asset/5a3f6e93-cb06-4c84-b826-863d5cc7e3d9";
-const imgPanPdv             = "https://www.figma.com/api/mcp/asset/5cce8cff-562b-4e06-ade1-bf189ac25a91";
-const imgPanNfe             = "https://www.figma.com/api/mcp/asset/fd38f367-d31b-415c-92ad-f4be88821257";
-const imgPanGoogleShopping  = "https://www.figma.com/api/mcp/asset/569d4c02-d504-42ae-a668-42b5d792a653";
-const imgPanPedidosEco      = "https://www.figma.com/api/mcp/asset/e5957202-1d8a-4822-bda7-c288bcbebc3d";
-const imgPanPerguntas       = "https://www.figma.com/api/mcp/asset/b278bd71-cbe0-466d-8434-29e8f90632af";
-const imgPanPosVenda        = "https://www.figma.com/api/mcp/asset/127241a0-6937-4565-9a62-02bd0aea615f";
-const imgPanSeparacao       = "https://www.figma.com/api/mcp/asset/b6bdee0e-0925-4f80-ade9-745bc26b8951";
-const imgPanExpedicao       = "https://www.figma.com/api/mcp/asset/70e49384-b7e9-48c6-a8da-dee092702be6";
-const imgPanDevolucao       = "https://www.figma.com/api/mcp/asset/90fabd86-a0b2-4ffd-b055-d2591bddd6b3";
-const imgPanComissoes       = "https://www.figma.com/api/mcp/asset/5a3f6e93-cb06-4c84-b826-863d5cc7e3d9";
-const imgPanMargem          = "https://www.figma.com/api/mcp/asset/edaad5fe-ac91-4edc-a9dd-bd5decd0b2e7";
-const imgPanPerformance     = "https://www.figma.com/api/mcp/asset/addfff07-7946-406f-9619-bacfda64fb65";
-
-// ─── Types ────────────────────────────────────────────────────────────────
+// ─── Types ────────────────────────────────────────────────────────────────────
 
 export type SidebarKey =
   | "fechado"
@@ -62,7 +23,7 @@ export type SidebarKey =
 
 interface PanelItem {
   label: string;
-  iconSrc?: string;
+  iconName?: IconName;
   isNew?: boolean;
 }
 
@@ -76,34 +37,33 @@ interface PanelContent {
   sections: PanelSection[];
 }
 
-// ─── Itens de navegação principal ────────────────────────────────────────
-
 interface NavItem {
   key: SidebarKey;
   label: string;
-  iconSrc: string;
-  iconActiveSrc?: string;
+  iconName: IconName;
 }
 
+// ─── Itens de navegação principal ────────────────────────────────────────────
+
 const NAV_ITEMS: NavItem[] = [
-  { key: "soluções da olist",        label: "Soluções Olist",         iconSrc: imgIconSolucoes   },
-  { key: "vendas",                   label: "Vendas",                  iconSrc: imgIconVendas, iconActiveSrc: imgIconVendasActive },
-  { key: "produtos",                 label: "Produtos",                iconSrc: imgIconProdutos   },
-  { key: "suprimentos",              label: "Suprimentos",             iconSrc: imgIconSuprimentos },
-  { key: "serviços",                 label: "Serviços",                iconSrc: imgIconServicos   },
-  { key: "finanças",                 label: "Finanças",                iconSrc: imgIconFinancas   },
-  { key: "clientes e fornecedores",  label: "Clientes e fornecedores", iconSrc: imgIconClientes   },
-  { key: "relatórios",               label: "Relatórios",              iconSrc: imgIconRelatorios },
-  { key: "meus atalhos",             label: "Meus atalhos",            iconSrc: imgIconAtalhos    },
+  { key: "soluções da olist",       label: "Soluções Olist",         iconName: "apps"            },
+  { key: "vendas",                  label: "Vendas",                 iconName: "tag"             },
+  { key: "produtos",                label: "Produtos",               iconName: "product-catalog" },
+  { key: "suprimentos",             label: "Suprimentos",            iconName: "wholesale"       },
+  { key: "serviços",                label: "Serviços",               iconName: "services"        },
+  { key: "finanças",                label: "Finanças",               iconName: "wallet"          },
+  { key: "clientes e fornecedores", label: "Clientes e fornecedores",iconName: "profile"         },
+  { key: "relatórios",              label: "Relatórios",             iconName: "file-graph"      },
+  { key: "meus atalhos",            label: "Meus atalhos",           iconName: "bookmark"        },
 ];
 
 const FOOTER_ITEMS: NavItem[] = [
-  { key: "notificações",       label: "Notificações",       iconSrc: imgIconNotificacoes  },
-  { key: "configurações",      label: "Configurações",      iconSrc: imgIconConfiguracoes },
-  { key: "central de suporte", label: "Central de suporte", iconSrc: imgIconSuporte       },
+  { key: "notificações",       label: "Notificações",       iconName: "bell"     },
+  { key: "configurações",      label: "Configurações",      iconName: "settings" },
+  { key: "central de suporte", label: "Central de suporte", iconName: "support"  },
 ];
 
-// ─── Conteúdo dos painéis ─────────────────────────────────────────────────
+// ─── Conteúdo dos painéis ─────────────────────────────────────────────────────
 
 const PANELS: Partial<Record<SidebarKey, PanelContent>> = {
   vendas: {
@@ -112,36 +72,36 @@ const PANELS: Partial<Record<SidebarKey, PanelContent>> = {
       {
         label: "Vendas",
         items: [
-          { label: "Propostas comerciais",    iconSrc: imgPanPropostas },
-          { label: "Pedidos de venda",        iconSrc: imgPanPedidos, isNew: true },
-          { label: "PDV",                     iconSrc: imgPanPdv      },
-          { label: "Nota fiscal (NF-e)",      iconSrc: imgPanNfe      },
-          { label: "Nota consumidor (NFC-e)", iconSrc: imgPanNfe      },
+          { label: "Propostas comerciais",    iconName: "invoice"          },
+          { label: "Pedidos de venda",        iconName: "shopping-cart", isNew: true },
+          { label: "PDV",                     iconName: "pay-machine-card" },
+          { label: "Nota fiscal (NF-e)",      iconName: "file-nf"          },
+          { label: "Nota consumidor (NFC-e)", iconName: "file-nf"          },
         ],
       },
       {
         label: "Ecommerce",
         items: [
-          { label: "Google Shopping",         iconSrc: imgPanGoogleShopping },
-          { label: "Pedidos no ecommerce",    iconSrc: imgPanPedidosEco     },
-          { label: "Perguntas de pré-venda",  iconSrc: imgPanPerguntas      },
-          { label: "Pós-venda",               iconSrc: imgPanPosVenda       },
+          { label: "Google Shopping",         iconName: "shopping-bag"  },
+          { label: "Pedidos no ecommerce",    iconName: "ecommerce"     },
+          { label: "Perguntas de pré-venda",  iconName: "chat-bubbles"  },
+          { label: "Pós-venda",               iconName: "reply"         },
         ],
       },
       {
         label: "Operação",
         items: [
-          { label: "Separação", iconSrc: imgPanSeparacao },
-          { label: "Expedição", iconSrc: imgPanExpedicao },
-          { label: "Devolução", iconSrc: imgPanDevolucao },
+          { label: "Separação", iconName: "package-manage" },
+          { label: "Expedição", iconName: "truck"          },
+          { label: "Devolução", iconName: "package-cancel" },
         ],
       },
       {
         label: "Relatórios",
         items: [
-          { label: "Comissões",              iconSrc: imgPanComissoes   },
-          { label: "Margem de contribuição", iconSrc: imgPanMargem      },
-          { label: "Performance de vendas",  iconSrc: imgPanPerformance },
+          { label: "Comissões",              iconName: "percentual"    },
+          { label: "Margem de contribuição", iconName: "chart-bar-up"  },
+          { label: "Performance de vendas",  iconName: "graph-desktop" },
         ],
       },
     ],
@@ -264,7 +224,7 @@ const PANELS: Partial<Record<SidebarKey, PanelContent>> = {
       {
         label: "Conta",
         items: [
-          { label: "Minha conta"     },
+          { label: "Minha conta"      },
           { label: "Upgrade de plano" },
         ],
       },
@@ -275,9 +235,9 @@ const PANELS: Partial<Record<SidebarKey, PanelContent>> = {
     sections: [
       {
         items: [
-          { label: "Novos pedidos disponíveis para separação"                  },
-          { label: "Não foi possível enviar o anúncio para integração Amazon"  },
-          { label: "Anúncio enviado para integração Amazon com sucesso"        },
+          { label: "Novos pedidos disponíveis para separação"                   },
+          { label: "Não foi possível enviar o anúncio para integração Amazon"   },
+          { label: "Anúncio enviado para integração Amazon com sucesso"         },
           { label: "Erro ao atualizar estoque do produto com o ecommerce iFood" },
         ],
       },
@@ -335,7 +295,7 @@ const PANELS: Partial<Record<SidebarKey, PanelContent>> = {
   },
 };
 
-// ─── Props ────────────────────────────────────────────────────────────────
+// ─── Props ────────────────────────────────────────────────────────────────────
 
 export interface MenuSidebarProps {
   className?: string;
@@ -353,13 +313,13 @@ export interface MenuSidebarProps {
   ariaLabel?: string;
 }
 
-// ─── Helper ───────────────────────────────────────────────────────────────
+// ─── Helper ───────────────────────────────────────────────────────────────────
 
 function cx(...parts: Array<string | false | null | undefined>): string {
   return parts.filter(Boolean).join(" ");
 }
 
-// ─── Componente principal ─────────────────────────────────────────────────
+// ─── Componente principal ─────────────────────────────────────────────────────
 
 export const MenuSidebar = ({
   className,
@@ -386,12 +346,21 @@ export const MenuSidebar = ({
         <div className={styles.logoArea}>
           {isContracted ? (
             <div className={styles.logoContractedWrap} aria-hidden="true">
-              <img alt="olist" className={styles.logoContractedImg} src={imgLogoContracted} />
+              <span
+                className={styles.logoContractedImg}
+                dangerouslySetInnerHTML={{ __html: logoSymbolSvg }}
+              />
             </div>
           ) : (
             <div className={styles.logoExpandedWrap} aria-hidden="true">
-              <img alt="" className={styles.logoToggle} src={imgLogoToggle} />
-              <img alt="olist" className={styles.logoWordmark} src={imgLogoOlist} />
+              <span
+                className={styles.logoToggle}
+                dangerouslySetInnerHTML={{ __html: logoToggleSvg }}
+              />
+              <span
+                className={styles.logoWordmark}
+                dangerouslySetInnerHTML={{ __html: logoWordmarkSvg }}
+              />
             </div>
           )}
         </div>
@@ -400,7 +369,6 @@ export const MenuSidebar = ({
         <div className={styles.navList} role="list">
           {NAV_ITEMS.map((item) => {
             const isActive = activeKey === item.key;
-            const iconSrc = isActive && item.iconActiveSrc ? item.iconActiveSrc : item.iconSrc;
             return (
               <div key={item.key} role="listitem">
                 <button
@@ -415,7 +383,7 @@ export const MenuSidebar = ({
                   onClick={() => onSelect?.(item.key)}
                 >
                   <span className={styles.navIcon} aria-hidden="true">
-                    <img alt="" className={styles.navIconImg} src={iconSrc} />
+                    <Icon name={item.iconName} size={20} />
                   </span>
                   {!isContracted && (
                     <span className={cx(styles.navLabel, isActive && styles.navLabelActive)}>
@@ -430,7 +398,6 @@ export const MenuSidebar = ({
 
         {/* Menu do usuário (rodapé) */}
         <div className={styles.userSection}>
-          {/* Botão principal do usuário */}
           <button
             type="button"
             className={cx(
@@ -452,7 +419,6 @@ export const MenuSidebar = ({
             )}
           </button>
 
-          {/* Ações do rodapé */}
           <div role="list">
             {FOOTER_ITEMS.map((item) => {
               const isActive = activeKey === item.key;
@@ -470,7 +436,7 @@ export const MenuSidebar = ({
                     onClick={() => onSelect?.(item.key)}
                   >
                     <span className={styles.navIcon} aria-hidden="true">
-                      <img alt="" className={styles.navIconImg} src={item.iconSrc} />
+                      <Icon name={item.iconName} size={20} />
                     </span>
                     {!isContracted && (
                       <span className={cx(styles.navLabel, isActive && styles.navLabelActive)}>
@@ -510,8 +476,8 @@ export const MenuSidebar = ({
                       role="listitem"
                     >
                       <span className={styles.panelItemIcon} aria-hidden="true">
-                        {panelItem.iconSrc ? (
-                          <img alt="" className={styles.panelItemIconImg} src={panelItem.iconSrc} />
+                        {panelItem.iconName ? (
+                          <Icon name={panelItem.iconName} size={16} />
                         ) : (
                           <span className={styles.placeholderIcon} />
                         )}

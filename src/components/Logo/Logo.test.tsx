@@ -15,15 +15,15 @@ describe("Logo", () => {
     expect(screen.getByRole("img", { name: "Logo da Olist" })).toBeInTheDocument();
   });
 
-  it("renderiza os três assets de imagem internos", () => {
+  it("renderiza os três assets SVG internos", () => {
     const { container } = render(<Logo />);
-    expect(container.querySelectorAll("img")).toHaveLength(3);
+    expect(container.querySelectorAll("span[aria-hidden='true']")).toHaveLength(3);
   });
 
-  it("imagens internas têm alt vazio (descrição está no container)", () => {
+  it("SVGs internos estão marcados como aria-hidden", () => {
     const { container } = render(<Logo />);
-    container.querySelectorAll("img").forEach((img) => {
-      expect(img.getAttribute("alt")).toBe("");
+    container.querySelectorAll("span[aria-hidden='true']").forEach((span) => {
+      expect(span.getAttribute("aria-hidden")).toBe("true");
     });
   });
 

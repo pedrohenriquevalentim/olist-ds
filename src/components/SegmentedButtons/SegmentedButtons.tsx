@@ -1,12 +1,6 @@
 import React, { useCallback, useRef } from 'react';
 import styles from './SegmentedButtons.module.css';
-
-/**
- * Tooltip icon asset from Figma (expires in 7 days — replace with a
- * project-local SVG when integrating permanently).
- */
-const imgTooltipIcon =
-  'https://www.figma.com/api/mcp/asset/7313fa46-f349-4790-bc45-e483fd81ca98';
+import { Icon } from '../Icon';
 
 export interface SegmentedButtonsProps {
   /** Number of segments displayed in the control. */
@@ -117,12 +111,7 @@ export const SegmentedButtons = ({
             className={styles.tooltipButton}
             aria-label="Mais informações"
           >
-            <img
-              src={imgTooltipIcon}
-              alt=""
-              className={styles.tooltipIcon}
-              aria-hidden="true"
-            />
+            <Icon name="help" size={16} className={styles.tooltipIcon} />
           </button>
         )}
       </div>

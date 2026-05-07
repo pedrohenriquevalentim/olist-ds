@@ -47,7 +47,7 @@ A Olist é uma plataforma B2B de e-commerce para sellers. A linguagem visual com
 
 Antes de criar QUALQUER elemento novo, verifique se um destes já existe:
 
-- Button, Checkbox, Logo, MenuErp, MenuSidebar, RadioButton, SegmentedButtons, Tag
+- Button, Checkbox, Icon, Logo, MenuErp, MenuSidebar, RadioButton, SegmentedButtons, Tag
 
 Para API completa dos componentes, leia `COMPONENTES.md`.
 Para caminhos dos arquivos, leia `MAPA_FONTES.md`.
@@ -89,11 +89,12 @@ Para caminhos dos arquivos, leia `MAPA_FONTES.md`.
 
 ---
 
-## Arquivos de Referência (11 total)
+## Arquivos de Referência (12 total)
 
 | Arquivo | O que contém | Quando consultar |
 |---|---|---|
 | **VISAO_GERAL.md** | Este arquivo — mapa de navegação | Sempre primeiro |
+| **FIGMA_CONFIG.md** | Arquivos do Figma que são fonte da verdade | **ANTES** de usar `search_design_system` |
 | **CORES.md** | Paleta de cores, regras, DO/DON'T | Ao escolher cores |
 | **TIPOGRAFIA.md** | Tokens de tipografia (tamanho, peso, altura) | Ao estilizar texto |
 | **GLOSSARIO_PAPEIS_TEXTO.md** | **NOVO** — Definição dos 10 papéis de texto (Heading, Label, etc.) | Ao nomear textos na UI |
@@ -195,4 +196,4 @@ COMPONENTES.md
 
 ---
 
-**Última atualização:** 2026-05-04 (v2.0 — adição de GLOSSARIO_PAPEIS_TEXTO.md e SDD_AVANCADO.md)
+**Última atualização:** 2026-05-07 (v2.0 — adição de GLOSSARIO_PAPEIS_TEXTO.md e SDD_AVANCADO.md)

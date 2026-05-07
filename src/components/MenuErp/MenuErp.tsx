@@ -1,28 +1,7 @@
+import React from "react";
 import styles from "./MenuErp.module.css";
-
-// ─── Asset URLs (Figma MCP — válidos por 7 dias) ──────────────────────────────
-
-// Logo — estado expandido
-const imgLogoToggle    = "https://www.figma.com/api/mcp/asset/46df82dd-3cba-4104-a56a-c075b6fc0f00";
-const imgLogoWordmark  = "https://www.figma.com/api/mcp/asset/8a55c0f0-e517-410d-bc9c-ddcdf121ef7c";
-// Logo — estado contraído
-const imgLogoCompact   = "https://www.figma.com/api/mcp/asset/64b7be96-f23e-448a-b8b7-56e2e1281d8a";
-
-// Ícones — itens de navegação
-const imgSolucoes      = "https://www.figma.com/api/mcp/asset/9e4bc884-dfe4-4fd2-8932-19a8b5aad114";
-const imgVendas        = "https://www.figma.com/api/mcp/asset/6ac0e1f5-70b6-4fff-aa76-298806863111";
-const imgProdutos      = "https://www.figma.com/api/mcp/asset/577c6ff0-bcaa-47b2-9bc7-5d83a34bad98";
-const imgSuprimentos   = "https://www.figma.com/api/mcp/asset/6480d563-d8eb-4a7d-b57a-ed535a253536";
-const imgServicos      = "https://www.figma.com/api/mcp/asset/642aca33-0801-450c-aa5b-05e24ad750cb";
-const imgFinancas      = "https://www.figma.com/api/mcp/asset/76000550-7e3f-4161-acd4-48422e5f2715";
-const imgContatos      = "https://www.figma.com/api/mcp/asset/ce9369c5-cd10-40af-9332-3086cd85294e";
-const imgRelatorios    = "https://www.figma.com/api/mcp/asset/37008218-2b8d-4012-82af-ea97282387a4";
-const imgAtalhos       = "https://www.figma.com/api/mcp/asset/19582f85-40a8-4f4e-9335-97a0296f17e8";
-
-// Ícones — seção do usuário
-const imgNotificacoes  = "https://www.figma.com/api/mcp/asset/621856e0-980f-481a-a6c3-774c2fd9b30c";
-const imgConfiguracoes = "https://www.figma.com/api/mcp/asset/affde267-ebd6-4aed-b2f0-8fd5c6b11800";
-const imgSuporte       = "https://www.figma.com/api/mcp/asset/5e2438b9-c957-4bce-af4f-5203b12823a2";
+import { Icon, IconName } from "../Icon";
+import { logoToggleSvg, logoSymbolSvg, logoWordmarkSvg } from "../../assets/logo";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -44,28 +23,28 @@ export type MenuErpItemKey =
 interface MenuItem {
   key: MenuErpItemKey;
   label: string;
-  iconSrc: string;
+  iconName: IconName;
   isNew?: boolean;
 }
 
 // ─── Dados ────────────────────────────────────────────────────────────────────
 
 const MAIN_ITEMS: MenuItem[] = [
-  { key: "solucoes",    label: "Soluções Olist",           iconSrc: imgSolucoes    },
-  { key: "vendas",      label: "Vendas",                   iconSrc: imgVendas      },
-  { key: "produtos",    label: "Produtos",                 iconSrc: imgProdutos    },
-  { key: "suprimentos", label: "Suprimentos",              iconSrc: imgSuprimentos },
-  { key: "servicos",    label: "Serviços",                 iconSrc: imgServicos    },
-  { key: "financas",    label: "Finanças",                 iconSrc: imgFinancas    },
-  { key: "contatos",    label: "Clientes e fornecedores",  iconSrc: imgContatos    },
-  { key: "relatorios",  label: "Relatórios",               iconSrc: imgRelatorios  },
-  { key: "atalhos",     label: "Meus atalhos",             iconSrc: imgAtalhos     },
+  { key: "solucoes",    label: "Soluções Olist",          iconName: "apps"            },
+  { key: "vendas",      label: "Vendas",                  iconName: "tag"             },
+  { key: "produtos",    label: "Produtos",                iconName: "product-catalog" },
+  { key: "suprimentos", label: "Suprimentos",             iconName: "wholesale"       },
+  { key: "servicos",    label: "Serviços",                iconName: "services"        },
+  { key: "financas",    label: "Finanças",                iconName: "wallet"          },
+  { key: "contatos",    label: "Clientes e fornecedores", iconName: "profile"         },
+  { key: "relatorios",  label: "Relatórios",              iconName: "file-graph"      },
+  { key: "atalhos",     label: "Meus atalhos",            iconName: "bookmark"        },
 ];
 
 const USER_ITEMS: MenuItem[] = [
-  { key: "notificacoes",  label: "Notificações",       iconSrc: imgNotificacoes  },
-  { key: "configuracoes", label: "Configurações",      iconSrc: imgConfiguracoes },
-  { key: "suporte",       label: "Central de suporte", iconSrc: imgSuporte       },
+  { key: "notificacoes",  label: "Notificações",       iconName: "bell"     },
+  { key: "configuracoes", label: "Configurações",      iconName: "settings" },
+  { key: "suporte",       label: "Central de suporte", iconName: "support"  },
 ];
 
 // ─── Props ────────────────────────────────────────────────────────────────────
@@ -121,7 +100,7 @@ export const MenuErp = ({
           onClick={() => onSelect?.(item.key)}
         >
           <span className={styles.itemIcon} aria-hidden="true">
-            <img alt="" className={styles.itemIconImg} src={item.iconSrc} />
+            <Icon name={item.iconName} size={20} />
           </span>
           {!isContracted && (
             <span className={styles.itemLabel}>{item.label}</span>
@@ -145,13 +124,20 @@ export const MenuErp = ({
         aria-hidden="true"
       >
         {isContracted ? (
-          <img alt="olist" className={styles.logoCompact} src={imgLogoCompact} />
+          <span
+            className={styles.logoCompact}
+            dangerouslySetInnerHTML={{ __html: logoSymbolSvg }}
+          />
         ) : (
           <div className={styles.logoRow}>
-            <div className={styles.logoMark}>
-              <img alt="" className={styles.logoToggle} src={imgLogoToggle} />
-            </div>
-            <img alt="olist" className={styles.logoWordmark} src={imgLogoWordmark} />
+            <span
+              className={styles.logoToggle}
+              dangerouslySetInnerHTML={{ __html: logoToggleSvg }}
+            />
+            <span
+              className={styles.logoWordmark}
+              dangerouslySetInnerHTML={{ __html: logoWordmarkSvg }}
+            />
           </div>
         )}
       </div>
@@ -169,7 +155,6 @@ export const MenuErp = ({
 
       {/* ── Seção do usuário ── */}
       <div className={cx(styles.userSection, isContracted && styles.userSectionContracted)}>
-        {/* Botão do perfil */}
         <button
           type="button"
           className={cx(
@@ -188,7 +173,6 @@ export const MenuErp = ({
           )}
         </button>
 
-        {/* Itens do usuário */}
         <ul
           className={styles.itemList}
           role="list"

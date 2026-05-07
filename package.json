@@ -16,6 +16,7 @@
     "url": "https://github.com/pedrohenriquevalentim/olist-ds.git"
   },
   "scripts": {
+    "validate:icons": "node scripts/validate-icon-migration.mjs",
     "sync:skill": "node scripts/sync-skill.mjs",
     "build:tokens": "node config.mjs",
     "build": "npm run build:tokens && node scripts/generate-index.mjs && tsc && node scripts/copy-css.mjs && npm run sync:skill",
@@ -24,6 +25,7 @@
     "generate:tests:all": "node scripts/generate-tests.mjs --all",
     "generate:stories": "node scripts/generate-stories.mjs --missing",
     "generate:stories:all": "node scripts/generate-stories.mjs --all",
+    "generate:icons": "node scripts/generate-icons.mjs",
     "generate:all": "node scripts/generate-tests.mjs --missing && node scripts/generate-stories.mjs --missing",
     "test": "vitest",
     "test:run": "vitest run",

@@ -1,23 +1,27 @@
-# Componentes Disponíveis
+# Componentes — API Completa
 
-**Auto-gerado em 2026-05-04** — Não edite manualmente. Este arquivo é gerado por `npm run sync:skill`.
-
-Total de componentes: **0**
-
----
-
-## Convenções
-
-- **Props obrigatórias** marcadas com ✅
-- **Props opcionais** marcadas com ❌
-- **Variants** definem aparência visual (primary, secondary, etc.)
-- **Estados** definem comportamento interativo (disabled, error, etc.)
-- **Tokens** são CSS variables do design system
+**Auto-gerado por `npm run build`**  
+**Última atualização:** 2026-05-07  
+**Versão da skill:** 2.1
 
 ---
 
-**Referência cruzada:**
-- `CORES.md` — tokens de cor
-- `TIPOGRAFIA.md` — tokens de tipografia
-- `ESPACAMENTO.md` — tokens de espaçamento
-- `PADROES.md` — como combinar componentes em páginas
+Este arquivo contém a API completa de todos os componentes do design system.
+
+## Componentes Disponíveis (1)
+
+### Icon
+
+**Props:**
+```typescript
+name: IconName;
+size?: number;
+color?: string;
+className?: string;
+'aria-label'?: string;
+```
+
+**Caminho:** `src/components/Icon/`
+
+---
+

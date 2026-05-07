@@ -37,14 +37,14 @@ describe("Button", () => {
     expect(onClick).toHaveBeenCalledTimes(0);
   });
 
-  it("renderiza ícone quando icon=lead", () => {
-    const { container } = render(<Button icon="lead" ariaLabel="Com ícone" />);
-    expect(container.querySelector("img")).toBeTruthy();
+  it("renderiza ícone quando icon=lead e iconName fornecido", () => {
+    const { container } = render(<Button icon="lead" iconName="bolt" ariaLabel="Com ícone" />);
+    expect(container.querySelector('[aria-hidden="true"] span')).toBeTruthy();
   });
 
   it("não renderiza ícone quando icon=none", () => {
     const { container } = render(<Button icon="none" ariaLabel="Sem ícone" />);
-    expect(container.querySelector("img")).toBeFalsy();
+    expect(container.querySelector(".withIcon")).toBeFalsy();
   });
 });
 

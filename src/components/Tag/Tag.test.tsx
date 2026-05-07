@@ -15,11 +15,14 @@ describe("Tag", () => {
     expect(screen.getByText("Ativo")).toBeInTheDocument();
   });
 
-  it("renderiza ícone como elemento decorativo", () => {
+  it("não renderiza ícone quando prop icon não é fornecida", () => {
     const { container } = render(<Tag />);
-    const img = container.querySelector("img");
-    expect(img).toBeTruthy();
-    expect(img).toHaveAttribute("alt", "");
+    expect(container.querySelector(".icon")).toBeFalsy();
+  });
+
+  it("renderiza ícone quando prop icon é fornecida", () => {
+    const { container } = render(<Tag icon="check" />);
+    expect(container.querySelector('[aria-hidden="true"]')).toBeTruthy();
   });
 
   it("aceita className personalizado", () => {

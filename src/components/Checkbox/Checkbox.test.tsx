@@ -54,11 +54,12 @@ describe("Checkbox", () => {
     const { container } = render(
       <Checkbox id="cb8" label="Com check" isChecked onChange={vi.fn()} />
     );
-    expect(container.querySelector("img")).toBeTruthy();
+    expect(container.querySelector(".checkIcon")).toBeTruthy();
   });
 
   it("não exibe ícone quando unchecked e não indeterminado", () => {
     const { container } = render(<Checkbox id="cb9" label="Sem check" />);
-    expect(container.querySelector("img")).toBeFalsy();
+    expect(container.querySelector(".checkIcon")).toBeFalsy();
+    expect(container.querySelector(".indeterminateIcon")).toBeFalsy();
   });
 });

@@ -56,10 +56,11 @@ Qual tipo de tarefa?
     │   → Ler COMPONENTES.md (verificar se já existe)
     │
     ├── Criar protótipo no Figma (workflow faseado)
+    │   → PRIMEIRO: Ler .claude/figma-config.json (fonte da verdade)
     │   → Ler SDD_PARA_TELA.md + SDD_AVANCADO.md (se aplicável)
     │   → Ler GLOSSARIO_PAPEIS_TEXTO.md (nomenclatura de layers)
     │   → Ler todas as referências visuais (CORES, TIPOGRAFIA, ESPACAMENTO)
-    │   → Usar Figma MCP (search_design_system, create_new_file, importComponentByKey)
+    │   → Usar Figma MCP APENAS nos arquivos de allowedFiles
     │   → ANTES de criar: listar todas as telas → aguardar validação
     │   → Criar tela por tela, aguardando feedback a cada entrega
     │
@@ -131,18 +132,22 @@ Qual tipo de tarefa?
 ### ✅ Sempre Faça:
 
 1. **Leia `VISAO_GERAL.md` primeiro** — é o mapa de navegação
-2. **Consulte `GLOSSARIO_PAPEIS_TEXTO.md` antes de nomear textos**
+2. **Antes de usar Figma MCP, leia `.claude/figma-config.json`:**
+   - Use APENAS os fileKeys em `allowedFiles`
+   - Ignore completamente arquivos em `blockedFiles`
+   - Respeite a ordem de `searchPriority` (busca no primeiro, depois no segundo, etc.)
+3. **Consulte `GLOSSARIO_PAPEIS_TEXTO.md` antes de nomear textos**
    - Se o SDD diz "título da página" → use **Heading**
    - Se o SDD diz "mensagem de erro" → use **Error**
    - Nunca invente nomes como "main title", "subtitle", "field label"
-3. **Leia `SDD_AVANCADO.md` se o SDD tiver:**
+4. **Leia `SDD_AVANCADO.md` se o SDD tiver:**
    - Requisitos Não Funcionais (RNF)
    - Seção DACI (stakeholders)
    - Métricas de Sucesso
    - Plano de Rollout
    - Observabilidade
-4. **Use os passos 1-10 de `SDD_PARA_TELA.md`** ao traduzir SDDs completos
-5. **No Figma, sempre use workflow faseado:**
+5. **Use os passos 1-10 de `SDD_PARA_TELA.md`** ao traduzir SDDs completos
+6. **No Figma, sempre use workflow faseado:**
    - Liste todas as telas ANTES de criar
    - Aguarde validação do usuário
    - Crie tela por tela (não todas de uma vez)
@@ -150,12 +155,15 @@ Qual tipo de tarefa?
 
 ### ❌ Nunca Faça:
 
-1. **Inventar nomes de papéis de texto** fora de `GLOSSARIO_PAPEIS_TEXTO.md`
-2. **Ignorar RNFs** — eles afetam UI (skeleton loaders, permissões, etc.)
-3. **Ignorar Métricas de Sucesso** — devem ser visíveis na UI quando aplicável
-4. **Ignorar Glossário do SDD** — termos do glossário viram labels de UI
-5. **Assumir que um componente não existe** sem checar `COMPONENTES.md` e `MAPA_FONTES.md`
-6. **No Figma: criar todas as telas de uma vez** — sempre use workflow faseado (tela por tela)
+1. **Usar Figma MCP em arquivos fora de `.claude/figma-config.json`:**
+   - NUNCA buscar componentes em arquivos que não estão em `allowedFiles`
+   - NUNCA usar arquivos listados em `blockedFiles` (mesmo que encontre componentes)
+2. **Inventar nomes de papéis de texto** fora de `GLOSSARIO_PAPEIS_TEXTO.md`
+3. **Ignorar RNFs** — eles afetam UI (skeleton loaders, permissões, etc.)
+4. **Ignorar Métricas de Sucesso** — devem ser visíveis na UI quando aplicável
+5. **Ignorar Glossário do SDD** — termos do glossário viram labels de UI
+6. **Assumir que um componente não existe** sem checar `COMPONENTES.md` e `MAPA_FONTES.md`
+7. **No Figma: criar todas as telas de uma vez** — sempre use workflow faseado (tela por tela)
 
 ## Casos de Uso v2.0
 
