@@ -1,10 +1,10 @@
 ---
 name: olist-ds-specialist
 description: Use esta skill para TODO trabalho de UI/UX da Olist — criação de telas a partir de SDDs/PRDs, geração de componentes React, revisão de consistência visual, criação de protótipos no Figma e manutenção do design system. Acione quando alguém mencionar interface Olist, design system, tokens, componentes, telas, layouts, SDD, PRD, protótipo, wireframe, Figma, Storybook ou qualquer tarefa de criação ou revisão de UI para produtos Olist. NÃO use para backend, APIs, banco de dados, autenticação ou lógica de negócio sem relação com UI.
-version: 2.0
+version: 2.1
 ---
 
-# Olist Design System — Especialista v2.0
+# Olist Design System — Especialista v2.1
 
 ## Papel
 
@@ -29,6 +29,21 @@ Priorize: tipografia, cores, espaçamento, hierarquia visual, reutilização de 
 - Gerenciamento de estado sem relação direta com UI
 - Performance sem impacto visual direto
 - Novas dependências sem necessidade clara
+
+## Fontes do Figma (Fonte da Verdade)
+
+Ao usar Figma MCP (`search_design_system`, `get_design_context`, etc.), buscar componentes APENAS nestes arquivos, nesta ordem de prioridade:
+
+| Prioridade | Arquivo | FileKey | Descrição |
+|---|---|---|---|
+| 1º (buscar primeiro) | Design System - Foundations, Components & Icons Rebrand (TO-BE) | `HeyN4w209HWh8rfpTDiwyf` | Fundações do rebrand, ícones e novos componentes do DS 2.0 |
+| 2º (fallback) | Design System - Components Web (AS-IS) | `QJmwu6sR06xmyGAoBaXuEn` | Componentes web AS-IS |
+
+**Regras:**
+- Buscar SEMPRE primeiro em `HeyN4w209HWh8rfpTDiwyf` (TO-BE)
+- Se não encontrar, buscar em `QJmwu6sR06xmyGAoBaXuEn` (AS-IS)
+- NUNCA buscar em outros arquivos fora desta lista
+- Se o arquivo `.claude/figma-config.json` existir no projeto, ele tem prioridade sobre esta lista
 
 ## Fluxo de Decisão
 
@@ -56,11 +71,12 @@ Qual tipo de tarefa?
     │   → Ler COMPONENTES.md (verificar se já existe)
     │
     ├── Criar protótipo no Figma (workflow faseado)
-    │   → PRIMEIRO: Ler .claude/figma-config.json (fonte da verdade)
+    │   → PRIMEIRO: Consultar seção "Fontes do Figma" acima (fileKeys permitidos)
+    │   → Se existir .claude/figma-config.json, ler e usar (tem prioridade)
     │   → Ler SDD_PARA_TELA.md + SDD_AVANCADO.md (se aplicável)
     │   → Ler GLOSSARIO_PAPEIS_TEXTO.md (nomenclatura de layers)
     │   → Ler todas as referências visuais (CORES, TIPOGRAFIA, ESPACAMENTO)
-    │   → Usar Figma MCP APENAS nos arquivos de allowedFiles
+    │   → Usar Figma MCP APENAS nos arquivos permitidos (HeyN4w209HWh8rfpTDiwyf primeiro)
     │   → ANTES de criar: listar todas as telas → aguardar validação
     │   → Criar tela por tela, aguardando feedback a cada entrega
     │
@@ -86,20 +102,21 @@ Qual tipo de tarefa?
 10. Sinalizar conflitos com padrões atuais e propor alternativas consistentes
 11. Entregar código React + TypeScript pronto para implementação quando solicitado
 
-## Arquivos de Referência (11 total)
+## Arquivos de Referência (12 total)
 
 | Arquivo | Quando ler | O que contém |
 |---|---|---|
 | `VISAO_GERAL.md` | **Sempre primeiro** | Mapa de navegação, identidade visual, princípios |
+| `FIGMA_CONFIG.md` | **Antes de usar Figma MCP** | Guia de uso dos fileKeys e configuração |
 | `CORES.md` | Criando/revisando UI | Sistema de cores com regras de uso |
 | `TIPOGRAFIA.md` | Criando/revisando UI | Tokens de tipografia (tamanho, peso, altura) |
-| `GLOSSARIO_PAPEIS_TEXTO.md` | **Antes de nomear textos** 🆕 | 10 papéis de texto (Heading, Label, Error, etc.) |
+| `GLOSSARIO_PAPEIS_TEXTO.md` | **Antes de nomear textos** | 10 papéis de texto (Heading, Label, Error, etc.) |
 | `ESPACAMENTO.md` | Criando/revisando UI | Escala, grid, border-radius |
 | `COMPONENTES.md` | Criando telas ou componentes | Componentes com props e variantes |
 | `PADROES.md` | Criando telas de SDDs | 5 padrões de página (Tabela, Form, Dashboard, etc.) |
 | `MAPA_FONTES.md` | Antes de criar qualquer coisa | Caminhos reais dos arquivos |
 | `SDD_PARA_TELA.md` | Lendo SDDs/PRDs | 10 passos SDD → decisões de UI |
-| `SDD_AVANCADO.md` | SDDs com seções técnicas 🆕 | RNFs, DACI, Métricas, Rollout, Observabilidade → UI |
+| `SDD_AVANCADO.md` | SDDs com seções técnicas | RNFs, DACI, Métricas, Rollout, Observabilidade → UI |
 | `CHECKLIST_REVISAO.md` | Revisando telas | 9 categorias de revisão visual e acessibilidade |
 
 ## Novidades v2.0
@@ -132,11 +149,11 @@ Qual tipo de tarefa?
 ### ✅ Sempre Faça:
 
 1. **Leia `VISAO_GERAL.md` primeiro** — é o mapa de navegação
-2. **Antes de usar Figma MCP, leia `.claude/figma-config.json`:**
-   - **Se o arquivo não existir:** informar usuário para copiar `figma-config.example.json` e preencher
-   - Use APENAS os fileKeys em `allowedFiles`
-   - Ignore completamente arquivos em `blockedFiles`
-   - Respeite a ordem de `searchPriority` (busca no primeiro, depois no segundo, etc.)
+2. **Antes de usar Figma MCP, consulte a seção "Fontes do Figma" deste arquivo:**
+   - Buscar primeiro em `HeyN4w209HWh8rfpTDiwyf` (TO-BE, rebrand)
+   - Se não encontrar, buscar em `QJmwu6sR06xmyGAoBaXuEn` (AS-IS)
+   - NUNCA buscar em outros arquivos
+   - Se `.claude/figma-config.json` existir no projeto, ele tem prioridade
 3. **Consulte `GLOSSARIO_PAPEIS_TEXTO.md` antes de nomear textos**
    - Se o SDD diz "título da página" → use **Heading**
    - Se o SDD diz "mensagem de erro" → use **Error**
@@ -156,9 +173,9 @@ Qual tipo de tarefa?
 
 ### ❌ Nunca Faça:
 
-1. **Usar Figma MCP em arquivos fora de `.claude/figma-config.json`:**
-   - NUNCA buscar componentes em arquivos que não estão em `allowedFiles`
-   - NUNCA usar arquivos listados em `blockedFiles` (mesmo que encontre componentes)
+1. **Buscar componentes no Figma fora dos arquivos permitidos:**
+   - NUNCA buscar fora de `HeyN4w209HWh8rfpTDiwyf` e `QJmwu6sR06xmyGAoBaXuEn`
+   - Se `.claude/figma-config.json` existir, respeitar `blockedFiles`
 2. **Inventar nomes de papéis de texto** fora de `GLOSSARIO_PAPEIS_TEXTO.md`
 3. **Ignorar RNFs** — eles afetam UI (skeleton loaders, permissões, etc.)
 4. **Ignorar Métricas de Sucesso** — devem ser visíveis na UI quando aplicável
@@ -304,5 +321,5 @@ export const AprovarPedidos = ({ isGerente, pedidos, onAprovar }) => {
 
 ---
 
-**Versão:** 2.0  
-**Última atualização:** 2026-05-04
+**Versão:** 2.1  
+**Última atualização:** 2026-05-19
