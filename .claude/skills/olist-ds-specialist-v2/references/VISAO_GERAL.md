@@ -89,12 +89,14 @@ Para caminhos dos arquivos, leia `MAPA_FONTES.md`.
 
 ---
 
-## Arquivos de Referência (12 total)
+## Arquivos de Referência (14 total)
 
 | Arquivo | O que contém | Quando consultar |
 |---|---|---|
 | **VISAO_GERAL.md** | Este arquivo — mapa de navegação | Sempre primeiro |
 | **FIGMA_CONFIG.md** | Arquivos do Figma que são fonte da verdade | **ANTES** de usar `search_design_system` |
+| **TEMPLATES_PRODUTO.md** | **Antes de gerar JSON ou criar telas** | Zonas de layout por produto (ERP, Envios, Hub, CD) |
+| **screen-spec-schema.json** | **Ao gerar JSON para plugin** | Schema e exemplo do formato screen-spec.json |
 | **CORES.md** | Paleta de cores, regras, DO/DON'T | Ao escolher cores |
 | **TIPOGRAFIA.md** | Tokens de tipografia (tamanho, peso, altura) | Ao estilizar texto |
 | **GLOSSARIO_PAPEIS_TEXTO.md** | **NOVO** — Definição dos 10 papéis de texto (Heading, Label, etc.) | Ao nomear textos na UI |
