@@ -1,172 +1,150 @@
-# Olist Design System — Especialista (v2.1)
+# Olist Design System — Especialista (v2.2)
 
 Skill corporativa para criação de telas, componentes e protótipos a partir de SDDs/PRDs usando o design system da Olist.
 
 Compatível com a especificação [DESIGN.md do Google Labs](https://github.com/google-labs-code/design.md).
 
-## Por que funciona
+## Novidades v2.2 (2026-06-03)
 
-A precisão de 90%+ na reutilização do design system vem de três decisões:
+### Modo JSON para plugin Figma (econômico):
+- Claude gera `screen-spec.json` em vez de criar direto no Figma
+- Plugin **Screen Builder** monta telas com componentes reais do DS
+- Modo incremental: cada JSON adiciona telas, nunca sobrescreve
+- Designer revisa JSON antes de construir — mais controle
 
-1. **Referências separadas** — cada dimensão do DS tem seu arquivo. O agente carrega só o necessário.
-2. **Mapa de fontes** — cada regra aponta para o arquivo real no código. O agente confirma com evidência.
-3. **SDD para Tela** — guia que traduz requisitos funcionais em decisões de UI concretas.
+### Inventário de componentes:
+- `component-registry.json` com 21 componentes mapeados
+- Keys e variantes extraídos da página do Figma
+- Sincronização automática: pedir "sincronize o registry" ao Claude
 
-## Novidades v2.1 (2026-05-19)
+### Templates por produto:
+- `TEMPLATES_PRODUTO.md` com zonas de layout (A-E) por produto
+- ERP: sidebar 304px + breadcrumb + search/filtros + content + paginação
+- Envios/Hub/Conta Digital: sidebar 304px + top bar + header+subtitle + content + sticky
+- Fonte da verdade no Figma, sincronizável via Claude
 
-### FileKeys do Figma embutidos no SKILL.md:
-- **Prioridade 1:** `HeyN4w209HWh8rfpTDiwyf` — Foundations, Components & Icons Rebrand (TO-BE)
-- **Prioridade 2:** `QJmwu6sR06xmyGAoBaXuEn` — Components Web (AS-IS)
-- Funciona tanto no Claude.ai (ZIP) quanto no Claude Code (projeto local)
-- Se `.claude/figma-config.json` existir no projeto, ele tem prioridade
-
-### Novos arquivos:
-- **`FIGMA_CONFIG.md`** — Guia de uso dos fileKeys e configuração do Figma
-- **`SETUP.md`** — Guia de instalação para novos usuários
-- **`figma-config.example.json`** — Template para configuração local (opcional)
-
-### v2.0 (2026-05-04):
-- **`GLOSSARIO_PAPEIS_TEXTO.md`** — Define como nomear cada tipo de texto (Heading, Label, Error, etc.)
-- **`SDD_AVANCADO.md`** — Traduz seções técnicas do SDD (RNFs, DACI, Métricas, Rollout) em UI
-- Incrementos em `TIPOGRAFIA.md`, `SDD_PARA_TELA.md`, `VISAO_GERAL.md`
+### Componentes propostos:
+- Se o SDD precisa de componente que não existe, Claude marca `"proposed": true`
+- Plugin renderiza como placeholder visual para o designer avaliar
 
 ## Estrutura
 
 ```
 olist-ds-specialist/
-├── SKILL.md                              # Papel, escopo, fluxo de decisão, fileKeys do Figma
-├── DESIGN.md                             # Especificação Google Labs (cross-tool)
-├── README.md                             # Este arquivo
-├── SETUP.md                              # Guia de instalação
-├── figma-config.example.json             # Template para configuração local (opcional)
+├── SKILL.md                           # Instruções, fileKeys, inventário, templates
+├── DESIGN.md                          # Especificação Google Labs
+├── README.md                          # Este arquivo
+├── SETUP.md                           # Guia de instalação
+├── component-registry.json            # 21 componentes com keys e variantes
+├── figma-config.example.json          # Template para config local
 └── references/
-    ├── VISAO_GERAL.md                    # Sempre lido primeiro — mapa de navegação
-    ├── FIGMA_CONFIG.md                   # Guia de uso dos fileKeys e configuração
-    ├── CORES.md                          # Sistema de cores com regras
-    ├── TIPOGRAFIA.md                     # Fontes, tamanhos, composições
-    ├── GLOSSARIO_PAPEIS_TEXTO.md         # Definição dos 10 papéis de texto
-    ├── ESPACAMENTO.md                    # Escala, grid, border-radius
-    ├── COMPONENTES.md                    # Componentes com props (auto-gerado)
-    ├── PADROES.md                        # Padrões de página
-    ├── MAPA_FONTES.md                    # Mapa de arquivos (auto-gerado)
-    ├── SDD_PARA_TELA.md                  # Tradução SDD → UI (10 passos)
-    ├── SDD_AVANCADO.md                   # Tradução de seções técnicas do SDD
-    └── CHECKLIST_REVISAO.md              # Checklist de revisão visual
+    ├── VISAO_GERAL.md                 # Mapa de navegação
+    ├── TEMPLATES_PRODUTO.md           # Zonas de layout por produto
+    ├── screen-spec-schema.json        # Schema do JSON para plugin
+    ├── FIGMA_CONFIG.md                # Guia dos fileKeys
+    ├── CORES.md                       # Sistema de cores
+    ├── TIPOGRAFIA.md                  # Tokens de tipografia
+    ├── GLOSSARIO_PAPEIS_TEXTO.md      # 10 papéis de texto
+    ├── ESPACAMENTO.md                 # Grid, border-radius
+    ├── COMPONENTES.md                 # Props e variantes (auto-gerado)
+    ├── PADROES.md                     # Padrões de página
+    ├── MAPA_FONTES.md                 # Estrutura de pastas (auto-gerado)
+    ├── SDD_PARA_TELA.md               # 10 passos SDD → UI
+    ├── SDD_AVANCADO.md                # RNFs, DACI, Métricas
+    └── CHECKLIST_REVISAO.md           # 9 categorias de revisão
 ```
 
 ## Fontes do Figma
 
-A skill usa dois arquivos do Figma como fonte da verdade:
-
 | Prioridade | Arquivo | FileKey |
 |---|---|---|
-| 1º (buscar primeiro) | Foundations, Components & Icons Rebrand (TO-BE) | `HeyN4w209HWh8rfpTDiwyf` |
-| 2º (fallback) | Components Web (AS-IS) | `QJmwu6sR06xmyGAoBaXuEn` |
-
-Estes fileKeys estão embutidos no SKILL.md e funcionam em qualquer contexto (Claude.ai ou Claude Code).
-
-Para customizar (adicionar/remover arquivos), crie `.claude/figma-config.json` no projeto — ele tem prioridade sobre os fileKeys embutidos.
+| 1º | Foundations, Components & Icons Rebrand (TO-BE) | `HeyN4w209HWh8rfpTDiwyf` |
+| 2º | Components Web (AS-IS) | `QJmwu6sR06xmyGAoBaXuEn` |
+| Inventário | AI Components DS Olist | `9pCeYLXBj1O0QPUiHANaqh` |
 
 ## Instalação
 
-### Opção 1: Script automático (recomendado)
-
+### Opção 1: Script automático
 ```bash
-unzip olist-ds-kit.zip
-cd olist-ds-kit
-bash setup.sh
+unzip olist-ds-kit.zip && cd olist-ds-kit && bash setup.sh
 ```
 
-O script copia a skill, o figma-config.json e atualiza o .gitignore automaticamente.
-
-### Opção 2: Claude Code (manual)
-
+### Opção 2: Claude Code
 ```bash
 mkdir -p .claude/skills
-cp -r olist-ds-specialist-v2/ .claude/skills/olist-ds-specialist/
+cp -r olist-ds-specialist/ .claude/skills/olist-ds-specialist/
 ```
 
 ### Opção 3: Claude.ai
-
-1. Settings → Customize → Skills
-2. Upload → selecionar o ZIP ou a pasta `olist-ds-specialist-v2/`
-3. Ativar a skill
-
-Na opção Claude.ai, os fileKeys do Figma já estão embutidos no SKILL.md — não precisa de configuração adicional.
-
-### Opção 4: Compartilhada via Git
-
-```bash
-cp -r olist-ds-specialist-v2/ .claude/skills/olist-ds-specialist/
-git add .claude/skills/
-git commit -m "feat: skill corporativa do design system v2.1"
-```
+Settings → Customize → Skills → Upload pasta. FileKeys já estão embutidos no SKILL.md.
 
 ## Uso
 
-### Básico (traduzir SDD em UI)
+### Modo JSON (econômico — priorizar)
+```
+Gere o JSON para o plugin Figma desta tela:
+[SDD aqui]
+```
+Claude gera `screen-spec.json` → designer revisa → cola no plugin Screen Builder → telas montadas.
+
+### Modo direto (React)
 ```
 Use $olist-ds-specialist para criar a tela deste SDD:
-[COLAR SDD AQUI]
+[SDD aqui]
 ```
 
-### Avançado (SDDs com RNFs, DACI, Métricas)
+### Modo Figma MCP
 ```
-Use $olist-ds-specialist para criar UI completa deste SDD,
-incluindo decisões de RNFs, DACI e Métricas de Sucesso:
-[COLAR SDD COMPLETO AQUI]
-```
-
-### Revisão de UI
-```
-Use $olist-ds-specialist para revisar se esta tela segue 
-as regras do design system Olist:
-[COLAR CÓDIGO OU SCREENSHOT]
+Use $olist-ds-specialist para criar UI no Figma:
+[SDD aqui]
 ```
 
-### Figma (criação faseada com validação)
+### Sincronizar inventário
 ```
-Use $olist-ds-specialist para criar UI completa no Figma:
-[COLAR SDD AQUI OU ANEXAR ARQUIVO]
+Sincronize o registry de componentes
 ```
 
-Claude vai:
-1. Listar todas as telas identificadas e aguardar validação
-2. Buscar componentes nos arquivos do Figma (TO-BE primeiro, AS-IS como fallback)
-3. Criar tela por tela, aguardando feedback a cada entrega
-4. Aplicar Auto Layout, tokens e nomenclatura semântica
+### Sincronizar templates
+```
+Sincronize os templates de produto
+```
+
+## Plugins Figma
+
+| Plugin | Propósito |
+|---|---|
+| **Screen Builder** | Recebe JSON → monta telas com componentes reais |
+| **Registry Exporter** | Exporta component keys (backup offline) |
+| **Token Exporter** | Exporta tokens/variáveis |
 
 ## Auto-sync
 
-A cada `npm run build`, os arquivos `COMPONENTES.md`, `MAPA_FONTES.md` e `VISAO_GERAL.md` são regenerados com o estado real do código.
-
-A cada `npm run wiki`, o Wiki do projeto é atualizado com métricas, componentes e status atuais.
-
-## Manutenção
-
-- Atualizar `MAPA_FONTES.md` quando novos componentes forem criados (automático)
-- Atualizar `CORES.md` e `TIPOGRAFIA.md` quando tokens mudarem
-- Atualizar `GLOSSARIO_PAPEIS_TEXTO.md` se novos papéis de texto forem criados
-- Atualizar fileKeys no SKILL.md se os arquivos do Figma mudarem
-- Nunca promover comportamento inferido como padrão sem validar no código real
+A cada `npm run build`: COMPONENTES.md, MAPA_FONTES.md e VISAO_GERAL.md são regenerados.
+A cada `npm run sync:tokens`: src/generated/ é regenerado a partir de src/tokens/.
+A cada `npm run wiki`: Wiki do projeto é atualizado.
 
 ## Changelog
 
+### v2.2 (2026-06-03)
+- Modo JSON para plugin Figma (econômico)
+- component-registry.json (21 componentes mapeados)
+- screen-spec-schema.json (schema do JSON)
+- TEMPLATES_PRODUTO.md (zonas de layout por produto)
+- Plugin Screen Builder (incremental)
+- Plugin Registry Exporter
+- Sincronização automática via Claude MCP
+- Componentes propostos (`"proposed": true`)
+- 14 arquivos de referência
+
 ### v2.1 (2026-05-19)
-- FileKeys do Figma embutidos no SKILL.md (funciona sem figma-config.json)
-- Adicionado `FIGMA_CONFIG.md` (12º arquivo de referência)
-- Adicionado `SETUP.md` (guia de instalação)
-- Adicionado `figma-config.example.json` (template)
-- Adicionado `setup.sh` (instalação automática)
-- Adicionado `generate-wiki.mjs` (Wiki auto-gerado)
-- Atualizado `sync-skill.mjs` para v2.1
+- FileKeys embutidos no SKILL.md
+- FIGMA_CONFIG.md, SETUP.md, setup.sh
+- generate-wiki.mjs
 
 ### v2.0 (2026-05-04)
-- Adicionado `GLOSSARIO_PAPEIS_TEXTO.md` (10 papéis de texto)
-- Adicionado `SDD_AVANCADO.md` (RNFs, DACI, Métricas, Rollout, Observabilidade)
-- Incrementado `SDD_PARA_TELA.md` (passos 8, 9, 10)
-- Incrementado `TIPOGRAFIA.md` (mapeamento papéis → tokens)
-- Incrementado `VISAO_GERAL.md` (mapa de navegação v2.0)
+- GLOSSARIO_PAPEIS_TEXTO.md, SDD_AVANCADO.md
+- Workflow faseado no Figma
+- Sistema de ícones centralizado
 
 ### v1.0 (2026-01-12)
-- Release inicial com 9 arquivos de referência
+- Release inicial

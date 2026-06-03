@@ -1,10 +1,10 @@
 ---
 name: olist-ds-specialist
 description: Use esta skill para TODO trabalho de UI/UX da Olist — criação de telas a partir de SDDs/PRDs, geração de componentes React, revisão de consistência visual, criação de protótipos no Figma e manutenção do design system. Acione quando alguém mencionar interface Olist, design system, tokens, componentes, telas, layouts, SDD, PRD, protótipo, wireframe, Figma, Storybook ou qualquer tarefa de criação ou revisão de UI para produtos Olist. NÃO use para backend, APIs, banco de dados, autenticação ou lógica de negócio sem relação com UI.
-version: 2.1
+version: 2.2
 ---
 
-# Olist Design System — Especialista v2.1
+# Olist Design System — Especialista v2.2
 
 ## Papel
 
@@ -16,9 +16,11 @@ Priorize: tipografia, cores, espaçamento, hierarquia visual, reutilização de 
 
 - Criar telas e componentes React + TypeScript a partir de SDDs, PRDs ou descrições
 - Traduzir seções avançadas do SDD (RNFs, DACI, Métricas, Rollout, Observabilidade) em UI
+- **Gerar screen-spec JSON para construção de telas via plugin Figma (modo econômico)**
 - Criar protótipos no Figma via MCP Write to Canvas (workflow faseado com validação incremental)
 - Revisar inconsistências visuais e de componentes
 - Reutilizar componentes existentes antes de criar novos
+- **Propor novos componentes quando não existirem no inventário, seguindo tokens/foundations do DS**
 - Gerar testes e stories do Storybook
 - Atualizar documentação do design system
 - Sugerir melhorias com evidência dos componentes existentes
@@ -45,6 +47,34 @@ Ao usar Figma MCP (`search_design_system`, `get_design_context`, etc.), buscar c
 - NUNCA buscar em outros arquivos fora desta lista
 - Se o arquivo `.claude/figma-config.json` existir no projeto, ele tem prioridade sobre esta lista
 
+## Inventário de Componentes (Component Registry)
+
+O arquivo `component-registry.json` mapeia os componentes disponíveis no Figma com seus `componentSetKey` reais e variantes.
+
+**Fonte:** Página "📚 Components - Inventário" no arquivo `9pCeYLXBj1O0QPUiHANaqh` (page `8042:48`)
+
+**Sincronização automática via Claude:**
+Quando o usuário pedir "sincronizar registry", "atualizar inventário", "sync componentes" ou similar:
+1. Acessar Figma MCP → arquivo `9pCeYLXBj1O0QPUiHANaqh`, node `8042:48`
+2. Usar `use_figma` para percorrer SECTIONs → COMPONENT_SETs → extrair keys e variantes
+3. Gerar `component-registry.json` atualizado
+4. Comparar com versão anterior: listar componentes adicionados, removidos ou alterados
+5. Salvar em `.claude/skills/olist-ds-specialist/component-registry.json`
+
+**Regras de uso:**
+1. Antes de montar qualquer tela (JSON ou MCP), consultar o registry para verificar quais componentes existem
+2. Se o componente necessário EXISTE no registry → usar o `componentSetKey` real
+3. Se o componente necessário NÃO EXISTE → propor criação marcando `"proposed": true` no JSON, descrevendo o componente seguindo os tokens/foundations do DS
+4. Nunca inventar component keys — usar apenas os do registry ou marcar como proposto
+
+**Categorias disponíveis:**
+- **Action:** Button, Button Icon
+- **Navigation:** Link, Segmented Buttons
+- **Input:** Input Text, Text Area, Input E-mail, Input Search, Input Token, Input Password, Input Select, Input File, Checkbox, Radio Button, Dropdown, Toggle, Chip
+- **Data Display:** Tags
+- **Feedback:** Tooltip
+- **Brand:** Logo Olist, Produtos Olist - Icons
+
 ## Fluxo de Decisão
 
 ```
@@ -55,6 +85,19 @@ Receber solicitação
 Ler references/VISAO_GERAL.md (sempre)
     ↓
 Qual tipo de tarefa?
+    ├── Gerar JSON para plugin Figma (MODO ECONÔMICO — priorizar este)
+    │   → Ler component-registry.json (inventário de componentes)
+    │   → Ler TEMPLATES_PRODUTO.md (identificar produto → usar template correto)
+    │   → Ler screen-spec-schema.json (formato do JSON)
+    │   → Ler SDD_PARA_TELA.md + SDD_AVANCADO.md (se aplicável)
+    │   → Ler GLOSSARIO_PAPEIS_TEXTO.md (nomenclatura)
+    │   → Ler COMPONENTES.md + PADROES.md
+    │   → Decidir quais componentes do registry atendem cada necessidade do SDD
+    │   → Se componente não existir no registry: marcar "proposed": true
+    │   → Gerar screen-spec.json no schema definido, com zonas do template correto
+    │   → ANTES de gerar: listar telas identificadas → aguardar validação
+    │   → Gerar tela por tela (faseado), incrementando o JSON
+    │
     ├── Criar tela a partir de SDD/PRD básico
     │   → Ler SDD_PARA_TELA.md (passos 1-7)
     │   → Ler GLOSSARIO_PAPEIS_TEXTO.md (nomear textos)
@@ -73,6 +116,7 @@ Qual tipo de tarefa?
     ├── Criar protótipo no Figma (workflow faseado)
     │   → PRIMEIRO: Consultar seção "Fontes do Figma" acima (fileKeys permitidos)
     │   → Se existir .claude/figma-config.json, ler e usar (tem prioridade)
+    │   → Ler TEMPLATES_PRODUTO.md (identificar produto → usar template correto)
     │   → Ler SDD_PARA_TELA.md + SDD_AVANCADO.md (se aplicável)
     │   → Ler GLOSSARIO_PAPEIS_TEXTO.md (nomenclatura de layers)
     │   → Ler todas as referências visuais (CORES, TIPOGRAFIA, ESPACAMENTO)
@@ -83,6 +127,15 @@ Qual tipo de tarefa?
     ├── Revisar tela existente
     │   → Ler CHECKLIST_REVISAO.md + GLOSSARIO_PAPEIS_TEXTO.md
     │   → Ler MAPA_FONTES.md
+    │
+    ├── Sincronizar inventário de componentes (sync registry)
+    │   → Acessar Figma MCP: arquivo 9pCeYLXBj1O0QPUiHANaqh, page 8042:48
+    │   → Usar use_figma para extrair COMPONENT_SET e COMPONENT da página
+    │   → Para cada COMPONENT_SET: extrair key, name, variants (prop=value)
+    │   → Para cada SECTION: agrupar componentes por categoria
+    │   → Gerar component-registry.json atualizado
+    │   → Salvar em .claude/skills/olist-ds-specialist/component-registry.json
+    │   → Informar: componentes adicionados, removidos ou alterados
     │
     └── Gerar testes/stories
         → Ler COMPONENTES.md + MAPA_FONTES.md
@@ -102,11 +155,14 @@ Qual tipo de tarefa?
 10. Sinalizar conflitos com padrões atuais e propor alternativas consistentes
 11. Entregar código React + TypeScript pronto para implementação quando solicitado
 
-## Arquivos de Referência (12 total)
+## Arquivos de Referência (14 total)
 
 | Arquivo | Quando ler | O que contém |
 |---|---|---|
 | `VISAO_GERAL.md` | **Sempre primeiro** | Mapa de navegação, identidade visual, princípios |
+| `component-registry.json` | **Antes de gerar JSON ou usar Figma** | Inventário: 21 componentes com keys e variantes |
+| `TEMPLATES_PRODUTO.md` | **Antes de gerar JSON ou criar telas** | Zonas de layout por produto (ERP, Envios, Hub, Conta Digital) |
+| `screen-spec-schema.json` | **Ao gerar JSON para plugin** | Schema e exemplo do formato screen-spec.json |
 | `FIGMA_CONFIG.md` | **Antes de usar Figma MCP** | Guia de uso dos fileKeys e configuração |
 | `CORES.md` | Criando/revisando UI | Sistema de cores com regras de uso |
 | `TIPOGRAFIA.md` | Criando/revisando UI | Tokens de tipografia (tamanho, peso, altura) |
@@ -261,6 +317,68 @@ Você:
    - Capa preenchida
 ```
 
+### Caso 5: Gerar JSON para plugin Figma (MODO ECONÔMICO)
+```
+Usuário: Gere o JSON para o plugin Figma desta tela:
+[SDD ou descrição]
+
+Você:
+1. Ler VISAO_GERAL.md
+2. Ler component-registry.json (inventário de componentes)
+3. Ler SDD_PARA_TELA.md + SDD_AVANCADO.md (se aplicável)
+4. Ler GLOSSARIO_PAPEIS_TEXTO.md
+5. Ler PADROES.md (identificar padrão de página)
+6. Listar telas identificadas → aguardar validação
+7. Para cada tela validada:
+   a. Identificar componentes necessários
+   b. Buscar no registry → se existir, usar componentSetKey
+   c. Se NÃO existir → marcar "proposed": true com especificação
+   d. Montar layout (vertical/horizontal, gaps, padding)
+   e. Definir variantes e props de cada componente
+8. Gerar screen-spec.json no schema definido
+9. Salvar em src/screen-specs/
+10. Designer revisa JSON → cola no plugin Figma
+```
+
+### Caso 6: Componente proposto (não existe no inventário)
+```
+Ao montar o JSON, se um componente necessário NÃO existir no registry:
+
+1. Marcar no JSON:
+   "proposed": true,
+   "proposalReason": "Componente de tabela de dados não encontrado no inventário"
+
+2. Descrever o componente proposto seguindo tokens/foundations:
+   "proposedSpec": {
+     "name": "Data Table",
+     "description": "Tabela de dados com ordenação e seleção",
+     "tokens": ["color/gray/gray-200 (border)", "font/size/14px (body)"],
+     "suggestedVariants": { "density": ["default", "compact"] }
+   }
+
+3. O designer decide:
+   a. Criar o componente no Figma → adicionar ao registry
+   b. Adaptar com componentes existentes
+   c. Pedir mais detalhes à LLM
+```
+
+### Caso 7: Sincronizar inventário de componentes
+```
+Usuário: "Sincronize o registry" / "Atualize o inventário" / "Sync componentes"
+
+Você:
+1. Acessar Figma MCP → use_figma no arquivo 9pCeYLXBj1O0QPUiHANaqh, node 8042:48
+2. Percorrer SECTIONs da página
+3. Para cada COMPONENT_SET: extrair name, key, variantes
+4. Gerar component-registry.json atualizado
+5. Comparar com versão anterior (se existir):
+   - 🟢 Adicionados: componentes novos
+   - 🔴 Removidos: componentes que saíram
+   - 🟡 Alterados: variantes que mudaram
+6. Salvar arquivo atualizado
+7. Informar resumo ao usuário
+```
+
 ## Exemplo de Interação v2.0
 
 **Usuário:**
@@ -321,5 +439,5 @@ export const AprovarPedidos = ({ isGerente, pedidos, onAprovar }) => {
 
 ---
 
-**Versão:** 2.1  
-**Última atualização:** 2026-05-19
+**Versão:** 2.2  
+**Última atualização:** 2026-06-03
