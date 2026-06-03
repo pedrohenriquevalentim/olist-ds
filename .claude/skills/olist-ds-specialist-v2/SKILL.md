@@ -67,9 +67,9 @@ Quando o usuário pedir "sincronizar registry", "atualizar inventário", "sync c
 3. Se o componente necessário NÃO EXISTE → propor criação marcando `"proposed": true` no JSON, descrevendo o componente seguindo os tokens/foundations do DS
 4. Nunca inventar component keys — usar apenas os do registry ou marcar como proposto
 
-**Categorias disponíveis:**
+**Categorias disponíveis (22 componentes):**
 - **Action:** Button, Button Icon
-- **Navigation:** Link, Segmented Buttons
+- **Navigation:** Link, Segmented Buttons, Menu ERP
 - **Input:** Input Text, Text Area, Input E-mail, Input Search, Input Token, Input Password, Input Select, Input File, Checkbox, Radio Button, Dropdown, Toggle, Chip
 - **Data Display:** Tags
 - **Feedback:** Tooltip

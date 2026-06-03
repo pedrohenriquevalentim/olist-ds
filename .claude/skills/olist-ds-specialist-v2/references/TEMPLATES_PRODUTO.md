@@ -96,7 +96,8 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
       {
         "id": "zona-a",
         "type": "component",
-        "component": "Menu Global",
+        "component": "Menu ERP",
+        "variant": { "stage": "0" },
         "width": 304
       },
       {
@@ -163,7 +164,7 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
 - Zona C SEMPRE inclui subtitle (descrição da página abaixo do heading)
 - Zona D pode conter Summary Card (fundo azul claro) antes do conteúdo principal
 - Zona E é opcional — "sticky" para ações de confirmação ou paginação
-- A Zona A é o MESMO componente "Novo Menu Global" do ERP (304px)
+- A Zona A usa o componente **Menu ERP** do inventário (304px), com variante `stage` adequada ao produto
 
 ### Estrutura JSON para Envios / Hub / Conta Digital
 
@@ -177,7 +178,8 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
       {
         "id": "zona-a",
         "type": "component",
-        "component": "Menu Global",
+        "component": "Menu ERP",
+        "variant": { "stage": "0" },
         "width": 304
       },
       {
