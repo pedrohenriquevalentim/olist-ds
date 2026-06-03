@@ -49,7 +49,7 @@ olist-ds-specialist/
     ├── COMPONENTES.md                 # Props e variantes (auto-gerado)
     ├── PADROES.md                     # Padrões de página
     ├── MAPA_FONTES.md                 # Estrutura de pastas (auto-gerado)
-    ├── SDD_PARA_TELA.md               # 10 passos SDD → UI
+    ├── SDD_PARA_TELA.md              # 10 passos SDD → UI
     ├── SDD_AVANCADO.md                # RNFs, DACI, Métricas
     └── CHECKLIST_REVISAO.md           # 9 categorias de revisão
 ```
@@ -60,7 +60,7 @@ olist-ds-specialist/
 |---|---|---|
 | 1º | Foundations, Components & Icons Rebrand (TO-BE) | `HeyN4w209HWh8rfpTDiwyf` |
 | 2º | Components Web (AS-IS) | `QJmwu6sR06xmyGAoBaXuEn` |
-| Inventário | AI Components DS Olist | `9pCeYLXBj1O0QPUiHANaqh` |
+| Inventário | AI-Components | `JAa7qFjKNJFOj9RJ7bmGU5` |
 
 ## Instalação
 
