@@ -1,8 +1,8 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds`  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.8`  
 **Skill:** v2.1  
-**Última atualização:** 2026-05-19  
+**Última atualização:** 2026-06-03  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -10,13 +10,13 @@
 ## Índice
 
 1. [Visão Geral](#visão-geral)
-2. [Arquitetura do Projeto](#arquitetura-do-projeto)
+2. [Componentes](#componentes)
 3. [Pipeline de Build e Release](#pipeline-de-build-e-release)
 4. [Skill Claude](#skill-claude)
-5. [Fontes do Figma](#fontes-do-figma)
-6. [Sistema de Ícones](#sistema-de-ícones)
-7. [Scripts Disponíveis](#scripts-disponíveis)
-8. [Instalação e Compartilhamento](#instalação-e-compartilhamento)
+5. [Sistema de Ícones](#sistema-de-ícones)
+6. [Configuração do Figma](#configuração-do-figma)
+7. [Scripts](#scripts)
+8. [Compartilhamento](#compartilhamento)
 9. [Troubleshooting](#troubleshooting)
 10. [Changelog](#changelog)
 
@@ -24,203 +24,149 @@
 
 ## Visão Geral
 
-O Olist Design System é uma biblioteca de componentes React + TypeScript publicada via npm. Combina componentes React, Storybook, skill para Claude, integração com Figma via MCP e sistema de ícones centralizado.
+O Olist Design System é uma biblioteca de componentes React + TypeScript publicada como `@pedrohenriquevalentim/olist-ds`.
 
-**Fontes do Figma (embutidas no SKILL.md):**
-- **TO-BE:** `HeyN4w209HWh8rfpTDiwyf` — Foundations, Components & Icons Rebrand
-- **AS-IS:** `QJmwu6sR06xmyGAoBaXuEn` — Components Web
+Combina componentes React, Storybook, skill para Claude, integração com Figma via MCP e sistema de ícones centralizado.
 
----
+**Números atuais:**
 
-## Arquitetura do Projeto
+| Métrica | Valor |
+|---|---|
+| Componentes | 9 |
+| Ícones SVG | 550 |
+| Arquivos da Skill | 16 |
+| Arquivos Figma permitidos | 2 |
+| Versão npm | 1.0.8 |
+| Versão skill | 2.1 |
 
-```
-olist-ds/
-├── src/
-│   ├── components/          # Componentes React
-│   │   ├── Button/
-│   │   ├── Icon/            # Sistema centralizado de ícones
-│   │   ├── MenuSidebar/
-│   │   ├── MenuErp/
-│   │   ├── Tag/
-│   │   └── .../
-│   ├── assets/
-│   │   └── icons/svgs/      # SVGs dos ícones (currentColor)
-│   └── index.ts             # Barrel exports
-│
-├── .claude/
-│   ├── figma-config.json    # Configuração local do Figma (opcional, .gitignore)
-│   └── skills/
-│       └── olist-ds-specialist/   # Skill para Claude v2.1
-│           ├── SKILL.md           # Inclui fileKeys do Figma embutidos
-│           ├── DESIGN.md
-│           ├── README.md
-│           ├── SETUP.md
-│           ├── figma-config.example.json
-│           └── references/        # 12 arquivos de referência
-│
-├── scripts/
-│   ├── sync-skill.mjs              # Sincroniza skill com código (v2.1)
-│   ├── generate-tests.mjs          # Gera testes via Gemini API
-│   ├── generate-stories.mjs        # Gera stories via Gemini API
-│   ├── generate-wiki.mjs           # Gera este Wiki
-│   ├── validate-icon-migration.mjs # Valida migração de ícones
-│   └── extract-icons-from-figma.mjs# Extrai ícones do Figma
-│
-├── wiki/
-│   └── WIKI.md              # Este arquivo (auto-gerado)
-│
-├── .env                     # GEMINI_API_KEY (não commitar)
-├── package.json
-└── .gitignore
-```
+## Componentes
 
----
+### Lista Completa (9)
+
+- `Button` — `src/components/Button/`
+- `Checkbox` — `src/components/Checkbox/`
+- `Icon` — `src/components/Icon/`
+- `Logo` — `src/components/Logo/`
+- `MenuErp` — `src/components/MenuErp/`
+- `MenuSidebar` — `src/components/MenuSidebar/`
+- `RadioButton` — `src/components/RadioButton/`
+- `SegmentedButtons` — `src/components/SegmentedButtons/`
+- `Tag` — `src/components/Tag/`
+
+### Status de Migração de Ícones
+
+| Componente | Status |
+|---|---|
+| Button | ➖ Sem ícones |
+| Checkbox | ➖ Sem ícones |
+| Icon | ✅ Componente central |
+| Logo | ➖ Sem ícones |
+| MenuErp | ➖ Sem ícones |
+| MenuSidebar | ➖ Sem ícones |
+| RadioButton | ➖ Sem ícones |
+| SegmentedButtons | ➖ Sem ícones |
+| Tag | ➖ Sem ícones |
 
 ## Pipeline de Build e Release
 
-### Fluxo Completo
+### Fluxo do Release
 
 ```
 npm run release
     │
-    ├── 1. npm run generate:all
-    │       ├── generate-tests.mjs --missing   (Gemini API)
-    │       └── generate-stories.mjs --missing  (Gemini API)
-    │
-    ├── 2. npm run build
-    │       └── Compilação TypeScript + bundling
-    │
-    ├── 3. npm run sync:skill (v2.1)
-    │       ├── Auto-gera COMPONENTES.md
-    │       ├── Auto-gera MAPA_FONTES.md
-    │       └── Atualiza VISAO_GERAL.md (12 arquivos)
-    │
-    ├── 4. npm version patch
-    │       └── Requer Git working directory limpo
-    │
-    ├── 5. npm publish
-    │       └── Publica no npm registry
-    │
-    ├── 6. git push --follow-tags
-    │
-    └── 7. npm run wiki (postrelease)
-            └── Atualiza wiki/WIKI.md
+    ├── 1. generate:all (testes + stories via Gemini)
+    ├── 2. build (compilação TypeScript)
+    ├── 3. sync:skill (atualiza skill v2.1)
+    ├── 4. npm version patch (incrementa versão)
+    ├── 5. npm publish (publica no registry)
+    └── 6. git push --follow-tags
 ```
 
 ### Pré-requisitos
 
-| Requisito | Como Configurar |
+- `GEMINI_API_KEY` em `.env`
+- `dotenv` instalado (`npm i -D dotenv --legacy-peer-deps`)
+- Git working directory limpo
+
+### Todos os Scripts
+
+| Comando | Executa |
 |---|---|
-| GEMINI_API_KEY | Criar `.env` com `GEMINI_API_KEY=sua-chave` |
-| dotenv | `npm install --save-dev dotenv --legacy-peer-deps` |
-| Git limpo | `git add . && git commit -m "..."` antes do release |
-
-### Todos os Comandos
-
-| Comando | Descrição |
-|---|---|
-| `npm run storybook` | Abre Storybook local |
-| `npm run build` | Compila componentes |
-| `npm run sync:skill` | Sincroniza skill com código |
-| `npm run generate:all` | Gera testes e stories faltantes |
-| `npm run release` | Pipeline completa |
-| `npm run validate:icons` | Valida migração de ícones |
-| `npm run wiki` | Gera/atualiza este Wiki |
-
----
+| `npm run validate:icons` | `node scripts/validate-icon-migration.mjs` |
+| `npm run sync:skill` | `node scripts/sync-skill.mjs` |
+| `npm run build:tokens` | `node scripts/sync-tokens.mjs` |
+| `npm run build` | `npm run build:tokens && node scripts/generate-index.mjs &...` |
+| `npm run dev` | `vite` |
+| `npm run generate:tests` | `node scripts/generate-tests.mjs --missing` |
+| `npm run generate:tests:all` | `node scripts/generate-tests.mjs --all` |
+| `npm run generate:stories` | `node scripts/generate-stories.mjs --missing` |
+| `npm run generate:stories:all` | `node scripts/generate-stories.mjs --all` |
+| `npm run generate:icons` | `node scripts/generate-icons.mjs` |
+| `npm run generate:all` | `node scripts/generate-tests.mjs --missing && node scripts...` |
+| `npm run test` | `vitest` |
+| `npm run test:run` | `vitest run` |
+| `npm run test:coverage` | `vitest run --coverage` |
+| `npm run storybook` | `storybook dev -p 6006` |
+| `npm run build-storybook` | `storybook build` |
+| `npm run lint` | `eslint src/` |
+| `npm run prepublishOnly` | `npm run build` |
+| `npm run pipeline` | `npm run build:tokens && npm run generate:all && npm run t...` |
+| `npm run mcp:figma` | `figma-mcp` |
+| `npm run watch:tokens` | `style-dictionary build --watch` |
+| `npm run pipeline:full` | `npm run build:tokens && npm run generate:all && npm run t...` |
+| `npm run pipeline:publish` | `npm run pipeline:full && npm version patch && git add . &...` |
+| `npm run release` | `npm run pipeline && npm run sync:skill && npm version pat...` |
+| `npm run wiki` | `node scripts/generate-wiki.mjs` |
+| `npm run postrelease` | `npm run wiki` |
 
 ## Skill Claude
 
 ### Versão: v2.1
 
-Skill que ensina Claude a atuar como especialista em Product Design e Frontend da Olist.
+**Localização:** `.claude/skills/olist-ds-specialist-v2/`
 
-### Arquivos (17 total)
+### Arquivos da Skill (16 total)
 
-**Raiz (5):**
-- `SKILL.md` — Instruções principais + fileKeys do Figma embutidos
-- `DESIGN.md` — Especificação Google Labs
-- `README.md` — Documentação e setup
-- `SETUP.md` — Guia de instalação
-- `figma-config.example.json` — Template para configuração local
+**Raiz (4):**
+- `README.md`
+- `SETUP.md`
+- `SKILL.md`
+- `figma-config.json`
 
 **Referências (12):**
-- `VISAO_GERAL.md` — Mapa de navegação (ler primeiro)
-- `FIGMA_CONFIG.md` — Guia de uso dos fileKeys
-- `CORES.md` — Paleta de cores
-- `TIPOGRAFIA.md` — Tokens de tipografia
-- `GLOSSARIO_PAPEIS_TEXTO.md` — 10 papéis de texto
-- `ESPACAMENTO.md` — Grid 4px, padding, margin
-- `COMPONENTES.md` — Props e variantes (auto-gerado)
-- `PADROES.md` — 5 padrões de página
-- `SDD_PARA_TELA.md` — 10 passos SDD → UI
-- `SDD_AVANCADO.md` — RNFs, DACI, Métricas
-- `MAPA_FONTES.md` — Estrutura de pastas (auto-gerado)
-- `CHECKLIST_REVISAO.md` — 9 categorias de revisão
+- `CHECKLIST_REVISAO.md`
+- `COMPONENTES.md`
+- `CORES.md`
+- `ESPACAMENTO.md`
+- `FIGMA_CONFIG.md`
+- `GLOSSARIO_PAPEIS_TEXTO.md`
+- `MAPA_FONTES.md`
+- `PADROES.md`
+- `SDD_AVANCADO.md`
+- `SDD_PARA_TELA.md`
+- `TIPOGRAFIA.md`
+- `VISAO_GERAL.md`
 
 ### Auto-gerados vs Manuais
 
 **Auto-gerados** (por `npm run build`): COMPONENTES.md, MAPA_FONTES.md, VISAO_GERAL.md (parcial)
 
-**Manuais** (não sobrescritos): todos os outros 9 arquivos de referência
+**Manuais** (não são sobrescritos): CHECKLIST_REVISAO.md, CORES.md, ESPACAMENTO.md, FIGMA_CONFIG.md, GLOSSARIO_PAPEIS_TEXTO.md, PADROES.md, SDD_AVANCADO.md, SDD_PARA_TELA.md, TIPOGRAFIA.md, VISAO_GERAL.md
 
 ### Regras Críticas
 
-**Sempre:**
 1. Ler VISAO_GERAL.md primeiro
-2. Buscar componentes no Figma usando fileKeys do SKILL.md (TO-BE primeiro, AS-IS como fallback)
-3. Consultar GLOSSARIO_PAPEIS_TEXTO.md antes de nomear textos
+2. Ler `.claude/figma-config.json` ANTES de usar Figma MCP
+3. Usar APENAS arquivos em `allowedFiles` (2 configurados)
 4. Workflow faseado no Figma (tela por tela)
-
-**Nunca:**
-1. Buscar em arquivos do Figma fora dos permitidos
-2. Inventar nomes de papéis de texto
-3. Criar todas as telas de uma vez no Figma
-
----
-
-## Fontes do Figma
-
-### FileKeys Embutidos (SKILL.md)
-
-| Prioridade | Arquivo | FileKey | Tipo |
-|---|---|---|---|
-| 1º | Foundations, Components & Icons Rebrand | `HeyN4w209HWh8rfpTDiwyf` | TO-BE (rebrand) |
-| 2º | Components Web | `QJmwu6sR06xmyGAoBaXuEn` | AS-IS (atual) |
-
-### Como Claude Usa
-
-**Claude.ai (ZIP):** lê fileKeys direto do SKILL.md — funciona sem configuração.
-
-**Claude Code (projeto):** se `.claude/figma-config.json` existir, usa ele (prioridade); senão, usa fileKeys do SKILL.md como fallback.
-
-### Configuração Local (Opcional)
-
-Para customizar arquivos permitidos no Claude Code:
-
-```bash
-cp .claude/skills/olist-ds-specialist/figma-config.example.json .claude/figma-config.json
-# Editar com seus fileKeys
-echo '.claude/figma-config.json' >> .gitignore
-```
-
-### Como Extrair fileKey
-
-```
-URL:     https://www.figma.com/design/ABC123/nome-do-arquivo
-FileKey: ABC123
-```
-
----
 
 ## Sistema de Ícones
 
 ### Arquitetura
 
 ```
-src/components/Icon/     → Componente React (dangerouslySetInnerHTML)
-src/assets/icons/svgs/   → SVGs (24px, Outline, currentColor)
+src/components/Icon/     → Componente React
+src/assets/icons/svgs/   → 550 SVGs (24px, Outline, currentColor)
 ```
 
 ### Uso
@@ -232,7 +178,7 @@ import { Icon } from '@pedrohenriquevalentim/olist-ds';
 <Icon name="chevron-right" size={16} color="var(--color-blue-500)" />
 ```
 
-### Tamanhos por Contexto
+### Tamanhos
 
 | Contexto | Tamanho |
 |---|---|
@@ -244,55 +190,89 @@ import { Icon } from '@pedrohenriquevalentim/olist-ds';
 
 ```bash
 npm run validate:icons
-# ✅ = exit code 0 (migração completa)
-# ❌ = exit code 1 (lista ações pendentes)
+# ✅ = migração completa
+# ❌ = componentes pendentes
 ```
 
----
+## Configuração do Figma
 
-## Scripts Disponíveis
+### Arquivo: `.claude/figma-config.json`
+
+**Status:** ✅ Configurado
+**FileKey principal:** `HeyN4w209HWh8rfpTDiwyf`
+**Arquivos permitidos:** 2
+
+1. `HeyN4w209HWh8rfpTDiwyf`
+2. `QJmwu6sR06xmyGAoBaXuEn`
+
+### Como Extrair fileKey
+
+```
+URL:     https://www.figma.com/design/ABC123/nome
+FileKey: ABC123
+```
+
+### Setup
+
+```bash
+cp .claude/skills/olist-ds-specialist-v2/figma-config.example.json .claude/figma-config.json
+# Editar com seus fileKeys
+echo '.claude/figma-config.json' >> .gitignore
+```
+
+## Scripts
+
+### Disponíveis em `scripts/`
+
+- `copy-css.mjs`
+- `generate-icons.mjs`
+- `generate-index.mjs`
+- `generate-stories.mjs`
+- `generate-tests.mjs`
+- `generate-wiki.mjs`
+- `sync-skill.mjs`
+- `sync-tokens.mjs`
+- `validate-icon-migration.mjs`
+
+### Principais
 
 | Script | Propósito | Quando Usar |
 |---|---|---|
-| `sync-skill.mjs` (v2.1) | Atualiza skill com código | Após mudar componentes |
-| `generate-wiki.mjs` | Gera este Wiki | Automaticamente no postrelease |
+| `sync-skill.mjs` | Atualiza skill com código | Após mudar componentes |
 | `validate-icon-migration.mjs` | Verifica URLs do Figma | Antes de release |
 | `extract-icons-from-figma.mjs` | Exporta ícones do Figma | Ao adicionar ícones |
-| `generate-tests.mjs` | Gera testes via Gemini | No generate:all |
-| `generate-stories.mjs` | Gera stories via Gemini | No generate:all |
+| `generate-wiki.mjs` | Gera este Wiki | Automaticamente no release |
 
----
+## Compartilhamento
 
-## Instalação e Compartilhamento
-
-### Para Novos Usuários (via ZIP + setup.sh)
-
-```bash
-unzip olist-ds-kit.zip
-cd olist-ds-kit
-bash setup.sh
-```
-
-### Para Claude.ai (via Upload)
-
-1. Settings → Customize → Skills → Upload
-2. Selecionar pasta `olist-ds-specialist-v2/` ou o ZIP
-3. Ativar — fileKeys do Figma já estão no SKILL.md
-
-### Compactar para Compartilhar
+### O Que Compactar
 
 ```bash
 cd .claude/skills
 zip -r olist-ds-specialist-v2.1.zip olist-ds-specialist-v2/
 ```
 
-### O Que NÃO Compartilhar
+### O Que NÃO Vai
 
-- `.env` (chaves de API)
+- `.claude/figma-config.json` (específico do projeto)
 - `.claude/settings.local.json`
 - `.claude/worktrees/`
+- `.env`
 
----
+### Setup do Destinatário
+
+```bash
+# 1. Extrair e copiar skill
+unzip olist-ds-specialist-v2.1.zip
+cp -r olist-ds-specialist-v2/ .claude/skills/olist-ds-specialist-v2/
+
+# 2. Configurar Figma
+cp .claude/skills/olist-ds-specialist-v2/figma-config.example.json .claude/figma-config.json
+# Editar com fileKeys próprios
+
+# 3. Gitignore
+echo '.claude/figma-config.json' >> .gitignore
+```
 
 ## Troubleshooting
 
@@ -321,22 +301,20 @@ npm install --save-dev PACOTE --legacy-peer-deps
 2. SVGs usam `currentColor`?
 3. SVGs têm `viewBox` definido?
 
-### Claude busca em arquivos errados do Figma
+### Claude não respeita figma-config
 
-1. Verificar seção "Fontes do Figma" no SKILL.md
-2. Se usando Claude Code, verificar `.claude/figma-config.json`
-
----
+1. `.claude/figma-config.json` existe?
+2. `allowedFiles` tem fileKeys?
+3. Skill v2.1 instalada?
 
 ## Changelog
 
-### v2.1 (2026-05-19)
-- FileKeys do Figma embutidos no SKILL.md
-- Funciona no Claude.ai sem configuração adicional
+### v2.1 (2026-05-07)
+- figma-config.example.json na skill (compartilhável)
 - FIGMA_CONFIG.md como 12º arquivo de referência
-- SETUP.md e setup.sh para instalação automática
-- generate-wiki.mjs para Wiki auto-gerado
+- Instrução para ler figma-config.json antes do Figma MCP
 - sync-skill.mjs v2.1
+- generate-wiki.mjs criado
 
 ### v2.0 (2026-05-04)
 - GLOSSARIO_PAPEIS_TEXTO.md (10 papéis de texto)
@@ -346,10 +324,10 @@ npm install --save-dev PACOTE --legacy-peer-deps
 - sync-skill.mjs para auto-geração
 - validate-icon-migration.mjs
 
-### v1.0 (2026-01-12)
+### v1.0
 - Versão inicial da skill
 - 8 arquivos de referência
 
 ---
 
-*Gerado automaticamente em 2026-05-19 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-06-03 por `generate-wiki.mjs`. Não edite manualmente.*
