@@ -51,11 +51,11 @@ Ao usar Figma MCP (`search_design_system`, `get_design_context`, etc.), buscar c
 
 O arquivo `component-registry.json` mapeia os componentes disponíveis no Figma com seus `componentSetKey` reais e variantes.
 
-**Fonte:** Página "📚 Components - Inventário" no arquivo `9pCeYLXBj1O0QPUiHANaqh` (page `8042:48`)
+**Fonte:** Página "📚 Components - Inventário" no arquivo `JAa7qFjKNJFOj9RJ7bmGU5` (page `0:1`)
 
 **Sincronização automática via Claude:**
 Quando o usuário pedir "sincronizar registry", "atualizar inventário", "sync componentes" ou similar:
-1. Acessar Figma MCP → arquivo `9pCeYLXBj1O0QPUiHANaqh`, node `8042:48`
+1. Acessar Figma MCP → arquivo `JAa7qFjKNJFOj9RJ7bmGU5`, node `0:1`
 2. Usar `use_figma` para percorrer SECTIONs → COMPONENT_SETs → extrair keys e variantes
 3. Gerar `component-registry.json` atualizado
 4. Comparar com versão anterior: listar componentes adicionados, removidos ou alterados
@@ -129,7 +129,7 @@ Qual tipo de tarefa?
     │   → Ler MAPA_FONTES.md
     │
     ├── Sincronizar inventário de componentes (sync registry)
-    │   → Acessar Figma MCP: arquivo 9pCeYLXBj1O0QPUiHANaqh, page 8042:48
+    │   → Acessar Figma MCP: arquivo JAa7qFjKNJFOj9RJ7bmGU5, page 0:1
     │   → Usar use_figma para extrair COMPONENT_SET e COMPONENT da página
     │   → Para cada COMPONENT_SET: extrair key, name, variants (prop=value)
     │   → Para cada SECTION: agrupar componentes por categoria
@@ -367,7 +367,7 @@ Ao montar o JSON, se um componente necessário NÃO existir no registry:
 Usuário: "Sincronize o registry" / "Atualize o inventário" / "Sync componentes"
 
 Você:
-1. Acessar Figma MCP → use_figma no arquivo 9pCeYLXBj1O0QPUiHANaqh, node 8042:48
+1. Acessar Figma MCP → use_figma no arquivo JAa7qFjKNJFOj9RJ7bmGU5, node 0:1
 2. Percorrer SECTIONs da página
 3. Para cada COMPONENT_SET: extrair name, key, variantes
 4. Gerar component-registry.json atualizado

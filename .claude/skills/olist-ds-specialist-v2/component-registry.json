@@ -1,0 +1,220 @@
+{
+  "_meta": {
+    "description": "Inventário de componentes do DS Olist disponíveis para construção de telas via JSON",
+    "source": "AI-Components",
+    "figmaFileKey": "JAa7qFjKNJFOj9RJ7bmGU5",
+    "figmaPageId": "0:1",
+    "extractedAt": "2026-06-03",
+    "totalComponents": 22,
+    "published": true,
+    "usage": [
+      "Skill olist-ds-specialist: consulta para decidir quais componentes usar",
+      "Plugin Figma: usa componentSetKey para importar via importComponentSetByKeyAsync",
+      "Claude: se componente necessário não existir aqui, propõe criação seguindo tokens/foundations"
+    ]
+  },
+
+  "components": {
+    "Logo Olist": {
+      "componentSetKey": "ae9ca71b5d178c724e20c9779ebf61b3bd65ec24",
+      "category": "brand",
+      "variantCount": 3,
+      "variants": {
+        "size": ["default", "simple", "symbol"]
+      }
+    },
+    "Button": {
+      "componentSetKey": "ca19f13385c29d595de8ff4879d0600be8a7ecd9",
+      "category": "action",
+      "variantCount": 36,
+      "variants": {
+        "type": ["primary", "secondary", "tertiary"],
+        "state": ["enabled", "hover", "pressed", "disabled"],
+        "no icon": ["on", "off"],
+        "lead icon": ["on", "off"],
+        "action icon": ["on", "off"]
+      }
+    },
+    "Button Icon": {
+      "componentSetKey": "e9a1a0b80660615ba5131ef794a9f7ba8bb1f774",
+      "category": "action",
+      "variantCount": 12,
+      "variants": {
+        "type": ["primary", "secondary", "tertiary"],
+        "state": ["enabled", "hover", "pressed", "disabled"]
+      }
+    },
+    "Link": {
+      "componentSetKey": "2dac5c308c95e2040feb3d9d04bdf9adcb36e512",
+      "category": "navigation",
+      "variantCount": 3,
+      "variants": {
+        "state": ["enabled", "hover", "pressed"]
+      }
+    },
+    "Segmented Buttons": {
+      "componentSetKey": "f63c3f48c0525127bfa7c23fb21caf14f66e1ca9",
+      "category": "navigation",
+      "variantCount": 10,
+      "variants": {
+        "segments": ["2", "3"],
+        "active segment": ["1", "2", "3"],
+        "label position": ["horizontal", "vertical"]
+      }
+    },
+    "Tags": {
+      "componentSetKey": "a8add251479043d1aacf04421dcd382c2cc407b5",
+      "category": "data-display",
+      "variantCount": 7,
+      "variants": {
+        "context": ["neutral", "accent", "brand", "informative", "success", "error", "warning"]
+      }
+    },
+    "Tooltip": {
+      "componentSetKey": "faf57638df74463fbb8db5cd805273ce785162b7",
+      "category": "feedback",
+      "variantCount": 4,
+      "variants": {
+        "pointing": ["up", "down", "left", "right"]
+      }
+    },
+    "Input Text": {
+      "componentSetKey": "081f99163aa3cc61c71e8e95e79703b00638c4db",
+      "category": "input",
+      "variantCount": 8,
+      "variants": {
+        "state": ["enabled", "hover", "pressed", "focused", "filled", "success", "error", "disabled"]
+      }
+    },
+    "Text Area": {
+      "componentSetKey": "8f17ce6c6ef1fcf4ccc889c43e26ce88ae5152ba",
+      "category": "input",
+      "variantCount": 32,
+      "variants": {
+        "state": ["enabled", "hover", "pressed", "focused", "filled", "success", "error", "disabled"],
+        "line amount": ["2 lines", "3 lines", "4 lines", "5 lines"]
+      }
+    },
+    "Input E-mail": {
+      "componentSetKey": "a17bfc5938193e1b18bb0576141620aa219fb760",
+      "category": "input",
+      "variantCount": 8,
+      "variants": {
+        "state": ["enabled", "hover", "pressed", "focused", "filled", "success", "error", "disabled"]
+      }
+    },
+    "Input Search": {
+      "componentSetKey": "d4b413e729540f5e0607dcc989a8af6742691d0f",
+      "category": "input",
+      "variantCount": 12,
+      "variants": {
+        "state": ["enabled", "hover", "pressed", "focused", "filled", "disabled"],
+        "action": ["button", "button icon"]
+      }
+    },
+    "Input Token": {
+      "componentSetKey": "1ce83aa9c05a67e91ecdeb0fef112592438301b8",
+      "category": "input",
+      "variantCount": 4,
+      "variants": {
+        "state": ["enabled", "success", "error", "disabled"]
+      }
+    },
+    "Input Password": {
+      "componentSetKey": "5b19884b37119aa09aed410cd30e8566ebf2435a",
+      "category": "input",
+      "variantCount": 12,
+      "variants": {
+        "state": ["enabled", "hover", "pressed", "focused", "filled", "success", "error", "disabled"],
+        "visibility": ["on", "off"]
+      }
+    },
+    "Input Select": {
+      "componentSetKey": "39fa9e996fe9a3af0d9cd2ee23227d47aad19901",
+      "category": "input",
+      "variantCount": 24,
+      "variants": {
+        "state": ["enabled", "hover", "pressed", "focused", "filled", "disabled"],
+        "type": ["single select", "multi select", "autocomplete", "multi autocomplete"]
+      }
+    },
+    "Input File": {
+      "componentSetKey": "a1838cf572b64e1055ab53faad4e9eb2e1fd86c6",
+      "category": "input",
+      "variantCount": 7,
+      "variants": {
+        "state": ["enabled", "hover", "pressed", "focused", "filled", "error", "disabled"]
+      }
+    },
+    "Checkbox": {
+      "componentSetKey": "2cf60d48cc26801a0c1b97ff277dc1e17d08fd35",
+      "category": "input",
+      "variantCount": 12,
+      "variants": {
+        "state": ["enabled", "hover", "pressed", "disabled"],
+        "checked": ["on", "off"],
+        "indeterminate": ["on", "off"]
+      }
+    },
+    "Radio Button": {
+      "componentSetKey": "240126cb93700f612d63f7bff44851930c5f9049",
+      "category": "input",
+      "variantCount": 8,
+      "variants": {
+        "state": ["enabled", "hover", "pressed", "disabled"],
+        "checked": ["on", "off"]
+      }
+    },
+    "Dropdown": {
+      "componentSetKey": "b954f18e92493f9bfbb644b361ec4881037e57da",
+      "category": "input",
+      "variantCount": 6,
+      "variants": {
+        "state": ["enabled", "hover", "pressed", "focused", "filled", "disabled"]
+      }
+    },
+    "Toggle": {
+      "componentSetKey": "97e9b7a6b8b31f20d13a5cb0048db15d7552d722",
+      "category": "input",
+      "variantCount": 7,
+      "variants": {
+        "state": ["enabled", "hover", "pressed", "disabled", "selected", "selected hover", "selected pressed"]
+      }
+    },
+    "Chip": {
+      "componentSetKey": "ae6ac95ae9d05868a0e5c702bb45327719abc627",
+      "category": "input",
+      "variantCount": 7,
+      "variants": {
+        "state": ["enabled", "hover", "pressed", "selected", "selected hover", "selected pressed", "disabled"]
+      }
+    },
+    "Produtos Olist - Icons": {
+      "componentSetKey": "986fac7be9997779b54adc8bdf2132ad0425c984",
+      "category": "brand",
+      "variantCount": 32,
+      "variants": {
+        "product": ["Conta Digital", "Crédito", "Agentes de IA", "Ecommerce", "Sistema ERP", "Envios", "Sistema PDV", "Hub de Integração"],
+        "state": ["default", "active & hover"],
+        "theme": ["dark", "light"]
+      }
+    },
+    "Menu ERP": {
+      "componentSetKey": "3b159bd08ba039eb7e19b34c95362c3a6c79eb13",
+      "category": "navigation",
+      "variantCount": 13,
+      "variants": {
+        "stage": ["0", "01", "vendas", "produtos", "supri", "serv", "finan", "cli", "relat", "conf", "help", "noti", "stage13"]
+      }
+    }
+  },
+
+  "categories": {
+    "action": ["Button", "Button Icon"],
+    "navigation": ["Link", "Segmented Buttons", "Menu ERP"],
+    "input": ["Input Text", "Text Area", "Input E-mail", "Input Search", "Input Token", "Input Password", "Input Select", "Input File", "Checkbox", "Radio Button", "Dropdown", "Toggle", "Chip"],
+    "data-display": ["Tags"],
+    "feedback": ["Tooltip"],
+    "brand": ["Logo Olist", "Produtos Olist - Icons"]
+  }
+}
