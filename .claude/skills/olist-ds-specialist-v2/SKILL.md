@@ -164,7 +164,11 @@ Qual tipo de tarefa?
    - Use `searchPriority` como `includeLibraryKeys` em todo `search_design_system`
    - Respeite a ordem: AI Components > ERP components > ERP recursos > ERP style guide > [DS] components web
    - Ignore resultados de `blockedLibraries`
-3. **Consulte `GLOSSARIO_PAPEIS_TEXTO.md` antes de nomear textos**
+3. **MANDATO DE COMPONENTES — aplica a CADA elemento UI criado no Figma:**
+   - Antes de criar qualquer frame, shape ou texto que represente um componente de UI, chame `search_design_system` com `includeLibraryKeys: searchPriority`
+   - Se encontrado: importe e use a instância real — mesmo que o text override falhe ou o variant não seja perfeito. **Componente DS imperfeito é sempre preferível a um primitivo perfeito.**
+   - Só crie primitivos com tokens DS para elementos **sem correspondência em nenhuma das 5 libraries**; nesse caso, documente explicitamente: `"[NomeDoElemento] — custom: não encontrado no DS"`
+4. **Consulte `GLOSSARIO_PAPEIS_TEXTO.md` antes de nomear textos**
    - Se o SDD diz "título da página" → use **Heading**
    - Se o SDD diz "mensagem de erro" → use **Error**
 4. **Leia `SDD_AVANCADO.md` se o SDD tiver:**
@@ -180,12 +184,13 @@ Qual tipo de tarefa?
 
 1. **Buscar componentes sem filtrar por `includeLibraryKeys`**
 2. **Usar libraries de `blockedLibraries`** mesmo que apareçam em buscas
-3. **Construir elementos UI do zero** quando o componente DS existe (Button, Tag, Menu ERP, etc.)
-4. **Inventar nomes de papéis de texto** fora de `GLOSSARIO_PAPEIS_TEXTO.md`
-5. **Ignorar RNFs** — eles afetam UI (skeleton loaders, permissões, etc.)
-6. **Usar o plugin Figma intermediário** — o canal de entrega é sempre `use_figma` direto
-7. **Criar todas as telas de uma vez** — sempre use workflow faseado (tela por tela)
-8. **Hardcodar cores, fontes ou espaçamentos** — sempre usar tokens DS
+3. **Criar elementos UI manualmente sem antes buscar** — não há exceção para "é mais rápido do zero": Button, Tag, ícones, inputs, chips, badges, menus e qualquer elemento reconhecível do DS devem sempre ser buscados primeiro
+4. **Substituir um componente DS por primitivo** porque o text override é difícil ou o variant não é exato — use o componente real mesmo imperfeito; ajuste o que for possível via `setProperties` ou override de texto
+5. **Inventar nomes de papéis de texto** fora de `GLOSSARIO_PAPEIS_TEXTO.md`
+6. **Ignorar RNFs** — eles afetam UI (skeleton loaders, permissões, etc.)
+7. **Usar o plugin Figma intermediário** — o canal de entrega é sempre `use_figma` direto
+8. **Criar todas as telas de uma vez** — sempre use workflow faseado (tela por tela)
+9. **Hardcodar cores, fontes ou espaçamentos** — sempre usar tokens DS
 
 ## Casos de Uso v3.0
 

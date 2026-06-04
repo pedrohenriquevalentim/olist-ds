@@ -31,7 +31,31 @@ Antes de qualquer operação, entender a diferença:
 
 ---
 
-## Como Buscar Componentes
+## Hierarquia de Decisão para Cada Elemento UI
+
+Antes de criar qualquer elemento no Figma, percorrer esta ordem **sem exceção**:
+
+```
+1. Existe nas libraries?
+   └─ search_design_system(nome, includeLibraryKeys: searchPriority)
+       ├─ SIM → importar instância real → usar mesmo que override seja imperfeito
+       └─ NÃO → ir para 2
+
+2. Existe em nenhuma das 5 libraries?
+   └─ Criar primitivo com tokens DS
+       ├─ fills: cores de CORES.md
+       ├─ typography: Plus Jakarta Sans + TIPOGRAFIA.md
+       ├─ spacing: grid 4px de ESPACAMENTO.md
+       └─ Nomear como custom: "NomeDoElemento — custom: não encontrado no DS"
+          e documentar para o designer criar o componente faltante
+```
+
+**Regra inviolável:** Componente DS com label placeholder > primitivo com label correto.
+O componente real garante tokens, handoff e versionamento. O primitivo não.
+
+---
+
+
 
 ### Padrão obrigatório — sempre com `includeLibraryKeys`:
 
