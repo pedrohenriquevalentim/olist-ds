@@ -1,4 +1,4 @@
-# Setup — Olist DS Specialist Skill
+# Setup — Olist DS Specialist Skill v3.0
 
 Siga este guia para instalar e configurar a skill no seu projeto.
 
@@ -10,17 +10,17 @@ Siga este guia para instalar e configurar a skill no seu projeto.
 
 - Projeto com código-fonte (React/TypeScript)
 - Claude Code instalado ou acesso ao Claude.ai
-- Acesso ao Figma com o Design System
+- Acesso ao Figma com o Design System Olist
 
 ---
 
 ## Passo 1: Extrair o ZIP
 
 ```bash
-unzip olist-ds-specialist-v2.1.zip
+unzip olist-ds-specialist-v3.zip
 ```
 
-Você verá a pasta `olist-ds-specialist-v2/` com todos os arquivos.
+Você verá a pasta `olist-ds-specialist/` com todos os arquivos.
 
 ---
 
@@ -28,61 +28,37 @@ Você verá a pasta `olist-ds-specialist-v2/` com todos os arquivos.
 
 ```bash
 mkdir -p .claude/skills
-cp -r olist-ds-specialist-v2/ .claude/skills/olist-ds-specialist/
+cp -r olist-ds-specialist/ .claude/skills/olist-ds-specialist/
 ```
 
 ---
 
-## Passo 3: Configurar fonte da verdade do Figma
+## Passo 3: Configurar as libraries do Figma
 
-### 3.1. Copiar template
+O `figma-config.json` já vem com as **libraryKeys** das 5 libraries autorizadas da Olist.  
+Na maioria dos casos, **não é necessário editar nada** — as libraryKeys são estáveis e já estão configuradas.
+
+### Verificar o arquivo:
 
 ```bash
-cp .claude/skills/olist-ds-specialist/figma-config.json .claude/figma-config.json
+cat .claude/skills/olist-ds-specialist/figma-config.json
 ```
 
-### 3.2. Pegar seu fileKey do Figma
+Confirme que `searchPriority` tem 5 entradas começando com `lk-`.
 
-1. Abrir o arquivo do Design System no Figma
-2. Copiar a URL da barra de endereço
-3. O fileKey é a parte entre `/design/` e o próximo `/`:
+### Sobre os identificadores:
 
-```
-https://www.figma.com/design/ABC123XYZ456/nome-do-arquivo
-                              └─────┬─────┘
-                                fileKey
-```
+| Tipo | Formato | Para que serve |
+|---|---|---|
+| `libraryKey` | `lk-abc123...` | Filtrar `search_design_system` — **é o que importa** |
+| `fileKey` | `ABC123XYZ` | Referência de arquivo (extraído da URL do Figma) |
+| `componentKey` | `9a3bf4...` | Importar componente via `importComponentByKeyAsync` |
 
-### 3.3. Preencher o arquivo
+### Se precisar adicionar uma nova library:
 
-Abrir `.claude/figma-config.json` no seu editor e substituir:
-
-- `SUBSTITUA_PELO_SEU_FILE_KEY` → seu fileKey real
-- `COLE_URL_COMPLETA_AQUI` → URL completa do Figma
-- `NOME_DO_ARQUIVO` → nome do arquivo no Figma
-
-Exemplo preenchido:
-
-```json
-{
-  "designSystem": {
-    "masterFile": {
-      "name": "Design System - Components Web",
-      "fileKey": "ABC123XYZ456",
-      "description": "Componentes principais",
-      "url": "https://www.figma.com/design/ABC123XYZ456/design-system"
-    },
-    "allowedFiles": [
-      "ABC123XYZ456"
-    ],
-    "searchPriority": [
-      "ABC123XYZ456"
-    ]
-  }
-}
-```
-
-Se você tiver mais de um arquivo no Figma, adicione em `additionalFiles` e inclua todos os fileKeys em `allowedFiles` e `searchPriority`.
+1. Abrir o arquivo do Figma no browser
+2. Abrir Claude e perguntar: `"Qual o libraryKey da library X?"` → Claude usa `get_libraries` para buscar
+3. Adicionar em `libraries` e `searchPriority` no `figma-config.json`, na posição correta de prioridade
 
 ---
 
@@ -92,7 +68,7 @@ Se você tiver mais de um arquivo no Figma, adicione em `additionalFiles` e incl
 echo '.claude/figma-config.json' >> .gitignore
 ```
 
-Isso evita que seus fileKeys sejam commitados no repositório.
+> As `libraryKeys` são identificadores de organização — evite commitar.
 
 ---
 
@@ -103,16 +79,16 @@ Isso evita que seus fileKeys sejam commitados no repositório.
 ```
 seu-projeto/
 ├── .claude/
-│   ├── figma-config.json           ← Seus fileKeys (Passo 3)
 │   └── skills/
-│       └── olist-ds-specialist/    ← Skill (Passo 2)
+│       └── olist-ds-specialist/
 │           ├── SKILL.md
-│           ├── DESIGN.md
 │           ├── README.md
-│           ├── figma-config.json   ← Template (não editar)
+│           ├── SETUP.md
+│           ├── figma-config.json       ← Libraries autorizadas (libraryKeys)
 │           └── references/
 │               ├── VISAO_GERAL.md
 │               ├── FIGMA_CONFIG.md
+│               ├── TEMPLATES_PRODUTO.md
 │               ├── CORES.md
 │               ├── TIPOGRAFIA.md
 │               ├── GLOSSARIO_PAPEIS_TEXTO.md
@@ -123,7 +99,7 @@ seu-projeto/
 │               ├── SDD_AVANCADO.md
 │               ├── MAPA_FONTES.md
 │               └── CHECKLIST_REVISAO.md
-└── .gitignore                      ← Com .claude/figma-config.json
+└── .gitignore
 ```
 
 ### Checklist rápido:
@@ -132,14 +108,11 @@ seu-projeto/
 # Skill instalada?
 ls .claude/skills/olist-ds-specialist/SKILL.md
 
-# Config criado?
-ls .claude/figma-config.json
-
-# No .gitignore?
-grep "figma-config" .gitignore
+# Config com libraryKeys?
+grep "lk-" .claude/skills/olist-ds-specialist/figma-config.json | head -3
 ```
 
-Os três comandos devem retornar resultado. Se algum falhar, revise o passo correspondente.
+Ambos devem retornar resultado. Se algum falhar, revise o passo correspondente.
 
 ---
 
@@ -155,7 +128,7 @@ claude
 Depois digite:
 
 ```
-Use $olist-ds-specialist para criar uma tela de login no Figma
+Use $olist-ds-specialist para criar a tela de upgrade de planos no Figma
 ```
 
 ### No Claude.ai (navegador):
@@ -168,61 +141,31 @@ Use $olist-ds-specialist para criar uma tela de login no Figma
 
 ---
 
-## Múltiplos Arquivos do Figma
+## Como a busca de componentes funciona
 
-Se o Design System está em mais de um arquivo no Figma, edite `.claude/figma-config.json`:
+Claude sempre filtra pelas libraries autorizadas, em ordem de prioridade:
 
-```json
-{
-  "designSystem": {
-    "masterFile": {
-      "name": "Components Web",
-      "fileKey": "PRIMEIRO_FILE_KEY"
-    },
-    "additionalFiles": [
-      {
-        "name": "Foundations",
-        "fileKey": "SEGUNDO_FILE_KEY",
-        "description": "Cores, tipografia, tokens"
-      },
-      {
-        "name": "Icons",
-        "fileKey": "TERCEIRO_FILE_KEY",
-        "description": "Biblioteca de ícones"
-      }
-    ],
-    "allowedFiles": [
-      "PRIMEIRO_FILE_KEY",
-      "SEGUNDO_FILE_KEY",
-      "TERCEIRO_FILE_KEY"
-    ],
-    "blockedFiles": [],
-    "searchPriority": [
-      "PRIMEIRO_FILE_KEY",
-      "SEGUNDO_FILE_KEY",
-      "TERCEIRO_FILE_KEY"
-    ]
-  }
-}
+```
+AI Components (master) → ERP components → ERP recursos → ERP style guide → [DS] components web
 ```
 
-A ordem em `searchPriority` define onde Claude busca primeiro. Se um componente existir em dois arquivos, o primeiro da lista tem prioridade.
+Ao pedir "crie a tela X no Figma", Claude automaticamente:
+1. Busca `Button`, `Menu ERP`, `Tags` etc. nas libraries acima
+2. Importa as instâncias reais com `importComponentByKeyAsync`
+3. Constrói o frame via `use_figma` com tokens e fills reais do DS
+4. Retorna screenshot + link do Figma para validação
 
 ---
 
 ## Problemas Comuns
 
-### "Arquivo figma-config.json não encontrado"
+### Claude busca em libraries erradas
 
-Você está na raiz do projeto? Verifique com `pwd` e rode:
+Verifique se `searchPriority` em `figma-config.json` tem as 5 libraryKeys corretas (começando com `lk-`).
 
-```bash
-cp .claude/skills/olist-ds-specialist/figma-config.json .claude/figma-config.json
-```
+### Componente não encontrado em nenhuma library
 
-### Claude busca em arquivos errados do Figma
-
-Verifique se `.claude/figma-config.json` tem os fileKeys corretos em `allowedFiles`.
+Claude constrói o elemento com primitivos seguindo os tokens do DS e documenta para o designer criar o componente faltante.
 
 ### Skill não aparece no Claude Code
 
@@ -238,12 +181,12 @@ Se não existir, repita o Passo 2.
 
 ## Pronto!
 
-A skill está instalada e configurada. Claude vai:
+A skill está instalada. Claude vai:
 
-- Ler seus tokens de cores, tipografia e espaçamento
-- Usar apenas os arquivos do Figma que você permitiu
+- Buscar componentes apenas nas 5 libraries autorizadas
+- Usar instâncias reais do DS (não primitivos manuais)
 - Seguir o glossário de nomenclatura da Olist
-- Criar telas no Figma com workflow faseado
+- Criar telas no Figma com workflow faseado (tela por tela)
 - Revisar consistência visual automaticamente
 
-Dúvidas? Consulte o `README.md` dentro da skill para informações detalhadas.
+Dúvidas? Consulte o `README.md` para informações detalhadas.

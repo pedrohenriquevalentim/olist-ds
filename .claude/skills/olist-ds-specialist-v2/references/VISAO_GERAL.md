@@ -94,9 +94,8 @@ Para caminhos dos arquivos, leia `MAPA_FONTES.md`.
 | Arquivo | O que contém | Quando consultar |
 |---|---|---|
 | **VISAO_GERAL.md** | Este arquivo — mapa de navegação | Sempre primeiro |
-| **FIGMA_CONFIG.md** | Arquivos do Figma que são fonte da verdade | **ANTES** de usar `search_design_system` |
-| **TEMPLATES_PRODUTO.md** | **Antes de gerar JSON ou criar telas** | Zonas de layout por produto (ERP, Envios, Hub, CD) |
-| **screen-spec-schema.json** | **Ao gerar JSON para plugin** | Schema e exemplo do formato screen-spec.json |
+| **FIGMA_CONFIG.md** | libraryKeys, componentKeys, workflow de busca e import | **ANTES** de usar `search_design_system` |
+| **TEMPLATES_PRODUTO.md** | **Antes de criar telas no Figma** | Zonas de layout por produto (ERP, Envios, Hub, Conta Digital) |
 | **CORES.md** | Paleta de cores, regras, DO/DON'T | Ao escolher cores |
 | **TIPOGRAFIA.md** | Tokens de tipografia (tamanho, peso, altura) | Ao estilizar texto |
 | **GLOSSARIO_PAPEIS_TEXTO.md** | **NOVO** — Definição dos 10 papéis de texto (Heading, Label, etc.) | Ao nomear textos na UI |
@@ -198,4 +197,4 @@ COMPONENTES.md
 
 ---
 
-**Última atualização:** 2026-05-07 (v2.0 — adição de GLOSSARIO_PAPEIS_TEXTO.md e SDD_AVANCADO.md)
+**Última atualização:** 2026-06-03 (v3.0 — workflow use_figma, libraryKeys como fonte da verdade, plugin JSON descontinuado)

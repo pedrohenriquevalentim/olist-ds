@@ -1,283 +1,191 @@
 # Configuração do Figma — Fonte da Verdade
 
-**Arquivo:** `.claude/figma-config.json`
+**Arquivo:** `figma-config.json`  
+**Versão:** 3.0 — baseada em libraryKeys
 
 ---
 
-## 📋 Propósito
+## Os Três Identificadores do Figma
 
-Este arquivo define quais arquivos do Figma são a **fonte oficial** do Design System Olist.
+Antes de qualquer operação, entender a diferença:
 
-**Regra crítica:** NUNCA busque componentes, tokens ou estilos em arquivos fora desta configuração.
+| Identificador | Formato | Onde aparece | Usado para |
+|---|---|---|---|
+| **libraryKey** | `lk-abc123...` | Resposta de `get_libraries` e `search_design_system` | Filtrar `search_design_system`, definir prioridade |
+| **fileKey** | `ABC123XYZ` | URL do Figma (`/design/:fileKey/`) | Referência, inspeção via `get_metadata` |
+| **componentKey** | `9a3bf4...` | Resposta de `search_design_system` | `importComponentByKeyAsync` / `importComponentSetByKeyAsync` |
 
 ---
 
-## 🔍 Como Usar
+## Libraries Autorizadas (em ordem de prioridade)
 
-### Antes de QUALQUER operação com Figma MCP:
+| # | Library | libraryKey (abreviado) |
+|---|---|---|
+| 1 | AI Components (master) | `lk-e52b27fe...` |
+| 2 | ERP components | `lk-831bcbe7...` |
+| 3 | ERP recursos | `lk-f95b9869...` |
+| 4 | ERP style guide | `lk-798aabd3...` |
+| 5 | [design system] components web | `lk-89f0ba0d...` |
 
-1. **Ler `.claude/figma-config.json`**
-2. **Extrair `allowedFiles`** — lista de fileKeys permitidos
-3. **Extrair `blockedFiles`** — lista de fileKeys proibidos
-4. **Extrair `searchPriority`** — ordem de busca
+**libraryKeys completas:** ver campo `searchPriority` em `figma-config.json`.
 
-### Ao buscar componentes:
+---
 
-```typescript
-// Exemplo de workflow correto:
+## Como Buscar Componentes
 
-// 1. Ler config
-const config = JSON.parse(await readFile('.claude/figma-config.json'));
-const allowedFiles = config.designSystem.allowedFiles;
-const searchPriority = config.designSystem.searchPriority;
+### Padrão obrigatório — sempre com `includeLibraryKeys`:
 
-// 2. Buscar componentes APENAS nos arquivos permitidos
-for (const fileKey of searchPriority) {
-  const results = await search_design_system({
-    query: "Button",
-    fileKey: fileKey  // ⬅️ FILTRAR por fileKey
-  });
-  
-  if (results.length > 0) {
-    // Achou! Usar este
-    return results[0];
-  }
-}
+```javascript
+// Ler o config para pegar a searchPriority
+const config = JSON.parse(readFile('figma-config.json'));
+const priority = config.designSystem.searchPriority;
 
-// 3. Se não achou em nenhum arquivo permitido
-return null; // Componente não existe no DS oficial
+// Buscar filtrando pelas 5 libraries autorizadas
+const results = await search_design_system({
+  fileKey: "rwQoESynmdscKMVuonWBto",  // arquivo de trabalho atual
+  query: "Button",
+  includeLibraryKeys: priority         // ← OBRIGATÓRIO
+});
+
+// O primeiro resultado já é o de maior prioridade
+const component = results.components[0];
+// component.componentKey → usar em importComponentSetByKeyAsync
+// component.libraryName  → confirmar qual library retornou
 ```
 
----
-
-## ⚠️ Regras Críticas
-
-### ✅ SEMPRE:
-1. Ler `.claude/figma-config.json` ANTES de usar `search_design_system`
-2. Filtrar buscas por `fileKey` (usar apenas os de `allowedFiles`)
-3. Respeitar ordem de `searchPriority` (buscar no primeiro, depois no segundo, etc.)
-4. Se componente não for encontrado em `allowedFiles`, registrar em página "Notas"
-
-### ❌ NUNCA:
-1. Buscar em arquivos fora de `allowedFiles`
-2. Usar componentes de arquivos em `blockedFiles` (mesmo que existam)
-3. Usar `search_design_system` sem filtro de `fileKey`
-4. Assumir que um arquivo está permitido sem verificar o config
-
----
-
-## 📊 Estrutura do JSON
-
-```json
-{
-  "designSystem": {
-    "masterFile": {
-      "name": "Design System - Components Web",
-      "fileKey": "QJmwu6sR06xmyGAoBaXuEn",
-      "description": "Componentes principais",
-      "url": "https://www.figma.com/design/QJmwu6sR06xmyGAoBaXuEn/..."
-    },
-    "additionalFiles": [
-      {
-        "name": "Design System - Foundations",
-        "fileKey": "ABC123XYZ456",
-        "description": "Cores, tipografia, tokens",
-        "url": "https://www.figma.com/design/ABC123XYZ456/..."
-      }
-    ],
-    "allowedFiles": [
-      "QJmwu6sR06xmyGAoBaXuEn",  // ⬅️ USAR APENAS ESTES
-      "ABC123XYZ456"
-    ],
-    "blockedFiles": [
-      "OLD_FILE_KEY"  // ⬅️ NUNCA USAR
-    ],
-    "searchPriority": [
-      "QJmwu6sR06xmyGAoBaXuEn",  // ⬅️ BUSCAR NESTA ORDEM
-      "ABC123XYZ456"
-    ]
-  }
-}
-```
-
----
-
-## 🎯 Exemplos de Uso
-
-### Exemplo 1: Buscar Button
-
-```typescript
-// ❌ ERRADO (busca em qualquer arquivo da org)
+### ❌ Nunca buscar sem filtro:
+```javascript
+// ERRADO — retorna componentes de qualquer library, incluindo bloqueadas
 search_design_system({ query: "Button" });
+```
 
-// ✅ CORRETO (busca apenas em allowedFiles, na ordem de prioridade)
-const config = JSON.parse(await readFile('.claude/figma-config.json'));
+---
 
-for (const fileKey of config.designSystem.searchPriority) {
-  const results = await search_design_system({
-    query: "Button",
-    fileKey: fileKey
-  });
-  
-  if (results.length > 0) {
-    return results[0]; // Achou no primeiro arquivo permitido
+## Como Importar e Instanciar Componentes
+
+### Para `component_set` (componente com variantes):
+```javascript
+// 1. Importar o set completo
+const compSet = await figma.importComponentSetByKeyAsync(component.componentKey);
+
+// 2. Encontrar a variante correta por keywords no nome
+function findVariant(compSet, keywords) {
+  for (const child of compSet.children) {
+    const name = child.name.toLowerCase();
+    if (keywords.every(k => name.includes(k.toLowerCase()))) return child;
   }
+  return compSet.defaultVariant ?? compSet.children[0];
+}
+
+const variant = findVariant(compSet, ['primary']); // ou ['secondary'], ['01'], etc.
+
+// 3. Criar instância e inserir no frame pai ANTES de definir sizing
+parent.appendChild(instance = variant.createInstance());
+instance.layoutSizingHorizontal = 'FILL'; // ← APÓS appendChild
+```
+
+### Para `component` simples:
+```javascript
+const comp = await figma.importComponentByKeyAsync(component.componentKey);
+const instance = comp.createInstance();
+parent.appendChild(instance);
+instance.layoutSizingVertical = 'FILL'; // ← APÓS appendChild
+```
+
+### Override de texto em instância:
+```javascript
+// Carregar a fonte ANTES de editar
+await figma.loadFontAsync({ family: 'Plus Jakarta Sans', style: 'Medium' });
+
+// Encontrar o nó de texto correto pelo nome do frame pai
+const labelFrame = instance.findOne(n => n.name === 'label' && n.type !== 'TEXT');
+const textNode = labelFrame?.findOne(n => n.type === 'TEXT');
+if (textNode) {
+  await figma.loadFontAsync(textNode.fontName);
+  textNode.characters = 'Selecionar Plano';
 }
 ```
 
 ---
 
-### Exemplo 2: Validar se arquivo é permitido
+## Workflow Completo: SDD → Figma
 
-```typescript
-function isFileAllowed(fileKey: string): boolean {
-  const config = JSON.parse(readFileSync('.claude/figma-config.json'));
-  return config.designSystem.allowedFiles.includes(fileKey);
-}
-
-function isFileBlocked(fileKey: string): boolean {
-  const config = JSON.parse(readFileSync('.claude/figma-config.json'));
-  return config.designSystem.blockedFiles.includes(fileKey);
-}
-
-// Uso:
-if (isFileBlocked(someFileKey)) {
-  console.warn(`Arquivo ${someFileKey} está bloqueado. Não usar.`);
-  return null;
-}
-
-if (!isFileAllowed(someFileKey)) {
-  console.warn(`Arquivo ${someFileKey} não está na lista de permitidos.`);
-  return null;
-}
+```
+1. Ler figma-config.json → extrair searchPriority e blockedLibraries
+   ↓
+2. Para cada componente necessário na tela:
+   search_design_system(nome, includeLibraryKeys: searchPriority)
+   → pegar componentKey do primeiro resultado
+   ↓
+3. importComponentSetByKeyAsync(componentKey) → findVariant → createInstance()
+   ↓
+4. use_figma:
+   - Criar frame pai com Auto Layout
+   - appendChild(instance) → depois definir layoutSizing
+   - Criar primitivos só para elementos sem componente no DS
+   ↓
+5. get_design_context → screenshot + validação visual
+   ↓
+6. Iterar com feedback
 ```
 
 ---
 
-### Exemplo 3: Registrar componentes não encontrados
+## Regras Críticas
 
-```typescript
-const notFoundComponents = [];
+### ✅ Sempre:
+1. Passar `includeLibraryKeys: searchPriority` em todo `search_design_system`
+2. Usar o primeiro resultado — a ordem do array garante a prioridade correta
+3. Verificar `libraryName` no resultado para confirmar de qual library veio
+4. Definir `layoutSizing` APÓS `appendChild` ao frame pai
+5. Carregar fonts com `loadFontAsync` antes de editar texto em instâncias
 
-const config = JSON.parse(await readFile('.claude/figma-config.json'));
+### ❌ Nunca:
+1. Chamar `search_design_system` sem `includeLibraryKeys`
+2. Usar componentes de `blockedLibraries` mesmo que apareçam sem filtro
+3. Construir Button, Tag, Menu ERP etc. manualmente quando existem no DS
+4. Definir `layoutSizingVertical/Horizontal` antes de `appendChild`
 
-for (const componentName of ["Button", "Card", "Modal"]) {
-  let found = false;
-  
-  for (const fileKey of config.designSystem.searchPriority) {
-    const results = await search_design_system({
-      query: componentName,
-      fileKey: fileKey
-    });
-    
-    if (results.length > 0) {
-      found = true;
-      break;
-    }
-  }
-  
-  if (!found) {
-    notFoundComponents.push(componentName);
-  }
-}
+---
 
-// Registrar na página "Notas" do Figma
-if (notFoundComponents.length > 0) {
-  createNotesPage({
-    title: "Componentes Faltantes no DS Master",
-    content: `
-      Os seguintes componentes não foram encontrados nos arquivos permitidos:
-      ${notFoundComponents.map(c => `- ${c}`).join('\n')}
-      
-      Arquivos pesquisados:
-      ${config.designSystem.allowedFiles.map(f => `- ${f}`).join('\n')}
-    `
-  });
-}
+## Valores Válidos da Figma Plugin API
+
+```javascript
+// counterAxisAlignItems — VÁLIDOS:
+'MIN' | 'MAX' | 'CENTER' | 'BASELINE'
+// ❌ INVÁLIDOS: 'STRETCH', 'END'
+
+// primaryAxisAlignItems — VÁLIDOS:
+'MIN' | 'MAX' | 'CENTER' | 'SPACE_BETWEEN'
+
+// layoutSizingHorizontal / layoutSizingVertical — VÁLIDOS:
+'FIXED' | 'HUG' | 'FILL'
 ```
 
 ---
 
-## 🚨 Tratamento de Erros
+## Libraries Bloqueadas
 
-### Se `.claude/figma-config.json` não existir:
+Ignorar mesmo que apareçam em buscas sem filtro:
 
-```typescript
-if (!existsSync('.claude/figma-config.json')) {
-  throw new Error(
-    'Arquivo .claude/figma-config.json não encontrado. ' +
-    'Configure a fonte da verdade do Design System antes de continuar.'
-  );
-}
-```
-
-### Se allowedFiles estiver vazio:
-
-```typescript
-const config = JSON.parse(await readFile('.claude/figma-config.json'));
-
-if (!config.designSystem.allowedFiles || config.designSystem.allowedFiles.length === 0) {
-  throw new Error(
-    'Nenhum arquivo permitido em .claude/figma-config.json. ' +
-    'Configure allowedFiles antes de buscar componentes.'
-  );
-}
-```
+| Library | Motivo |
+|---|---|
+| `design system` (base) | Supersedida por AI Components e ERP components |
+| `HeyN4w209HWh8rfpTDiwyf` (TO-BE antigo) | Conteúdo migrado para AI Components |
+| `QJmwu6sR06xmyGAoBaXuEn` (AS-IS antigo) | Substituído por [design system] components web via libraryKey |
 
 ---
 
-## 📝 Checklist de Validação
+## Checklist Antes de Usar Figma MCP
 
-Antes de usar Figma MCP, verificar:
-
-- [ ] `.claude/figma-config.json` existe
-- [ ] `allowedFiles` tem pelo menos 1 fileKey
-- [ ] `searchPriority` está definido
-- [ ] Todos os fileKeys em `searchPriority` também estão em `allowedFiles`
-- [ ] `blockedFiles` não está em `allowedFiles` (sem conflito)
+- [ ] `figma-config.json` existe e tem `searchPriority` com 5 libraryKeys
+- [ ] `search_design_system` será chamado com `includeLibraryKeys: searchPriority`
+- [ ] Nenhum resultado de `blockedLibraries` será usado
+- [ ] Fonts carregadas antes de editar texto em instâncias
+- [ ] `layoutSizing` definido após `appendChild`
 
 ---
 
-## 🎯 Comportamento Esperado
-
-### Cenário 1: Componente existe no primeiro arquivo permitido
-**Resultado:** Usar esse componente, não buscar nos outros
-
-### Cenário 2: Componente não existe no primeiro, mas existe no segundo
-**Resultado:** Usar do segundo arquivo
-
-### Cenário 3: Componente existe apenas em arquivo bloqueado
-**Resultado:** Não usar. Registrar em "Notas" como componente faltante
-
-### Cenário 4: Componente existe em arquivo fora de allowedFiles
-**Resultado:** Não usar. Registrar em "Notas" como componente faltante
-
-### Cenário 5: Componente existe em múltiplos arquivos permitidos
-**Resultado:** Usar do primeiro (conforme searchPriority)
-
----
-
-## 🔄 Atualização do Config
-
-Se o usuário pedir para adicionar/remover arquivos:
-
-1. Ler `.claude/figma-config.json`
-2. Modificar `allowedFiles`, `blockedFiles` ou `searchPriority`
-3. Salvar de volta
-4. Confirmar mudanças com o usuário
-
-**Nunca modificar sem confirmação do usuário.**
-
----
-
-## 📚 Referências
-
-- README.md → Seção "Figma (com telas faseadas)"
-- GUIA-MULTIPLOS-ARQUIVOS-FIGMA.md → Como configurar múltiplos arquivos
-- PROMPT-FIGMA-COM-FONTE-VERDADE.md → Prompt com fileKey configurado
-
----
-
-**Data de criação:** 2026-05-07  
-**Última atualização:** 2026-05-07  
-**Versão da skill:** 2.1
+**Data de criação:** 2026-05-07
+**Última atualização:** 2026-06-03
+**Versão:** 3.0 — migrado de fileKey para libraryKey como identificador primário

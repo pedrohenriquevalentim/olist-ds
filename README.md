@@ -149,19 +149,24 @@ npm run build
 ```
 olist-ds/
 ├── .github/workflows/pipeline.yml        # CI/CD
-├── .claude/skills/olist-ds-skill/        # Skill corporativa (auto-sync)
-│   ├── SKILL.md                          # Role, escopo, decision flow
-│   ├── DESIGN.md                         # Google Labs spec (cross-tool)
+├── .claude/skills/olist-ds-specialist-v2/ # Skill corporativa (auto-sync)
+│   ├── SKILL.md                          # Role, escopo, decision flow (v3.0)
+│   ├── figma-config.json                 # libraryKeys, searchPriority, blockedLibraries
+│   ├── component-registry.json           # Registry de componentes sincronizado
 │   └── references/
-│       ├── OLIST_DS_OVERVIEW.md          # Brand, princípios, tokens rápidos
-│       ├── COLORS.md                     # Sistema de cores com DO/DON'T
-│       ├── TYPOGRAPHY.md                 # Fontes, tamanhos, composições
-│       ├── SPACING.md                    # Escala, layout grid, border-radius
-│       ├── COMPONENTS.md                 # Componentes com props (auto-gerado)
-│       ├── PATTERNS.md                   # Padrões de página (table, form, dashboard)
-│       ├── SOURCE_MAP.md                 # Mapa de arquivos (auto-gerado)
-│       ├── SDD_TO_SCREEN.md             # Guia: SDD → decisões de UI
-│       └── VISUAL_REVIEW_CHECKLIST.md   # Checklist de revisão visual
+│       ├── VISAO_GERAL.md                # Mapa de navegação, identidade visual
+│       ├── FIGMA_CONFIG.md               # Workflow de busca e import de componentes
+│       ├── TEMPLATES_PRODUTO.md          # Zonas de layout por produto
+│       ├── CORES.md                      # Sistema de cores com regras de uso
+│       ├── TIPOGRAFIA.md                 # Tokens de tipografia
+│       ├── ESPACAMENTO.md                # Escala, grid, border-radius
+│       ├── GLOSSARIO_PAPEIS_TEXTO.md     # 10 papéis de texto (Heading, Label, Error…)
+│       ├── COMPONENTES.md                # Componentes com props (auto-gerado)
+│       ├── PADROES.md                    # 5 padrões de página (Tabela, Form, Dashboard…)
+│       ├── MAPA_FONTES.md                # Caminhos reais dos arquivos (auto-gerado)
+│       ├── SDD_PARA_TELA.md              # 10 passos SDD → decisões de UI
+│       ├── SDD_AVANCADO.md               # RNFs, DACI, Métricas, Rollout → UI
+│       └── CHECKLIST_REVISAO.md          # 9 categorias de revisão visual
 ├── .storybook/
 │   ├── main.ts                           # Paths + addons
 │   ├── preview.ts                        # Autodocs + tokens + font decorator
@@ -343,7 +348,15 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 
 ### Auto-sync
 
-A cada `npm run build`, os arquivos `COMPONENTS.md`, `SOURCE_MAP.md` e `OLIST_DS_OVERVIEW.md` são regenerados pelo script `sync-skill.mjs` com o estado real do codebase. Para atualizar no Claude.ai, re-upload da pasta da skill.
+A cada `npm run build`, os arquivos `COMPONENTES.md`, `MAPA_FONTES.md` e `VISAO_GERAL.md` (parcial) são regenerados pelo script `sync-skill.mjs` com o estado real do codebase. Para atualizar no Claude.ai, re-upload da pasta da skill.
+
+### Mudanças v3.0
+
+- Canal de entrega único: `use_figma` direto (plugin JSON intermediário removido)
+- **AI Components** como library master — preferência absoluta para componentes duplicados
+- `figma-config.json` com `searchPriority` e `blockedLibraries` como fonte da verdade
+- Workflow faseado obrigatório: listar telas → validar → criar uma por vez
+- Regras da Figma Plugin API documentadas para evitar erros comuns
 
 ---
 

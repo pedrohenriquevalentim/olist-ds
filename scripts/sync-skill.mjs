@@ -1,26 +1,23 @@
 #!/usr/bin/env node
 
 /**
- * sync-skill.mjs v2.1
- * 
+ * sync-skill.mjs
+ *
  * Sincroniza a skill corporativa olist-ds-specialist-v2 com o estado real do código.
- * 
+ *
  * Auto-gera:
  * - COMPONENTES.md (props, tokens, estados de cada componente)
  * - MAPA_FONTES.md (estrutura de pastas do repositório)
  * - VISAO_GERAL.md (atualiza lista de componentes)
- * 
+ *
+ * Sincroniza em CLAUDE.md:
+ * - Lista de libraries por prioridade (lida do figma-config.json)
+ *
  * Não toca em:
  * - CORES.md, TIPOGRAFIA.md, ESPACAMENTO.md (definidos manualmente)
- * - GLOSSARIO_PAPEIS_TEXTO.md (definido manualmente)
- * - FIGMA_CONFIG.md (definido manualmente) ← NOVO v2.1
- * - SDD_AVANCADO.md (definido manualmente)
- * - SDD_PARA_TELA.md, PADROES.md, CHECKLIST_REVISAO.md (definidos manualmente)
- * 
- * Changelog v2.1:
- * - Adicionado FIGMA_CONFIG.md à lista de arquivos de referência
- * - Atualizado contador: 11 → 12 arquivos total
- * 
+ * - GLOSSARIO_PAPEIS_TEXTO.md, FIGMA_CONFIG.md, SDD_AVANCADO.md (manuais)
+ * - SDD_PARA_TELA.md, PADROES.md, CHECKLIST_REVISAO.md, TEMPLATES_PRODUTO.md (manuais)
+ *
  * Uso:
  *   npm run sync:skill
  *   ou
@@ -28,19 +25,29 @@
  */
 
 import { readdirSync, readFileSync, writeFileSync, statSync, existsSync } from 'fs';
-import { join, relative, extname } from 'path';
+import { join } from 'path';
 
 // Configuração
 const ROOT_DIR = process.cwd();
 const SKILL_DIR = join(ROOT_DIR, '.claude', 'skills', 'olist-ds-specialist-v2');
 const REFERENCES_DIR = join(SKILL_DIR, 'references');
 const COMPONENTS_DIR = join(ROOT_DIR, 'src', 'components');
+const FIGMA_CONFIG_PATH = join(SKILL_DIR, 'figma-config.json');
+const CLAUDE_MD_PATH = join(ROOT_DIR, 'CLAUDE.md');
 
-// Versão da skill
-const SKILL_VERSION = '2.1';  // ← atualizado
+// Versão da skill — lida dinamicamente do SKILL.md
+function readSkillVersion() {
+  const skillMdPath = join(SKILL_DIR, 'SKILL.md');
+  if (!existsSync(skillMdPath)) return '?';
+  const content = readFileSync(skillMdPath, 'utf-8');
+  const match = content.match(/^version:\s*([\d.]+)/m);
+  return match ? match[1] : '?';
+}
+
+const SKILL_VERSION = readSkillVersion();
 const UPDATE_DATE = new Date().toISOString().split('T')[0];
 
-console.log('🔄 Sincronizando skill corporativa v2.1...\n');
+console.log(`🔄 Sincronizando skill corporativa v${SKILL_VERSION}...\n`);
 
 // ============================================================================
 // 1. Auto-gerar COMPONENTES.md
@@ -196,54 +203,86 @@ src/
 }
 
 // ============================================================================
-// 3. Atualizar VISAO_GERAL.md (apenas seção de componentes)
+// 3. Atualizar VISAO_GERAL.md (apenas lista de componentes e data)
 // ============================================================================
 
 function updateVisaoGeralMarkdown() {
   console.log('📝 Atualizando VISAO_GERAL.md...');
-  
+
   const visaoGeralPath = join(REFERENCES_DIR, 'VISAO_GERAL.md');
-  
+
   if (!existsSync(visaoGeralPath)) {
     console.log('⚠️  VISAO_GERAL.md não encontrado. Pulando...');
     return;
   }
-  
+
   let content = readFileSync(visaoGeralPath, 'utf-8');
-  
+
   // Atualizar lista de componentes
   if (existsSync(COMPONENTS_DIR)) {
     const components = readdirSync(COMPONENTS_DIR)
       .filter(name => statSync(join(COMPONENTS_DIR, name)).isDirectory())
       .sort();
-    
-    const componentsList = components.join(', ');
-    
-    // Substituir linha de componentes existentes
+
     content = content.replace(
-      /- Button, Checkbox.*$/m,
-      `- ${componentsList}`
+      /^- Button, Checkbox.*$/m,
+      `- ${components.join(', ')}`
     );
   }
-  
-  // Atualizar contador de arquivos (11 → 12)
-  content = content.replace(
-    /## Arquivos de Referência \(11 total\)/,
-    '## Arquivos de Referência (12 total)'
-  );
-  
-  // Garantir que FIGMA_CONFIG.md está na tabela
-  if (!content.includes('FIGMA_CONFIG.md')) {
-    // Adicionar FIGMA_CONFIG.md depois de VISAO_GERAL.md
-    content = content.replace(
-      /\| \*\*VISAO_GERAL\.md\*\* \| Este arquivo — mapa de navegação \| Sempre primeiro \|/,
-      `| **VISAO_GERAL.md** | Este arquivo — mapa de navegação | Sempre primeiro |
-| **FIGMA_CONFIG.md** | Arquivos do Figma que são fonte da verdade | **ANTES** de usar \`search_design_system\` |`
-    );
-  }
-  
+
   writeFileSync(visaoGeralPath, content, 'utf-8');
   console.log('✅ VISAO_GERAL.md atualizado\n');
+}
+
+// ============================================================================
+// 4. Sincronizar prioridade de libraries no CLAUDE.md
+// ============================================================================
+
+function syncClaudeMd() {
+  console.log('📝 Sincronizando CLAUDE.md...');
+
+  if (!existsSync(CLAUDE_MD_PATH)) {
+    console.log('⚠️  CLAUDE.md não encontrado. Pulando...');
+    return;
+  }
+
+  if (!existsSync(FIGMA_CONFIG_PATH)) {
+    console.log('⚠️  figma-config.json não encontrado. Pulando CLAUDE.md...');
+    return;
+  }
+
+  let figmaConfig;
+  try {
+    figmaConfig = JSON.parse(readFileSync(FIGMA_CONFIG_PATH, 'utf-8'));
+  } catch {
+    console.log('⚠️  Erro ao ler figma-config.json. Pulando CLAUDE.md...');
+    return;
+  }
+
+  const libraries = figmaConfig?.designSystem?.libraries || [];
+  if (libraries.length === 0) {
+    console.log('⚠️  Nenhuma library no figma-config.json. Pulando CLAUDE.md...');
+    return;
+  }
+
+  // Gerar bloco de prioridade de libraries
+  const libraryLines = libraries
+    .map(lib => `   - **${lib.name}**${lib.priority === 1 ? ' (master — preferência absoluta)' : ''}`)
+    .join('\n');
+
+  const newPriorityBlock =
+    `4. Identifique os componentes do design system necessários consultando as libraries na ordem de prioridade:\n${libraryLines}`;
+
+  let content = readFileSync(CLAUDE_MD_PATH, 'utf-8');
+
+  // Substituir o bloco de prioridade de libraries entre o passo 4 e o passo 5
+  content = content.replace(
+    /4\. Identifique os componentes do design system necessários consultando as libraries na ordem de prioridade:[\s\S]*?(?=\n5\.)/,
+    newPriorityBlock
+  );
+
+  writeFileSync(CLAUDE_MD_PATH, content, 'utf-8');
+  console.log('✅ CLAUDE.md sincronizado (libraries atualizadas)\n');
 }
 
 // ============================================================================
@@ -254,12 +293,14 @@ try {
   generateComponentsMarkdown();
   generateMapaFontesMarkdown();
   updateVisaoGeralMarkdown();
-  
+  syncClaudeMd();
+
   console.log('✅ Sincronização concluída!\n');
   console.log('Arquivos gerados:');
   console.log('  - .claude/skills/olist-ds-specialist-v2/references/COMPONENTES.md');
   console.log('  - .claude/skills/olist-ds-specialist-v2/references/MAPA_FONTES.md');
   console.log('  - .claude/skills/olist-ds-specialist-v2/references/VISAO_GERAL.md (atualizado)');
+  console.log('  - CLAUDE.md (libraries sincronizadas)');
   console.log('');
 } catch (error) {
   console.error('❌ Erro:', error.message);

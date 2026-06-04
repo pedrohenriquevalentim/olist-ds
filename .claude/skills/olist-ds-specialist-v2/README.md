@@ -1,47 +1,38 @@
-# Olist Design System — Especialista (v2.2)
+# Olist Design System — Especialista (v3.0)
 
 Skill corporativa para criação de telas, componentes e protótipos a partir de SDDs/PRDs usando o design system da Olist.
 
-Compatível com a especificação [DESIGN.md do Google Labs](https://github.com/google-labs-code/design.md).
+## Novidades v3.0 (2026-06-03)
 
-## Novidades v2.2 (2026-06-03)
+### Workflow use_figma (canal único de entrega):
+- Telas construídas diretamente no Figma via `use_figma` MCP com instâncias reais de componentes DS
+- `search_design_system` com `includeLibraryKeys` filtra às 5 libraries autorizadas
+- `importComponentSetByKeyAsync` traz componentes reais (Menu ERP, Button, Tags, etc.)
+- Workflow faseado: tela por tela com screenshot + feedback a cada entrega
 
-### Modo JSON para plugin Figma (econômico):
-- Claude gera `screen-spec.json` em vez de criar direto no Figma
-- Plugin **Screen Builder** monta telas com componentes reais do DS
-- Modo incremental: cada JSON adiciona telas, nunca sobrescreve
-- Designer revisa JSON antes de construir — mais controle
+### Libraries como fonte da verdade:
+- `figma-config.json` agora usa `libraryKey` (formato `lk-...`) em vez de `fileKey`
+- AI Components é o novo master — Menu ERP atualizado + ícones rebrand 24
+- 5 libraries em ordem de prioridade; 3 libraries bloqueadas
+- `search_design_system` sempre filtrado por `searchPriority`
 
-### Inventário de componentes:
-- `component-registry.json` com 21 componentes mapeados
-- Keys e variantes extraídos da página do Figma
-- Sincronização automática: pedir "sincronize o registry" ao Claude
-
-### Templates por produto:
-- `TEMPLATES_PRODUTO.md` com zonas de layout (A-E) por produto
-- ERP: sidebar 304px + breadcrumb + search/filtros + content + paginação
-- Envios/Hub/Conta Digital: sidebar 304px + top bar + header+subtitle + content + sticky
-- Fonte da verdade no Figma, sincronizável via Claude
-
-### Componentes propostos:
-- Se o SDD precisa de componente que não existe, Claude marca `"proposed": true`
-- Plugin renderiza como placeholder visual para o designer avaliar
+### Regras da Figma Plugin API documentadas:
+- `layoutSizing` definido após `appendChild`
+- Valores válidos de `counterAxisAlignItems`: MIN MAX CENTER BASELINE
+- Textos em cards: `textAutoResize='HEIGHT'` + `layoutSizingHorizontal='FILL'`
 
 ## Estrutura
 
 ```
 olist-ds-specialist/
-├── SKILL.md                           # Instruções, fileKeys, inventário, templates
-├── DESIGN.md                          # Especificação Google Labs
+├── SKILL.md                           # Instruções, workflow, regras v3.0
 ├── README.md                          # Este arquivo
 ├── SETUP.md                           # Guia de instalação
-├── component-registry.json            # 21 componentes com keys e variantes
-├── figma-config.example.json          # Template para config local
+├── figma-config.json                  # Libraries autorizadas (libraryKeys)
 └── references/
     ├── VISAO_GERAL.md                 # Mapa de navegação
-    ├── TEMPLATES_PRODUTO.md           # Zonas de layout por produto
-    ├── screen-spec-schema.json        # Schema do JSON para plugin
-    ├── FIGMA_CONFIG.md                # Guia dos fileKeys
+    ├── FIGMA_CONFIG.md                # libraryKeys, workflow de busca e import
+    ├── TEMPLATES_PRODUTO.md           # Zonas de layout por produto (ERP, Envios, Hub, CD)
     ├── CORES.md                       # Sistema de cores
     ├── TIPOGRAFIA.md                  # Tokens de tipografia
     ├── GLOSSARIO_PAPEIS_TEXTO.md      # 10 papéis de texto
@@ -49,18 +40,22 @@ olist-ds-specialist/
     ├── COMPONENTES.md                 # Props e variantes (auto-gerado)
     ├── PADROES.md                     # Padrões de página
     ├── MAPA_FONTES.md                 # Estrutura de pastas (auto-gerado)
-    ├── SDD_PARA_TELA.md              # 10 passos SDD → UI
+    ├── SDD_PARA_TELA.md               # 10 passos SDD → UI
     ├── SDD_AVANCADO.md                # RNFs, DACI, Métricas
     └── CHECKLIST_REVISAO.md           # 9 categorias de revisão
 ```
 
-## Fontes do Figma
+## Libraries do Figma (ordem de prioridade)
 
-| Prioridade | Arquivo | FileKey |
+| # | Library | Conteúdo |
 |---|---|---|
-| 1º | Foundations, Components & Icons Rebrand (TO-BE) | `HeyN4w209HWh8rfpTDiwyf` |
-| 2º | Components Web (AS-IS) | `QJmwu6sR06xmyGAoBaXuEn` |
-| Inventário | AI-Components | `JAa7qFjKNJFOj9RJ7bmGU5` |
+| 1 (master) | **AI Components** | Menu ERP atualizado, Button, ícones rebrand 24 |
+| 2 | **ERP components** | Componentes principais do ERP Tiny |
+| 3 | **ERP recursos** | Recursos e padrões complementares |
+| 4 | **ERP style guide** | Tipografia, tokens, paleta |
+| 5 (fallback) | **[design system] components web** | Componentes web base |
+
+**libraryKeys completas:** ver `figma-config.json`.
 
 ## Instalação
 
@@ -76,75 +71,55 @@ cp -r olist-ds-specialist/ .claude/skills/olist-ds-specialist/
 ```
 
 ### Opção 3: Claude.ai
-Settings → Customize → Skills → Upload pasta. FileKeys já estão embutidos no SKILL.md.
+Settings → Customize → Skills → Upload pasta.
 
 ## Uso
 
-### Modo JSON (econômico — priorizar)
+### Criar tela no Figma (workflow principal)
 ```
-Gere o JSON para o plugin Figma desta tela:
+Use $olist-ds-specialist para criar UI no Figma:
 [SDD aqui]
 ```
-Claude gera `screen-spec.json` → designer revisa → cola no plugin Screen Builder → telas montadas.
+Claude busca componentes nas libraries autorizadas → importa instâncias reais → constrói via `use_figma` → retorna screenshot + link.
 
-### Modo direto (React)
+### Criar tela React
 ```
 Use $olist-ds-specialist para criar a tela deste SDD:
 [SDD aqui]
 ```
 
-### Modo Figma MCP
+### Revisar UI existente
 ```
-Use $olist-ds-specialist para criar UI no Figma:
-[SDD aqui]
+Use $olist-ds-specialist para revisar esta tela:
+[código ou screenshot]
 ```
 
-### Sincronizar inventário
+### Sincronizar inventário de componentes
 ```
 Sincronize o registry de componentes
 ```
 
-### Sincronizar templates
-```
-Sincronize os templates de produto
-```
-
-## Plugins Figma
-
-| Plugin | Propósito |
-|---|---|
-| **Screen Builder** | Recebe JSON → monta telas com componentes reais |
-| **Registry Exporter** | Exporta component keys (backup offline) |
-| **Token Exporter** | Exporta tokens/variáveis |
-
-## Auto-sync
-
-A cada `npm run build`: COMPONENTES.md, MAPA_FONTES.md e VISAO_GERAL.md são regenerados.
-A cada `npm run sync:tokens`: src/generated/ é regenerado a partir de src/tokens/.
-A cada `npm run wiki`: Wiki do projeto é atualizado.
-
 ## Changelog
+
+### v3.0 (2026-06-03)
+- **Canal de entrega:** `use_figma` direto com instâncias DS reais (plugin intermediário descontinuado)
+- **Libraries:** `figma-config.json` migrado de `fileKey` para `libraryKey`; AI Components como master
+- **Busca:** `search_design_system` sempre com `includeLibraryKeys: searchPriority`
+- **Regras Figma Plugin API:** documentadas em SKILL.md (layoutSizing, counterAxisAlignItems, etc.)
+- Removido: `screen-spec-schema.json`, plugin Screen Builder, modo JSON econômico
+- 13 arquivos de referência ativos
 
 ### v2.2 (2026-06-03)
 - Modo JSON para plugin Figma (econômico)
-- component-registry.json (21 componentes mapeados)
-- screen-spec-schema.json (schema do JSON)
+- component-registry.json, screen-spec-schema.json
 - TEMPLATES_PRODUTO.md (zonas de layout por produto)
-- Plugin Screen Builder (incremental)
-- Plugin Registry Exporter
-- Sincronização automática via Claude MCP
-- Componentes propostos (`"proposed": true`)
-- 14 arquivos de referência
 
 ### v2.1 (2026-05-19)
-- FileKeys embutidos no SKILL.md
-- FIGMA_CONFIG.md, SETUP.md, setup.sh
-- generate-wiki.mjs
+- FIGMA_CONFIG.md, SETUP.md
 
 ### v2.0 (2026-05-04)
 - GLOSSARIO_PAPEIS_TEXTO.md, SDD_AVANCADO.md
 - Workflow faseado no Figma
-- Sistema de ícones centralizado
 
 ### v1.0 (2026-01-12)
 - Release inicial

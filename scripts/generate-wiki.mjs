@@ -34,7 +34,7 @@ const WIKI_PATH = join(WIKI_DIR, 'WIKI.md');
 const PKG_PATH = join(ROOT, 'package.json');
 const COMPONENTS_DIR = join(ROOT, 'src', 'components');
 const SKILL_DIR = join(ROOT, '.claude', 'skills', 'olist-ds-specialist-v2');
-const FIGMA_CONFIG_PATH = join(ROOT, '.claude', 'figma-config.json');
+const FIGMA_CONFIG_PATH = join(SKILL_DIR, 'figma-config.json');
 const SCRIPTS_DIR = join(ROOT, 'scripts');
 const ICONS_DIR = join(ROOT, 'src', 'assets', 'icons', 'svgs');
 
@@ -87,7 +87,7 @@ const components = listDirs(COMPONENTS_DIR);
 
 // Skill files
 const skillRootFiles = existsSync(SKILL_DIR)
-  ? listFiles(SKILL_DIR).filter(f => !statSync(join(SKILL_DIR, f)).isDirectory())
+  ? listFiles(SKILL_DIR).filter(f => !statSync(join(SKILL_DIR, f)).isDirectory() && f !== '.DS_Store')
   : [];
 const skillRefDir = join(SKILL_DIR, 'references');
 const skillRefFiles = listFiles(skillRefDir, '.md');
@@ -100,8 +100,9 @@ const skillVersion = (() => {
 
 // Figma config
 const figmaConfig = safeReadJSON(FIGMA_CONFIG_PATH);
-const figmaFileKey = figmaConfig?.designSystem?.masterFile?.fileKey || 'NÃO CONFIGURADO';
-const figmaAllowed = figmaConfig?.designSystem?.allowedFiles || [];
+const figmaLibraries = figmaConfig?.designSystem?.libraries || [];
+const figmaFileKey = figmaLibraries[0]?.fileKey || figmaLibraries[0]?.libraryKey?.substring(0, 12) + '…' || 'NÃO CONFIGURADO';
+const figmaAllowed = figmaConfig?.designSystem?.searchPriority || [];
 
 // Icons
 const iconCount = countFiles(ICONS_DIR, '.svg');
@@ -238,7 +239,25 @@ npm run release
 |---|---|
 ${scriptsList}`);
 
-// Skill
+// Skill — Regras Críticas extraídas do SKILL.md
+function extractRegrasCriticas() {
+  const skillMd = safeRead(join(SKILL_DIR, 'SKILL.md'));
+  if (!skillMd) return '_Não foi possível ler SKILL.md_';
+  // Extrai o bloco entre "## Regras Críticas" e a próxima seção "## "
+  const match = skillMd.match(/## Regras Críticas[\s\S]*?(?=\n## )/);
+  if (!match) return '_Seção Regras Críticas não encontrada no SKILL.md_';
+  // Remove o título (já estará no h3) e retorna o conteúdo
+  return match[0].replace(/^## Regras Críticas[^\n]*\n/, '').trim();
+}
+
+// Skill — Changelog lido do CHANGELOG.md da skill
+function readChangelog() {
+  const changelogPath = join(SKILL_DIR, 'CHANGELOG.md');
+  const content = safeRead(changelogPath);
+  if (!content) return '_Nenhum changelog encontrado. Crie `.claude/skills/olist-ds-specialist-v2/CHANGELOG.md`._';
+  return content.trim();
+}
+
 section('Skill Claude', `### Versão: v${skillVersion}
 
 **Localização:** \`.claude/skills/olist-ds-specialist-v2/\`
@@ -257,12 +276,9 @@ ${skillRefFiles.map(f => `- \`${f}\``).join('\n')}
 
 **Manuais** (não são sobrescritos): ${skillRefFiles.filter(f => !['COMPONENTES.md', 'MAPA_FONTES.md'].includes(f)).join(', ')}
 
-### Regras Críticas
+### Regras Críticas v${skillVersion}
 
-1. Ler VISAO_GERAL.md primeiro
-2. Ler \`.claude/figma-config.json\` ANTES de usar Figma MCP
-3. Usar APENAS arquivos em \`allowedFiles\` (${figmaAllowed.length} configurados)
-4. Workflow faseado no Figma (tela por tela)`);
+${extractRegrasCriticas()}`);
 
 // Ícones
 section('Sistema de Ícones', `### Arquitetura
@@ -298,13 +314,26 @@ npm run validate:icons
 \`\`\``);
 
 // Figma
+const librariesTable = figmaLibraries.length > 0
+  ? `| Prioridade | Library | Descrição |\n|---|---|---|\n` +
+    figmaLibraries.map(lib =>
+      `| ${lib.priority} | **${lib.name}** | ${lib.description?.split('.')[0] || ''} |`
+    ).join('\n')
+  : '_Nenhuma library configurada_';
+
 section('Configuração do Figma', `### Arquivo: \`.claude/figma-config.json\`
 
 **Status:** ${figmaConfig ? '✅ Configurado' : '❌ Não encontrado'}
-**FileKey principal:** \`${figmaFileKey}\`
-**Arquivos permitidos:** ${figmaAllowed.length}
+**Libraries configuradas:** ${figmaLibraries.length}
+**searchPriority entries:** ${figmaAllowed.length}
 
-${figmaAllowed.length > 0 ? figmaAllowed.map((fk, i) => `${i + 1}. \`${fk}\``).join('\n') : '_Nenhum arquivo configurado_'}
+### Libraries por Prioridade
+
+${librariesTable}
+
+### Blocked Libraries
+
+${figmaConfig?.designSystem?.blockedLibraries?.map(b => `- **${b.name}** — ${b.reason}`).join('\n') || '_Nenhuma_'}
 
 ### Como Extrair fileKey
 
@@ -394,28 +423,12 @@ npm install --save-dev PACOTE --legacy-peer-deps
 ### Claude não respeita figma-config
 
 1. \`.claude/figma-config.json\` existe?
-2. \`allowedFiles\` tem fileKeys?
-3. Skill v2.1 instalada?`);
+2. \`searchPriority\` tem os libraryKeys corretos?
+3. Skill v${skillVersion} instalada?
+4. O prompt inclui instrução para ler \`figma-config.json\` antes do Figma MCP?`);
 
-// Changelog
-section('Changelog', `### v2.1 (2026-05-07)
-- figma-config.example.json na skill (compartilhável)
-- FIGMA_CONFIG.md como 12º arquivo de referência
-- Instrução para ler figma-config.json antes do Figma MCP
-- sync-skill.mjs v2.1
-- generate-wiki.mjs criado
-
-### v2.0 (2026-05-04)
-- GLOSSARIO_PAPEIS_TEXTO.md (10 papéis de texto)
-- SDD_AVANCADO.md (RNFs, DACI, Métricas, Rollout)
-- Workflow faseado no Figma
-- Sistema de ícones centralizado
-- sync-skill.mjs para auto-geração
-- validate-icon-migration.mjs
-
-### v1.0
-- Versão inicial da skill
-- 8 arquivos de referência`);
+// Changelog — lido do CHANGELOG.md da skill
+section('Changelog', readChangelog());
 
 // Footer
 wiki += `\n---\n\n*Gerado automaticamente em ${TODAY} por \`generate-wiki.mjs\`. Não edite manualmente.*\n`;

@@ -1,50 +1,94 @@
 {
-    "designSystem": {
-      "masterFile": {
+  "designSystem": {
+    "libraries": [
+      {
+        "priority": 1,
+        "name": "AI Components",
+        "fileKey": "JAa7qFjKNJFOj9RJ7bmGU5",
+        "libraryKey": "lk-e52b27fef454a38384433e4dc6895fd1f4b6dfd7b5a58d8ec414917c4bbdd3f93181fb73596c1c81be7c00eecc389c77259f0578c150c7a298be620b9e80731f",
+        "url": "https://www.figma.com/design/JAa7qFjKNJFOj9RJ7bmGU5/AI-Components",
+        "description": "Library master — Menu ERP atualizado, Button, ícones rebrand 24. Preferir sempre sobre todas as demais."
+      },
+      {
+        "priority": 2,
+        "name": "ERP components",
+        "libraryKey": "lk-831bcbe755f53fd6cf9cfe4b7e877a26bc341fb419d140835c2973128a8a915cf26115cfbc0e6184ba4881d489a7869e6cf28f67de5ef3dbe93cebefc146d744",
+        "description": "Componentes principais do ERP Tiny (button common, menu do erp, tag card, inputs, etc). Usar quando não encontrado na AI Components."
+      },
+      {
+        "priority": 3,
+        "name": "ERP recursos",
+        "libraryKey": "lk-f95b9869c6c38c4f5c74b94611f708873f641ecc4a412aa097a0c84cab019f98c24ee283133e3cc3313882c089008f068459de3edf728c4f0b8489d1f5b580b3",
+        "description": "Recursos complementares do ERP — ilustrações, padrões específicos de produto."
+      },
+      {
+        "priority": 4,
+        "name": "ERP style guide",
+        "libraryKey": "lk-798aabd36baa90e38817136d0c8dae3f4fd84aab661e07c4dfa468fc3e7d83701769b1beb00a0c40824c2e325b0c5ebda4af6a40ae3b89a4e95c4f7289c4035d",
+        "description": "Style guide do ERP — tipografia, espaçamentos, tokens visuais, paleta."
+      },
+      {
+        "priority": 5,
+        "name": "[design system] components web",
+        "libraryKey": "lk-89f0ba0d76188fb1d2456e4b1d9458984acec54b86ef9818feaf6bfecc313d36cc4d2b512913be7d09473040ed2df34dc991ebe2acca10abfd143ff758b37437",
+        "description": "Componentes web base do DS. Fallback final — usar apenas se o componente não existir nas libraries anteriores."
+      }
+    ],
+    "searchPriority": [
+      "lk-e52b27fef454a38384433e4dc6895fd1f4b6dfd7b5a58d8ec414917c4bbdd3f93181fb73596c1c81be7c00eecc389c77259f0578c150c7a298be620b9e80731f",
+      "lk-831bcbe755f53fd6cf9cfe4b7e877a26bc341fb419d140835c2973128a8a915cf26115cfbc0e6184ba4881d489a7869e6cf28f67de5ef3dbe93cebefc146d744",
+      "lk-f95b9869c6c38c4f5c74b94611f708873f641ecc4a412aa097a0c84cab019f98c24ee283133e3cc3313882c089008f068459de3edf728c4f0b8489d1f5b580b3",
+      "lk-798aabd36baa90e38817136d0c8dae3f4fd84aab661e07c4dfa468fc3e7d83701769b1beb00a0c40824c2e325b0c5ebda4af6a40ae3b89a4e95c4f7289c4035d",
+      "lk-89f0ba0d76188fb1d2456e4b1d9458984acec54b86ef9818feaf6bfecc313d36cc4d2b512913be7d09473040ed2df34dc991ebe2acca10abfd143ff758b37437"
+    ],
+    "blockedLibraries": [
+      {
+        "name": "design system (base)",
+        "libraryKey": "lk-f068a69b8c4ef3c01d6a883806b21c6ebe73213d3565451a399cfba74694fbc0053c2b4226fb206812f098c679b6a971148aa027e97bc14733e29552c4002cb5",
+        "reason": "Base genérica supersedida pela AI Components e ERP components. Ignorar mesmo se aparecer em buscas sem filtro."
+      },
+      {
         "name": "Design System - Fondations, Components & Icons Rebrand (TO-BE)",
         "fileKey": "HeyN4w209HWh8rfpTDiwyf",
-        "description": "Fundações do rebrand, ícones enovos componentes do design system 2.0",
-        "url": "https://www.figma.com/design/HeyN4w209HWh8rfpTDiwyf/design-system?node-id=16-56&p=f&t=TsSHNhJ5WiND29iC-0"
+        "reason": "Arquivo TO-BE descontinuado como referência de busca. Conteúdo migrado para AI Components."
       },
-      "additionalFiles": [
-        {
-          "name": "Design System - Components Web (AS-IS)",
-          "fileKey": "QJmwu6sR06xmyGAoBaXuEn",
-          "description": "Componentes web AS-IS",
-          "url": "https://www.figma.com/design/QJmwu6sR06xmyGAoBaXuEn/-design-system--components-web?m=auto"
-        }
-      ],
-      "allowedFiles": [
-        "HeyN4w209HWh8rfpTDiwyf",
-        "QJmwu6sR06xmyGAoBaXuEn"
-      ],
-      "blockedFiles":[],
-      "searchPriority": [
-        "HeyN4w209HWh8rfpTDiwyf",
-        "QJmwu6sR06xmyGAoBaXuEn"
-      ],
-      "notes": [
-        "=== COMO ADICIONAR NOVOS ARQUIVOS ===",
-        "",
-        "1. Abra o arquivo do Figma",
-        "2. Copie a URL da barra de endereço",
-        "3. Extraia o fileKey:",
-        "4. Adicione em 'additionalFiles' com nome e descrição",
-        "5. Adicione o fileKey em 'allowedFiles'",
-        "",
-        "=== PRIORIDADE DE BUSCA ===",
-        "",
-        "searchPriority define a ordem em que Claude busca componentes.",
-        "Primeiro arquivo = maior prioridade.",
-        "",
-        "Exemplo:",
-        "- Se 'Button' existir em Components e em Patterns,",
-        "  o de Components será usado (vem primeiro na lista).",
-        "",
-        "=== BLOQUEIO DE ARQUIVOS ===",
-        "",
-        "blockedFiles: arquivos antigos/deprecados que NÃO devem ser usados.",
-        "Mesmo que existam na org, Claude vai ignorá-los."
+      {
+        "name": "Design System - Components Web (AS-IS)",
+        "fileKey": "QJmwu6sR06xmyGAoBaXuEn",
+        "reason": "Arquivo AS-IS descontinuado como referência direta. Substituído pela library [design system] components web via libraryKey."
+      }
+    ],
+    "buildWorkflow": {
+      "method": "use_figma",
+      "pluginJsonObsolete": true,
+      "description": "Caminho C — Híbrido: planejamento interno por zonas (TEMPLATES_PRODUTO.md), entrega via use_figma direto no arquivo Figma com instâncias reais do DS.",
+      "steps": [
+        "1. Ler SDD → identificar telas → validar com PM",
+        "2. search_design_system(query, includeLibraryKeys: searchPriority) → obter componentKey",
+        "3. importComponentSetByKeyAsync(componentKey) → criar instância real",
+        "4. use_figma → montar frame com fills/strokes/tokens reais do DS",
+        "5. get_design_context → screenshot → validação visual",
+        "6. Iterar com feedback → próxima tela"
       ]
-    }
+    },
+    "notes": [
+      "=== SOBRE OS IDENTIFICADORES ===",
+      "libraryKey (lk-...): identificador de library publicada. Usado em search_design_system e importComponentByKeyAsync.",
+      "fileKey: identificador do arquivo Figma na URL. Usado apenas para referência/inspeção via get_metadata.",
+      "componentKey: identificador de componente individual. Retornado pelo search_design_system. Usado em importComponentByKeyAsync.",
+      "",
+      "=== COMO BUSCAR COMPONENTES ===",
+      "Sempre passar includeLibraryKeys: searchPriority para filtrar às 5 libraries autorizadas.",
+      "Exemplo: search_design_system('Button', includeLibraryKeys: [searchPriority])",
+      "Usar o primeiro resultado encontrado — a ordem da lista garante a prioridade correta.",
+      "",
+      "=== COMO IMPORTAR COMPONENTES ===",
+      "Para component_set: importComponentSetByKeyAsync(componentKey) → buscar variante → createInstance()",
+      "Para component: importComponentByKeyAsync(componentKey) → createInstance()",
+      "Sempre definir layoutSizing APÓS appendChild ao frame pai.",
+      "",
+      "=== BIBLIOTECAS BLOQUEADAS ===",
+      "Ignorar resultados de blockedLibraries mesmo se aparecerem em buscas sem filtro de libraryKey."
+    ]
+  }
 }

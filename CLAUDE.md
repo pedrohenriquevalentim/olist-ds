@@ -55,7 +55,7 @@ src/components/NomeComponente/
 
 ## Fluxo de Publicação
 Após criar/alterar componentes:
-1.ld:tokens
+1. npm run build:tokens
 2. npm run test:run
 3. npm run build-storybook
 4. git add . && git commit -m "feat: descricao"
@@ -64,24 +64,33 @@ Após criar/alterar componentes:
 
 ## Fluxo Reverso: PRD → Figma
 
+Use a skill `$olist-ds-specialist` para este fluxo. As regras abaixo são um resumo — a skill contém o workflow completo.
+
 ### Ao receber um PRD ou solicitação de tela:
 
 1. Leia o PRD/briefing completo
-2. Identifique os componentes do design system necessários (consulte src/components/)
-3. Identifique os tokens necessários (consulte src/generated/variables.css)
-4. Crie a tela no Figma usando use_figma com:
-   - Variables do arquivo Figma para cores, espaçamento, tipografia
-   - Componentes existentes da biblioteca quando disponíveis
-   - Auto Layout para garantir responsividade
-   - Nomenclatura semântica nos layers (nunca "Frame 1" ou "Group 5")
+2. Leia `.claude/skills/olist-ds-specialist-v2/references/VISAO_GERAL.md` (sempre primeiro)
+3. Leia `.claude/skills/olist-ds-specialist-v2/figma-config.json` ANTES de qualquer operação com Figma MCP
+4. Identifique os componentes do design system necessários consultando as libraries na ordem de prioridade:
+   - **AI Components** (master — preferência absoluta)
+   - **ERP components**
+   - **ERP recursos**
+   - **ERP style guide**
+   - **[design system] components web**
+5. Use `search_design_system` sempre com `includeLibraryKeys: searchPriority` (do figma-config.json)
+6. Liste TODAS as telas identificadas e aguarde validação antes de criar
+7. Crie tela por tela com `use_figma`, aguardando feedback a cada entrega
 
 ### Regras para geração de telas:
-- SEMPRE use as Variables do Figma (não hardcode cores)
+- SEMPRE leia `figma-config.json` para obter `searchPriority` e `blockedLibraries` antes de buscar componentes
+- NUNCA use libraries de `blockedLibraries` mesmo que apareçam em buscas
+- SEMPRE use instâncias reais de componentes do DS — não construa do zero o que já existe
 - SEMPRE use Auto Layout (nunca posicionamento absoluto)
+- Defina `layoutSizing` APÓS `appendChild` (regra crítica da Figma Plugin API)
+- `counterAxisAlignItems` aceita apenas: `MIN` `MAX` `CENTER` `BASELINE`
 - Nomeie cada layer semanticamente: "HeaderContainer", "NavigationSidebar", "ContentArea"
-- Agrupe elementos relacionados em frames com nomes descritivos
 - Siga a hierarquia de espaçamento: 4, 8, 12, 16, 24, 32, 40, 48, 64
-- Use os border-radius definidos nos tokens
+- Use os border-radius definidos nos tokens (8px padrão, 4px pequeno, 9999px pill)
 - Fonte primária: Plus Jakarta Sans
 
 ### Estrutura padrão de uma tela:
