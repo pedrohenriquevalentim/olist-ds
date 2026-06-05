@@ -3,11 +3,15 @@
 /* ── Wrapper ──────────────────────────────────────────────────────────────── */
 
 .wrapper {
-  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--shape-spacing-x1-8px);
   width: 19rem; /* 304px */
+}
+
+/* Contexto de posicionamento do listbox — não inclui label nem support text */
+.triggerContainer {
+  position: relative;
 }
 
 /* ── Label Row ───────────────────────────────────────────────────────────── */

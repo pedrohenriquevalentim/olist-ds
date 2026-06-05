@@ -1,8 +1,8 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.15`  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.16`  
 **Skill:** v3.0  
-**Última atualização:** 2026-06-04  
+**Última atualização:** 2026-06-05  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -32,26 +32,22 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 
 | Métrica | Valor |
 |---|---|
-| Componentes | 9 |
+| Componentes | 5 |
 | Ícones SVG | 550 |
 | Arquivos da Skill | 19 |
 | Arquivos Figma permitidos | 5 |
-| Versão npm | 1.0.15 |
+| Versão npm | 1.0.16 |
 | Versão skill | 3.0 |
 
 ## Componentes
 
-### Lista Completa (9)
+### Lista Completa (5)
 
 - `Button` — `src/components/Button/`
 - `Checkbox` — `src/components/Checkbox/`
 - `Icon` — `src/components/Icon/`
+- `InputSelect` — `src/components/InputSelect/`
 - `Logo` — `src/components/Logo/`
-- `MenuErp` — `src/components/MenuErp/`
-- `MenuSidebar` — `src/components/MenuSidebar/`
-- `RadioButton` — `src/components/RadioButton/`
-- `SegmentedButtons` — `src/components/SegmentedButtons/`
-- `Tag` — `src/components/Tag/`
 
 ### Status de Migração de Ícones
 
@@ -60,12 +56,8 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Button | ➖ Sem ícones |
 | Checkbox | ➖ Sem ícones |
 | Icon | ✅ Componente central |
+| InputSelect | ➖ Sem ícones |
 | Logo | ➖ Sem ícones |
-| MenuErp | ➖ Sem ícones |
-| MenuSidebar | ➖ Sem ícones |
-| RadioButton | ➖ Sem ícones |
-| SegmentedButtons | ➖ Sem ícones |
-| Tag | ➖ Sem ícones |
 
 ## Pipeline de Build e Release
 
@@ -386,4 +378,4 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ---
 
-*Gerado automaticamente em 2026-06-04 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-06-05 por `generate-wiki.mjs`. Não edite manualmente.*

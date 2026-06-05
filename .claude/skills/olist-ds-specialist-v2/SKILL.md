@@ -110,9 +110,12 @@ Qual tipo de tarefa?
     │   → Ler GLOSSARIO_PAPEIS_TEXTO.md (nomear textos)
     │   → Ler COMPONENTES.md + PADROES.md + MAPA_FONTES.md
     │
-    ├── Criar componente
+    ├── Implementar componente React a partir de link Figma
     │   → Ler CORES.md + TIPOGRAFIA.md + GLOSSARIO_PAPEIS_TEXTO.md + ESPACAMENTO.md
-    │   → Ler COMPONENTES.md (verificar se já existe)
+    │   → Ler COMPONENTES.md (verificar se já existe antes de criar)
+    │   → get_design_context(nodeId, fileKey) → get_screenshot → baixar assets
+    │   → Seguir as "Regras de Implementação React" desta skill (seção abaixo)
+    │   → Gerar os 5 arquivos obrigatórios
     │
     ├── Revisar tela existente
     │   → Ler CHECKLIST_REVISAO.md + GLOSSARIO_PAPEIS_TEXTO.md
@@ -264,6 +267,87 @@ Você:
    - Instâncias reais do DS (sem primitivos manuais para componentes existentes)
    - layoutSizing definido após appendChild
 ```
+
+### Caso 7: Implementar componente React a partir de link Figma
+
+```
+Usuário: Use $olist-ds-specialist para implementar este componente: [link figma]
+
+Você:
+1. Ler VISAO_GERAL.md
+2. Ler COMPONENTES.md → verificar se componente já existe no projeto
+3. Extrair fileKey e nodeId da URL do Figma
+   - Formato: figma.com/design/:fileKey/...?node-id=:nodeId (converter "-" → ":" no nodeId)
+4. get_design_context(nodeId, fileKey) → estrutura e tokens do design
+5. get_screenshot(nodeId, fileKey) → referência visual
+6. Baixar assets referenciados (SVGs, imagens) para src/assets/
+7. Ler CORES.md + TIPOGRAFIA.md + ESPACAMENTO.md → mapear tokens do Figma para var(--...)
+8. Implementar seguindo obrigatoriamente as Regras de Implementação React abaixo
+9. Validar resultado contra screenshot antes de entregar
+10. Gerar exatamente 5 arquivos
+```
+
+---
+
+## Regras de Implementação React (Figma → Código)
+
+Aplicar sempre que a tarefa for gerar código React a partir de design.
+
+### Tokens e Estilos
+- Usar EXCLUSIVAMENTE `src/generated/variables.css` via `var(--nome-do-token)`
+- NUNCA hardcodar hex, px ou fontes — sempre `rem` e tokens CSS
+- Elementos de texto internos (`<label>`, helper text, placeholder, mensagem de erro) devem ter classes CSS próprias no `.module.css` com `font-weight`, `font-size` e `line-height` explícitos via tokens — nunca confiar nos defaults do navegador
+
+### Convenções TypeScript
+- Arrow function com export nomeado
+- Interface exportada para Props (nunca `type`)
+- Estender atributos nativos HTML (ex: `ButtonHTMLAttributes<HTMLButtonElement>`)
+
+### Ícones
+- Props de ícone usam EXCLUSIVAMENTE `React.ReactNode` — nunca instalar pacotes externos
+- NÃO passar cor via prop; gerenciar pelo CSS pai via `currentColor` (funciona em hover, active, disabled automaticamente)
+- Renderizar condicionalmente no JSX
+
+### Variantes e Estados
+- Replicar TODAS as variantes visíveis no Figma
+- CSS Modules com tokens para cada variante e estado
+
+### Componentes Complexos (Select, Dropdown, Autocomplete)
+- Separar Trigger e Popover/List internamente (funções auxiliares no mesmo arquivo)
+- Se houver variante `multiselect`: usar Generics ou Union Types para `value`/`onChange` (Array vs Elemento Único)
+- Gerenciar estado interno de visibilidade da lista + implementar click-outside
+
+### Acessibilidade Avançada (W3C obrigatório)
+- Todo elemento interativo: `role` + `aria-label`
+- Selects/Dropdowns: Trigger `role="combobox"`, lista `role="listbox"`, itens `role="option"`
+- Navegação por teclado: `ArrowUp`/`ArrowDown` (navegar), `Enter` (selecionar), `Escape` (fechar), `Space`
+- Botões simples: `Enter` e `Space`
+- Contraste mínimo 4.5:1
+
+### Testes (Vitest + RTL) — cobertura obrigatória
+- Renderização básica
+- Variantes principais
+- Atributos ARIA
+- Injeção correta de `ReactNode` (ícones)
+
+### Storybook (v10)
+- Props de ícone: `argTypes` com `mapping` e `control: { type: 'select' }`
+- Selects: mock robusto de dados na Story
+- Todas as descrições e stories em português
+
+### 5 Arquivos Obrigatórios (sempre, sem exceção)
+```
+src/components/NomeComponente/
+  ├── NomeComponente.tsx
+  ├── NomeComponente.module.css
+  ├── NomeComponente.test.tsx
+  ├── NomeComponente.stories.tsx
+  └── index.ts   ← re-export do componente E da interface
+```
+
+Consultar componentes em `src/components/` como referência antes de implementar.
+
+---
 
 ### Caso 5: Componente não existe no inventário
 ```

@@ -298,12 +298,20 @@ claude
 
 ### Criar componente a partir do Figma
 
+**Via skill (recomendado):**
+```
+Use $olist-ds-specialist para implementar este componente:
+https://www.figma.com/design/XXXX/YYYY?node-id=123:456
+```
+
+A skill lê o design, mapeia os tokens, e gera automaticamente os 5 arquivos obrigatórios seguindo todas as regras do DS (tokens, acessibilidade W3C, testes RTL, Storybook v10).
+
+**Via prompt direto (sem skill):**
 ```
 Leia o componente Figma neste link:
 https://www.figma.com/design/XXXX/YYYY?node-id=123:456
 
-Gere o componente React completo seguindo as instruções do CLAUDE.md.
-Inclua o .tsx, .module.css, .test.tsx, .stories.tsx e index.ts.
+Gere o componente React seguindo as instruções do CLAUDE.md.
 Depois rode npm run test:run para validar.
 ```
 
@@ -311,12 +319,11 @@ Depois rode npm run test:run para validar.
 
 ```
 Preciso que você:
-1. Leia o componente Figma neste link: [LINK]
-2. Gere todos os arquivos (tsx, css, test, stories, index)
-3. Rode npm run build:tokens
-4. Rode npm run test:run — se falhar, corrija e rode novamente
-5. Rode npm run build-storybook
-6. Faça git add, commit e push
+1. Use $olist-ds-specialist para implementar o componente: [LINK]
+2. Rode npm run build:tokens
+3. Rode npm run test:run — se falhar, corrija e rode novamente
+4. Rode npm run build-storybook
+5. Faça git add, commit e push
 ```
 
 ---
@@ -335,7 +342,13 @@ Inspirada na abordagem do [Pacy Design](https://github.com/lebrunhari/pacy_desig
 
 ### Como usar
 
-**No Claude Code:**
+**No Claude Code — implementar componente a partir do Figma:**
+```
+Use $olist-ds-specialist para implementar este componente:
+https://www.figma.com/design/XXXX/YYYY?node-id=123:456
+```
+
+**No Claude Code — criar tela a partir de SDD:**
 ```
 Use $olist-ds-specialist para criar a tela deste SDD:
 [COLAR O SDD]
@@ -344,7 +357,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 **No Claude.ai (sem terminal):**
 1. Settings → Connectors → Figma → Connect
 2. Customize → Skills → Upload → selecionar pasta da skill
-3. Iniciar conversa e colar o SDD
+3. Iniciar conversa e colar o SDD ou link do Figma
 
 ### Auto-sync
 

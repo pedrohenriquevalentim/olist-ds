@@ -155,11 +155,14 @@ export const InputSelect = (props: InputSelectProps) => {
   const searchRef = useRef<HTMLInputElement>(null);
 
   // ── Valores selecionados ─────────────────────────────────────────────────
-  const selectedValues: string[] = isMulti
-    ? ((props as InputSelectMultiProps).value ?? [])
-    : (props as InputSelectSingleProps).value
-      ? [(props as InputSelectSingleProps).value!]
-      : [];
+  const selectedValues: string[] = (() => {
+    if (isMulti) {
+      const v = (props as InputSelectMultiProps).value;
+      return Array.isArray(v) ? v : [];
+    }
+    const v = (props as InputSelectSingleProps).value;
+    return v ? [v] : [];
+  })();
 
   // ── Opções filtradas ─────────────────────────────────────────────────────
   const filteredOptions =
@@ -384,7 +387,8 @@ export const InputSelect = (props: InputSelectProps) => {
         </div>
       )}
 
-      {/* Trigger */}
+      {/* Trigger + Listbox — contexto de posicionamento isolado */}
+      <div className={styles.triggerContainer}>
       <button
         ref={triggerRef}
         id={inputId}
@@ -523,6 +527,8 @@ export const InputSelect = (props: InputSelectProps) => {
           </ul>
         </div>
       )}
+
+      </div>
 
       {/* Texto de suporte */}
       {hasSupport && supportText && (

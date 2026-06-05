@@ -276,6 +276,25 @@ ${skillRefFiles.map(f => `- \`${f}\``).join('\n')}
 
 **Manuais** (não são sobrescritos): ${skillRefFiles.filter(f => !['COMPONENTES.md', 'MAPA_FONTES.md'].includes(f)).join(', ')}
 
+### Como Usar
+
+**No Claude Code — implementar componente a partir do Figma:**
+\`\`\`
+Use $olist-ds-specialist para implementar este componente:
+https://www.figma.com/design/XXXX/YYYY?node-id=123:456
+\`\`\`
+
+**No Claude Code — criar tela a partir de SDD:**
+\`\`\`
+Use $olist-ds-specialist para criar a tela deste SDD:
+[COLAR O SDD]
+\`\`\`
+
+**No Claude.ai (sem terminal):**
+1. Settings → Connectors → Figma → Connect
+2. Customize → Skills → Upload → selecionar pasta da skill
+3. Iniciar conversa e colar o SDD ou link do Figma
+
 ### Regras Críticas v${skillVersion}
 
 ${extractRegrasCriticas()}`);

@@ -29,14 +29,70 @@ src/components/NomeComponente/
 
 ## Convenções
 - Componentes como arrow functions com export nomeado
-- Props tipadas com interface (não type)
+- Props tipadas com interface (não type) — exporte sempre a interface junto ao componente
 - Nomes em PascalCase
-- Descriçõese stories em português
+- Descrições e stories em português
+- Estenda atributos nativos HTML nas Props (ex: `ButtonHTMLAttributes<HTMLButtonElement>`)
 
-## Acessibilidade
-- Todo elemento interativo deve ter role e aria-label
-- Botões devem funcionar com Enter e Space
+## Geração de Componentes a partir do Figma
+
+Quando receber um link do Figma para implementar como componente React, siga este fluxo obrigatório:
+
+### 1. Leitura do Design (Figma MCP)
+1. Chame `get_design_context` com o `nodeId` e `fileKey` extraídos da URL do Figma
+2. Se a resposta for grande ou truncada, chame `get_metadata` primeiro para mapear a árvore de nós
+3. Chame `get_screenshot` para ter referência visual
+4. Baixe assets referenciados (imagens, SVGs) antes de implementar
+5. Valide o resultado renderizado contra o screenshot antes de concluir
+
+### 2. Tokens e Estilos
+- Consuma EXCLUSIVAMENTE os tokens de `src/generated/variables.css` via `var(--nome-do-token)`
+- NUNCA use valores hardcoded ou unidades em `px` — use `rem`
+- Elementos de texto internos (`<label>`, helper text, placeholder, mensagem de erro) DEVEM ter classes CSS próprias no `.module.css` com `font-weight`, `font-size` e `line-height` explícitos via tokens — nunca confie nos defaults do navegador
+
+### 3. Ícones
+- Props de ícone devem usar EXCLUSIVAMENTE `React.ReactNode` — nunca instale pacotes externos
+- NÃO passe cores via prop para ícones; gerencie cor pelo CSS pai usando `currentColor` nos SVGs (funciona automaticamente em hover, active, disabled)
+- Renderize ícones condicionalmente no JSX
+
+### 4. Variantes e Estados
+- Replique TODAS as variantes visíveis no Figma (tamanho, cor, estado)
+- Use CSS Modules com tokens para cada variante/estado
+
+### 5. Componentes Complexos (Select, Dropdown, Autocomplete)
+- Separe Trigger e Popover/List em responsabilidades distintas internamente (funções auxiliares ou sub-componentes no mesmo arquivo)
+- Se houver variante `multiselect`, use Generics ou Union Types rigorosos para `value` e `onChange` (Array vs Elemento Único)
+- Gerencie estado interno de visibilidade da lista
+- Implemente click-outside para fechar a lista
+
+### 6. Acessibilidade Avançada (W3C)
+- Todo elemento interativo: `role` + `aria-label`
+- Selects/Dropdowns: Trigger com `role="combobox"` ou `role="button"`, lista com `role="listbox"`, itens com `role="option"`
+- Navegação por teclado OBRIGATÓRIA: `ArrowUp`, `ArrowDown` (navegar na lista), `Enter` (selecionar), `Escape` (fechar), `Space`
+- Botões simples: `Enter` e `Space`
 - Contraste mínimo 4.5:1
+
+### 7. Testes (Vitest + RTL)
+Cubra obrigatoriamente:
+- Renderização básica
+- Variantes principais
+- Atributos ARIA
+- Injeção correta de `ReactNode` (ícones)
+
+### 8. Storybook (v10)
+- Props de ícone: `argTypes` com `mapping` e `control: { type: 'select' }`
+- Componentes com opções (Selects): forneça mock robusto de dados na Story
+- Todas as descrições e stories em português
+
+### 9. Saída Esperada
+Gere EXATAMENTE cinco arquivos em blocos de código separados:
+- `NomeComponente.tsx`
+- `NomeComponente.module.css`
+- `NomeComponente.test.tsx`
+- `NomeComponente.stories.tsx`
+- `index.ts` (re-export do componente e da interface)
+
+Consulte os componentes em `src/components/` como referência de padrão antes de implementar.
 
 ## Assets do Figma MCP
 - Se o MCP retornar URL localhost para imagem/SVG, use diretamente
