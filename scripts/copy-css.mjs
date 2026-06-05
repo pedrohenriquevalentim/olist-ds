@@ -1,4 +1,4 @@
-import { cpSync, readdirSync, existsSync, statSync } from 'fs';
+import { cpSync, readdirSync, mkdirSync, statSync } from 'fs';
 import { join } from 'path';
 
 const componentsDir = './src/components';
@@ -21,5 +21,10 @@ for (const dir of dirs) {
     }
   }
 }
+
+// Copia variables.css para dist/ (consumidores importam de dist/variables.css)
+mkdirSync('./dist', { recursive: true });
+cpSync('./src/generated/variables.css', './dist/variables.css');
+console.log('  ✅ variables.css');
 
 console.log('\n✅ CSS copiados para dist/');

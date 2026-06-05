@@ -1,6 +1,6 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.16`  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.17`  
 **Skill:** v3.0  
 **Última atualização:** 2026-06-05  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
@@ -36,7 +36,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Ícones SVG | 550 |
 | Arquivos da Skill | 19 |
 | Arquivos Figma permitidos | 5 |
-| Versão npm | 1.0.16 |
+| Versão npm | 1.0.17 |
 | Versão skill | 3.0 |
 
 ## Componentes
@@ -147,6 +147,25 @@ npm run release
 **Auto-gerados** (por `npm run build`): COMPONENTES.md, MAPA_FONTES.md, VISAO_GERAL.md (parcial)
 
 **Manuais** (não são sobrescritos): CHECKLIST_REVISAO.md, CORES.md, ESPACAMENTO.md, FIGMA_CONFIG.md, GLOSSARIO_PAPEIS_TEXTO.md, PADROES.md, SDD_AVANCADO.md, SDD_PARA_TELA.md, TEMPLATES_PRODUTO.md, TIPOGRAFIA.md, VISAO_GERAL.md
+
+### Como Usar
+
+**No Claude Code — implementar componente a partir do Figma:**
+```
+Use $olist-ds-specialist para implementar este componente:
+https://www.figma.com/design/XXXX/YYYY?node-id=123:456
+```
+
+**No Claude Code — criar tela a partir de SDD:**
+```
+Use $olist-ds-specialist para criar a tela deste SDD:
+[COLAR O SDD]
+```
+
+**No Claude.ai (sem terminal):**
+1. Settings → Connectors → Figma → Connect
+2. Customize → Skills → Upload → selecionar pasta da skill
+3. Iniciar conversa e colar o SDD ou link do Figma
 
 ### Regras Críticas v3.0
 
