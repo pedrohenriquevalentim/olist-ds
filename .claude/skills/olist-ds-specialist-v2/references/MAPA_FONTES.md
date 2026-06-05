@@ -19,6 +19,10 @@ src/
 │   │       ├── index.tsx
 │   │       ├── styles.module.css
 │   │       └── Checkbox.stories.tsx
+│   ├── Chip/
+│   │       ├── index.tsx
+│   │       ├── styles.module.css
+│   │       └── Chip.stories.tsx
 │   ├── Icon/
 │   │       ├── index.tsx
 │   │       ├── styles.module.css
@@ -27,10 +31,14 @@ src/
 │   │       ├── index.tsx
 │   │       ├── styles.module.css
 │   │       └── InputSelect.stories.tsx
-│   └── Logo/
+│   ├── Logo/
+│   │       ├── index.tsx
+│   │       ├── styles.module.css
+│   │       └── Logo.stories.tsx
+│   └── ProdutosOlistIcons/
 │           ├── index.tsx
 │           ├── styles.module.css
-│           └── Logo.stories.tsx
+│           └── ProdutosOlistIcons.stories.tsx
 ├── assets/
 │   └── icons/
 └── index.ts
@@ -42,6 +50,8 @@ src/
 
 - **Button:** `src/components/Button/index.tsx`
 - **Checkbox:** `src/components/Checkbox/index.tsx`
+- **Chip:** `src/components/Chip/index.tsx`
 - **Icon:** `src/components/Icon/index.tsx`
 - **InputSelect:** `src/components/InputSelect/index.tsx`
 - **Logo:** `src/components/Logo/index.tsx`
+- **ProdutosOlistIcons:** `src/components/ProdutosOlistIcons/index.tsx`

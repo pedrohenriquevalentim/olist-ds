@@ -98,6 +98,14 @@ Consulte os componentes em `src/components/` como referência de padrão antes d
 - Se o MCP retornar URL localhost para imagem/SVG, use diretamente
 - NÃO instale pacotes de ícones, use os assets do Figma
 - NÃO crie placeholders se uma URL de asset for fornecida
+- Ao importar arquivos `.svg` como módulos TypeScript, a declaração de tipo já existe em `src/css-modules.d.ts`:
+  ```ts
+  declare module '*.svg' {
+    const src: string;
+    export default src;
+  }
+  ```
+  Se não estiver lá, adicione antes de usar `import foo from '*.svg'` — caso contrário o `npm run build` falhará com TS2307.
 
 ## Comandos Disponíveis
 - npm run build:tokens     → gera variáveis CSS a partir dos tokens JSON

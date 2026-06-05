@@ -1,0 +1,48 @@
+@import '../../generated/variables.css';
+
+/* ============================
+   Pill container
+   ============================ */
+
+.pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 44px;
+  padding: var(--shape-spacing-x125-10px, 10px) var(--shape-spacing-x075-6px, 6px);
+  border-radius: var(--shape-border-radius-pill-9999px);
+  flex-shrink: 0;
+}
+
+/* ============================
+   Active + dark: gradiente azul → teal
+   ============================ */
+
+.pillActiveGradient {
+  background: linear-gradient(
+    to bottom,
+    var(--color-blue-blue-500),
+    var(--color-cyan-cyan-200) 115.91%
+  );
+}
+
+/* ============================
+   Icon container (relative, para posicionamento absoluto das partes)
+   ============================ */
+
+.iconContainer {
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* ============================
+   Cada parte do ícone (img)
+   ============================ */
+
+.iconPart {
+  position: absolute;
+  display: block;
+  max-width: none;
+}

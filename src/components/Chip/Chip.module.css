@@ -1,0 +1,145 @@
+@import '../../generated/variables.css';
+
+/* ============================
+   Base
+   ============================ */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  height: var(--chip-size-height);
+  padding: var(--chip-spacing-padding);
+  border-radius: var(--chip-border-radius-pill);
+  border: var(--chip-border-width-default) solid var(--chip-border-color-enabled);
+  background-color: var(--chip-color-enabled);
+  background-image: none;
+  font-family: var(--font-family-jakarta), sans-serif;
+  font-size: var(--chip-font-size);
+  /* Fallback 500 por bug de referência circular em --font-weight-medium no gerador de tokens */
+  font-weight: var(--chip-font-weight, 500);
+  line-height: var(--chip-font-line-height);
+  color: var(--chip-font-color-enabled);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    background-image 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.chip:focus-visible {
+  outline: var(--focus-border-width-default) solid var(--focus-border-color-default);
+  outline-offset: var(--effects-distance-2px);
+}
+
+/* ============================
+   Estado: hover (não selecionado)
+   ============================ */
+
+.chip:hover:not(:disabled):not([data-selected='true']) {
+  background-image: linear-gradient(
+    var(--chip-color-hover),
+    var(--chip-color-hover)
+  );
+  border-color: var(--chip-border-color-hover);
+  color: var(--chip-font-color-hover);
+  cursor: pointer;
+}
+
+/* ============================
+   Estado: pressed (não selecionado)
+   ============================ */
+
+.chip:active:not(:disabled):not([data-selected='true']) {
+  background-image: linear-gradient(
+    var(--chip-color-pressed),
+    var(--chip-color-pressed)
+  );
+  border-color: var(--chip-border-color-pressed);
+  color: var(--chip-font-color-pressed);
+}
+
+/* ============================
+   Estado: selected
+   ============================ */
+
+.chip[data-selected='true'] {
+  gap: var(--chip-spacing-gap);
+  padding: var(--chip-spacing-padding) var(--chip-spacing-padding) var(--chip-spacing-padding)
+    var(--chip-spacing-icon-padding);
+  background-color: var(--chip-color-selected);
+  background-image: none;
+  border-color: var(--chip-border-color-selected);
+  color: var(--chip-font-color-selected);
+}
+
+/* ============================
+   Estado: selected hover
+   ============================ */
+
+.chip[data-selected='true']:hover:not(:disabled) {
+  background-image: linear-gradient(
+    var(--chip-color-selected-hover),
+    var(--chip-color-selected-hover)
+  );
+  border-color: var(--chip-border-color-selected-hover);
+  color: var(--chip-font-color-selected-hover);
+  cursor: pointer;
+}
+
+/* ============================
+   Estado: selected pressed
+   ============================ */
+
+.chip[data-selected='true']:active:not(:disabled) {
+  background-image: linear-gradient(
+    var(--chip-color-selected-pressed),
+    var(--chip-color-selected-pressed)
+  );
+  border-color: var(--chip-border-color-selected-pressed);
+  color: var(--chip-font-color-selected-pressed);
+}
+
+/* ============================
+   Estado: disabled
+   ============================ */
+
+.chip:disabled {
+  background-color: var(--chip-color-disabled);
+  background-image: none;
+  border-color: var(--chip-border-color-disabled);
+  color: var(--chip-font-color-disabled);
+  cursor: not-allowed;
+}
+
+/* ============================
+   Ícone de check
+   ============================ */
+
+.checkIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--shape-size-x2-16px);
+  height: var(--shape-size-x2-16px);
+  flex-shrink: 0;
+  color: var(--chip-shape-color-selected);
+}
+
+.chip[data-selected='true']:hover:not(:disabled) .checkIcon {
+  color: var(--chip-shape-color-selected-hover);
+}
+
+.chip[data-selected='true']:active:not(:disabled) .checkIcon {
+  color: var(--chip-shape-color-selected-pressed);
+}
+
+/* ============================
+   Label
+   ============================ */
+
+.label {
+  display: inline-block;
+}

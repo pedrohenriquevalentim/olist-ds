@@ -308,6 +308,16 @@ Aplicar sempre que a tarefa for gerar código React a partir de design.
 - NÃO passar cor via prop; gerenciar pelo CSS pai via `currentColor` (funciona em hover, active, disabled automaticamente)
 - Renderizar condicionalmente no JSX
 
+### Assets SVG importados como módulo
+Quando o componente importar arquivos `.svg` diretamente (ex: `import icon from '../../assets/icons/foo.svg'`), o TypeScript exige uma declaração de tipo. Verificar se `src/css-modules.d.ts` já contém:
+```ts
+declare module '*.svg' {
+  const src: string;
+  export default src;
+}
+```
+Se não contiver, **adicionar antes de criar o componente** — caso contrário o `npm run build` falhará com erro TS2307. Esta declaração já existe no projeto desde 2026-06-05.
+
 ### Variantes e Estados
 - Replicar TODAS as variantes visíveis no Figma
 - CSS Modules com tokens para cada variante e estado
