@@ -1,80 +1,42 @@
-import React from "react";
-import styles from "./Button.module.css";
-import { Icon, IconName } from "../Icon";
+import React from 'react';
+import styles from './Button.module.css';
 
-type ButtonType = "primary" | "secondary" | "tertiary";
-type ButtonState = "enabled" | "hover" | "pressed" | "disabled";
-type ButtonIcon = "lead" | "action" | "none";
-
-export interface ButtonProps {
-  className?: string;
-  /** Tipo visual do botão (conforme design). */
-  type?: ButtonType;
-  /** Estado visual do botão (conforme design). */
-  state?: ButtonState;
-  /** Posição do ícone (conforme variantes do design). */
-  icon?: ButtonIcon;
-  /** Ícone do design system a exibir. */
-  iconName?: IconName;
-  /** Exibe anel de foco (variante do design). */
-  hasFocus?: boolean;
-  /** Texto do botão. */
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary' | 'tertiary';
   label?: string;
-  /** Texto de acessibilidade (se omitido, usa `label`). */
-  ariaLabel?: string;
-  /** Callback de clique. Não é chamado quando `state="disabled"`. */
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-function cx(...parts: Array<string | false | null | undefined>) {
-  return parts.filter(Boolean).join(" ");
+  leadIcon?: React.ReactNode;
+  actionIcon?: React.ReactNode;
 }
 
 export const Button = ({
+  variant = 'primary',
+  label,
+  leadIcon,
+  actionIcon,
+  children,
+  disabled = false,
   className,
-  type = "primary",
-  state = "enabled",
-  icon = "lead",
-  iconName,
-  hasFocus = false,
-  label = "placeholder Text",
-  ariaLabel,
-  onClick,
+  ...rest
 }: ButtonProps) => {
-  const isDisabled = state === "disabled";
-  const resolvedAria = ariaLabel ?? label;
-  const showLeadIcon = icon === "lead";
-  const showActionIcon = icon === "action";
-  const showIcon = icon !== "none" && !!iconName;
+  const content = children ?? label;
 
   return (
     <button
-      type="button"
-      className={cx(
-        styles.button,
-        styles[type],
-        styles[`state_${state}`],
-        showIcon ? styles.withIcon : styles.noIcon,
-        hasFocus && styles.hasFocus,
-        className
-      )}
-      aria-label={resolvedAria}
-      disabled={isDisabled}
-      onClick={isDisabled ? undefined : onClick}
+      className={[styles.button, styles[variant], className].filter(Boolean).join(' ')}
+      disabled={disabled}
+      {...rest}
     >
-      {showLeadIcon && showIcon ? (
-        <span className={styles.icon} aria-hidden="true">
-          <Icon name={iconName!} size={16} />
+      {leadIcon && (
+        <span className={styles.iconWrapper} aria-hidden="true">
+          {leadIcon}
         </span>
-      ) : null}
-
-      <span className={styles.label}>{label}</span>
-
-      {showActionIcon && showIcon ? (
-        <span className={styles.icon} aria-hidden="true">
-          <Icon name={iconName!} size={16} />
+      )}
+      {content && <span className={styles.label}>{content}</span>}
+      {actionIcon && (
+        <span className={styles.iconWrapper} aria-hidden="true">
+          {actionIcon}
         </span>
-      ) : null}
+      )}
     </button>
   );
 };

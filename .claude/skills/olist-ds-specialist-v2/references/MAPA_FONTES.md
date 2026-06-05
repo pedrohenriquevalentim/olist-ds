@@ -1,7 +1,7 @@
 # Mapa de Fontes — Estrutura do Repositório
 
 **Auto-gerado por `npm run build`**  
-**Última atualização:** 2026-06-04  
+**Última atualização:** 2026-06-05  
 **Versão da skill:** 3.0
 
 ---
@@ -23,30 +23,14 @@ src/
 │   │       ├── index.tsx
 │   │       ├── styles.module.css
 │   │       └── Icon.stories.tsx
-│   ├── Logo/
+│   ├── InputSelect/
 │   │       ├── index.tsx
 │   │       ├── styles.module.css
-│   │       └── Logo.stories.tsx
-│   ├── MenuErp/
-│   │       ├── index.tsx
-│   │       ├── styles.module.css
-│   │       └── MenuErp.stories.tsx
-│   ├── MenuSidebar/
-│   │       ├── index.tsx
-│   │       ├── styles.module.css
-│   │       └── MenuSidebar.stories.tsx
-│   ├── RadioButton/
-│   │       ├── index.tsx
-│   │       ├── styles.module.css
-│   │       └── RadioButton.stories.tsx
-│   ├── SegmentedButtons/
-│   │       ├── index.tsx
-│   │       ├── styles.module.css
-│   │       └── SegmentedButtons.stories.tsx
-│   └── Tag/
+│   │       └── InputSelect.stories.tsx
+│   └── Logo/
 │           ├── index.tsx
 │           ├── styles.module.css
-│           └── Tag.stories.tsx
+│           └── Logo.stories.tsx
 ├── assets/
 │   └── icons/
 └── index.ts
@@ -59,9 +43,5 @@ src/
 - **Button:** `src/components/Button/index.tsx`
 - **Checkbox:** `src/components/Checkbox/index.tsx`
 - **Icon:** `src/components/Icon/index.tsx`
+- **InputSelect:** `src/components/InputSelect/index.tsx`
 - **Logo:** `src/components/Logo/index.tsx`
-- **MenuErp:** `src/components/MenuErp/index.tsx`
-- **MenuSidebar:** `src/components/MenuSidebar/index.tsx`
-- **RadioButton:** `src/components/RadioButton/index.tsx`
-- **SegmentedButtons:** `src/components/SegmentedButtons/index.tsx`
-- **Tag:** `src/components/Tag/index.tsx`

@@ -4,9 +4,5 @@
 
 export { Button } from './components/Button';
 export { Checkbox } from './components/Checkbox';
+export { InputSelect } from './components/InputSelect';
 export { Logo } from './components/Logo';
-export { MenuErp } from './components/MenuErp';
-export { MenuSidebar } from './components/MenuSidebar';
-export { RadioButton } from './components/RadioButton';
-export { SegmentedButtons } from './components/SegmentedButtons';
-export { Tag } from './components/Tag';

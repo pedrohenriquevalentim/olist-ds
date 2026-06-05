@@ -1,140 +1,176 @@
-/* ─── Wrapper ──────────────────────────────────────────────────────────────── */
-.checkbox {
+@import '../../generated/variables.css';
+
+/* ============================
+   Wrapper (label raiz)
+   ============================ */
+
+.wrapper {
   display: inline-flex;
   align-items: center;
-  gap: var(--shape-spacing-4px);
-  height: var(--shape-size-40px);
+  gap: var(--checkbox-spacing-gap);
+  height: var(--checkbox-size-height);
   cursor: pointer;
-  position: relative;
   user-select: none;
 }
 
-.checkbox.state_disabled {
-  cursor: default;
+.wrapperDisabled {
+  cursor: not-allowed;
 }
 
-/* ─── Input nativo oculto (mantém semântica e foco de teclado) ─────────────── */
+/* ============================
+   Área de toque / overlay de hover (40 × 40)
+   ============================ */
+
+.boxArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--checkbox-size-height);
+  height: var(--checkbox-size-height);
+  border-radius: var(--checkbox-border-radius-area);
+  background-color: transparent;
+  position: relative;
+  transition: background-color 0.15s ease;
+}
+
+.wrapper:not(.wrapperDisabled):hover .boxArea {
+  background-color: var(--checkbox-color-hover);
+}
+
+.wrapper:not(.wrapperDisabled):active .boxArea {
+  background-color: var(--checkbox-color-pressed);
+}
+
+/* ============================
+   Input nativo (semântico, visualmente oculto)
+   ============================ */
+
 .input {
   position: absolute;
-  width: 1px;
-  height: 1px;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   opacity: 0;
   margin: 0;
-  padding: 0;
-  pointer-events: none;
+  cursor: inherit;
+  z-index: 1;
 }
 
-/* ─── Área de interação 40×40 ─────────────────────────────────────────────── */
-.boxArea {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--shape-size-40px);
-  height: var(--shape-size-40px);
-  flex-shrink: 0;
-  border-radius: var(--shape-border-radius-12px);
-  background: transparent;
-}
+/* ============================
+   Caixa visual (16 × 16)
+   ============================ */
 
-.checkbox.state_hover .boxArea {
-  background-image: linear-gradient(
-    90deg,
-    var(--effects-hover-gray-900-4) 0%,
-    var(--effects-hover-gray-900-4) 100%
-  );
-}
-
-.checkbox.state_pressed .boxArea {
-  background-image: linear-gradient(
-    90deg,
-    var(--effects-pressed-gray-900-12) 0%,
-    var(--effects-pressed-gray-900-12) 100%
-  );
-}
-
-/* ─── Quadrado visual 16×16 ────────────────────────────────────────────────── */
 .box {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--shape-size-16px);
-  height: var(--shape-size-16px);
-  border-radius: var(--shape-border-radius-4px);
-  border: var(--shape-border-width-2px) solid var(--color-gray-300);
-  background: transparent;
   flex-shrink: 0;
-  box-sizing: border-box;
+  width: var(--checkbox-size-box-height);
+  height: var(--checkbox-size-box-height);
+  border-radius: var(--checkbox-border-radius-box);
+  border: var(--checkbox-border-width-enabled) solid var(--checkbox-border-color-enabled);
+  background-color: transparent;
+  /* Cor herdada pelos SVGs internos via currentColor */
+  color: var(--checkbox-shape-color-selected);
+  pointer-events: none;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    border-width 0.1s ease;
 }
 
-/* Estados da borda (unchecked) */
-.checkbox.state_hover .box {
-  border-color: var(--color-gray-500);
+/* ---- Hover: cor da borda (apenas quando desmarcado) ---- */
+.wrapper:not(.wrapperDisabled):hover
+  .input:not(:checked):not(:indeterminate)
+  + .box {
+  border-color: var(--checkbox-border-color-hover);
 }
 
-.checkbox.state_pressed .box {
-  border-color: var(--color-gray-800);
+/* ---- Pressed: cor da borda (apenas quando desmarcado) ---- */
+.wrapper:not(.wrapperDisabled):active
+  .input:not(:checked):not(:indeterminate)
+  + .box {
+  border-color: var(--checkbox-border-color-pressed);
 }
 
-.checkbox.state_disabled .box {
-  border-color: var(--color-gray-100);
+/* ---- Selecionado ---- */
+.input:checked + .box {
+  background-color: var(--checkbox-color-selected);
+  border-color: var(--checkbox-color-selected);
+  border-width: var(--checkbox-border-width-selected);
 }
 
-/* Checked */
-.checkbox.isChecked .box {
-  background: var(--color-blue-500);
-  border-color: var(--color-blue-500);
+/* ---- Indeterminado ---- */
+.input:indeterminate + .box {
+  background-color: var(--checkbox-color-selected);
+  border-color: var(--checkbox-color-selected);
+  border-width: var(--checkbox-border-width-selected);
 }
 
-/* Indeterminate */
-.checkbox.isIndeterminate .box {
-  background: var(--color-blue-500);
-  border-color: var(--color-blue-500);
+/* ---- Desabilitado desmarcado ---- */
+.input:disabled + .box {
+  border-color: var(--checkbox-border-color-disabled);
+  border-width: var(--checkbox-border-width-disabled);
+  background-color: transparent;
 }
 
-/* Checked ou indeterminate + disabled */
-.checkbox.state_disabled.isChecked .box,
-.checkbox.state_disabled.isIndeterminate .box {
-  background: var(--effects-disabled-gray-900-8);
+/* ---- Desabilitado selecionado ou indeterminado ---- */
+.input:disabled:checked + .box,
+.input:disabled:indeterminate + .box {
+  background-color: var(--checkbox-color-disabled);
   border: none;
+  color: var(--checkbox-shape-color-disabled);
 }
 
-/* ─── Foco de teclado (visível apenas via keyboard) ───────────────────────── */
-.input:focus-visible ~ .boxArea .box {
-  outline: var(--shape-border-width-2px) solid var(--color-blue-500);
-  outline-offset: var(--shape-spacing-4px);
-}
+/* ============================
+   Ícones internos
+   Visibilidade controlada por pseudo-classes nativas (:checked / :indeterminate)
+   ============================ */
 
-/* ─── Ícones internos ────────────────────────────────────────────────────────*/
-.icon {
-  display: block;
+.checkIcon,
+.indeterminateIcon {
+  display: none;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
 }
 
-/* Dimensões exatas conforme Figma */
-.checkIcon {
-  width: 0.65625rem;  /* 10.5px */
-  height: 0.53125rem; /* 8.5px */
+.input:checked + .box .checkIcon {
+  display: flex;
 }
 
-.indeterminateIcon {
-  width: 0.75rem;     /* 12px */
-  height: 0.125rem;   /* 2px */
+.input:indeterminate + .box .indeterminateIcon {
+  display: flex;
 }
 
-/* ─── Label ──────────────────────────────────────────────────────────────── */
-.label {
-  font-family: var(--font-family-jakarta), system-ui, sans-serif;
-  font-size: var(--font-size-14px);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--font-line-height-16px);
-  color: var(--color-gray-900);
+/* ============================
+   Foco visível (acessibilidade WCAG 2.4.7)
+   ============================ */
+
+.input:focus-visible + .box {
+  outline: var(--focus-border-width-default) solid var(--focus-border-color-default);
+  outline-offset: 0.125rem;
+}
+
+/* ============================
+   Label (Regra #5 — tipografia explícita, nunca confiar em defaults do browser)
+   Tokens: font-family, font-size, font-weight e line-height declarados explicitamente
+   conforme o Figma (Plus Jakarta Sans SemiBold 14px / 16px)
+   ============================ */
+
+.labelText {
+  font-family: var(--font-family-jakarta);
+  font-size: var(--text-label-font-size);
+  font-weight: var(--text-label-font-weight);
+  line-height: var(--text-label-line-height);
+  color: var(--text-label-color-enabled);
+  font-feature-settings: 'ss03' 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  flex-shrink: 0;
-  font-feature-settings: 'ss03' 1;
 }
 
-.checkbox.state_disabled .label {
-  color: var(--color-gray-200);
+.wrapperDisabled .labelText {
+  color: var(--text-label-color-disabled);
 }

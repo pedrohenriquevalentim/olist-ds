@@ -1,89 +1,99 @@
-import React, { useEffect, useRef } from "react";
-import styles from "./Checkbox.module.css";
-import { Icon } from "../Icon";
+import React, { useId, useRef, useEffect } from 'react';
+import styles from './Checkbox.module.css';
 
-type CheckboxState = "enabled" | "hover" | "pressed" | "disabled";
-
-export interface CheckboxProps {
-  /** Estado visual do checkbox (conforme variantes do design). */
-  state?: CheckboxState;
-  /** Se está marcado. */
-  isChecked?: boolean;
-  /** Se está no estado indeterminado (sobrepõe isChecked visualmente). */
-  isIndeterminate?: boolean;
-  /** Se exibe o texto do label ao lado do checkbox. */
-  hasLabel?: boolean;
-  /** Texto do label. */
+export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
   label?: string;
-  /** ID do input para associar ao label via htmlFor. */
-  id?: string;
-  /** Callback de mudança. Não é chamado quando state="disabled". */
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  className?: string;
-}
-
-function cx(...parts: Array<string | false | null | undefined>) {
-  return parts.filter(Boolean).join(" ");
+  isIndeterminate?: boolean;
 }
 
 export const Checkbox = ({
-  state = "enabled",
-  isChecked = false,
+  label,
   isIndeterminate = false,
-  hasLabel = true,
-  label = "Label text",
+  checked,
+  disabled = false,
+  className,
   id,
   onChange,
-  className,
+  ...rest
 }: CheckboxProps) => {
-  const isDisabled = state === "disabled";
-  const showCheck = isChecked && !isIndeterminate;
-  const showIndeterminate = isIndeterminate && !isChecked;
+  const generatedId = useId();
+  const inputId = id ?? generatedId;
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // A propriedade `indeterminate` só pode ser definida via JS, não via atributo HTML
   useEffect(() => {
     if (inputRef.current) {
-      inputRef.current.indeterminate = showIndeterminate;
+      inputRef.current.indeterminate = isIndeterminate;
     }
-  }, [showIndeterminate]);
+  }, [isIndeterminate]);
 
   return (
     <label
-      htmlFor={id}
-      className={cx(
-        styles.checkbox,
-        styles[`state_${state}`],
-        showCheck && styles.isChecked,
-        showIndeterminate && styles.isIndeterminate,
-        className
-      )}
+      className={[
+        styles.wrapper,
+        disabled ? styles.wrapperDisabled : undefined,
+        className,
+      ]
+        .filter(Boolean)
+        .join(' ')}
+      htmlFor={inputId}
     >
-      <input
-        ref={inputRef}
-        type="checkbox"
-        id={id}
-        className={styles.input}
-        checked={isChecked}
-        disabled={isDisabled}
-        aria-checked={showIndeterminate ? "mixed" : isChecked}
-        onChange={isDisabled ? undefined : onChange}
-        readOnly={!onChange || isDisabled}
-      />
+      <span className={styles.boxArea}>
+        {/* Input nativo visualmente oculto — mantém semântica e foco por teclado */}
+        <input
+          ref={inputRef}
+          type="checkbox"
+          id={inputId}
+          className={styles.input}
+          checked={checked}
+          disabled={disabled}
+          onChange={onChange}
+          aria-checked={isIndeterminate ? 'mixed' : checked}
+          {...rest}
+        />
 
-      {/* Área de clique — 40×40px — renderiza o quadrado visual de 16px */}
-      <span className={styles.boxArea} aria-hidden="true">
-        <span className={styles.box}>
-          {showCheck && (
-            <Icon name="check" size={12} className={cx(styles.icon, styles.checkIcon)} />
-          )}
-          {showIndeterminate && (
-            <Icon name="remove" size={12} className={cx(styles.icon, styles.indeterminateIcon)} />
-          )}
+        {/* Caixa visual (16 × 16) com ícones SVG inline via currentColor */}
+        <span className={styles.box} aria-hidden="true">
+          <span className={styles.checkIcon}>
+            <svg
+              width="11"
+              height="9"
+              viewBox="0 0 11 9"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M1 4.5L4 7.5L10 1"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
+          <span className={styles.indeterminateIcon}>
+            <svg
+              width="12"
+              height="2"
+              viewBox="0 0 12 2"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M1 1H11"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </span>
         </span>
       </span>
 
-      {hasLabel && <span className={styles.label}>{label}</span>}
+      {label !== undefined && (
+        <span className={styles.labelText}>{label}</span>
+      )}
     </label>
   );
 };

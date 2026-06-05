@@ -3,12 +3,8 @@
 export const componentNames = [
   "Button",
   "Checkbox",
-  "Logo",
-  "MenuErp",
-  "MenuSidebar",
-  "RadioButton",
-  "SegmentedButtons",
-  "Tag"
+  "InputSelect",
+  "Logo"
 ] as const;
 
 export type ComponentName = typeof componentNames[number];

@@ -47,7 +47,7 @@ A Olist é uma plataforma B2B de e-commerce para sellers. A linguagem visual com
 
 Antes de criar QUALQUER elemento novo, verifique se um destes já existe:
 
-- Button, Checkbox, Icon, Logo, MenuErp, MenuSidebar, RadioButton, SegmentedButtons, Tag
+- Button, Checkbox, Icon, InputSelect, Logo
 
 Para API completa dos componentes, leia `COMPONENTES.md`.
 Para caminhos dos arquivos, leia `MAPA_FONTES.md`.

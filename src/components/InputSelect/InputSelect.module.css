@@ -1,0 +1,417 @@
+@import '../../generated/variables.css';
+
+/* ── Wrapper ──────────────────────────────────────────────────────────────── */
+
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--shape-spacing-x1-8px);
+  width: 19rem; /* 304px */
+}
+
+/* ── Label Row ───────────────────────────────────────────────────────────── */
+
+.labelRow {
+  display: flex;
+  align-items: center;
+  gap: var(--text-label-gap);
+  height: var(--text-label-height);
+}
+
+.labelText {
+  font-family: var(--font-family-jakarta), sans-serif;
+  font-size: var(--text-label-font-size);
+  font-weight: var(--text-label-font-weight, 600);
+  line-height: var(--text-label-line-height);
+  color: var(--text-label-color-enabled);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-feature-settings: 'ss03' 1;
+  cursor: default;
+}
+
+.labelDisabled {
+  color: var(--text-label-color-disabled);
+}
+
+.tooltipIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--shape-size-x2-16px);
+  height: var(--shape-size-x2-16px);
+  flex-shrink: 0;
+  color: var(--input-base-shape-color-enabled);
+  cursor: default;
+}
+
+.tooltipIcon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ── Input Base (Trigger) ────────────────────────────────────────────────── */
+
+.inputBase {
+  display: flex;
+  align-items: center;
+  gap: var(--input-base-spacing-gap);
+  min-height: var(--input-base-size-input-height);
+  padding-inline: var(--input-base-spacing-padding);
+  padding-block: var(--shape-spacing-x1-8px);
+  border-radius: var(--input-base-border-radius-default);
+  border: var(--input-base-border-width-enabled) solid var(--input-base-border-color-enabled);
+  background-color: var(--input-base-color-enabled);
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color 0.15s ease,
+    border-width 0.1s ease,
+    background-color 0.15s ease;
+}
+
+.inputBase:hover:not(:disabled) {
+  border-color: var(--input-base-border-color-hover);
+  background-color: var(--input-base-color-hover);
+}
+
+.inputBase:active:not(:disabled) {
+  border-width: var(--input-base-border-width-pressed);
+  border-color: var(--input-base-border-color-pressed);
+  background-color: var(--input-base-color-pressed);
+}
+
+.inputBase:focus-visible {
+  outline: none;
+  border-width: var(--input-base-border-width-focused);
+  border-color: var(--input-base-border-color-focused);
+  background-color: var(--input-base-color-focused);
+}
+
+.inputBase.stateFocused {
+  border-width: var(--input-base-border-width-focused);
+  border-color: var(--input-base-border-color-focused);
+  background-color: var(--input-base-color-focused);
+}
+
+.inputBase.stateFilled {
+  border-color: var(--input-base-border-color-filled);
+  background-color: var(--input-base-color-filled);
+}
+
+.inputBase.stateDisabled,
+.inputBase:disabled {
+  border-width: var(--input-base-border-width-disabled);
+  border-color: var(--input-base-border-color-disabled);
+  background-color: var(--input-base-color-disabled);
+  cursor: not-allowed;
+}
+
+/* ── Conteúdo do trigger ─────────────────────────────────────────────────── */
+
+.triggerContent {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.placeholderText {
+  font-family: var(--font-family-jakarta), sans-serif;
+  font-size: var(--text-placeholder-text-font-size);
+  font-weight: var(--text-placeholder-text-font-weight, 400);
+  line-height: var(--text-placeholder-text-line-height);
+  color: var(--input-base-font-color-enabled);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-feature-settings: 'ss03' 1, 'lnum' 1, 'tnum' 1;
+}
+
+.selectedText {
+  font-family: var(--font-family-jakarta), sans-serif;
+  font-size: var(--text-placeholder-text-font-size);
+  font-weight: var(--text-placeholder-text-font-weight, 400);
+  line-height: var(--text-placeholder-text-line-height);
+  color: var(--input-base-font-color-filled);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-feature-settings: 'ss03' 1, 'lnum' 1, 'tnum' 1;
+}
+
+.inputBase:disabled .placeholderText,
+.inputBase:disabled .selectedText {
+  color: var(--input-base-font-color-disabled);
+}
+
+/* ── Chips (multi select) ────────────────────────────────────────────────── */
+
+.chipsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--input-token-gap);
+  flex: 1;
+  min-width: 0;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--chip-spacing-gap);
+  padding-inline: var(--chip-spacing-padding);
+  height: var(--chip-size-height);
+  border-radius: var(--chip-border-radius-pill);
+  background-color: var(--chip-color-selected);
+  color: var(--chip-font-color-selected);
+  font-family: var(--font-family-jakarta), sans-serif;
+  font-size: var(--chip-font-size);
+  font-weight: var(--chip-font-weight, 500);
+  line-height: var(--chip-font-line-height);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.chipLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 8rem;
+}
+
+.chipRemove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.75rem;
+  height: 0.75rem;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: inherit;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.chipRemove svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ── Chevron ─────────────────────────────────────────────────────────────── */
+
+.chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--shape-size-x2-16px);
+  height: var(--shape-size-x2-16px);
+  flex-shrink: 0;
+  color: var(--input-base-shape-color-enabled);
+  transition: transform 0.2s ease;
+}
+
+.chevron svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.inputBase:disabled .chevron {
+  color: var(--input-base-shape-color-disabled);
+}
+
+/* ── Listbox wrapper ─────────────────────────────────────────────────────── */
+
+.listboxWrapper {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: var(--list-color-bg);
+  border-radius: var(--list-border-radius-default);
+  box-shadow: 0 0.25rem 1rem rgba(5, 5, 5, 0.12);
+  overflow: hidden;
+}
+
+/* ── Campo de busca (autocomplete) ───────────────────────────────────────── */
+
+.searchWrapper {
+  padding: var(--list-spacing-padding);
+  padding-bottom: 0;
+}
+
+.searchInput {
+  width: 100%;
+  height: var(--input-base-size-input-height);
+  padding-inline: var(--input-base-spacing-padding);
+  border-radius: var(--input-base-border-radius-default);
+  border: var(--input-base-border-width-enabled) solid var(--input-base-border-color-enabled);
+  background-color: var(--input-base-color-enabled);
+  font-family: var(--font-family-jakarta), sans-serif;
+  font-size: var(--text-placeholder-text-font-size);
+  font-weight: var(--text-placeholder-text-font-weight, 400);
+  line-height: var(--text-placeholder-text-line-height);
+  color: var(--input-base-font-color-filled);
+  font-feature-settings: 'ss03' 1;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, border-width 0.1s ease;
+}
+
+.searchInput:focus {
+  border-width: var(--input-base-border-width-focused);
+  border-color: var(--input-base-border-color-focused);
+}
+
+/* ── Listbox ─────────────────────────────────────────────────────────────── */
+
+.listbox {
+  list-style: none;
+  margin: 0;
+  padding: var(--list-spacing-padding);
+  max-height: 13.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--list-spacing-gap);
+}
+
+/* ── Item da lista ───────────────────────────────────────────────────────── */
+
+.listItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--list-list-item-spacing-gap-content);
+  min-height: var(--list-list-item-size-height);
+  padding-inline: var(--list-list-item-spacing-padding);
+  border-radius: var(--list-list-item-border-radius-default);
+  background-color: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.1s ease;
+}
+
+.listItem:hover:not(.listItemDisabled) {
+  background-color: var(--list-list-item-color-hover);
+}
+
+.listItem:active:not(.listItemDisabled) {
+  background-color: var(--list-list-item-color-pressed);
+}
+
+.listItemSelected {
+  background-color: var(--list-list-item-color-selected-enabled);
+}
+
+.listItemSelected:hover {
+  background-color: var(--list-list-item-color-selected-hover);
+}
+
+.listItemSelected:active {
+  background-color: var(--list-list-item-color-selected-pressed);
+}
+
+.listItemFocused:not(.listItemSelected) {
+  background-color: var(--list-list-item-color-hover);
+}
+
+.listItemFocused.listItemSelected {
+  background-color: var(--list-list-item-color-selected-hover);
+}
+
+.listItemDisabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ── Label do item ───────────────────────────────────────────────────────── */
+
+.listItemLabel {
+  font-family: var(--font-family-jakarta), sans-serif;
+  font-size: var(--list-list-item-font-size-default);
+  font-weight: var(--list-list-item-font-weight-default, 400);
+  line-height: var(--list-list-item-line-height-default);
+  color: var(--list-list-item-font-color-enabled);
+  font-feature-settings: 'ss03' 1;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.listItemSelected .listItemLabel {
+  color: var(--list-list-item-font-color-selected);
+}
+
+.listItemDisabled .listItemLabel {
+  color: var(--list-list-item-font-color-disabled);
+}
+
+/* ── Checkbox wrapper (multi select) ────────────────────────────────────── */
+
+.checkboxWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+/* ── Checkmark (single select) ───────────────────────────────────────────── */
+
+.checkIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--shape-size-x2-16px);
+  height: var(--shape-size-x2-16px);
+  flex-shrink: 0;
+  color: var(--list-list-item-shape-color-selected);
+}
+
+.checkIcon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ── Mensagem de lista vazia ─────────────────────────────────────────────── */
+
+.emptyMessage {
+  padding: var(--list-list-item-spacing-padding);
+  font-family: var(--font-family-jakarta), sans-serif;
+  font-size: var(--list-list-item-font-size-default);
+  font-weight: var(--list-list-item-font-weight-default, 400);
+  line-height: var(--list-list-item-line-height-default);
+  color: var(--list-list-item-font-color-disabled);
+  text-align: center;
+}
+
+/* ── Texto de suporte ────────────────────────────────────────────────────── */
+
+.supportText {
+  display: block;
+  font-family: var(--font-family-jakarta), sans-serif;
+  font-size: var(--text-support-text-font-size);
+  font-weight: var(--text-support-text-font-weight, 400);
+  line-height: var(--text-support-text-line-height);
+  color: var(--text-support-text-color-enabled);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-feature-settings: 'ss03' 1;
+}
+
+.supportDisabled {
+  color: var(--text-support-text-color-disabled);
+}
