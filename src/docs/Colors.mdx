@@ -1,0 +1,173 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Colors" />
+
+# Cores
+
+Todas as cores são definidas como design tokens no Figma e exportadas via Style Dictionary para `src/generated/variables.css`.
+
+> **Regra:** nunca use valores hex diretamente no código. Use sempre `var(--nome-do-token)`.
+
+export const Swatch = ({ token, hex, label }) => (
+  <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '6px 0', borderBottom: '1px solid #f0ece0' }}>
+    <div style={{ width: 36, height: 36, borderRadius: 6, background: hex, border: '1px solid rgba(0,0,0,0.08)', flexShrink: 0 }} />
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+      <code style={{ fontSize: 12, color: '#403f3b' }}>{token}</code>
+      <span style={{ fontSize: 11, color: '#827f73' }}>{hex}{label ? ` — ${label}` : ''}</span>
+    </div>
+  </div>
+);
+
+export const PaletteGrid = ({ children }) => (
+  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 32px', marginBottom: 32 }}>
+    {children}
+  </div>
+);
+
+---
+
+## Neutros (Gray)
+
+Base da interface. Cinzas com subtom quente (bege).
+
+<PaletteGrid>
+  <Swatch token="--color-gray-gray-0"   hex="#fcfbf8" label="Fundo da página, superfície padrão" />
+  <Swatch token="--color-gray-gray-50"  hex="#f2f0e8" label="Hover sutil, linhas alternadas" />
+  <Swatch token="--color-gray-gray-100" hex="#e7e4da" label="Bordas, divisores" />
+  <Swatch token="--color-gray-gray-200" hex="#cecbc0" label="Bordas fortes, header de tabela" />
+  <Swatch token="--color-gray-gray-300" hex="#afada2" label="Texto desabilitado" />
+  <Swatch token="--color-gray-gray-400" hex="#918e83" label="Ícones inativos, placeholder" />
+  <Swatch token="--color-gray-gray-500" hex="#827f73" label="Texto secundário, captions" />
+  <Swatch token="--color-gray-gray-600" hex="#615f56" label="Texto terciário, labels sutis" />
+  <Swatch token="--color-gray-gray-700" hex="#403f3b" label="Labels de formulário" />
+  <Swatch token="--color-gray-gray-800" hex="#201f1d" label="Texto enfatizado" />
+  <Swatch token="--color-gray-gray-900" hex="#10100f" label="Texto principal, títulos" />
+  <Swatch token="--color-gray-gray-950" hex="#050505" label="Contraste máximo" />
+</PaletteGrid>
+
+---
+
+## Marca (Blue)
+
+Azul é a cor de ação primária — sinaliza interatividade.
+
+<PaletteGrid>
+  <Swatch token="--color-blue-blue-0"   hex="#f8f9fc" label="Hover em linhas interativas" />
+  <Swatch token="--color-blue-blue-50"  hex="#e7edf8" label="Fundo de seleção/ativo" />
+  <Swatch token="--color-blue-blue-100" hex="#d6dff5" label="Selecionado + hover" />
+  <Swatch token="--color-blue-blue-200" hex="#a1b9ed" label="Borda de chip selecionado" />
+  <Swatch token="--color-blue-blue-300" hex="#6791ea" />
+  <Swatch token="--color-blue-blue-400" hex="#2766ec" label="Hover em botão primário" />
+  <Swatch token="--color-blue-blue-500" hex="#0a4ee4" label="⭐ Ação primária, links, indicadores ativos" />
+  <Swatch token="--color-blue-blue-600" hex="#043fbe" label="Pressed em botão primário" />
+  <Swatch token="--color-blue-blue-700" hex="#002d8f" label="Active em botão primário" />
+  <Swatch token="--color-blue-blue-800" hex="#001647" label="Navy — sidebar, backgrounds escuros" />
+  <Swatch token="--color-blue-blue-900" hex="#000c29" />
+  <Swatch token="--color-blue-blue-950" hex="#000614" />
+</PaletteGrid>
+
+---
+
+## Feedback — Erro (Red)
+
+<PaletteGrid>
+  <Swatch token="--color-red-red-0"   hex="#fef7f5" label="Fundo de linha/card com erro" />
+  <Swatch token="--color-red-red-50"  hex="#fdded9" />
+  <Swatch token="--color-red-red-100" hex="#fbcdc6" />
+  <Swatch token="--color-red-red-200" hex="#f7ada1" />
+  <Swatch token="--color-red-red-300" hex="#f28d7d" />
+  <Swatch token="--color-red-red-400" hex="#ed6e5a" />
+  <Swatch token="--color-red-red-500" hex="#e64e36" label="⭐ Erro, destrutivo — mensagens e botões de deletar" />
+  <Swatch token="--color-red-red-600" hex="#c9412c" />
+  <Swatch token="--color-red-red-700" hex="#842d1f" />
+</PaletteGrid>
+
+---
+
+## Feedback — Sucesso (Green)
+
+<PaletteGrid>
+  <Swatch token="--color-green-green-0"   hex="#fafcf8" label="Fundo de linha/card com sucesso" />
+  <Swatch token="--color-green-green-50"  hex="#ecf3e2" />
+  <Swatch token="--color-green-green-100" hex="#e3edd4" />
+  <Swatch token="--color-green-green-200" hex="#c7daa9" />
+  <Swatch token="--color-green-green-300" hex="#afcb86" />
+  <Swatch token="--color-green-green-400" hex="#93b95b" />
+  <Swatch token="--color-green-green-500" hex="#779e3d" label="⭐ Sucesso, positivo, despachado" />
+  <Swatch token="--color-green-green-600" hex="#59762d" />
+  <Swatch token="--color-green-green-700" hex="#425822" />
+</PaletteGrid>
+
+---
+
+## Feedback — Alerta (Yellow)
+
+<PaletteGrid>
+  <Swatch token="--color-yellow-yellow-0"   hex="#fefbf6" label="Fundo de linha/card com alerta" />
+  <Swatch token="--color-yellow-yellow-50"  hex="#fbeeda" />
+  <Swatch token="--color-yellow-yellow-100" hex="#f9e5c7" />
+  <Swatch token="--color-yellow-yellow-200" hex="#f6d4a2" />
+  <Swatch token="--color-yellow-yellow-300" hex="#f4c47c" />
+  <Swatch token="--color-yellow-yellow-400" hex="#f0b356" />
+  <Swatch token="--color-yellow-yellow-500" hex="#f0a028" label="⭐ Alerta, pendente, atenção" />
+  <Swatch token="--color-yellow-yellow-600" hex="#d38817" />
+</PaletteGrid>
+
+---
+
+## Info (Cyan)
+
+<PaletteGrid>
+  <Swatch token="--color-cyan-cyan-0"   hex="#f6fefe" />
+  <Swatch token="--color-cyan-cyan-50"  hex="#dcf9f9" />
+  <Swatch token="--color-cyan-cyan-100" hex="#bdefef" />
+  <Swatch token="--color-cyan-cyan-200" hex="#8dd7d7" label="Gradiente de ícones (ponta teal)" />
+  <Swatch token="--color-cyan-cyan-300" hex="#68caca" />
+  <Swatch token="--color-cyan-cyan-400" hex="#54b6b6" />
+  <Swatch token="--color-cyan-cyan-500" hex="#489999" label="⭐ Info, status neutro — badges informativos" />
+  <Swatch token="--color-cyan-cyan-600" hex="#3e7979" />
+  <Swatch token="--color-cyan-cyan-800" hex="#1b2c2c" label="Navy teal — backgrounds escuros" />
+</PaletteGrid>
+
+---
+
+## Pink
+
+<PaletteGrid>
+  <Swatch token="--color-pink-pink-0"   hex="#fef6fb" />
+  <Swatch token="--color-pink-pink-100" hex="#f1c5e0" />
+  <Swatch token="--color-pink-pink-200" hex="#df9fc7" label="Gradiente navy-pink (ponta)" />
+  <Swatch token="--color-pink-pink-300" hex="#cf77ad" />
+  <Swatch token="--color-pink-pink-400" hex="#b95b95" label="⭐ Pink médio" />
+  <Swatch token="--color-pink-pink-500" hex="#99487a" />
+</PaletteGrid>
+
+---
+
+## Mapa de status para badges
+
+| Status | Fundo | Texto |
+|---|---|---|
+| Pendente | `--color-yellow-yellow-50` | `--color-yellow-yellow-600` |
+| Aprovado | `--color-blue-blue-50` | `--color-blue-blue-600` |
+| Despachado | `--color-green-green-50` | `--color-green-green-600` |
+| Cancelado | `--color-red-red-50` | `--color-red-red-600` |
+| Em análise | `--color-cyan-cyan-50` | `--color-cyan-cyan-600` |
+
+## Como usar
+
+```css
+.elemento {
+  /* texto principal */
+  color: var(--color-gray-gray-900);
+
+  /* ação primária */
+  background: var(--color-blue-blue-500);
+
+  /* erro */
+  color: var(--color-red-red-500);
+
+  /* fundo padrão */
+  background: var(--color-gray-gray-0);
+}
+```

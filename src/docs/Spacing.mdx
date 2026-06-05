@@ -1,0 +1,130 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Spacing" />
+
+# Espaçamento
+
+Todos os espaçamentos seguem um **grid de 4px**. Todo valor deve ser múltiplo de 4. Tokens disponíveis em `src/generated/variables.css`.
+
+> **Regra:** nunca use valores arbitrários (5px, 7px, 13px). Use sempre `var(--shape-spacing-*)`.
+
+---
+
+## Escala de espaçamento
+
+export const SpacingRow = ({ token, value, usage }) => (
+  <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '6px 0', borderBottom: '1px solid #f0ece0' }}>
+    <div style={{ width: value, height: 20, background: '#0a4ee4', borderRadius: 2, flexShrink: 0, minWidth: 4 }} />
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 1, flex: 1 }}>
+      <code style={{ fontSize: 12, color: '#403f3b' }}>{token}</code>
+      <span style={{ fontSize: 11, color: '#827f73' }}>{value}px{usage ? ` — ${usage}` : ''}</span>
+    </div>
+  </div>
+);
+
+<SpacingRow token="--shape-spacing-4px"  value={4}  usage="Gap ícone-texto inline, padding vertical de badge" />
+<SpacingRow token="--shape-spacing-8px"  value={8}  usage="Padding compacto, gaps pequenos, checkbox–label" />
+<SpacingRow token="--shape-spacing-12px" value={12} usage="Padding horizontal de input, gaps internos de card" />
+<SpacingRow token="--shape-spacing-16px" value={16} usage="⭐ Padding padrão, gaps de seção, padding de card compacto" />
+<SpacingRow token="--shape-spacing-24px" value={24} usage="⭐ Padding de card padrão, separação de seções" />
+<SpacingRow token="--shape-spacing-32px" value={32} usage="⭐ Padding da área de conteúdo da página, entre seções maiores" />
+<SpacingRow token="--shape-spacing-40px" value={40} usage="Margens topo/base da página" />
+<SpacingRow token="--shape-spacing-48px" value={48} usage="Divisões entre seções maiores" />
+<SpacingRow token="--shape-spacing-64px" value={64} usage="Respiro de nível de página (raro)" />
+
+---
+
+## Padrão de layout
+
+```
+┌────────────────────────────────────────────────┐
+│              Header (64px altura)               │
+├──────────┬─────────────────────────────────────┤
+│          │                                     │
+│ Sidebar  │          Área de Conteúdo            │
+│ (280px)  │       padding: 24px ou 32px          │
+│          │                                     │
+│          │  ┌─────────────────────────────┐    │
+│          │  │  Título + Ações             │    │
+│          │  │  (gap: 24px abaixo)         │    │
+│          │  ├─────────────────────────────┤    │
+│          │  │  Filtros                    │    │
+│          │  │  (gap: 16px abaixo)         │    │
+│          │  ├─────────────────────────────┤    │
+│          │  │  Tabela / Cards / Form      │    │
+│          │  └─────────────────────────────┘    │
+│          │                                     │
+└──────────┴─────────────────────────────────────┘
+```
+
+### Tokens de layout fixos
+
+| Elemento | Token | Valor |
+|---|---|---|
+| Largura da sidebar | `--shape-size-280px` | 280px |
+| Altura do header | `--shape-size-64px` | 64px |
+| Padding área de conteúdo | `--shape-spacing-24px` ou `--shape-spacing-32px` | 24–32px |
+| Altura de linha de tabela | `--shape-size-48px` ou `--shape-size-56px` | 48–56px |
+| Altura de input/botão MD | `--shape-size-40px` | 40px |
+| Altura de input/botão SM | `--shape-size-32px` | 32px |
+
+---
+
+## Border Radius
+
+export const RadiusRow = ({ token, value, label }) => (
+  <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '8px 0', borderBottom: '1px solid #f0ece0' }}>
+    <div style={{ width: 48, height: 32, background: '#0a4ee4', borderRadius: value, flexShrink: 0, opacity: 0.85 }} />
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+      <code style={{ fontSize: 12, color: '#403f3b' }}>{token}</code>
+      <span style={{ fontSize: 11, color: '#827f73' }}>{value} — {label}</span>
+    </div>
+  </div>
+);
+
+<RadiusRow token="--shape-border-radius-0px"    value="0px"    label="Elementos quadrados (nunca para interativos)" />
+<RadiusRow token="--shape-border-radius-4px"    value="4px"    label="Botões SM, badges, chips" />
+<RadiusRow token="--shape-border-radius-8px"    value="8px"    label="⭐ Padrão — botões, inputs, cards, modais" />
+<RadiusRow token="--shape-border-radius-12px"   value="12px"   label="Cards grandes, containers" />
+<RadiusRow token="--shape-border-radius-16px"   value="16px"   label="Containers de modal, cards proeminentes" />
+<RadiusRow token="--shape-border-radius-9999px" value="9999px" label="⭐ Pills — tags, chips, avatares circulares" />
+
+---
+
+## Espessura de borda
+
+| Token | Valor | Uso |
+|---|---|---|
+| `--shape-border-width-1px` | 1px | ⭐ Bordas padrão — inputs, cards, divisores |
+| `--shape-border-width-2px` | 2px | Anéis de foco, estados ativos, ênfase |
+| `--shape-border-width-4px` | 4px | Borda lateral em linhas selecionadas |
+
+---
+
+## Exemplo de código
+
+```css
+/* Área de conteúdo da página */
+.conteudoPagina {
+  padding: var(--shape-spacing-32px);
+}
+
+/* Card padrão */
+.card {
+  padding: var(--shape-spacing-24px);
+  border-radius: var(--shape-border-radius-8px);
+  border: var(--shape-border-width-1px) solid var(--color-gray-gray-100);
+}
+
+/* Gap entre elementos em linha */
+.row {
+  display: flex;
+  gap: var(--shape-spacing-12px);
+}
+
+/* Pill / Tag */
+.pill {
+  padding: var(--shape-spacing-4px) var(--shape-spacing-8px);
+  border-radius: var(--shape-border-radius-9999px);
+}
+```

@@ -1,6 +1,6 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.18`  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.19`  
 **Skill:** v3.0  
 **Última atualização:** 2026-06-05  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
@@ -32,22 +32,24 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 
 | Métrica | Valor |
 |---|---|
-| Componentes | 5 |
+| Componentes | 7 |
 | Ícones SVG | 550 |
-| Arquivos da Skill | 19 |
+| Arquivos da Skill | 20 |
 | Arquivos Figma permitidos | 5 |
-| Versão npm | 1.0.18 |
+| Versão npm | 1.0.19 |
 | Versão skill | 3.0 |
 
 ## Componentes
 
-### Lista Completa (5)
+### Lista Completa (7)
 
 - `Button` — `src/components/Button/`
 - `Checkbox` — `src/components/Checkbox/`
+- `Chip` — `src/components/Chip/`
 - `Icon` — `src/components/Icon/`
 - `InputSelect` — `src/components/InputSelect/`
 - `Logo` — `src/components/Logo/`
+- `ProdutosOlistIcons` — `src/components/ProdutosOlistIcons/`
 
 ### Status de Migração de Ícones
 
@@ -55,9 +57,11 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 |---|---|
 | Button | ➖ Sem ícones |
 | Checkbox | ➖ Sem ícones |
+| Chip | ➖ Sem ícones |
 | Icon | ✅ Componente central |
 | InputSelect | ➖ Sem ícones |
 | Logo | ➖ Sem ícones |
+| ProdutosOlistIcons | ➖ Sem ícones |
 
 ## Pipeline de Build e Release
 
@@ -110,6 +114,7 @@ npm run release
 | `npm run release` | `npm run pipeline && npm run sync:skill && npm version pat...` |
 | `npm run wiki` | `node scripts/generate-wiki.mjs` |
 | `npm run postrelease` | `npm run wiki` |
+| `npm run chromatic` | `npx chromatic --project-token=chpt_eb7756a8c9c93ad` |
 
 ## Skill Claude
 
@@ -117,7 +122,7 @@ npm run release
 
 **Localização:** `.claude/skills/olist-ds-specialist-v2/`
 
-### Arquivos da Skill (19 total)
+### Arquivos da Skill (20 total)
 
 **Raiz (6):**
 - `CHANGELOG.md`
@@ -127,13 +132,14 @@ npm run release
 - `component-registry.json`
 - `figma-config.json`
 
-**Referências (13):**
+**Referências (14):**
 - `CHECKLIST_REVISAO.md`
 - `COMPONENTES.md`
 - `CORES.md`
 - `ESPACAMENTO.md`
 - `FIGMA_CONFIG.md`
 - `GLOSSARIO_PAPEIS_TEXTO.md`
+- `HARNEES_TELAS.md`
 - `MAPA_FONTES.md`
 - `PADROES.md`
 - `SDD_AVANCADO.md`
@@ -146,7 +152,7 @@ npm run release
 
 **Auto-gerados** (por `npm run build`): COMPONENTES.md, MAPA_FONTES.md, VISAO_GERAL.md (parcial)
 
-**Manuais** (não são sobrescritos): CHECKLIST_REVISAO.md, CORES.md, ESPACAMENTO.md, FIGMA_CONFIG.md, GLOSSARIO_PAPEIS_TEXTO.md, PADROES.md, SDD_AVANCADO.md, SDD_PARA_TELA.md, TEMPLATES_PRODUTO.md, TIPOGRAFIA.md, VISAO_GERAL.md
+**Manuais** (não são sobrescritos): CHECKLIST_REVISAO.md, CORES.md, ESPACAMENTO.md, FIGMA_CONFIG.md, GLOSSARIO_PAPEIS_TEXTO.md, HARNEES_TELAS.md, PADROES.md, SDD_AVANCADO.md, SDD_PARA_TELA.md, TEMPLATES_PRODUTO.md, TIPOGRAFIA.md, VISAO_GERAL.md
 
 ### Como Usar
 

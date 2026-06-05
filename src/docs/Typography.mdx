@@ -4,37 +4,158 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Tipografia
 
-A fonte primária é **Plus Jakarta Sans**, carregada via Google Fonts.
+A fonte primária é **Plus Jakarta Sans**, carregada via Google Fonts. Todos os valores são definidos como tokens em `src/generated/variables.css`.
 
-## Font Family
+> **Regra:** nunca use valores de fonte, peso ou altura hardcoded. Use sempre `var(--nome-do-token)`.
 
-| Token | Valor |
-|-------|-------|
-| `--font-family-jakarta` | Plus Jakarta Sans |
-| `--font-family-arial` | Arial (fallback) |
+---
 
-## Font Sizes
+## Família tipográfica
 
-<div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-  <span style={{ fontSize: 10 }}>10px — Caption (--font-size-10px)</span>
-  <span style={{ fontSize: 12 }}>12px — Small (--font-size-12px)</span>
-  <span style={{ fontSize: 14 }}>14px — Body Small (--font-size-14px)</span>
-  <span style={{ fontSize: 16 }}>16px — Body (--font-size-16px)</span>
-  <span style={{ fontSize: 20 }}>20px — Heading 5 (--font-size-20px)</span>
-  <span style={{ fontSize: 24 }}>24px — Heading 4 (--font-size-24px)</span>
-  <span style={{ fontSize: 32 }}>32px — Heading 3 (--font-size-32px)</span>
-  <span style={{ fontSize: 40 }}>40px — Heading 2 (--font-size-40px)</span>
-  <span style={{ fontSize: 48 }}>48px — Heading 1 (--font-size-48px)</span>
-</div>
+| Token | Valor | Uso |
+|---|---|---|
+| `--font-family-jakarta` | Plus Jakarta Sans | **Toda a UI** — títulos, corpo, labels, botões, inputs |
+| `--font-family-arial` | Arial | Fallback apenas — nunca especificar diretamente |
 
-## Font Weights
+---
 
-<div style={{ display: 'flex', flexDirection: 'column', gap: 12, fontSize: 20 }}>
-  <span style={{ fontWeight: 200 }}>Extra Light (200)</span>
-  <span style={{ fontWeight: 300 }}>Light (300)</span>
-  <span style={{ fontWeight: 400 }}>Regular (400)</span>
-  <span style={{ fontWeight: 500 }}>Medium (500)</span>
-  <span style={{ fontWeight: 600 }}>Semibold (600)</span>
-  <span style={{ fontWeight: 700 }}>Bold (700)</span>
-  <span style={{ fontWeight: 800 }}>Extra Bold (800)</span>
-</div>
+## Escala de tamanhos
+
+export const SizeRow = ({ token, size, usage }) => (
+  <div style={{ display: 'flex', alignItems: 'baseline', gap: 16, padding: '10px 0', borderBottom: '1px solid #f0ece0' }}>
+    <span style={{ fontFamily: 'Plus Jakarta Sans, sans-serif', fontSize: size, lineHeight: 1.2, minWidth: 280, color: '#10100f' }}>
+      Aa — {size}
+    </span>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <code style={{ fontSize: 12, color: '#403f3b' }}>{token}</code>
+      <span style={{ fontSize: 11, color: '#827f73' }}>{usage}</span>
+    </div>
+  </div>
+);
+
+<SizeRow token="--font-size-10px" size="10px" usage="Micro labels, badges, letras miúdas" />
+<SizeRow token="--font-size-12px" size="12px" usage="Captions, helper text, headers de tabela, timestamps" />
+<SizeRow token="--font-size-14px" size="14px" usage="⭐ Texto corpo padrão do ERP — células, valores de input" />
+<SizeRow token="--font-size-16px" size="16px" usage="Headers de seção, corpo enfatizado, labels de input" />
+<SizeRow token="--font-size-20px" size="20px" usage="Sub-headers de página, títulos de card" />
+<SizeRow token="--font-size-24px" size="24px" usage="Títulos de página, headers de modal" />
+<SizeRow token="--font-size-32px" size="32px" usage="Métricas de dashboard, números destaque" />
+<SizeRow token="--font-size-40px" size="40px" usage="Números grandes de exibição (raro)" />
+<SizeRow token="--font-size-48px" size="48px" usage="Headers de marketing (raro no ERP)" />
+<SizeRow token="--font-size-56px" size="56px" usage="Display — uso excepcional" />
+<SizeRow token="--font-size-64px" size="64px" usage="Display — uso excepcional" />
+
+---
+
+## Pesos
+
+export const WeightRow = ({ token, weight, label, usage }) => (
+  <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '8px 0', borderBottom: '1px solid #f0ece0' }}>
+    <span style={{ fontFamily: 'Plus Jakarta Sans, sans-serif', fontSize: 20, fontWeight: weight, minWidth: 200, color: '#10100f' }}>
+      Plus Jakarta Sans
+    </span>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <code style={{ fontSize: 12, color: '#403f3b' }}>{token}</code>
+      <span style={{ fontSize: 11, color: '#827f73' }}>{weight} — {label}{usage ? ` · ${usage}` : ''}</span>
+    </div>
+  </div>
+);
+
+<WeightRow token="--font-weight-extra-light" weight={200} label="Extra Light" usage="Apenas decorativo — evitar no ERP" />
+<WeightRow token="--font-weight-light"       weight={300} label="Light"       usage="Números grandes de exibição" />
+<WeightRow token="--font-weight-regular"     weight={400} label="Regular"     usage="⭐ Corpo padrão, descrições, células de tabela" />
+<WeightRow token="--font-weight-medium"      weight={500} label="Medium"      usage="Labels de input, labels de formulário, ênfase sutil" />
+<WeightRow token="--font-weight-semibold"    weight={600} label="Semibold"    usage="⭐ Headers, texto de botão, headers de tabela, badges" />
+<WeightRow token="--font-weight-bold"        weight={700} label="Bold"        usage="Títulos de página, ênfase forte, métricas" />
+<WeightRow token="--font-weight-extra-bold"  weight={800} label="Extra Bold"  usage="Apenas marketing — evitar no ERP" />
+
+---
+
+## Alturas de linha
+
+| Token | Valor | Usar com tamanho |
+|---|---|---|
+| `--font-line-height-12px` | 12px | 10px e 12px (compacto) |
+| `--font-line-height-14px` | 14px | 12px (alternativo) |
+| `--font-line-height-16px` | 16px | 12px (mais espaço) |
+| `--font-line-height-18px` | 18px | 12px com respiro extra |
+| `--font-line-height-20px` | 20px | ⭐ 14px — corpo padrão |
+| `--font-line-height-24px` | 24px | 16px |
+| `--font-line-height-30px` | 30px | 20px |
+| `--font-line-height-32px` | 32px | 24px |
+| `--font-line-height-40px` | 40px | 32px |
+| `--font-line-height-48px` | 48px | 40px |
+
+---
+
+## Papéis de texto
+
+Cada elemento de texto na UI tem um **papel semântico**. Use as combinações abaixo como ponto de partida — nunca confie nos defaults do navegador.
+
+export const RoleRow = ({ role, size, weight, lineHeight, color, cssClass, usage }) => (
+  <div style={{ display: 'grid', gridTemplateColumns: '140px 1fr 2fr', gap: 16, alignItems: 'center', padding: '10px 0', borderBottom: '1px solid #f0ece0' }}>
+    <span style={{ fontFamily: 'Plus Jakarta Sans, sans-serif', fontSize: size, fontWeight: weight, lineHeight: lineHeight + 'px', color: color || '#10100f' }}>
+      {role}
+    </span>
+    <code style={{ fontSize: 11, color: '#403f3b' }}>{cssClass}</code>
+    <span style={{ fontSize: 11, color: '#827f73' }}>{size}px / {weight} / lh {lineHeight}px — {usage}</span>
+  </div>
+);
+
+<RoleRow role="Heading"       size={24} weight={700} lineHeight={32} cssClass=".heading"      usage="Título principal da tela" />
+<RoleRow role="Subheading"    size={14} weight={400} lineHeight={20} color="#827f73" cssClass=".subheading"   usage="Texto de apoio abaixo do Heading" />
+<RoleRow role="Section Title" size={16} weight={600} lineHeight={24} cssClass=".sectionTitle"  usage="Título de seção ou grupo" />
+<RoleRow role="Body"          size={14} weight={400} lineHeight={20} cssClass=".body"          usage="Parágrafo de conteúdo" />
+<RoleRow role="Label"         size={14} weight={500} lineHeight={20} color="#403f3b" cssClass=".label"         usage="Rótulo de campo de formulário" />
+<RoleRow role="Helper"        size={12} weight={400} lineHeight={16} color="#827f73" cssClass=".helper"        usage="Texto auxiliar abaixo de campos" />
+<RoleRow role="Error"         size={12} weight={400} lineHeight={16} color="#e64e36" cssClass=".error"         usage="Mensagem de erro de validação" />
+<RoleRow role="Caption"       size={12} weight={400} lineHeight={16} color="#827f73" cssClass=".caption"       usage="Timestamps, metadados, rodapés" />
+<RoleRow role="CTA Label"     size={14} weight={600} lineHeight={20} color="#0a4ee4" cssClass=".ctaLabel"      usage="Texto dentro de botão" />
+<RoleRow role="Link"          size={14} weight={400} lineHeight={20} color="#0a4ee4" cssClass=".link"          usage="Texto clicável inline" />
+
+### Casos especiais
+
+| Elemento | Tamanho | Peso | Altura | Cor |
+|---|---|---|---|---|
+| Header de tabela | 12px | semibold (600) | 16px | `--color-gray-gray-600` |
+| Badge / Tag | 12px | semibold (600) | 16px | (cor do badge) |
+| Métrica (dashboard) | 32px | bold (700) | 40px | `--color-gray-gray-900` |
+| Placeholder de input | 12px | regular (400) | 16px | `--color-gray-gray-400` |
+
+---
+
+## Exemplo de código
+
+```css
+.heading {
+  font-family: var(--font-family-jakarta), sans-serif;
+  font-size: var(--font-size-24px);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-line-height-32px);
+  color: var(--color-gray-gray-900);
+}
+
+.body {
+  font-family: var(--font-family-jakarta), sans-serif;
+  font-size: var(--font-size-14px);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-line-height-20px);
+  color: var(--color-gray-gray-900);
+}
+
+.label {
+  font-family: var(--font-family-jakarta), sans-serif;
+  font-size: var(--font-size-14px);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--font-line-height-20px);
+  color: var(--color-gray-gray-700);
+}
+
+.error {
+  font-family: var(--font-family-jakarta), sans-serif;
+  font-size: var(--font-size-12px);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-line-height-16px);
+  color: var(--color-red-red-500);
+}
+```
