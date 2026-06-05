@@ -1,6 +1,18 @@
-# Olist Design System — Especialista (v3.0)
+# Olist Design System — Especialista (v3.1)
 
 Skill corporativa para criação de telas, componentes e protótipos a partir de SDDs/PRDs usando o design system da Olist.
+
+## Novidades v3.1 (2026-06-05)
+
+### Harness de construção de telas (`HARNESS_TELAS.md`):
+- Gate pré-construção obrigatório antes de qualquer frame no Figma
+- Restrições binárias por zona (A–E) para ERP e Envios/Hub/Conta Digital
+- Limites quantitativos por componente (ex: máx 1 `Button` primary por tela)
+- Contextos válidos e proibidos por componente
+- Harness de primitivos (o que pode e não pode ser construído do zero)
+- Padrão de nomenclatura de layers obrigatório
+- Estados mínimos obrigatórios por padrão de página
+- Formato padronizado para reportar conflitos com o harness
 
 ## Novidades v3.0 (2026-06-03)
 
@@ -25,7 +37,7 @@ Skill corporativa para criação de telas, componentes e protótipos a partir de
 
 ```
 olist-ds-specialist/
-├── SKILL.md                           # Instruções, workflow, regras v3.0
+├── SKILL.md                           # Instruções, workflow, regras v3.1
 ├── README.md                          # Este arquivo
 ├── SETUP.md                           # Guia de instalação
 ├── figma-config.json                  # Libraries autorizadas (libraryKeys)
@@ -33,6 +45,7 @@ olist-ds-specialist/
     ├── VISAO_GERAL.md                 # Mapa de navegação
     ├── FIGMA_CONFIG.md                # libraryKeys, workflow de busca e import
     ├── TEMPLATES_PRODUTO.md           # Zonas de layout por produto (ERP, Envios, Hub, CD)
+    ├── HARNESS_TELAS.md               # Restrições executáveis de construção de telas ← novo
     ├── CORES.md                       # Sistema de cores
     ├── TIPOGRAFIA.md                  # Tokens de tipografia
     ├── GLOSSARIO_PAPEIS_TEXTO.md      # 10 papéis de texto
@@ -80,7 +93,7 @@ Settings → Customize → Skills → Upload pasta.
 Use $olist-ds-specialist para criar UI no Figma:
 [SDD aqui]
 ```
-Claude busca componentes nas libraries autorizadas → importa instâncias reais → constrói via `use_figma` → retorna screenshot + link.
+Claude executa o gate do harness → busca componentes nas libraries autorizadas → importa instâncias reais → constrói via `use_figma` → retorna screenshot + link.
 
 ### Criar tela React
 ```
@@ -100,6 +113,12 @@ Sincronize o registry de componentes
 ```
 
 ## Changelog
+
+### v3.1 (2026-06-05)
+- **Harness:** `HARNESS_TELAS.md` adicionado como gate pré-construção obrigatório no Figma
+- Gate com 6 itens binários executados antes de qualquer frame
+- Restrições de zona, componente, primitivo, nomenclatura e estados por padrão de página
+- 14 arquivos de referência ativos
 
 ### v3.0 (2026-06-03)
 - **Canal de entrega:** `use_figma` direto com instâncias DS reais (plugin intermediário descontinuado)

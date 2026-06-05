@@ -25,7 +25,7 @@ Execute este gate antes de criar qualquer frame. Se qualquer item falhar, **reso
 ```
 [ ] 1. Template identificado (erp | envios | conta-digital | hub)?
 [ ] 2. Todas as zonas necessárias mapeadas pelo template?
-[ ] 3. Padrão de página da Zona D identificado (Tabela | Form | Dashboard | Detalhe | Empty)?
+[ ] 3. Padrão de página da Zona D (Content Area) identificado (Tabela | Form | Dashboard | Detalhe | Empty)?
 [ ] 4. Componentes necessários têm componentKey válido nas libraries autorizadas?
 [ ] 5. Nenhuma regra de limite por tela será violada (ver Seção 2)?
 [ ] 6. Componentes ausentes identificados e marcados como "— custom" (ver Seção 4)?

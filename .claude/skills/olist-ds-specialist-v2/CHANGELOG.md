@@ -1,3 +1,16 @@
+## v3.1 (2026-06-05)
+- **Harness:** `HARNESS_TELAS.md` adicionado como gate pré-construção obrigatório no fluxo Figma
+- Gate com 6 itens binários — o Claude só avança para criação de frames se todos forem marcados
+- Restrições de zona por template (ERP e Envios/Hub/Conta Digital): colunas "Pode conter" e "Não pode conter" para cada zona A–E
+- Limites quantitativos por componente (ex: máx 1 `Button` primary por tela, máx 1 `Heading` por tela)
+- Tabela de contextos válidos e proibidos por componente
+- Harness de primitivos: define o que pode ser construído do zero e configuração obrigatória de cada primitivo
+- Padrão de nomenclatura de layers obrigatório com formato e exemplos
+- Estados mínimos obrigatórios por padrão de página (Tabela, Form, Dashboard, Detalhe, Empty State)
+- Regras específicas para skeleton loading
+- Formato padronizado para reportar conflitos com o harness (Seção 8)
+- `SKILL.md` atualizado para v3.1: harness integrado no fluxo de decisão, tabela de referências e Caso 4
+
 ## v3.0 (2026-06-03)
 - Remoção do workflow de plugin JSON intermediário — `use_figma` como canal único
 - **AI Components** como library master com preferência absoluta sobre ERP components
