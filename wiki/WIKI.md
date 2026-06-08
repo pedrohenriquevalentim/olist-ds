@@ -1,7 +1,7 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.20`  
-**Skill:** v3.0  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.21`  
+**Skill:** v3.1  
 **Última atualização:** 2026-06-05  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
@@ -36,8 +36,8 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Ícones SVG | 550 |
 | Arquivos da Skill | 20 |
 | Arquivos Figma permitidos | 5 |
-| Versão npm | 1.0.20 |
-| Versão skill | 3.0 |
+| Versão npm | 1.0.21 |
+| Versão skill | 3.1 |
 
 ## Componentes
 
@@ -72,7 +72,7 @@ npm run release
     │
     ├── 1. generate:all (testes + stories via Gemini)
     ├── 2. build (compilação TypeScript)
-    ├── 3. sync:skill (atualiza skill v3.0)
+    ├── 3. sync:skill (atualiza skill v3.1)
     ├── 4. npm version patch (incrementa versão)
     ├── 5. npm publish (publica no registry)
     └── 6. git push --follow-tags
@@ -118,7 +118,7 @@ npm run release
 
 ## Skill Claude
 
-### Versão: v3.0
+### Versão: v3.1
 
 **Localização:** `.claude/skills/olist-ds-specialist-v2/`
 
@@ -173,7 +173,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 2. Customize → Skills → Upload → selecionar pasta da skill
 3. Iniciar conversa e colar o SDD ou link do Figma
 
-### Regras Críticas v3.0
+### Regras Críticas v3.1
 
 ### ✅ Sempre Faça:
 
@@ -182,33 +182,33 @@ Use $olist-ds-specialist para criar a tela deste SDD:
    - Use `searchPriority` como `includeLibraryKeys` em todo `search_design_system`
    - Respeite a ordem: AI Components > ERP components > ERP recursos > ERP style guide > [DS] components web
    - Ignore resultados de `blockedLibraries`
-3. **MANDATO DE COMPONENTES — aplica a CADA elemento UI criado no Figma:**
-   - Antes de criar qualquer frame, shape ou texto que represente um componente de UI, chame `search_design_system` com `includeLibraryKeys: searchPriority`
-   - Se encontrado: importe e use a instância real — mesmo que o text override falhe ou o variant não seja perfeito. **Componente DS imperfeito é sempre preferível a um primitivo perfeito.**
-   - Só crie primitivos com tokens DS para elementos **sem correspondência em nenhuma das 5 libraries**; nesse caso, documente explicitamente: `"[NomeDoElemento] — custom: não encontrado no DS"`
+3. **Leia `HARNESS_TELAS.md` antes de criar qualquer frame no Figma:**
+   - Execute o gate pré-construção (Seção 1) — só avance com todos os itens marcados
+   - Verifique limites por tela (Seção 2) antes de instanciar componentes
+   - Identifique o padrão da Zona D (Seção 3) antes de montar o conteúdo
+   - Reporte conflitos com o harness antes de criar, nunca depois
 4. **Consulte `GLOSSARIO_PAPEIS_TEXTO.md` antes de nomear textos**
    - Se o SDD diz "título da página" → use **Heading**
    - Se o SDD diz "mensagem de erro" → use **Error**
-4. **Leia `SDD_AVANCADO.md` se o SDD tiver:**
+5. **Leia `SDD_AVANCADO.md` se o SDD tiver:**
    - Requisitos Não Funcionais (RNF), DACI, Métricas, Rollout, Observabilidade
-5. **Use os passos 1-10 de `SDD_PARA_TELA.md`** ao traduzir SDDs completos
-6. **No Figma, sempre use workflow faseado:**
+6. **Use os passos 1-10 de `SDD_PARA_TELA.md`** ao traduzir SDDs completos
+7. **No Figma, sempre use workflow faseado:**
    - Liste todas as telas ANTES de criar → aguarde validação
    - Crie tela por tela com `use_figma`, aguardando feedback a cada entrega
-7. **Sempre defina `layoutSizing` APÓS `appendChild`** (regra crítica da Figma Plugin API)
-8. **Valores válidos de `counterAxisAlignItems`:** `MIN` `MAX` `CENTER` `BASELINE` (sem STRETCH, sem END)
+8. **Sempre defina `layoutSizing` APÓS `appendChild`** (regra crítica da Figma Plugin API)
+9. **Valores válidos de `counterAxisAlignItems`:** `MIN` `MAX` `CENTER` `BASELINE` (sem STRETCH, sem END)
 
 ### ❌ Nunca Faça:
 
 1. **Buscar componentes sem filtrar por `includeLibraryKeys`**
 2. **Usar libraries de `blockedLibraries`** mesmo que apareçam em buscas
-3. **Criar elementos UI manualmente sem antes buscar** — não há exceção para "é mais rápido do zero": Button, Tag, ícones, inputs, chips, badges, menus e qualquer elemento reconhecível do DS devem sempre ser buscados primeiro
-4. **Substituir um componente DS por primitivo** porque o text override é difícil ou o variant não é exato — use o componente real mesmo imperfeito; ajuste o que for possível via `setProperties` ou override de texto
-5. **Inventar nomes de papéis de texto** fora de `GLOSSARIO_PAPEIS_TEXTO.md`
-6. **Ignorar RNFs** — eles afetam UI (skeleton loaders, permissões, etc.)
-7. **Usar o plugin Figma intermediário** — o canal de entrega é sempre `use_figma` direto
-8. **Criar todas as telas de uma vez** — sempre use workflow faseado (tela por tela)
-9. **Hardcodar cores, fontes ou espaçamentos** — sempre usar tokens DS
+3. **Construir elementos UI do zero** quando o componente DS existe (Button, Tag, Menu ERP, etc.)
+4. **Inventar nomes de papéis de texto** fora de `GLOSSARIO_PAPEIS_TEXTO.md`
+5. **Ignorar RNFs** — eles afetam UI (skeleton loaders, permissões, etc.)
+6. **Usar o plugin Figma intermediário** — o canal de entrega é sempre `use_figma` direto
+7. **Criar todas as telas de uma vez** — sempre use workflow faseado (tela por tela)
+8. **Hardcodar cores, fontes ou espaçamentos** — sempre usar tokens DS
 
 ## Sistema de Ícones
 
@@ -312,7 +312,7 @@ echo '.claude/figma-config.json' >> .gitignore
 
 ```bash
 cd .claude/skills
-zip -r olist-ds-specialist-v3.0.zip olist-ds-specialist-v2/
+zip -r olist-ds-specialist-v3.1.zip olist-ds-specialist-v2/
 ```
 
 ### O Que NÃO Vai
@@ -326,7 +326,7 @@ zip -r olist-ds-specialist-v3.0.zip olist-ds-specialist-v2/
 
 ```bash
 # 1. Extrair e copiar skill
-unzip olist-ds-specialist-v3.0.zip
+unzip olist-ds-specialist-v3.1.zip
 cp -r olist-ds-specialist-v2/ .claude/skills/olist-ds-specialist-v2/
 
 # 2. Configurar Figma
@@ -368,10 +368,23 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 1. `.claude/figma-config.json` existe?
 2. `searchPriority` tem os libraryKeys corretos?
-3. Skill v3.0 instalada?
+3. Skill v3.1 instalada?
 4. O prompt inclui instrução para ler `figma-config.json` antes do Figma MCP?
 
 ## Changelog
+
+## v3.1 (2026-06-05)
+- **Harness:** `HARNESS_TELAS.md` adicionado como gate pré-construção obrigatório no fluxo Figma
+- Gate com 6 itens binários — o Claude só avança para criação de frames se todos forem marcados
+- Restrições de zona por template (ERP e Envios/Hub/Conta Digital): colunas "Pode conter" e "Não pode conter" para cada zona A–E
+- Limites quantitativos por componente (ex: máx 1 `Button` primary por tela, máx 1 `Heading` por tela)
+- Tabela de contextos válidos e proibidos por componente
+- Harness de primitivos: define o que pode ser construído do zero e configuração obrigatória de cada primitivo
+- Padrão de nomenclatura de layers obrigatório com formato e exemplos
+- Estados mínimos obrigatórios por padrão de página (Tabela, Form, Dashboard, Detalhe, Empty State)
+- Regras específicas para skeleton loading
+- Formato padronizado para reportar conflitos com o harness (Seção 8)
+- `SKILL.md` atualizado para v3.1: harness integrado no fluxo de decisão, tabela de referências e Caso 4
 
 ## v3.0 (2026-06-03)
 - Remoção do workflow de plugin JSON intermediário — `use_figma` como canal único
