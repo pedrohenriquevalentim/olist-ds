@@ -1,4 +1,4 @@
-# Setup — Olist DS Specialist Skill v3.0
+# Setup — Olist DS Specialist Skill v3.2
 
 Siga este guia para instalar e configurar a skill no seu projeto.
 
@@ -20,7 +20,7 @@ Siga este guia para instalar e configurar a skill no seu projeto.
 unzip olist-ds-specialist-v3.zip
 ```
 
-Você verá a pasta `olist-ds-specialist/` com todos os arquivos.
+Você verá a pasta `olist-ds-specialist-v3.2/` com todos os arquivos.
 
 ---
 
@@ -28,7 +28,7 @@ Você verá a pasta `olist-ds-specialist/` com todos os arquivos.
 
 ```bash
 mkdir -p .claude/skills
-cp -r olist-ds-specialist/ .claude/skills/olist-ds-specialist/
+cp -r olist-ds-specialist-v3.2/ .claude/skills/olist-ds-specialist-v3.2/
 ```
 
 ---
@@ -41,7 +41,7 @@ Na maioria dos casos, **não é necessário editar nada** — as libraryKeys sã
 ### Verificar o arquivo:
 
 ```bash
-cat .claude/skills/olist-ds-specialist/figma-config.json
+cat .claude/skills/olist-ds-specialist-v3.2/figma-config.json
 ```
 
 Confirme que `searchPriority` tem 5 entradas começando com `lk-`.
@@ -80,36 +80,41 @@ echo '.claude/figma-config.json' >> .gitignore
 seu-projeto/
 ├── .claude/
 │   └── skills/
-│       └── olist-ds-specialist/
+│       └── olist-ds-specialist-v3.2/
 │           ├── SKILL.md
 │           ├── README.md
 │           ├── SETUP.md
-│           ├── figma-config.json       ← Libraries autorizadas (libraryKeys)
+│           ├── CHANGELOG.md
+│           ├── component-registry.json
+│           ├── figma-config.json
 │           └── references/
-│               ├── VISAO_GERAL.md
-│               ├── FIGMA_CONFIG.md
-│               ├── TEMPLATES_PRODUTO.md
-│               ├── CORES.md
-│               ├── TIPOGRAFIA.md
-│               ├── GLOSSARIO_PAPEIS_TEXTO.md
-│               ├── ESPACAMENTO.md
+│               ├── CHECKLIST_REVISAO.md
 │               ├── COMPONENTES.md
-│               ├── PADROES.md
-│               ├── SDD_PARA_TELA.md
-│               ├── SDD_AVANCADO.md
+│               ├── CORES.md
+│               ├── ESPACAMENTO.md
+│               ├── FIGMA_CONFIG.md
+│               ├── GLOSSARIO_PAPEIS_TEXTO.md
+│               ├── HARNEES_TELAS.md
 │               ├── MAPA_FONTES.md
-│               └── CHECKLIST_REVISAO.md
+│               ├── PADROES.md
+│               ├── SDD_AVANCADO.md
+│               ├── SDD_PARA_TELA.md
+│               ├── TEMPLATES_PRODUTO.md
+│               ├── TIPOGRAFIA.md
+│               ├── UX_WRITING.md
+│               └── VISAO_GERAL.md
 └── .gitignore
 ```
+
 
 ### Checklist rápido:
 
 ```bash
 # Skill instalada?
-ls .claude/skills/olist-ds-specialist/SKILL.md
+ls .claude/skills/olist-ds-specialist-v3.2/SKILL.md
 
 # Config com libraryKeys?
-grep "lk-" .claude/skills/olist-ds-specialist/figma-config.json | head -3
+grep "lk-" .claude/skills/olist-ds-specialist-v3.2/figma-config.json | head -3
 ```
 
 Ambos devem retornar resultado. Se algum falhar, revise o passo correspondente.
@@ -128,14 +133,14 @@ claude
 Depois digite:
 
 ```
-Use $olist-ds-specialist para criar a tela de upgrade de planos no Figma
+Use $olist-ds-specialist-v3.2 para criar a tela de upgrade de planos no Figma
 ```
 
 ### No Claude.ai (navegador):
 
 1. Abrir Claude.ai
 2. Customize → Skills → Upload
-3. Selecionar pasta `olist-ds-specialist/`
+3. Selecionar pasta `olist-ds-specialist-v3.2/`
 4. Ativar a skill
 5. Usar normalmente em qualquer conversa
 
@@ -172,7 +177,7 @@ Claude constrói o elemento com primitivos seguindo os tokens do DS e documenta 
 Verifique se a pasta está no caminho correto:
 
 ```bash
-ls .claude/skills/olist-ds-specialist/SKILL.md
+ls .claude/skills/olist-ds-specialist-v3.2/SKILL.md
 ```
 
 Se não existir, repita o Passo 2.

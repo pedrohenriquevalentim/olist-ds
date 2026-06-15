@@ -201,21 +201,76 @@ ${tree}
 > **Raiz:** ${rootFiles.length} arquivo(s) · **Referências:** ${refFiles.length} arquivo(s) · **Total:** ${rootFiles.length + refFiles.length} arquivo(s) — atualizado automaticamente pelo \`sync-skill-meta.mjs\``;
 }
 
+function replaceStructureBlock(content, skillDir, dirName, version) {
+  const newSection = buildStructureSection(skillDir, dirName, version);
+  const structureRe = /^## Estrutura[\s\S]*?(?=\n## |\n---\n|$)/m;
+  if (structureRe.test(content)) return content.replace(structureRe, newSection);
+  return content.replace(/^## Libraries/m, `${newSection}\n\n## Libraries`);
+}
+
 function updateReadmeStructure(readmePath, skillDir, dirName, version) {
   if (!existsSync(readmePath)) return;
-  let content = readFileSync(readmePath, 'utf-8');
-  const newSection = buildStructureSection(skillDir, dirName, version);
+  const content = replaceStructureBlock(readFileSync(readmePath, 'utf-8'), skillDir, dirName, version);
+  writeFileSync(readmePath, content, 'utf-8');
+}
 
-  // Substitui todo o bloco ## Estrutura ... até o próximo ## (ou fim)
-  const structureRe = /^## Estrutura[\s\S]*?(?=\n## |\n---\n|$)/m;
-  if (structureRe.test(content)) {
-    content = content.replace(structureRe, newSection);
-  } else {
-    // Insere antes de ## Libraries se não existir
-    content = content.replace(/^## Libraries/m, `${newSection}\n\n## Libraries`);
+function updateSetupMd(setupPath, skillDir, dirName, version) {
+  if (!existsSync(setupPath)) return;
+  let content = readFileSync(setupPath, 'utf-8');
+
+  // 1. Atualiza título com versão atual
+  content = content.replace(
+    /# Setup — Olist DS Specialist Skill v[\d.]+/,
+    `# Setup — Olist DS Specialist Skill v${version}`
+  );
+
+  // 2. Substitui todas as ocorrências do nome genérico pelo nome versionado
+  content = content.replace(/olist-ds-specialist(?!-v)/g, dirName);
+
+  // 3. Substitui a estrutura esperada (bloco entre "### Estrutura esperada:" e o próximo "###" ou "---")
+  const setupStructureRe = /### Estrutura esperada:[\s\S]*?(?=\n### |\n---\n)/m;
+  if (setupStructureRe.test(content)) {
+    const refsDir = join(skillDir, 'references');
+    const refFiles = existsSync(refsDir)
+      ? readdirSync(refsDir).filter(f => f.endsWith('.md')).sort()
+      : [];
+    const refLines = refFiles.map((f, i) =>
+      `│               ${i === refFiles.length - 1 ? '└──' : '├──'} ${f}`
+    ).join('\n');
+
+    const newBlock = `### Estrutura esperada:
+
+\`\`\`
+seu-projeto/
+├── .claude/
+│   └── skills/
+│       └── ${dirName}/
+│           ├── SKILL.md
+│           ├── README.md
+│           ├── SETUP.md
+│           ├── CHANGELOG.md
+│           ├── component-registry.json
+│           ├── figma-config.json
+│           └── references/
+${refLines}
+└── .gitignore
+\`\`\`
+
+`;
+    content = content.replace(setupStructureRe, newBlock);
   }
 
-  writeFileSync(readmePath, content, 'utf-8');
+  // 4. Corrige os comandos de checklist que referenciam o nome da pasta
+  content = content.replace(
+    /ls \.claude\/skills\/[^/\s]+\/SKILL\.md/g,
+    `ls .claude/skills/${dirName}/SKILL.md`
+  );
+  content = content.replace(
+    /grep "lk-" \.claude\/skills\/[^/\s]+\/figma-config\.json/g,
+    `grep "lk-" .claude/skills/${dirName}/figma-config.json`
+  );
+
+  writeFileSync(setupPath, content, 'utf-8');
 }
 
 // ── 6. Atualiza o README.md ──────────────────────────────────────────────────
@@ -333,6 +388,11 @@ if (skillVersion !== readmeVersion) {
 // 4b. Atualiza seção ## Estrutura com lista real de arquivos
 updateReadmeStructure(readmePath, skillDir, expectedDirName, skillVersion);
 console.log(`   ✅ README.md — seção Estrutura regenerada`);
+
+// 4c. Atualiza SETUP.md (versão, caminhos e estrutura esperada)
+const setupPath = join(skillDir, 'SETUP.md');
+updateSetupMd(setupPath, skillDir, expectedDirName, skillVersion);
+console.log(`   ✅ SETUP.md — versão, caminhos e estrutura atualizados`);
 
 // 5. Regenera Wiki
 console.log('');
