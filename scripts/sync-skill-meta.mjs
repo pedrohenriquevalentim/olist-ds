@@ -126,6 +126,98 @@ function readReadmeVersion(readmePath) {
   return match ? match[1] : null;
 }
 
+// ── 5b. Gera a seção ## Estrutura dinamicamente ──────────────────────────────
+
+// Descrições conhecidas para cada arquivo da skill
+const FILE_DESCRIPTIONS = {
+  // Raiz
+  'SKILL.md':               'Instruções, workflow, regras e fluxo de decisão',
+  'README.md':              'Este arquivo — visão geral e changelog',
+  'SETUP.md':               'Guia de instalação e configuração',
+  'CHANGELOG.md':           'Histórico de versões da skill',
+  'figma-config.json':      'Libraries autorizadas (libraryKeys e searchPriority)',
+  'component-registry.json':'Cache local de componentKeys por categoria',
+  // References
+  'VISAO_GERAL.md':         'Mapa de navegação — leia sempre primeiro',
+  'FIGMA_CONFIG.md':        'libraryKeys, workflow de busca e import',
+  'TEMPLATES_PRODUTO.md':   'Zonas de layout por produto (ERP, Envios, Hub, CD)',
+  'HARNEES_TELAS.md':       'Gate pré-construção: restrições por zona, limites por componente',
+  'HARNESS_TELAS.md':       'Gate pré-construção: restrições por zona, limites por componente',
+  'CORES.md':               'Sistema de cores com regras de uso',
+  'TIPOGRAFIA.md':          'Tokens de tipografia (tamanho, peso, altura)',
+  'GLOSSARIO_PAPEIS_TEXTO.md': '10 papéis de texto (Heading, Label, Error, etc.)',
+  'UX_WRITING.md':          'Tom de voz, 4 pilares, 12 tipos de texto, diretrizes B2B/B2C',
+  'ESPACAMENTO.md':         'Grid de 4px, border-radius, escala de espaçamento',
+  'COMPONENTES.md':         'Props e variantes de cada componente (auto-gerado)',
+  'PADROES.md':             '5 padrões de página (Tabela, Form, Dashboard, Detalhe, Config)',
+  'MAPA_FONTES.md':         'Estrutura de pastas do repositório (auto-gerado)',
+  'SDD_PARA_TELA.md':       '10 passos para traduzir SDD/PRD em decisões de UI',
+  'SDD_AVANCADO.md':        'RNFs, DACI, Métricas, Rollout, Observabilidade → UI',
+  'CHECKLIST_REVISAO.md':   '10 categorias de revisão visual, acessibilidade e UX Writing',
+};
+
+function buildStructureSection(skillDir, dirName, version) {
+  const refsDir = join(skillDir, 'references');
+
+  // Arquivos raiz (excluindo pasta references e .DS_Store)
+  const rootFiles = readdirSync(skillDir)
+    .filter(f => !statSync(join(skillDir, f)).isDirectory() && f !== '.DS_Store')
+    .sort();
+
+  // Arquivos de referências
+  const refFiles = existsSync(refsDir)
+    ? readdirSync(refsDir).filter(f => f.endsWith('.md')).sort()
+    : [];
+
+  const descOf = (name) => FILE_DESCRIPTIONS[name] ?? '';
+
+  // Monta árvore ASCII
+  const rootLines = rootFiles.map((f, i) => {
+    const isLast = i === rootFiles.length - 1 && refFiles.length === 0;
+    const prefix = isLast ? '└──' : '├──';
+    const desc = descOf(f);
+    return `${prefix} ${f}${desc ? `                           `.slice(f.length) + `# ${desc}` : ''}`;
+  });
+
+  const refLines = refFiles.map((f, i) => {
+    const isLast = i === refFiles.length - 1;
+    const prefix = isLast ? '    └──' : '    ├──';
+    const desc = descOf(f);
+    return `${prefix} ${f}${desc ? `                                `.slice(f.length) + `# ${desc}` : ''}`;
+  });
+
+  const tree = [
+    `${dirName}/`,
+    ...rootLines,
+    ...(refFiles.length > 0 ? [`└── references/`, ...refLines] : []),
+  ].join('\n');
+
+  return `## Estrutura
+
+\`\`\`
+${tree}
+\`\`\`
+
+> **Raiz:** ${rootFiles.length} arquivo(s) · **Referências:** ${refFiles.length} arquivo(s) · **Total:** ${rootFiles.length + refFiles.length} arquivo(s) — atualizado automaticamente pelo \`sync-skill-meta.mjs\``;
+}
+
+function updateReadmeStructure(readmePath, skillDir, dirName, version) {
+  if (!existsSync(readmePath)) return;
+  let content = readFileSync(readmePath, 'utf-8');
+  const newSection = buildStructureSection(skillDir, dirName, version);
+
+  // Substitui todo o bloco ## Estrutura ... até o próximo ## (ou fim)
+  const structureRe = /^## Estrutura[\s\S]*?(?=\n## |\n---\n|$)/m;
+  if (structureRe.test(content)) {
+    content = content.replace(structureRe, newSection);
+  } else {
+    // Insere antes de ## Libraries se não existir
+    content = content.replace(/^## Libraries/m, `${newSection}\n\n## Libraries`);
+  }
+
+  writeFileSync(readmePath, content, 'utf-8');
+}
+
 // ── 6. Atualiza o README.md ──────────────────────────────────────────────────
 
 function readChangelogForVersion(changelogPath, version) {
@@ -237,6 +329,10 @@ if (skillVersion !== readmeVersion) {
 } else {
   console.log(`   ✅ README já está na versão v${skillVersion}`);
 }
+
+// 4b. Atualiza seção ## Estrutura com lista real de arquivos
+updateReadmeStructure(readmePath, skillDir, expectedDirName, skillVersion);
+console.log(`   ✅ README.md — seção Estrutura regenerada`);
 
 // 5. Regenera Wiki
 console.log('');

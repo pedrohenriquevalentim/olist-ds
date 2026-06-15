@@ -26,7 +26,7 @@
  */
 
 import { readdirSync, readFileSync, writeFileSync, statSync, existsSync, mkdirSync } from 'fs';
-import { join } from 'path';
+import { join, basename } from 'path';
 
 const ROOT = process.cwd();
 const WIKI_DIR = join(ROOT, 'wiki');
@@ -272,7 +272,7 @@ function readChangelog() {
 
 section('Skill Claude', `### Versão: v${skillVersion}
 
-**Localização:** \`.claude/skills/olist-ds-specialist-v3.2/\`
+**Localização:** \`.claude/skills/${basename(SKILL_DIR)}/\`
 
 ### Arquivos da Skill (${skillRootFiles.length + skillRefFiles.length} total)
 
