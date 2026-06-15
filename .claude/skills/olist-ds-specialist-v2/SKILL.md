@@ -1,6 +1,6 @@
 ---
 name: olist-ds-specialist
-description: Use esta skill para TODO trabalho de UI/UX da Olist — criação de telas a partir de SDDs/PRDs, geração de componentes React, revisão de consistência visual, criação de protótipos no Figma e manutenção do design system. Acione quando alguém mencionar interface Olist, design system, tokens, componentes, telas, layouts, SDD, PRD, protótipo, wireframe, Figma, Storybook ou qualquer tarefa de criação ou revisão de UI para produtos Olist. NÃO use para backend, APIs, banco de dados, autenticação ou lógica de negócio sem relação com UI.
+description: Use esta skill para TODO trabalho de UI/UX da Olist — criação de telas a partir de SDDs/PRDs, geração de componentes React, revisão de consistência visual, criação de protótipos no Figma, manutenção do design system e criação/revisão de textos de UI (UX Writing, copy, tom de voz). Acione quando alguém mencionar interface Olist, design system, tokens, componentes, telas, layouts, SDD, PRD, protótipo, wireframe, Figma, Storybook, copy, texto de botão, mensagem de erro, empty state, toast, label, placeholder ou qualquer tarefa de criação ou revisão de UI/copy para produtos Olist. NÃO use para backend, APIs, banco de dados, autenticação ou lógica de negócio sem relação com UI.
 version: 3.1
 ---
 
@@ -116,8 +116,16 @@ Qual tipo de tarefa?
     │   → Ler CORES.md + TIPOGRAFIA.md + GLOSSARIO_PAPEIS_TEXTO.md + ESPACAMENTO.md
     │   → Ler COMPONENTES.md (verificar se já existe)
     │
+    ├── Criar ou revisar textos de UI (copy/UX Writing)
+    │   → Ler UX_WRITING.md (protocolo obrigatório: componente → contexto → objetivo)
+    │   → Validar contra Os 4 Pilares (Conciso, Claro, Significativo, Dialógico)
+    │   → Aplicar regras por tipo de texto (CTA, Label, Helper, Erro, Toast, etc.)
+    │   → Verificar tom correto: B2B (lojista) ou B2C (consumidor)
+    │   → Verificar nomenclatura de produtos Olist + abrasileiramento
+    │
     ├── Revisar tela existente
-    │   → Ler CHECKLIST_REVISAO.md + GLOSSARIO_PAPEIS_TEXTO.md
+    │   → Ler CHECKLIST_REVISAO.md (inclui seção 10 — UX Writing)
+    │   → Ler GLOSSARIO_PAPEIS_TEXTO.md + UX_WRITING.md
     │   → Ler MAPA_FONTES.md
     │
     └── Gerar testes/stories
@@ -156,7 +164,8 @@ Qual tipo de tarefa?
 | `MAPA_FONTES.md` | Antes de criar qualquer coisa | Caminhos reais dos arquivos |
 | `SDD_PARA_TELA.md` | Lendo SDDs/PRDs | 10 passos SDD → decisões de UI |
 | `SDD_AVANCADO.md` | SDDs com seções técnicas | RNFs, DACI, Métricas, Rollout, Observabilidade → UI |
-| `CHECKLIST_REVISAO.md` | Revisando telas | 9 categorias de revisão visual e acessibilidade |
+| `UX_WRITING.md` | **Ao criar ou revisar qualquer copy de UI** | Protocolo de triagem, 4 pilares, 12 tipos de texto, tom B2B/B2C, abrasileiramento, nomenclatura Olist |
+| `CHECKLIST_REVISAO.md` | Revisando telas | 9 categorias de revisão visual e acessibilidade + seção 10 de UX Writing |
 
 ## Regras Críticas v3.1
 
@@ -175,7 +184,11 @@ Qual tipo de tarefa?
 4. **Consulte `GLOSSARIO_PAPEIS_TEXTO.md` antes de nomear textos**
    - Se o SDD diz "título da página" → use **Heading**
    - Se o SDD diz "mensagem de erro" → use **Error**
-5. **Leia `SDD_AVANCADO.md` se o SDD tiver:**
+5. **Consulte `UX_WRITING.md` ao criar qualquer texto na UI:**
+   - Execute o protocolo de triagem (componente → contexto → objetivo)
+   - Valide contra Os 4 Pilares antes de finalizar qualquer copy
+   - Use a tabela de mapeamento SDD → Tipo de Texto para traduzir requisitos em copy
+6. **Leia `SDD_AVANCADO.md` se o SDD tiver:**
    - Requisitos Não Funcionais (RNF), DACI, Métricas, Rollout, Observabilidade
 6. **Use os passos 1-10 de `SDD_PARA_TELA.md`** ao traduzir SDDs completos
 7. **No Figma, sempre use workflow faseado:**
@@ -320,6 +333,7 @@ Erros comuns e suas correções — manter para evitar regressão:
 
 ---
 
-**Versão:** 3.1
-**Última atualização:** 2026-06-05
+**Versão:** 3.2
+**Última atualização:** 2026-06-15
+**Mudanças v3.2:** Adição do `UX_WRITING.md` como referência de copy e tom de voz; novo ramo no Fluxo de Decisão para criação/revisão de textos de UI; seção 10 de UX Writing no `CHECKLIST_REVISAO.md`; regra crítica 5 sobre consultar `UX_WRITING.md` ao criar textos.
 **Mudanças v3.1:** Adição do `HARNESS_TELAS.md` como gate pré-construção obrigatório no fluxo de criação de telas no Figma; integração nas regras críticas e no Caso 4.

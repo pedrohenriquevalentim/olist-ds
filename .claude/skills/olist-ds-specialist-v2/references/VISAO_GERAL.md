@@ -80,16 +80,21 @@ Para caminhos dos arquivos, leia `MAPA_FONTES.md`.
 3. `COMPONENTES.md` — verificar componentes disponíveis
 
 #### Revisando qualidade de UI:
-1. `CHECKLIST_REVISAO.md` — 9 categorias de revisão
+1. `CHECKLIST_REVISAO.md` — 9 categorias de revisão + UX Writing
 2. `CORES.md` — verificar uso correto de cores
 3. `TIPOGRAFIA.md` + `GLOSSARIO_PAPEIS_TEXTO.md` — verificar nomes e tokens de texto
+4. `UX_WRITING.md` — verificar tom, copy e diretrizes de escrita
+
+#### Criando ou revisando textos de UI (copy/UX Writing):
+1. `UX_WRITING.md` — protocolo de triagem, 4 pilares, 12 tipos de texto, regras por tipo
+2. `GLOSSARIO_PAPEIS_TEXTO.md` — papéis visuais de texto (Heading, Label, Error, etc.)
 
 #### Navegando no código-fonte:
 1. `MAPA_FONTES.md` — estrutura de pastas do repositório
 
 ---
 
-## Arquivos de Referência (14 total)
+## Arquivos de Referência (15 total)
 
 | Arquivo | O que contém | Quando consultar |
 |---|---|---|
@@ -98,14 +103,15 @@ Para caminhos dos arquivos, leia `MAPA_FONTES.md`.
 | **TEMPLATES_PRODUTO.md** | **Antes de criar telas no Figma** | Zonas de layout por produto (ERP, Envios, Hub, Conta Digital) |
 | **CORES.md** | Paleta de cores, regras, DO/DON'T | Ao escolher cores |
 | **TIPOGRAFIA.md** | Tokens de tipografia (tamanho, peso, altura) | Ao estilizar texto |
-| **GLOSSARIO_PAPEIS_TEXTO.md** | **NOVO** — Definição dos 10 papéis de texto (Heading, Label, etc.) | Ao nomear textos na UI |
+| **GLOSSARIO_PAPEIS_TEXTO.md** | Definição dos 10 papéis de texto (Heading, Label, etc.) | Ao nomear textos na UI |
+| **UX_WRITING.md** | **NOVO** — Protocolo de triagem, 4 pilares, 12 tipos de texto, tom B2B/B2C, abrasileiramento | Ao criar ou revisar qualquer copy de UI |
 | **ESPACAMENTO.md** | Grid de 4px, padding, margin | Ao definir layout |
 | **COMPONENTES.md** | Props, tokens, estados de cada componente | Ao usar/criar componentes |
 | **PADROES.md** | 5 padrões de página com ASCII diagrams | Ao criar telas completas |
 | **SDD_PARA_TELA.md** | 10 passos para traduzir SDD em UI | Ao ler SDD/PRD |
-| **SDD_AVANCADO.md** | **NOVO** — Traduzir seções avançadas do SDD (RNFs, DACI, Métricas, Rollout) | Ao ler SDDs complexos |
+| **SDD_AVANCADO.md** | Traduzir seções avançadas do SDD (RNFs, DACI, Métricas, Rollout) | Ao ler SDDs complexos |
 | **MAPA_FONTES.md** | Estrutura de pastas do repositório | Ao navegar no código |
-| **CHECKLIST_REVISAO.md** | 9 categorias de revisão de qualidade | Ao revisar UI |
+| **CHECKLIST_REVISAO.md** | 9 categorias de revisão de qualidade + UX Writing | Ao revisar UI |
 
 ---
 

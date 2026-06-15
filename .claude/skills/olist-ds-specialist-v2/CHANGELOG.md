@@ -1,3 +1,18 @@
+## v3.2 (2026-06-15)
+- **UX Writing:** `UX_WRITING.md` adicionado como referência de copy e tom de voz (fonte: skill CX Writing v2.0)
+- Novo ramo no Fluxo de Decisão para "Criar ou revisar textos de UI"
+- Seção 10 adicionada ao `CHECKLIST_REVISAO.md` com 18 itens de revisão de UX Writing
+- Regra crítica 5 no `SKILL.md`: consultar `UX_WRITING.md` ao criar qualquer texto na UI
+- `VISAO_GERAL.md` atualizado: 15 referências, nova entrada `UX_WRITING.md`, novo bloco de leitura para copy/UX Writing
+- Protocolo de triagem obrigatório: componente → contexto → objetivo antes de qualquer copy
+- 4 Pilares de Conteúdo como critério de validação (Conciso, Claro, Significativo, Dialógico)
+- 12 tipos de texto mapeados com regras DO/DON'T, limites de caracteres e tokens visuais
+- Diretrizes B2B (lojista) vs. B2C (consumidor) com linguagem e tom distintos
+- Iniciativa de abrasileiramento documentada (sem hífen, termos técnicos contextualizados, sem termos internos externamente)
+- Nomenclatura de produtos Olist (primeira menção + menções posteriores)
+- Mapeamento SDD → tipo de texto para tradução de requisitos em copy
+- `SKILL.md` atualizado para v3.2
+
 ## v3.1 (2026-06-05)
 - **Harness:** `HARNESS_TELAS.md` adicionado como gate pré-construção obrigatório no fluxo Figma
 - Gate com 6 itens binários — o Claude só avança para criação de frames se todos forem marcados

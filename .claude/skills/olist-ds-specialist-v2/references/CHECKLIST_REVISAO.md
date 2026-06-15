@@ -88,6 +88,29 @@ Use este checklist ao revisar qualquer tela ou componente para consistência vis
 - [ ] Overlays usam shadow-80 no backdrop
 - [ ] Nenhum valor de sombra customizado
 
+## 10. UX Writing
+
+- [ ] Copy validado contra os **4 Pilares**: Conciso, Claro, Significativo, Dialógico
+- [ ] Tom correto para o contexto: B2B (lojista) ou B2C (consumidor)?
+- [ ] CTAs com verbo + objeto ("Salvar Produto", não "OK" ou "Sim")
+- [ ] Labels de campo são substantivos, não instruções ("CPF do vendedor", não "Insira seu CPF")
+- [ ] Helper text direto e curto (máx 80 caracteres)
+- [ ] Erros informam problema + solução ("CPF inválido. Use apenas números.")
+- [ ] Empty states oferecem ação ("Nenhum pedido. Criar seu primeiro?")
+- [ ] Modais destrutivos explicam consequências + têm CTA claro ("Excluir Permanentemente")
+- [ ] Toasts são breves e claros (máx 60 caracteres no título)
+- [ ] Sentence case em tudo (exceto títulos de página e nomes próprios)
+- [ ] Sem ponto final em labels, helpers, CTAs, placeholders e badges
+- [ ] Nomenclatura de produtos Olist correta ("Sistema ERP da Olist" na 1ª menção)
+- [ ] Sem "seller" externamente → "você", "lojista", "parceiro"
+- [ ] Sem hífen: "ecommerce", "email", "ebook"
+- [ ] Termos técnicos em inglês contextualizados em português
+- [ ] Valores monetários com símbolo (R$ 1.000,00)
+- [ ] Datas em formato local (12/04/2026)
+- [ ] Emoji: máx 1-2 por mensagem, nunca em labels/erros/CTAs/breadcrumbs
+
+**Consulte `UX_WRITING.md` para regras completas por tipo de texto.**
+
 ## Níveis de Severidade
 
 | Nível | Significado | Ação |
