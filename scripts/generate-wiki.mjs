@@ -33,7 +33,19 @@ const WIKI_DIR = join(ROOT, 'wiki');
 const WIKI_PATH = join(WIKI_DIR, 'WIKI.md');
 const PKG_PATH = join(ROOT, 'package.json');
 const COMPONENTS_DIR = join(ROOT, 'src', 'components');
-const SKILL_DIR = join(ROOT, '.claude', 'skills', 'olist-ds-specialist-v2');
+
+// Descobre a pasta da skill dinamicamente (prefixo olist-ds-specialist)
+function resolveSkillDir() {
+  const base = join(ROOT, '.claude', 'skills');
+  if (!existsSync(base)) return null;
+  const entries = readdirSync(base).filter(
+    name => name.startsWith('olist-ds-specialist') && statSync(join(base, name)).isDirectory()
+  );
+  const withSkillMd = entries.find(name => existsSync(join(base, name, 'SKILL.md')));
+  return withSkillMd ? join(base, withSkillMd) : (entries[0] ? join(base, entries[0]) : null);
+}
+
+const SKILL_DIR = resolveSkillDir() ?? join(ROOT, '.claude', 'skills', 'olist-ds-specialist-v3.2');
 const FIGMA_CONFIG_PATH = join(SKILL_DIR, 'figma-config.json');
 const SCRIPTS_DIR = join(ROOT, 'scripts');
 const ICONS_DIR = join(ROOT, 'src', 'assets', 'icons', 'svgs');
@@ -254,13 +266,13 @@ function extractRegrasCriticas() {
 function readChangelog() {
   const changelogPath = join(SKILL_DIR, 'CHANGELOG.md');
   const content = safeRead(changelogPath);
-  if (!content) return '_Nenhum changelog encontrado. Crie `.claude/skills/olist-ds-specialist-v2/CHANGELOG.md`._';
+  if (!content) return '_Nenhum changelog encontrado. Crie `.claude/skills/olist-ds-specialist-v3.2/CHANGELOG.md`._';
   return content.trim();
 }
 
 section('Skill Claude', `### Versão: v${skillVersion}
 
-**Localização:** \`.claude/skills/olist-ds-specialist-v2/\`
+**Localização:** \`.claude/skills/olist-ds-specialist-v3.2/\`
 
 ### Arquivos da Skill (${skillRootFiles.length + skillRefFiles.length} total)
 
@@ -364,7 +376,7 @@ FileKey: ABC123
 ### Setup
 
 \`\`\`bash
-cp .claude/skills/olist-ds-specialist-v2/figma-config.example.json .claude/figma-config.json
+cp .claude/skills/olist-ds-specialist-v3.2/figma-config.example.json .claude/figma-config.json
 # Editar com seus fileKeys
 echo '.claude/figma-config.json' >> .gitignore
 \`\`\``);
@@ -388,7 +400,7 @@ section('Compartilhamento', `### O Que Compactar
 
 \`\`\`bash
 cd .claude/skills
-zip -r olist-ds-specialist-v${skillVersion}.zip olist-ds-specialist-v2/
+zip -r olist-ds-specialist-v${skillVersion}.zip olist-ds-specialist-v3.2/
 \`\`\`
 
 ### O Que NÃO Vai
@@ -403,10 +415,10 @@ zip -r olist-ds-specialist-v${skillVersion}.zip olist-ds-specialist-v2/
 \`\`\`bash
 # 1. Extrair e copiar skill
 unzip olist-ds-specialist-v${skillVersion}.zip
-cp -r olist-ds-specialist-v2/ .claude/skills/olist-ds-specialist-v2/
+cp -r olist-ds-specialist-v3.2/ .claude/skills/olist-ds-specialist-v3.2/
 
 # 2. Configurar Figma
-cp .claude/skills/olist-ds-specialist-v2/figma-config.example.json .claude/figma-config.json
+cp .claude/skills/olist-ds-specialist-v3.2/figma-config.example.json .claude/figma-config.json
 # Editar com fileKeys próprios
 
 # 3. Gitignore

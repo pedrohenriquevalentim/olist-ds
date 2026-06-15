@@ -113,7 +113,7 @@ npm run release
 | `npm run watch:tokens` | `style-dictionary build --watch` |
 | `npm run pipeline:full` | `npm run build:tokens && npm run generate:all && npm run t...` |
 | `npm run pipeline:publish` | `npm run pipeline:full && npm version patch && git add . &...` |
-| `npm run release` | `npm run pipeline && npm run sync:skill && npm version pat...` |
+| `npm run release` | `npm run pipeline && npm run sync:skill && npm run sync:sk...` |
 | `npm run sync:skill-meta` | `node scripts/sync-skill-meta.mjs` |
 | `npm run wiki` | `node scripts/generate-wiki.mjs` |
 | `npm run postrelease` | `npm run wiki` |
@@ -123,7 +123,7 @@ npm run release
 
 ### Versão: v3.2
 
-**Localização:** `.claude/skills/olist-ds-specialist-v2/`
+**Localização:** `.claude/skills/olist-ds-specialist-v3.2/`
 
 ### Arquivos da Skill (21 total)
 
@@ -286,7 +286,7 @@ FileKey: ABC123
 ### Setup
 
 ```bash
-cp .claude/skills/olist-ds-specialist-v2/figma-config.example.json .claude/figma-config.json
+cp .claude/skills/olist-ds-specialist-v3.2/figma-config.example.json .claude/figma-config.json
 # Editar com seus fileKeys
 echo '.claude/figma-config.json' >> .gitignore
 ```
@@ -321,7 +321,7 @@ echo '.claude/figma-config.json' >> .gitignore
 
 ```bash
 cd .claude/skills
-zip -r olist-ds-specialist-v3.2.zip olist-ds-specialist-v2/
+zip -r olist-ds-specialist-v3.2.zip olist-ds-specialist-v3.2/
 ```
 
 ### O Que NÃO Vai
@@ -336,10 +336,10 @@ zip -r olist-ds-specialist-v3.2.zip olist-ds-specialist-v2/
 ```bash
 # 1. Extrair e copiar skill
 unzip olist-ds-specialist-v3.2.zip
-cp -r olist-ds-specialist-v2/ .claude/skills/olist-ds-specialist-v2/
+cp -r olist-ds-specialist-v3.2/ .claude/skills/olist-ds-specialist-v3.2/
 
 # 2. Configurar Figma
-cp .claude/skills/olist-ds-specialist-v2/figma-config.example.json .claude/figma-config.json
+cp .claude/skills/olist-ds-specialist-v3.2/figma-config.example.json .claude/figma-config.json
 # Editar com fileKeys próprios
 
 # 3. Gitignore

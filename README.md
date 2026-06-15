@@ -149,7 +149,7 @@ npm run build
 ```
 olist-ds/
 ├── .github/workflows/pipeline.yml        # CI/CD
-├── .claude/skills/olist-ds-specialist-v2/ # Skill corporativa (auto-sync)
+├── .claude/skills/olist-ds-specialist-v3.2/ # Skill corporativa (auto-sync)
 │   ├── SKILL.md                          # Role, escopo, decision flow (v3.0)
 │   ├── figma-config.json                 # libraryKeys, searchPriority, blockedLibraries
 │   ├── component-registry.json           # Registry de componentes sincronizado

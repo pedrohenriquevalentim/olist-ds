@@ -339,5 +339,5 @@ Emoji é bem-vindo, mas com moderação. **Máx 1-2 por mensagem.**
 
 ---
 
-**Última atualização:** 2026-06-15 (v1.0 — integrado ao olist-ds-specialist-v2)  
+**Última atualização:** 2026-06-15 (v1.0 — integrado ao olist-ds-specialist-v3.2)  
 **Fonte original:** UX_WRITING.md — Equipe de CX Writing Olist (v2.0 — 2026-06-12)

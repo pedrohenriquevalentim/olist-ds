@@ -133,8 +133,8 @@ Use a skill `$olist-ds-specialist` para este fluxo. As regras abaixo são um res
 ### Ao receber um PRD ou solicitação de tela:
 
 1. Leia o PRD/briefing completo
-2. Leia `.claude/skills/olist-ds-specialist-v2/references/VISAO_GERAL.md` (sempre primeiro)
-3. Leia `.claude/skills/olist-ds-specialist-v2/figma-config.json` ANTES de qualquer operação com Figma MCP
+2. Leia `.claude/skills/olist-ds-specialist-v3.2/references/VISAO_GERAL.md` (sempre primeiro)
+3. Leia `.claude/skills/olist-ds-specialist-v3.2/figma-config.json` ANTES de qualquer operação com Figma MCP
 4. Identifique os componentes do design system necessários consultando as libraries na ordem de prioridade:
    - **AI Components** (master — preferência absoluta)
    - **ERP components**

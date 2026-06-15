@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "f=$(jq -r '.tool_input.file_path // empty'); if echo \"$f\" | grep -qE 'olist-ds-specialist-v2/(SKILL|CHANGELOG)\\.md$'; then cd /Users/pedro.santos/Desktop/olist && node scripts/sync-skill-meta.mjs; fi",
+            "command": "f=$(jq -r '.tool_input.file_path // empty'); if echo \"$f\" | grep -qE 'olist-ds-specialist[^/]*/(SKILL|CHANGELOG)\\.md$'; then cd /Users/pedro.santos/Desktop/olist && node scripts/sync-skill-meta.mjs; fi",
             "timeout": 60,
             "statusMessage": "Sincronizando metadados da skill..."
           }
