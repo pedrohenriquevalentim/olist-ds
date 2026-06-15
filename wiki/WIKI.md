@@ -1,8 +1,8 @@
 # Olist Design System — Wiki
 
 **Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.21`  
-**Skill:** v3.1  
-**Última atualização:** 2026-06-05  
+**Skill:** v3.2  
+**Última atualização:** 2026-06-15  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -32,16 +32,16 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 
 | Métrica | Valor |
 |---|---|
-| Componentes | 7 |
+| Componentes | 8 |
 | Ícones SVG | 550 |
-| Arquivos da Skill | 20 |
+| Arquivos da Skill | 21 |
 | Arquivos Figma permitidos | 5 |
 | Versão npm | 1.0.21 |
-| Versão skill | 3.1 |
+| Versão skill | 3.2 |
 
 ## Componentes
 
-### Lista Completa (7)
+### Lista Completa (8)
 
 - `Button` — `src/components/Button/`
 - `Checkbox` — `src/components/Checkbox/`
@@ -49,6 +49,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 - `Icon` — `src/components/Icon/`
 - `InputSelect` — `src/components/InputSelect/`
 - `Logo` — `src/components/Logo/`
+- `MenuGlobal` — `src/components/MenuGlobal/`
 - `ProdutosOlistIcons` — `src/components/ProdutosOlistIcons/`
 
 ### Status de Migração de Ícones
@@ -61,6 +62,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Icon | ✅ Componente central |
 | InputSelect | ➖ Sem ícones |
 | Logo | ➖ Sem ícones |
+| MenuGlobal | ➖ Sem ícones |
 | ProdutosOlistIcons | ➖ Sem ícones |
 
 ## Pipeline de Build e Release
@@ -72,7 +74,7 @@ npm run release
     │
     ├── 1. generate:all (testes + stories via Gemini)
     ├── 2. build (compilação TypeScript)
-    ├── 3. sync:skill (atualiza skill v3.1)
+    ├── 3. sync:skill (atualiza skill v3.2)
     ├── 4. npm version patch (incrementa versão)
     ├── 5. npm publish (publica no registry)
     └── 6. git push --follow-tags
@@ -112,17 +114,18 @@ npm run release
 | `npm run pipeline:full` | `npm run build:tokens && npm run generate:all && npm run t...` |
 | `npm run pipeline:publish` | `npm run pipeline:full && npm version patch && git add . &...` |
 | `npm run release` | `npm run pipeline && npm run sync:skill && npm version pat...` |
+| `npm run sync:skill-meta` | `node scripts/sync-skill-meta.mjs` |
 | `npm run wiki` | `node scripts/generate-wiki.mjs` |
 | `npm run postrelease` | `npm run wiki` |
 | `npm run chromatic` | `npx chromatic --project-token=chpt_eb7756a8c9c93ad` |
 
 ## Skill Claude
 
-### Versão: v3.1
+### Versão: v3.2
 
 **Localização:** `.claude/skills/olist-ds-specialist-v2/`
 
-### Arquivos da Skill (20 total)
+### Arquivos da Skill (21 total)
 
 **Raiz (6):**
 - `CHANGELOG.md`
@@ -132,7 +135,7 @@ npm run release
 - `component-registry.json`
 - `figma-config.json`
 
-**Referências (14):**
+**Referências (15):**
 - `CHECKLIST_REVISAO.md`
 - `COMPONENTES.md`
 - `CORES.md`
@@ -146,13 +149,14 @@ npm run release
 - `SDD_PARA_TELA.md`
 - `TEMPLATES_PRODUTO.md`
 - `TIPOGRAFIA.md`
+- `UX_WRITING.md`
 - `VISAO_GERAL.md`
 
 ### Auto-gerados vs Manuais
 
 **Auto-gerados** (por `npm run build`): COMPONENTES.md, MAPA_FONTES.md, VISAO_GERAL.md (parcial)
 
-**Manuais** (não são sobrescritos): CHECKLIST_REVISAO.md, CORES.md, ESPACAMENTO.md, FIGMA_CONFIG.md, GLOSSARIO_PAPEIS_TEXTO.md, HARNEES_TELAS.md, PADROES.md, SDD_AVANCADO.md, SDD_PARA_TELA.md, TEMPLATES_PRODUTO.md, TIPOGRAFIA.md, VISAO_GERAL.md
+**Manuais** (não são sobrescritos): CHECKLIST_REVISAO.md, CORES.md, ESPACAMENTO.md, FIGMA_CONFIG.md, GLOSSARIO_PAPEIS_TEXTO.md, HARNEES_TELAS.md, PADROES.md, SDD_AVANCADO.md, SDD_PARA_TELA.md, TEMPLATES_PRODUTO.md, TIPOGRAFIA.md, UX_WRITING.md, VISAO_GERAL.md
 
 ### Como Usar
 
@@ -173,7 +177,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 2. Customize → Skills → Upload → selecionar pasta da skill
 3. Iniciar conversa e colar o SDD ou link do Figma
 
-### Regras Críticas v3.1
+### Regras Críticas v3.2
 
 ### ✅ Sempre Faça:
 
@@ -190,7 +194,11 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 4. **Consulte `GLOSSARIO_PAPEIS_TEXTO.md` antes de nomear textos**
    - Se o SDD diz "título da página" → use **Heading**
    - Se o SDD diz "mensagem de erro" → use **Error**
-5. **Leia `SDD_AVANCADO.md` se o SDD tiver:**
+5. **Consulte `UX_WRITING.md` ao criar qualquer texto na UI:**
+   - Execute o protocolo de triagem (componente → contexto → objetivo)
+   - Valide contra Os 4 Pilares antes de finalizar qualquer copy
+   - Use a tabela de mapeamento SDD → Tipo de Texto para traduzir requisitos em copy
+6. **Leia `SDD_AVANCADO.md` se o SDD tiver:**
    - Requisitos Não Funcionais (RNF), DACI, Métricas, Rollout, Observabilidade
 6. **Use os passos 1-10 de `SDD_PARA_TELA.md`** ao traduzir SDDs completos
 7. **No Figma, sempre use workflow faseado:**
@@ -293,6 +301,7 @@ echo '.claude/figma-config.json' >> .gitignore
 - `generate-stories.mjs`
 - `generate-tests.mjs`
 - `generate-wiki.mjs`
+- `sync-skill-meta.mjs`
 - `sync-skill.mjs`
 - `sync-tokens.mjs`
 - `validate-icon-migration.mjs`
@@ -312,7 +321,7 @@ echo '.claude/figma-config.json' >> .gitignore
 
 ```bash
 cd .claude/skills
-zip -r olist-ds-specialist-v3.1.zip olist-ds-specialist-v2/
+zip -r olist-ds-specialist-v3.2.zip olist-ds-specialist-v2/
 ```
 
 ### O Que NÃO Vai
@@ -326,7 +335,7 @@ zip -r olist-ds-specialist-v3.1.zip olist-ds-specialist-v2/
 
 ```bash
 # 1. Extrair e copiar skill
-unzip olist-ds-specialist-v3.1.zip
+unzip olist-ds-specialist-v3.2.zip
 cp -r olist-ds-specialist-v2/ .claude/skills/olist-ds-specialist-v2/
 
 # 2. Configurar Figma
@@ -368,10 +377,25 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 1. `.claude/figma-config.json` existe?
 2. `searchPriority` tem os libraryKeys corretos?
-3. Skill v3.1 instalada?
+3. Skill v3.2 instalada?
 4. O prompt inclui instrução para ler `figma-config.json` antes do Figma MCP?
 
 ## Changelog
+
+## v3.2 (2026-06-15)
+- **UX Writing:** `UX_WRITING.md` adicionado como referência de copy e tom de voz (fonte: skill CX Writing v2.0)
+- Novo ramo no Fluxo de Decisão para "Criar ou revisar textos de UI"
+- Seção 10 adicionada ao `CHECKLIST_REVISAO.md` com 18 itens de revisão de UX Writing
+- Regra crítica 5 no `SKILL.md`: consultar `UX_WRITING.md` ao criar qualquer texto na UI
+- `VISAO_GERAL.md` atualizado: 15 referências, nova entrada `UX_WRITING.md`, novo bloco de leitura para copy/UX Writing
+- Protocolo de triagem obrigatório: componente → contexto → objetivo antes de qualquer copy
+- 4 Pilares de Conteúdo como critério de validação (Conciso, Claro, Significativo, Dialógico)
+- 12 tipos de texto mapeados com regras DO/DON'T, limites de caracteres e tokens visuais
+- Diretrizes B2B (lojista) vs. B2C (consumidor) com linguagem e tom distintos
+- Iniciativa de abrasileiramento documentada (sem hífen, termos técnicos contextualizados, sem termos internos externamente)
+- Nomenclatura de produtos Olist (primeira menção + menções posteriores)
+- Mapeamento SDD → tipo de texto para tradução de requisitos em copy
+- `SKILL.md` atualizado para v3.2
 
 ## v3.1 (2026-06-05)
 - **Harness:** `HARNESS_TELAS.md` adicionado como gate pré-construção obrigatório no fluxo Figma
@@ -416,4 +440,4 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ---
 
-*Gerado automaticamente em 2026-06-05 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-06-15 por `generate-wiki.mjs`. Não edite manualmente.*

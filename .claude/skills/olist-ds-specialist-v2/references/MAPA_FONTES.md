@@ -1,7 +1,7 @@
 # Mapa de Fontes — Estrutura do Repositório
 
 **Auto-gerado por `npm run build`**  
-**Última atualização:** 2026-06-08  
+**Última atualização:** 2026-06-15  
 **Versão da skill:** 3.1
 
 ---
@@ -35,6 +35,10 @@ src/
 │   │       ├── index.tsx
 │   │       ├── styles.module.css
 │   │       └── Logo.stories.tsx
+│   ├── MenuGlobal/
+│   │       ├── index.tsx
+│   │       ├── styles.module.css
+│   │       └── MenuGlobal.stories.tsx
 │   └── ProdutosOlistIcons/
 │           ├── index.tsx
 │           ├── styles.module.css
@@ -54,4 +58,5 @@ src/
 - **Icon:** `src/components/Icon/index.tsx`
 - **InputSelect:** `src/components/InputSelect/index.tsx`
 - **Logo:** `src/components/Logo/index.tsx`
+- **MenuGlobal:** `src/components/MenuGlobal/index.tsx`
 - **ProdutosOlistIcons:** `src/components/ProdutosOlistIcons/index.tsx`

@@ -6,6 +6,7 @@ export const componentNames = [
   "Chip",
   "InputSelect",
   "Logo",
+  "MenuGlobal",
   "ProdutosOlistIcons"
 ] as const;
 
