@@ -224,7 +224,10 @@ function updateSetupMd(setupPath, skillDir, dirName, version) {
     `# Setup — Olist DS Specialist Skill v${version}`
   );
 
-  // 2. Substitui todas as ocorrências do nome genérico pelo nome versionado
+  // 2. Substitui todas as ocorrências do nome genérico ou versionado pelo nome atual
+  // Usa \d+(?:\.\d+)* para não capturar o ponto final antes de .zip
+  content = content.replace(/olist-ds-specialist-v\d+(?:\.\d+)*\.zip/g, `${dirName}.zip`);
+  content = content.replace(/olist-ds-specialist-v\d+(?:\.\d+)*/g, dirName);
   content = content.replace(/olist-ds-specialist(?!-v)/g, dirName);
 
   // 3. Substitui a estrutura esperada (bloco entre "### Estrutura esperada:" e o próximo "###" ou "---")

@@ -17,7 +17,7 @@ Siga este guia para instalar e configurar a skill no seu projeto.
 ## Passo 1: Extrair o ZIP
 
 ```bash
-unzip olist-ds-specialist-v3.zip
+unzip olist-ds-specialist-v3.2.zip
 ```
 
 Você verá a pasta `olist-ds-specialist-v3.2/` com todos os arquivos.
