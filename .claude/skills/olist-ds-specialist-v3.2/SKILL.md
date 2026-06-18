@@ -74,6 +74,32 @@ Quando o usuário pedir "sincronizar registry", "atualizar inventário" ou simil
 3. Listar: componentKey, nome, libraryName, variantes encontradas
 4. Informar ao usuário: adicionados, removidos, alterados
 
+## Fonte dos Componentes React
+
+Ao gerar telas React (Casos 1 e 2), o inventário de componentes reais do repositório `olist-ds` deve ser consultado na seguinte ordem de prioridade:
+
+### 1. GitHub (fonte primária — sempre tentar primeiro)
+
+Buscar o `COMPONENTES.md` mais recente diretamente do repositório público:
+
+```
+https://raw.githubusercontent.com/pedrohenriquevalentim/olist-ds/main/.claude/skills/olist-ds-specialist-v3.2/references/COMPONENTES.md
+```
+
+Use `WebFetch` para obter este arquivo antes de gerar qualquer código React. Ele contém as props reais, variantes e estados de cada componente na versão mais atual publicada.
+
+### 2. Arquivo local (fallback)
+
+Se o fetch falhar (sem conexão, erro de rede), usar o arquivo `references/COMPONENTES.md` presente na skill.
+
+### Regras de uso após obter o inventário
+
+- **Somente usar componentes listados no inventário** — nunca inventar componentes que não existam
+- **Respeitar as props exatas** — nomes, tipos e valores listados são os reais do TypeScript
+- **Imports sempre de `src/components/NomeComponente`** — conforme `Caminho` listado em cada entrada
+- **Ícones via `<Icon name="..." />`** — nunca instalar pacotes externos
+- **A versão do pacote no cabeçalho do COMPONENTES.md** indica com qual release do DS o inventário está alinhado — informar ao usuário se necessário
+
 ## Fluxo de Decisão
 
 ```
@@ -104,13 +130,15 @@ Qual tipo de tarefa?
     ├── Criar tela a partir de SDD/PRD básico (React)
     │   → Ler SDD_PARA_TELA.md (passos 1-7)
     │   → Ler GLOSSARIO_PAPEIS_TEXTO.md (nomear textos)
-    │   → Ler COMPONENTES.md + PADROES.md + MAPA_FONTES.md
+    │   → Buscar COMPONENTES.md atualizado do GitHub (ver seção "Fonte dos Componentes React")
+    │   → Ler PADROES.md + MAPA_FONTES.md
     │
     ├── Criar tela a partir de SDD/PRD completo (React)
     │   → Ler SDD_PARA_TELA.md (passos 1-10)
     │   → Ler SDD_AVANCADO.md (RNFs, DACI, Métricas, Rollout, Observabilidade)
     │   → Ler GLOSSARIO_PAPEIS_TEXTO.md (nomear textos)
-    │   → Ler COMPONENTES.md + PADROES.md + MAPA_FONTES.md
+    │   → Buscar COMPONENTES.md atualizado do GitHub (ver seção "Fonte dos Componentes React")
+    │   → Ler PADROES.md + MAPA_FONTES.md
     │
     ├── Criar componente
     │   → Ler CORES.md + TIPOGRAFIA.md + GLOSSARIO_PAPEIS_TEXTO.md + ESPACAMENTO.md
