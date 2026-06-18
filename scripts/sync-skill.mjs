@@ -59,6 +59,20 @@ function readSkillVersion() {
 const SKILL_VERSION = readSkillVersion();
 const UPDATE_DATE = new Date().toISOString().split('T')[0];
 
+// Versão do pacote npm — lida do package.json
+function readPackageVersion() {
+  const pkgPath = join(ROOT_DIR, 'package.json');
+  if (!existsSync(pkgPath)) return '?';
+  try {
+    const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
+    return pkg.version ?? '?';
+  } catch {
+    return '?';
+  }
+}
+
+const PACKAGE_VERSION = readPackageVersion();
+
 console.log(`🔄 Sincronizando skill corporativa v${SKILL_VERSION}...\n`);
 
 // ============================================================================
@@ -66,18 +80,25 @@ console.log(`🔄 Sincronizando skill corporativa v${SKILL_VERSION}...\n`);
 // ============================================================================
 
 function extractComponentInfo(componentPath) {
+  const componentName = componentPath.split('/').pop();
+  // Suporta tanto index.tsx (componente inline) quanto NomeComponente.tsx (padrão atual)
   const indexPath = join(componentPath, 'index.tsx');
-  const cssPath = join(componentPath, 'styles.module.css');
-  
+  const namedPath = join(componentPath, `${componentName}.tsx`);
+  const sourcePath = existsSync(indexPath) ? indexPath : existsSync(namedPath) ? namedPath : null;
+  // Suporta tanto styles.module.css quanto NomeComponente.module.css
+  const cssPath = existsSync(join(componentPath, 'styles.module.css'))
+    ? join(componentPath, 'styles.module.css')
+    : join(componentPath, `${componentName}.module.css`);
+
   let content = '';
   let props = [];
   let variants = [];
-  
-  if (existsSync(indexPath)) {
-    content = readFileSync(indexPath, 'utf-8');
+
+  if (sourcePath) {
+    content = readFileSync(sourcePath, 'utf-8');
     
-    // Extrair props da interface
-    const propsMatch = content.match(/export interface \w+Props {([^}]+)}/s);
+    // Extrair props da interface (suporta "extends ...")
+    const propsMatch = content.match(/export interface \w+Props(?:[^{]*)?\{([^}]+)\}/s);
     if (propsMatch) {
       const propsContent = propsMatch[1];
       const propLines = propsContent
@@ -108,14 +129,18 @@ function generateComponentsMarkdown() {
   const components = readdirSync(COMPONENTS_DIR)
     .filter(name => {
       const path = join(COMPONENTS_DIR, name);
-      return statSync(path).isDirectory() && existsSync(join(path, 'index.tsx'));
+      return (
+        statSync(path).isDirectory() &&
+        (existsSync(join(path, 'index.tsx')) || existsSync(join(path, `${name}.tsx`)))
+      );
     })
     .sort();
   
   let markdown = `# Componentes — API Completa
 
-**Auto-gerado por \`npm run build\`**  
-**Última atualização:** ${UPDATE_DATE}  
+**Auto-gerado por \`npm run build\`**
+**Última atualização:** ${UPDATE_DATE}
+**Versão do pacote:** ${PACKAGE_VERSION}
 **Versão da skill:** ${SKILL_VERSION}
 
 ---
