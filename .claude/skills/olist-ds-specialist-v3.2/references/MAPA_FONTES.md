@@ -35,10 +35,6 @@ src/
 │   │       ├── index.tsx
 │   │       ├── styles.module.css
 │   │       └── Logo.stories.tsx
-│   ├── MenuGlobal/
-│   │       ├── index.tsx
-│   │       ├── styles.module.css
-│   │       └── MenuGlobal.stories.tsx
 │   └── ProdutosOlistIcons/
 │           ├── index.tsx
 │           ├── styles.module.css
@@ -58,5 +54,4 @@ src/
 - **Icon:** `src/components/Icon/index.tsx`
 - **InputSelect:** `src/components/InputSelect/index.tsx`
 - **Logo:** `src/components/Logo/index.tsx`
-- **MenuGlobal:** `src/components/MenuGlobal/index.tsx`
 - **ProdutosOlistIcons:** `src/components/ProdutosOlistIcons/index.tsx`

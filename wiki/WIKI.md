@@ -2,7 +2,7 @@
 
 **Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.22`  
 **Skill:** v3.2  
-**Última atualização:** 2026-06-15  
+**Última atualização:** 2026-06-18  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -32,7 +32,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 
 | Métrica | Valor |
 |---|---|
-| Componentes | 8 |
+| Componentes | 7 |
 | Ícones SVG | 550 |
 | Arquivos da Skill | 21 |
 | Arquivos Figma permitidos | 5 |
@@ -41,7 +41,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 
 ## Componentes
 
-### Lista Completa (8)
+### Lista Completa (7)
 
 - `Button` — `src/components/Button/`
 - `Checkbox` — `src/components/Checkbox/`
@@ -49,7 +49,6 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 - `Icon` — `src/components/Icon/`
 - `InputSelect` — `src/components/InputSelect/`
 - `Logo` — `src/components/Logo/`
-- `MenuGlobal` — `src/components/MenuGlobal/`
 - `ProdutosOlistIcons` — `src/components/ProdutosOlistIcons/`
 
 ### Status de Migração de Ícones
@@ -62,7 +61,6 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Icon | ✅ Componente central |
 | InputSelect | ➖ Sem ícones |
 | Logo | ➖ Sem ícones |
-| MenuGlobal | ➖ Sem ícones |
 | ProdutosOlistIcons | ➖ Sem ícones |
 
 ## Pipeline de Build e Release
@@ -440,4 +438,4 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ---
 
-*Gerado automaticamente em 2026-06-15 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-06-18 por `generate-wiki.mjs`. Não edite manualmente.*

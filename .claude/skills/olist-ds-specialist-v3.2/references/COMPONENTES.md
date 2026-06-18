@@ -9,7 +9,7 @@
 
 Este arquivo contém a API completa de todos os componentes do design system.
 
-## Componentes Disponíveis (8)
+## Componentes Disponíveis (7)
 
 ### Button
 
@@ -88,23 +88,6 @@ size?: 'default' | 'simple' | 'symbol';
 ```
 
 **Caminho:** `src/components/Logo/`
-
----
-
-### MenuGlobal
-
-**Props:**
-```typescript
-products: MenuGlobalProduct[];
-activeProductId?: string;
-activeItemId?: string;
-railBottomItems?: MenuGlobalRailItem[];
-onProductChange?: (productId: string) => void;
-onItemSelect?: (itemId: string) => void;
-className?: string;
-```
-
-**Caminho:** `src/components/MenuGlobal/`
 
 ---
 
