@@ -1,0 +1,244 @@
+@import '../../generated/variables.css';
+
+/* ============================
+   Wrapper
+   ============================ */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--shape-spacing-x1-8px);
+  width: 100%;
+}
+
+/* ============================
+   Label
+   ============================ */
+
+.label {
+  display: block;
+  font-family: var(--font-family-jakarta);
+  font-size: var(--text-label-font-size);
+  font-weight: var(--text-label-font-weight);
+  line-height: var(--text-label-line-height);
+  color: var(--text-label-color-enabled);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-feature-settings: 'ss03' 1;
+}
+
+.labelDisabled {
+  color: var(--text-label-color-disabled);
+}
+
+/* ============================
+   Input base (wrapper da linha)
+   ============================ */
+
+.inputBase {
+  display: flex;
+  align-items: center;
+  gap: var(--input-base-spacing-gap);
+  height: var(--input-base-size-input-height);
+  padding-left: var(--input-base-spacing-padding);
+  padding-right: var(--input-base-spacing-button-padding);
+  border-radius: var(--input-search-border-radius);
+  border: var(--input-base-border-width-enabled) solid var(--input-base-border-color-enabled);
+  background-color: var(--input-base-color-enabled);
+  transition:
+    border-color 0.15s ease,
+    border-width 0.1s ease,
+    background-color 0.15s ease,
+    background-image 0.15s ease;
+}
+
+.inputBase:hover:not(:has(input:disabled)) {
+  border-color: var(--input-base-border-color-hover);
+  background-color: var(--input-base-color-hover);
+}
+
+.inputBase:focus-within:not(:has(input:disabled)) {
+  border-width: var(--input-base-border-width-focused);
+  border-color: var(--input-base-border-color-focused);
+  background-color: var(--input-base-color-focused);
+}
+
+.inputBase:has(input:disabled) {
+  border-color: var(--input-base-border-color-disabled);
+  background-color: var(--input-base-color-disabled);
+}
+
+/* ============================
+   Input nativo
+   ============================ */
+
+.input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-family-jakarta);
+  font-size: var(--text-placeholder-text-font-size);
+  font-weight: var(--text-placeholder-text-font-weight);
+  line-height: var(--text-placeholder-text-line-height);
+  color: var(--input-base-font-color-filled);
+  font-feature-settings: 'ss03' 1, 'lnum' 1, 'tnum' 1;
+  /* Remove estilização padrão do tipo search */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.input::placeholder {
+  color: var(--input-base-font-color-enabled);
+}
+
+.input:disabled {
+  color: var(--input-base-font-color-disabled);
+  cursor: not-allowed;
+}
+
+.input:disabled::placeholder {
+  color: var(--input-base-font-color-disabled);
+}
+
+/* Remove o "x" nativo em webkit */
+.input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* ============================
+   Botão de ação — variante "button" (com texto)
+   ============================ */
+
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--button-spacing-gap);
+  height: var(--button-size-height);
+  padding-inline: var(--button-spacing-padding);
+  border-radius: var(--button-border-radius-pill);
+  border: none;
+  background-color: var(--button-color-primary-enabled);
+  color: var(--button-font-font-color-primary-enabled);
+  font-family: var(--font-family-jakarta);
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight, 500);
+  line-height: var(--button-font-line-height);
+  font-feature-settings: 'ss03' 1;
+  white-space: nowrap;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background-color 0.15s ease,
+    background-image 0.15s ease,
+    color 0.15s ease;
+}
+
+.actionButton:hover:not(:disabled) {
+  background-image: linear-gradient(
+    var(--button-color-primary-hover),
+    var(--button-color-primary-hover)
+  );
+  color: var(--button-font-font-color-primary-hover);
+}
+
+.actionButton:active:not(:disabled) {
+  background-image: linear-gradient(
+    var(--button-color-primary-pressed),
+    var(--button-color-primary-pressed)
+  );
+  color: var(--button-font-font-color-primary-pressed);
+}
+
+.actionButton:disabled {
+  background-color: var(--button-color-primary-disabled);
+  background-image: none;
+  color: var(--button-font-font-color-primary-disabled);
+  cursor: not-allowed;
+}
+
+.actionButtonLabel {
+  display: inline-block;
+}
+
+/* ============================
+   Botão de ação — variante "button icon" (apenas ícone)
+   ============================ */
+
+.actionButtonIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--button-size-height);
+  height: var(--button-size-height);
+  border-radius: var(--button-border-radius-pill);
+  border: none;
+  background-color: var(--button-color-tertiary-enabled);
+  color: var(--input-base-shape-color-enabled);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.actionButtonIcon:hover:not(:disabled) {
+  background-color: var(--button-color-tertiary-hover);
+  color: var(--input-base-shape-color-hover);
+}
+
+.actionButtonIcon:active:not(:disabled) {
+  background-color: var(--button-color-tertiary-pressed);
+  color: var(--input-base-shape-color-pressed);
+}
+
+.actionButtonIcon:disabled {
+  background-color: var(--button-color-tertiary-disabled);
+  color: var(--input-base-shape-color-disabled);
+  cursor: not-allowed;
+}
+
+/* ============================
+   Ícone
+   ============================ */
+
+.iconWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--shape-size-x2-16px);
+  height: var(--shape-size-x2-16px);
+  flex-shrink: 0;
+  color: currentColor;
+}
+
+.iconWrapper svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ============================
+   Texto de suporte
+   ============================ */
+
+.supportText {
+  font-family: var(--font-family-jakarta);
+  font-size: var(--text-support-text-font-size);
+  font-weight: var(--text-support-text-font-weight);
+  line-height: var(--text-support-text-line-height);
+  color: var(--text-support-text-color-enabled);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-feature-settings: 'ss03' 1;
+  margin: 0;
+}
+
+.supportTextDisabled {
+  color: var(--text-support-text-color-disabled);
+}
