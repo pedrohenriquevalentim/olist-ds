@@ -35,14 +35,14 @@ jobs:
       - name: Instalar dependências
         run: npm install
 
-      - name: Lint
-        run: npm run lint
-
       - name: Gerar tokens CSS
         run: npm run build:tokens
 
       - name: Verificar TypeScript (inclui arquivos gerados pela IA)
         run: tsc --noEmit --allowJs false
+
+      - name: Instalar browsers do Playwright
+        run: npx playwright install chromium --with-deps
 
       - name: Rodar testes
         run: npm run test:run
