@@ -7,7 +7,7 @@ const distDir = './dist/components';
 const dirs = readdirSync(componentsDir);
 
 for (const dir of dirs) {
-  const srcPath = join(componentsDir, dir);
+  const srcPath = join(componentsDir, dir); 
 
   if (!statSync(srcPath).isDirectory()) continue;
 
