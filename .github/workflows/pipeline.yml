@@ -1,8 +1,8 @@
-name: Design System — Pipeline AI-First
+name: Design System — Pipeline
 
 # Quando roda:
-# - A cada push na branch main
-# - A cada Pull Request apontando para main
+# - A cada Pull Request apontando para main (gate de merge)
+# - A cada push na main (após merge aprovado)
 on:
   push:
     branches: [main]
@@ -11,15 +11,18 @@ on:
 
 jobs:
   # ─────────────────────────────────────────────────────────
-  # JOB 1: Qualidade
-  # Roda lint, gera tokens, gera testes com Gemini, executa testes
+  # JOB 1: Gate de qualidade — roda em TODO PR e push
+  #
+  # NÃO roda geração de código com IA aqui.
+  # Testes e stories devem ser gerados localmente (npm run generate:all)
+  # e commitados antes de abrir o PR. Este job apenas valida o que foi commitado.
   # ─────────────────────────────────────────────────────────
   quality:
-    name: Lint + Tokens + Testes
+    name: Lint + Tokens + TypeScript + Testes
     runs-on: ubuntu-latest
 
     steps:
-      - name: Baixar código do repositório
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Configurar Node.js
@@ -31,40 +34,35 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
-      - name: Verificar qualidade do código
+      - name: Lint
         run: npm run lint
 
-      - name: Gerar tokens CSS a partir do Figma
+      - name: Gerar tokens CSS
         run: npm run build:tokens
 
-      - name: Gerar testes com Gemini (componentes sem teste)
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: npm run generate:tests
+      - name: Verificar TypeScript (inclui arquivos gerados pela IA)
+        run: tsc --noEmit --allowJs false
 
-      - name: Rodar todos os testes
+      - name: Rodar testes
         run: npm run test:run
 
-      - name: Compilar TypeScript
-        run: npm run build
-
   # ─────────────────────────────────────────────────────────
-  # JOB 2: Storybook
-  # Gera stories, builda o Storybook, publica no GitHub Pages
-  # Só roda se o Job 1 passou
+  # JOB 2: Build do Storybook
+  # Só roda se o Job 1 passou.
+  # Em PRs: apenas valida que o build não quebra.
+  # Em push na main: faz deploy no GitHub Pages.
   # ─────────────────────────────────────────────────────────
   storybook:
-    name: Build + Deploy Storybook
+    name: Build Storybook
     needs: quality
     runs-on: ubuntu-latest
 
-    # Permissão para publicar no GitHub Pages
     permissions:
       pages: write
       id-token: write
 
     steps:
-      - name: Baixar código
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Configurar Node.js
@@ -79,31 +77,25 @@ jobs:
       - name: Gerar tokens
         run: npm run build:tokens
 
-      - name: Gerar stories com Gemini (componentes sem story)
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: npm run generate:stories
-
       - name: Build do Storybook
         run: npm run build-storybook
 
-      - name: Publicar no GitHub Pages
+      - name: Deploy no GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./storybook-static
 
   # ─────────────────────────────────────────────────────────
-  # JOB 3: Publicar no NPM Privado
-  # Publica o pacote no GitHub Packages
-  # Só roda no push para main (não em PRs)
-  # Só roda se Jobs 1 e 2 passaram
+  # JOB 3: Publicar no GitHub Packages
+  # Só roda no push para main (não em PRs).
+  # Só roda se Jobs 1 e 2 passaram.
   # ─────────────────────────────────────────────────────────
   publish:
     name: Publicar no GitHub Packages
     needs: [quality, storybook]
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
 
     permissions:
@@ -111,7 +103,7 @@ jobs:
       packages: write
 
     steps:
-      - name: Baixar código
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Configurar Node.js com registro do GitHub Packages
@@ -127,7 +119,7 @@ jobs:
       - name: Gerar tokens
         run: npm run build:tokens
 
-      - name: Compilar TypeScript
+      - name: Build
         run: npm run build
 
       - name: Publicar pacote
