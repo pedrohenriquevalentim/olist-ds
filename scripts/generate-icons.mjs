@@ -10,6 +10,30 @@ import { join, resolve } from 'path';
 const SVG_DIR = resolve('src/assets/icons/svgs');
 const OUT_FILE = resolve('src/components/Icon/index.tsx');
 
+// ─── SANITIZAÇÃO DE SVG ───────────────────────────────────
+// Remove vetores de ataque comuns em SVGs vindos de fontes externas (ex: Figma).
+// Permite apenas atributos e elementos necessários para ícones decorativos.
+const BLOCKED_SVG_TAGS = [
+  /<script[\s\S]*?<\/script>/gi,
+  /<script[^>]*>/gi,
+  /<use[^>]+href\s*=\s*["'](?!#)/gi,   // <use href> apontando para URL externa
+  /<use[^>]+xlink:href\s*=\s*["'](?!#)/gi,
+  /\bon\w+\s*=/gi,                       // event handlers inline (onload=, onclick=, etc.)
+  /javascript\s*:/gi,                    // javascript: URI
+  /<foreignObject[\s\S]*?<\/foreignObject>/gi,
+  /<image[^>]+href\s*=\s*["']https?:/gi, // imagens externas
+];
+
+function sanitizeSVG(raw) {
+  let svg = raw;
+  for (const pattern of BLOCKED_SVG_TAGS) {
+    svg = svg.replace(pattern, '');
+  }
+  return svg;
+}
+
+// ─── LEITURA E PROCESSAMENTO ──────────────────────────────
+
 const files = readdirSync(SVG_DIR).sort();
 const entries = [];
 
@@ -32,7 +56,8 @@ for (const filename of files) {
   if (!iconName) continue;
 
   const key = isFill ? `${iconName}-fill` : iconName;
-  const svgContent = readFileSync(join(SVG_DIR, filename), 'utf-8')
+  const raw = readFileSync(join(SVG_DIR, filename), 'utf-8');
+  const svgContent = sanitizeSVG(raw)
     .replace(/\n/g, '')
     .replace(/\s{2,}/g, ' ')
     .trim();

@@ -32,32 +32,42 @@ REGRAS ESTRITAS:
 `;
 
 // ─── SANITIZAÇÃO DE TEXTO ─────────────────────────────────
+// Normaliza apenas caracteres tipográficos que causam problemas de encoding.
+// Acentos do português são mantidos — a API aceita UTF-8 e substituí-los
+// corromperia strings literais dos componentes, gerando testes contra valores errados.
 function sanitizeText(text) {
-    // Remove TODOS os caracteres não-ASCII e substitui por equivalentes seguros
-    return text.replace(/[^\x00-\x7F]/g, (char) => {
-      const map = {
-        '\u201C': '"', '\u201D': '"',   // aspas duplas tipográficas
-        '\u2018': "'", '\u2019': "'",   // aspas simples tipográficas
-        '\u2013': '-', '\u2014': '--',  // dashes
-        '\u2026': '...',                // reticências
-        '\u00A0': ' ',                  // espaço não-quebrável
-        // Acentos do português
-        'à': 'a', 'á': 'a', 'â': 'a', 'ã': 'a',
-        'é': 'e', 'ê': 'e',
-        'í': 'i',
-        'ó': 'o', 'ô': 'o', 'õ': 'o',
-        'ú': 'u', 'ü': 'u',
-        'ç': 'c',
-        'À': 'A', 'Á': 'A', 'Â': 'A', 'Ã': 'A',
-        'É': 'E', 'Ê': 'E',
-        'Í': 'I',
-        'Ó': 'O', 'Ô': 'O', 'Õ': 'O',
-        'Ú': 'U', 'Ü': 'U',
-        'Ç': 'C',
-      };
-      return map[char] || '';
-    });
+  return text
+    .replace(/“/g, '"').replace(/”/g, '"')   // aspas duplas tipográficas
+    .replace(/‘/g, "'").replace(/’/g, "'")   // aspas simples tipográficas
+    .replace(/–/g, '-').replace(/—/g, '--')  // dashes
+    .replace(/…/g, '...')                         // reticências
+    .replace(/ /g, ' ');                          // espaço não-quebrável
+}
+
+// ─── VALIDAÇÃO DO OUTPUT DA IA ─────────────────────────────
+const BLOCKED_PATTERNS = [
+  { re: /\beval\s*\(/, label: 'eval()' },
+  { re: /new\s+Function\s*\(/, label: 'new Function()' },
+  { re: /dangerouslySetInnerHTML/, label: 'dangerouslySetInnerHTML' },
+  { re: /\bprocess\.env\b/, label: 'process.env' },
+  { re: /\brequire\s*\(/, label: 'require()' },
+  { re: /\bexecSync\b|\bspawnSync\b|\bchild_process\b/, label: 'child_process' },
+  // fetch fora de contexto de mock (vi.fn / vi.spyOn)
+  { re: /(?<!vi\.(fn|spyOn)\()(?<!jest\.(fn|spyOn)\()\bfetch\s*\(/, label: 'fetch() fora de mock' },
+  // imports de pacotes externos não esperados em testes
+  { re: /import\s+.*\s+from\s+['"](?!\.\.?\/|vitest|@testing-library|@storybook|react)/, label: 'import de pacote externo inesperado' },
+];
+
+function validateAIOutput(code, componentName) {
+  for (const { re, label } of BLOCKED_PATTERNS) {
+    if (re.test(code)) {
+      throw new Error(`Output da IA rejeitado para "${componentName}": padrão proibido detectado — ${label}`);
+    }
   }
+  if (code.trim().length < 50) {
+    throw new Error(`Output da IA rejeitado para "${componentName}": conteúdo suspeitosamente curto`);
+  }
+}
 
 // ─── FUNÇÕES ──────────────────────────────────────────────
 
@@ -125,8 +135,11 @@ O import do componente deve ser: import { ${component.name} } from './${componen
 
   testCode = testCode.replace(/^```(?:tsx?|javascript)?\n?/gm, '');
   testCode = testCode.replace(/```$/gm, '');
+  testCode = testCode.trim();
 
-  return testCode.trim();
+  validateAIOutput(testCode, component.name);
+
+  return testCode;
 }
 
 // ─── EXECUÇÃO PRINCIPAL ───────────────────────────────────

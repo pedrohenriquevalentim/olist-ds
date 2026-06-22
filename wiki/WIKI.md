@@ -2,7 +2,7 @@
 
 **Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.22`  
 **Skill:** v3.2  
-**Última atualização:** 2026-06-18  
+**Última atualização:** 2026-06-22  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -106,7 +106,7 @@ npm run release
 | `npm run build-storybook` | `storybook build` |
 | `npm run lint` | `eslint src/` |
 | `npm run prepublishOnly` | `npm run build` |
-| `npm run pipeline` | `npm run build:tokens && npm run generate:all && npm run t...` |
+| `npm run pipeline` | `npm run build:tokens && npm run generate:all && tsc --noE...` |
 | `npm run mcp:figma` | `figma-mcp` |
 | `npm run watch:tokens` | `style-dictionary build --watch` |
 | `npm run pipeline:full` | `npm run build:tokens && npm run generate:all && npm run t...` |
@@ -115,7 +115,7 @@ npm run release
 | `npm run sync:skill-meta` | `node scripts/sync-skill-meta.mjs` |
 | `npm run wiki` | `node scripts/generate-wiki.mjs` |
 | `npm run postrelease` | `npm run wiki` |
-| `npm run chromatic` | `npx chromatic --project-token=chpt_eb7756a8c9c93ad` |
+| `npm run chromatic` | `npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN` |
 
 ## Skill Claude
 
@@ -438,4 +438,4 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ---
 
-*Gerado automaticamente em 2026-06-18 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-06-22 por `generate-wiki.mjs`. Não edite manualmente.*

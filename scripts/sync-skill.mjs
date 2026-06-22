@@ -313,10 +313,13 @@ function syncClaudeMd() {
   let content = readFileSync(CLAUDE_MD_PATH, 'utf-8');
 
   // Substituir o bloco de prioridade de libraries entre o passo 4 e o passo 5
-  content = content.replace(
-    /4\. Identifique os componentes do design system necessários consultando as libraries na ordem de prioridade:[\s\S]*?(?=\n5\.)/,
-    newPriorityBlock
-  );
+  const pattern = /4\. Identifique os componentes do design system necessários consultando as libraries na ordem de prioridade:[\s\S]*?(?=\n5\.)/;
+  if (!pattern.test(content)) {
+    console.warn('⚠️  CLAUDE.md sincronizado parcialmente: padrão do passo 4 não encontrado. O arquivo pode ter sido editado manualmente.');
+    return;
+  }
+
+  content = content.replace(pattern, newPriorityBlock);
 
   writeFileSync(CLAUDE_MD_PATH, content, 'utf-8');
   console.log('✅ CLAUDE.md sincronizado (libraries atualizadas)\n');

@@ -33,7 +33,7 @@
     "build-storybook": "storybook build",
     "lint": "eslint src/",
     "prepublishOnly": "npm run build",
-    "pipeline": "npm run build:tokens && npm run generate:all && npm run test:run && npm run build-storybook",
+    "pipeline": "npm run build:tokens && npm run generate:all && tsc --noEmit && npm run test:run && npm run build-storybook",
     "mcp:figma": "figma-mcp",
     "watch:tokens": "style-dictionary build --watch",
     "pipeline:full": "npm run build:tokens && npm run generate:all && npm run test:run && npm run build-storybook && npm run build",
@@ -42,7 +42,7 @@
     "sync:skill-meta": "node scripts/sync-skill-meta.mjs",
     "wiki": "node scripts/generate-wiki.mjs",
     "postrelease": "npm run wiki",
-    "chromatic": "npx chromatic --project-token=chpt_eb7756a8c9c93ad"
+    "chromatic": "npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN"
   },
   "keywords": [],
   "author": "Pedro Valentim",
