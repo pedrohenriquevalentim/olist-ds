@@ -33,7 +33,7 @@ jobs:
           cache-dependency-path: package-lock.json
 
       - name: Instalar dependências
-        run: npm ci
+        run: npm install
 
       - name: Lint
         run: npm run lint
@@ -73,7 +73,7 @@ jobs:
           cache: 'npm'
 
       - name: Instalar dependências
-        run: npm ci
+        run: npm install
 
       - name: Gerar tokens
         run: npm run build:tokens
@@ -115,7 +115,7 @@ jobs:
           cache: 'npm'
 
       - name: Instalar dependências
-        run: npm ci
+        run: npm install
 
       - name: Gerar tokens
         run: npm run build:tokens
