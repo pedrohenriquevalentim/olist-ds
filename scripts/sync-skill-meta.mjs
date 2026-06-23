@@ -117,6 +117,21 @@ function updateSkillInternalRefs(skillDir, oldName, newName) {
   walk(skillDir);
 }
 
+// ── 4e. Atualiza o H1 title dentro do próprio SKILL.md ──────────────────────
+
+function updateSkillMdTitle(skillDir, version) {
+  const skillMdPath = join(skillDir, 'SKILL.md');
+  if (!existsSync(skillMdPath)) return;
+  let content = readFileSync(skillMdPath, 'utf-8');
+  const updated = content.replace(
+    /^(# Olist Design System — Especialista) v[\d.]+/m,
+    `$1 v${version}`
+  );
+  if (updated === content) return;
+  writeFileSync(skillMdPath, updated, 'utf-8');
+  console.log(`   ✅ SKILL.md — H1 title atualizado para v${version}`);
+}
+
 // ── 5. Lê o README e a versão dele ──────────────────────────────────────────
 
 function readReadmeVersion(readmePath) {
@@ -444,6 +459,9 @@ console.log(`   ✅ README.md — seção Estrutura regenerada`);
 const setupPath = join(skillDir, 'SETUP.md');
 updateSetupMd(setupPath, skillDir, expectedDirName, skillVersion);
 console.log(`   ✅ SETUP.md — versão, caminhos e estrutura atualizados`);
+
+// 4d-title. Atualiza o H1 title dentro do próprio SKILL.md
+updateSkillMdTitle(skillDir, skillVersion);
 
 // 4d. Atualiza decisions/ (INDEX.md e CHANGELOG.md) — dentro da skill
 const decisionsDir = join(skillDir, 'decisions');
