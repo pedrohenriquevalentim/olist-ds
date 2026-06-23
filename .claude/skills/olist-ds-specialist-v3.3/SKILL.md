@@ -4,7 +4,7 @@ description: Use esta skill para TODO trabalho de UI/UX da Olist — criação d
 version: 3.4
 ---
 
-# Olist Design System — Especialista v3.3
+# Olist Design System — Especialista v3.4
 
 ## Papel
 

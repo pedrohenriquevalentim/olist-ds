@@ -62,9 +62,14 @@ function bumpVersion(version, minor) {
 
 function writeVersion(skillMdPath, oldVersion, newVersion) {
   const content = readFileSync(skillMdPath, 'utf-8');
-  const updated = content.replace(
+  let updated = content.replace(
     /^(version:\s*)[\d.]+/m,
     `$1${newVersion}`
+  );
+  // Atualiza o H1 title junto com o frontmatter
+  updated = updated.replace(
+    /^(# Olist Design System — Especialista) v[\d.]+/m,
+    `$1 v${newVersion}`
   );
   writeFileSync(skillMdPath, updated, 'utf-8');
 }
