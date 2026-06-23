@@ -1,6 +1,6 @@
 {
   "name": "@pedrohenriquevalentim/olist-ds",
-  "version": "1.0.25",
+  "version": "1.0.27",
   "description": "Olist Design System — componentes React + tokens",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -34,7 +34,8 @@
     "lint": "eslint src/",
     "prepublishOnly": "npm run build",
     "pipeline": "npm run build:tokens && npm run generate:all && tsc --noEmit && npm run test:run && npm run build-storybook",
-    "ship": "npm run pipeline && npm version patch && git add . && git commit -m 'chore: release' && git push origin HEAD",
+    "version:skill": "node scripts/version-skill.mjs",
+    "ship": "npm run version:skill && npm run pipeline && git add -A && git commit -m 'chore: release' && npm version patch && git push origin HEAD --tags",
     "mcp:figma": "figma-mcp",
     "watch:tokens": "style-dictionary build --watch",
     "sync:skill-meta": "node scripts/sync-skill-meta.mjs",
