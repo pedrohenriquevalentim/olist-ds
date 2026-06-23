@@ -2,7 +2,7 @@
 
 **Categoria:** UX/Design
 **Status:** Ativa
-**Skill de referência:** `.claude/skills/olist-ds-specialist-v3.2/references/ESPACAMENTO.md`, `references/PADROES.md`, `references/TEMPLATES_PRODUTO.md`
+**Skill de referência:** `.claude/skills/olist-ds-specialist-v3.3/references/ESPACAMENTO.md`, `references/PADROES.md`, `references/TEMPLATES_PRODUTO.md`
 
 ---
 

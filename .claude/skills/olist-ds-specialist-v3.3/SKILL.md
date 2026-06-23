@@ -1,10 +1,10 @@
 ---
 name: olist-ds-specialist
 description: Use esta skill para TODO trabalho de UI/UX da Olist — criação de telas a partir de SDDs/PRDs, geração de componentes React, revisão de consistência visual, criação de protótipos no Figma, manutenção do design system e criação/revisão de textos de UI (UX Writing, copy, tom de voz). Acione quando alguém mencionar interface Olist, design system, tokens, componentes, telas, layouts, SDD, PRD, protótipo, wireframe, Figma, Storybook, copy, texto de botão, mensagem de erro, empty state, toast, label, placeholder ou qualquer tarefa de criação ou revisão de UI/copy para produtos Olist. NÃO use para backend, APIs, banco de dados, autenticação ou lógica de negócio sem relação com UI.
-version: 3.2
+version: 3.4
 ---
 
-# Olist Design System — Especialista v3.2
+# Olist Design System — Especialista v3.3
 
 ## Papel
 
@@ -83,7 +83,7 @@ Ao gerar telas React (Casos 1 e 2), o inventário de componentes reais do reposi
 Buscar o `COMPONENTES.md` mais recente diretamente do repositório público:
 
 ```
-https://raw.githubusercontent.com/pedrohenriquevalentim/olist-ds/main/.claude/skills/olist-ds-specialist-v3.2/references/COMPONENTES.md
+https://raw.githubusercontent.com/pedrohenriquevalentim/olist-ds/main/.claude/skills/olist-ds-specialist-v3.3/references/COMPONENTES.md
 ```
 
 Use `WebFetch` para obter este arquivo antes de gerar qualquer código React. Ele contém as props reais, variantes e estados de cada componente na versão mais atual publicada.
@@ -108,6 +108,8 @@ Receber solicitação
 É trabalho de UI/UX? → Não → Recusar, explicar escopo
     ↓ Sim
 Ler references/VISAO_GERAL.md (sempre)
+    ↓
+Ler decisions/INDEX.md (verificar decisões ativas que se aplicam à tarefa)
     ↓
 Qual tipo de tarefa?
     │
@@ -165,17 +167,36 @@ Qual tipo de tarefa?
 1. Entender a solicitação e confirmar que é trabalho de UI/UX
 2. Ler `references/VISAO_GERAL.md` primeiro (sempre)
 3. Ler `figma-config.json` antes de qualquer operação com Figma MCP
-4. Ler os arquivos de referência específicos para a tarefa (ver Fluxo de Decisão)
-5. **SEMPRE consultar `GLOSSARIO_PAPEIS_TEXTO.md` antes de nomear textos** (Heading, Label, Error, etc.)
-6. Consultar `references/MAPA_FONTES.md` para encontrar componentes e padrões existentes
-7. Reutilizar componentes, tokens e padrões existentes antes de criar qualquer coisa nova
-8. Nunca usar cores, fontes, espaçamentos ou border-radius hardcoded — sempre usar tokens
-9. **Usar EXATAMENTE os nomes de papéis de texto definidos em `GLOSSARIO_PAPEIS_TEXTO.md`**
-10. Preservar lógica, estado e regras de negócio ao modificar telas
-11. Sinalizar conflitos com padrões atuais e propor alternativas consistentes
-12. Entregar código React + TypeScript pronto para implementação quando solicitado
+4. **Ler `decisions/INDEX.md` para identificar decisões de design ativas que se aplicam à tarefa**
+5. Ler os arquivos de referência específicos para a tarefa (ver Fluxo de Decisão)
+6. **SEMPRE consultar `GLOSSARIO_PAPEIS_TEXTO.md` antes de nomear textos** (Heading, Label, Error, etc.)
+7. Consultar `references/MAPA_FONTES.md` para encontrar componentes e padrões existentes
+8. Reutilizar componentes, tokens e padrões existentes antes de criar qualquer coisa nova
+9. Nunca usar cores, fontes, espaçamentos ou border-radius hardcoded — sempre usar tokens
+10. **Usar EXATAMENTE os nomes de papéis de texto definidos em `GLOSSARIO_PAPEIS_TEXTO.md`**
+11. Preservar lógica, estado e regras de negócio ao modificar telas
+12. Sinalizar conflitos com padrões atuais e propor alternativas consistentes
+13. Entregar código React + TypeScript pronto para implementação quando solicitado
 
 ## Arquivos de Referência
+
+### decisions/ — Decisões de design registradas e versionadas
+
+| Arquivo | Quando ler | O que contém |
+|---|---|---|
+| `decisions/INDEX.md` | **Logo após VISAO_GERAL.md** | Índice de todas as decisões ativas (técnicas e UX/Design) |
+| `decisions/technical/TOKENS.md` | Criando componentes | Regras de consumo de tokens CSS, unidades rem |
+| `decisions/technical/COMPONENTES_REACT.md` | Criando componentes | Convenções de estrutura, props e testes |
+| `decisions/technical/ICONES.md` | Usando ícones | ReactNode, currentColor, sem pacotes externos |
+| `decisions/technical/ACESSIBILIDADE.md` | Qualquer elemento interativo | Roles ARIA, teclado, contraste WCAG AA |
+| `decisions/technical/ASSETS_FIGMA.md` | Usando Figma MCP | Fluxo de assets, identificadores, declaração SVG |
+| `decisions/ux-design/PRINCIPIOS.md` | Qualquer tarefa de UI | 4 princípios de design Olist e identidade visual |
+| `decisions/ux-design/ESPACAMENTO_LAYOUT.md` | Definindo layout | Grid 4px, 5 padrões de página, estrutura de tela |
+| `decisions/ux-design/TIPOGRAFIA.md` | Estilizando texto | Escala tipográfica, 10 papéis de texto |
+| `decisions/ux-design/FLUXO_PRD_FIGMA.md` | Traduzindo PRD/SDD em Figma | Hierarquia de bibliotecas, busca, regras de build |
+| `decisions/ux-design/UX_WRITING.md` | Criando ou revisando copy | Tom B2B, regras por tipo de texto |
+
+### references/ — Base de conhecimento da skill
 
 | Arquivo | Quando ler | O que contém |
 |---|---|---|
@@ -200,30 +221,31 @@ Qual tipo de tarefa?
 ### ✅ Sempre Faça:
 
 1. **Leia `VISAO_GERAL.md` primeiro** — é o mapa de navegação
-2. **Leia `figma-config.json` antes de usar Figma MCP:**
+2. **Leia `decisions/INDEX.md` logo em seguida** — contém decisões de produto ativas que têm precedência sobre defaults. Leia os arquivos específicos apontados pelo INDEX que se aplicam à tarefa atual.
+3. **Leia `figma-config.json` antes de usar Figma MCP:**
    - Use `searchPriority` como `includeLibraryKeys` em todo `search_design_system`
    - Respeite a ordem: AI Components > ERP components > ERP recursos > ERP style guide > [DS] components web
    - Ignore resultados de `blockedLibraries`
-3. **Leia `HARNESS_TELAS.md` antes de criar qualquer frame no Figma:**
+4. **Leia `HARNESS_TELAS.md` antes de criar qualquer frame no Figma:**
    - Execute o gate pré-construção (Seção 1) — só avance com todos os itens marcados
    - Verifique limites por tela (Seção 2) antes de instanciar componentes
    - Identifique o padrão da Zona D (Seção 3) antes de montar o conteúdo
    - Reporte conflitos com o harness antes de criar, nunca depois
-4. **Consulte `GLOSSARIO_PAPEIS_TEXTO.md` antes de nomear textos**
+5. **Consulte `GLOSSARIO_PAPEIS_TEXTO.md` antes de nomear textos**
    - Se o SDD diz "título da página" → use **Heading**
    - Se o SDD diz "mensagem de erro" → use **Error**
-5. **Consulte `UX_WRITING.md` ao criar qualquer texto na UI:**
+6. **Consulte `UX_WRITING.md` ao criar qualquer texto na UI:**
    - Execute o protocolo de triagem (componente → contexto → objetivo)
    - Valide contra Os 4 Pilares antes de finalizar qualquer copy
    - Use a tabela de mapeamento SDD → Tipo de Texto para traduzir requisitos em copy
-6. **Leia `SDD_AVANCADO.md` se o SDD tiver:**
+7. **Leia `SDD_AVANCADO.md` se o SDD tiver:**
    - Requisitos Não Funcionais (RNF), DACI, Métricas, Rollout, Observabilidade
-6. **Use os passos 1-10 de `SDD_PARA_TELA.md`** ao traduzir SDDs completos
-7. **No Figma, sempre use workflow faseado:**
+8. **Use os passos 1-10 de `SDD_PARA_TELA.md`** ao traduzir SDDs completos
+9. **No Figma, sempre use workflow faseado:**
    - Liste todas as telas ANTES de criar → aguarde validação
    - Crie tela por tela com `use_figma`, aguardando feedback a cada entrega
-8. **Sempre defina `layoutSizing` APÓS `appendChild`** (regra crítica da Figma Plugin API)
-9. **Valores válidos de `counterAxisAlignItems`:** `MIN` `MAX` `CENTER` `BASELINE` (sem STRETCH, sem END)
+10. **Sempre defina `layoutSizing` APÓS `appendChild`** (regra crítica da Figma Plugin API)
+11. **Valores válidos de `counterAxisAlignItems`:** `MIN` `MAX` `CENTER` `BASELINE` (sem STRETCH, sem END)
 
 ### ❌ Nunca Faça:
 
@@ -361,7 +383,8 @@ Erros comuns e suas correções — manter para evitar regressão:
 
 ---
 
-**Versão:** 3.2
-**Última atualização:** 2026-06-15
+**Versão:** 3.3
+**Última atualização:** 2026-06-23
+**Mudanças v3.3:** Pasta `decisions/` criada dentro da skill com 10 decisões de design (5 técnicas, 5 UX/Design); `decisions/INDEX.md` adicionado como leitura obrigatória no Fluxo de Decisão e nas Regras Críticas; tabela de referências separada em `decisions/` e `references/`.
 **Mudanças v3.2:** Adição do `UX_WRITING.md` como referência de copy e tom de voz; novo ramo no Fluxo de Decisão para criação/revisão de textos de UI; seção 10 de UX Writing no `CHECKLIST_REVISAO.md`; regra crítica 5 sobre consultar `UX_WRITING.md` ao criar textos.
 **Mudanças v3.1:** Adição do `HARNESS_TELAS.md` como gate pré-construção obrigatório no fluxo de criação de telas no Figma; integração nas regras críticas e no Caso 4.

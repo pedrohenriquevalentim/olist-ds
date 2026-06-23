@@ -3,8 +3,8 @@
 Ponto de entrada para todas as decisões de produto registradas neste projeto.
 Cada decisão referencia o arquivo da skill que governa os detalhes completos.
 
-**Skill principal:** `.claude/skills/olist-ds-specialist-v3.2/`
-**Referência mestra:** `.claude/skills/olist-ds-specialist-v3.2/references/VISAO_GERAL.md`
+**Skill principal:** `.claude/skills/olist-ds-specialist-v3.3/`
+**Referência mestra:** `.claude/skills/olist-ds-specialist-v3.3/references/VISAO_GERAL.md`
 
 ---
 
@@ -44,4 +44,4 @@ Exemplo:
 
 ---
 
-**Última atualização:** 2026-06-23 v1.0
+**Última atualização:** 2026-06-23 — skill v3.3

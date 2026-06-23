@@ -1,8 +1,8 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.22`  
-**Skill:** v3.2  
-**Última atualização:** 2026-06-22  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.26`  
+**Skill:** v3.3  
+**Última atualização:** 2026-06-23  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -32,21 +32,22 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 
 | Métrica | Valor |
 |---|---|
-| Componentes | 7 |
+| Componentes | 8 |
 | Ícones SVG | 550 |
 | Arquivos da Skill | 21 |
 | Arquivos Figma permitidos | 5 |
-| Versão npm | 1.0.22 |
-| Versão skill | 3.2 |
+| Versão npm | 1.0.26 |
+| Versão skill | 3.3 |
 
 ## Componentes
 
-### Lista Completa (7)
+### Lista Completa (8)
 
 - `Button` — `src/components/Button/`
 - `Checkbox` — `src/components/Checkbox/`
 - `Chip` — `src/components/Chip/`
 - `Icon` — `src/components/Icon/`
+- `InputSearch` — `src/components/InputSearch/`
 - `InputSelect` — `src/components/InputSelect/`
 - `Logo` — `src/components/Logo/`
 - `ProdutosOlistIcons` — `src/components/ProdutosOlistIcons/`
@@ -59,6 +60,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Checkbox | ➖ Sem ícones |
 | Chip | ➖ Sem ícones |
 | Icon | ✅ Componente central |
+| InputSearch | ➖ Sem ícones |
 | InputSelect | ➖ Sem ícones |
 | Logo | ➖ Sem ícones |
 | ProdutosOlistIcons | ➖ Sem ícones |
@@ -72,7 +74,7 @@ npm run release
     │
     ├── 1. generate:all (testes + stories via Gemini)
     ├── 2. build (compilação TypeScript)
-    ├── 3. sync:skill (atualiza skill v3.2)
+    ├── 3. sync:skill (atualiza skill v3.3)
     ├── 4. npm version patch (incrementa versão)
     ├── 5. npm publish (publica no registry)
     └── 6. git push --follow-tags
@@ -107,11 +109,10 @@ npm run release
 | `npm run lint` | `eslint src/` |
 | `npm run prepublishOnly` | `npm run build` |
 | `npm run pipeline` | `npm run build:tokens && npm run generate:all && tsc --noE...` |
+| `npm run version:skill` | `node scripts/version-skill.mjs` |
+| `npm run ship` | `npm run version:skill && npm run pipeline && npm version ...` |
 | `npm run mcp:figma` | `figma-mcp` |
 | `npm run watch:tokens` | `style-dictionary build --watch` |
-| `npm run pipeline:full` | `npm run build:tokens && npm run generate:all && npm run t...` |
-| `npm run pipeline:publish` | `npm run pipeline:full && npm version patch && git add . &...` |
-| `npm run release` | `npm run pipeline && npm run sync:skill && npm run sync:sk...` |
 | `npm run sync:skill-meta` | `node scripts/sync-skill-meta.mjs` |
 | `npm run wiki` | `node scripts/generate-wiki.mjs` |
 | `npm run postrelease` | `npm run wiki` |
@@ -119,9 +120,9 @@ npm run release
 
 ## Skill Claude
 
-### Versão: v3.2
+### Versão: v3.3
 
-**Localização:** `.claude/skills/olist-ds-specialist-v3.2/`
+**Localização:** `.claude/skills/olist-ds-specialist-v3.3/`
 
 ### Arquivos da Skill (21 total)
 
@@ -175,35 +176,36 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 2. Customize → Skills → Upload → selecionar pasta da skill
 3. Iniciar conversa e colar o SDD ou link do Figma
 
-### Regras Críticas v3.2
+### Regras Críticas v3.3
 
 ### ✅ Sempre Faça:
 
 1. **Leia `VISAO_GERAL.md` primeiro** — é o mapa de navegação
-2. **Leia `figma-config.json` antes de usar Figma MCP:**
+2. **Leia `decisions/INDEX.md` logo em seguida** — contém decisões de produto ativas que têm precedência sobre defaults. Leia os arquivos específicos apontados pelo INDEX que se aplicam à tarefa atual.
+3. **Leia `figma-config.json` antes de usar Figma MCP:**
    - Use `searchPriority` como `includeLibraryKeys` em todo `search_design_system`
    - Respeite a ordem: AI Components > ERP components > ERP recursos > ERP style guide > [DS] components web
    - Ignore resultados de `blockedLibraries`
-3. **Leia `HARNESS_TELAS.md` antes de criar qualquer frame no Figma:**
+4. **Leia `HARNESS_TELAS.md` antes de criar qualquer frame no Figma:**
    - Execute o gate pré-construção (Seção 1) — só avance com todos os itens marcados
    - Verifique limites por tela (Seção 2) antes de instanciar componentes
    - Identifique o padrão da Zona D (Seção 3) antes de montar o conteúdo
    - Reporte conflitos com o harness antes de criar, nunca depois
-4. **Consulte `GLOSSARIO_PAPEIS_TEXTO.md` antes de nomear textos**
+5. **Consulte `GLOSSARIO_PAPEIS_TEXTO.md` antes de nomear textos**
    - Se o SDD diz "título da página" → use **Heading**
    - Se o SDD diz "mensagem de erro" → use **Error**
-5. **Consulte `UX_WRITING.md` ao criar qualquer texto na UI:**
+6. **Consulte `UX_WRITING.md` ao criar qualquer texto na UI:**
    - Execute o protocolo de triagem (componente → contexto → objetivo)
    - Valide contra Os 4 Pilares antes de finalizar qualquer copy
    - Use a tabela de mapeamento SDD → Tipo de Texto para traduzir requisitos em copy
-6. **Leia `SDD_AVANCADO.md` se o SDD tiver:**
+7. **Leia `SDD_AVANCADO.md` se o SDD tiver:**
    - Requisitos Não Funcionais (RNF), DACI, Métricas, Rollout, Observabilidade
-6. **Use os passos 1-10 de `SDD_PARA_TELA.md`** ao traduzir SDDs completos
-7. **No Figma, sempre use workflow faseado:**
+8. **Use os passos 1-10 de `SDD_PARA_TELA.md`** ao traduzir SDDs completos
+9. **No Figma, sempre use workflow faseado:**
    - Liste todas as telas ANTES de criar → aguarde validação
    - Crie tela por tela com `use_figma`, aguardando feedback a cada entrega
-8. **Sempre defina `layoutSizing` APÓS `appendChild`** (regra crítica da Figma Plugin API)
-9. **Valores válidos de `counterAxisAlignItems`:** `MIN` `MAX` `CENTER` `BASELINE` (sem STRETCH, sem END)
+10. **Sempre defina `layoutSizing` APÓS `appendChild`** (regra crítica da Figma Plugin API)
+11. **Valores válidos de `counterAxisAlignItems`:** `MIN` `MAX` `CENTER` `BASELINE` (sem STRETCH, sem END)
 
 ### ❌ Nunca Faça:
 
@@ -284,7 +286,7 @@ FileKey: ABC123
 ### Setup
 
 ```bash
-cp .claude/skills/olist-ds-specialist-v3.2/figma-config.example.json .claude/figma-config.json
+cp .claude/skills/olist-ds-specialist-v3.3/figma-config.example.json .claude/figma-config.json
 # Editar com seus fileKeys
 echo '.claude/figma-config.json' >> .gitignore
 ```
@@ -303,6 +305,7 @@ echo '.claude/figma-config.json' >> .gitignore
 - `sync-skill.mjs`
 - `sync-tokens.mjs`
 - `validate-icon-migration.mjs`
+- `version-skill.mjs`
 
 ### Principais
 
@@ -319,7 +322,7 @@ echo '.claude/figma-config.json' >> .gitignore
 
 ```bash
 cd .claude/skills
-zip -r olist-ds-specialist-v3.2.zip olist-ds-specialist-v3.2/
+zip -r olist-ds-specialist-v3.3.zip olist-ds-specialist-v3.3/
 ```
 
 ### O Que NÃO Vai
@@ -333,11 +336,11 @@ zip -r olist-ds-specialist-v3.2.zip olist-ds-specialist-v3.2/
 
 ```bash
 # 1. Extrair e copiar skill
-unzip olist-ds-specialist-v3.2.zip
-cp -r olist-ds-specialist-v3.2/ .claude/skills/olist-ds-specialist-v3.2/
+unzip olist-ds-specialist-v3.3.zip
+cp -r olist-ds-specialist-v3.3/ .claude/skills/olist-ds-specialist-v3.3/
 
 # 2. Configurar Figma
-cp .claude/skills/olist-ds-specialist-v3.2/figma-config.example.json .claude/figma-config.json
+cp .claude/skills/olist-ds-specialist-v3.3/figma-config.example.json .claude/figma-config.json
 # Editar com fileKeys próprios
 
 # 3. Gitignore
@@ -375,10 +378,15 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 1. `.claude/figma-config.json` existe?
 2. `searchPriority` tem os libraryKeys corretos?
-3. Skill v3.2 instalada?
+3. Skill v3.3 instalada?
 4. O prompt inclui instrução para ler `figma-config.json` antes do Figma MCP?
 
 ## Changelog
+
+## v3.3 (2026-06-23)
+- Arquivos da skill modificados: README.md
+- Decisões de design atualizadas: decisions/CHANGELOG.md
+- Outros arquivos: claude/decisions/INDEX.md
 
 ## v3.2 (2026-06-15)
 - **UX Writing:** `UX_WRITING.md` adicionado como referência de copy e tom de voz (fonte: skill CX Writing v2.0)
@@ -438,4 +446,4 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ---
 
-*Gerado automaticamente em 2026-06-22 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-06-23 por `generate-wiki.mjs`. Não edite manualmente.*

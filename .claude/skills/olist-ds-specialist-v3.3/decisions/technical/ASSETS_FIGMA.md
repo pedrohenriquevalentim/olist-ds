@@ -2,7 +2,7 @@
 
 **Categoria:** Técnica
 **Status:** Ativa
-**Skill de referência:** `.claude/skills/olist-ds-specialist-v3.2/figma-config.json`, `references/FIGMA_CONFIG.md`
+**Skill de referência:** `.claude/skills/olist-ds-specialist-v3.3/figma-config.json`, `references/FIGMA_CONFIG.md`
 
 ---
 

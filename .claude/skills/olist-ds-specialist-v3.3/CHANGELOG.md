@@ -1,3 +1,11 @@
+## v3.4 (2026-06-23)
+- Arquivos da skill modificados: 
+
+## v3.3 (2026-06-23)
+- Arquivos da skill modificados: README.md
+- Decisões de design atualizadas: decisions/CHANGELOG.md
+- Outros arquivos: claude/decisions/INDEX.md
+
 ## v3.2 (2026-06-15)
 - **UX Writing:** `UX_WRITING.md` adicionado como referência de copy e tom de voz (fonte: skill CX Writing v2.0)
 - Novo ramo no Fluxo de Decisão para "Criar ou revisar textos de UI"

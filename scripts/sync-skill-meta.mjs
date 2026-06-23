@@ -99,7 +99,7 @@ function updateAllReferences(oldName, newName) {
     const changed = updateReferencesInFile(abs, oldName, newName);
     if (changed) console.log(`      ✓ ${rel}`);
   }
-  // Também atualiza referências dentro dos próprios arquivos da skill
+  // Atualiza referências dentro de toda a pasta da skill (inclui decisions/)
   const skillDir = join(SKILLS_BASE, newName);
   updateSkillInternalRefs(skillDir, oldName, newName);
 }
@@ -329,6 +329,54 @@ function updateReadme(readmePath, changelogPath, newVersion) {
   writeFileSync(readmePath, content, 'utf-8');
 }
 
+// ── 7b. Atualiza INDEX.md e CHANGELOG.md em decisions/ (dentro da skill) ────
+
+function updateDecisionsIndex(decisionsDir, skillVersion, today) {
+  const indexPath = join(decisionsDir, 'INDEX.md');
+  if (!existsSync(indexPath)) return;
+  let content = readFileSync(indexPath, 'utf-8');
+  // Atualiza linha "Última atualização"
+  content = content.replace(
+    /\*\*Última atualização:\*\*.*/,
+    `**Última atualização:** ${today} — skill v${skillVersion}`
+  );
+  writeFileSync(indexPath, content, 'utf-8');
+  console.log(`   ✅ decisions/INDEX.md — data atualizada`);
+}
+
+function updateDecisionsChangelog(decisionsDir, skillDir, skillVersion, today) {
+  const changelogPath = join(decisionsDir, 'CHANGELOG.md');
+  const skillChangelogPath = join(skillDir, 'CHANGELOG.md');
+
+  // Lê bloco da versão atual no CHANGELOG da skill
+  let skillEntry = '';
+  if (existsSync(skillChangelogPath)) {
+    const skillCl = readFileSync(skillChangelogPath, 'utf-8');
+    const pattern = new RegExp(`## v${skillVersion.replace('.', '\\.')}[\\s\\S]*?(?=\\n## v|$)`);
+    const match = skillCl.match(pattern);
+    if (match) skillEntry = match[0].trim();
+  }
+
+  let content = existsSync(changelogPath) ? readFileSync(changelogPath, 'utf-8') : '';
+
+  // Não duplica se a versão já estiver registrada
+  if (content.includes(`## v${skillVersion}`)) return;
+
+  const entry = skillEntry
+    ? `## v${skillVersion} (${today})\n\n> Skill atualizada para v${skillVersion}. Referências sincronizadas automaticamente.\n\n${skillEntry.replace(/^## v[\d.]+ \([^)]+\)\n?/, '')}\n`
+    : `## v${skillVersion} (${today})\n\n> Skill atualizada para v${skillVersion}. Referências sincronizadas automaticamente.\n`;
+
+  if (!content) {
+    content = `# Changelog — Decisões de Design de Produto\n\nHistórico de atualizações sincronizado com a skill \`olist-ds-specialist\`.\n\n${entry}`;
+  } else {
+    // Insere após o cabeçalho (primeira linha de ##)
+    content = content.replace(/^(# [^\n]+\n[\s\S]*?)(\n## v)/, `$1\n${entry}\n## v`);
+  }
+
+  writeFileSync(changelogPath, content, 'utf-8');
+  console.log(`   ✅ decisions/CHANGELOG.md — entrada v${skillVersion} adicionada`);
+}
+
 // ── 7. Regenera o Wiki ───────────────────────────────────────────────────────
 
 function regenerateWiki() {
@@ -396,6 +444,16 @@ console.log(`   ✅ README.md — seção Estrutura regenerada`);
 const setupPath = join(skillDir, 'SETUP.md');
 updateSetupMd(setupPath, skillDir, expectedDirName, skillVersion);
 console.log(`   ✅ SETUP.md — versão, caminhos e estrutura atualizados`);
+
+// 4d. Atualiza decisions/ (INDEX.md e CHANGELOG.md) — dentro da skill
+const decisionsDir = join(skillDir, 'decisions');
+const today = new Date().toISOString().split('T')[0];
+if (existsSync(decisionsDir)) {
+  updateDecisionsIndex(decisionsDir, skillVersion, today);
+  updateDecisionsChangelog(decisionsDir, skillDir, skillVersion, today);
+} else {
+  console.log(`   ℹ️  decisions/ não encontrado dentro da skill — pulando`);
+}
 
 // 5. Regenera Wiki
 console.log('');
