@@ -3,7 +3,7 @@
 /**
  * sync-skill.mjs
  *
- * Sincroniza a skill corporativa olist-ds-specialist-v3.3 com o estado real do código.
+ * Sincroniza a skill corporativa olist-ds-specialist-v3.5 com o estado real do código.
  *
  * Auto-gera:
  * - COMPONENTES.md (props, tokens, estados de cada componente)
@@ -41,7 +41,7 @@ function resolveSkillDir() {
   return withSkillMd ? join(base, withSkillMd) : (entries[0] ? join(base, entries[0]) : null);
 }
 
-const SKILL_DIR = resolveSkillDir() ?? join(ROOT_DIR, '.claude', 'skills', 'olist-ds-specialist-v3.3');
+const SKILL_DIR = resolveSkillDir() ?? join(ROOT_DIR, '.claude', 'skills', 'olist-ds-specialist-v3.5');
 const REFERENCES_DIR = join(SKILL_DIR, 'references');
 const COMPONENTS_DIR = join(ROOT_DIR, 'src', 'components');
 const FIGMA_CONFIG_PATH = join(SKILL_DIR, 'figma-config.json');
@@ -337,9 +337,9 @@ try {
 
   console.log('✅ Sincronização concluída!\n');
   console.log('Arquivos gerados:');
-  console.log('  - .claude/skills/olist-ds-specialist-v3.3/references/COMPONENTES.md');
-  console.log('  - .claude/skills/olist-ds-specialist-v3.3/references/MAPA_FONTES.md');
-  console.log('  - .claude/skills/olist-ds-specialist-v3.3/references/VISAO_GERAL.md (atualizado)');
+  console.log('  - .claude/skills/olist-ds-specialist-v3.5/references/COMPONENTES.md');
+  console.log('  - .claude/skills/olist-ds-specialist-v3.5/references/MAPA_FONTES.md');
+  console.log('  - .claude/skills/olist-ds-specialist-v3.5/references/VISAO_GERAL.md (atualizado)');
   console.log('  - CLAUDE.md (libraries sincronizadas)');
   console.log('');
 } catch (error) {

@@ -2,7 +2,7 @@
 
 **Categoria:** Técnica
 **Status:** Ativa
-**Skill de referência:** `.claude/skills/olist-ds-specialist-v3.3/references/COMPONENTES.md`, `references/MAPA_FONTES.md`
+**Skill de referência:** `.claude/skills/olist-ds-specialist-v3.5/references/COMPONENTES.md`, `references/MAPA_FONTES.md`
 
 ---
 

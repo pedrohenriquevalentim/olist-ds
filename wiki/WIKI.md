@@ -1,7 +1,7 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.28`  
-**Skill:** v3.3  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.29`  
+**Skill:** v3.5  
 **Última atualização:** 2026-06-23  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
@@ -36,8 +36,8 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Ícones SVG | 550 |
 | Arquivos da Skill | 21 |
 | Arquivos Figma permitidos | 5 |
-| Versão npm | 1.0.28 |
-| Versão skill | 3.3 |
+| Versão npm | 1.0.29 |
+| Versão skill | 3.5 |
 
 ## Componentes
 
@@ -74,7 +74,7 @@ npm run release
     │
     ├── 1. generate:all (testes + stories via Gemini)
     ├── 2. build (compilação TypeScript)
-    ├── 3. sync:skill (atualiza skill v3.3)
+    ├── 3. sync:skill (atualiza skill v3.5)
     ├── 4. npm version patch (incrementa versão)
     ├── 5. npm publish (publica no registry)
     └── 6. git push --follow-tags
@@ -110,7 +110,7 @@ npm run release
 | `npm run prepublishOnly` | `npm run build` |
 | `npm run pipeline` | `npm run build:tokens && npm run generate:all && tsc --noE...` |
 | `npm run version:skill` | `node scripts/version-skill.mjs` |
-| `npm run ship` | `npm run version:skill && npm run pipeline && git add -A &...` |
+| `npm run ship` | `npm run version:skill && npm run sync:skill-meta && npm r...` |
 | `npm run mcp:figma` | `figma-mcp` |
 | `npm run watch:tokens` | `style-dictionary build --watch` |
 | `npm run sync:skill-meta` | `node scripts/sync-skill-meta.mjs` |
@@ -120,9 +120,9 @@ npm run release
 
 ## Skill Claude
 
-### Versão: v3.3
+### Versão: v3.5
 
-**Localização:** `.claude/skills/olist-ds-specialist-v3.3/`
+**Localização:** `.claude/skills/olist-ds-specialist-v3.5/`
 
 ### Arquivos da Skill (21 total)
 
@@ -176,7 +176,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 2. Customize → Skills → Upload → selecionar pasta da skill
 3. Iniciar conversa e colar o SDD ou link do Figma
 
-### Regras Críticas v3.3
+### Regras Críticas v3.5
 
 ### ✅ Sempre Faça:
 
@@ -286,7 +286,7 @@ FileKey: ABC123
 ### Setup
 
 ```bash
-cp .claude/skills/olist-ds-specialist-v3.3/figma-config.example.json .claude/figma-config.json
+cp .claude/skills/olist-ds-specialist-v3.5/figma-config.example.json .claude/figma-config.json
 # Editar com seus fileKeys
 echo '.claude/figma-config.json' >> .gitignore
 ```
@@ -322,7 +322,7 @@ echo '.claude/figma-config.json' >> .gitignore
 
 ```bash
 cd .claude/skills
-zip -r olist-ds-specialist-v3.3.zip olist-ds-specialist-v3.3/
+zip -r olist-ds-specialist-v3.5.zip olist-ds-specialist-v3.5/
 ```
 
 ### O Que NÃO Vai
@@ -336,11 +336,11 @@ zip -r olist-ds-specialist-v3.3.zip olist-ds-specialist-v3.3/
 
 ```bash
 # 1. Extrair e copiar skill
-unzip olist-ds-specialist-v3.3.zip
-cp -r olist-ds-specialist-v3.3/ .claude/skills/olist-ds-specialist-v3.3/
+unzip olist-ds-specialist-v3.5.zip
+cp -r olist-ds-specialist-v3.5/ .claude/skills/olist-ds-specialist-v3.5/
 
 # 2. Configurar Figma
-cp .claude/skills/olist-ds-specialist-v3.3/figma-config.example.json .claude/figma-config.json
+cp .claude/skills/olist-ds-specialist-v3.5/figma-config.example.json .claude/figma-config.json
 # Editar com fileKeys próprios
 
 # 3. Gitignore
@@ -378,14 +378,14 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 1. `.claude/figma-config.json` existe?
 2. `searchPriority` tem os libraryKeys corretos?
-3. Skill v3.3 instalada?
+3. Skill v3.5 instalada?
 4. O prompt inclui instrução para ler `figma-config.json` antes do Figma MCP?
 
 ## Changelog
 
 ## v3.6 (2026-06-23)
 - Arquivos da skill modificados: SKILL.md, CHANGELOG.md, README.md, SETUP.md, component-registry.json, decisions/CHANGELOG.md, decisions/INDEX.md, decisions/technical/ACESSIBILIDADE.md, decisions/technical/ASSETS_FIGMA.md, decisions/technical/COMPONENTES_REACT.md, decisions/technical/ICONES.md, decisions/technical/TOKENS.md, decisions/ux-design/ESPACAMENTO_LAYOUT.md, decisions/ux-design/FLUXO_PRD_FIGMA.md, decisions/ux-design/PRINCIPIOS.md, decisions/ux-design/TIPOGRAFIA.md, decisions/ux-design/UX_WRITING.md, figma-config.json, references/CHECKLIST_REVISAO.md, references/COMPONENTES.md, references/CORES.md, references/ESPACAMENTO.md, references/FIGMA_CONFIG.md, references/GLOSSARIO_PAPEIS_TEXTO.md, references/HARNEES_TELAS.md, references/MAPA_FONTES.md, references/PADROES.md, references/SDD_AVANCADO.md, references/SDD_PARA_TELA.md, references/TEMPLATES_PRODUTO.md, references/TIPOGRAFIA.md, references/UX_WRITING.md, references/VISAO_GERAL.md
-- Outros arquivos: claude/skills/olist-ds-specialist-v3.3/CHANGELOG.md
+- Outros arquivos: claude/skills/olist-ds-specialist-v3.5/CHANGELOG.md
 
 ## v3.5 (2026-06-23)
 - Arquivos da skill modificados: CHANGELOG.md, README.md, SETUP.md, SKILL.md, component-registry.json, decisions/CHANGELOG.md, decisions/INDEX.md, decisions/technical/ACESSIBILIDADE.md, decisions/technical/ASSETS_FIGMA.md, decisions/technical/COMPONENTES_REACT.md, decisions/technical/ICONES.md, decisions/technical/TOKENS.md, decisions/ux-design/ESPACAMENTO_LAYOUT.md, decisions/ux-design/FLUXO_PRD_FIGMA.md, decisions/ux-design/PRINCIPIOS.md, decisions/ux-design/TIPOGRAFIA.md, decisions/ux-design/UX_WRITING.md, figma-config.json, references/CHECKLIST_REVISAO.md, references/COMPONENTES.md, references/CORES.md, references/ESPACAMENTO.md, references/FIGMA_CONFIG.md, references/GLOSSARIO_PAPEIS_TEXTO.md, references/HARNEES_TELAS.md, references/MAPA_FONTES.md, references/PADROES.md, references/SDD_AVANCADO.md, references/SDD_PARA_TELA.md, references/TEMPLATES_PRODUTO.md, references/TIPOGRAFIA.md, references/UX_WRITING.md, references/VISAO_GERAL.md

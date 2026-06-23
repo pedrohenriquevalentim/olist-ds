@@ -1,6 +1,14 @@
-# Olist Design System — Especialista (v3.3)
+# Olist Design System — Especialista (v3.5)
 
 Skill corporativa para criação de telas, componentes e protótipos a partir de SDDs/PRDs usando o design system da Olist.
+
+## Novidades v3.5 (2026-06-23)
+
+- Arquivos da skill modificados: CHANGELOG.md, README.md, SETUP.md, SKILL.md, component-registry.json, decisions/CHANGELOG.md, decisions/INDEX.md, decisions/technical/ACESSIBILIDADE.md, decisions/technical/ASSETS_FIGMA.md, decisions/technical/COMPONENTES_REACT.md, decisions/technical/ICONES.md, decisions/technical/TOKENS.md, decisions/ux-design/ESPACAMENTO_LAYOUT.md, decisions/ux-design/FLUXO_PRD_FIGMA.md, decisions/ux-design/PRINCIPIOS.md, decisions/ux-design/TIPOGRAFIA.md, decisions/ux-design/UX_WRITING.md, figma-config.json, references/CHECKLIST_REVISAO.md, references/COMPONENTES.md, references/CORES.md, references/ESPACAMENTO.md, references/FIGMA_CONFIG.md, references/GLOSSARIO_PAPEIS_TEXTO.md, references/HARNEES_TELAS.md, references/MAPA_FONTES.md, references/PADROES.md, references/SDD_AVANCADO.md, references/SDD_PARA_TELA.md, references/TEMPLATES_PRODUTO.md, references/TIPOGRAFIA.md, references/UX_WRITING.md, references/VISAO_GERAL.md
+
+## Novidades v3.4 (2026-06-23)
+
+- Arquivos da skill modificados:
 
 ## Novidades v3.3 (2026-06-23)
 
@@ -58,7 +66,7 @@ Skill corporativa para criação de telas, componentes e protótipos a partir de
 ## Estrutura
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -86,7 +94,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -114,7 +122,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -142,7 +150,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -170,7 +178,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -198,7 +206,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -226,7 +234,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -254,7 +262,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -282,7 +290,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -310,7 +318,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -338,7 +346,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -366,7 +374,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -394,7 +402,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -422,7 +430,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -450,7 +458,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -478,7 +486,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -506,7 +514,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -534,7 +542,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -562,7 +570,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -590,7 +598,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -618,7 +626,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -646,7 +654,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -674,7 +682,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -702,7 +710,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -730,7 +738,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -758,7 +766,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -786,7 +794,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -814,7 +822,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -842,7 +850,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -870,7 +878,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -898,7 +906,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -926,7 +934,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -954,7 +962,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -982,7 +990,7 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -1010,7 +1018,63 @@ olist-ds-specialist-v3.3/
 > **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
-olist-ds-specialist-v3.3/
+olist-ds-specialist-v3.5/
+├── CHANGELOG.md               # Histórico de versões da skill
+├── README.md                  # Este arquivo — visão geral e changelog
+├── SETUP.md                   # Guia de instalação e configuração
+├── SKILL.md                   # Instruções, workflow, regras e fluxo de decisão
+├── component-registry.json    # Cache local de componentKeys por categoria
+├── figma-config.json          # Libraries autorizadas (libraryKeys e searchPriority)
+└── references/
+    ├── CHECKLIST_REVISAO.md            # 10 categorias de revisão visual, acessibilidade e UX Writing
+    ├── COMPONENTES.md                  # Props e variantes de cada componente (auto-gerado)
+    ├── CORES.md                        # Sistema de cores com regras de uso
+    ├── ESPACAMENTO.md                  # Grid de 4px, border-radius, escala de espaçamento
+    ├── FIGMA_CONFIG.md                 # libraryKeys, workflow de busca e import
+    ├── GLOSSARIO_PAPEIS_TEXTO.md       # 10 papéis de texto (Heading, Label, Error, etc.)
+    ├── HARNEES_TELAS.md                # Gate pré-construção: restrições por zona, limites por componente
+    ├── MAPA_FONTES.md                  # Estrutura de pastas do repositório (auto-gerado)
+    ├── PADROES.md                      # 5 padrões de página (Tabela, Form, Dashboard, Detalhe, Config)
+    ├── SDD_AVANCADO.md                 # RNFs, DACI, Métricas, Rollout, Observabilidade → UI
+    ├── SDD_PARA_TELA.md                # 10 passos para traduzir SDD/PRD em decisões de UI
+    ├── TEMPLATES_PRODUTO.md            # Zonas de layout por produto (ERP, Envios, Hub, CD)
+    ├── TIPOGRAFIA.md                   # Tokens de tipografia (tamanho, peso, altura)
+    ├── UX_WRITING.md                   # Tom de voz, 4 pilares, 12 tipos de texto, diretrizes B2B/B2C
+    └── VISAO_GERAL.md                  # Mapa de navegação — leia sempre primeiro
+```
+
+> **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
+
+```
+olist-ds-specialist-v3.5/
+├── CHANGELOG.md               # Histórico de versões da skill
+├── README.md                  # Este arquivo — visão geral e changelog
+├── SETUP.md                   # Guia de instalação e configuração
+├── SKILL.md                   # Instruções, workflow, regras e fluxo de decisão
+├── component-registry.json    # Cache local de componentKeys por categoria
+├── figma-config.json          # Libraries autorizadas (libraryKeys e searchPriority)
+└── references/
+    ├── CHECKLIST_REVISAO.md            # 10 categorias de revisão visual, acessibilidade e UX Writing
+    ├── COMPONENTES.md                  # Props e variantes de cada componente (auto-gerado)
+    ├── CORES.md                        # Sistema de cores com regras de uso
+    ├── ESPACAMENTO.md                  # Grid de 4px, border-radius, escala de espaçamento
+    ├── FIGMA_CONFIG.md                 # libraryKeys, workflow de busca e import
+    ├── GLOSSARIO_PAPEIS_TEXTO.md       # 10 papéis de texto (Heading, Label, Error, etc.)
+    ├── HARNEES_TELAS.md                # Gate pré-construção: restrições por zona, limites por componente
+    ├── MAPA_FONTES.md                  # Estrutura de pastas do repositório (auto-gerado)
+    ├── PADROES.md                      # 5 padrões de página (Tabela, Form, Dashboard, Detalhe, Config)
+    ├── SDD_AVANCADO.md                 # RNFs, DACI, Métricas, Rollout, Observabilidade → UI
+    ├── SDD_PARA_TELA.md                # 10 passos para traduzir SDD/PRD em decisões de UI
+    ├── TEMPLATES_PRODUTO.md            # Zonas de layout por produto (ERP, Envios, Hub, CD)
+    ├── TIPOGRAFIA.md                   # Tokens de tipografia (tamanho, peso, altura)
+    ├── UX_WRITING.md                   # Tom de voz, 4 pilares, 12 tipos de texto, diretrizes B2B/B2C
+    └── VISAO_GERAL.md                  # Mapa de navegação — leia sempre primeiro
+```
+
+> **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
+
+```
+olist-ds-specialist-v3.5/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
@@ -1115,6 +1179,12 @@ Sincronize o registry de componentes
 ```
 
 ## Changelog
+
+### v3.5 (2026-06-23)
+- Arquivos da skill modificados: CHANGELOG.md, README.md, SETUP.md, SKILL.md, component-registry.json, decisions/CHANGELOG.md, decisions/INDEX.md, decisions/technical/ACESSIBILIDADE.md, decisions/technical/ASSETS_FIGMA.md, decisions/technical/COMPONENTES_REACT.md, decisions/technical/ICONES.md, decisions/technical/TOKENS.md, decisions/ux-design/ESPACAMENTO_LAYOUT.md, decisions/ux-design/FLUXO_PRD_FIGMA.md, decisions/ux-design/PRINCIPIOS.md, decisions/ux-design/TIPOGRAFIA.md, decisions/ux-design/UX_WRITING.md, figma-config.json, references/CHECKLIST_REVISAO.md, references/COMPONENTES.md, references/CORES.md, references/ESPACAMENTO.md, references/FIGMA_CONFIG.md, references/GLOSSARIO_PAPEIS_TEXTO.md, references/HARNEES_TELAS.md, references/MAPA_FONTES.md, references/PADROES.md, references/SDD_AVANCADO.md, references/SDD_PARA_TELA.md, references/TEMPLATES_PRODUTO.md, references/TIPOGRAFIA.md, references/UX_WRITING.md, references/VISAO_GERAL.md
+
+### v3.4 (2026-06-23)
+- Arquivos da skill modificados:
 
 ### v3.3 (2026-06-23)
 - Arquivos da skill modificados: README.md
