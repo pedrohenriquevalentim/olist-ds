@@ -1,7 +1,7 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.29`  
-**Skill:** v3.5  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.30`  
+**Skill:** v3.6  
 **Última atualização:** 2026-06-23  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
@@ -36,8 +36,8 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Ícones SVG | 550 |
 | Arquivos da Skill | 21 |
 | Arquivos Figma permitidos | 5 |
-| Versão npm | 1.0.29 |
-| Versão skill | 3.5 |
+| Versão npm | 1.0.30 |
+| Versão skill | 3.6 |
 
 ## Componentes
 
@@ -74,7 +74,7 @@ npm run release
     │
     ├── 1. generate:all (testes + stories via Gemini)
     ├── 2. build (compilação TypeScript)
-    ├── 3. sync:skill (atualiza skill v3.5)
+    ├── 3. sync:skill (atualiza skill v3.6)
     ├── 4. npm version patch (incrementa versão)
     ├── 5. npm publish (publica no registry)
     └── 6. git push --follow-tags
@@ -120,9 +120,9 @@ npm run release
 
 ## Skill Claude
 
-### Versão: v3.5
+### Versão: v3.6
 
-**Localização:** `.claude/skills/olist-ds-specialist-v3.5/`
+**Localização:** `.claude/skills/olist-ds-specialist-v3.6/`
 
 ### Arquivos da Skill (21 total)
 
@@ -176,7 +176,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 2. Customize → Skills → Upload → selecionar pasta da skill
 3. Iniciar conversa e colar o SDD ou link do Figma
 
-### Regras Críticas v3.5
+### Regras Críticas v3.6
 
 ### ✅ Sempre Faça:
 
@@ -322,7 +322,7 @@ echo '.claude/figma-config.json' >> .gitignore
 
 ```bash
 cd .claude/skills
-zip -r olist-ds-specialist-v3.5.zip olist-ds-specialist-v3.5/
+zip -r olist-ds-specialist-v3.6.zip olist-ds-specialist-v3.5/
 ```
 
 ### O Que NÃO Vai
@@ -336,7 +336,7 @@ zip -r olist-ds-specialist-v3.5.zip olist-ds-specialist-v3.5/
 
 ```bash
 # 1. Extrair e copiar skill
-unzip olist-ds-specialist-v3.5.zip
+unzip olist-ds-specialist-v3.6.zip
 cp -r olist-ds-specialist-v3.5/ .claude/skills/olist-ds-specialist-v3.5/
 
 # 2. Configurar Figma
@@ -378,7 +378,7 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 1. `.claude/figma-config.json` existe?
 2. `searchPriority` tem os libraryKeys corretos?
-3. Skill v3.5 instalada?
+3. Skill v3.6 instalada?
 4. O prompt inclui instrução para ler `figma-config.json` antes do Figma MCP?
 
 ## Changelog
