@@ -1,8 +1,8 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.31`  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.32`  
 **Skill:** v3.6  
-**Última atualização:** 2026-06-23  
+**Última atualização:** 2026-06-24  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -32,16 +32,16 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 
 | Métrica | Valor |
 |---|---|
-| Componentes | 8 |
+| Componentes | 9 |
 | Ícones SVG | 550 |
 | Arquivos da Skill | 21 |
 | Arquivos Figma permitidos | 5 |
-| Versão npm | 1.0.31 |
+| Versão npm | 1.0.32 |
 | Versão skill | 3.6 |
 
 ## Componentes
 
-### Lista Completa (8)
+### Lista Completa (9)
 
 - `Button` — `src/components/Button/`
 - `Checkbox` — `src/components/Checkbox/`
@@ -49,6 +49,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 - `Icon` — `src/components/Icon/`
 - `InputSearch` — `src/components/InputSearch/`
 - `InputSelect` — `src/components/InputSelect/`
+- `InputText` — `src/components/InputText/`
 - `Logo` — `src/components/Logo/`
 - `ProdutosOlistIcons` — `src/components/ProdutosOlistIcons/`
 
@@ -62,6 +63,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Icon | ✅ Componente central |
 | InputSearch | ➖ Sem ícones |
 | InputSelect | ➖ Sem ícones |
+| InputText | ➖ Sem ícones |
 | Logo | ➖ Sem ícones |
 | ProdutosOlistIcons | ➖ Sem ícones |
 
@@ -456,4 +458,4 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ---
 
-*Gerado automaticamente em 2026-06-23 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-06-24 por `generate-wiki.mjs`. Não edite manualmente.*
