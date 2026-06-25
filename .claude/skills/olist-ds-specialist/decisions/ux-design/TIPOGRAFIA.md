@@ -2,7 +2,7 @@
 
 **Categoria:** UX/Design
 **Status:** Ativa
-**Skill de referência:** `.claude/skills/olist-ds-specialist-v3.5/references/TIPOGRAFIA.md`, `references/GLOSSARIO_PAPEIS_TEXTO.md`
+**Skill de referência:** `.claude/skills/olist-ds-specialist/references/TIPOGRAFIA.md`, `references/GLOSSARIO_PAPEIS_TEXTO.md`
 
 ---
 

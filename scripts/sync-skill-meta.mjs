@@ -515,7 +515,7 @@ const currentDirName = basename(currentSkillDir);
 
 // 2. Lê a versão do SKILL.md
 const skillVersion = readSkillVersion(currentSkillDir);
-const expectedDirName = `${SKILL_PREFIX}-v${skillVersion}`;
+const expectedDirName = SKILL_PREFIX; // nome fixo sem sufixo de versão
 
 console.log(`   Pasta atual   : ${currentDirName}`);
 console.log(`   Versão skill  : v${skillVersion}`);

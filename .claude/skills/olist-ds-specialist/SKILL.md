@@ -84,7 +84,7 @@ Ao gerar telas React (Casos 1 e 2), o inventário de componentes reais do reposi
 Buscar o `COMPONENTES.md` mais recente diretamente do repositório público:
 
 ```
-https://raw.githubusercontent.com/pedrohenriquevalentim/olist-ds/main/.claude/skills/olist-ds-specialist-v3.5/references/COMPONENTES.md
+https://raw.githubusercontent.com/pedrohenriquevalentim/olist-ds/main/.claude/skills/olist-ds-specialist/references/COMPONENTES.md
 ```
 
 Use `WebFetch` para obter este arquivo antes de gerar qualquer código React. Ele contém as props reais, variantes e estados de cada componente na versão mais atual publicada.

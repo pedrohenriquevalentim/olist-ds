@@ -45,7 +45,7 @@ function resolveSkillDir() {
   return withSkillMd ? join(base, withSkillMd) : (entries[0] ? join(base, entries[0]) : null);
 }
 
-const SKILL_DIR = resolveSkillDir() ?? join(ROOT, '.claude', 'skills', 'olist-ds-specialist-v3.5');
+const SKILL_DIR = resolveSkillDir() ?? join(ROOT, '.claude', 'skills', 'olist-ds-specialist');
 const FIGMA_CONFIG_PATH = join(SKILL_DIR, 'figma-config.json');
 const SCRIPTS_DIR = join(ROOT, 'scripts');
 const ICONS_DIR = join(ROOT, 'src', 'assets', 'icons', 'svgs');
@@ -266,7 +266,7 @@ function extractRegrasCriticas() {
 function readChangelog() {
   const changelogPath = join(SKILL_DIR, 'CHANGELOG.md');
   const content = safeRead(changelogPath);
-  if (!content) return '_Nenhum changelog encontrado. Crie `.claude/skills/olist-ds-specialist-v3.5/CHANGELOG.md`._';
+  if (!content) return '_Nenhum changelog encontrado. Crie `.claude/skills/olist-ds-specialist/CHANGELOG.md`._';
   return content.trim();
 }
 
@@ -376,7 +376,7 @@ FileKey: ABC123
 ### Setup
 
 \`\`\`bash
-cp .claude/skills/olist-ds-specialist-v3.5/figma-config.example.json .claude/figma-config.json
+cp .claude/skills/olist-ds-specialist/figma-config.example.json .claude/figma-config.json
 # Editar com seus fileKeys
 echo '.claude/figma-config.json' >> .gitignore
 \`\`\``);
@@ -400,7 +400,7 @@ section('Compartilhamento', `### O Que Compactar
 
 \`\`\`bash
 cd .claude/skills
-zip -r olist-ds-specialist-v${skillVersion}.zip olist-ds-specialist-v3.5/
+zip -r olist-ds-specialist.zip olist-ds-specialist/
 \`\`\`
 
 ### O Que NÃO Vai
@@ -414,11 +414,11 @@ zip -r olist-ds-specialist-v${skillVersion}.zip olist-ds-specialist-v3.5/
 
 \`\`\`bash
 # 1. Extrair e copiar skill
-unzip olist-ds-specialist-v${skillVersion}.zip
-cp -r olist-ds-specialist-v3.5/ .claude/skills/olist-ds-specialist-v3.5/
+unzip olist-ds-specialist.zip
+cp -r olist-ds-specialist/ .claude/skills/olist-ds-specialist/
 
 # 2. Configurar Figma
-cp .claude/skills/olist-ds-specialist-v3.5/figma-config.example.json .claude/figma-config.json
+cp .claude/skills/olist-ds-specialist/figma-config.example.json .claude/figma-config.json
 # Editar com fileKeys próprios
 
 # 3. Gitignore
