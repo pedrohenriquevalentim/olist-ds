@@ -9,17 +9,28 @@ Skill corporativa para criação de telas, componentes e protótipos a partir de
 
 ## Novidades v3.5 (2026-06-23) 
 
-- Arquivos da skill modificados: CHANGELOG.md, README.md, SETUP.md, SKILL.md, component-registry.json, decisions/CHANGELOG.md, decisions/INDEX.md, decisions/technical/ACESSIBILIDADE.md, decisions/technical/ASSETS_FIGMA.md, decisions/technical/COMPONENTES_REACT.md, decisions/technical/ICONES.md, decisions/technical/TOKENS.md, decisions/ux-design/ESPACAMENTO_LAYOUT.md, decisions/ux-design/FLUXO_PRD_FIGMA.md, decisions/ux-design/PRINCIPIOS.md, decisions/ux-design/TIPOGRAFIA.md, decisions/ux-design/UX_WRITING.md, figma-config.json, references/CHECKLIST_REVISAO.md, references/COMPONENTES.md, references/CORES.md, references/ESPACAMENTO.md, references/FIGMA_CONFIG.md, references/GLOSSARIO_PAPEIS_TEXTO.md, references/HARNEES_TELAS.md, references/MAPA_FONTES.md, references/PADROES.md, references/SDD_AVANCADO.md, references/SDD_PARA_TELA.md, references/TEMPLATES_PRODUTO.md, references/TIPOGRAFIA.md, references/UX_WRITING.md, references/VISAO_GERAL.md
+- Sincronização geral de todos os arquivos da skill após reestruturação interna
+- Todos os arquivos de `decisions/` e `references/` revisados e atualizados
 
 ## Novidades v3.4 (2026-06-23)
 
-- Arquivos da skill modificados:
+- Atualização incremental interna sem mudanças funcionais
 
 ## Novidades v3.3 (2026-06-23)
 
-- Arquivos da skill modificados: README.md
-- Decisões de design atualizadas: decisions/CHANGELOG.md
-- Outros arquivos: claude/decisions/INDEX.md
+- Criação da pasta `decisions/` com 10 arquivos de decisão organizados por tema:
+  - `technical/TOKENS.md` — regras de consumo de tokens CSS e unidades rem
+  - `technical/COMPONENTES_REACT.md` — convenções de estrutura, props e testes
+  - `technical/ICONES.md` — ReactNode, currentColor, sem pacotes externos
+  - `technical/ACESSIBILIDADE.md` — roles ARIA, navegação por teclado, WCAG AA
+  - `technical/ASSETS_FIGMA.md` — fluxo Figma MCP, identificadores, declaração SVG
+  - `ux-design/PRINCIPIOS.md` — 4 princípios de design Olist e identidade visual
+  - `ux-design/ESPACAMENTO_LAYOUT.md` — grid 4px, 5 padrões de página, estrutura de tela
+  - `ux-design/TIPOGRAFIA.md` — escala tipográfica, 10 papéis de texto
+  - `ux-design/FLUXO_PRD_FIGMA.md` — hierarquia de bibliotecas, busca e regras de build
+  - `ux-design/UX_WRITING.md` — tom B2B, regras por tipo de texto
+- `decisions/INDEX.md` criado como índice navegável
+- `sync-skill-meta.mjs` atualizado para varrer `decisions/` ao renomear referências
 
 ## Novidades v3.2 (2026-06-15)
 
@@ -40,35 +51,90 @@ Skill corporativa para criação de telas, componentes e protótipos a partir de
 ## Novidades v3.1 (2026-06-05)
 
 ### Harness de construção de telas (`HARNESS_TELAS.md`):
-- Gate pré-construção obrigatório antes de qualquer frame no Figma
+- Gate pré-construção obrigatório com 6 itens binários — Claude só avança se todos aprovados
 - Restrições binárias por zona (A–E) para ERP e Envios/Hub/Conta Digital
-- Limites quantitativos por componente (ex: máx 1 `Button` primary por tela)
-- Contextos válidos e proibidos por componente
-- Harness de primitivos (o que pode e não pode ser construído do zero)
-- Padrão de nomenclatura de layers obrigatório
-- Estados mínimos obrigatórios por padrão de página
-- Formato padronizado para reportar conflitos com o harness
+- Limites quantitativos por componente (ex: máx 1 `Button` primary por tela, máx 1 `Heading` por tela)
+- Tabela de contextos válidos e proibidos por componente
+- Harness de primitivos: define o que pode ser construído do zero e configuração obrigatória
+- Padrão de nomenclatura de layers obrigatório com formato e exemplos
+- Estados mínimos obrigatórios por padrão de página (Tabela, Form, Dashboard, Detalhe, Empty State)
+- Regras específicas para skeleton loading
+- Formato padronizado para reportar conflitos com o harness (Seção 8)
+- `SKILL.md` atualizado para v3.1: harness integrado no fluxo de decisão, tabela de referências e Caso 4
 
 ## Novidades v3.0 (2026-06-03)
 
 ### Workflow use_figma (canal único de entrega):
+- Remoção do workflow de plugin JSON intermediário — `use_figma` como canal único
 - Telas construídas diretamente no Figma via `use_figma` MCP com instâncias reais de componentes DS
 - `search_design_system` com `includeLibraryKeys` filtra às 5 libraries autorizadas
 - `importComponentSetByKeyAsync` traz componentes reais (Menu ERP, Button, Tags, etc.)
 - Workflow faseado: tela por tela com screenshot + feedback a cada entrega
+- Caso de uso 5: componente não existe no inventário → construir com primitivos + documentar
+- Caso de uso 6: sincronizar inventário de componentes
 
 ### Libraries como fonte da verdade:
 - `figma-config.json` agora usa `libraryKey` (formato `lk-...`) em vez de `fileKey`
-- AI Components é o novo master — Menu ERP atualizado + ícones rebrand 24
+- **AI Components** como library master com preferência absoluta sobre ERP components
 - 5 libraries em ordem de prioridade; 3 libraries bloqueadas
 - `search_design_system` sempre filtrado por `searchPriority`
+- TEMPLATES_PRODUTO.md adicionado (zonas de layout por produto: ERP, Envios, Hub, Conta Digital)
 
 ### Regras da Figma Plugin API documentadas:
 - `layoutSizing` definido após `appendChild`
 - Valores válidos de `counterAxisAlignItems`: MIN MAX CENTER BASELINE
 - Textos em cards: `textAutoResize='HEIGHT'` + `layoutSizingHorizontal='FILL'`
 
+## Novidades v2.1 (2026-05-07)
+
+- `figma-config.example.json` adicionado à skill (compartilhável sem credenciais)
+- `FIGMA_CONFIG.md` como 12º arquivo de referência
+- Instrução para ler `figma-config.json` antes de qualquer chamada ao Figma MCP
+- `sync-skill.mjs` atualizado para v2.1
+- `generate-wiki.mjs` criado
+
+## Novidades v2.0 (2026-05-04)
+
+- `GLOSSARIO_PAPEIS_TEXTO.md` — 10 papéis de texto (Heading, Label, Error, etc.)
+- `SDD_AVANCADO.md` — RNFs, DACI, Métricas, Rollout e Observabilidade → UI
+- Workflow faseado no Figma (tela por tela com feedback)
+- Sistema de ícones centralizado via `currentColor`
+- `sync-skill.mjs` para auto-geração de referências
+- `validate-icon-migration.mjs` para validação de migração
+
+## Novidades v1.0
+
+- Versão inicial da skill com 8 arquivos de referência
+
 ## Estrutura
+
+```
+olist-ds-specialist-v3.6/
+├── CHANGELOG.md               # Histórico de versões da skill
+├── README.md                  # Este arquivo — visão geral e changelog
+├── SETUP.md                   # Guia de instalação e configuração
+├── SKILL.md                   # Instruções, workflow, regras e fluxo de decisão
+├── component-registry.json    # Cache local de componentKeys por categoria
+├── figma-config.json          # Libraries autorizadas (libraryKeys e searchPriority)
+└── references/
+    ├── CHECKLIST_REVISAO.md            # 10 categorias de revisão visual, acessibilidade e UX Writing
+    ├── COMPONENTES.md                  # Props e variantes de cada componente (auto-gerado)
+    ├── CORES.md                        # Sistema de cores com regras de uso
+    ├── ESPACAMENTO.md                  # Grid de 4px, border-radius, escala de espaçamento
+    ├── FIGMA_CONFIG.md                 # libraryKeys, workflow de busca e import
+    ├── GLOSSARIO_PAPEIS_TEXTO.md       # 10 papéis de texto (Heading, Label, Error, etc.)
+    ├── HARNEES_TELAS.md                # Gate pré-construção: restrições por zona, limites por componente
+    ├── MAPA_FONTES.md                  # Estrutura de pastas do repositório (auto-gerado)
+    ├── PADROES.md                      # 5 padrões de página (Tabela, Form, Dashboard, Detalhe, Config)
+    ├── SDD_AVANCADO.md                 # RNFs, DACI, Métricas, Rollout, Observabilidade → UI
+    ├── SDD_PARA_TELA.md                # 10 passos para traduzir SDD/PRD em decisões de UI
+    ├── TEMPLATES_PRODUTO.md            # Zonas de layout por produto (ERP, Envios, Hub, CD)
+    ├── TIPOGRAFIA.md                   # Tokens de tipografia (tamanho, peso, altura)
+    ├── UX_WRITING.md                   # Tom de voz, 4 pilares, 12 tipos de texto, diretrizes B2B/B2C
+    └── VISAO_GERAL.md                  # Mapa de navegação — leia sempre primeiro
+```
+
+> **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 
 ```
 olist-ds-specialist-v3.6/
