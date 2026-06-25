@@ -3,7 +3,7 @@
 /**
  * sync-skill.mjs
  *
- * Sincroniza a skill corporativa olist-ds-specialist-v3.6 com o estado real do código.
+ * Sincroniza a skill corporativa olist-ds-specialist com o estado real do código.
  *
  * Auto-gera:
  * - COMPONENTES.md (props, tokens, estados de cada componente)
@@ -41,7 +41,7 @@ function resolveSkillDir() {
   return withSkillMd ? join(base, withSkillMd) : (entries[0] ? join(base, entries[0]) : null);
 }
 
-const SKILL_DIR = resolveSkillDir() ?? join(ROOT_DIR, '.claude', 'skills', 'olist-ds-specialist-v3.6');
+const SKILL_DIR = resolveSkillDir() ?? join(ROOT_DIR, '.claude', 'skills', 'olist-ds-specialist');
 const REFERENCES_DIR = join(SKILL_DIR, 'references');
 const COMPONENTS_DIR = join(ROOT_DIR, 'src', 'components');
 const FIGMA_CONFIG_PATH = join(SKILL_DIR, 'figma-config.json');
@@ -208,12 +208,18 @@ src/
       const isLast = i === components.length - 1;
       const prefix = isLast ? '└──' : '├──';
       markdown += `│   ${prefix} ${components[i]}/\n`;
-      markdown += `│   ${isLast ? '    ' : '│   '}    ├── index.tsx\n`;
-      markdown += `│   ${isLast ? '    ' : '│   '}    ├── styles.module.css\n`;
-      markdown += `│   ${isLast ? '    ' : '│   '}    └── ${components[i]}.stories.tsx\n`;
+      const indent = `│   ${isLast ? '    ' : '│   '}    `;
+      const compDir = join(COMPONENTS_DIR, components[i]);
+      const files = readdirSync(compDir)
+        .filter(f => !statSync(join(compDir, f)).isDirectory())
+        .sort();
+      for (let j = 0; j < files.length; j++) {
+        const fileLast = j === files.length - 1;
+        markdown += `${indent}${fileLast ? '└──' : '├──'} ${files[j]}\n`;
+      }
     }
   }
-  
+
   markdown += `├── assets/
 │   └── icons/
 └── index.ts
@@ -229,9 +235,11 @@ src/
     const components = readdirSync(COMPONENTS_DIR)
       .filter(name => statSync(join(COMPONENTS_DIR, name)).isDirectory())
       .sort();
-    
+
     for (const componentName of components) {
-      markdown += `- **${componentName}:** \`src/components/${componentName}/index.tsx\`\n`;
+      const compDir = join(COMPONENTS_DIR, componentName);
+      const mainFile = readdirSync(compDir).find(f => f === `${componentName}.tsx`) ?? 'index.tsx';
+      markdown += `- **${componentName}:** \`src/components/${componentName}/${mainFile}\`\n`;
     }
   }
   
@@ -336,10 +344,11 @@ try {
   syncClaudeMd();
 
   console.log('✅ Sincronização concluída!\n');
+  const skillDirName = SKILL_DIR.split('/').pop();
   console.log('Arquivos gerados:');
-  console.log('  - .claude/skills/olist-ds-specialist-v3.6/references/COMPONENTES.md');
-  console.log('  - .claude/skills/olist-ds-specialist-v3.6/references/MAPA_FONTES.md');
-  console.log('  - .claude/skills/olist-ds-specialist-v3.6/references/VISAO_GERAL.md (atualizado)');
+  console.log(`  - .claude/skills/${skillDirName}/references/COMPONENTES.md`);
+  console.log(`  - .claude/skills/${skillDirName}/references/MAPA_FONTES.md`);
+  console.log(`  - .claude/skills/${skillDirName}/references/VISAO_GERAL.md (atualizado)`);
   console.log('  - CLAUDE.md (libraries sincronizadas)');
   console.log('');
 } catch (error) {

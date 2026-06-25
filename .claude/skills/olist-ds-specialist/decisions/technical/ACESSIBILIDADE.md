@@ -2,7 +2,7 @@
 
 **Categoria:** Técnica
 **Status:** Ativa
-**Skill de referência:** `.claude/skills/olist-ds-specialist-v3.5/references/CHECKLIST_REVISAO.md`
+**Skill de referência:** `.claude/skills/olist-ds-specialist/references/CHECKLIST_REVISAO.md`
 
 ---
 

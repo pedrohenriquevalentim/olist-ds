@@ -2,7 +2,7 @@
 
 **Categoria:** Técnica
 **Status:** Ativa
-**Skill de referência:** `.claude/skills/olist-ds-specialist-v3.5/references/CORES.md`, `TIPOGRAFIA.md`, `ESPACAMENTO.md`
+**Skill de referência:** `.claude/skills/olist-ds-specialist/references/CORES.md`, `TIPOGRAFIA.md`, `ESPACAMENTO.md`
 
 ---
 

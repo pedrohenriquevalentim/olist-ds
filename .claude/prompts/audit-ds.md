@@ -19,7 +19,7 @@ Você é o guardião do Olist Design System. Execute uma auditoria completa e co
 3. Execute `git status` para ver alterações não commitadas.
 4. Liste mentalmente:
    - Quais componentes em src/components/ foram criados, modificados ou removidos?
-   - Algum arquivo de skill (.claude/skills/olist-ds-specialist-v3.6/) foi modificado?
+   - Algum arquivo de skill (.claude/skills/olist-ds-specialist/) foi modificado?
    - O figma-config.json foi alterado?
    - O SKILL.md teve mudança de versão?
    - Scripts em scripts/ foram modificados?
@@ -49,7 +49,7 @@ Para cada pasta em `src/components/`:
 
 ## ETAPA 3 — Auditoria da Estrutura da Skill
 
-1. Leia `.claude/skills/olist-ds-specialist-v3.6/README.md`.
+1. Leia `.claude/skills/olist-ds-specialist/README.md`.
    - Confirme que a seção `## Estrutura` reflete os arquivos reais da skill.
    - Confirme que há UMA ÚNICA seção `## Estrutura` (sem duplicatas).
    - Se desatualizado: execute `node scripts/sync-skill-meta.mjs`.
@@ -70,7 +70,7 @@ Para cada pasta em `src/components/`:
 
 ## ETAPA 4 — Auditoria das Libraries do Figma
 
-1. Leia `.claude/skills/olist-ds-specialist-v3.6/figma-config.json`.
+1. Leia `.claude/skills/olist-ds-specialist/figma-config.json`.
 2. Para cada library em `searchPriority`, verifique se:
    - O `libraryKey` está presente e completo.
    - A `description` está correta e atual.
@@ -116,7 +116,7 @@ Verifique se algum destes itens está FALTANDO no ship:
 
 1. Leia o campo `lastModified:` do frontmatter de `SKILL.md`:
    ```
-   grep "lastModified" .claude/skills/olist-ds-specialist-v3.6/SKILL.md
+   grep "lastModified" .claude/skills/olist-ds-specialist/SKILL.md
    ```
 
 2. Compare com a data de hoje. Se estiver desatualizado:
@@ -125,13 +125,13 @@ Verifique se algum destes itens está FALTANDO no ship:
 
 3. Confirme que o H1 do README da skill contém a data:
    ```
-   head -1 .claude/skills/olist-ds-specialist-v3.6/README.md
+   head -1 .claude/skills/olist-ds-specialist/README.md
    ```
    Deve ser no formato: `# Olist Design System — Especialista (v3.6 · atualizado em YYYY-MM-DD)`
 
 4. Confirme que o H1 do SKILL.md contém a data:
    ```
-   grep "^# Olist" .claude/skills/olist-ds-specialist-v3.6/SKILL.md
+   grep "^# Olist" .claude/skills/olist-ds-specialist/SKILL.md
    ```
    Deve ser no formato: `# Olist Design System — Especialista v3.6 · YYYY-MM-DD`
 

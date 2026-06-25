@@ -17,10 +17,10 @@ Siga este guia para instalar e configurar a skill no seu projeto.
 ## Passo 1: Extrair o ZIP
 
 ```bash
-unzip olist-ds-specialist-v3.6.zip
+unzip olist-ds-specialist.zip
 ```
 
-Você verá a pasta `olist-ds-specialist-v3.6/` com todos os arquivos.
+Você verá a pasta `olist-ds-specialist/` com todos os arquivos.
 
 ---
 
@@ -28,7 +28,7 @@ Você verá a pasta `olist-ds-specialist-v3.6/` com todos os arquivos.
 
 ```bash
 mkdir -p .claude/skills
-cp -r olist-ds-specialist-v3.6/ .claude/skills/olist-ds-specialist-v3.6/
+cp -r olist-ds-specialist/ .claude/skills/olist-ds-specialist/
 ```
 
 ---
@@ -41,7 +41,7 @@ Na maioria dos casos, **não é necessário editar nada** — as libraryKeys sã
 ### Verificar o arquivo:
 
 ```bash
-cat .claude/skills/olist-ds-specialist-v3.6/figma-config.json
+cat .claude/skills/olist-ds-specialist/figma-config.json
 ```
 
 Confirme que `searchPriority` tem 5 entradas começando com `lk-`.
@@ -80,7 +80,7 @@ echo '.claude/figma-config.json' >> .gitignore
 seu-projeto/
 ├── .claude/
 │   └── skills/
-│       └── olist-ds-specialist-v3.6/
+│       └── olist-ds-specialist/
 │           ├── SKILL.md
 │           ├── README.md
 │           ├── SETUP.md
@@ -111,10 +111,10 @@ seu-projeto/
 
 ```bash
 # Skill instalada?
-ls .claude/skills/olist-ds-specialist-v3.6/SKILL.md
+ls .claude/skills/olist-ds-specialist/SKILL.md
 
 # Config com libraryKeys?
-grep "lk-" .claude/skills/olist-ds-specialist-v3.6/figma-config.json | head -3
+grep "lk-" .claude/skills/olist-ds-specialist/figma-config.json | head -3
 ```
 
 Ambos devem retornar resultado. Se algum falhar, revise o passo correspondente.
@@ -133,14 +133,14 @@ claude
 Depois digite:
 
 ```
-Use $olist-ds-specialist-v3.6 para criar a tela de upgrade de planos no Figma
+Use $olist-ds-specialist para criar a tela de upgrade de planos no Figma
 ```
 
 ### No Claude.ai (navegador):
 
 1. Abrir Claude.ai
 2. Customize → Skills → Upload
-3. Selecionar pasta `olist-ds-specialist-v3.6/`
+3. Selecionar pasta `olist-ds-specialist/`
 4. Ativar a skill
 5. Usar normalmente em qualquer conversa
 
@@ -177,7 +177,7 @@ Claude constrói o elemento com primitivos seguindo os tokens do DS e documenta 
 Verifique se a pasta está no caminho correto:
 
 ```bash
-ls .claude/skills/olist-ds-specialist-v3.6/SKILL.md
+ls .claude/skills/olist-ds-specialist/SKILL.md
 ```
 
 Se não existir, repita o Passo 2.

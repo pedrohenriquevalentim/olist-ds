@@ -2,7 +2,7 @@
 
 **Categoria:** UX/Design
 **Status:** Ativa
-**Skill de referência:** `.claude/skills/olist-ds-specialist-v3.5/references/SDD_PARA_TELA.md`, `references/SDD_AVANCADO.md`, `figma-config.json`
+**Skill de referência:** `.claude/skills/olist-ds-specialist/references/SDD_PARA_TELA.md`, `references/SDD_AVANCADO.md`, `figma-config.json`
 
 ---
 
