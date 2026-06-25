@@ -116,105 +116,21 @@ olist-ds-specialist-v3.6/
 ├── SKILL.md                   # Instruções, workflow, regras e fluxo de decisão
 ├── component-registry.json    # Cache local de componentKeys por categoria
 ├── figma-config.json          # Libraries autorizadas (libraryKeys e searchPriority)
-└── references/
-    ├── CHECKLIST_REVISAO.md            # 10 categorias de revisão visual, acessibilidade e UX Writing
-    ├── COMPONENTES.md                  # Props e variantes de cada componente (auto-gerado)
-    ├── CORES.md                        # Sistema de cores com regras de uso
-    ├── ESPACAMENTO.md                  # Grid de 4px, border-radius, escala de espaçamento
-    ├── FIGMA_CONFIG.md                 # libraryKeys, workflow de busca e import
-    ├── GLOSSARIO_PAPEIS_TEXTO.md       # 10 papéis de texto (Heading, Label, Error, etc.)
-    ├── HARNEES_TELAS.md                # Gate pré-construção: restrições por zona, limites por componente
-    ├── MAPA_FONTES.md                  # Estrutura de pastas do repositório (auto-gerado)
-    ├── PADROES.md                      # 5 padrões de página (Tabela, Form, Dashboard, Detalhe, Config)
-    ├── SDD_AVANCADO.md                 # RNFs, DACI, Métricas, Rollout, Observabilidade → UI
-    ├── SDD_PARA_TELA.md                # 10 passos para traduzir SDD/PRD em decisões de UI
-    ├── TEMPLATES_PRODUTO.md            # Zonas de layout por produto (ERP, Envios, Hub, CD)
-    ├── TIPOGRAFIA.md                   # Tokens de tipografia (tamanho, peso, altura)
-    ├── UX_WRITING.md                   # Tom de voz, 4 pilares, 12 tipos de texto, diretrizes B2B/B2C
-    └── VISAO_GERAL.md                  # Mapa de navegação — leia sempre primeiro
-```
-
-> **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
-
-```
-olist-ds-specialist-v3.6/
-├── CHANGELOG.md               # Histórico de versões da skill
-├── README.md                  # Este arquivo — visão geral e changelog
-├── SETUP.md                   # Guia de instalação e configuração
-├── SKILL.md                   # Instruções, workflow, regras e fluxo de decisão
-├── component-registry.json    # Cache local de componentKeys por categoria
-├── figma-config.json          # Libraries autorizadas (libraryKeys e searchPriority)
-└── references/
-    ├── CHECKLIST_REVISAO.md            # 10 categorias de revisão visual, acessibilidade e UX Writing
-    ├── COMPONENTES.md                  # Props e variantes de cada componente (auto-gerado)
-    ├── CORES.md                        # Sistema de cores com regras de uso
-    ├── ESPACAMENTO.md                  # Grid de 4px, border-radius, escala de espaçamento
-    ├── FIGMA_CONFIG.md                 # libraryKeys, workflow de busca e import
-    ├── GLOSSARIO_PAPEIS_TEXTO.md       # 10 papéis de texto (Heading, Label, Error, etc.)
-    ├── HARNEES_TELAS.md                # Gate pré-construção: restrições por zona, limites por componente
-    ├── MAPA_FONTES.md                  # Estrutura de pastas do repositório (auto-gerado)
-    ├── PADROES.md                      # 5 padrões de página (Tabela, Form, Dashboard, Detalhe, Config)
-    ├── SDD_AVANCADO.md                 # RNFs, DACI, Métricas, Rollout, Observabilidade → UI
-    ├── SDD_PARA_TELA.md                # 10 passos para traduzir SDD/PRD em decisões de UI
-    ├── TEMPLATES_PRODUTO.md            # Zonas de layout por produto (ERP, Envios, Hub, CD)
-    ├── TIPOGRAFIA.md                   # Tokens de tipografia (tamanho, peso, altura)
-    ├── UX_WRITING.md                   # Tom de voz, 4 pilares, 12 tipos de texto, diretrizes B2B/B2C
-    └── VISAO_GERAL.md                  # Mapa de navegação — leia sempre primeiro
-```
-
-> **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
-
-```
-olist-ds-specialist-v3.6/
-├── CHANGELOG.md               # Histórico de versões da skill
-├── README.md                  # Este arquivo — visão geral e changelog
-├── SETUP.md                   # Guia de instalação e configuração
-├── SKILL.md                   # Instruções, workflow, regras e fluxo de decisão
-├── component-registry.json    # Cache local de componentKeys por categoria
-├── figma-config.json          # Libraries autorizadas (libraryKeys e searchPriority)
-└── references/
-    ├── CHECKLIST_REVISAO.md            # 10 categorias de revisão visual, acessibilidade e UX Writing
-    ├── COMPONENTES.md                  # Props e variantes de cada componente (auto-gerado)
-    ├── CORES.md                        # Sistema de cores com regras de uso
-    ├── ESPACAMENTO.md                  # Grid de 4px, border-radius, escala de espaçamento
-    ├── FIGMA_CONFIG.md                 # libraryKeys, workflow de busca e import
-    ├── GLOSSARIO_PAPEIS_TEXTO.md       # 10 papéis de texto (Heading, Label, Error, etc.)
-    ├── HARNEES_TELAS.md                # Gate pré-construção: restrições por zona, limites por componente
-    ├── MAPA_FONTES.md                  # Estrutura de pastas do repositório (auto-gerado)
-    ├── PADROES.md                      # 5 padrões de página (Tabela, Form, Dashboard, Detalhe, Config)
-    ├── SDD_AVANCADO.md                 # RNFs, DACI, Métricas, Rollout, Observabilidade → UI
-    ├── SDD_PARA_TELA.md                # 10 passos para traduzir SDD/PRD em decisões de UI
-    ├── TEMPLATES_PRODUTO.md            # Zonas de layout por produto (ERP, Envios, Hub, CD)
-    ├── TIPOGRAFIA.md                   # Tokens de tipografia (tamanho, peso, altura)
-    ├── UX_WRITING.md                   # Tom de voz, 4 pilares, 12 tipos de texto, diretrizes B2B/B2C
-    └── VISAO_GERAL.md                  # Mapa de navegação — leia sempre primeiro
-```
-
-> **Raiz:** 6 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 21 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
-
-```
-olist-ds-specialist-v3.6/
-├── CHANGELOG.md               # Histórico de versões da skill
-├── README.md                  # Este arquivo — visão geral e changelog
-├── SETUP.md                   # Guia de instalação e configuração
-├── SKILL.md                   # Instruções, workflow, regras e fluxo de decisão
-├── component-registry.json    # Cache local de componentKeys por categoria
-├── figma-config.json          # Libraries autorizadas (libraryKeys e searchPriority)
 ├── decisions/
-│   ├── CHANGELOG.md           # Histórico de decisões de design
-│   ├── INDEX.md               # Índice navegável de todas as decisões
+│   ├── CHANGELOG.md                # Histórico de decisões de design
+│   ├── INDEX.md                    # Índice navegável de todas as decisões
 │   ├── technical/
-│   │   ├── ACESSIBILIDADE.md  # Decisões de acessibilidade (WCAG, ARIA, teclado)
-│   │   ├── ASSETS_FIGMA.md    # Regras de uso de assets do Figma MCP
-│   │   ├── COMPONENTES_REACT.md # Convenções de componentes React
-│   │   ├── ICONES.md          # Uso de ícones via ReactNode e currentColor
-│   │   └── TOKENS.md          # Tokens CSS e variáveis de design
+│   │   ├── ACESSIBILIDADE.md           # Decisões de acessibilidade (WCAG, ARIA, teclado)
+│   │   ├── ASSETS_FIGMA.md             # Regras de uso de assets do Figma MCP
+│   │   ├── COMPONENTES_REACT.md        # Convenções de componentes React
+│   │   ├── ICONES.md                   # Uso de ícones via ReactNode e currentColor
+│   │   └── TOKENS.md                   # Tokens CSS e variáveis de design
 │   └── ux-design/
-│       ├── ESPACAMENTO_LAYOUT.md # Grid de 4px, border-radius, espaçamento
-│       ├── FLUXO_PRD_FIGMA.md    # Workflow PRD → Figma passo a passo
-│       ├── PRINCIPIOS.md         # Princípios de design Olist
-│       ├── TIPOGRAFIA.md         # Escala tipográfica e tokens
-│       └── UX_WRITING.md         # Tom de voz, 4 pilares, diretrizes B2B/B2C
+│       ├── ESPACAMENTO_LAYOUT.md       # Grid de 4px, border-radius, espaçamento
+│       ├── FLUXO_PRD_FIGMA.md          # Workflow PRD → Figma passo a passo
+│       ├── PRINCIPIOS.md               # Princípios de design Olist
+│       ├── TIPOGRAFIA.md               # Escala tipográfica e tokens
+│       └── UX_WRITING.md               # Tom de voz, 4 pilares, diretrizes B2B/B2C
 └── references/
     ├── CHECKLIST_REVISAO.md            # 10 categorias de revisão visual, acessibilidade e UX Writing
     ├── COMPONENTES.md                  # Props e variantes de cada componente (auto-gerado)
@@ -233,8 +149,7 @@ olist-ds-specialist-v3.6/
     └── VISAO_GERAL.md                  # Mapa de navegação — leia sempre primeiro
 ```
 
-> **Raiz:** 6 arquivo(s) · **Decisions:** 7 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 28 arquivo(s)
-
+> **Raiz:** 6 arquivo(s) · **Decisions:** 12 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 33 arquivo(s) — atualizado automaticamente pelo `sync-skill-meta.mjs`
 ## Libraries do Figma (ordem de prioridade)
 
 | # | Library | Conteúdo |

@@ -171,10 +171,29 @@ const FILE_DESCRIPTIONS = {
   'CHECKLIST_REVISAO.md':   '10 categorias de revisão visual, acessibilidade e UX Writing',
 };
 
+// Descrições de subpastas de decisions/
+const DECISIONS_DESCRIPTIONS = {
+  'CHANGELOG.md':          'Histórico de decisões de design',
+  'INDEX.md':              'Índice navegável de todas as decisões',
+  // technical/
+  'ACESSIBILIDADE.md':     'Decisões de acessibilidade (WCAG, ARIA, teclado)',
+  'ASSETS_FIGMA.md':       'Regras de uso de assets do Figma MCP',
+  'COMPONENTES_REACT.md':  'Convenções de componentes React',
+  'ICONES.md':             'Uso de ícones via ReactNode e currentColor',
+  'TOKENS.md':             'Tokens CSS e variáveis de design',
+  // ux-design/
+  'ESPACAMENTO_LAYOUT.md': 'Grid de 4px, border-radius, espaçamento',
+  'FLUXO_PRD_FIGMA.md':    'Workflow PRD → Figma passo a passo',
+  'PRINCIPIOS.md':         'Princípios de design Olist',
+  'TIPOGRAFIA.md':         'Escala tipográfica e tokens',
+  'UX_WRITING.md':         'Tom de voz, 4 pilares, diretrizes B2B/B2C',
+};
+
 function buildStructureSection(skillDir, dirName, version) {
   const refsDir = join(skillDir, 'references');
+  const decisionsDir = join(skillDir, 'decisions');
 
-  // Arquivos raiz (excluindo pasta references e .DS_Store)
+  // Arquivos raiz (excluindo subpastas e .DS_Store)
   const rootFiles = readdirSync(skillDir)
     .filter(f => !statSync(join(skillDir, f)).isDirectory() && f !== '.DS_Store')
     .sort();
@@ -184,16 +203,57 @@ function buildStructureSection(skillDir, dirName, version) {
     ? readdirSync(refsDir).filter(f => f.endsWith('.md')).sort()
     : [];
 
+  // decisions/ e suas subpastas
+  let decisionsLines = [];
+  let decisionsFileCount = 0;
+  if (existsSync(decisionsDir)) {
+    const decRootFiles = readdirSync(decisionsDir)
+      .filter(f => !statSync(join(decisionsDir, f)).isDirectory() && f !== '.DS_Store')
+      .sort();
+    const decSubDirs = readdirSync(decisionsDir)
+      .filter(f => statSync(join(decisionsDir, f)).isDirectory() && f !== '.DS_Store')
+      .sort();
+
+    const totalDecEntries = decRootFiles.length + decSubDirs.length;
+    const pad = (name, width = 28) => name + ' '.repeat(Math.max(1, width - name.length));
+    decRootFiles.forEach((f, i) => {
+      const isLast = i === decRootFiles.length - 1 && decSubDirs.length === 0;
+      const prefix = isLast ? '│   └──' : '│   ├──';
+      const desc = DECISIONS_DESCRIPTIONS[f] ?? FILE_DESCRIPTIONS[f] ?? '';
+      decisionsLines.push(`${prefix} ${desc ? pad(f) + '# ' + desc : f}`);
+      decisionsFileCount++;
+    });
+    decSubDirs.forEach((sub, si) => {
+      const isLastSub = si === decSubDirs.length - 1;
+      const subPrefix = isLastSub ? '│   └──' : '│   ├──';
+      decisionsLines.push(`${subPrefix} ${sub}/`);
+      const subFiles = readdirSync(join(decisionsDir, sub))
+        .filter(f => f !== '.DS_Store').sort();
+      subFiles.forEach((f, fi) => {
+        const isLastFile = fi === subFiles.length - 1;
+        const filePrefix = isLastSub
+          ? (isLastFile ? '│       └──' : '│       ├──')
+          : (isLastFile ? '│   │   └──' : '│   │   ├──');
+        const desc = DECISIONS_DESCRIPTIONS[f] ?? '';
+        decisionsLines.push(`${filePrefix} ${desc ? pad(f) + '# ' + desc : f}`);
+        decisionsFileCount++;
+      });
+    });
+  }
+
+  const hasDecisions = decisionsLines.length > 0;
+  const hasRefs = refFiles.length > 0;
   const descOf = (name) => FILE_DESCRIPTIONS[name] ?? '';
 
-  // Monta árvore ASCII
+  // Linhas raiz
   const rootLines = rootFiles.map((f, i) => {
-    const isLast = i === rootFiles.length - 1 && refFiles.length === 0;
+    const isLast = i === rootFiles.length - 1 && !hasDecisions && !hasRefs;
     const prefix = isLast ? '└──' : '├──';
     const desc = descOf(f);
     return `${prefix} ${f}${desc ? `                           `.slice(f.length) + `# ${desc}` : ''}`;
   });
 
+  // Linhas references/
   const refLines = refFiles.map((f, i) => {
     const isLast = i === refFiles.length - 1;
     const prefix = isLast ? '    └──' : '    ├──';
@@ -201,26 +261,33 @@ function buildStructureSection(skillDir, dirName, version) {
     return `${prefix} ${f}${desc ? `                                `.slice(f.length) + `# ${desc}` : ''}`;
   });
 
-  const tree = [
+  const treeLines = [
     `${dirName}/`,
     ...rootLines,
-    ...(refFiles.length > 0 ? [`└── references/`, ...refLines] : []),
-  ].join('\n');
+    ...(hasDecisions ? [`├── decisions/`, ...decisionsLines] : []),
+    ...(hasRefs ? [`└── references/`, ...refLines] : []),
+  ];
+
+  const totalFiles = rootFiles.length + decisionsFileCount + refFiles.length;
+  const summary = hasDecisions
+    ? `**Raiz:** ${rootFiles.length} arquivo(s) · **Decisions:** ${decisionsFileCount} arquivo(s) · **Referências:** ${refFiles.length} arquivo(s) · **Total:** ${totalFiles} arquivo(s) — atualizado automaticamente pelo \`sync-skill-meta.mjs\``
+    : `**Raiz:** ${rootFiles.length} arquivo(s) · **Referências:** ${refFiles.length} arquivo(s) · **Total:** ${totalFiles} arquivo(s) — atualizado automaticamente pelo \`sync-skill-meta.mjs\``;
 
   return `## Estrutura
 
 \`\`\`
-${tree}
+${treeLines.join('\n')}
 \`\`\`
 
-> **Raiz:** ${rootFiles.length} arquivo(s) · **Referências:** ${refFiles.length} arquivo(s) · **Total:** ${rootFiles.length + refFiles.length} arquivo(s) — atualizado automaticamente pelo \`sync-skill-meta.mjs\``;
+> ${summary}`;
 }
 
 function replaceStructureBlock(content, skillDir, dirName, version) {
   const newSection = buildStructureSection(skillDir, dirName, version);
-  const structureRe = /^## Estrutura[\s\S]*?(?=\n## |\n---\n|$)/m;
+  // Captura desde "## Estrutura" até a próxima seção "## " (sem flag m para $ não casar fim-de-linha)
+  const structureRe = /## Estrutura[\s\S]*?(?=\n## [A-ZÀ-Ú])/;
   if (structureRe.test(content)) return content.replace(structureRe, newSection);
-  return content.replace(/^## Libraries/m, `${newSection}\n\n## Libraries`);
+  return content.replace(/## Libraries/m, `${newSection}\n\n## Libraries`);
 }
 
 function updateReadmeStructure(readmePath, skillDir, dirName, version) {
