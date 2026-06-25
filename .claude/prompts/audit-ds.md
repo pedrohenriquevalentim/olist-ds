@@ -104,12 +104,47 @@ Verifique se algum destes itens está FALTANDO no ship:
 - [ ] `generate-wiki.mjs` está sendo chamado dentro de `sync-skill-meta.mjs`?
   - Confirme que `regenerateWiki()` é chamado no final do script.
 - [ ] `sync:skill` (que gera COMPONENTES.md, MAPA_FONTES.md, VISAO_GERAL.md) está sendo chamado?
-  - ATENÇÃO: `sync:skill` NÃO está no ship atualmente. Se houver novos componentes, o ship não atualiza COMPONENTES.md automaticamente.
-  - Se isso for um problema: adicione `npm run sync:skill &&` antes de `npm run sync:skill-meta` no script ship do package.json.
+  - Confirme que o ship começa com `npm run sync:skill && npm run sync:skill-meta && ...`
+- [ ] `updateLastModified()` está sendo chamada no Main, antes de atualizar o README?
+  - Confirme que há `updateLastModified(skillDir, today)` antes do bloco "Atualiza README.md".
+- [ ] `updateSkillMdTitle()` recebe três argumentos `(skillDir, version, date)`?
+  - Confirme que o H1 do SKILL.md fica no formato `v3.6 · 2026-06-25`.
 
 ---
 
-## ETAPA 6 — Relatório Final
+## ETAPA 6 — Verificação de Versão e lastModified
+
+1. Leia o campo `lastModified:` do frontmatter de `SKILL.md`:
+   ```
+   grep "lastModified" .claude/skills/olist-ds-specialist-v3.6/SKILL.md
+   ```
+
+2. Compare com a data de hoje. Se estiver desatualizado:
+   - Execute `node scripts/sync-skill-meta.mjs`
+   - Isso atualizará `lastModified`, o H1 do SKILL.md, o título do README e a wiki.
+
+3. Confirme que o H1 do README da skill contém a data:
+   ```
+   head -1 .claude/skills/olist-ds-specialist-v3.6/README.md
+   ```
+   Deve ser no formato: `# Olist Design System — Especialista (v3.6 · atualizado em YYYY-MM-DD)`
+
+4. Confirme que o H1 do SKILL.md contém a data:
+   ```
+   grep "^# Olist" .claude/skills/olist-ds-specialist-v3.6/SKILL.md
+   ```
+   Deve ser no formato: `# Olist Design System — Especialista v3.6 · YYYY-MM-DD`
+
+5. Confirme que a wiki reflete a data de atualização correta:
+   ```
+   head -6 wiki/WIKI.md
+   ```
+
+Se qualquer um dos três estiver desatualizado: execute `node scripts/sync-skill-meta.mjs` e depois `npm run wiki`.
+
+---
+
+## ETAPA 7 — Relatório Final
 
 Após verificar tudo, responda com uma tabela assim:
 
@@ -124,6 +159,9 @@ Após verificar tudo, responda com uma tabela assim:
 | CLAUDE.md com libraries corretas | ✅ / ⚠️ | ... |
 | figma-config.json consistente | ✅ / ⚠️ | ... |
 | Script ship cobre todas as atualizações | ✅ / ⚠️ | ... |
+| SKILL.md — campo lastModified atualizado | ✅ / ⚠️ | ... |
+| SKILL.md — H1 com versão · data | ✅ / ⚠️ | ... |
+| README da skill — título com data | ✅ / ⚠️ | ... |
 
 Se houver qualquer ⚠️ que não pôde ser resolvido automaticamente, liste o que falta e por quê.
 ```
