@@ -117,19 +117,44 @@ function updateSkillInternalRefs(skillDir, oldName, newName) {
   walk(skillDir);
 }
 
-// ── 4e. Atualiza o H1 title dentro do próprio SKILL.md ──────────────────────
+// ── 4e. Lê e atualiza lastModified + H1 title dentro do SKILL.md ────────────
 
-function updateSkillMdTitle(skillDir, version) {
+function readLastModified(skillDir) {
+  const skillMdPath = join(skillDir, 'SKILL.md');
+  if (!existsSync(skillMdPath)) return null;
+  const content = readFileSync(skillMdPath, 'utf-8');
+  const match = content.match(/^lastModified:\s*(.+)/m);
+  return match ? match[1].trim() : null;
+}
+
+function updateLastModified(skillDir, date) {
   const skillMdPath = join(skillDir, 'SKILL.md');
   if (!existsSync(skillMdPath)) return;
   let content = readFileSync(skillMdPath, 'utf-8');
+  if (/^lastModified:/m.test(content)) {
+    const updated = content.replace(/^lastModified:.*/m, `lastModified: ${date}`);
+    if (updated === content) return; // já está atualizado
+    writeFileSync(skillMdPath, updated, 'utf-8');
+  } else {
+    // Insere após o campo version:
+    const updated = content.replace(/^(version:.*)$/m, `$1\nlastModified: ${date}`);
+    writeFileSync(skillMdPath, updated, 'utf-8');
+  }
+  console.log(`   ✅ SKILL.md — lastModified atualizado para ${date}`);
+}
+
+function updateSkillMdTitle(skillDir, version, date) {
+  const skillMdPath = join(skillDir, 'SKILL.md');
+  if (!existsSync(skillMdPath)) return;
+  let content = readFileSync(skillMdPath, 'utf-8');
+  // Atualiza H1: "v3.6" ou "v3.6 · 2026-06-25"
   const updated = content.replace(
-    /^(# Olist Design System — Especialista) v[\d.]+/m,
-    `$1 v${version}`
+    /^(# Olist Design System — Especialista) v[\d.]+(?:\s·\s[\d-]+)?/m,
+    `$1 v${version} · ${date}`
   );
   if (updated === content) return;
   writeFileSync(skillMdPath, updated, 'utf-8');
-  console.log(`   ✅ SKILL.md — H1 title atualizado para v${version}`);
+  console.log(`   ✅ SKILL.md — H1 title atualizado para v${version} · ${date}`);
 }
 
 // ── 5. Lê o README e a versão dele ──────────────────────────────────────────
@@ -269,9 +294,10 @@ function buildStructureSection(skillDir, dirName, version) {
   ];
 
   const totalFiles = rootFiles.length + decisionsFileCount + refFiles.length;
+  const modDate = new Date().toISOString().split('T')[0];
   const summary = hasDecisions
-    ? `**Raiz:** ${rootFiles.length} arquivo(s) · **Decisions:** ${decisionsFileCount} arquivo(s) · **Referências:** ${refFiles.length} arquivo(s) · **Total:** ${totalFiles} arquivo(s) — atualizado automaticamente pelo \`sync-skill-meta.mjs\``
-    : `**Raiz:** ${rootFiles.length} arquivo(s) · **Referências:** ${refFiles.length} arquivo(s) · **Total:** ${totalFiles} arquivo(s) — atualizado automaticamente pelo \`sync-skill-meta.mjs\``;
+    ? `**Raiz:** ${rootFiles.length} arquivo(s) · **Decisions:** ${decisionsFileCount} arquivo(s) · **Referências:** ${refFiles.length} arquivo(s) · **Total:** ${totalFiles} arquivo(s) — atualizado em ${modDate} pelo \`sync-skill-meta.mjs\``
+    : `**Raiz:** ${rootFiles.length} arquivo(s) · **Referências:** ${refFiles.length} arquivo(s) · **Total:** ${totalFiles} arquivo(s) — atualizado em ${modDate} pelo \`sync-skill-meta.mjs\``;
 
   return `## Estrutura
 
@@ -383,13 +409,14 @@ function buildChangelogEntry(version, date, changelogBlock) {
   return `### v${version} (${date})\n${bullets}`;
 }
 
-function updateReadme(readmePath, changelogPath, newVersion) {
+function updateReadme(readmePath, changelogPath, newVersion, lastModified) {
   let content = readFileSync(readmePath, 'utf-8');
   const today = new Date().toISOString().split('T')[0];
+  const modLabel = lastModified ? ` · atualizado em ${lastModified}` : '';
 
   content = content.replace(
-    /# Olist Design System — Especialista \(v[\d.]+\)/,
-    `# Olist Design System — Especialista (v${newVersion})`
+    /# Olist Design System — Especialista \(v[\d.]+(?:\s·\s[^)]+)?\)/,
+    `# Olist Design System — Especialista (v${newVersion}${modLabel})`
   );
 
   const changelogBlock = readChangelogForVersion(changelogPath, newVersion);
@@ -503,6 +530,12 @@ if (currentDirName !== expectedDirName) {
   console.log(`   ✅ Pasta já está no nome correto`);
 }
 
+const today = new Date().toISOString().split('T')[0];
+
+// 4a. Atualiza lastModified no SKILL.md e propaga a data
+updateLastModified(skillDir, today);
+const lastModified = today;
+
 // 4. Atualiza README.md
 const readmePath = join(skillDir, 'README.md');
 const changelogPath = join(skillDir, 'CHANGELOG.md');
@@ -512,10 +545,18 @@ console.log(`\n   README versão atual: v${readmeVersion ?? '(não encontrada)'}
 
 if (skillVersion !== readmeVersion) {
   console.log(`   📝 Atualizando README de v${readmeVersion} → v${skillVersion}...`);
-  updateReadme(readmePath, changelogPath, skillVersion);
+  updateReadme(readmePath, changelogPath, skillVersion, lastModified);
   console.log(`   ✅ README.md atualizado para v${skillVersion}`);
 } else {
-  console.log(`   ✅ README já está na versão v${skillVersion}`);
+  // Mesmo sem mudança de versão, atualiza a data no título do README
+  let content = readFileSync(readmePath, 'utf-8');
+  const modLabel = ` · atualizado em ${lastModified}`;
+  const updatedTitle = content.replace(
+    /# Olist Design System — Especialista \(v[\d.]+(?:\s·\s[^)]+)?\)/,
+    `# Olist Design System — Especialista (v${skillVersion}${modLabel})`
+  );
+  if (updatedTitle !== content) writeFileSync(readmePath, updatedTitle, 'utf-8');
+  console.log(`   ✅ README já está na versão v${skillVersion} · atualizado em ${lastModified}`);
 }
 
 // 4b. Atualiza seção ## Estrutura com lista real de arquivos
@@ -527,12 +568,11 @@ const setupPath = join(skillDir, 'SETUP.md');
 updateSetupMd(setupPath, skillDir, expectedDirName, skillVersion);
 console.log(`   ✅ SETUP.md — versão, caminhos e estrutura atualizados`);
 
-// 4d-title. Atualiza o H1 title dentro do próprio SKILL.md
-updateSkillMdTitle(skillDir, skillVersion);
+// 4d-title. Atualiza o H1 title dentro do próprio SKILL.md (v3.6 · 2026-06-25)
+updateSkillMdTitle(skillDir, skillVersion, lastModified);
 
 // 4d. Atualiza decisions/ (INDEX.md e CHANGELOG.md) — dentro da skill
 const decisionsDir = join(skillDir, 'decisions');
-const today = new Date().toISOString().split('T')[0];
 if (existsSync(decisionsDir)) {
   updateDecisionsIndex(decisionsDir, skillVersion, today);
   updateDecisionsChangelog(decisionsDir, skillDir, skillVersion, today);
