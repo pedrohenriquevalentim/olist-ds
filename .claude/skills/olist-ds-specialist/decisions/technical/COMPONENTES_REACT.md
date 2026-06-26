@@ -101,6 +101,17 @@ npm run storybook
 
 ---
 
+## Documentação no Figma (fluxo unificado)
+
+Ao implementar um componente a partir de URL do Figma, **além dos 5 arquivos de código**, gerar em paralelo o frame `📄 Docs — NomeComponente` na mesma section do componente original.
+
+O frame contém 4 seções obrigatórias: **demo** · **props** · **anatomia** · **acessibilidade**.
+
+Ver `SKILL.md` Caso 7 e `CLAUDE.md` passo 10 para o script completo via `use_figma`.
+
+---
+
 ## Histórico
 
+- 2026-06-25 v1.1 — Adicionada seção sobre geração de docs no Figma (fluxo unificado v3.7)
 - 2026-06-23 v1.0 — Decisão inicial extraída do CLAUDE.md

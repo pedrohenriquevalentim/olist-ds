@@ -36,11 +36,13 @@ src/components/NomeComponente/
 
 ## Geração de Componentes a partir do Figma
 
+> **Use a skill `$olist-ds-specialist` (Caso 7) para este fluxo.** Ela executa em paralelo a geração de código e a geração do frame de docs no Figma. As regras abaixo são o detalhamento técnico — a skill contém o workflow completo e orquestrado.
+
 Quando receber um link do Figma para implementar como componente React, siga este fluxo obrigatório:
 
 ### 1. Leitura do Design (Figma MCP)
-1. Chame `get_design_context` com o `nodeId` e `fileKey` extraídos da URL do Figma
-2. Se a resposta for grande ou truncada, chame `get_metadata` primeiro para mapear a árvore de nós
+1. Chame `get_metadata` com `depth=3` para mapear variantes e props
+2. Chame `get_design_context` com o `nodeId` e `fileKey` extraídos da URL do Figma
 3. Chame `get_screenshot` para ter referência visual
 4. Baixe assets referenciados (imagens, SVGs) antes de implementar
 5. Valide o resultado renderizado contra o screenshot antes de concluir
@@ -93,6 +95,15 @@ Gere EXATAMENTE cinco arquivos em blocos de código separados:
 - `index.ts` (re-export do componente e da interface)
 
 Consulte os componentes em `src/components/` como referência de padrão antes de implementar.
+
+### 10. Documentação no Figma (obrigatório no fluxo unificado)
+Após gerar o código, gere também o frame `📄 Docs — NomeComponente` na mesma section do componente original no Figma, contendo:
+- **demo** — instâncias reais de cada variante, agrupadas por dimensão lógica (estado, visibilidade, etc.)
+- **props** — tabela com colunas: prop · tipo · valores · obrigatório · default
+- **anatomia** — instância do estado mais completo com legenda numerada de cada parte
+- **acessibilidade** — 3 grupos (ARIA · teclado · contraste), cada item com chip de código + descrição
+
+Ver `olist-ds-specialist` Caso 7 para o script completo de geração via `use_figma`.
 
 ## Assets do Figma MCP
 - Se o MCP retornar URL localhost para imagem/SVG, use diretamente

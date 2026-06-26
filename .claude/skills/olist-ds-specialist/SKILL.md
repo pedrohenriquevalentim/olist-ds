@@ -1,11 +1,11 @@
 ---
 name: olist-ds-specialist
 description: Use esta skill para TODO trabalho de UI/UX da Olist — criação de telas a partir de SDDs/PRDs, geração de componentes React, revisão de consistência visual, criação de protótipos no Figma, manutenção do design system e criação/revisão de textos de UI (UX Writing, copy, tom de voz). Acione quando alguém mencionar interface Olist, design system, tokens, componentes, telas, layouts, SDD, PRD, protótipo, wireframe, Figma, Storybook, copy, texto de botão, mensagem de erro, empty state, toast, label, placeholder ou qualquer tarefa de criação ou revisão de UI/copy para produtos Olist. NÃO use para backend, APIs, banco de dados, autenticação ou lógica de negócio sem relação com UI.
-version: 3.6
-lastModified: 2026-06-25
+version: 3.7
+lastModified: 2026-06-26
 ---
 
-# Olist Design System — Especialista v3.6 · 2026-06-25
+# Olist Design System — Especialista v3.7 · 2026-06-26
 
 ## Papel
 
@@ -143,9 +143,16 @@ Qual tipo de tarefa?
     │   → Buscar COMPONENTES.md atualizado do GitHub (ver seção "Fonte dos Componentes React")
     │   → Ler PADROES.md + MAPA_FONTES.md
     │
-    ├── Criar componente
-    │   → Ler CORES.md + TIPOGRAFIA.md + GLOSSARIO_PAPEIS_TEXTO.md + ESPACAMENTO.md
-    │   → Ler COMPONENTES.md (verificar se já existe)
+    ├── Implementar componente a partir do Figma (fluxo unificado — ver Caso 7)
+    │   → Extrair fileKey e nodeId da URL do Figma
+    │   → get_metadata(nodeId) → mapear variantes, props e structure
+    │   → get_design_context(nodeId) → extrair props completas, tokens, estados
+    │   → get_screenshot → referência visual
+    │   → [PARALELO]
+    │     ├── Gerar 5 arquivos de código (ver CLAUDE.md — Estrutura de Componente)
+    │     └── Gerar frame "📄 Docs — NomeComponente" na mesma section do Figma
+    │           (demo · props · anatomia · acessibilidade)
+    │   → Aguardar feedback
     │
     ├── Criar ou revisar textos de UI (copy/UX Writing)
     │   → Ler UX_WRITING.md (protocolo obrigatório: componente → contexto → objetivo)
@@ -368,6 +375,64 @@ Você:
 5. Apresentar resumo ao usuário
 ```
 
+### Caso 7: Implementar componente a partir de URL do Figma (fluxo unificado)
+```
+Usuário: "Implemente este componente: https://figma.com/design/FILE?node-id=X"
+
+Você:
+1. Extrair fileKey (entre /design/ e /) e nodeId (node-id=X, trocar - por :) da URL
+2. get_metadata(fileKey, nodeId, depth=3) → mapear hierarquia de variantes
+3. get_design_context(fileKey, nodeId) → extrair props, estados, tokens e código de referência
+4. get_screenshot(fileKey, nodeId) → referência visual
+5. Interpretar os dados acima:
+   - Props: nomes, tipos (enum/boolean/string), valores, defaults
+   - Estados: lista de variantes (ex: state=enabled, state=error…)
+   - Visibility variants: props booleanas que geram sub-variantes
+   - Partes anatômicas: elementos nomeados no MCP (label, input base, icon, support text…)
+6. PARALELO — executar os dois passos abaixo ao mesmo tempo:
+
+   [A] GERAR CÓDIGO (5 arquivos conforme CLAUDE.md):
+       - NomeComponente.tsx         (React + TypeScript)
+       - NomeComponente.module.css  (CSS Modules + var(--tokens))
+       - NomeComponente.test.tsx    (Vitest + RTL)
+       - NomeComponente.stories.tsx (Storybook v10)
+       - index.ts                   (re-export componente + interface)
+       Regras: apenas tokens de src/generated/variables.css, rem (nunca px),
+       ícones como ReactNode, aria roles obrigatórios, teclado para interativos
+
+   [B] GERAR DOCS NO FIGMA (frame "📄 Docs — NomeComponente"):
+       - Criar frame dentro da MESMA section do componente original
+       - Posicionar à direita do component set (x = componentX + componentWidth + 60)
+       - Frame com Auto Layout VERTICAL, padding 40, gap 48, fundo branco, cornerRadius 16
+       - Seção "demo":
+           · Agrupar variantes por dimensão lógica (ex: "visibility on" / "visibility off")
+           · Instanciar cada variante com createInstance() → organizar em rows horizontais
+           · Label abaixo de cada instância com o nome do estado (12px Regular, muted)
+       - Seção "props":
+           · Tabela com colunas: prop · tipo · valores · obrigatório · default
+           · Header com bg GRAY_BG (#ECE9DF), rows alternadas, border #E7E4DA
+           · Larguras de coluna: 200 · 160 · 460 · 100 · 180
+       - Seção "anatomia":
+           · Instância do estado mais completo (preferencialmente focused/filled)
+           · Cards em grid 2 colunas: badge azul numerado + nome + descrição da parte
+           · Partes a cobrir: label, tooltip, input base, lead icon, texto/placeholder,
+             toggle icon, support text (adaptar ao componente)
+       - Seção "acessibilidade":
+           · 3 grupos: "Roles e atributos ARIA" (azul) · "Navegação por teclado" (verde)
+             · "Contraste e percepção" (âmbar)
+           · Cada item: chip de código (bg GRAY_BG) + descrição em 13px Regular
+       - placeholder = true nas seções enquanto constroem, false ao concluir cada uma
+       - screenshot() após cada seção para validação incremental
+
+7. Entregar código + confirmar que frame de docs foi criado no Figma com URL/nodeId
+8. Informar ao usuário: rodar npm run ship (inclui pipeline completo + versão + push)
+```
+
+**Nota sobre disponibilidade de instâncias:**
+Se o componente ainda não estiver publicado na library, a seção "demo" do frame de docs
+usará instâncias locais (do próprio arquivo). Após publicação, as instâncias atualizarão
+automaticamente. Informar o usuário caso esta situação ocorra.
+
 ## Regras da Figma Plugin API (use_figma)
 
 Erros comuns e suas correções — manter para evitar regressão:
@@ -384,8 +449,10 @@ Erros comuns e suas correções — manter para evitar regressão:
 
 ---
 
-**Versão:** 3.3
-**Última atualização:** 2026-06-23
+**Versão:** 3.7
+**Última atualização:** 2026-06-25
+**Mudanças v3.7:** Caso 7 adicionado — fluxo unificado de implementação de componente a partir de URL do Figma, combinando geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade) em paralelo; ramo "Criar componente" no Fluxo de Decisão expandido para referenciar o Caso 7.
+**Mudanças v3.6:** Versão anterior.
 **Mudanças v3.3:** Pasta `decisions/` criada dentro da skill com 10 decisões de design (5 técnicas, 5 UX/Design); `decisions/INDEX.md` adicionado como leitura obrigatória no Fluxo de Decisão e nas Regras Críticas; tabela de referências separada em `decisions/` e `references/`.
 **Mudanças v3.2:** Adição do `UX_WRITING.md` como referência de copy e tom de voz; novo ramo no Fluxo de Decisão para criação/revisão de textos de UI; seção 10 de UX Writing no `CHECKLIST_REVISAO.md`; regra crítica 5 sobre consultar `UX_WRITING.md` ao criar textos.
 **Mudanças v3.1:** Adição do `HARNESS_TELAS.md` como gate pré-construção obrigatório no fluxo de criação de telas no Figma; integração nas regras críticas e no Caso 4.

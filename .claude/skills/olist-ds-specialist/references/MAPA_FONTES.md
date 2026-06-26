@@ -1,8 +1,8 @@
 # Mapa de Fontes — Estrutura do Repositório
 
 **Auto-gerado por `npm run build`**  
-**Última atualização:** 2026-06-25  
-**Versão da skill:** 3.6
+**Última atualização:** 2026-06-26  
+**Versão da skill:** 3.7
 
 ---
 
@@ -34,6 +34,12 @@ src/
 │   │       ├── Icon.test.tsx
 │   │       ├── index.tsx
 │   │       └── styles.module.css
+│   ├── InputPassword/
+│   │       ├── InputPassword.module.css
+│   │       ├── InputPassword.stories.tsx
+│   │       ├── InputPassword.test.tsx
+│   │       ├── InputPassword.tsx
+│   │       └── index.ts
 │   ├── InputSearch/
 │   │       ├── InputSearch.module.css
 │   │       ├── InputSearch.stories.tsx
@@ -77,6 +83,7 @@ src/
 - **Checkbox:** `src/components/Checkbox/Checkbox.tsx`
 - **Chip:** `src/components/Chip/Chip.tsx`
 - **Icon:** `src/components/Icon/index.tsx`
+- **InputPassword:** `src/components/InputPassword/InputPassword.tsx`
 - **InputSearch:** `src/components/InputSearch/InputSearch.tsx`
 - **InputSelect:** `src/components/InputSelect/InputSelect.tsx`
 - **InputText:** `src/components/InputText/InputText.tsx`
