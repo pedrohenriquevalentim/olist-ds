@@ -334,6 +334,51 @@ function syncClaudeMd() {
 }
 
 // ============================================================================
+// 5. Atualiza seções auto-geráveis do README.md raiz
+// ============================================================================
+
+function syncReadmeMd() {
+  const readmePath = join(ROOT_DIR, 'README.md');
+  if (!existsSync(readmePath)) {
+    console.warn('⚠️  README.md não encontrado. Pulando...');
+    return;
+  }
+
+  const componentDirs = readdirSync(COMPONENTS_DIR)
+    .filter(f => statSync(join(COMPONENTS_DIR, f)).isDirectory())
+    .sort();
+
+  let content = readFileSync(readmePath, 'utf-8');
+  const original = content;
+
+  // Atualiza contagem de componentes inline na estrutura de pastas
+  content = content.replace(
+    /<!-- AUTO:component-count -->[\s\S]*?<!-- \/AUTO:component-count -->/,
+    `<!-- AUTO:component-count -->${componentDirs.length}<!-- /AUTO:component-count -->`
+  );
+
+  // Atualiza lista de componentes
+  const componentList = componentDirs.join(', ');
+  content = content.replace(
+    /<!-- AUTO:component-list-start -->[\s\S]*?<!-- AUTO:component-list-end -->/,
+    `<!-- AUTO:component-list-start -->\n${componentList}\n<!-- AUTO:component-list-end -->`
+  );
+
+  // Atualiza versão da skill
+  content = content.replace(
+    /<!-- AUTO:skill-version-start -->[\s\S]*?<!-- AUTO:skill-version-end -->/,
+    `<!-- AUTO:skill-version-start -->v${SKILL_VERSION}<!-- AUTO:skill-version-end -->`
+  );
+
+  if (content !== original) {
+    writeFileSync(readmePath, content, 'utf-8');
+    console.log('✅ README.md atualizado (componentes e versão da skill)\n');
+  } else {
+    console.log('✅ README.md já está atualizado\n');
+  }
+}
+
+// ============================================================================
 // Executar tudo
 // ============================================================================
 
@@ -342,6 +387,7 @@ try {
   generateMapaFontesMarkdown();
   updateVisaoGeralMarkdown();
   syncClaudeMd();
+  syncReadmeMd();
 
   console.log('✅ Sincronização concluída!\n');
   const skillDirName = SKILL_DIR.split('/').pop();
@@ -350,6 +396,7 @@ try {
   console.log(`  - .claude/skills/${skillDirName}/references/MAPA_FONTES.md`);
   console.log(`  - .claude/skills/${skillDirName}/references/VISAO_GERAL.md (atualizado)`);
   console.log('  - CLAUDE.md (libraries sincronizadas)');
+  console.log('  - README.md (componentes e versão da skill)');
   console.log('');
 } catch (error) {
   console.error('❌ Erro:', error.message);
