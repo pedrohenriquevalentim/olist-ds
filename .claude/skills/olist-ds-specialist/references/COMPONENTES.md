@@ -1,15 +1,15 @@
 # Componentes — API Completa
 
 **Auto-gerado por `npm run build`**
-**Última atualização:** 2026-06-25
-**Versão do pacote:** 1.0.40
-**Versão da skill:** 3.6
+**Última atualização:** 2026-06-26
+**Versão do pacote:** 1.0.42
+**Versão da skill:** 3.7
 
 ---
 
 Este arquivo contém a API completa de todos os componentes do design system.
 
-## Componentes Disponíveis (9)
+## Componentes Disponíveis (10)
 
 ### Button
 
@@ -63,6 +63,45 @@ className?: string;
 ```
 
 **Caminho:** `src/components/Icon/`
+
+---
+
+### InputPassword
+
+**Props:**
+```typescript
+/** Texto do label acima do campo */
+label?: string;
+/** Placeholder exibido quando o campo está vazio */
+placeholder?: string;
+/** Ícone à esquerda dentro do campo */
+leadIcon?: React.ReactNode;
+/** Exibe o texto de suporte abaixo do campo */
+hasSupport?: boolean;
+/** Texto de suporte */
+supportText?: string;
+/** Exibe ícone de tooltip ao lado do label */
+hasTooltip?: boolean;
+/** Texto do tooltip */
+tooltipText?: string;
+/** Estado de sucesso — sobrepõe estilos de borda e suporte */
+isSuccess?: boolean;
+/** Estado de erro — sobrepõe estilos de borda e suporte */
+isError?: boolean;
+/** Desabilita o campo */
+isDisabled?: boolean;
+/** Visibilidade controlada externamente (senha visível = true) */
+isPasswordVisible?: boolean;
+/** Callback disparado ao alternar visibilidade */
+onVisibilityToggle?: (isVisible: boolean) => void;
+/** Valor controlado */
+value?: string;
+/** Callback disparado ao digitar */
+onChange?: (value: string) => void;
+className?: string;
+```
+
+**Caminho:** `src/components/InputPassword/`
 
 ---
 
