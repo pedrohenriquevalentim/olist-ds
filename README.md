@@ -1,10 +1,10 @@
 # Olist Design System
 
-Pipeline AI-First que conecta Figma, Claude, Gemini e Next.js para transformar decisões visuais em componentes React prontos para produção — e transformar SDDs em protótipos no Figma automaticamente.
+Pipeline AI-First que conecta Figma, Claude e Gemini para transformar decisões visuais em componentes React prontos para produção — e transformar SDDs em protótipos no Figma automaticamente.
 
 O design system é um pacote NPM privado (`@pedrohenriquevalentim/olist-ds`) publicado no GitHub Packages. Cada componente consome design tokens exportados do Figma, tem testes gerados por IA, documentação interativa no Storybook, e pode ser instalado em qualquer projeto React ou Next.js.
 
-A skill integrada permite que crie telas a partir de SDDs usando o design system como base, via Claude.ai ou Claude Code.
+A skill integrada (`olist-ds-specialist`) permite criar telas a partir de SDDs e gerar documentação de componentes direto no Figma, usando o design system como base, via Claude.ai ou Claude Code.
 
 ---
 
@@ -23,13 +23,16 @@ FIGMA (source of truth)
 │
 ├──→ Claude Code + Figma MCP
 │    Lê componente no Figma → gera React + TypeScript + CSS Modules
-│    Designer revisa e refina
+│    Gera frames de documentação (📄 Docs) no Figma por componente
 │
 ├──→ Gemini Pro (API)
 │    Lê código dos componentes → gera testes (Vitest) e stories (Storybook)
 │
 ├──→ Storybook
 │    Documentação interativa com autodocs, foundations e catálogo visual
+│
+├──→ wiki/WIKI.md (auto-gerado)
+│    Visão consolidada: componentes, ícones, skill, Figma — atualizada a cada ship
 │
 ├──→ CI/CD (GitHub Actions)
 │    Lint → Tokens → Testes → Storybook → Publicação NPM
@@ -38,7 +41,8 @@ FIGMA (source of truth)
 │    Importa o pacote publicado e renderiza todos os componentes
 │
 └──→ Skill corporativa (auto-sync)
-     Atualiza documentação da skill a cada build
+     Atualiza documentação da skill a cada ship
+     Auditoria automática semanal via scheduled task
      Disponível para toda a empresa via Claude.ai ou Claude Code
 ```
 
@@ -52,6 +56,7 @@ SDD / PRD
 │
 └──→ Claude Code + Figma MCP (via terminal)
      Lê SDD + consulta componentes existentes → gera telas no canvas
+     Gera frame 📄 Docs de cada componente no Figma (demo, props, anatomia, a11y)
 ```
 
 ---
@@ -68,9 +73,8 @@ SDD / PRD
 | Storybook | 10 | Documentação interativa |
 | Style Dictionary | 5 | Transformação de design tokens |
 | @tokens-studio/sd-transforms | 2 | Ponte entre Tokens Studio e Style Dictionary |
-| Claude Code (Opus 4.6) | — | Geração de componentes via Figma MCP |
+| Claude Code | — | Geração de componentes via Figma MCP |
 | Gemini Pro (API) | 2.5 | Geração automática de testes e stories |
-| Next.js | 16 | Ambiente de consumo e teste |
 | GitHub Actions | — | CI/CD |
 | GitHub Packages | — | NPM privado |
 | Plus Jakarta Sans | — | Fonte primária (Google Fonts) |
@@ -91,19 +95,6 @@ winget install OpenJS.NodeJS.LTS
 # Linux
 curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
 sudo apt-get install -y nodejs
-```
-
-### Git
-
-```bash
-# macOS
-xcode-select --install
-
-# Windows
-winget install Git.Git
-
-# Linux
-sudo apt-get install git
 ```
 
 ### Claude Code
@@ -146,65 +137,94 @@ npm run build
 
 ## Estrutura do Projeto
 
+<!-- AUTO:structure-start -->
 ```
 olist-ds/
 ├── .github/workflows/pipeline.yml        # CI/CD
-├── .claude/skills/olist-ds-specialist/ # Skill corporativa (auto-sync)
-│   ├── SKILL.md                          # Role, escopo, decision flow (v3.0)
-│   ├── figma-config.json                 # libraryKeys, searchPriority, blockedLibraries
-│   ├── component-registry.json           # Registry de componentes sincronizado
-│   └── references/
-│       ├── VISAO_GERAL.md                # Mapa de navegação, identidade visual
-│       ├── FIGMA_CONFIG.md               # Workflow de busca e import de componentes
-│       ├── TEMPLATES_PRODUTO.md          # Zonas de layout por produto
-│       ├── CORES.md                      # Sistema de cores com regras de uso
-│       ├── TIPOGRAFIA.md                 # Tokens de tipografia
-│       ├── ESPACAMENTO.md                # Escala, grid, border-radius
-│       ├── GLOSSARIO_PAPEIS_TEXTO.md     # 10 papéis de texto (Heading, Label, Error…)
-│       ├── COMPONENTES.md                # Componentes com props (auto-gerado)
-│       ├── PADROES.md                    # 5 padrões de página (Tabela, Form, Dashboard…)
-│       ├── MAPA_FONTES.md                # Caminhos reais dos arquivos (auto-gerado)
-│       ├── SDD_PARA_TELA.md              # 10 passos SDD → decisões de UI
-│       ├── SDD_AVANCADO.md               # RNFs, DACI, Métricas, Rollout → UI
-│       └── CHECKLIST_REVISAO.md          # 9 categorias de revisão visual
+├── .claude/
+│   ├── settings.json                     # Permissões e hooks do Claude Code
+│   └── skills/olist-ds-specialist/       # Skill corporativa (v3.7)
+│       ├── SKILL.md                      # Role, escopo, decision flow
+│       ├── README.md                     # Visão geral e changelog da skill
+│       ├── SETUP.md                      # Guia de instalação
+│       ├── CHANGELOG.md                  # Histórico de versões da skill
+│       ├── figma-config.json             # libraryKeys, searchPriority, blockedLibraries
+│       ├── component-registry.json       # Cache de componentKeys por categoria
+│       ├── decisions/                    # Architecture Decision Records
+│       │   ├── INDEX.md
+│       │   ├── CHANGELOG.md
+│       │   ├── technical/               # Decisões técnicas (tokens, ícones, a11y, etc.)
+│       │   └── ux-design/              # Decisões de UX (tipografia, espaçamento, fluxos)
+│       └── references/
+│           ├── VISAO_GERAL.md           # Mapa de navegação — leia sempre primeiro
+│           ├── COMPONENTES.md           # Props e variantes de cada componente (auto-gerado)
+│           ├── MAPA_FONTES.md           # Estrutura de pastas do repositório (auto-gerado)
+│           ├── FIGMA_CONFIG.md          # Workflow de busca e import de componentes
+│           ├── TEMPLATES_PRODUTO.md     # Zonas de layout por produto
+│           ├── HARNEES_TELAS.md         # Gate pré-construção: restrições por zona
+│           ├── CORES.md                 # Sistema de cores com regras de uso
+│           ├── TIPOGRAFIA.md            # Tokens de tipografia
+│           ├── ESPACAMENTO.md           # Grid de 4px, border-radius, escala
+│           ├── GLOSSARIO_PAPEIS_TEXTO.md # 10 papéis de texto (Heading, Label, Error…)
+│           ├── UX_WRITING.md            # Tom de voz, 4 pilares, 12 tipos de texto
+│           ├── PADROES.md               # 5 padrões de página (Tabela, Form, Dashboard…)
+│           ├── SDD_PARA_TELA.md         # 10 passos SDD → decisões de UI
+│           ├── SDD_AVANCADO.md          # RNFs, DACI, Métricas, Rollout → UI
+│           └── CHECKLIST_REVISAO.md     # Categorias de revisão visual e a11y
 ├── .storybook/
-│   ├── main.ts                           # Paths + addons
-│   ├── preview.ts                        # Autodocs + tokens + font decorator
-│   ├── preview-head.html                 # Google Fonts
-│   ├── theme.ts                          # Branding Olist
-│   └── manager.ts                        # Aplica tema
+│   ├── main.ts                          # Paths + addons
+│   ├── preview.ts                       # Autodocs + tokens + font decorator
+│   ├── preview-head.html                # Google Fonts
+│   ├── theme.ts                         # Branding Olist
+│   └── manager.ts                       # Aplica tema
 ├── scripts/
-│   ├── generate-tests.mjs                # Gemini → .test.tsx
-│   ├── generate-stories.mjs              # Gemini → .stories.tsx
-│   ├── generate-index.mjs                # Gera index.ts + catalog.ts
-│   ├── copy-css.mjs                      # Copia .module.css para dist/
-│   └── sync-skill.mjs                    # Atualiza skill com estado atual do DS
+│   ├── sync-tokens.mjs                  # JSON → CSS Custom Properties (tokens)
+│   ├── sync-skill.mjs                   # Regenera COMPONENTES.md, MAPA_FONTES.md, VISAO_GERAL.md
+│   ├── sync-skill-meta.mjs              # Atualiza versão, README e wiki da skill
+│   ├── generate-wiki.mjs                # Gera wiki/WIKI.md consolidado
+│   ├── generate-tests.mjs               # Gemini → .test.tsx
+│   ├── generate-stories.mjs             # Gemini → .stories.tsx
+│   ├── generate-index.mjs               # Gera src/index.ts + src/catalog.ts
+│   ├── generate-icons.mjs               # Gera src/components/Icon com ícones do Figma
+│   ├── copy-css.mjs                     # Copia .module.css para dist/
+│   └── version-skill.mjs                # Bump de versão da skill
 ├── src/
-│   ├── tokens/base.json                  # JSON do Tokens Studio (DTCG)
-│   ├── generated/                        # Saída do Style Dictionary (não editar)
+│   ├── tokens/                          # JSON do Tokens Studio (DTCG)
+│   │   ├── base.json
+│   │   ├── theme.json
+│   │   └── tokens.json
+│   ├── generated/                       # Saída do Style Dictionary (não editar)
 │   │   ├── variables.css
 │   │   └── tokens.js
-│   ├── components/
+│   ├── components/                      # <!-- AUTO:component-count -->10<!-- /AUTO:component-count --> componentes
 │   │   └── [ComponentName]/
 │   │       ├── ComponentName.tsx
 │   │       ├── ComponentName.module.css
 │   │       ├── ComponentName.test.tsx
 │   │       ├── ComponentName.stories.tsx
 │   │       └── index.ts
-│   ├── docs/                             # Páginas MDX do Storybook
+│   ├── docs/                            # Páginas MDX do Storybook
 │   │   ├── Introduction.mdx
 │   │   └── foundations/
-│   ├── index.ts                          # Auto-gerado
-│   ├── catalog.ts                        # Auto-gerado
-│   ├── css-modules.d.ts                  # Tipos para CSS Modules
-│   └── test-setup.ts                     # Setup do Vitest
-├── CLAUDE.md                             # Instruções para Claude Code
-├── DESIGN.md                             # Google Labs spec
-├── config.mjs                            # Style Dictionary + transforms
+│   ├── index.ts                         # Auto-gerado
+│   ├── catalog.ts                       # Auto-gerado
+│   ├── css-modules.d.ts                 # Tipos para CSS Modules
+│   └── test-setup.ts                    # Setup do Vitest
+├── wiki/
+│   └── WIKI.md                          # Wiki consolidado (auto-gerado)
+├── CLAUDE.md                            # Instruções para Claude Code
+├── eslint.config.mjs
 ├── tsconfig.json
 ├── vite.config.ts
 └── package.json
 ```
+<!-- AUTO:structure-end -->
+
+### Componentes disponíveis
+
+<!-- AUTO:component-list-start -->
+Button, Checkbox, Chip, Icon, InputPassword, InputSearch, InputSelect, InputText, Logo, ProdutosOlistIcons
+<!-- AUTO:component-list-end -->
 
 ---
 
@@ -221,6 +241,7 @@ npm run storybook              # Storybook (porta 6006)
 
 ```bash
 npm run build:tokens           # JSON → CSS Custom Properties
+npm run watch:tokens           # Modo watch
 ```
 
 ### Geração com IA
@@ -231,6 +252,7 @@ npm run generate:tests:all     # Regenera todos os testes
 npm run generate:stories       # Gemini → stories faltantes
 npm run generate:stories:all   # Regenera todas as stories
 npm run generate:all           # Testes + stories faltantes
+npm run generate:icons         # Regenera componente Icon a partir do Figma
 ```
 
 ### Testes
@@ -246,41 +268,39 @@ npm run test:coverage          # Com relatório de cobertura
 ```bash
 npm run build                  # Tokens + index + TypeScript + CSS + sync skill
 npm run build-storybook        # Build estático do Storybook
-npm run pipeline               # Build + generate + test + storybook
+npm run pipeline               # build:tokens + generate:all + tsc + test:run + build-storybook
+```
+
+### Sincronização de Skill e Docs
+
+```bash
+npm run sync:skill             # Regenera COMPONENTES.md, MAPA_FONTES.md, VISAO_GERAL.md, README (estrutura)
+npm run sync:skill-meta        # Atualiza versão, título e wiki da skill
+npm run wiki                   # Regenera wiki/WIKI.md
 ```
 
 ### Publicação
 
 ```bash
-npm run release                # Pipeline + version patch + publish + push
+npm run ship
 ```
 
-Executa em sequência:
+Executa o pipeline completo em sequência:
 
-1. Gera tokens CSS
-2. Gera testes e stories faltantes (Gemini)
-3. Roda todos os testes
-4. Builda o Storybook
-5. Compila TypeScript + gera index.ts + copia CSS
-6. Sincroniza a skill corporativa
-7. Incrementa versão (patch)
-8. Publica no GitHub Packages
-9. Push do código e das tags
+1. `sync:skill` — atualiza docs de componentes e README
+2. `sync:skill-meta` — sincroniza versão e wiki da skill
+3. `pipeline` — build:tokens + generate:all + tsc + test:run + build-storybook
+4. `git add -A && git commit -m 'chore: release'`
+5. `npm version patch` — incrementa versão (patch)
+6. `git push origin HEAD --tags`
 
-### Controle manual de versão
+Para bump manual de versão minor/major:
 
 ```bash
 npm run pipeline
-npm version minor              # 1.0.5 → 1.1.0 (novo componente)
-npm version major              # 1.1.0 → 2.0.0 (breaking change)
-npm publish
+npm version minor              # 1.0.x → 1.1.0 (novo componente)
+npm version major              # 1.x.0 → 2.0.0 (breaking change)
 git push && git push --tags
-```
-
-### Skill
-
-```bash
-npm run sync:skill             # Atualiza skill com estado atual do DS
 ```
 
 ---
@@ -290,7 +310,6 @@ npm run sync:skill             # Atualiza skill com estado atual do DS
 ### Configuração
 
 ```bash
-claude config set model claude-opus-4-6
 claude mcp add figma-mcp --url https://mcp.figma.com/mcp
 cd olist-ds
 claude
@@ -304,7 +323,7 @@ Use $olist-ds-specialist para implementar este componente:
 https://www.figma.com/design/XXXX/YYYY?node-id=123:456
 ```
 
-A skill lê o design, mapeia os tokens, e gera automaticamente os 5 arquivos obrigatórios seguindo todas as regras do DS (tokens, acessibilidade W3C, testes RTL, Storybook v10).
+A skill lê o design, mapeia os tokens, gera os 5 arquivos obrigatórios (tsx, css, test, stories, index) e, ao final, cria automaticamente o frame `📄 Docs — NomeComponente` no Figma com demo, tabela de props, anatomia e guia de acessibilidade.
 
 **Via prompt direto (sem skill):**
 ```
@@ -315,30 +334,41 @@ Gere o componente React seguindo as instruções do CLAUDE.md.
 Depois rode npm run test:run para validar.
 ```
 
+### Criar tela a partir de SDD
+
+```
+Use $olist-ds-specialist para criar a tela deste SDD:
+[COLAR O SDD]
+```
+
 ### Pipeline completo via prompt
 
 ```
 Preciso que você:
 1. Use $olist-ds-specialist para implementar o componente: [LINK]
-2. Rode npm run build:tokens
-3. Rode npm run test:run — se falhar, corrija e rode novamente
-4. Rode npm run build-storybook
-5. Faça git add, commit e push
+2. Rode npm run test:run — se falhar, corrija e rode novamente
+3. Rode npm run ship
 ```
 
 ---
 
 ## Skill Corporativa
 
-A skill permite que qualquer pessoa da empresa crie telas a partir de SDDs usando o design system. Ela se auto-atualiza a cada `npm run build`.
+A skill `olist-ds-specialist` (<!-- AUTO:skill-version-start -->v3.7<!-- AUTO:skill-version-end -->) permite que qualquer pessoa da empresa crie telas a partir de SDDs, implemente componentes React do DS e gere documentação no Figma — com precisão consistente.
 
-### Por que atinge 90%+ de precisão
+### Capacidades
 
-1. **Referências separadas** — cada dimensão do design system tem seu arquivo (cores, tipografia, componentes). O agente carrega só o necessário.
-2. **Source Map** — cada regra aponta para o arquivo real no código. O agente não inventa — confirma com evidência.
-3. **SDD to Screen** — guia de tradução que transforma requisitos funcionais em decisões de UI concretas.
+- **Figma → React** — lê componente no Figma, gera tsx + css + test + stories + index
+- **PRD/SDD → Figma** — lê SDD, consulta libraries do DS, monta telas com instâncias reais
+- **Docs no Figma** — gera frame `📄 Docs — NomeComponente` com demo, props, anatomia e a11y
+- **Decisões documentadas** — `decisions/` com Architecture Decision Records (técnicos e UX)
 
-Inspirada na abordagem do [Pacy Design](https://github.com/lebrunhari/pacy_design) e compatível com a especificação [DESIGN.md do Google Labs](https://github.com/google-labs-code/design.md).
+### Por que atinge alta precisão
+
+1. **Referências separadas** — cada dimensão do design system tem seu arquivo (cores, tipografia, componentes, espaçamento, papéis de texto, padrões de página). O agente carrega só o necessário.
+2. **Source Map** — `MAPA_FONTES.md` aponta para o arquivo real de cada componente. O agente não inventa — confirma com evidência.
+3. **SDD to Screen** — `SDD_PARA_TELA.md` e `SDD_AVANCADO.md` traduzem requisitos funcionais em decisões de UI concretas.
+4. **figma-config.json** — fonte única de verdade para libraries autorizadas, com `searchPriority` e `blockedLibraries`.
 
 ### Como usar
 
@@ -356,20 +386,36 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 
 **No Claude.ai (sem terminal):**
 1. Settings → Connectors → Figma → Connect
-2. Customize → Skills → Upload → selecionar pasta da skill
+2. Customize → Skills → Upload → selecionar pasta `olist-ds-specialist`
 3. Iniciar conversa e colar o SDD ou link do Figma
 
 ### Auto-sync
 
-A cada `npm run build`, os arquivos `COMPONENTES.md`, `MAPA_FONTES.md` e `VISAO_GERAL.md` (parcial) são regenerados pelo script `sync-skill.mjs` com o estado real do codebase. Para atualizar no Claude.ai, re-upload da pasta da skill.
+A cada `npm run ship`, os arquivos a seguir são regenerados automaticamente:
 
-### Mudanças v3.0
+| Arquivo | Gerado por |
+|---|---|
+| `references/COMPONENTES.md` | `sync-skill.mjs` |
+| `references/MAPA_FONTES.md` | `sync-skill.mjs` |
+| `references/VISAO_GERAL.md` | `sync-skill.mjs` |
+| `README.md` (seções marcadas) | `sync-skill.mjs` |
+| `skill/README.md` | `sync-skill-meta.mjs` |
+| `wiki/WIKI.md` | `generate-wiki.mjs` |
 
-- Canal de entrega único: `use_figma` direto (plugin JSON intermediário removido)
-- **AI Components** como library master — preferência absoluta para componentes duplicados
-- `figma-config.json` com `searchPriority` e `blockedLibraries` como fonte da verdade
-- Workflow faseado obrigatório: listar telas → validar → criar uma por vez
-- Regras da Figma Plugin API documentadas para evitar erros comuns
+Para sincronizar manualmente sem publicar:
+
+```bash
+npm run sync:skill && npm run sync:skill-meta && npm run wiki
+```
+
+### Auditoria automática
+
+Um scheduled task (`olist-ds-audit`) executa semanalmente via Claude Code e:
+
+- Verifica integridade de arquivos por componente
+- Confirma que todas as referências da skill estão atualizadas
+- Corrige versões defasadas nas docs automaticamente
+- Reporta qualquer item que não pôde ser corrigido sem intervenção humana
 
 ---
 
@@ -377,7 +423,7 @@ A cada `npm run build`, os arquivos `COMPONENTES.md`, `MAPA_FONTES.md` e `VISAO_
 
 ### Origem
 
-Definidos no Figma com **Tokens Studio** (v2.11.4). Exportados como JSON (DTCG) para `src/tokens/base.json`.
+Definidos no Figma com **Tokens Studio** (v2.11.4). Exportados como JSON (DTCG) para `src/tokens/`.
 
 ### Transformação
 
@@ -385,7 +431,7 @@ Definidos no Figma com **Tokens Studio** (v2.11.4). Exportados como JSON (DTCG) 
 npm run build:tokens
 ```
 
-O `config.mjs` usa Style Dictionary + `@tokens-studio/sd-transforms` com transforms customizados:
+O `scripts/sync-tokens.mjs` usa Style Dictionary + `@tokens-studio/sd-transforms` com transforms customizados:
 - **custom/font-family-quote** — adiciona aspas em nomes com espaço
 - **custom/px-unit** — converte números para px (exceto opacity e font-weight)
 
@@ -427,8 +473,6 @@ npm run storybook    # http://localhost:6006
 ```bash
 npx create-next-app@latest olist-ds-next
 cd olist-ds-next
-npm install ../olist-ds        # local
-# ou
 npm install @pedrohenriquevalentim/olist-ds   # GitHub Packages
 ```
 
@@ -451,12 +495,11 @@ Secret necessário: `GEMINI_API_KEY` (repositório → Settings → Secrets → 
 
 ## Criar Novo Componente (Checklist)
 
-1. Claude Code lê o componente no Figma e gera os arquivos
-2. `npm run generate:all` — testes e stories via Gemini
+1. Claude Code lê o componente no Figma via skill e gera os 5 arquivos
+2. A skill gera automaticamente o frame `📄 Docs` no Figma
 3. `npm run test:run` — valida
 4. `npm run storybook` — visualiza
-5. `npm run release` — builda, sincroniza skill, versiona, publica
-6. No Next.js: `npm install ../olist-ds` — componente aparece no catálogo
+5. `npm run ship` — sincroniza docs, versiona e publica
 
 ---
 
@@ -467,7 +510,6 @@ Secret necessário: `GEMINI_API_KEY` (repositório → Settings → Secrets → 
 | Claude Code + MCP | Sim | Sim | Devs, designers técnicos |
 | Claude.ai + Conector Figma | Não | Não | PMs, designers, CS |
 | Claude.ai + Skill upload | Não | Não | Qualquer pessoa |
-| DESIGN.md no projeto | Não | Não | Qualquer ferramenta AI |
 
 ---
 
