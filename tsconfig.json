@@ -22,6 +22,7 @@
     "**/*.test.*",
     "**/*.stories.*",
     "src/playground.tsx",
-    "src/stories"
+    "src/stories",
+    "src/test-setup.ts"
   ]
 }

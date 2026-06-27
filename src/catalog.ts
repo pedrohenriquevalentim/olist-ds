@@ -4,7 +4,10 @@ export const componentNames = [
   "Button",
   "Checkbox",
   "Chip",
+  "InputPassword",
+  "InputSearch",
   "InputSelect",
+  "InputText",
   "Logo",
   "ProdutosOlistIcons"
 ] as const;
