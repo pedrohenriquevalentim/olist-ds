@@ -1,8 +1,8 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.43`  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.47`  
 **Skill:** v3.7  
-**Última atualização:** 2026-06-26  
+**Última atualização:** 2026-06-27  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -36,7 +36,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Ícones SVG | 550 |
 | Arquivos da Skill | 21 |
 | Arquivos Figma permitidos | 5 |
-| Versão npm | 1.0.43 |
+| Versão npm | 1.0.47 |
 | Versão skill | 3.7 |
 
 ## Componentes
@@ -97,7 +97,8 @@ npm run release
 | `npm run validate:icons` | `node scripts/validate-icon-migration.mjs` |
 | `npm run sync:skill` | `node scripts/sync-skill.mjs` |
 | `npm run build:tokens` | `node scripts/sync-tokens.mjs` |
-| `npm run build` | `npm run build:tokens && node scripts/generate-index.mjs &...` |
+| `npm run clean` | `node -e "const{rmSync}=require('fs');rmSync('dist',{recur...` |
+| `npm run build` | `npm run clean && npm run build:tokens && node scripts/gen...` |
 | `npm run dev` | `vite` |
 | `npm run generate:tests` | `node scripts/generate-tests.mjs --missing` |
 | `npm run generate:tests:all` | `node scripts/generate-tests.mjs --all` |
@@ -466,4 +467,4 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ---
 
-*Gerado automaticamente em 2026-06-26 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-06-27 por `generate-wiki.mjs`. Não edite manualmente.*
