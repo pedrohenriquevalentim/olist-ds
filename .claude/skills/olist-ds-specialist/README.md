@@ -1,6 +1,20 @@
-# Olist Design System — Especialista (v3.7 · atualizado em 2026-06-27)
+# Olist Design System — Especialista (v3.7 · atualizado em 2026-06-28)
 
 Skill corporativa para criação de telas, componentes e protótipos a partir de SDDs/PRDs usando o design system da Olist.
+
+## Novidades v3.7 (2026-06-28)
+
+- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
+- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
+- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
+- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
+
+## Novidades v3.7 (2026-06-28)
+
+- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
+- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
+- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
+- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
 
 ## Novidades v3.7 (2026-06-27)
 
@@ -285,7 +299,7 @@ olist-ds-specialist/
     └── VISAO_GERAL.md                  # Mapa de navegação — leia sempre primeiro
 ```
 
-> **Raiz:** 6 arquivo(s) · **Decisions:** 12 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 33 arquivo(s) — atualizado em 2026-06-27 pelo `sync-skill-meta.mjs`
+> **Raiz:** 6 arquivo(s) · **Decisions:** 12 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 33 arquivo(s) — atualizado em 2026-06-28 pelo `sync-skill-meta.mjs`
 ## Libraries do Figma (ordem de prioridade)
 
 | # | Library | Conteúdo |

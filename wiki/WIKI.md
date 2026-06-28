@@ -1,8 +1,8 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.49`  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.51`  
 **Skill:** v3.7  
-**Última atualização:** 2026-06-27  
+**Última atualização:** 2026-06-28  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -36,7 +36,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Ícones SVG | 550 |
 | Arquivos da Skill | 21 |
 | Arquivos Figma permitidos | 5 |
-| Versão npm | 1.0.49 |
+| Versão npm | 1.0.51 |
 | Versão skill | 3.7 |
 
 ## Componentes
@@ -97,7 +97,7 @@ npm run release
 | `npm run validate:icons` | `node scripts/validate-icon-migration.mjs` |
 | `npm run sync:skill` | `node scripts/sync-skill.mjs` |
 | `npm run build:tokens` | `node scripts/sync-tokens.mjs` |
-| `npm run clean` | `node -e "const{rmSync}=require('fs');rmSync('dist',{recur...` |
+| `npm run clean` | `rm -rf dist` |
 | `npm run build` | `npm run clean && npm run build:tokens && node scripts/gen...` |
 | `npm run dev` | `vite` |
 | `npm run generate:tests` | `node scripts/generate-tests.mjs --missing` |
@@ -113,9 +113,9 @@ npm run release
 | `npm run build-storybook` | `storybook build` |
 | `npm run lint` | `eslint src/` |
 | `npm run prepublishOnly` | `npm run build` |
-| `npm run pipeline` | `npm run build:tokens && npm run generate:all && tsc --noE...` |
+| `npm run pipeline` | `npm run build:tokens && npm run generate:all && npm run l...` |
 | `npm run version:skill` | `node scripts/version-skill.mjs` |
-| `npm run ship` | `npm run sync:skill && npm run sync:skill-meta && npm run ...` |
+| `npm run ship` | `npm run pipeline && npm run sync:skill && npm run sync:sk...` |
 | `npm run mcp:figma` | `figma-mcp` |
 | `npm run watch:tokens` | `style-dictionary build --watch` |
 | `npm run sync:skill-meta` | `node scripts/sync-skill-meta.mjs` |
@@ -467,4 +467,4 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ---
 
-*Gerado automaticamente em 2026-06-27 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-06-28 por `generate-wiki.mjs`. Não edite manualmente.*

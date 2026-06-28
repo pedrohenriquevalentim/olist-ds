@@ -97,18 +97,24 @@ const Chip = ({ label, onRemove, removeIcon, disabled }: ChipProps) => {
     <span className={styles.chip}>
       <span className={styles.chipLabel}>{label}</span>
       {!disabled && (
-        <button
-          type="button"
+        <span
+          role="button"
           className={styles.chipRemove}
           onClick={(e) => {
             e.stopPropagation();
             onRemove();
           }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.stopPropagation();
+              onRemove();
+            }
+          }}
           aria-label={`Remover ${label}`}
           tabIndex={-1}
         >
           {removeIcon ?? defaultRemoveIcon}
-        </button>
+        </span>
       )}
     </span>
   );
