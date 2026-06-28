@@ -63,7 +63,8 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "olist-ds": "file:../olist-ds",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "@axe-core/react": "^4.11.1",
     "@chromatic-com/storybook": "^5.2.1",
     "@eslint/js": "^10.0.1",
