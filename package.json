@@ -4,9 +4,19 @@
   "description": "Olist Design System — componentes React + tokens",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./variables.css": "./dist/variables.css"
+  },
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=22"
+  },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
@@ -18,7 +28,7 @@
     "validate:icons": "node scripts/validate-icon-migration.mjs",
     "sync:skill": "node scripts/sync-skill.mjs",
     "build:tokens": "node scripts/sync-tokens.mjs",
-    "clean": "node -e \"const{rmSync}=require('fs');rmSync('dist',{recursive:true,force:true});\"",
+    "clean": "rm -rf dist",
     "build": "npm run clean && npm run build:tokens && node scripts/generate-index.mjs && tsc && node scripts/copy-css.mjs && npm run sync:skill && npm run sync:skill-meta",
     "dev": "vite",
     "generate:tests": "node scripts/generate-tests.mjs --missing",
@@ -34,9 +44,9 @@
     "build-storybook": "storybook build",
     "lint": "eslint src/",
     "prepublishOnly": "npm run build",
-    "pipeline": "npm run build:tokens && npm run generate:all && tsc --noEmit && npm run test:run && npm run build-storybook",
+    "pipeline": "npm run build:tokens && npm run generate:all && npm run lint && tsc --noEmit && npm run test:run && npm run build-storybook",
     "version:skill": "node scripts/version-skill.mjs",
-    "ship": "npm run sync:skill && npm run sync:skill-meta && npm run pipeline && git add -A && git commit -m 'chore: release' && npm version patch && git push origin HEAD --tags",
+    "ship": "npm run pipeline && npm run sync:skill && npm run sync:skill-meta && git add src/ scripts/ wiki/ CLAUDE.md .claude/ && git commit -m 'chore: release' && npm version patch && git push origin HEAD --tags",
     "mcp:figma": "figma-mcp",
     "watch:tokens": "style-dictionary build --watch",
     "sync:skill-meta": "node scripts/sync-skill-meta.mjs",
@@ -48,12 +58,12 @@
   "author": "Pedro Valentim",
   "license": "ISC",
   "type": "module",
-  "dependencies": {
-    "olist-ds": "file:../olist-ds",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "olist-ds": "file:../olist-ds",
     "@axe-core/react": "^4.11.1",
     "@chromatic-com/storybook": "^5.2.1",
     "@eslint/js": "^10.0.1",

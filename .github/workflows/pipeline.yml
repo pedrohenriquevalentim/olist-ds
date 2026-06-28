@@ -33,10 +33,13 @@ jobs:
           cache-dependency-path: package-lock.json
 
       - name: Instalar dependências
-        run: npm install
+        run: npm ci
 
       - name: Gerar tokens CSS
         run: npm run build:tokens
+
+      - name: Lint
+        run: npm run lint
 
       - name: Verificar TypeScript (inclui arquivos gerados pela IA)
         run: tsc --noEmit --allowJs false
@@ -46,6 +49,13 @@ jobs:
 
       - name: Rodar testes
         run: npm run test:run
+
+      - name: Salvar tokens gerados
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-tokens
+          path: src/generated/
+          retention-days: 1
 
   # ─────────────────────────────────────────────────────────
   # JOB 2: Build do Storybook
@@ -70,12 +80,16 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
+          cache-dependency-path: package-lock.json
 
       - name: Instalar dependências
-        run: npm install
+        run: npm ci
 
-      - name: Gerar tokens
-        run: npm run build:tokens
+      - name: Baixar tokens gerados
+        uses: actions/download-artifact@v4
+        with:
+          name: generated-tokens
+          path: src/generated/
 
       - name: Build do Storybook
         run: npm run build-storybook
@@ -112,12 +126,16 @@ jobs:
           node-version: '22'
           registry-url: 'https://npm.pkg.github.com'
           cache: 'npm'
+          cache-dependency-path: package-lock.json
 
       - name: Instalar dependências
-        run: npm install
+        run: npm ci
 
-      - name: Gerar tokens
-        run: npm run build:tokens
+      - name: Baixar tokens gerados
+        uses: actions/download-artifact@v4
+        with:
+          name: generated-tokens
+          path: src/generated/
 
       - name: Build
         run: npm run build
