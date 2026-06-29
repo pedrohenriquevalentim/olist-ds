@@ -1118,7 +1118,12 @@ export const Icon = ({
   color,
   'aria-label': ariaLabel,
 }: IconProps) => {
-  const svgContent = icons[name];
+  const rawSvg = icons[name];
+  const svgContent = color === 'currentColor'
+    ? rawSvg
+        .replace(/fill="#[0-9A-Fa-f]{3,6}"/gi, 'fill="currentColor"')
+        .replace(/stroke="#[0-9A-Fa-f]{3,6}"/gi, 'stroke="currentColor"')
+    : rawSvg;
 
   if (!svgContent) {
     console.warn(`Icon "${name}" not found`);

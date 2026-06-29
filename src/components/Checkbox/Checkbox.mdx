@@ -1,0 +1,55 @@
+import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as CheckboxStories from './Checkbox.stories';
+
+<Meta of={CheckboxStories} />
+
+# Checkbox
+
+Controle de seleção binária ou indeterminada. Use para permitir que o usuário marque ou desmarque uma opção de forma independente.
+
+## Import
+
+```tsx
+import { Checkbox } from '@pedrohenriquevalentim/olist-ds';
+```
+
+## Uso básico
+
+```tsx
+const [checked, setChecked] = useState(false);
+
+<Checkbox
+  label="Aceitar termos de uso"
+  checked={checked}
+  onChange={(e) => setChecked(e.target.checked)}
+/>
+
+{/* Estado indeterminado — para "Selecionar todos" parcial */}
+<Checkbox
+  label="Selecionar todos"
+  checked={false}
+  isIndeterminate
+  onChange={toggleTodos}
+/>
+```
+
+## Playground
+
+<Canvas of={CheckboxStories.Playground} />
+<Controls of={CheckboxStories.Playground} />
+
+## Estados
+
+Enabled × (unchecked, checked, indeterminate) e disabled × (unchecked, checked, indeterminate).
+
+<Canvas of={CheckboxStories.Estados} />
+
+## Caso de uso — Selecionar todos
+
+Padrão comum em tabelas: o checkbox pai entra no estado indeterminado quando apenas parte dos filhos está selecionada.
+
+<Canvas of={CheckboxStories.GrupoSelecionarTodos} />
+
+## Props
+
+<ArgTypes of={CheckboxStories} />

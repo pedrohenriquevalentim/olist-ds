@@ -7,7 +7,7 @@ const meta: Meta<typeof Logo> = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
+
   argTypes: {
     size: {
       control: 'select',
@@ -40,8 +40,7 @@ type Story = StoryObj<typeof Logo>;
    Stories
    ============================ */
 
-export const Padrão: Story = {
-  name: 'Padrão (default)',
+export const Playground: Story = {
   args: {
     size: 'default',
   },

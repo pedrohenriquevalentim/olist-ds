@@ -1,0 +1,52 @@
+import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as IconStories from './Icon.stories';
+
+<Meta of={IconStories} />
+
+# Icon
+
+Biblioteca de ícones do Olist Design System. Todos os ícones são SVGs inline com suporte a `currentColor` para herdar cor via CSS.
+
+## Import
+
+```tsx
+import { Icon } from '@pedrohenriquevalentim/olist-ds';
+```
+
+## Uso básico
+
+```tsx
+{/* Tamanho e cor padrão */}
+<Icon name="check" size={24} />
+
+{/* Com cor explícita */}
+<Icon name="alert-circle" size={20} color="#E64E36" />
+
+{/* Herda cor do elemento pai (ideal em botões e inputs) */}
+<Icon name="search" size={16} color="currentColor" />
+```
+
+## Nomes disponíveis
+
+Use o sufixo `-fill` para a variante preenchida de cada ícone: `check` → `check-fill`, `alert` → `alert-fill`.
+
+## Playground
+
+<Canvas of={IconStories.Playground} />
+<Controls of={IconStories.Playground} />
+
+## Todos os ícones
+
+<Canvas of={IconStories.AllIcons} />
+
+## Tamanhos
+
+<Canvas of={IconStories.Sizes} />
+
+## Cores
+
+<Canvas of={IconStories.Colors} />
+
+## Props
+
+<ArgTypes of={IconStories} />

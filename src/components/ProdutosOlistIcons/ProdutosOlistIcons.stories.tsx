@@ -43,7 +43,7 @@ const meta: Meta<typeof ProdutosOlistIcons> = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
+
   argTypes: {
     product: {
       control: 'select',
@@ -74,8 +74,7 @@ const meta: Meta<typeof ProdutosOlistIcons> = {
 export default meta;
 type Story = StoryObj<typeof ProdutosOlistIcons>;
 
-export const Padrão: Story = {
-  name: 'Padrão',
+export const Playground: Story = {
   args: {
     product: 'Conta Digital',
     state: 'default',

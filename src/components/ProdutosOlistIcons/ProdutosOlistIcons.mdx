@@ -1,0 +1,52 @@
+import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ProdutosStories from './ProdutosOlistIcons.stories';
+
+<Meta of={ProdutosStories} />
+
+# ProdutosOlistIcons
+
+Ícones dos produtos Olist (Conta Digital, Ecommerce, Sistema ERP, etc.). Usados na sidebar de navegação em dois temas: `dark` e `light`.
+
+## Import
+
+```tsx
+import { ProdutosOlistIcons } from '@pedrohenriquevalentim/olist-ds';
+```
+
+## Uso básico
+
+```tsx
+{/* Sidebar escura — estado padrão */}
+<ProdutosOlistIcons product="Sistema ERP" theme="dark" state="default" />
+
+{/* Sidebar escura — item ativo (gradiente azul→teal) */}
+<ProdutosOlistIcons product="Sistema ERP" theme="dark" state="active" />
+
+{/* Fundo claro */}
+<ProdutosOlistIcons product="Ecommerce" theme="light" state="default" />
+```
+
+## Produtos disponíveis
+
+`Conta Digital` · `Crédito` · `Agentes de IA` · `Ecommerce` · `Sistema ERP` · `Envios` · `Sistema PDV` · `Hub de Integração`
+
+## Playground
+
+<Canvas of={ProdutosStories.Playground} />
+<Controls of={ProdutosStories.Playground} />
+
+## Todos os produtos — dark
+
+<Canvas of={ProdutosStories.TodosOsProdutos} />
+
+## Todos os produtos — light
+
+<Canvas of={ProdutosStories.TodosOsProdutosLight} />
+
+## Comparação dark vs light
+
+<Canvas of={ProdutosStories.ComparacaoTemas} />
+
+## Props
+
+<ArgTypes of={ProdutosStories} />

@@ -1,0 +1,58 @@
+import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as InputSearchStories from './InputSearch.stories';
+
+<Meta of={InputSearchStories} />
+
+# InputSearch
+
+Campo de busca com borda pill. Duas variantes de ação: botão com texto (`button`) ou apenas ícone (`button icon`).
+
+## Import
+
+```tsx
+import { InputSearch } from '@pedrohenriquevalentim/olist-ds';
+```
+
+## Uso básico
+
+```tsx
+const [value, setValue] = useState('');
+
+<InputSearch
+  action="button"
+  label="Pesquisar pedido"
+  placeholder="Digite o número do pedido"
+  value={value}
+  onChange={setValue}
+  onSearch={() => console.log('buscar:', value)}
+/>
+
+{/* Variante compacta com ícone */}
+<InputSearch
+  action="button icon"
+  placeholder="Buscar"
+  value={value}
+  onChange={setValue}
+/>
+```
+
+## Playground
+
+<Canvas of={InputSearchStories.Playground} />
+<Controls of={InputSearchStories.Playground} />
+
+## Variantes
+
+Botão com texto vs. botão ícone.
+
+<Canvas of={InputSearchStories.Variantes} />
+
+## Estados
+
+Enabled, preenchido, com suporte e disabled.
+
+<Canvas of={InputSearchStories.Estados} />
+
+## Props
+
+<ArgTypes of={InputSearchStories} />

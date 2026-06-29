@@ -1,0 +1,138 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="AI" />
+
+# AI no Olist Design System
+
+O DS disponibiliza uma skill para Claude Code que cobre todo o trabalho de UI — desde a geração de componentes a partir do Figma até a criação de telas completas a partir de PRDs.
+
+---
+
+## Skill disponível
+
+### `$olist-ds-specialist`
+
+Especialista em Product Design e Frontend da Olist. Cobre criação de telas, geração de componentes React, prototipação no Figma e manutenção do próprio DS.
+
+**Quando acionar automaticamente:** menção a interface Olist, design system, tokens, componentes, telas, layouts, SDD, PRD, protótipo, Figma, Storybook, copy, texto de botão, mensagem de erro, empty state, toast, label ou placeholder.
+
+---
+
+## Slash Commands
+
+Cada capacidade pode ser invocada explicitamente. O agente também aciona o caso correto automaticamente quando o contexto é reconhecido.
+
+| Comando | Uso | Para quem |
+|---|---|---|
+| `/ds-implementar` | `/ds-implementar <figma-url>` | Dev de BU: converte tela Figma em JSX tipado usando componentes DS |
+| `/ds-tela` | `/ds-tela <sdd-ou-prd>` | Dev de BU: gera tela React a partir de SDD/PRD |
+| `/ds-figma` | `/ds-figma <sdd-ou-prd>` | Designer/Dev: cria telas no Figma com instâncias reais do DS |
+| `/ds-componente` | `/ds-componente <figma-url>` | Mantenedor DS: gera novo componente DS completo (5 arquivos + docs Figma) |
+| `/ds-revisar` | `/ds-revisar` + código ou screenshot | Qualquer dev: revisa tela/código contra padrões DS |
+| `/ds-sync` | `/ds-sync` | Mantenedor DS: sincroniza inventário de componentes |
+
+---
+
+## O que cada comando faz
+
+### `/ds-implementar` — Figma de produto → JSX com componentes DS
+
+Para devs de BU que recebem uma tela do Figma e precisam implementá-la sem conhecer o inventário do DS de memória.
+
+```
+/ds-implementar https://www.figma.com/design/...?node-id=...
+```
+
+O que acontece:
+1. Lê a tela via Figma MCP e identifica cada elemento visual
+2. Mapeia elementos → componentes DS disponíveis (`Button`, `InputText`, `Chip`…)
+3. Busca as props reais de cada componente em `COMPONENTES.md`
+4. Gera JSX com imports corretos, props tipadas e tokens de espaçamento
+5. Sinaliza elementos sem equivalente DS com sugestão de token a usar
+
+---
+
+### `/ds-componente` — Figma de componente → novo componente DS
+
+Para o mantenedor do DS que precisa implementar um novo componente a partir do design.
+
+```
+/ds-componente https://www.figma.com/design/...?node-id=...
+```
+
+O que acontece:
+1. Lê metadados, contexto de design e screenshot via Figma MCP
+2. Gera 5 arquivos: `.tsx` · `.module.css` · `.test.tsx` · `.stories.tsx` · `index.ts`
+3. Em paralelo, gera frame de docs no Figma (demo · props · anatomia · acessibilidade)
+4. Valida contra screenshot antes de concluir
+
+---
+
+### `/ds-tela` — SDD/PRD → tela React
+
+```
+/ds-tela [cole o SDD ou PRD aqui]
+```
+
+Detecta automaticamente se o SDD é básico (só RFs) ou completo (com RNFs, DACI, Métricas, Rollout) e adapta o fluxo.
+
+---
+
+### `/ds-figma` — SDD/PRD → telas no Figma
+
+```
+/ds-figma [cole o SDD ou PRD aqui]
+```
+
+Lista todas as telas antes de criar, aguarda validação e entrega tela por tela com instâncias reais dos componentes DS.
+
+---
+
+### `/ds-revisar` — Revisão de tela
+
+```
+/ds-revisar [cole o código ou arraste o screenshot]
+```
+
+Verifica: componentes DS corretos, tokens de cor/tipografia/espaçamento, acessibilidade (WCAG AA), UX Writing (tom, copy, labels).
+
+---
+
+### `/ds-sync` — Sincronizar inventário
+
+```
+/ds-sync
+```
+
+Busca componentes publicados nas libraries Figma por ordem de prioridade e atualiza o inventário da skill.
+
+---
+
+## Regras que a skill segue
+
+| Regra | Detalhe |
+|---|---|
+| **Tokens** | Usa exclusivamente `var(--nome-do-token)` de `src/generated/variables.css`. Nunca valores hardcoded |
+| **Unidades** | `rem`, nunca `px` |
+| **Ícones** | Usa o componente `Icon` do DS com `color="currentColor"`. Nunca instala pacotes externos |
+| **Libraries Figma** | Sempre filtra por `searchPriority` do `figma-config.json`. Nunca usa `blockedLibraries` |
+| **Auto Layout** | Toda criação no Figma usa Auto Layout. Nunca posicionamento absoluto |
+| **Acessibilidade** | Todo elemento interativo tem `role` + `aria-label`. Contraste mínimo 4.5:1 |
+
+---
+
+## Fora do escopo
+
+A skill **não** cobre: backend, APIs, banco de dados, autenticação, regras de negócio, gerenciamento de estado sem relação com UI, performance sem impacto visual.
+
+---
+
+## Como invocar
+
+Em qualquer sessão Claude Code dentro do repositório:
+
+```
+/olist-ds-specialist
+```
+
+Ou simplesmente descreva a tarefa — a skill é acionada automaticamente quando o contexto é de UI/design system.

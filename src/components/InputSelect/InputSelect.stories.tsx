@@ -113,7 +113,7 @@ const meta: Meta<typeof InputSelect> = {
       },
     },
   },
-  tags: ['autodocs'],
+
   argTypes: {
     selectType: {
       control: 'select',
@@ -194,8 +194,7 @@ type Story = StoryObj<typeof InputSelect>;
    Stories
    ============================ */
 
-export const Padrão: Story = {
-  name: 'Padrão (single select)',
+export const Playground: Story = {
   render: (args) => <SingleWrapper {...args} />,
   args: {
     label: 'Estado',

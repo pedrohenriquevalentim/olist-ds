@@ -1,0 +1,50 @@
+import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as LogoStories from './Logo.stories';
+
+<Meta of={LogoStories} />
+
+# Logo
+
+Logotipo Olist em três variantes de tamanho. Use `default` em telas principais, `simple` em headers compactos e `symbol` em espaços reduzidos como favicons ou avatares.
+
+## Import
+
+```tsx
+import { Logo } from '@pedrohenriquevalentim/olist-ds';
+```
+
+## Uso básico
+
+```tsx
+{/* Logo completo */}
+<Logo size="default" />
+
+{/* Sem círculo laranja, redimensionável */}
+<Logo size="simple" />
+
+{/* Apenas o ícone */}
+<Logo size="symbol" />
+```
+
+## Playground
+
+<Canvas of={LogoStories.Playground} />
+<Controls of={LogoStories.Playground} />
+
+## Variantes
+
+`default`, `simple` e `symbol` lado a lado.
+
+<Canvas of={LogoStories.TodasVariantes} />
+
+## Sobre fundo escuro
+
+<Canvas of={LogoStories.SobreFundoEscuro} />
+
+## Símbolo em múltiplos tamanhos
+
+<Canvas of={LogoStories.SímboloEscalável} />
+
+## Props
+
+<ArgTypes of={LogoStories} />

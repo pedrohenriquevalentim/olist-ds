@@ -288,15 +288,26 @@ ${skillRefFiles.map(f => `- \`${f}\``).join('\n')}
 
 **Manuais** (não são sobrescritos): ${skillRefFiles.filter(f => !['COMPONENTES.md', 'MAPA_FONTES.md'].includes(f)).join(', ')}
 
-### Como Usar
+### Como Usar — Slash Commands
 
-**No Claude Code — implementar componente a partir do Figma:**
+| Comando | Para quem | O que faz |
+|---|---|---|
+| \`/ds-implementar <figma-url>\` | Dev de BU | Converte tela Figma em JSX com componentes DS |
+| \`/ds-tela <sdd-ou-prd>\` | Dev de BU | Gera tela React a partir de SDD/PRD |
+| \`/ds-figma <sdd-ou-prd>\` | Designer/Dev | Cria telas no Figma com instâncias reais DS |
+| \`/ds-componente <figma-url>\` | Mantenedor DS | Gera novo componente DS completo (5 arquivos + docs) |
+| \`/ds-revisar\` | Qualquer dev | Revisa tela/código contra padrões DS |
+| \`/ds-sync\` | Mantenedor DS | Sincroniza inventário de componentes das libraries |
+
+**No Claude Code — exemplos:**
 \`\`\`
-Use $olist-ds-specialist para implementar este componente:
-https://www.figma.com/design/XXXX/YYYY?node-id=123:456
+/ds-implementar https://www.figma.com/design/XXXX/YYYY?node-id=123:456
+/ds-componente https://www.figma.com/design/XXXX/YYYY?node-id=123:456
+/ds-tela [COLAR O SDD]
+/ds-revisar [COLAR O CÓDIGO]
 \`\`\`
 
-**No Claude Code — criar tela a partir de SDD:**
+**Ou invocar por descrição (detecção automática):**
 \`\`\`
 Use $olist-ds-specialist para criar a tela deste SDD:
 [COLAR O SDD]
@@ -305,7 +316,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 **No Claude.ai (sem terminal):**
 1. Settings → Connectors → Figma → Connect
 2. Customize → Skills → Upload → selecionar pasta da skill
-3. Iniciar conversa e colar o SDD ou link do Figma
+3. Iniciar conversa e usar um dos slash commands acima
 
 ### Regras Críticas v${skillVersion}
 

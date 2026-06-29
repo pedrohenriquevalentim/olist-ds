@@ -1,0 +1,60 @@
+import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as InputTextStories from './InputText.stories';
+
+<Meta of={InputTextStories} />
+
+# InputText
+
+Campo de texto de linha única. Suporta label, ícone de lead, tooltip, texto de suporte e estados de validação.
+
+## Import
+
+```tsx
+import { InputText } from '@pedrohenriquevalentim/olist-ds';
+```
+
+## Uso básico
+
+```tsx
+const [value, setValue] = useState('');
+
+<InputText
+  label="E-mail"
+  placeholder="seu@email.com"
+  value={value}
+  onChange={setValue}
+  hasSupport
+  supportText="Use seu e-mail corporativo"
+/>
+
+{/* Com estado de erro */}
+<InputText
+  label="E-mail"
+  value={value}
+  onChange={setValue}
+  isError
+  hasSupport
+  supportText="E-mail inválido"
+/>
+```
+
+## Playground
+
+<Canvas of={InputTextStories.Playground} />
+<Controls of={InputTextStories.Playground} />
+
+## Estados
+
+Enabled, preenchido, success, error e disabled.
+
+<Canvas of={InputTextStories.Estados} />
+
+## Variantes
+
+Com ícone de lead, com tooltip e combinações.
+
+<Canvas of={InputTextStories.Variantes} />
+
+## Props
+
+<ArgTypes of={InputTextStories} />

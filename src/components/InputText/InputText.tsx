@@ -1,5 +1,6 @@
 import React, { useId } from 'react';
 import styles from './InputText.module.css';
+import { Icon } from '../Icon';
 
 export interface InputTextProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   /** Texto do label acima do campo */
@@ -70,7 +71,7 @@ export const InputText = ({
           </label>
           {hasTooltip && (
             <div className={styles.tooltipWrapper} role="tooltip" aria-label={tooltipText}>
-              <TooltipIcon />
+              <Icon name="help-circle" size={16} color="currentColor" />
             </div>
           )}
         </div>
@@ -109,25 +110,3 @@ export const InputText = ({
     </div>
   );
 };
-
-function TooltipIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <circle cx="8" cy="8" r="6.5" stroke="currentColor" strokeWidth="1.5" />
-      <path
-        d="M8 7.25V11"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <circle cx="8" cy="5" r="0.75" fill="currentColor" />
-    </svg>
-  );
-}

@@ -9,6 +9,7 @@ import React, {
 } from 'react';
 import styles from './InputSelect.module.css';
 import { Checkbox } from '../Checkbox';
+import { Icon } from '../Icon';
 
 // ── Tipos públicos ─────────────────────────────────────────────────────────
 
@@ -82,33 +83,30 @@ interface ChipProps {
 }
 
 const Chip = ({ label, onRemove, removeIcon, disabled }: ChipProps) => {
-  const defaultRemoveIcon = (
-    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path
-        d="M4 4l8 8M12 4l-8 8"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
+  const defaultRemoveIcon = <Icon name="close" size={16} color="currentColor" />;
 
   return (
     <span className={styles.chip}>
       <span className={styles.chipLabel}>{label}</span>
       {!disabled && (
-        <button
-          type="button"
+        <span
+          role="button"
           className={styles.chipRemove}
           onClick={(e) => {
             e.stopPropagation();
             onRemove();
           }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.stopPropagation();
+              onRemove();
+            }
+          }}
           aria-label={`Remover ${label}`}
           tabIndex={-1}
         >
           {removeIcon ?? defaultRemoveIcon}
-        </button>
+        </span>
       )}
     </span>
   );
@@ -319,41 +317,11 @@ export const InputSelect = (props: InputSelectProps) => {
     .join(' ');
 
   // ── Ícones padrão ────────────────────────────────────────────────────────
-  const defaultChevron = (
-    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path
-        d={isOpen ? 'M12 10L8 6l-4 4' : 'M4 6l4 4 4-4'}
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
+  const defaultChevron = <Icon name={isOpen ? 'chevron-top' : 'chevron-down'} size={16} color="currentColor" />;
 
-  const defaultCheck = (
-    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path
-        d="M3 8l4 4 6-6"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
+  const defaultCheck = <Icon name="check" size={16} color="currentColor" />;
 
-  const defaultTooltip = (
-    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5" />
-      <path
-        d="M8 7v4M8 5.5v.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
+  const defaultTooltip = <Icon name="help-circle" size={16} color="currentColor" />;
 
   return (
     <div
