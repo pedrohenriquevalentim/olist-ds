@@ -2,266 +2,47 @@
 
 Skill corporativa para criação de telas, componentes e protótipos a partir de SDDs/PRDs usando o design system da Olist.
 
-## Novidades v3.7 (2026-06-28)
+## Novidades v3.8 (2026-06-29)
+
+- **Slash Commands:** 6 skills finas criadas em `.claude/skills/ds-*/` — `/ds-implementar`, `/ds-tela`, `/ds-figma`, `/ds-componente`, `/ds-revisar`, `/ds-sync` — cada uma delega ao caso correspondente da skill principal
+- **Caso 8 (`/ds-implementar`):** novo fluxo para devs de BU converterem telas Figma em JSX tipado usando componentes DS, sem precisar conhecer o inventário de memória
+- **Fluxo de Decisão:** roteamento explícito por slash command adicionado antes da detecção automática de intenção
+- **`generate-wiki.mjs`:** seção "Como Usar" atualizada com tabela de slash commands
+- **`package.json`:** `ship` corrigido para incluir `.storybook/`, `README.md` e `package.json` no `git add`
+
+## Novidades v3.8 (2026-06-29)
+
+- **Slash Commands:** 6 skills finas criadas em `.claude/skills/ds-*/` — `/ds-implementar`, `/ds-tela`, `/ds-figma`, `/ds-componente`, `/ds-revisar`, `/ds-sync` — cada uma delega ao caso correspondente da skill principal
+- **Caso 8 (`/ds-implementar`):** novo fluxo para devs de BU converterem telas Figma em JSX tipado usando componentes DS, sem precisar conhecer o inventário de memória
+- **Fluxo de Decisão:** roteamento explícito por slash command adicionado antes da detecção automática de intenção
+- **`generate-wiki.mjs`:** seção "Como Usar" atualizada com tabela de slash commands
+- **`package.json`:** `ship` corrigido para incluir `.storybook/`, `README.md` e `package.json` no `git add`
+
+## Novidades v3.7 (2026-06-25)
 
 - **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
 - `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
-- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
 - Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
-
-## Novidades v3.7 (2026-06-28)
-
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
-- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
-- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
-- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
-
-## Novidades v3.7 (2026-06-28)
-
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
-- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
-- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
-- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
-
-## Novidades v3.7 (2026-06-27)
-
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
-- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
-- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
-- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
-
-## Novidades v3.7 (2026-06-27)
-
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
-- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
-- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
-- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
-
-## Novidades v3.7 (2026-06-27)
-
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
-- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
-- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
-- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
-
-## Novidades v3.7 (2026-06-27)
-
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
-- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
-- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
-- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
-
-## Novidades v3.7 (2026-06-27)
-
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
-- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
-- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
-- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
-
-## Novidades v3.7 (2026-06-27)
-
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
-- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
-- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
-- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
-
-## Novidades v3.7 (2026-06-27)
-
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
-- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
-- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
-- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
-
-## Novidades v3.7 (2026-06-27)
-
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
-- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
-- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
-- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
-
-## Novidades v3.7 (2026-06-27)
-
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
-- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
-- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
-- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
-
-## Novidades v3.7 (2026-06-27)
-
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
-- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
-- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
-- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
-
-## Novidades v3.7 (2026-06-27)
-
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
-- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
-- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
-- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
-
-## Novidades v3.7 (2026-06-27)
-
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
-- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
-- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
-- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
-
-## Novidades v3.7 (2026-06-26)
-
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
-- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
-- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
-- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
-
-## Novidades v3.7 (2026-06-26)
-
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
-- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
-- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
-- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
-
-## Novidades v3.7 (2026-06-26)
-
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
-- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
-- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
-- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
-
-## Novidades v3.7 (2026-06-26)
-
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
-- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
-- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
-- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
-
-## Novidades v3.7 (2026-06-26)
-
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
-- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
-- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
-- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
-
-## Novidades v3.7 (2026-06-26)
-
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
-- `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
-- `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
-- Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
-
-## Novidades v3.6 (2026-06-25)
-
-- Arquivos da skill modificados: SKILL.md, CHANGELOG.md, README.md, SETUP.md, component-registry.json, decisions/CHANGELOG.md, decisions/INDEX.md, decisions/technical/ACESSIBILIDADE.md, decisions/technical/ASSETS_FIGMA.md, decisions/technical/COMPONENTES_REACT.md, decisions/technical/ICONES.md, decisions/technical/TOKENS.md, decisions/ux-design/ESPACAMENTO_LAYOUT.md, decisions/ux-design/FLUXO_PRD_FIGMA.md, decisions/ux-design/PRINCIPIOS.md, decisions/ux-design/TIPOGRAFIA.md, decisions/ux-design/UX_WRITING.md, figma-config.json, references/CHECKLIST_REVISAO.md, references/COMPONENTES.md, references/CORES.md, references/ESPACAMENTO.md, references/FIGMA_CONFIG.md, references/GLOSSARIO_PAPEIS_TEXTO.md, references/HARNEES_TELAS.md, references/MAPA_FONTES.md, references/PADROES.md, references/SDD_AVANCADO.md, references/SDD_PARA_TELA.md, references/TEMPLATES_PRODUTO.md, references/TIPOGRAFIA.md, references/UX_WRITING.md, references/VISAO_GERAL.md
-- Outros arquivos: claude/skills/olist-ds-specialist/CHANGELOG.md
-
-## Novidades v3.6 (2026-06-25)
-
-- Arquivos da skill modificados: SKILL.md, CHANGELOG.md, README.md, SETUP.md, component-registry.json, decisions/CHANGELOG.md, decisions/INDEX.md, decisions/technical/ACESSIBILIDADE.md, decisions/technical/ASSETS_FIGMA.md, decisions/technical/COMPONENTES_REACT.md, decisions/technical/ICONES.md, decisions/technical/TOKENS.md, decisions/ux-design/ESPACAMENTO_LAYOUT.md, decisions/ux-design/FLUXO_PRD_FIGMA.md, decisions/ux-design/PRINCIPIOS.md, decisions/ux-design/TIPOGRAFIA.md, decisions/ux-design/UX_WRITING.md, figma-config.json, references/CHECKLIST_REVISAO.md, references/COMPONENTES.md, references/CORES.md, references/ESPACAMENTO.md, references/FIGMA_CONFIG.md, references/GLOSSARIO_PAPEIS_TEXTO.md, references/HARNEES_TELAS.md, references/MAPA_FONTES.md, references/PADROES.md, references/SDD_AVANCADO.md, references/SDD_PARA_TELA.md, references/TEMPLATES_PRODUTO.md, references/TIPOGRAFIA.md, references/UX_WRITING.md, references/VISAO_GERAL.md
-- Outros arquivos: claude/skills/olist-ds-specialist/CHANGELOG.md
-
-## Novidades v3.6 (2026-06-23)
-
-- Arquivos da skill modificados: SKILL.md, CHANGELOG.md, README.md, SETUP.md, component-registry.json, decisions/CHANGELOG.md, decisions/INDEX.md, decisions/technical/ACESSIBILIDADE.md, decisions/technical/ASSETS_FIGMA.md, decisions/technical/COMPONENTES_REACT.md, decisions/technical/ICONES.md, decisions/technical/TOKENS.md, decisions/ux-design/ESPACAMENTO_LAYOUT.md, decisions/ux-design/FLUXO_PRD_FIGMA.md, decisions/ux-design/PRINCIPIOS.md, decisions/ux-design/TIPOGRAFIA.md, decisions/ux-design/UX_WRITING.md, figma-config.json, references/CHECKLIST_REVISAO.md, references/COMPONENTES.md, references/CORES.md, references/ESPACAMENTO.md, references/FIGMA_CONFIG.md, references/GLOSSARIO_PAPEIS_TEXTO.md, references/HARNEES_TELAS.md, references/MAPA_FONTES.md, references/PADROES.md, references/SDD_AVANCADO.md, references/SDD_PARA_TELA.md, references/TEMPLATES_PRODUTO.md, references/TIPOGRAFIA.md, references/UX_WRITING.md, references/VISAO_GERAL.md
-- Outros arquivos: claude/skills/olist-ds-specialist/CHANGELOG.md
-
-## Novidades v3.5 (2026-06-23) 
-
-- Sincronização geral de todos os arquivos da skill após reestruturação interna
-- Todos os arquivos de `decisions/` e `references/` revisados e atualizados
-
-## Novidades v3.4 (2026-06-23)
-
-- Atualização incremental interna sem mudanças funcionais
 
 ## Novidades v3.3 (2026-06-23)
 
-- Criação da pasta `decisions/` com 10 arquivos de decisão organizados por tema:
-  - `technical/TOKENS.md` — regras de consumo de tokens CSS e unidades rem
-  - `technical/COMPONENTES_REACT.md` — convenções de estrutura, props e testes
-  - `technical/ICONES.md` — ReactNode, currentColor, sem pacotes externos
-  - `technical/ACESSIBILIDADE.md` — roles ARIA, navegação por teclado, WCAG AA
-  - `technical/ASSETS_FIGMA.md` — fluxo Figma MCP, identificadores, declaração SVG
-  - `ux-design/PRINCIPIOS.md` — 4 princípios de design Olist e identidade visual
-  - `ux-design/ESPACAMENTO_LAYOUT.md` — grid 4px, 5 padrões de página, estrutura de tela
-  - `ux-design/TIPOGRAFIA.md` — escala tipográfica, 10 papéis de texto
-  - `ux-design/FLUXO_PRD_FIGMA.md` — hierarquia de bibliotecas, busca e regras de build
-  - `ux-design/UX_WRITING.md` — tom B2B, regras por tipo de texto
+- Criação da pasta `decisions/` com 10 arquivos de decisão organizados por tema
 - `decisions/INDEX.md` criado como índice navegável
-- `sync-skill-meta.mjs` atualizado para varrer `decisions/` ao renomear referências
 
 ## Novidades v3.2 (2026-06-15)
 
-- **UX Writing:** `UX_WRITING.md` adicionado como referência de copy e tom de voz (fonte: skill CX Writing v2.0)
+- **UX Writing:** `UX_WRITING.md` adicionado como referência de copy e tom de voz
 - Novo ramo no Fluxo de Decisão para "Criar ou revisar textos de UI"
-- Seção 10 adicionada ao `CHECKLIST_REVISAO.md` com 18 itens de revisão de UX Writing
-- Regra crítica 5 no `SKILL.md`: consultar `UX_WRITING.md` ao criar qualquer texto na UI
-- `VISAO_GERAL.md` atualizado: 15 referências, nova entrada `UX_WRITING.md`, novo bloco de leitura para copy/UX Writing
-- Protocolo de triagem obrigatório: componente → contexto → objetivo antes de qualquer copy
-- 4 Pilares de Conteúdo como critério de validação (Conciso, Claro, Significativo, Dialógico)
-- 12 tipos de texto mapeados com regras DO/DON'T, limites de caracteres e tokens visuais
-- Diretrizes B2B (lojista) vs. B2C (consumidor) com linguagem e tom distintos
-- Iniciativa de abrasileiramento documentada (sem hífen, termos técnicos contextualizados, sem termos internos externamente)
-- Nomenclatura de produtos Olist (primeira menção + menções posteriores)
-- Mapeamento SDD → tipo de texto para tradução de requisitos em copy
-- `SKILL.md` atualizado para v3.2
+- 4 Pilares de Conteúdo, 12 tipos de texto, diretrizes B2B/B2C
 
 ## Novidades v3.1 (2026-06-05)
 
-### Harness de construção de telas (`HARNESS_TELAS.md`):
-- Gate pré-construção obrigatório com 6 itens binários — Claude só avança se todos aprovados
-- Restrições binárias por zona (A–E) para ERP e Envios/Hub/Conta Digital
-- Limites quantitativos por componente (ex: máx 1 `Button` primary por tela, máx 1 `Heading` por tela)
-- Tabela de contextos válidos e proibidos por componente
-- Harness de primitivos: define o que pode ser construído do zero e configuração obrigatória
-- Padrão de nomenclatura de layers obrigatório com formato e exemplos
-- Estados mínimos obrigatórios por padrão de página (Tabela, Form, Dashboard, Detalhe, Empty State)
-- Regras específicas para skeleton loading
-- Formato padronizado para reportar conflitos com o harness (Seção 8)
-- `SKILL.md` atualizado para v3.1: harness integrado no fluxo de decisão, tabela de referências e Caso 4
+- `HARNESS_TELAS.md` adicionado como gate pré-construção obrigatório no Figma
 
 ## Novidades v3.0 (2026-06-03)
 
-### Workflow use_figma (canal único de entrega):
-- Remoção do workflow de plugin JSON intermediário — `use_figma` como canal único
-- Telas construídas diretamente no Figma via `use_figma` MCP com instâncias reais de componentes DS
-- `search_design_system` com `includeLibraryKeys` filtra às 5 libraries autorizadas
-- `importComponentSetByKeyAsync` traz componentes reais (Menu ERP, Button, Tags, etc.)
-- Workflow faseado: tela por tela com screenshot + feedback a cada entrega
-- Caso de uso 5: componente não existe no inventário → construir com primitivos + documentar
-- Caso de uso 6: sincronizar inventário de componentes
-
-### Libraries como fonte da verdade:
-- `figma-config.json` agora usa `libraryKey` (formato `lk-...`) em vez de `fileKey`
-- **AI Components** como library master com preferência absoluta sobre ERP components
-- 5 libraries em ordem de prioridade; 3 libraries bloqueadas
-- `search_design_system` sempre filtrado por `searchPriority`
-- TEMPLATES_PRODUTO.md adicionado (zonas de layout por produto: ERP, Envios, Hub, Conta Digital)
-
-### Regras da Figma Plugin API documentadas:
-- `layoutSizing` definido após `appendChild`
-- Valores válidos de `counterAxisAlignItems`: MIN MAX CENTER BASELINE
-- Textos em cards: `textAutoResize='HEIGHT'` + `layoutSizingHorizontal='FILL'`
-
-## Novidades v2.1 (2026-05-07)
-
-- `figma-config.example.json` adicionado à skill (compartilhável sem credenciais)
-- `FIGMA_CONFIG.md` como 12º arquivo de referência
-- Instrução para ler `figma-config.json` antes de qualquer chamada ao Figma MCP
-- `sync-skill.mjs` atualizado para v2.1
-- `generate-wiki.mjs` criado
-
-## Novidades v2.0 (2026-05-04)
-
-- `GLOSSARIO_PAPEIS_TEXTO.md` — 10 papéis de texto (Heading, Label, Error, etc.)
-- `SDD_AVANCADO.md` — RNFs, DACI, Métricas, Rollout e Observabilidade → UI
-- Workflow faseado no Figma (tela por tela com feedback)
-- Sistema de ícones centralizado via `currentColor`
-- `sync-skill.mjs` para auto-geração de referências
-- `validate-icon-migration.mjs` para validação de migração
-
-## Novidades v1.0
-
-- Versão inicial da skill com 8 arquivos de referência
+- Canal de entrega migrado para `use_figma` direto com instâncias DS reais
+- `figma-config.json` migrado de `fileKey` para `libraryKey`; AI Components como master
 
 ## Estrutura
 
@@ -321,109 +102,62 @@ olist-ds-specialist/
 
 ## Instalação
 
-### Opção 1: Script automático
+### Claude Code (recomendado)
 ```bash
-unzip olist-ds-kit.zip && cd olist-ds-kit && bash setup.sh
+# A skill viaja com o repositório — só clonar já é suficiente
+git clone <repo>
 ```
 
-### Opção 2: Claude Code
+### Claude.ai web
 ```bash
-mkdir -p .claude/skills
-cp -r olist-ds-specialist/ .claude/skills/olist-ds-specialist/
+cd .claude/skills && zip -r olist-ds-specialist.zip olist-ds-specialist/
 ```
-
-### Opção 3: Claude.ai
-Settings → Customize → Skills → Upload pasta.
+Settings → Customize → Skills → Upload `olist-ds-specialist.zip`
 
 ## Uso
 
-### Criar tela no Figma (workflow principal)
+### Slash Commands (Claude Code CLI)
+
+| Comando | Para quem | O que faz |
+|---|---|---|
+| `/ds-implementar <figma-url>` | Dev de BU | Converte tela Figma em JSX com componentes DS |
+| `/ds-tela <sdd-ou-prd>` | Dev de BU | Gera tela React a partir de SDD/PRD |
+| `/ds-figma <sdd-ou-prd>` | Designer/Dev | Cria telas no Figma com instâncias reais DS |
+| `/ds-componente <figma-url>` | Mantenedor DS | Gera novo componente DS completo (5 arquivos + docs) |
+| `/ds-revisar` | Qualquer dev | Revisa tela/código contra padrões DS |
+| `/ds-sync` | Mantenedor DS | Sincroniza inventário de componentes |
+
+### Por descrição (Claude Code e Claude.ai)
 ```
 Use $olist-ds-specialist para criar UI no Figma:
 [SDD aqui]
-```
-Claude executa o gate do harness → busca componentes nas libraries autorizadas → importa instâncias reais → constrói via `use_figma` → retorna screenshot + link.
-
-### Criar tela React
-```
-Use $olist-ds-specialist para criar a tela deste SDD:
-[SDD aqui]
-```
-
-### Revisar UI existente
-```
-Use $olist-ds-specialist para revisar esta tela:
-[código ou screenshot]
-```
-
-### Sincronizar inventário de componentes
-```
-Sincronize o registry de componentes
 ```
 
 ## Changelog
 
 ### v3.8 (2026-06-29)
-- Versão 3.8
+- Slash Commands: 6 skills finas (`ds-*`) + Caso 8 (`/ds-implementar`) + roteamento no Fluxo de Decisão
 
-### v3.7 (2026-06-26)
-- Versão 3.7
+### v3.7 (2026-06-25)
+- Fluxo unificado Figma → código + docs (Caso 7)
 
 ### v3.6 (2026-06-23)
-- Arquivos da skill modificados: SKILL.md, CHANGELOG.md, README.md, SETUP.md, component-registry.json, decisions/CHANGELOG.md, decisions/INDEX.md, decisions/technical/ACESSIBILIDADE.md, decisions/technical/ASSETS_FIGMA.md, decisions/technical/COMPONENTES_REACT.md, decisions/technical/ICONES.md, decisions/technical/TOKENS.md, decisions/ux-design/ESPACAMENTO_LAYOUT.md, decisions/ux-design/FLUXO_PRD_FIGMA.md, decisions/ux-design/PRINCIPIOS.md, decisions/ux-design/TIPOGRAFIA.md, decisions/ux-design/UX_WRITING.md, figma-config.json, references/CHECKLIST_REVISAO.md, references/COMPONENTES.md, references/CORES.md, references/ESPACAMENTO.md, references/FIGMA_CONFIG.md, references/GLOSSARIO_PAPEIS_TEXTO.md, references/HARNEES_TELAS.md, references/MAPA_FONTES.md, references/PADROES.md, references/SDD_AVANCADO.md, references/SDD_PARA_TELA.md, references/TEMPLATES_PRODUTO.md, references/TIPOGRAFIA.md, references/UX_WRITING.md, references/VISAO_GERAL.md
-- Outros arquivos: claude/skills/olist-ds-specialist/CHANGELOG.md
-
-### v3.5 (2026-06-23)
-- Arquivos da skill modificados: CHANGELOG.md, README.md, SETUP.md, SKILL.md, component-registry.json, decisions/CHANGELOG.md, decisions/INDEX.md, decisions/technical/ACESSIBILIDADE.md, decisions/technical/ASSETS_FIGMA.md, decisions/technical/COMPONENTES_REACT.md, decisions/technical/ICONES.md, decisions/technical/TOKENS.md, decisions/ux-design/ESPACAMENTO_LAYOUT.md, decisions/ux-design/FLUXO_PRD_FIGMA.md, decisions/ux-design/PRINCIPIOS.md, decisions/ux-design/TIPOGRAFIA.md, decisions/ux-design/UX_WRITING.md, figma-config.json, references/CHECKLIST_REVISAO.md, references/COMPONENTES.md, references/CORES.md, references/ESPACAMENTO.md, references/FIGMA_CONFIG.md, references/GLOSSARIO_PAPEIS_TEXTO.md, references/HARNEES_TELAS.md, references/MAPA_FONTES.md, references/PADROES.md, references/SDD_AVANCADO.md, references/SDD_PARA_TELA.md, references/TEMPLATES_PRODUTO.md, references/TIPOGRAFIA.md, references/UX_WRITING.md, references/VISAO_GERAL.md
-
-### v3.4 (2026-06-23)
-- Arquivos da skill modificados:
+- Sincronização geral após reestruturação interna
 
 ### v3.3 (2026-06-23)
-- Arquivos da skill modificados: README.md
-- Decisões de design atualizadas: decisions/CHANGELOG.md
-- Outros arquivos: claude/decisions/INDEX.md
+- Pasta `decisions/` com 10 arquivos de decisão
 
 ### v3.2 (2026-06-15)
-- **UX Writing:** `UX_WRITING.md` adicionado como referência de copy e tom de voz (fonte: skill CX Writing v2.0)
-- Novo ramo no Fluxo de Decisão para "Criar ou revisar textos de UI"
-- Seção 10 adicionada ao `CHECKLIST_REVISAO.md` com 18 itens de revisão de UX Writing
-- Regra crítica 5 no `SKILL.md`: consultar `UX_WRITING.md` ao criar qualquer texto na UI
-- `VISAO_GERAL.md` atualizado: 15 referências, nova entrada `UX_WRITING.md`, novo bloco de leitura para copy/UX Writing
-- Protocolo de triagem obrigatório: componente → contexto → objetivo antes de qualquer copy
-- 4 Pilares de Conteúdo como critério de validação (Conciso, Claro, Significativo, Dialógico)
-- 12 tipos de texto mapeados com regras DO/DON'T, limites de caracteres e tokens visuais
-- Diretrizes B2B (lojista) vs. B2C (consumidor) com linguagem e tom distintos
-- Iniciativa de abrasileiramento documentada (sem hífen, termos técnicos contextualizados, sem termos internos externamente)
-- Nomenclatura de produtos Olist (primeira menção + menções posteriores)
-- Mapeamento SDD → tipo de texto para tradução de requisitos em copy
-- `SKILL.md` atualizado para v3.2
+- UX Writing: protocolo, 4 pilares, 12 tipos de texto, B2B/B2C
 
 ### v3.1 (2026-06-05)
-- **Harness:** `HARNESS_TELAS.md` adicionado como gate pré-construção obrigatório no Figma
-- Gate com 6 itens binários executados antes de qualquer frame
-- Restrições de zona, componente, primitivo, nomenclatura e estados por padrão de página
-- 14 arquivos de referência ativos
+- HARNESS_TELAS.md como gate pré-construção obrigatório
 
 ### v3.0 (2026-06-03)
-- **Canal de entrega:** `use_figma` direto com instâncias DS reais (plugin intermediário descontinuado)
-- **Libraries:** `figma-config.json` migrado de `fileKey` para `libraryKey`; AI Components como master
-- **Busca:** `search_design_system` sempre com `includeLibraryKeys: searchPriority`
-- **Regras Figma Plugin API:** documentadas em SKILL.md (layoutSizing, counterAxisAlignItems, etc.)
-- Removido: `screen-spec-schema.json`, plugin Screen Builder, modo JSON econômico
-- 13 arquivos de referência ativos
-
-### v2.2 (2026-06-03)
-- Modo JSON para plugin Figma (econômico)
-- component-registry.json, screen-spec-schema.json
-- TEMPLATES_PRODUTO.md (zonas de layout por produto)
-
-### v2.1 (2026-05-19)
-- FIGMA_CONFIG.md, SETUP.md
+- Canal de entrega: `use_figma` direto; libraryKeys; AI Components como master
 
 ### v2.0 (2026-05-04)
-- GLOSSARIO_PAPEIS_TEXTO.md, SDD_AVANCADO.md
-- Workflow faseado no Figma
+- GLOSSARIO_PAPEIS_TEXTO.md, SDD_AVANCADO.md, workflow faseado
 
 ### v1.0 (2026-01-12)
 - Release inicial

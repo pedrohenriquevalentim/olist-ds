@@ -1,6 +1,6 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.54`  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.55`  
 **Skill:** v3.8  
 **Última atualização:** 2026-06-29  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
@@ -36,7 +36,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Ícones SVG | 550 |
 | Arquivos da Skill | 21 |
 | Arquivos Figma permitidos | 5 |
-| Versão npm | 1.0.54 |
+| Versão npm | 1.0.55 |
 | Versão skill | 3.8 |
 
 ## Componentes
@@ -398,6 +398,13 @@ npm install --save-dev PACOTE --legacy-peer-deps
 4. O prompt inclui instrução para ler `figma-config.json` antes do Figma MCP?
 
 ## Changelog
+
+## v3.8 (2026-06-29)
+- **Slash Commands:** 6 skills finas criadas em `.claude/skills/ds-*/` — `/ds-implementar`, `/ds-tela`, `/ds-figma`, `/ds-componente`, `/ds-revisar`, `/ds-sync` — cada uma delega ao caso correspondente da skill principal
+- **Caso 8 (`/ds-implementar`):** novo fluxo para devs de BU converterem telas Figma em JSX tipado usando componentes DS, sem precisar conhecer o inventário de memória
+- **Fluxo de Decisão:** roteamento explícito por slash command adicionado antes da detecção automática de intenção
+- **`generate-wiki.mjs`:** seção "Como Usar" atualizada com tabela de slash commands
+- **`package.json`:** `ship` corrigido para incluir `.storybook/`, `README.md` e `package.json` no `git add`
 
 ## v3.7 (2026-06-25)
 - **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
