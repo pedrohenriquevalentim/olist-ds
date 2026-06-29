@@ -9,5 +9,5 @@ storybook-static/
 .claude/worktrees/
 
 # Skill do design system (NÃO ignorar — deve ser commitada)
-!.claude/skills/olist-ds-specialist-v2/
+!.claude/skills/olist-ds-specialist/
 
