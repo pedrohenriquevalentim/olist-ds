@@ -12,7 +12,7 @@ const meta: Meta<typeof Checkbox> = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
+
   argTypes: {
     label: {
       control: 'text',
@@ -53,137 +53,18 @@ type Story = StoryObj<typeof Checkbox>;
    Stories
    ============================ */
 
-export const Padrão: Story = {
-  name: 'Padrão',
+export const Playground: Story = {
   args: {
     label: 'Label text',
   },
 };
 
-export const Marcado: Story = {
-  name: 'Marcado',
-  render: (args) => {
-    const [checked, setChecked] = useState(true);
-    return (
-      <Checkbox
-        {...args}
-        label="Opção selecionada"
-        checked={checked}
-        onChange={(e) => setChecked(e.target.checked)}
-      />
-    );
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Estado marcado. O ícone de check branco aparece sobre o fundo azul primário (`--checkbox-color-selected`).',
-      },
-    },
-  },
-};
-
-export const Indeterminado: Story = {
-  name: 'Indeterminado',
-  args: {
-    label: 'Seleção parcial',
-    isIndeterminate: true,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Estado indeterminado — usado tipicamente em "Selecionar todos" quando apenas parte dos itens da lista está selecionada. Define `aria-checked="mixed"` para tecnologias assistivas.',
-      },
-    },
-  },
-};
-
-export const Desabilitado: Story = {
-  name: 'Desabilitado',
-  args: {
-    label: 'Opção indisponível',
-    disabled: true,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Estado desabilitado. Cursor `not-allowed`, borda e label em cinza (`--checkbox-border-color-disabled`, `--text-label-color-disabled`).',
-      },
-    },
-  },
-};
-
-export const DesabilitadoMarcado: Story = {
-  name: 'Desabilitado + marcado',
-  render: () => <Checkbox label="Obrigatório (somente leitura)" disabled checked onChange={() => {}} />,
-  parameters: {
-    docs: {
-      description: {
-        story: 'Valor pré-marcado que o usuário não pode alterar — ex.: campo obrigatório ou permissão concedida por padrão.',
-      },
-    },
-  },
-};
-
-export const DesabilitadoIndeterminado: Story = {
-  name: 'Desabilitado + indeterminado',
-  args: {
-    label: 'Seleção parcial bloqueada',
-    disabled: true,
-    isIndeterminate: true,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Estado desabilitado com valor indeterminado. Fundo usa `--checkbox-color-disabled` e ícone herda `--checkbox-shape-color-disabled`.',
-      },
-    },
-  },
-};
-
-export const SemLabel: Story = {
-  name: 'Sem label (somente checkbox)',
-  args: {
-    'aria-label': 'Selecionar item',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Checkbox sem label visível. Use `aria-label` para garantir nome acessível quando o contexto visual já identifica o campo.',
-      },
-    },
-  },
-};
-
-export const Controlado: Story = {
-  name: 'Controlado (toggle interativo)',
-  render: () => {
-    const [checked, setChecked] = useState(false);
-    return (
-      <Checkbox
-        label={checked ? 'Marcado ✓' : 'Desmarcado'}
-        checked={checked}
-        onChange={(e) => setChecked(e.target.checked)}
-      />
-    );
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Exemplo de uso controlado com estado React. Clique para alternar entre marcado e desmarcado.',
-      },
-    },
-  },
-};
-
-export const TodosOsEstados: Story = {
-  name: 'Todos os estados',
+export const Estados: Story = {
   render: () => {
     const [c1, setC1] = useState(false);
     const [c2, setC2] = useState(true);
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
         <Checkbox label="Desmarcado — enabled" checked={c1} onChange={(e) => setC1(e.target.checked)} />
         <Checkbox label="Marcado — enabled" checked={c2} onChange={(e) => setC2(e.target.checked)} />
         <Checkbox label="Indeterminado — enabled" isIndeterminate />
@@ -193,14 +74,7 @@ export const TodosOsEstados: Story = {
       </div>
     );
   },
-  parameters: {
-    layout: 'padded',
-    docs: {
-      description: {
-        story: 'Todos os estados definidos no Design System: enabled × (unchecked, checked, indeterminate) e disabled × (unchecked, checked, indeterminate).',
-      },
-    },
-  },
+  parameters: { layout: 'padded' },
 };
 
 export const GrupoSelecionarTodos: Story = {

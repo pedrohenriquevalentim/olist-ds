@@ -1,0 +1,78 @@
+import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as InputSelectStories from './InputSelect.stories';
+
+<Meta of={InputSelectStories} />
+
+# InputSelect
+
+Campo de seleção com quatro modos: `single`, `multi`, `autocomplete` e `multi-autocomplete`. Implementa ARIA combobox/listbox com navegação completa por teclado.
+
+## Import
+
+```tsx
+import { InputSelect } from '@pedrohenriquevalentim/olist-ds';
+```
+
+## Uso básico
+
+```tsx
+{/* Seleção simples */}
+const [value, setValue] = useState('');
+
+<InputSelect
+  selectType="single"
+  label="Estado"
+  placeholder="Selecione um estado"
+  options={[
+    { value: 'sp', label: 'São Paulo' },
+    { value: 'rj', label: 'Rio de Janeiro' },
+  ]}
+  value={value}
+  onChange={setValue}
+/>
+
+{/* Seleção múltipla */}
+const [values, setValues] = useState<string[]>([]);
+
+<InputSelect
+  selectType="multi"
+  label="Categorias"
+  options={categorias}
+  value={values}
+  onChange={setValues}
+/>
+```
+
+## Navegação por teclado
+
+| Tecla | Ação |
+|-------|------|
+| `↓` / `↑` | Navegar entre opções |
+| `Enter` | Selecionar opção focada |
+| `Escape` | Fechar lista |
+| `Space` | Abrir lista / selecionar |
+
+## Playground
+
+<Canvas of={InputSelectStories.Playground} />
+<Controls of={InputSelectStories.Playground} />
+
+## Multi select
+
+<Canvas of={InputSelectStories.SeleçãoMúltipla} />
+
+## Autocomplete
+
+<Canvas of={InputSelectStories.Autocomplete} />
+
+## Multi autocomplete
+
+<Canvas of={InputSelectStories.MultiAutocomplete} />
+
+## Todas as variantes
+
+<Canvas of={InputSelectStories.TodasVariantes} />
+
+## Props
+
+<ArgTypes of={InputSelectStories} />

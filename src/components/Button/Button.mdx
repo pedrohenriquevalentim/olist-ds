@@ -1,0 +1,53 @@
+import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ButtonStories from './Button.stories';
+
+<Meta of={ButtonStories} />
+
+# Button
+
+Ação primária de interação. Use o Button para disparar uma operação — salvar, confirmar, navegar ou executar uma ação destrutiva.
+
+## Import
+
+```tsx
+import { Button } from '@olist/design-system';
+```
+
+## Uso básico
+
+```tsx
+<Button variant="primary" label="Confirmar" />
+
+<Button variant="secondary" label="Cancelar" />
+
+<Button
+  variant="primary"
+  label="Adicionar"
+  leadIcon={<Icon name="add" size={16} color="currentColor" />}
+/>
+```
+
+## Playground
+
+<Canvas of={ButtonStories.Playground} />
+<Controls of={ButtonStories.Playground} />
+
+## Variantes
+
+Três níveis de hierarquia visual. Use `primary` para a ação principal da tela, `secondary` para ações alternativas e `tertiary` para ações de baixa ênfase.
+
+<Canvas of={ButtonStories.Variantes} />
+
+## Ícones
+
+Props `leadIcon` e `actionIcon` aceitam qualquer `ReactNode`. Use sempre o componente `Icon` do design system com `color="currentColor"` para herdar a cor correta em todos os estados.
+
+<Canvas of={ButtonStories.Icones} />
+
+## Anatomia
+
+<Canvas of={ButtonStories.Anatomia} />
+
+## Props
+
+<ArgTypes of={ButtonStories} />

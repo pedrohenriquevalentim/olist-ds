@@ -1,8 +1,8 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.52`  
-**Skill:** v3.7  
-**Última atualização:** 2026-06-28  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.53`  
+**Skill:** v3.8  
+**Última atualização:** 2026-06-29  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -36,8 +36,8 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Ícones SVG | 550 |
 | Arquivos da Skill | 21 |
 | Arquivos Figma permitidos | 5 |
-| Versão npm | 1.0.52 |
-| Versão skill | 3.7 |
+| Versão npm | 1.0.53 |
+| Versão skill | 3.8 |
 
 ## Componentes
 
@@ -78,7 +78,7 @@ npm run release
     │
     ├── 1. generate:all (testes + stories via Gemini)
     ├── 2. build (compilação TypeScript)
-    ├── 3. sync:skill (atualiza skill v3.7)
+    ├── 3. sync:skill (atualiza skill v3.8)
     ├── 4. npm version patch (incrementa versão)
     ├── 5. npm publish (publica no registry)
     └── 6. git push --follow-tags
@@ -125,7 +125,7 @@ npm run release
 
 ## Skill Claude
 
-### Versão: v3.7
+### Versão: v3.8
 
 **Localização:** `.claude/skills/olist-ds-specialist/`
 
@@ -162,15 +162,26 @@ npm run release
 
 **Manuais** (não são sobrescritos): CHECKLIST_REVISAO.md, CORES.md, ESPACAMENTO.md, FIGMA_CONFIG.md, GLOSSARIO_PAPEIS_TEXTO.md, HARNEES_TELAS.md, PADROES.md, SDD_AVANCADO.md, SDD_PARA_TELA.md, TEMPLATES_PRODUTO.md, TIPOGRAFIA.md, UX_WRITING.md, VISAO_GERAL.md
 
-### Como Usar
+### Como Usar — Slash Commands
 
-**No Claude Code — implementar componente a partir do Figma:**
+| Comando | Para quem | O que faz |
+|---|---|---|
+| `/ds-implementar <figma-url>` | Dev de BU | Converte tela Figma em JSX com componentes DS |
+| `/ds-tela <sdd-ou-prd>` | Dev de BU | Gera tela React a partir de SDD/PRD |
+| `/ds-figma <sdd-ou-prd>` | Designer/Dev | Cria telas no Figma com instâncias reais DS |
+| `/ds-componente <figma-url>` | Mantenedor DS | Gera novo componente DS completo (5 arquivos + docs) |
+| `/ds-revisar` | Qualquer dev | Revisa tela/código contra padrões DS |
+| `/ds-sync` | Mantenedor DS | Sincroniza inventário de componentes das libraries |
+
+**No Claude Code — exemplos:**
 ```
-Use $olist-ds-specialist para implementar este componente:
-https://www.figma.com/design/XXXX/YYYY?node-id=123:456
+/ds-implementar https://www.figma.com/design/XXXX/YYYY?node-id=123:456
+/ds-componente https://www.figma.com/design/XXXX/YYYY?node-id=123:456
+/ds-tela [COLAR O SDD]
+/ds-revisar [COLAR O CÓDIGO]
 ```
 
-**No Claude Code — criar tela a partir de SDD:**
+**Ou invocar por descrição (detecção automática):**
 ```
 Use $olist-ds-specialist para criar a tela deste SDD:
 [COLAR O SDD]
@@ -179,9 +190,9 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 **No Claude.ai (sem terminal):**
 1. Settings → Connectors → Figma → Connect
 2. Customize → Skills → Upload → selecionar pasta da skill
-3. Iniciar conversa e colar o SDD ou link do Figma
+3. Iniciar conversa e usar um dos slash commands acima
 
-### Regras Críticas v3.7
+### Regras Críticas v3.8
 
 ### ✅ Sempre Faça:
 
@@ -383,7 +394,7 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 1. `.claude/figma-config.json` existe?
 2. `searchPriority` tem os libraryKeys corretos?
-3. Skill v3.7 instalada?
+3. Skill v3.8 instalada?
 4. O prompt inclui instrução para ler `figma-config.json` antes do Figma MCP?
 
 ## Changelog
@@ -467,4 +478,4 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ---
 
-*Gerado automaticamente em 2026-06-28 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-06-29 por `generate-wiki.mjs`. Não edite manualmente.*

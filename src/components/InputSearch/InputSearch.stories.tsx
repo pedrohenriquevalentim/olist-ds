@@ -3,9 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { InputSearch } from './InputSearch';
 
 const meta: Meta<typeof InputSearch> = {
-  title: 'Componentes/InputSearch',
+  title: 'Components/InputSearch',
   component: InputSearch,
-  tags: ['autodocs'],
+
   parameters: {
     docs: {
       description: {
@@ -55,94 +55,35 @@ const ControlledTemplate = (args: React.ComponentProps<typeof InputSearch>) => {
   return <InputSearch {...args} value={value} onChange={setValue} />;
 };
 
-export const Padrao: Story = {
-  name: 'Padrão — Botão com texto',
+export const Playground: Story = {
+  name: 'Playground',
   render: (args) => <ControlledTemplate {...args} />,
   args: {
     action: 'button',
     label: 'Label text',
     placeholder: 'Placeholder text',
     support: false,
-    supportText: 'Support text',
-    isDisabled: false,
   },
 };
 
-export const BotaoIcone: Story = {
-  name: 'Variante — Botão ícone',
-  render: (args) => <ControlledTemplate {...args} />,
-  args: {
-    action: 'button icon',
-    label: 'Label text',
-    placeholder: 'Placeholder text',
-    support: false,
-    isDisabled: false,
-  },
-};
-
-export const ComTextoSuporte: Story = {
-  name: 'Com texto de suporte',
-  render: (args) => <ControlledTemplate {...args} />,
-  args: {
-    action: 'button',
-    label: 'Pesquisar pedido',
-    placeholder: 'Digite o número do pedido',
-    support: true,
-    supportText: 'Exemplo: #123456',
-    isDisabled: false,
-  },
-};
-
-export const Desabilitado: Story = {
-  name: 'Estado desabilitado',
-  args: {
-    action: 'button',
-    label: 'Label text',
-    placeholder: 'Placeholder text',
-    isDisabled: true,
-    support: true,
-    supportText: 'Campo indisponível no momento',
-    value: '',
-  },
-};
-
-export const Preenchido: Story = {
-  name: 'Estado preenchido',
-  args: {
-    action: 'button',
-    label: 'Label text',
-    placeholder: 'Placeholder text',
-    value: 'Filled text',
-    isDisabled: false,
-  },
-};
-
-export const SemLabel: Story = {
-  name: 'Sem label',
-  render: (args) => <ControlledTemplate {...args} />,
-  args: {
-    action: 'button',
-    placeholder: 'Buscar produtos',
-    isDisabled: false,
-  },
-};
-
-export const TodasVariantes: Story = {
-  name: 'Todas as variantes',
+export const Variantes: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '360px' }}>
-      <InputSearch action="button" label="Botão com texto — enabled" placeholder="Placeholder text" value="" />
-      <InputSearch action="button icon" label="Botão ícone — enabled" placeholder="Placeholder text" value="" />
-      <InputSearch action="button" label="Preenchido" placeholder="Placeholder text" value="Filled text" />
-      <InputSearch action="button" label="Desabilitado" placeholder="Placeholder text" isDisabled value="" />
-      <InputSearch
-        action="button"
-        label="Com suporte"
-        placeholder="Placeholder text"
-        support
-        supportText="Texto de suporte"
-        value=""
-      />
+      <InputSearch action="button" label="Botão com texto" placeholder="Placeholder text" value="" />
+      <InputSearch action="button icon" label="Botão ícone" placeholder="Placeholder text" value="" />
     </div>
   ),
+  parameters: { layout: 'padded' },
+};
+
+export const Estados: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '360px' }}>
+      <InputSearch action="button" label="Enabled" placeholder="Placeholder text" value="" />
+      <InputSearch action="button" label="Preenchido" placeholder="Placeholder text" value="Filled text" />
+      <InputSearch action="button" label="Com suporte" placeholder="Placeholder text" support supportText="Texto de suporte" value="" />
+      <InputSearch action="button" label="Desabilitado" placeholder="Placeholder text" isDisabled value="" />
+    </div>
+  ),
+  parameters: { layout: 'padded' },
 };

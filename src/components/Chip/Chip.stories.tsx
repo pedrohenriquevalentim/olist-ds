@@ -8,7 +8,7 @@ const meta: Meta<typeof Chip> = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
+
   argTypes: {
     label: {
       control: 'text',
@@ -38,93 +38,29 @@ const meta: Meta<typeof Chip> = {
 export default meta;
 type Story = StoryObj<typeof Chip>;
 
-export const Padrão: Story = {
-  name: 'Padrão',
+export const Playground: Story = {
   args: {
     label: 'Categoria',
-    isSelected: false,
   },
 };
 
-export const Selecionado: Story = {
-  name: 'Selecionado',
-  args: {
-    label: 'Categoria',
-    isSelected: true,
-  },
-};
-
-export const Desabilitado: Story = {
-  name: 'Desabilitado',
-  args: {
-    label: 'Categoria',
-    isDisabled: true,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Estado desabilitado. Bloqueia cliques e eventos de teclado.',
-      },
-    },
-  },
-};
-
-export const DesabilitadoSelecionado: Story = {
-  name: 'Desabilitado e selecionado',
-  args: {
-    label: 'Categoria',
-    isSelected: true,
-    isDisabled: true,
-  },
-};
-
-export const Interativo: Story = {
-  name: 'Interativo (com estado)',
-  render: () => {
-    const [selecionado, setSelecionado] = useState(false);
-    return (
-      <Chip
-        label={selecionado ? 'Selecionado' : 'Clique para selecionar'}
-        isSelected={selecionado}
-        onChange={setSelecionado}
-      />
-    );
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Exemplo com estado gerenciado pelo componente pai. Clique para alternar.',
-      },
-    },
-  },
-};
-
-export const TodosOsEstados: Story = {
-  name: 'Todos os estados',
+export const Estados: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'flex-start' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <span style={{ fontSize: '12px', color: '#827f73', width: '140px' }}>Habilitado</span>
-        <Chip label="Placeholder text" />
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <span style={{ fontSize: '12px', color: '#827f73', width: '140px' }}>Selecionado</span>
-        <Chip label="Placeholder text" isSelected />
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <span style={{ fontSize: '12px', color: '#827f73', width: '140px' }}>Desabilitado</span>
-        <Chip label="Placeholder text" isDisabled />
-      </div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'flex-start' }}>
+      {[
+        { label: 'Habilitado', props: {} },
+        { label: 'Selecionado', props: { isSelected: true } },
+        { label: 'Desabilitado', props: { isDisabled: true } },
+        { label: 'Desabilitado + selecionado', props: { isSelected: true, isDisabled: true } },
+      ].map(({ label, props }) => (
+        <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <span style={{ fontSize: '12px', color: '#8f8d85', width: '168px', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>{label}</span>
+          <Chip label="Placeholder text" {...props} />
+        </div>
+      ))}
     </div>
   ),
-  parameters: {
-    layout: 'padded',
-    docs: {
-      description: {
-        story: 'Visão consolidada dos três estados principais do chip.',
-      },
-    },
-  },
+  parameters: { layout: 'padded' },
 };
 
 export const GrupoDeFiltros: Story = {

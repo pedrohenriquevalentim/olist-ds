@@ -1,0 +1,43 @@
+import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ChipStories from './Chip.stories';
+
+<Meta of={ChipStories} />
+
+# Chip
+
+Filtro ou tag selecionável. Use em grupos para permitir seleção múltipla de categorias, filtros ou atributos.
+
+## Import
+
+```tsx
+import { Chip } from '@pedrohenriquevalentim/olist-ds';
+```
+
+## Uso básico
+
+```tsx
+const [selecionado, setSelecionado] = useState(false);
+
+<Chip
+  label="Eletrônicos"
+  isSelected={selecionado}
+  onChange={setSelecionado}
+/>
+```
+
+## Playground
+
+<Canvas of={ChipStories.Playground} />
+<Controls of={ChipStories.Playground} />
+
+## Estados
+
+<Canvas of={ChipStories.Estados} />
+
+## Caso de uso — Grupo de filtros
+
+<Canvas of={ChipStories.GrupoDeFiltros} />
+
+## Props
+
+<ArgTypes of={ChipStories} />

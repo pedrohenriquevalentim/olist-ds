@@ -1,11 +1,24 @@
 ---
 name: olist-ds-specialist
 description: Use esta skill para TODO trabalho de UI/UX da Olist — criação de telas a partir de SDDs/PRDs, geração de componentes React, revisão de consistência visual, criação de protótipos no Figma, manutenção do design system e criação/revisão de textos de UI (UX Writing, copy, tom de voz). Acione quando alguém mencionar interface Olist, design system, tokens, componentes, telas, layouts, SDD, PRD, protótipo, wireframe, Figma, Storybook, copy, texto de botão, mensagem de erro, empty state, toast, label, placeholder ou qualquer tarefa de criação ou revisão de UI/copy para produtos Olist. NÃO use para backend, APIs, banco de dados, autenticação ou lógica de negócio sem relação com UI.
-version: 3.7
-lastModified: 2026-06-28
+version: 3.8
+lastModified: 2026-06-29
 ---
 
-# Olist Design System — Especialista v3.7 · 2026-06-28
+# Olist Design System — Especialista v3.8 · 2026-06-29
+
+## Slash Commands
+
+Cada capacidade da skill pode ser invocada explicitamente via slash command. O agente também aciona automaticamente o caso correto quando o contexto for reconhecido.
+
+| Comando | Uso | Caso | Para quem |
+|---|---|---|---|
+| `/ds-tela` | `/ds-tela <sdd-ou-prd>` | 1 + 2 | Dev de BU: gera tela React a partir de SDD/PRD usando componentes DS |
+| `/ds-figma` | `/ds-figma <sdd-ou-prd>` | 4 | Designer/Dev: cria telas no Figma com instâncias reais do DS |
+| `/ds-implementar` | `/ds-implementar <figma-url>` | 8 | Dev de BU: converte tela Figma em JSX tipado usando componentes DS |
+| `/ds-componente` | `/ds-componente <figma-url>` | 7 | Mantenedor DS: gera novo componente DS completo (5 arquivos + docs Figma) |
+| `/ds-revisar` | `/ds-revisar` + código ou screenshot | 3 | Qualquer dev: revisa tela/código contra padrões do DS |
+| `/ds-sync` | `/ds-sync` | 6 | Mantenedor DS: sincroniza inventário de componentes das libraries Figma |
 
 ## Papel
 
@@ -106,6 +119,16 @@ Se o fetch falhar (sem conexão, erro de rede), usar o arquivo `references/COMPO
 ```
 Receber solicitação
     ↓
+A mensagem começa com um slash command?
+    │
+    ├── /ds-implementar <figma-url> → ir direto para Caso 8
+    ├── /ds-componente <figma-url>  → ir direto para Caso 7
+    ├── /ds-tela <sdd-ou-prd>       → ir direto para Caso 1 ou 2 (auto-detectar se tem RNFs/DACI)
+    ├── /ds-figma <sdd-ou-prd>      → ir direto para Caso 4
+    ├── /ds-revisar                 → ir direto para Caso 3
+    └── /ds-sync                   → ir direto para Caso 6
+    │
+    ↓ (sem slash command — detecção automática de intenção)
 É trabalho de UI/UX? → Não → Recusar, explicar escopo
     ↓ Sim
 Ler references/VISAO_GERAL.md (sempre)
@@ -266,7 +289,7 @@ Qual tipo de tarefa?
 7. **Criar todas as telas de uma vez** — sempre use workflow faseado (tela por tela)
 8. **Hardcodar cores, fontes ou espaçamentos** — sempre usar tokens DS
 
-## Casos de Uso v3.1
+## Casos de Uso v3.8
 
 ### Caso 1: SDD básico — tela React
 ```
@@ -433,6 +456,51 @@ Se o componente ainda não estiver publicado na library, a seção "demo" do fra
 usará instâncias locais (do próprio arquivo). Após publicação, as instâncias atualizarão
 automaticamente. Informar o usuário caso esta situação ocorra.
 
+### Caso 8: Converter tela Figma em código de produto `/ds-implementar`
+
+> **Para devs de BU** que recebem uma tela do Figma e precisam implementá-la usando os componentes do DS — sem precisar conhecer o inventário de memória.
+
+```
+Usuário: /ds-implementar https://figma.com/design/FILE?node-id=X
+
+Você:
+1. Extrair fileKey e nodeId da URL
+2. get_metadata(fileKey, nodeId, depth=2) → mapear estrutura da tela
+3. get_design_context(fileKey, nodeId) → identificar elementos visuais
+4. get_screenshot(fileKey, nodeId) → referência visual
+
+5. Para cada elemento identificado na tela:
+   a. Verificar se existe componente DS correspondente em COMPONENTES.md
+   b. Se existir → usar o componente com as props corretas
+   c. Se não existir → usar HTML semântico + tokens CSS do DS
+      Sinalizar ao dev: "Este elemento não tem componente DS equivalente"
+
+6. Buscar COMPONENTES.md atualizado do GitHub (fonte primária de props reais):
+   https://raw.githubusercontent.com/pedrohenriquevalentim/olist-ds/main/.claude/skills/olist-ds-specialist/references/COMPONENTES.md
+
+7. Gerar código React de produto:
+   - Imports dos componentes DS: import { Button, InputText } from '@pedrohenriquevalentim/olist-ds'
+   - Props tipadas conforme interface real de cada componente (via COMPONENTES.md)
+   - Tokens de espaçamento via var(--token) para elementos sem componente DS
+   - Ícones via <Icon name="..." size={N} color="currentColor" />
+   - Nenhum valor hardcoded de cor, fonte ou espaçamento
+   - Acessibilidade: aria-label em elementos interativos sem label visível
+
+8. Verificar tipagem: listar props usadas e confirmar que batem com as interfaces do COMPONENTES.md
+
+9. Entregar:
+   - Componente React completo pronto para colar no repositório da BU
+   - Lista de componentes DS utilizados e suas versões
+   - Lista de elementos sem equivalente DS (se houver), com sugestão de token a usar
+   - Instrução de instalação se o DS ainda não estiver no package.json da BU:
+     npm install @pedrohenriquevalentim/olist-ds
+     import '@pedrohenriquevalentim/olist-ds/dist/variables.css'
+```
+
+**Diferença do Caso 7:**
+- Caso 7 (`/ds-componente`): cria um *novo componente para o DS* — output vai para o repositório `olist-ds`
+- Caso 8 (`/ds-implementar`): implementa uma *tela de produto usando o DS* — output vai para o repositório da BU
+
 ## Regras da Figma Plugin API (use_figma)
 
 Erros comuns e suas correções — manter para evitar regressão:
@@ -449,8 +517,9 @@ Erros comuns e suas correções — manter para evitar regressão:
 
 ---
 
-**Versão:** 3.7
-**Última atualização:** 2026-06-25
+**Versão:** 3.8
+**Última atualização:** 2026-06-28
+**Mudanças v3.8:** Slash Commands adicionados (6 comandos explícitos: /ds-tela, /ds-figma, /ds-implementar, /ds-componente, /ds-revisar, /ds-sync); Caso 8 adicionado — /ds-implementar converte tela Figma em código React de produto usando componentes DS com props tipadas, direcionado a devs de BU consumidores do DS.
 **Mudanças v3.7:** Caso 7 adicionado — fluxo unificado de implementação de componente a partir de URL do Figma, combinando geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade) em paralelo; ramo "Criar componente" no Fluxo de Decisão expandido para referenciar o Caso 7.
 **Mudanças v3.6:** Versão anterior.
 **Mudanças v3.3:** Pasta `decisions/` criada dentro da skill com 10 decisões de design (5 técnicas, 5 UX/Design); `decisions/INDEX.md` adicionado como leitura obrigatória no Fluxo de Decisão e nas Regras Críticas; tabela de referências separada em `decisions/` e `references/`.

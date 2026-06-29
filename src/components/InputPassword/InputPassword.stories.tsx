@@ -1,10 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 import { InputPassword } from './InputPassword';
+import { Icon } from '../Icon';
 
 const meta: Meta<typeof InputPassword> = {
   title: 'Components/InputPassword',
   component: InputPassword,
-  tags: ['autodocs'],
+
   parameters: {
     layout: 'centered',
     docs: {
@@ -20,12 +22,7 @@ const meta: Meta<typeof InputPassword> = {
       options: ['none', 'lock'],
       mapping: {
         none: undefined,
-        lock: (
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="3" y="7" width="10" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
-            <path d="M5 7V5a3 3 0 0 1 6 0v2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-          </svg>
-        ),
+        lock: <Icon name="lock" size={16} color="currentColor" />,
       },
       description: 'Ícone opcional à esquerda do campo',
     },
@@ -51,68 +48,29 @@ const meta: Meta<typeof InputPassword> = {
 export default meta;
 type Story = StoryObj<typeof InputPassword>;
 
-export const Default: Story = {
-  name: 'Padrão',
+export const Playground: Story = {};
+
+export const Estados: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '22.5rem' }}>
+      <InputPassword label="Enabled" placeholder="Placeholder text" hasSupport supportText="Mínimo 8 caracteres" />
+      <InputPassword label="Preenchido" placeholder="Placeholder text" value="MinhaSenha123!" hasSupport supportText="Mínimo 8 caracteres" />
+      <InputPassword label="Senha visível" placeholder="Placeholder text" value="MinhaSenha123!" isPasswordVisible hasSupport supportText="Mínimo 8 caracteres" />
+      <InputPassword label="Success" placeholder="Placeholder text" value="MinhaSenha123!" isSuccess hasSupport supportText="Senha válida" />
+      <InputPassword label="Error" placeholder="Placeholder text" value="abc" isError hasSupport supportText="Senha muito curta, mínimo 8 caracteres" />
+      <InputPassword label="Disabled" placeholder="Campo desabilitado" isDisabled hasSupport supportText="Mínimo 8 caracteres" />
+    </div>
+  ),
+  parameters: { layout: 'padded' },
 };
 
-export const ComIcone: Story = {
-  name: 'Com ícone de lead',
-  args: {
-    leadIcon: (
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="3" y="7" width="10" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M5 7V5a3 3 0 0 1 6 0v2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-};
-
-export const Sucesso: Story = {
-  name: 'Estado: sucesso',
-  args: {
-    isSuccess: true,
-    value: 'MinhaSenha123!',
-    supportText: 'Senha válida',
-  },
-};
-
-export const Erro: Story = {
-  name: 'Estado: erro',
-  args: {
-    isError: true,
-    value: 'abc',
-    supportText: 'Senha muito curta, mínimo 8 caracteres',
-  },
-};
-
-export const Desabilitado: Story = {
-  name: 'Estado: desabilitado',
-  args: {
-    isDisabled: true,
-    placeholder: 'Campo desabilitado',
-  },
-};
-
-export const SenhaVisivel: Story = {
-  name: 'Senha visível (controlado)',
-  args: {
-    isPasswordVisible: true,
-    value: 'MinhaSenha123!',
-  },
-};
-
-export const ComTooltip: Story = {
-  name: 'Com tooltip no label',
-  args: {
-    hasTooltip: true,
-    tooltipText: 'A senha deve ter no mínimo 8 caracteres, incluindo letras e números',
-  },
-};
-
-export const SemSuporte: Story = {
-  name: 'Sem texto de suporte',
-  args: {
-    hasSupport: false,
-    supportText: undefined,
-  },
+export const Variantes: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '22.5rem' }}>
+      <InputPassword label="Sem extras" placeholder="Placeholder text" hasSupport={false} />
+      <InputPassword label="Com ícone" placeholder="Placeholder text" leadIcon={<Icon name="lock" size={16} color="currentColor" />} hasSupport supportText="Mínimo 8 caracteres" />
+      <InputPassword label="Com tooltip" placeholder="Placeholder text" hasTooltip tooltipText="A senha deve ter no mínimo 8 caracteres" hasSupport supportText="Mínimo 8 caracteres" />
+    </div>
+  ),
+  parameters: { layout: 'padded' },
 };

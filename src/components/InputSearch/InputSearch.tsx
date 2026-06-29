@@ -1,5 +1,6 @@
 import React, { useId } from 'react';
 import styles from './InputSearch.module.css';
+import { Icon } from '../Icon';
 
 export interface InputSearchProps {
   /** Variante da ação ao lado direito do campo */
@@ -86,7 +87,7 @@ export const InputSearch = ({
           >
             <span className={styles.actionButtonLabel}>buscar</span>
             <span className={styles.iconWrapper} aria-hidden="true">
-              <SearchIcon />
+              <Icon name="search" size={16} color="currentColor" />
             </span>
           </button>
         )}
@@ -100,7 +101,7 @@ export const InputSearch = ({
             aria-label="Buscar"
           >
             <span className={styles.iconWrapper} aria-hidden="true">
-              <SearchIcon />
+              <Icon name="search" size={16} color="currentColor" />
             </span>
           </button>
         )}
@@ -114,19 +115,3 @@ export const InputSearch = ({
     </div>
   );
 };
-
-function SearchIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <circle cx="7" cy="7" r="4.5" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M10.5 10.5L13.5 13.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  );
-}

@@ -1,26 +1,13 @@
 import React from 'react';
 import styles from './Logo.module.css';
 
-/*
- * Assets exportados pelo Figma MCP.
- * Para produção, substituir pelas URLs locais em src/assets/logo/
- * após baixar os SVGs via: curl -o src/assets/logo/<nome>.svg "<url>"
- */
-const ASSETS = {
-  default: {
-    toggle:   'https://www.figma.com/api/mcp/asset/88ed73b1-739b-4c5b-8324-5d845c8e609d',
-    circle:   'https://www.figma.com/api/mcp/asset/b1744796-008f-4d3c-8b1a-6727e9ec10a4',
-    wordmark: 'https://www.figma.com/api/mcp/asset/4762f43a-ab33-4a5a-93bc-f969ecf839ff',
-  },
-  simple: {
-    toggle:   'https://www.figma.com/api/mcp/asset/bf4e94b6-6b76-425b-8e87-00a300d0f8ce',
-    wordmark: 'https://www.figma.com/api/mcp/asset/1cc37aa2-026e-4df8-bdf8-1cbb24c82550',
-  },
-  symbol: {
-    toggle: 'https://www.figma.com/api/mcp/asset/ffb39bed-c2bf-4e59-a694-d9fac1143cb4',
-    circle: 'https://www.figma.com/api/mcp/asset/36ccb7a0-59de-42ec-9108-9d6fbc067285',
-  },
-} as const;
+import toggleDefaultSrc from '../../assets/logo/svgs/toggle-default.svg';
+import circleDefaultSrc from '../../assets/logo/svgs/circle-default.svg';
+import wordmarkDefaultSrc from '../../assets/logo/svgs/wordmark-default.svg';
+import toggleSimpleSrc from '../../assets/logo/svgs/toggle-simple.svg';
+import wordmarkSimpleSrc from '../../assets/logo/svgs/wordmark-simple.svg';
+import toggleSymbolSrc from '../../assets/logo/svgs/toggle-symbol.svg';
+import circleSymbolSrc from '../../assets/logo/svgs/circle-symbol.svg';
 
 export interface LogoProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Variante de tamanho do logo. */
@@ -49,11 +36,11 @@ export const Logo = ({
               <img
                 alt=""
                 className={styles.asset}
-                src={size === 'default' ? ASSETS.default.toggle : ASSETS.simple.toggle}
+                src={size === 'default' ? toggleDefaultSrc : toggleSimpleSrc}
               />
               {size === 'default' && (
                 <div className={styles.circleWrapper}>
-                  <img alt="" className={styles.asset} src={ASSETS.default.circle} />
+                  <img alt="" className={styles.asset} src={circleDefaultSrc} />
                 </div>
               )}
             </div>
@@ -61,7 +48,7 @@ export const Logo = ({
               <img
                 alt=""
                 className={styles.asset}
-                src={size === 'default' ? ASSETS.default.wordmark : ASSETS.simple.wordmark}
+                src={size === 'default' ? wordmarkDefaultSrc : wordmarkSimpleSrc}
               />
             </div>
           </>
@@ -69,9 +56,9 @@ export const Logo = ({
 
         {isSymbol && (
           <div className={styles.symbolWrapper}>
-            <img alt="" className={styles.asset} src={ASSETS.symbol.toggle} />
+            <img alt="" className={styles.asset} src={toggleSymbolSrc} />
             <div className={styles.circleWrapper}>
-              <img alt="" className={styles.asset} src={ASSETS.symbol.circle} />
+              <img alt="" className={styles.asset} src={circleSymbolSrc} />
             </div>
           </div>
         )}

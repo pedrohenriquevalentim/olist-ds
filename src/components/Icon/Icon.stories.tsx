@@ -7,7 +7,7 @@ const meta: Meta<typeof Icon> = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
+
   argTypes: {
     name: {
       control: 'select',
@@ -28,7 +28,7 @@ const meta: Meta<typeof Icon> = {
 export default meta;
 type Story = StoryObj<typeof Icon>;
 
-export const Default: Story = {
+export const Playground: Story = {
   args: {
     name: availableIcons[0],
     size: 24,
