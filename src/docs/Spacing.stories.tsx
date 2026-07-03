@@ -127,8 +127,8 @@ export const Espacamentos: StoryObj = {
         <LayoutToken label="Sidebar contraída"       token="--menu-container-size-width-contracted" value="56px" />
         <LayoutToken label="Altura do header"        token="--shape-size-64px"              value="64px" />
         <LayoutToken label="Padding conteúdo"        token="--shape-spacing-24px / 32px"    value="24–32px" />
-        <LayoutToken label="Altura input/botão MD"   token="--shape-size-40px"              value="40px" />
-        <LayoutToken label="Altura input/botão SM"   token="--shape-size-32px"              value="32px" />
+        <LayoutToken label="Altura input/botão"      token="--shape-size-48px"              value="48px" />
+        <LayoutToken label="Altura de chip/tag"      token="--shape-size-32px"              value="32px" />
         <LayoutToken label="Altura linha de tabela"  token="--shape-size-48px"              value="48px" />
       </div>
     </div>
