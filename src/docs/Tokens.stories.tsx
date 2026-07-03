@@ -91,19 +91,19 @@ const textTokens: TokenRow[] = [
 ];
 
 const buttonTokens: TokenRow[] = [
-  { token: '--button-size-height',            resolves: '--shape-size-x4-32px',              description: 'Altura do botão' },
+  { token: '--button-size-height',            resolves: '--shape-size-x6-48px',              description: 'Altura do botão' },
   { token: '--button-color-primary-enabled',  resolves: '--color-background-enabled-full-brand', description: 'Fundo primary enabled' },
   { token: '--button-color-primary-hover',    resolves: '--color-background-hover-full-brand',   description: 'Fundo primary hover' },
   { token: '--button-color-primary-pressed',  resolves: '--color-background-pressed-full-brand', description: 'Fundo primary pressed' },
   { token: '--button-border-radius-pill',     resolves: '--shape-border-radius-pill-9999px',  description: 'Raio de borda (pill)' },
-  { token: '--button-font-size',              resolves: '--font-size-x15-12px',               description: 'Tamanho do texto' },
+  { token: '--button-font-size',              resolves: '--font-size-x175-14px',              description: 'Tamanho do texto' },
   { token: '--button-font-weight',            resolves: '--font-weight-medium',               description: 'Peso do texto' },
-  { token: '--button-spacing-padding',        resolves: '--shape-spacing-x15-12px',           description: 'Padding horizontal' },
-  { token: '--button-spacing-gap',            resolves: '--shape-spacing-x05-4px',            description: 'Gap ícone–texto' },
+  { token: '--button-spacing-padding',        resolves: '--shape-spacing-x2-16px',            description: 'Padding horizontal' },
+  { token: '--button-spacing-gap',            resolves: '--shape-spacing-x1-8px',             description: 'Gap ícone–texto' },
 ];
 
 const inputTokens: TokenRow[] = [
-  { token: '--input-base-size-input-height', resolves: '--shape-size-x5-40px',       description: 'Altura do input' },
+  { token: '--input-base-size-input-height', resolves: '--shape-size-x6-48px',       description: 'Altura do input' },
   { token: '--input-base-border-radius-default', resolves: '--shape-border-radius-x15-12px', description: 'Raio de borda' },
   { token: '--input-base-border-color-enabled',  resolves: '--color-border-enabled-neutral', description: 'Borda enabled' },
   { token: '--input-base-border-color-hover',    resolves: '--color-border-hover-neutral',   description: 'Borda hover' },
@@ -210,7 +210,7 @@ export const Hierarquia: StoryObj = {
         <h2 style={{ fontSize: 16, fontWeight: 700, color: '#10100f', margin: '0 0 16px' }}>Exemplo — Botão primário</h2>
         {[
           { comp: '--button-color-primary-enabled', sem: '--color-background-enabled-full-brand', prim: '--color-blue-blue-500', hex: '#0a4ee4' },
-          { comp: '--button-font-size',             sem: '(direto)',                              prim: '--font-size-x15-12px → --font-size-12px', hex: '12px' },
+          { comp: '--button-font-size',             sem: '(direto)',                              prim: '--font-size-x175-14px → --font-size-14px', hex: '14px' },
           { comp: '--button-border-radius-pill',    sem: '(direto)',                              prim: '--shape-border-radius-pill-9999px → 9999px', hex: '9999px' },
         ].map(({ comp, sem, prim, hex }) => (
           <div key={comp} style={{ display: 'flex', alignItems: 'center', gap: 0, marginBottom: 10, flexWrap: 'wrap' }}>

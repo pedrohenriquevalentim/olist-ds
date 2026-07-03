@@ -129,10 +129,10 @@ const TOKENS = [
   { n: 1, category: 'background', token: '--button-color-primary-enabled',           value: '--color-background-enabled-full-brand' },
   { n: 2, category: 'text',       token: '--button-font-font-color-primary-enabled',  value: '--color-text-enabled-on-brand'         },
   { n: 3, category: 'shape',      token: '--button-border-radius-pill',               value: '--shape-border-radius-pill-9999px'     },
-  { n: 4, category: 'spacing',    token: '--button-size-height',                      value: '--shape-size-x4-32px'                  },
-  { n: 5, category: 'spacing',    token: '--button-spacing-padding',                  value: '--shape-spacing-x15-12px'              },
-  { n: 6, category: 'spacing',    token: '--button-spacing-gap',                      value: '--shape-spacing-x05-4px'               },
-  { n: 7, category: 'typography', token: '--button-font-size',                        value: '--font-size-x15-12px'                  },
+  { n: 4, category: 'spacing',    token: '--button-size-height',                      value: '--shape-size-x6-48px'                  },
+  { n: 5, category: 'spacing',    token: '--button-spacing-padding',                  value: '--shape-spacing-x2-16px'               },
+  { n: 6, category: 'spacing',    token: '--button-spacing-gap',                      value: '--shape-spacing-x1-8px'                },
+  { n: 7, category: 'typography', token: '--button-font-size',                        value: '--font-size-x175-14px'                 },
   { n: 8, category: 'typography', token: '--button-font-weight',                      value: '--font-weight-medium (500)'            },
 ];
 
