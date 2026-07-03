@@ -1,11 +1,11 @@
 ---
 name: olist-ds-specialist
 description: Use esta skill para TODO trabalho de UI/UX da Olist — criação de telas a partir de SDDs/PRDs, geração de componentes React, revisão de consistência visual, criação de protótipos no Figma, manutenção do design system e criação/revisão de textos de UI (UX Writing, copy, tom de voz). Acione quando alguém mencionar interface Olist, design system, tokens, componentes, telas, layouts, SDD, PRD, protótipo, wireframe, Figma, Storybook, copy, texto de botão, mensagem de erro, empty state, toast, label, placeholder ou qualquer tarefa de criação ou revisão de UI/copy para produtos Olist. NÃO use para backend, APIs, banco de dados, autenticação ou lógica de negócio sem relação com UI.
-version: 3.8
-lastModified: 2026-06-29
+version: 3.10
+lastModified: 2026-07-03
 ---
 
-# Olist Design System — Especialista v3.8 · 2026-06-29
+# Olist Design System — Especialista v3.10 · 2026-07-03
 
 ## Slash Commands
 
@@ -16,6 +16,7 @@ Cada capacidade da skill pode ser invocada explicitamente via slash command. O a
 | `/ds-tela` | `/ds-tela <sdd-ou-prd>` | 1 + 2 | Dev de BU: gera tela React a partir de SDD/PRD usando componentes DS |
 | `/ds-figma` | `/ds-figma <sdd-ou-prd>` | 4 | Designer/Dev: cria telas no Figma com instâncias reais do DS |
 | `/ds-implementar` | `/ds-implementar <figma-url>` | 8 | Dev de BU: converte tela Figma em JSX tipado usando componentes DS |
+| `/ds-handoff` | `/ds-handoff <figma-url(s)>` | 9 | Qualquer dev: gera manifesto Markdown de componentes DS usados numa jornada, para anexar em PR |
 | `/ds-componente` | `/ds-componente <figma-url>` | 7 | Mantenedor DS: gera novo componente DS completo (5 arquivos + docs Figma) |
 | `/ds-revisar` | `/ds-revisar` + código ou screenshot | 3 | Qualquer dev: revisa tela/código contra padrões do DS |
 | `/ds-sync` | `/ds-sync` | 6 | Mantenedor DS: sincroniza inventário de componentes das libraries Figma |
@@ -51,40 +52,51 @@ Priorize: tipografia, cores, espaçamento, hierarquia visual, reutilização de 
 A fonte da verdade está nas **libraries subscritas**, identificadas por `libraryKey`.  
 Ler `figma-config.json` ANTES de qualquer operação com Figma MCP.
 
-**Order de prioridade obrigatória:**
+> **Decisão permanente (desde 2026-07-03):** a `design system (base)` ([link](https://www.figma.com/design/HeyN4w209HWh8rfpTDiwyf/design-system)) é a **única library de referência** para construção de telas. As demais libraries estão bloqueadas permanentemente. Ver `figma-config.json` (`blockedLibraries`) e `decisions/ux-design/FLUXO_PRD_FIGMA.md` para o histórico da decisão.
+
+**Order de prioridade:**
 
 | Prioridade | Library | Conteúdo |
 |---|---|---|
-| 1 (master) | **AI Components** | Menu ERP atualizado, Button, ícones rebrand 24 |
-| 2 | **ERP components** | Componentes principais do ERP Tiny |
-| 3 | **ERP recursos** | Recursos e padrões complementares |
-| 4 | **ERP style guide** | Tipografia, tokens visuais, paleta |
-| 5 (fallback) | **[design system] components web** | Componentes web base |
+| 1 (master) | **design system (base)** | Única referência para construção de telas |
+
+**Hierarquia anterior (descontinuada, dados preservados em `blockedLibraries`):** AI Components, ERP components, ERP recursos, ERP style guide, [design system] components web.
 
 **libraryKeys e regras completas:** ver `figma-config.json` e `references/FIGMA_CONFIG.md`
 
 **Regras:**
 - Sempre filtrar por `searchPriority` do `figma-config.json` ao chamar `search_design_system`
-- Usar o primeiro resultado encontrado — a ordem garante prioridade
+- Descartar resultados cujo `name` comece com `.` (ponto) **antes** de escolher "o primeiro resultado" — são peças internas de construção de component set, nunca instâncias válidas (ver "Componentes Internos '.[base]'" abaixo)
+- Do que sobrar, usar o primeiro resultado encontrado — a ordem garante prioridade
 - NUNCA usar libraries de `blockedLibraries` mesmo que apareçam sem filtro
-- **AI Components tem preferência absoluta** sobre ERP components para componentes duplicados
+- A **design system (base) é a única fonte** — sem disputa de preferência entre libraries
+
+### ⚠️ Componentes Internos ".[base]" — sempre ignorar
+
+Regra **permanente**, independente de qual library está ativa. Componentes de construção interna de um component set aparecem com prefixo `.` no `name` (convenção do Figma para ocultar do painel de Assets). Confirmado na `design system (base)` em 2026-07-02: `.menu erp/stage14`, `.[base] single select list`, `.[base] multi select list`.
+
+- Nunca importar/instanciar um resultado de `search_design_system` cujo `name` comece com `.`
+- Padrões cadastrados em `figma-config.json` → `excludedComponentNamePatterns`
+- Se o único resultado para um componente necessário for um `.nome` ou `.[base] ...`, tratar como **não encontrado** e seguir a Seção 4 do `HARNEES_TELAS.md` (construir com primitivos + documentar gap para o designer)
+
+**Checagem de cobertura do harness (2026-07-02):** a `design system (base)` foi verificada componente a componente contra os requisitos do `HARNEES_TELAS.md` via `search_design_system` real. Cobertura confirmada para Menu ERP, Button(+Icon), Radio Button, Segmented Buttons, Tag (+variantes), Tooltip, Logo, Icon, Input Search/Text, Dropdown, Checkbox, Card genérico, Breadcrumb, e Heading/Subheading via Text Styles. **Gap conhecido:** não existe variante dedicada de `Summary Card` (fundo azul) — apenas `card` genérico; validar manualmente antes de usar em telas Envios/Hub/Conta Digital. Detalhes em `figma-config.json` → `harnessCoverageCheck`.
 
 ## Inventário de Componentes
 
 Antes de construir qualquer tela, chamar `search_design_system` com `includeLibraryKeys: searchPriority` para localizar os componentKeys necessários.
 
-**Categorias disponíveis (inventário da skill v2.2 — verificar AI Components como fonte master):**
+**Categorias disponíveis (inventário da skill v2.2 — fonte única: design system (base)):**
 - **Action:** Button, Button Icon
-- **Navigation:** Link, Segmented Buttons, Menu ERP
+- **Navigation:** Link, Segmented Buttons, Menu Global
 - **Input:** Input Text, Text Area, Input E-mail, Input Search, Input Token, Input Password, Input Select, Input File, Checkbox, Radio Button, Dropdown, Toggle, Chip
 - **Data Display:** Tags
 - **Feedback:** Tooltip
-- **Brand:** Logo Olist, Ícones rebrand 24 (em AI Components)
+- **Brand:** Logo Olist, Ícones rebrand 24 (na design system (base))
 
 **Sincronização do inventário:**
 Quando o usuário pedir "sincronizar registry", "atualizar inventário" ou similar:
 1. `search_design_system` com `includeLibraryKeys: searchPriority` para cada categoria
-2. Consolidar resultados em ordem de prioridade (AI Components primeiro)
+2. Consolidar resultados em ordem de prioridade (design system (base) é a única fonte)
 3. Listar: componentKey, nome, libraryName, variantes encontradas
 4. Informar ao usuário: adicionados, removidos, alterados
 
@@ -122,6 +134,7 @@ Receber solicitação
 A mensagem começa com um slash command?
     │
     ├── /ds-implementar <figma-url> → ir direto para Caso 8
+    ├── /ds-handoff <figma-url(s)>  → ir direto para Caso 9
     ├── /ds-componente <figma-url>  → ir direto para Caso 7
     ├── /ds-tela <sdd-ou-prd>       → ir direto para Caso 1 ou 2 (auto-detectar se tem RNFs/DACI)
     ├── /ds-figma <sdd-ou-prd>      → ir direto para Caso 4
@@ -189,6 +202,12 @@ Qual tipo de tarefa?
     │   → Ler GLOSSARIO_PAPEIS_TEXTO.md + UX_WRITING.md
     │   → Ler MAPA_FONTES.md
     │
+    ├── Gerar manifesto de handoff de jornada (Caso 9 — ver `/ds-handoff`)
+    │   → get_metadata em cada link recebido → resolver telas da jornada
+    │   → Para cada tela: get_design_context → comparar com COMPONENTES.md
+    │   → Agregar componentes usados + gaps entre todas as telas
+    │   → Entregar Markdown (sem gerar código, sem commitar)
+    │
     └── Gerar testes/stories
         → Ler COMPONENTES.md + MAPA_FONTES.md
 ```
@@ -255,7 +274,7 @@ Qual tipo de tarefa?
 2. **Leia `decisions/INDEX.md` logo em seguida** — contém decisões de produto ativas que têm precedência sobre defaults. Leia os arquivos específicos apontados pelo INDEX que se aplicam à tarefa atual.
 3. **Leia `figma-config.json` antes de usar Figma MCP:**
    - Use `searchPriority` como `includeLibraryKeys` em todo `search_design_system`
-   - Respeite a ordem: AI Components > ERP components > ERP recursos > ERP style guide > [DS] components web
+   - `searchPriority` tem apenas `design system (base)` — única library de referência desde 2026-07-03 (hierarquia anterior de AI Components/ERP components/etc. foi descontinuada, dados preservados em `blockedLibraries`)
    - Ignore resultados de `blockedLibraries`
 4. **Leia `HARNESS_TELAS.md` antes de criar qualquer frame no Figma:**
    - Execute o gate pré-construção (Seção 1) — só avance com todos os itens marcados
@@ -282,14 +301,14 @@ Qual tipo de tarefa?
 
 1. **Buscar componentes sem filtrar por `includeLibraryKeys`**
 2. **Usar libraries de `blockedLibraries`** mesmo que apareçam em buscas
-3. **Construir elementos UI do zero** quando o componente DS existe (Button, Tag, Menu ERP, etc.)
+3. **Construir elementos UI do zero** quando o componente DS existe (Button, Tag, Menu Global, etc.)
 4. **Inventar nomes de papéis de texto** fora de `GLOSSARIO_PAPEIS_TEXTO.md`
 5. **Ignorar RNFs** — eles afetam UI (skeleton loaders, permissões, etc.)
 6. **Usar o plugin Figma intermediário** — o canal de entrega é sempre `use_figma` direto
 7. **Criar todas as telas de uma vez** — sempre use workflow faseado (tela por tela)
 8. **Hardcodar cores, fontes ou espaçamentos** — sempre usar tokens DS
 
-## Casos de Uso v3.8
+## Casos de Uso v3.10
 
 ### Caso 1: SDD básico — tela React
 ```
@@ -389,7 +408,7 @@ Usuário: "Sincronize o registry" / "Atualize o inventário" / "Sync componentes
 
 Você:
 1. search_design_system("*", includeLibraryKeys: searchPriority) para cada categoria
-2. Consolidar por ordem de prioridade (AI Components sobrepõe ERP components, etc.)
+2. Consolidar por ordem de prioridade (há só 1 library ativa — sem sobreposição a resolver)
 3. Para cada componente: anotar name, componentKey, libraryName, variantes
 4. Comparar com inventário anterior (COMPONENTES.md):
    - 🟢 Adicionados: componentes novos nas libraries
@@ -501,6 +520,69 @@ Você:
 - Caso 7 (`/ds-componente`): cria um *novo componente para o DS* — output vai para o repositório `olist-ds`
 - Caso 8 (`/ds-implementar`): implementa uma *tela de produto usando o DS* — output vai para o repositório da BU
 
+### Caso 9: Gerar manifesto de handoff de jornada `/ds-handoff`
+
+> **Para qualquer dev** que precisa abrir uma PR e documentar quais componentes do DS aparecem numa jornada do Figma — sem gerar código, só o inventário em Markdown.
+
+```
+Usuário: /ds-handoff <um ou mais links do Figma>
+
+Você:
+1. Para cada link recebido, extrair fileKey e nodeId
+
+2. get_metadata(fileKey, nodeId, depth=2) → identificar o tipo do nó e resolver as "telas":
+   - PAGE            → listar frames-filho de topo → cada um vira uma tela da jornada
+   - FRAME           → o próprio nó já é uma tela
+   - COMPONENT / COMPONENT_SET / INSTANCE → tratar como unidade única, documentar direto
+     sem descer em telas
+   (o usuário pode misturar tipos entre os links — resolver cada um independentemente
+   e depois consolidar a lista final de telas)
+
+3. Para cada tela:
+   a. get_design_context(fileKey, nodeId) → listar instâncias de componente presentes
+   b. Para cada instância, verificar correspondência em COMPONENTES.md (buscar do GitHub,
+      mesma fonte do Caso 8) e/ou component-registry.json:
+      - Se existir → registrar: nome do componente, variante(s)/props observadas, import real
+      - Se não existir → registrar como gap: nome da layer, tela onde aparece, sugestão
+        (ex: "construir com tokens CORES.md/ESPACAMENTO.md; avaliar criação via /ds-componente")
+
+4. Agregar entre todas as telas:
+   - Componentes DS: deduplicar por nome, unindo variantes observadas e telas onde aparece
+   - Gaps: não deduplicar — cada gap é local à tela onde foi encontrado
+
+5. Gerar e entregar o Markdown (template abaixo):
+   - Bloco Markdown no chat, pronto para colar na descrição de uma PR
+   - Não gerar código, não commitar, não abrir PR — artefato é ad-hoc, não persiste no repo
+```
+
+**Template de saída:**
+
+```md
+# Handoff — <nome ou link da jornada>
+
+## Componentes do Design System utilizados
+
+| Componente | Variante(s) observada(s) | Import | Aparece em | Link Figma |
+|---|---|---|---|---|
+| Button | primary/enabled, secondary/hover | `import { Button } from '@pedrohenriquevalentim/olist-ds'` | Tela 1, Tela 3 | [link](...) |
+
+## Elementos sem componente DS equivalente
+
+| Elemento | Tela | Sugestão |
+|---|---|---|
+| "Plan Card" (frame custom) | Tela 2 | Construir com tokens CORES.md/ESPACAMENTO.md; avaliar criação via `/ds-componente` |
+
+## Resumo
+- **X** componentes DS únicos usados
+- **Y** telas analisadas
+- **Z** elementos sem equivalente DS
+```
+
+**Diferença dos Casos 7 e 8:**
+- Caso 7 (`/ds-componente`): cria um *novo componente para o DS*
+- Caso 8 (`/ds-implementar`): converte uma tela em *código de produto pronto para colar*
+- Caso 9 (`/ds-handoff`): não gera código — só documenta quais componentes DS (e gaps) aparecem numa jornada, para anexar numa PR ao time de dev
+
 ## Regras da Figma Plugin API (use_figma)
 
 Erros comuns e suas correções — manter para evitar regressão:
@@ -517,8 +599,11 @@ Erros comuns e suas correções — manter para evitar regressão:
 
 ---
 
-**Versão:** 3.8
-**Última atualização:** 2026-06-28
+**Versão:** 3.10
+**Última atualização:** 2026-07-02
+**Decisão permanente (2026-07-03, não versionada):** `design system (base)` é a única library de referência em `figma-config.json`/`searchPriority`; AI Components, ERP components, ERP recursos, ERP style guide e [design system] components web estão bloqueadas permanentemente em `blockedLibraries` (dados preservados para eventual reversão). Ver `decisions/ux-design/FLUXO_PRD_FIGMA.md` para o histórico completo da decisão.
+**Mudanças v3.10:** Library "design system (base)" desbloqueada e consolidada como prioridade 6 (fallback final) em `figma-config.json` — as duas entradas antes bloqueadas que referenciavam o mesmo conteúdo por ângulos diferentes ("design system (base)" via libraryKey e "Design System - Fondations, Components & Icons Rebrand (TO-BE)" via fileKey, confirmadas como o mesmo objeto via `get_libraries`) foram unificadas numa única entrada em `libraries[]`/`searchPriority`; "Design System - Components Web (AS-IS)" permanece bloqueada. Tabela de prioridades e `CLAUDE.md` do repo atualizados.
+**Mudanças v3.9:** Caso 9 adicionado — `/ds-handoff` gera manifesto em Markdown listando componentes DS usados numa jornada do Figma (página, frame(s) ou componente(s)), com variantes observadas, imports e gaps sem equivalente DS; não gera código nem persiste artefato no repo, pensado para colar direto na descrição de uma PR ao time de dev; slash command e ramo no Fluxo de Decisão adicionados.
 **Mudanças v3.8:** Slash Commands adicionados (6 comandos explícitos: /ds-tela, /ds-figma, /ds-implementar, /ds-componente, /ds-revisar, /ds-sync); Caso 8 adicionado — /ds-implementar converte tela Figma em código React de produto usando componentes DS com props tipadas, direcionado a devs de BU consumidores do DS.
 **Mudanças v3.7:** Caso 7 adicionado — fluxo unificado de implementação de componente a partir de URL do Figma, combinando geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade) em paralelo; ramo "Criar componente" no Fluxo de Decisão expandido para referenciar o Caso 7.
 **Mudanças v3.6:** Versão anterior.

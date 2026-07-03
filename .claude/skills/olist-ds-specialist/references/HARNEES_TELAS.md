@@ -27,6 +27,7 @@ Execute este gate antes de criar qualquer frame. Se qualquer item falhar, **reso
 [ ] 2. Todas as zonas necessárias mapeadas pelo template?
 [ ] 3. Padrão de página da Zona D (Content Area) identificado (Tabela | Form | Dashboard | Detalhe | Empty)?
 [ ] 4. Componentes necessários têm componentKey válido nas libraries autorizadas?
+[ ] 4b. Nenhum componentKey escolhido veio de um resultado com name iniciado por "." (componente interno de construção — ver FIGMA_CONFIG.md)?
 [ ] 5. Nenhuma regra de limite por tela será violada (ver Seção 2)?
 [ ] 6. Componentes ausentes identificados e marcados como "— custom" (ver Seção 4)?
 ```
@@ -44,7 +45,7 @@ A coluna "Proibido" é exaustiva para os casos mais comuns — outros casos deve
 
 | Zona | Nome | Pode conter | Não pode conter |
 |---|---|---|---|
-| **A** | Novo Menu Global | `Menu ERP` (instância real, `stage` definido) | Qualquer outro componente. Nenhum elemento custom. |
+| **A** | Novo Menu Global | `Menu Global` (instância real, `produto` definido) | Qualquer outro componente. Nenhum elemento custom. |
 | **B** | Top Bar | `Breadcrumb` (texto, sem componente DS), máx 1 `Button` primary, `Button` secondary ou icon ilimitados | Inputs, formulários, tabelas, cards, badges soltos, ilustrações |
 | **C** | Page Header | `Heading` (1 único), `Input Search` (opcional), `Button` com ícone para filtros (sem label), `Tag` de filtro ativo | `Subheading`, cards de métrica, gráficos, tabelas, `Button` primary |
 | **D** | Content Area | Um padrão de página (ver Seção 3): Tabela, Form, Dashboard, Detalhe, ou Empty State | Elementos de navegação (breadcrumb, sidebar items), CTAs primários fora do contexto do padrão |
@@ -53,7 +54,7 @@ A coluna "Proibido" é exaustiva para os casos mais comuns — outros casos deve
 **Regras específicas ERP:**
 - Gap entre zonas B-C-D-E: **0px**
 - Fundo do container (zonas B–E): `--backgrounds/bg` (`#fcfbf8`)
-- Zona A: fundo do componente `Menu ERP` — não alterar
+- Zona A: fundo do componente `Menu Global` — não alterar
 - Breadcrumb na Zona B: texto puro com separador `/`, sem componente DS, cor `gray-500`
 
 ---
@@ -62,7 +63,7 @@ A coluna "Proibido" é exaustiva para os casos mais comuns — outros casos deve
 
 | Zona | Nome | Pode conter | Não pode conter |
 |---|---|---|---|
-| **A** | Novo Menu Global | `Menu ERP` (instância real, `stage` definido) | Qualquer outro componente. Nenhum elemento custom. |
+| **A** | Novo Menu Global | `Menu Global` (instância real, `produto` definido) | Qualquer outro componente. Nenhum elemento custom. |
 | **B** | Top Bar | Logo do produto (se aplicável), máx 1 `Button` primary, ações do produto (avatar, notificações) | Breadcrumb, inputs de busca, filtros |
 | **C** | Page Header + Subtitle | `Heading` (1 único) + `Subheading` obrigatório (descrição da página) | `Input Search`, filtros, `Button` de qualquer tipo, badges |
 | **D** | Content Area | `Summary Card` (opcional, antes do conteúdo principal), um padrão de página (Tabela, Form, Dashboard, Detalhe, Empty State), `Input Search` (dentro do padrão) | CTAs primários soltos fora do padrão, breadcrumb, elementos de navegação |
@@ -72,7 +73,9 @@ A coluna "Proibido" é exaustiva para os casos mais comuns — outros casos deve
 - Gap entre zonas B-C-D-E: **24px**
 - `Subheading` na Zona C é **obrigatório** (diferença crítica em relação ao ERP)
 - `Summary Card` (fundo azul claro) é opcional — aparece antes do conteúdo quando há métricas de resumo
-- Zona A: mesmo componente `Menu ERP` do ERP, `stage` adequado ao produto
+- Zona A: mesmo componente `Menu Global` do ERP, `produto` adequado ao contexto
+
+> ⚠️ **Gap conhecido (verificado em 2026-07-02):** não foi encontrada uma variante dedicada de `Summary Card` na library `design system (base)` — apenas o component_set genérico `card`. Antes de usar `Summary Card` numa tela desses templates, verificar as variantes do `card` (pode existir uma variante equivalente com outro nome) ou seguir a Seção 4 (primitivos + documentar gap) e a Seção 8 (reportar violação) deste harness. Ver `figma-config.json` → `harnessCoverageCheck.gaps`.
 
 ---
 
@@ -86,7 +89,7 @@ Define limites quantitativos e contextos válidos para cada componente.
 |---|---|---|
 | `Button` — variante primary | **1** | Hierarquia de CTA. Mais de 1 primary = falha crítica. |
 | `Heading` (papel de texto) | **1** | Um único título de página por tela. |
-| `Menu ERP` | **1** | Sempre na Zona A. Nunca duplicar. |
+| `Menu Global` | **1** | Sempre na Zona A. Nunca duplicar. |
 | `Input Search` | **1** | Uma busca por tela. ERP: Zona C. Envios/Hub: Zona D. |
 | `Summary Card` | **1** | Opcional. Apenas em Envios/Hub/Conta Digital, Zona D, antes do padrão. |
 
@@ -107,7 +110,7 @@ Define limites quantitativos e contextos válidos para cada componente.
 
 | Componente | Variante obrigatória | Observação |
 |---|---|---|
-| `Menu ERP` | `stage` deve ser definido | Reflete o produto: ERP, Envios, Hub, Conta Digital |
+| `Menu Global` | `produto` deve ser definido | Reflete o produto: ERP, Conta Digital, Envios, Ecommerce, Agentes de IA, Minha Conta |
 | `Button` | `size` e `variant` sempre explícitos | Nunca usar defaults implícitos |
 | `Tag` | `color` sempre mapeado ao status semântico | Ver `CORES.md` — Mapa de Cores para Status |
 
@@ -144,7 +147,7 @@ Quando um componente não existe no inventário DS, o Claude pode construir com 
 | `rectangle` / `rect` | ✅ | `fills` usando tokens DS (`CORES.md`), `cornerRadius` da escala DS |
 | `text` | ✅ | `loadFontAsync` antes de editar, fonte `Plus Jakarta Sans`, tokens de `TIPOGRAFIA.md` |
 | `line` / `divisor` | ✅ | `stroke` = `--color-gray-100` (1px), sem `fill` |
-| `vector` / `path` | ✅ para ícones do rebrand 24 | Apenas importar de `AI Components` — nunca desenhar caminhos manualmente |
+| `vector` / `path` | ✅ para ícones do rebrand 24 | Apenas importar da library ativa em `searchPriority` (`design system (base)`) — nunca desenhar caminhos manualmente |
 
 ### O que é proibido construir com primitivos
 
@@ -179,7 +182,7 @@ Nomes de layers são parte do harness — layers mal nomeados indicam construç�
 |---|---|---|
 | Frame de template | `[Produto]/[NomeTela]` | `ERP/Pedidos — Lista` |
 | Zona | `Zona [Letra] — [Nome]` | `Zona C — Page Header` |
-| Instância de componente DS | Nome exato do componente | `Button`, `Menu ERP`, `Tag` |
+| Instância de componente DS | Nome exato do componente | `Button`, `Menu Global`, `Tag` |
 | Componente custom | `[Categoria]/[Nome] — custom` | `Card/SummaryCard — custom` |
 | Frame de padrão | `Padrão/[Tipo]` | `Padrão/Tabela`, `Padrão/Form` |
 | Texto (papel de texto) | `[Papel]: [conteúdo curto]` | `Heading: Pedidos`, `Label: Nome do produto` |
@@ -257,6 +260,7 @@ Como prefere prosseguir?
 | Se precisar de | Leia |
 |---|---|
 | Dimensões e zonas dos templates | `TEMPLATES_PRODUTO.md` |
+| Componentes recomendados por zona (por template) | `TEMPLATES_PRODUTO.md` → seção "Componentes Recomendados por Zona" |
 | componentKeys e libraries | `FIGMA_CONFIG.md` |
 | Tokens de cor para primitivos custom | `CORES.md` |
 | Tokens de tipografia para texto custom | `TIPOGRAFIA.md` |
@@ -269,4 +273,5 @@ Como prefere prosseguir?
 
 **Versão:** 1.0  
 **Criado em:** 2026-06-05  
+**Atualizado em:** 2026-07-03 — `Menu ERP` (variante `stage=X`) substituído por `Menu Global` (variante `produto=X`), confirmado após republicação da library. Ver `component-registry.json` para o componentKey e a lista completa de produtos.  
 **Próxima revisão sugerida:** após 10 telas geradas com o harness ativo — coletar violações recorrentes e adicionar à Seção 2 (Limites por Componente) e Seção 3 (Padrões proibidos emergentes)

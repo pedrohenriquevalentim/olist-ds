@@ -19,6 +19,8 @@ Antes de qualquer operação, entender a diferença:
 
 ## Libraries Autorizadas (em ordem de prioridade)
 
+> **📌 Decisão permanente (desde 2026-07-03):** a tabela abaixo é a hierarquia **anterior, descontinuada**. A única library ativa em `searchPriority` hoje é `design system (base)`; as 5 abaixo estão em `blockedLibraries` (ver seção "Libraries Bloqueadas"), com dados preservados para eventual reversão futura.
+
 | # | Library | libraryKey (abreviado) |
 |---|---|---|
 | 1 | AI Components (master) | `lk-e52b27fe...` |
@@ -41,7 +43,7 @@ Antes de criar qualquer elemento no Figma, percorrer esta ordem **sem exceção*
        ├─ SIM → importar instância real → usar mesmo que override seja imperfeito
        └─ NÃO → ir para 2
 
-2. Existe em nenhuma das 5 libraries?
+2. Não existe na library de searchPriority (design system (base))?
    └─ Criar primitivo com tokens DS
        ├─ fills: cores de CORES.md
        ├─ typography: Plus Jakarta Sans + TIPOGRAFIA.md
@@ -64,7 +66,7 @@ O componente real garante tokens, handoff e versionamento. O primitivo não.
 const config = JSON.parse(readFile('figma-config.json'));
 const priority = config.designSystem.searchPriority;
 
-// Buscar filtrando pelas 5 libraries autorizadas
+// Buscar filtrando pela library autorizada (design system (base))
 const results = await search_design_system({
   fileKey: "rwQoESynmdscKMVuonWBto",  // arquivo de trabalho atual
   query: "Button",
@@ -159,16 +161,38 @@ if (textNode) {
 
 ### ✅ Sempre:
 1. Passar `includeLibraryKeys: searchPriority` em todo `search_design_system`
-2. Usar o primeiro resultado — a ordem do array garante a prioridade correta
-3. Verificar `libraryName` no resultado para confirmar de qual library veio
-4. Definir `layoutSizing` APÓS `appendChild` ao frame pai
-5. Carregar fonts com `loadFontAsync` antes de editar texto em instâncias
+2. Descartar resultados com `name` iniciado por `.` (componentes internos de construção — ver seção "Componentes Internos '.[base]'" abaixo)
+3. Do que sobrar, usar o primeiro resultado — a ordem do array garante a prioridade correta
+4. Verificar `libraryName` no resultado para confirmar de qual library veio
+5. Definir `layoutSizing` APÓS `appendChild` ao frame pai
+6. Carregar fonts com `loadFontAsync` antes de editar texto em instâncias
 
 ### ❌ Nunca:
 1. Chamar `search_design_system` sem `includeLibraryKeys`
 2. Usar componentes de `blockedLibraries` mesmo que apareçam sem filtro
-3. Construir Button, Tag, Menu ERP etc. manualmente quando existem no DS
-4. Definir `layoutSizingVertical/Horizontal` antes de `appendChild`
+3. Importar/instanciar um componente cujo `name` comece com `.` (ex: `.[base] single select list`, `.menu erp/stage14`) — são peças internas, nunca resultados válidos
+4. Construir Button, Tag, Menu Global etc. manualmente quando existem no DS
+5. Definir `layoutSizingVertical/Horizontal` antes de `appendChild`
+
+---
+
+## Componentes Internos ".[base]" — Sempre Ignorar
+
+Regra **permanente**, válida para qualquer library ativa (não é específica do teste de library master).
+
+O Figma oculta do painel de Assets qualquer componente cujo nome comece com `.` (ponto). Esse é o padrão usado para as peças que **constroem** um component set publicado — nunca são o resultado que se deve importar.
+
+**Confirmado na `design system (base)` em 2026-07-02** (verificação real via `search_design_system`):
+
+| name retornado | filePath | O que é |
+|---|---|---|
+| `.menu erp/stage14` | `components/_menu erp/stage14` | Variante interna usada para montar o component_set público `menu erp` |
+| `.[base] single select list` | `components/__base_ single select list` | Bloco de construção interno do `dropdown` |
+| `.[base] multi select list` | `components/__base_ multi select list` | Bloco de construção interno de listas multi-seleção |
+
+**Regra de filtro:** ao processar o array `components` retornado por `search_design_system`, remover qualquer entrada cujo `name` dê match em `^\.` **antes** de escolher "o primeiro resultado" da lista (regra "Sempre #3" acima). O padrão está cadastrado em `figma-config.json` → `excludedComponentNamePatterns`.
+
+Se, depois do filtro, não sobrar nenhum resultado para um componente necessário, tratar como **não encontrado no DS** e seguir a Seção 4 do `HARNEES_TELAS.md` (primitivos + documentar gap).
 
 ---
 
@@ -192,17 +216,29 @@ if (textNode) {
 
 Ignorar mesmo que apareçam em buscas sem filtro:
 
+**Bloqueada permanentemente:**
+
 | Library | Motivo |
 |---|---|
-| `design system` (base) | Supersedida por AI Components e ERP components |
-| `HeyN4w209HWh8rfpTDiwyf` (TO-BE antigo) | Conteúdo migrado para AI Components |
-| `QJmwu6sR06xmyGAoBaXuEn` (AS-IS antigo) | Substituído por [design system] components web via libraryKey |
+| `QJmwu6sR06xmyGAoBaXuEn` (Design System - Components Web AS-IS) | Substituído por [design system] components web via libraryKey |
+
+**Bloqueadas permanentemente desde 2026-07-03 (descontinuadas em favor da design system (base)):**
+
+| Library | Motivo |
+|---|---|
+| AI Components | Era a master; substituída pela design system (base) como única referência |
+| ERP components | Descontinuada — dados preservados (era prioridade 2) |
+| ERP recursos | Descontinuada — dados preservados (era prioridade 3) |
+| ERP style guide | Descontinuada — dados preservados (era prioridade 4) |
+| [design system] components web | Descontinuada — dados preservados (era prioridade 5) |
+
+> Nota: `design system (base)` **não está bloqueada** — foi desbloqueada em 2026-07-02 e adotada como única library ativa em 2026-07-03. Este arquivo chegou a listá-la como bloqueada numa versão anterior; corrigido.
 
 ---
 
 ## Checklist Antes de Usar Figma MCP
 
-- [ ] `figma-config.json` existe e tem `searchPriority` com 5 libraryKeys
+- [ ] `figma-config.json` existe e tem `searchPriority` preenchido (1 libraryKey: design system (base))
 - [ ] `search_design_system` será chamado com `includeLibraryKeys: searchPriority`
 - [ ] Nenhum resultado de `blockedLibraries` será usado
 - [ ] Fonts carregadas antes de editar texto em instâncias

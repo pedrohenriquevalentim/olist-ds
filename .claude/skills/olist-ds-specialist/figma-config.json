@@ -3,61 +3,80 @@
     "libraries": [
       {
         "priority": 1,
+        "name": "design system (base)",
+        "fileKey": "HeyN4w209HWh8rfpTDiwyf",
+        "libraryKey": "lk-f068a69b8c4ef3c01d6a883806b21c6ebe73213d3565451a399cfba74694fbc0053c2b4226fb206812f098c679b6a971148aa027e97bc14733e29552c4002cb5",
+        "url": "https://www.figma.com/design/HeyN4w209HWh8rfpTDiwyf/design-system",
+        "description": "Adotada em 2026-07-03 como única referência para construção de telas (decisão permanente, substitui a hierarquia anterior de 6 libraries). Mesmo conteúdo antes listado como arquivo bloqueado 'Design System - Fondations, Components & Icons Rebrand (TO-BE)'. Verificada contra o harness em 2026-07-02 — ver harnessCoverageCheck abaixo."
+      }
+    ],
+    "searchPriority": [
+      "lk-f068a69b8c4ef3c01d6a883806b21c6ebe73213d3565451a399cfba74694fbc0053c2b4226fb206812f098c679b6a971148aa027e97bc14733e29552c4002cb5"
+    ],
+    "blockedLibraries": [
+      {
+        "name": "Design System - Components Web (AS-IS)",
+        "fileKey": "QJmwu6sR06xmyGAoBaXuEn",
+        "reason": "Arquivo AS-IS descontinuado como referência direta. Substituído pela library [design system] components web via libraryKey."
+      },
+      {
+        "priority": 1,
         "name": "AI Components",
         "fileKey": "JAa7qFjKNJFOj9RJ7bmGU5",
         "libraryKey": "lk-e52b27fef454a38384433e4dc6895fd1f4b6dfd7b5a58d8ec414917c4bbdd3f93181fb73596c1c81be7c00eecc389c77259f0578c150c7a298be620b9e80731f",
         "url": "https://www.figma.com/design/JAa7qFjKNJFOj9RJ7bmGU5/AI-Components",
-        "description": "Library master — Menu ERP atualizado, Button, ícones rebrand 24. Preferir sempre sobre todas as demais."
+        "reason": "Bloqueada permanentemente desde 2026-07-03 — design system (base) adotada como única referência para construção de telas. Era a library master antes dessa decisão. Dados preservados (fileKey/libraryKey) para eventual reversão futura."
       },
       {
         "priority": 2,
         "name": "ERP components",
         "libraryKey": "lk-831bcbe755f53fd6cf9cfe4b7e877a26bc341fb419d140835c2973128a8a915cf26115cfbc0e6184ba4881d489a7869e6cf28f67de5ef3dbe93cebefc146d744",
-        "description": "Componentes principais do ERP Tiny (button common, menu do erp, tag card, inputs, etc). Usar quando não encontrado na AI Components."
+        "reason": "Bloqueada permanentemente desde 2026-07-03 — ver motivo em 'AI Components' acima."
       },
       {
         "priority": 3,
         "name": "ERP recursos",
         "libraryKey": "lk-f95b9869c6c38c4f5c74b94611f708873f641ecc4a412aa097a0c84cab019f98c24ee283133e3cc3313882c089008f068459de3edf728c4f0b8489d1f5b580b3",
-        "description": "Recursos complementares do ERP — ilustrações, padrões específicos de produto."
+        "reason": "Bloqueada permanentemente desde 2026-07-03 — ver motivo em 'AI Components' acima."
       },
       {
         "priority": 4,
         "name": "ERP style guide",
         "libraryKey": "lk-798aabd36baa90e38817136d0c8dae3f4fd84aab661e07c4dfa468fc3e7d83701769b1beb00a0c40824c2e325b0c5ebda4af6a40ae3b89a4e95c4f7289c4035d",
-        "description": "Style guide do ERP — tipografia, espaçamentos, tokens visuais, paleta."
+        "reason": "Bloqueada permanentemente desde 2026-07-03 — ver motivo em 'AI Components' acima."
       },
       {
         "priority": 5,
         "name": "[design system] components web",
         "libraryKey": "lk-89f0ba0d76188fb1d2456e4b1d9458984acec54b86ef9818feaf6bfecc313d36cc4d2b512913be7d09473040ed2df34dc991ebe2acca10abfd143ff758b37437",
-        "description": "Componentes web base do DS. Fallback final — usar apenas se o componente não existir nas libraries anteriores."
+        "reason": "Bloqueada permanentemente desde 2026-07-03 — ver motivo em 'AI Components' acima."
       }
     ],
-    "searchPriority": [
-      "lk-e52b27fef454a38384433e4dc6895fd1f4b6dfd7b5a58d8ec414917c4bbdd3f93181fb73596c1c81be7c00eecc389c77259f0578c150c7a298be620b9e80731f",
-      "lk-831bcbe755f53fd6cf9cfe4b7e877a26bc341fb419d140835c2973128a8a915cf26115cfbc0e6184ba4881d489a7869e6cf28f67de5ef3dbe93cebefc146d744",
-      "lk-f95b9869c6c38c4f5c74b94611f708873f641ecc4a412aa097a0c84cab019f98c24ee283133e3cc3313882c089008f068459de3edf728c4f0b8489d1f5b580b3",
-      "lk-798aabd36baa90e38817136d0c8dae3f4fd84aab661e07c4dfa468fc3e7d83701769b1beb00a0c40824c2e325b0c5ebda4af6a40ae3b89a4e95c4f7289c4035d",
-      "lk-89f0ba0d76188fb1d2456e4b1d9458984acec54b86ef9818feaf6bfecc313d36cc4d2b512913be7d09473040ed2df34dc991ebe2acca10abfd143ff758b37437"
-    ],
-    "blockedLibraries": [
+    "excludedComponentNamePatterns": [
       {
-        "name": "design system (base)",
-        "libraryKey": "lk-f068a69b8c4ef3c01d6a883806b21c6ebe73213d3565451a399cfba74694fbc0053c2b4226fb206812f098c679b6a971148aa027e97bc14733e29552c4002cb5",
-        "reason": "Base genérica supersedida pela AI Components e ERP components. Ignorar mesmo se aparecer em buscas sem filtro."
-      },
-      {
-        "name": "Design System - Fondations, Components & Icons Rebrand (TO-BE)",
-        "fileKey": "HeyN4w209HWh8rfpTDiwyf",
-        "reason": "Arquivo TO-BE descontinuado como referência de busca. Conteúdo migrado para AI Components."
-      },
-      {
-        "name": "Design System - Components Web (AS-IS)",
-        "fileKey": "QJmwu6sR06xmyGAoBaXuEn",
-        "reason": "Arquivo AS-IS descontinuado como referência direta. Substituído pela library [design system] components web via libraryKey."
+        "pattern": "^\\.",
+        "reason": "Prefixo '.' oculta o componente do painel de Assets do Figma — indica peça interna de construção de um component set (ex: '.menu erp/stage14', '.[base] single select list', '.[base] multi select list'). Nunca importar/instanciar diretamente; usar sempre o component_set público sem o prefixo de ponto."
       }
     ],
+    "harnessCoverageCheck": {
+      "lastVerifiedAt": "2026-07-02",
+      "againstLibrary": "design system (base)",
+      "verifiedVia": "search_design_system real, uma query por requisito do HARNEES_TELAS.md",
+      "status": "cobertura quase completa — 1 gap conhecido",
+      "confirmed": [
+        "Menu ERP", "Button", "Button Icon", "Radio Button", "Segmented Buttons", "Link",
+        "Tag (+ tag-desktop, tag-mobile, tag-more, tag-delivery)", "Tooltip", "Logo",
+        "Icon (genérico + ~15 ícones individuais)", "Input Search", "Input Text", "Dropdown",
+        "Checkbox", "Avatar", "Card (genérico)", "Breadcrumb",
+        "Heading/Subheading via Text Styles (text/H1–H5, paragraph, caption, description) — não como componente, consistente com o harness"
+      ],
+      "gaps": [
+        {
+          "requirement": "Summary Card (HARNEES_TELAS.md Seção 1 — template Envios/Hub/Conta Digital, Zona D)",
+          "finding": "Não foi encontrado componente/variante dedicada de 'Summary Card' (fundo azul claro). Existe apenas o component_set genérico 'card'. Validar manualmente as variantes desse card (ou com o time de design) antes de usar em telas desses produtos — pode exigir construção com primitivos + documentação de gap (Seção 4 do harness) até confirmação."
+        }
+      ]
+    },
     "buildWorkflow": {
       "method": "use_figma",
       "pluginJsonObsolete": true,
@@ -72,13 +91,16 @@
       ]
     },
     "notes": [
+      "=== LIBRARY ÚNICA DE REFERÊNCIA (decisão permanente desde 2026-07-03) ===",
+      "searchPriority contém apenas a design system (base). As outras 5 libraries que compunham a hierarquia anterior (AI Components, ERP components, ERP recursos, ERP style guide, [design system] components web) estão em blockedLibraries permanentemente, com o motivo e a priority original anotados em cada entrada — preservadas apenas para referência histórica e eventual reversão futura.",
+      "",
       "=== SOBRE OS IDENTIFICADORES ===",
       "libraryKey (lk-...): identificador de library publicada. Usado em search_design_system e importComponentByKeyAsync.",
       "fileKey: identificador do arquivo Figma na URL. Usado apenas para referência/inspeção via get_metadata.",
       "componentKey: identificador de componente individual. Retornado pelo search_design_system. Usado em importComponentByKeyAsync.",
       "",
       "=== COMO BUSCAR COMPONENTES ===",
-      "Sempre passar includeLibraryKeys: searchPriority para filtrar às 5 libraries autorizadas.",
+      "Sempre passar includeLibraryKeys: searchPriority para filtrar à library autorizada (hoje, apenas 1: design system (base)).",
       "Exemplo: search_design_system('Button', includeLibraryKeys: [searchPriority])",
       "Usar o primeiro resultado encontrado — a ordem da lista garante a prioridade correta.",
       "",
@@ -88,7 +110,12 @@
       "Sempre definir layoutSizing APÓS appendChild ao frame pai.",
       "",
       "=== BIBLIOTECAS BLOQUEADAS ===",
-      "Ignorar resultados de blockedLibraries mesmo se aparecerem em buscas sem filtro de libraryKey."
+      "Ignorar resultados de blockedLibraries mesmo se aparecerem em buscas sem filtro de libraryKey. Isso inclui AI Components, ERP components, ERP recursos, ERP style guide e [design system] components web — bloqueadas permanentemente desde 2026-07-03.",
+      "",
+      "=== COMPONENTES INTERNOS '.[base]' — SEMPRE IGNORAR ===",
+      "Componentes cujo name comece com '.' (ponto) são peças ocultas usadas para CONSTRUIR um component set — nunca resultados válidos para importar/instanciar. Confirmado na design system (base): '.menu erp/stage14', '.[base] single select list', '.[base] multi select list'.",
+      "Ver excludedComponentNamePatterns acima. Ao processar resultados de search_design_system, descartar qualquer entrada cujo name dê match em algum desses patterns antes de escolher 'o primeiro resultado' da busca.",
+      "Se o único resultado retornado para um componente for um '.[base]/...' ou '.nome', tratar como 'não encontrado' e seguir o fluxo de Seção 4 do HARNEES_TELAS.md (construir com primitivos + documentar gap)."
     ]
   }
 }
