@@ -76,6 +76,7 @@ olist-ds-specialist/
 │   │   ├── ICONES.md                   # Uso de ícones via ReactNode e currentColor
 │   │   └── TOKENS.md                   # Tokens CSS e variáveis de design
 │   └── ux-design/
+│       ├── COMPONENTES_POR_ZONA.md
 │       ├── ESPACAMENTO_LAYOUT.md       # Grid de 4px, border-radius, espaçamento
 │       ├── FLUXO_PRD_FIGMA.md          # Workflow PRD → Figma passo a passo
 │       ├── PRINCIPIOS.md               # Princípios de design Olist
@@ -99,7 +100,7 @@ olist-ds-specialist/
     └── VISAO_GERAL.md                  # Mapa de navegação — leia sempre primeiro
 ```
 
-> **Raiz:** 6 arquivo(s) · **Decisions:** 12 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 33 arquivo(s) — atualizado em 2026-07-03 pelo `sync-skill-meta.mjs`
+> **Raiz:** 6 arquivo(s) · **Decisions:** 13 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 34 arquivo(s) — atualizado em 2026-07-03 pelo `sync-skill-meta.mjs`
 ## Libraries do Figma (ordem de prioridade)
 
 | # | Library | Conteúdo |
