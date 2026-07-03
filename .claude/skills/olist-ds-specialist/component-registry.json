@@ -6,7 +6,7 @@
     "figmaLibraryKey": "lk-f068a69b8c4ef3c01d6a883806b21c6ebe73213d3565451a399cfba74694fbc0053c2b4226fb206812f098c679b6a971148aa027e97bc14733e29552c4002cb5",
     "extractedAt": "2026-07-03",
     "republishedAt": "2026-07-03T15:16:45Z",
-    "totalComponents": 63,
+    "totalComponents": 62,
     "published": true,
     "previousSource": {
       "name": "AI-Components",
@@ -18,7 +18,7 @@
     "variantsNote": "Variantes detalhadas (state/type/size) confirmadas via get_metadata apenas para a categoria Input e para Menu Global. Para os demais, variantes não foram coletadas.",
     "excludedNamePattern": "^\\.",
     "excludedNote": "Componentes com name iniciado por '.' (ex: '.menu erp/stage14', '.[base] single select list', '.[base] multi select list', '.[base] token box', '.[base] counter') foram excluídos deste registry — são peças internas de construção de component set, nunca instâncias válidas. Ver figma-config.json > excludedComponentNamePatterns.",
-    "resolvedIssue_menuGlobal": "RESOLVIDO após republicação: 'menu-global' agora é pesquisável como component_set próprio (componentKey abaixo), com variantes por produto. O componentKey antigo de 'Menu ERP' (variantes stage=X) não aparece mais nas buscas — foi substituído, não apenas renomeado. Entrada 'Menu ERP' mantida no registry só para referência histórica, marcada como superseded.",
+    "resolvedIssue_menuGlobal": "RESOLVIDO após republicação: 'menu-global' agora é pesquisável como component_set próprio (componentKey abaixo), com variantes por produto. O componentKey antigo de 'Menu ERP' (variantes stage=X) não aparece mais nas buscas — foi substituído, não apenas renomeado. A entrada 'Menu ERP' foi removida deste registry em 2026-07-03 a pedido do usuário (não é mais usado); o histórico da substituição continua em syncDiff.migrated e em decisions/ux-design/FLUXO_PRD_FIGMA.md.",
     "usage": [
       "Skill olist-ds-specialist: consulta para decidir quais componentes usar",
       "Plugin Figma: usa componentKey para importar via importComponentByKeyAsync (component) ou importComponentSetByKeyAsync (component_set)",
@@ -35,14 +35,7 @@
       "assetType": "component_set",
       "category": "navigation",
       "variants": { "produto": ["ERP", "Conta Digital", "Envios", "Ecommerce", "Agentes de IA", "Minha Conta"] },
-      "note": "Sucessor de 'Menu ERP' — confirmado pesquisável após republicação da library em 2026-07-03T15:16:45Z. Usar este, não o antigo."
-    },
-    "Menu ERP": {
-      "componentKey": "4556c8fdb1ee00d2aa13c690ab312cbf468baeab",
-      "assetType": "component_set",
-      "category": "deprecated",
-      "variants": { "stage": ["0", "01", "vendas", "produtos", "supri", "serv", "finan", "cli", "relat", "conf", "help", "noti", "stage13"] },
-      "note": "SUPERSEDED por 'Menu Global' em 2026-07-03. Este componentKey não aparece mais em buscas — mantido apenas como referência histórica, não usar."
+      "note": "Sucessor de 'Menu ERP' — confirmado pesquisável após republicação da library em 2026-07-03T15:16:45Z. Único componente de menu a usar."
     },
     "Link": { "componentKey": "3923b840597be703e95d1b0cf7075b2cb087177f", "assetType": "component_set", "category": "navigation" },
     "Segmented Buttons": { "componentKey": "218c86353f7cb84c5b129ae8bbcf23b28908b43b", "assetType": "component_set", "category": "navigation" },
@@ -173,7 +166,6 @@
   "categories": {
     "action": ["Button", "Button Icon"],
     "navigation": ["Menu Global", "Link", "Segmented Buttons", "Breadcrumb", "Tabs", "Paginator", "Sort", "Context Switch"],
-    "deprecated": ["Menu ERP"],
     "input": ["Input Text", "Input Email", "Input Search", "Input Token", "Input Password", "Input File", "Input Select", "Input Paragraph", "Dropdown", "Checkbox", "Radio Button", "Toggle", "Chip"],
     "data-display": ["Tag", "Badge", "Tag Desktop", "Tag Mobile", "Tag More", "Tag Delivery", "Table", "Card", "Avatar"],
     "feedback": ["Tooltip", "Cookie"],
