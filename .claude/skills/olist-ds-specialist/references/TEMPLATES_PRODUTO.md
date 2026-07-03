@@ -1,8 +1,10 @@
 # Templates de Página por Produto
 
-**Versão:** 1.1  
-**Última atualização:** 2026-06-03 (v1.1 — screen-spec descontinuado; use_figma como canal de entrega)  
+**Versão:** 1.3  
+**Última atualização:** 2026-07-03 (v1.3 — adicionada seção "Componentes Recomendados por Zona" por template, com base no inventário confirmado em `component-registry.json`; pontos em aberto documentados separadamente)  
 **Fonte Figma:** `9pCeYLXBj1O0QPUiHANaqh` — Página "📐 Templates dos produtos - Inventário" (node `8063:818`)
+
+> **Nota:** este arquivo Figma é **diferente** da library de componentes `design system (base)` (`HeyN4w209HWh8rfpTDiwyf`, ver `figma-config.json`). Os templates aqui são wireframes de estrutura/zona (frames com labels de texto, não componentes publicados) — verificado em 2026-07-03 via `get_metadata` direto nos nodes: `8063:818`, `8063:3669` e `8063:20969` continuam válidos e as dimensões batem exatamente com o documentado abaixo. Não há necessidade de migrar este conteúdo para a `design system (base)` — são artefatos de tipos diferentes (wireframe de layout vs. component library).
 
 Antes de criar telas no Figma, identificar o PRODUTO no SDD/PRD e usar o template correspondente. As zonas descritas aqui refletem exatamente a estrutura definida no Figma.
 
@@ -84,6 +86,17 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
 - Zona E é opcional — só aparece quando há tabela com muitos itens
 - Máximo 1 CTA primário na Zona B (Top Bar)
 
+### Componentes Recomendados por Zona — ERP
+
+> Baseado no inventário confirmado em `component-registry.json` (63 componentes, pós-republicação de 2026-07-03). Zona A não entra aqui — é exclusiva do `Menu Global` (ver Regras acima). Itens marcados ⚠️ são percepção, não regra fechada — ver "Observações e Pontos em Aberto" ao final deste arquivo.
+
+| Zona | Componentes recomendados |
+|---|---|
+| **B** — Top Bar | `Breadcrumb` ⚠️ (harness histórico assume texto puro, mas hoje existe componente real), `Button` (primary, máx 1), `Button Icon` |
+| **C** — Page Header | `Input Search`, `Button Icon` (filtro), `Tag` ou `Badge` ⚠️ (filtro ativo) — Heading é Text Style, não componente |
+| **D** — Content Area | `Table`, `Sort`, `Checkbox`, `Radio Button`, `Toggle`, `Chip`, `Dropdown`, `Input Text`/`Input Email`/`Input Search`/`Input Token`/`Input Password`/`Input File`/`Input Select`/`Input Paragraph`, `Card`, `Segmented Buttons` ou `Tabs` ⚠️ (sub-navegação, escolha em aberto), `Tooltip`, `Avatar` |
+| **E** — Paginação | `Paginator` |
+
 ### Estrutura de Layout — ERP (referência para use_figma)
 
 ```json
@@ -96,8 +109,8 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
       {
         "id": "zona-a",
         "type": "component",
-        "component": "Menu ERP",
-        "variant": { "stage": "0" },
+        "component": "Menu Global",
+        "variant": { "produto": "ERP" },
         "width": 304
       },
       {
@@ -164,7 +177,18 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
 - Zona C SEMPRE inclui subtitle (descrição da página abaixo do heading)
 - Zona D pode conter Summary Card (fundo azul claro) antes do conteúdo principal
 - Zona E é opcional — "sticky" para ações de confirmação ou paginação
-- A Zona A usa o componente **Menu ERP** do inventário (304px), com variante `stage` adequada ao produto
+- A Zona A usa o componente **Menu Global** do inventário (304px), com variante `produto` adequada ao contexto (ex: `Envios`, `Conta Digital`, `Ecommerce`)
+
+### Componentes Recomendados por Zona — Envios / Hub / Conta Digital
+
+> Baseado no inventário confirmado em `component-registry.json`. Zona A não entra aqui — é exclusiva do `Menu Global`. Itens marcados ⚠️ são percepção, não regra fechada — ver "Observações e Pontos em Aberto" ao final deste arquivo.
+
+| Zona | Componentes recomendados |
+|---|---|
+| **B** — Top Bar | `Logo`, `Button` (primary, máx 1), `Avatar`, `Badge` ⚠️ (contador de notificação, inferência), `Context Switch` ⚠️ (propósito não confirmado) |
+| **C** — Page Header + Subtitle | Nenhum — Heading e Subheading são Text Styles, não componentes |
+| **D** — Content Area | `Card` (para "Summary Card" — gap conhecido, sem variante dedicada), mesmo conjunto de Form/Tabela/Dashboard da Zona D do ERP, `Input Search` (aqui, dentro do padrão — não solto como no ERP) |
+| **E** — Sticky ou Paginação | `Button` primary + `Button` secondary (máx 2, modo sticky) ou `Paginator` |
 
 ### Estrutura de Layout — Envios / Hub / Conta Digital (referência para use_figma)
 
@@ -178,8 +202,8 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
       {
         "id": "zona-a",
         "type": "component",
-        "component": "Menu ERP",
-        "variant": { "stage": "0" },
+        "component": "Menu Global",
+        "variant": { "produto": "Envios" },
         "width": 304
       },
       {
@@ -198,6 +222,21 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
   }
 }
 ```
+
+---
+
+## Observações e Pontos em Aberto (componentes por zona)
+
+Percepção registrada em 2026-07-03, ainda **não confirmada com o time de design** — não tratar como regra do harness até validação.
+
+> Formalizado como decisão pendente em `decisions/ux-design/COMPONENTES_POR_ZONA.md` (com contexto, impacto e como resolver cada item) — leia lá antes de decidir sozinho entre as opções em disputa.
+
+- **`Breadcrumb`:** o harness (`HARNEES_TELAS.md`) assume "texto puro, sem componente DS" na Zona B do ERP. Hoje existe um `Breadcrumb` component_set real na `design system (base)`. Vale decidir se passa a usar a instância real.
+- **`Tag` vs `Badge`:** a library tem os dois desde a republicação. Não está claro se são intercambiáveis ou se cada um tem um uso específico (ex: `Tag` para status semântico, `Badge` para contador numérico). Documentado como "ou" nas tabelas acima até esclarecer.
+- **`Segmented Buttons` vs `Tabs`:** ambos parecem cobrir sub-navegação dentro da Zona D (padrão Detalhe). O harness só menciona `Segmented Buttons`; `Tabs` é mais novo no inventário. Confirmar qual é o pretendido antes de padronizar.
+- **`Context Switch`:** componente novo, propósito não confirmado — nome sugere troca de contexto/workspace, hipótese de uso na Zona B (Top Bar) dos templates Envios/Hub/Conta Digital, mas isso é inferência, não fato verificado.
+- **`Tooltip` e `Cookie`:** não pertencem a nenhuma zona específica — são overlays (Tooltip ancorado a qualquer elemento interativo; Cookie provavelmente banner de página inteira).
+- **`Sort`:** provavelmente acoplado ao cabeçalho de coluna da `Table`, não uma peça solta de zona — não incluído como item independente nas tabelas acima por esse motivo, mas fica registrado aqui como parte do padrão Tabela.
 
 ---
 

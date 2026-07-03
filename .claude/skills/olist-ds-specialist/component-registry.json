@@ -1,220 +1,214 @@
 {
   "_meta": {
     "description": "Inventário de componentes do DS Olist disponíveis para construção de telas via JSON",
-    "source": "AI-Components",
-    "figmaFileKey": "JAa7qFjKNJFOj9RJ7bmGU5",
-    "figmaPageId": "0:1",
-    "extractedAt": "2026-06-03",
-    "totalComponents": 22,
+    "source": "design system (base)",
+    "figmaFileKey": "HeyN4w209HWh8rfpTDiwyf",
+    "figmaLibraryKey": "lk-f068a69b8c4ef3c01d6a883806b21c6ebe73213d3565451a399cfba74694fbc0053c2b4226fb206812f098c679b6a971148aa027e97bc14733e29552c4002cb5",
+    "extractedAt": "2026-07-03",
+    "republishedAt": "2026-07-03T15:16:45Z",
+    "totalComponents": 62,
     "published": true,
+    "previousSource": {
+      "name": "AI-Components",
+      "figmaFileKey": "JAa7qFjKNJFOj9RJ7bmGU5",
+      "note": "Registry anterior (extraído em 2026-06-03). Substituído nesta sincronização porque a AI Components foi bloqueada permanentemente em 2026-07-03 — ver figma-config.json > blockedLibraries."
+    },
+    "method": "Varredura em 2 passes: (1) sync inicial via search_design_system por nome; (2) get_metadata em node ids reais fornecidos pelo usuário ('🗨️ inputs' 703:8622 e 'menu-global' 8799:12268), que confirmou 5 componentes que a busca por palavra-chave não havia superficializado. Após o usuário republicar a library inteira (2026-07-03T15:16:45Z), refeita uma 3ª passada revalidando todo componentKey já conhecido — a maioria ficou estável, mas 'Tag' mudou de key e 5 componentes novos apareceram. get_metadata sem nodeId continua só expondo a página '🟦 cover' (vazia) como top-level page — não há forma automática de listar todas as páginas da library; cobertura 100% exigiria links de páginas adicionais (ex: página principal de ícones, cards) que ainda não foram fornecidos.",
+    "variantsCollected": "parcial",
+    "variantsNote": "Variantes detalhadas (state/type/size) confirmadas via get_metadata apenas para a categoria Input e para Menu Global. Para os demais, variantes não foram coletadas.",
+    "excludedNamePattern": "^\\.",
+    "excludedNote": "Componentes com name iniciado por '.' (ex: '.menu erp/stage14', '.[base] single select list', '.[base] multi select list', '.[base] token box', '.[base] counter') foram excluídos deste registry — são peças internas de construção de component set, nunca instâncias válidas. Ver figma-config.json > excludedComponentNamePatterns.",
+    "resolvedIssue_menuGlobal": "RESOLVIDO após republicação: 'menu-global' agora é pesquisável como component_set próprio (componentKey abaixo), com variantes por produto. O componentKey antigo de 'Menu ERP' (variantes stage=X) não aparece mais nas buscas — foi substituído, não apenas renomeado. A entrada 'Menu ERP' foi removida deste registry em 2026-07-03 a pedido do usuário (não é mais usado); o histórico da substituição continua em syncDiff.migrated e em decisions/ux-design/FLUXO_PRD_FIGMA.md.",
     "usage": [
       "Skill olist-ds-specialist: consulta para decidir quais componentes usar",
-      "Plugin Figma: usa componentSetKey para importar via importComponentSetByKeyAsync",
+      "Plugin Figma: usa componentKey para importar via importComponentByKeyAsync (component) ou importComponentSetByKeyAsync (component_set)",
       "Claude: se componente necessário não existir aqui, propõe criação seguindo tokens/foundations"
     ]
   },
 
   "components": {
-    "Logo Olist": {
-      "componentSetKey": "ae9ca71b5d178c724e20c9779ebf61b3bd65ec24",
-      "category": "brand",
-      "variantCount": 3,
-      "variants": {
-        "size": ["default", "simple", "symbol"]
-      }
-    },
-    "Button": {
-      "componentSetKey": "ca19f13385c29d595de8ff4879d0600be8a7ecd9",
-      "category": "action",
-      "variantCount": 36,
-      "variants": {
-        "type": ["primary", "secondary", "tertiary"],
-        "state": ["enabled", "hover", "pressed", "disabled"],
-        "no icon": ["on", "off"],
-        "lead icon": ["on", "off"],
-        "action icon": ["on", "off"]
-      }
-    },
-    "Button Icon": {
-      "componentSetKey": "e9a1a0b80660615ba5131ef794a9f7ba8bb1f774",
-      "category": "action",
-      "variantCount": 12,
-      "variants": {
-        "type": ["primary", "secondary", "tertiary"],
-        "state": ["enabled", "hover", "pressed", "disabled"]
-      }
-    },
-    "Link": {
-      "componentSetKey": "2dac5c308c95e2040feb3d9d04bdf9adcb36e512",
+    "Button": { "componentKey": "7eeea8fba59887a3a224468fe8059d490733579e", "assetType": "component_set", "category": "action" },
+    "Button Icon": { "componentKey": "0a4fdb6997f71ed5c9ed5c9993d682090d55597e", "assetType": "component_set", "category": "action" },
+
+    "Menu Global": {
+      "componentKey": "c2a9753aa84b8296ad1f7587a738ed019aa7d8b3",
+      "assetType": "component_set",
       "category": "navigation",
-      "variantCount": 3,
-      "variants": {
-        "state": ["enabled", "hover", "pressed"]
-      }
+      "variants": { "produto": ["ERP", "Conta Digital", "Envios", "Ecommerce", "Agentes de IA", "Minha Conta"] },
+      "note": "Sucessor de 'Menu ERP' — confirmado pesquisável após republicação da library em 2026-07-03T15:16:45Z. Único componente de menu a usar."
     },
-    "Segmented Buttons": {
-      "componentSetKey": "f63c3f48c0525127bfa7c23fb21caf14f66e1ca9",
-      "category": "navigation",
-      "variantCount": 10,
-      "variants": {
-        "segments": ["2", "3"],
-        "active segment": ["1", "2", "3"],
-        "label position": ["horizontal", "vertical"]
-      }
-    },
-    "Tags": {
-      "componentSetKey": "a8add251479043d1aacf04421dcd382c2cc407b5",
-      "category": "data-display",
-      "variantCount": 7,
-      "variants": {
-        "context": ["neutral", "accent", "brand", "informative", "success", "error", "warning"]
-      }
-    },
-    "Tooltip": {
-      "componentSetKey": "faf57638df74463fbb8db5cd805273ce785162b7",
-      "category": "feedback",
-      "variantCount": 4,
-      "variants": {
-        "pointing": ["up", "down", "left", "right"]
-      }
-    },
+    "Link": { "componentKey": "3923b840597be703e95d1b0cf7075b2cb087177f", "assetType": "component_set", "category": "navigation" },
+    "Segmented Buttons": { "componentKey": "218c86353f7cb84c5b129ae8bbcf23b28908b43b", "assetType": "component_set", "category": "navigation" },
+    "Breadcrumb": { "componentKey": "6549e468d12c266059eee2b1bc52eb8602b7d20c", "assetType": "component_set", "category": "navigation" },
+    "Tabs": { "componentKey": "6e28a768040022b920e7080a6a5f0b4b185abd68", "assetType": "component", "category": "navigation" },
+    "Paginator": { "componentKey": "2939593d5921fc8ceded785f7c81032fcb2c5b09", "assetType": "component", "category": "navigation" },
+    "Sort": { "componentKey": "3a7414fc0acd8b1d310ca1aa7aa62648805215d6", "assetType": "component_set", "category": "navigation" },
+    "Context Switch": { "componentKey": "1ea4fd52a3de7a2668dd9954b9070455360fd9c1", "assetType": "component_set", "category": "navigation", "note": "Novo após republicação — não existia no sync anterior" },
+
     "Input Text": {
-      "componentSetKey": "081f99163aa3cc61c71e8e95e79703b00638c4db",
+      "componentKey": "2f8bc179b629be8489ebd6fcc985d8606ba8c40d",
+      "assetType": "component_set",
       "category": "input",
-      "variantCount": 8,
-      "variants": {
-        "state": ["enabled", "hover", "pressed", "focused", "filled", "success", "error", "disabled"]
-      }
+      "variants": { "state": ["enabled", "hover", "pressed", "focused", "filled", "success", "error", "disabled"] }
     },
-    "Text Area": {
-      "componentSetKey": "8f17ce6c6ef1fcf4ccc889c43e26ce88ae5152ba",
+    "Input Email": {
+      "componentKey": "113a8732adea820838eaa24fbd982791e5ba0a60",
+      "assetType": "component_set",
       "category": "input",
-      "variantCount": 32,
-      "variants": {
-        "state": ["enabled", "hover", "pressed", "focused", "filled", "success", "error", "disabled"],
-        "line amount": ["2 lines", "3 lines", "4 lines", "5 lines"]
-      }
-    },
-    "Input E-mail": {
-      "componentSetKey": "a17bfc5938193e1b18bb0576141620aa219fb760",
-      "category": "input",
-      "variantCount": 8,
-      "variants": {
-        "state": ["enabled", "hover", "pressed", "focused", "filled", "success", "error", "disabled"]
-      }
+      "variants": { "state": ["enabled", "hover", "pressed", "focused", "filled", "success", "error", "disabled"] }
     },
     "Input Search": {
-      "componentSetKey": "d4b413e729540f5e0607dcc989a8af6742691d0f",
+      "componentKey": "052324bf69c3705610cbf01e55080375a7a35c6e",
+      "assetType": "component_set",
       "category": "input",
-      "variantCount": 12,
-      "variants": {
-        "state": ["enabled", "hover", "pressed", "focused", "filled", "disabled"],
-        "action": ["button", "button icon"]
-      }
+      "variants": { "state": ["enabled", "hover", "pressed", "focused", "filled", "disabled"] }
     },
     "Input Token": {
-      "componentSetKey": "1ce83aa9c05a67e91ecdeb0fef112592438301b8",
+      "componentKey": "14487f6dc6518ffe15b53a4fe2dbecf54c3da81e",
+      "assetType": "component_set",
       "category": "input",
-      "variantCount": 4,
-      "variants": {
-        "state": ["enabled", "success", "error", "disabled"]
-      }
+      "variants": { "state": ["enabled", "success", "error", "disabled"] }
     },
     "Input Password": {
-      "componentSetKey": "5b19884b37119aa09aed410cd30e8566ebf2435a",
+      "componentKey": "9c66f0890644dc2e086740784b0102efdd3f0388",
+      "assetType": "component_set",
       "category": "input",
-      "variantCount": 12,
       "variants": {
         "state": ["enabled", "hover", "pressed", "focused", "filled", "success", "error", "disabled"],
-        "visibility": ["on", "off"]
+        "visibility": ["on", "off (apenas focused/filled/success/error)"]
       }
     },
-    "Input Select": {
-      "componentSetKey": "39fa9e996fe9a3af0d9cd2ee23227d47aad19901",
+    "Input File": {
+      "componentKey": "efa8855a476f6b080369fafdc08b611561826149",
+      "assetType": "component_set",
       "category": "input",
-      "variantCount": 24,
+      "variants": { "state": ["enabled", "hover", "pressed", "focused", "filled", "error", "disabled"] }
+    },
+    "Input Select": {
+      "componentKey": "6718eb6149b9023bdaa3509fec1d90f01ba34c95",
+      "assetType": "component_set",
+      "category": "input",
       "variants": {
         "state": ["enabled", "hover", "pressed", "focused", "filled", "disabled"],
         "type": ["single select", "multi select", "autocomplete", "multi autocomplete"]
       }
     },
-    "Input File": {
-      "componentSetKey": "a1838cf572b64e1055ab53faad4e9eb2e1fd86c6",
+    "Input Paragraph": {
+      "componentKey": "1fb4cdce8cbc0d94ba60777e26fa54b1d06234b0",
+      "assetType": "component_set",
       "category": "input",
-      "variantCount": 7,
       "variants": {
-        "state": ["enabled", "hover", "pressed", "focused", "filled", "error", "disabled"]
-      }
+        "state": ["enabled", "hover", "pressed", "focused", "filled", "success", "error", "disabled"],
+        "line amount": ["2 lines", "3 lines", "4 lines", "5 lines"]
+      },
+      "note": "Sucessor de 'Text Area' do registry anterior — variantCount (32) idêntico."
     },
-    "Checkbox": {
-      "componentSetKey": "2cf60d48cc26801a0c1b97ff277dc1e17d08fd35",
-      "category": "input",
-      "variantCount": 12,
-      "variants": {
-        "state": ["enabled", "hover", "pressed", "disabled"],
-        "checked": ["on", "off"],
-        "indeterminate": ["on", "off"]
-      }
+    "Dropdown": { "componentKey": "a2fcb2da539547fece1e9f732b54aef08f1a4d1f", "assetType": "component_set", "category": "input" },
+    "Checkbox": { "componentKey": "6ae014154ba2196c2fe582d7be8affe07b6ac6c5", "assetType": "component_set", "category": "input" },
+    "Radio Button": { "componentKey": "db5515c33452f4b8d09aebcc3fde23a87b086c94", "assetType": "component_set", "category": "input" },
+    "Toggle": { "componentKey": "ef0ab115509f94cca96620106fa82bf7d61ae55a", "assetType": "component_set", "category": "input" },
+    "Chip": { "componentKey": "c20828e4cc18036e5ebce48ccaa8250443c49fa3", "assetType": "component_set", "category": "input" },
+
+    "Tag": {
+      "componentKey": "482fbfe31d86fc7509f2218d59c765f53ee86123",
+      "assetType": "component_set",
+      "category": "data-display",
+      "note": "Corrigido após republicação: o key anterior (7b83f7957b6e6bd88395b553a1344fba057770ad) não aparece mais em buscas — provavelmente era um duplicado/rascunho consolidado na republicação."
     },
-    "Radio Button": {
-      "componentSetKey": "240126cb93700f612d63f7bff44851930c5f9049",
-      "category": "input",
-      "variantCount": 8,
-      "variants": {
-        "state": ["enabled", "hover", "pressed", "disabled"],
-        "checked": ["on", "off"]
-      }
+    "Badge": { "componentKey": "2462c2057976a758ad2b85779f3a7ed29896d1d6", "assetType": "component_set", "category": "data-display", "note": "Novo após republicação — não existia no sync anterior" },
+    "Tag Desktop": { "componentKey": "b37852a583b766c7cfcc2fe9492aca83198b2108", "assetType": "component_set", "category": "data-display" },
+    "Tag Mobile": { "componentKey": "a2ba6bbde19085e2a814deefb139153f3f99b324", "assetType": "component_set", "category": "data-display" },
+    "Tag More": { "componentKey": "68c827a7378793f13006f2da8e4d9ff3b2ab05d7", "assetType": "component_set", "category": "data-display" },
+    "Tag Delivery": { "componentKey": "f69dc570260efeea49e80ac004218a2c5d546c90", "assetType": "component_set", "category": "data-display" },
+    "Table": { "componentKey": "57db0c99d57bcb4da8cdd9b02938a65af734ed67", "assetType": "component", "category": "data-display" },
+    "Card": {
+      "componentKey": "6c5bbef10eaba4951d287ce61bd29ec4de5683dc",
+      "assetType": "component_set",
+      "category": "data-display",
+      "note": "Gap 'Summary Card' reconfirmado após republicação — segue existindo só este Card genérico."
     },
-    "Dropdown": {
-      "componentSetKey": "b954f18e92493f9bfbb644b361ec4881037e57da",
-      "category": "input",
-      "variantCount": 6,
-      "variants": {
-        "state": ["enabled", "hover", "pressed", "focused", "filled", "disabled"]
-      }
-    },
-    "Toggle": {
-      "componentSetKey": "97e9b7a6b8b31f20d13a5cb0048db15d7552d722",
-      "category": "input",
-      "variantCount": 7,
-      "variants": {
-        "state": ["enabled", "hover", "pressed", "disabled", "selected", "selected hover", "selected pressed"]
-      }
-    },
-    "Chip": {
-      "componentSetKey": "ae6ac95ae9d05868a0e5c702bb45327719abc627",
-      "category": "input",
-      "variantCount": 7,
-      "variants": {
-        "state": ["enabled", "hover", "pressed", "selected", "selected hover", "selected pressed", "disabled"]
-      }
-    },
-    "Produtos Olist - Icons": {
-      "componentSetKey": "986fac7be9997779b54adc8bdf2132ad0425c984",
-      "category": "brand",
-      "variantCount": 32,
-      "variants": {
-        "product": ["Conta Digital", "Crédito", "Agentes de IA", "Ecommerce", "Sistema ERP", "Envios", "Sistema PDV", "Hub de Integração"],
-        "state": ["default", "active & hover"],
-        "theme": ["dark", "light"]
-      }
-    },
-    "Menu ERP": {
-      "componentSetKey": "3b159bd08ba039eb7e19b34c95362c3a6c79eb13",
-      "category": "navigation",
-      "variantCount": 13,
-      "variants": {
-        "stage": ["0", "01", "vendas", "produtos", "supri", "serv", "finan", "cli", "relat", "conf", "help", "noti", "stage13"]
-      }
-    }
+    "Avatar": { "componentKey": "a8dff04fe9f4403ace175b38b0e4b0e41956f176", "assetType": "component", "category": "data-display" },
+
+    "Tooltip": { "componentKey": "90fd1f88654fb8501bdba141445c7ba9ab86a836", "assetType": "component_set", "category": "feedback" },
+    "Cookie": { "componentKey": "57f03259ba3c9ab1b0843924179054c09a5eda6f", "assetType": "component_set", "category": "feedback" },
+
+    "Logo": { "componentKey": "123282975f82f3e75a25a3300cec859957f44eb2", "assetType": "component_set", "category": "brand" },
+
+    "Icon": { "componentKey": "bbcdd6c98692e3c10c356fecfec57edfcee109d2", "assetType": "component_set", "category": "icon", "note": "Componente genérico de ícone — usar como wrapper quando aplicável" },
+    "Product Icon": { "componentKey": "00d7c4fda6b10c90cf7e778eda2d7b57a86d8c70", "assetType": "component_set", "category": "icon", "note": "Sucessor de 'Produtos Olist - Icons' do registry anterior" },
+    "Chevron Right": { "componentKey": "a12afe7f6aaf44c1126c968a7c288aeef2f976bc", "assetType": "component_set", "category": "icon" },
+    "Chevron Down": { "componentKey": "8fb826e386688cca84bedaae1232f41933c5c699", "assetType": "component_set", "category": "icon" },
+    "Chevron Up Down Circle": { "componentKey": "14b7e2c4dbfb5501f9bf76afbc969f04cd818499", "assetType": "component_set", "category": "icon" },
+    "Add": { "componentKey": "1a346fb54347e17eaa418b7bc848ccc321194171", "assetType": "component_set", "category": "icon" },
+    "Add Circle": { "componentKey": "d504a189c880f138db82042ea8eef0183ac80934", "assetType": "component_set", "category": "icon" },
+    "Open In New": { "componentKey": "b1b1b1591ef9e45ca731b91062708c56a59a4cbb", "assetType": "component_set", "category": "icon" },
+    "Image": { "componentKey": "ab9f4cfc232be10a6c31ce5f07a515579bd3e7a6", "assetType": "component_set", "category": "icon" },
+    "Ecommerce": { "componentKey": "898525ea273c1ec97839e457fa1739a5626621ef", "assetType": "component_set", "category": "icon" },
+    "Money Hand": { "componentKey": "8886d226e28086ead44107b3283cf15d898eb1a2", "assetType": "component_set", "category": "icon" },
+    "Money Coin": { "componentKey": "989b5d8389c4a95c0048d8ea4ae3c0ecbe929945", "assetType": "component_set", "category": "icon" },
+    "Money In": { "componentKey": "c44e5c76f3cf63d73c4f5475f55bfe9a2fe0460e", "assetType": "component_set", "category": "icon" },
+    "Pencil": { "componentKey": "d04ef7d639a3f526afadfd0f4b8c0f9b8777cd3d", "assetType": "component_set", "category": "icon" },
+    "Confirm": { "componentKey": "8c57006b5536144cb5bfb69d474391f6cdab536d", "assetType": "component_set", "category": "icon" },
+    "Clock": { "componentKey": "4192b5872b2654f46e6644c9400f6dcd429b70df", "assetType": "component_set", "category": "icon" },
+    "Close": { "componentKey": "8b5470dd4d13775e41892397c367467540163345", "assetType": "component_set", "category": "icon" },
+    "Shopping Cart": { "componentKey": "e6d64691149a243d86ffef3d0668bd5fbd3bbb4b", "assetType": "component_set", "category": "icon" },
+    "Home": { "componentKey": "e8464d482335af177793767108d9af33fea85386", "assetType": "component_set", "category": "icon" },
+    "Pan Hand": { "componentKey": "5e1c5f948897c596b08d6b857ba6f298aa59e785", "assetType": "component_set", "category": "icon" },
+    "Circle": { "componentKey": "b7bd631b1a21bbdf8da0539e034c6a26b65a673d", "assetType": "component_set", "category": "icon" },
+    "Apps": { "componentKey": "fefec466539afc9e513ce0cd8e32485e2c3fa2fe", "assetType": "component_set", "category": "icon" },
+    "File Import": { "componentKey": "a769dcbf38a83526550cda4eeb8e1831189383e4", "assetType": "component_set", "category": "icon" },
+    "Reorder": { "componentKey": "fee4994049b6bdfc8026b9ab0aa277cd9c0d486a", "assetType": "component_set", "category": "icon" },
+    "Logout": { "componentKey": "f538b61b1345050150cd6d3cae6dddcc15c75e9f", "assetType": "component_set", "category": "icon", "note": "Novo após republicação — não existia no sync anterior" },
+    "Play": { "componentKey": "da97c375a465ab2f42e6c99077dac6100378d84f", "assetType": "component_set", "category": "icon", "note": "Novo após republicação — não existia no sync anterior" },
+    "More H": { "componentKey": "5a2ff40a2401ae0226662732ff3fa429428177d2", "assetType": "component_set", "category": "icon", "note": "Novo após republicação — não existia no sync anterior" }
   },
 
   "categories": {
     "action": ["Button", "Button Icon"],
-    "navigation": ["Link", "Segmented Buttons", "Menu ERP"],
-    "input": ["Input Text", "Text Area", "Input E-mail", "Input Search", "Input Token", "Input Password", "Input Select", "Input File", "Checkbox", "Radio Button", "Dropdown", "Toggle", "Chip"],
-    "data-display": ["Tags"],
-    "feedback": ["Tooltip"],
-    "brand": ["Logo Olist", "Produtos Olist - Icons"]
+    "navigation": ["Menu Global", "Link", "Segmented Buttons", "Breadcrumb", "Tabs", "Paginator", "Sort", "Context Switch"],
+    "input": ["Input Text", "Input Email", "Input Search", "Input Token", "Input Password", "Input File", "Input Select", "Input Paragraph", "Dropdown", "Checkbox", "Radio Button", "Toggle", "Chip"],
+    "data-display": ["Tag", "Badge", "Tag Desktop", "Tag Mobile", "Tag More", "Tag Delivery", "Table", "Card", "Avatar"],
+    "feedback": ["Tooltip", "Cookie"],
+    "brand": ["Logo"],
+    "icon": ["Icon", "Product Icon", "Chevron Right", "Chevron Down", "Chevron Up Down Circle", "Add", "Add Circle", "Open In New", "Image", "Ecommerce", "Money Hand", "Money Coin", "Money In", "Pencil", "Confirm", "Clock", "Close", "Shopping Cart", "Home", "Pan Hand", "Circle", "Apps", "File Import", "Reorder", "Logout", "Play", "More H"]
+  },
+
+  "textStyles": {
+    "note": "Papéis de texto (Heading/Subheading/etc.) não são componentes nesta library — são Text Styles. Usar via style key, não componentKey.",
+    "styles": ["text/H1", "text/H2", "text/H3", "text/H4", "text/H5", "text/caption", "text/paragraph", "text/description"]
+  },
+
+  "excludedInternal": {
+    "note": "Confirmados via search_design_system e get_metadata, nunca usar diretamente — ver _meta.excludedNote",
+    "components": [".menu erp/stage14", ".[base] single select list", ".[base] multi select list", ".[base] token box", ".[base] counter"]
+  },
+
+  "syncDiff": {
+    "comparedAgainst": "component-registry.json anterior (source: AI-Components, extractedAt: 2026-06-03)",
+    "resolvedAfterFullSweep": {
+      "note": "Confirmados via get_metadata na página real 'inputs' — a busca por palavra-chave não os superficializava.",
+      "components": ["Input Email", "Input Token", "Input Password", "Input File", "Input Paragraph (= antiga 'Text Area')"]
+    },
+    "changedByRepublish_2026_07_03": {
+      "note": "Diferenças detectadas revalidando todo o registry após o usuário republicar a library inteira.",
+      "componentKeyChanged": [
+        { "component": "Tag", "from": "7b83f7957b6e6bd88395b553a1344fba057770ad", "to": "482fbfe31d86fc7509f2218d59c765f53ee86123", "note": "Key antigo não aparece mais em buscas; provável consolidação de duplicado" },
+        { "component": "Menu ERP → Menu Global", "from": "4556c8fdb1ee00d2aa13c690ab312cbf468baeab", "to": "c2a9753aa84b8296ad1f7587a738ed019aa7d8b3", "note": "Renomeado + variantes trocadas de stage=X para produto=X; tratado como substituição, não simples rename" }
+      ],
+      "newComponents": ["Badge", "Context Switch", "Logout", "Play", "More H"],
+      "unchanged": "Todos os demais componentKeys já catalogados permaneceram estáveis"
+    },
+    "migrated": [
+      { "from": "Produtos Olist - Icons", "to": "Product Icon", "note": "Mesmo conceito, componentKey novo" },
+      { "from": "Tags", "to": "Tag", "note": "Nome singular, componentKey novo, ganhou variantes Desktop/Mobile/More/Delivery" },
+      { "from": "Text Area", "to": "Input Paragraph", "note": "variantCount idêntico (32)" },
+      { "from": "Menu ERP", "to": "Menu Global", "note": "Confirmado definitivo após republicação — ver changedByRepublish_2026_07_03" }
+    ],
+    "gapStillOpen": ["Summary Card — reconfirmado ausente após republicação, só existe Card genérico"],
+    "unchanged": [
+      "Button", "Button Icon", "Link", "Segmented Buttons", "Tooltip",
+      "Input Text", "Input Search", "Input Select", "Checkbox", "Radio Button", "Dropdown", "Toggle", "Chip",
+      "Logo (era 'Logo Olist')"
+    ]
   }
 }

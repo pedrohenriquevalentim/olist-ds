@@ -27,6 +27,7 @@ Cada decisão referencia o arquivo da skill que governa os detalhes completos.
 | [ux-design/TIPOGRAFIA.md](ux-design/TIPOGRAFIA.md) | Escala tipográfica e papéis de texto | `references/TIPOGRAFIA.md`, `references/GLOSSARIO_PAPEIS_TEXTO.md` |
 | [ux-design/FLUXO_PRD_FIGMA.md](ux-design/FLUXO_PRD_FIGMA.md) | Workflow PRD → Figma e hierarquia de bibliotecas | `references/SDD_PARA_TELA.md`, `references/SDD_AVANCADO.md`, `figma-config.json` |
 | [ux-design/UX_WRITING.md](ux-design/UX_WRITING.md) | Tom de voz, copy e regras de escrita | `references/UX_WRITING.md`, `references/GLOSSARIO_PAPEIS_TEXTO.md` |
+| [ux-design/COMPONENTES_POR_ZONA.md](ux-design/COMPONENTES_POR_ZONA.md) | **Pendente** — ambiguidades de componente por zona pós-republicação (Tag vs Badge, Segmented Buttons vs Tabs, etc.) | `references/TEMPLATES_PRODUTO.md`, `references/HARNEES_TELAS.md`, `component-registry.json` |
 
 ---
 
@@ -44,4 +45,4 @@ Exemplo:
 
 ---
 
-**Última atualização:** 2026-06-29 — skill v3.8
+**Última atualização:** 2026-07-03 — skill v3.10

@@ -1,8 +1,8 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.55`  
-**Skill:** v3.8  
-**Última atualização:** 2026-06-29  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.57`  
+**Skill:** v3.10  
+**Última atualização:** 2026-07-03  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -35,9 +35,9 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Componentes | 10 |
 | Ícones SVG | 550 |
 | Arquivos da Skill | 21 |
-| Arquivos Figma permitidos | 5 |
-| Versão npm | 1.0.55 |
-| Versão skill | 3.8 |
+| Arquivos Figma permitidos | 1 |
+| Versão npm | 1.0.57 |
+| Versão skill | 3.10 |
 
 ## Componentes
 
@@ -78,7 +78,7 @@ npm run release
     │
     ├── 1. generate:all (testes + stories via Gemini)
     ├── 2. build (compilação TypeScript)
-    ├── 3. sync:skill (atualiza skill v3.8)
+    ├── 3. sync:skill (atualiza skill v3.10)
     ├── 4. npm version patch (incrementa versão)
     ├── 5. npm publish (publica no registry)
     └── 6. git push --follow-tags
@@ -125,7 +125,7 @@ npm run release
 
 ## Skill Claude
 
-### Versão: v3.8
+### Versão: v3.10
 
 **Localização:** `.claude/skills/olist-ds-specialist/`
 
@@ -192,7 +192,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 2. Customize → Skills → Upload → selecionar pasta da skill
 3. Iniciar conversa e usar um dos slash commands acima
 
-### Regras Críticas v3.8
+### Regras Críticas v3.10
 
 ### ✅ Sempre Faça:
 
@@ -200,7 +200,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 2. **Leia `decisions/INDEX.md` logo em seguida** — contém decisões de produto ativas que têm precedência sobre defaults. Leia os arquivos específicos apontados pelo INDEX que se aplicam à tarefa atual.
 3. **Leia `figma-config.json` antes de usar Figma MCP:**
    - Use `searchPriority` como `includeLibraryKeys` em todo `search_design_system`
-   - Respeite a ordem: AI Components > ERP components > ERP recursos > ERP style guide > [DS] components web
+   - `searchPriority` tem apenas `design system (base)` — única library de referência desde 2026-07-03 (hierarquia anterior de AI Components/ERP components/etc. foi descontinuada, dados preservados em `blockedLibraries`)
    - Ignore resultados de `blockedLibraries`
 4. **Leia `HARNESS_TELAS.md` antes de criar qualquer frame no Figma:**
    - Execute o gate pré-construção (Seção 1) — só avance com todos os itens marcados
@@ -227,7 +227,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 
 1. **Buscar componentes sem filtrar por `includeLibraryKeys`**
 2. **Usar libraries de `blockedLibraries`** mesmo que apareçam em buscas
-3. **Construir elementos UI do zero** quando o componente DS existe (Button, Tag, Menu ERP, etc.)
+3. **Construir elementos UI do zero** quando o componente DS existe (Button, Tag, Menu Global, etc.)
 4. **Inventar nomes de papéis de texto** fora de `GLOSSARIO_PAPEIS_TEXTO.md`
 5. **Ignorar RNFs** — eles afetam UI (skeleton loaders, permissões, etc.)
 6. **Usar o plugin Figma intermediário** — o canal de entrega é sempre `use_figma` direto
@@ -273,24 +273,23 @@ npm run validate:icons
 ### Arquivo: `.claude/figma-config.json`
 
 **Status:** ✅ Configurado
-**Libraries configuradas:** 5
-**searchPriority entries:** 5
+**Libraries configuradas:** 1
+**searchPriority entries:** 1
 
 ### Libraries por Prioridade
 
 | Prioridade | Library | Descrição |
 |---|---|---|
-| 1 | **AI Components** | Library master — Menu ERP atualizado, Button, ícones rebrand 24 |
-| 2 | **ERP components** | Componentes principais do ERP Tiny (button common, menu do erp, tag card, inputs, etc) |
-| 3 | **ERP recursos** | Recursos complementares do ERP — ilustrações, padrões específicos de produto |
-| 4 | **ERP style guide** | Style guide do ERP — tipografia, espaçamentos, tokens visuais, paleta |
-| 5 | **[design system] components web** | Componentes web base do DS |
+| 1 | **design system (base)** | Adotada em 2026-07-03 como única referência para construção de telas (decisão permanente, substitui a hierarquia anterior de 6 libraries) |
 
 ### Blocked Libraries
 
-- **design system (base)** — Base genérica supersedida pela AI Components e ERP components. Ignorar mesmo se aparecer em buscas sem filtro.
-- **Design System - Fondations, Components & Icons Rebrand (TO-BE)** — Arquivo TO-BE descontinuado como referência de busca. Conteúdo migrado para AI Components.
 - **Design System - Components Web (AS-IS)** — Arquivo AS-IS descontinuado como referência direta. Substituído pela library [design system] components web via libraryKey.
+- **AI Components** — Bloqueada permanentemente desde 2026-07-03 — design system (base) adotada como única referência para construção de telas. Era a library master antes dessa decisão. Dados preservados (fileKey/libraryKey) para eventual reversão futura.
+- **ERP components** — Bloqueada permanentemente desde 2026-07-03 — ver motivo em 'AI Components' acima.
+- **ERP recursos** — Bloqueada permanentemente desde 2026-07-03 — ver motivo em 'AI Components' acima.
+- **ERP style guide** — Bloqueada permanentemente desde 2026-07-03 — ver motivo em 'AI Components' acima.
+- **[design system] components web** — Bloqueada permanentemente desde 2026-07-03 — ver motivo em 'AI Components' acima.
 
 ### Como Extrair fileKey
 
@@ -394,7 +393,7 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 1. `.claude/figma-config.json` existe?
 2. `searchPriority` tem os libraryKeys corretos?
-3. Skill v3.8 instalada?
+3. Skill v3.10 instalada?
 4. O prompt inclui instrução para ler `figma-config.json` antes do Figma MCP?
 
 ## Changelog
@@ -485,4 +484,4 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ---
 
-*Gerado automaticamente em 2026-06-29 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-07-03 por `generate-wiki.mjs`. Não edite manualmente.*

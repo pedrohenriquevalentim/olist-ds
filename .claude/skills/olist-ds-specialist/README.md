@@ -1,6 +1,10 @@
-# Olist Design System — Especialista (v3.8 · atualizado em 2026-06-29)
+# Olist Design System — Especialista (v3.10 · atualizado em 2026-07-03)
 
 Skill corporativa para criação de telas, componentes e protótipos a partir de SDDs/PRDs usando o design system da Olist.
+
+## 📌 Library de referência (decisão permanente desde 2026-07-03)
+
+A [`design system (base)`](https://www.figma.com/design/HeyN4w209HWh8rfpTDiwyf/design-system) é a **única library de referência** para construção de telas, em `figma-config.json`/`searchPriority`. A hierarquia anterior (AI Components, ERP components, ERP recursos, ERP style guide, [design system] components web) foi descontinuada e está em `blockedLibraries` com os dados preservados. Histórico completo da decisão, incluindo checagem de cobertura contra o harness, em `decisions/ux-design/FLUXO_PRD_FIGMA.md`.
 
 ## Novidades v3.8 (2026-06-29)
 
@@ -72,6 +76,7 @@ olist-ds-specialist/
 │   │   ├── ICONES.md                   # Uso de ícones via ReactNode e currentColor
 │   │   └── TOKENS.md                   # Tokens CSS e variáveis de design
 │   └── ux-design/
+│       ├── COMPONENTES_POR_ZONA.md
 │       ├── ESPACAMENTO_LAYOUT.md       # Grid de 4px, border-radius, espaçamento
 │       ├── FLUXO_PRD_FIGMA.md          # Workflow PRD → Figma passo a passo
 │       ├── PRINCIPIOS.md               # Princípios de design Olist
@@ -95,16 +100,14 @@ olist-ds-specialist/
     └── VISAO_GERAL.md                  # Mapa de navegação — leia sempre primeiro
 ```
 
-> **Raiz:** 6 arquivo(s) · **Decisions:** 12 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 33 arquivo(s) — atualizado em 2026-06-29 pelo `sync-skill-meta.mjs`
+> **Raiz:** 6 arquivo(s) · **Decisions:** 13 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 34 arquivo(s) — atualizado em 2026-07-03 pelo `sync-skill-meta.mjs`
 ## Libraries do Figma (ordem de prioridade)
 
 | # | Library | Conteúdo |
 |---|---|---|
-| 1 (master) | **AI Components** | Menu ERP atualizado, Button, ícones rebrand 24 |
-| 2 | **ERP components** | Componentes principais do ERP Tiny |
-| 3 | **ERP recursos** | Recursos e padrões complementares |
-| 4 | **ERP style guide** | Tipografia, tokens, paleta |
-| 5 (fallback) | **[design system] components web** | Componentes web base |
+| 1 (master) | **design system (base)** | Única referência para construção de telas |
+
+**Hierarquia anterior (descontinuada em 2026-07-03, dados preservados em `blockedLibraries`):** AI Components (Menu ERP atualizado, Button, ícones rebrand 24), ERP components, ERP recursos, ERP style guide, [design system] components web.
 
 **libraryKeys completas:** ver `figma-config.json`.
 
@@ -142,6 +145,12 @@ Use $olist-ds-specialist para criar UI no Figma:
 ```
 
 ## Changelog
+
+### v3.10 (2026-07-02)
+- Versão 3.10
+
+### v3.9 (2026-07-02)
+- Versão 3.9
 
 ### v3.8 (2026-06-29)
 - Slash Commands: 6 skills finas (`ds-*`) + Caso 8 (`/ds-implementar`) + roteamento no Fluxo de Decisão

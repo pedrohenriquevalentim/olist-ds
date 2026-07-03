@@ -1,4 +1,4 @@
-# Setup — Olist DS Specialist Skill v3.8
+# Setup — Olist DS Specialist Skill v3.10
 
 Siga este guia para instalar e configurar a skill no seu projeto.
 
@@ -44,7 +44,7 @@ Na maioria dos casos, **não é necessário editar nada** — as libraryKeys sã
 cat .claude/skills/olist-ds-specialist/figma-config.json
 ```
 
-Confirme que `searchPriority` tem 5 entradas começando com `lk-`.
+Confirme que `searchPriority` tem entradas começando com `lk-`. **Decisão permanente desde 2026-07-03:** só 1 entrada (`design system (base)`) — as outras 5 estão em `blockedLibraries` (descontinuadas, dados preservados).
 
 ### Sobre os identificadores:
 
@@ -154,8 +154,10 @@ Claude sempre filtra pelas libraries autorizadas, em ordem de prioridade:
 AI Components (master) → ERP components → ERP recursos → ERP style guide → [DS] components web
 ```
 
+> **Decisão permanente desde 2026-07-03:** a ordem acima foi descontinuada. Claude filtra só por `design system (base)`, adotada como única library de referência. Ver `figma-config.json` e `decisions/ux-design/FLUXO_PRD_FIGMA.md`.
+
 Ao pedir "crie a tela X no Figma", Claude automaticamente:
-1. Busca `Button`, `Menu ERP`, `Tags` etc. nas libraries acima
+1. Busca `Button`, `Menu Global`, `Tags` etc. nas libraries acima
 2. Importa as instâncias reais com `importComponentByKeyAsync`
 3. Constrói o frame via `use_figma` com tokens e fills reais do DS
 4. Retorna screenshot + link do Figma para validação
@@ -166,7 +168,7 @@ Ao pedir "crie a tela X no Figma", Claude automaticamente:
 
 ### Claude busca em libraries erradas
 
-Verifique se `searchPriority` em `figma-config.json` tem as 5 libraryKeys corretas (começando com `lk-`).
+Verifique `searchPriority` em `figma-config.json`. Desde 2026-07-03, é esperado ter só 1 libraryKey (`design system (base)`), começando com `lk-`.
 
 ### Componente não encontrado em nenhuma library
 

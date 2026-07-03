@@ -146,12 +146,10 @@ Use a skill `$olist-ds-specialist` para este fluxo. As regras abaixo são um res
 1. Leia o PRD/briefing completo
 2. Leia `.claude/skills/olist-ds-specialist/references/VISAO_GERAL.md` (sempre primeiro)
 3. Leia `.claude/skills/olist-ds-specialist/figma-config.json` ANTES de qualquer operação com Figma MCP
-4. Identifique os componentes do design system necessários consultando as libraries na ordem de prioridade:
-   - **AI Components** (master — preferência absoluta)
-   - **ERP components**
-   - **ERP recursos**
-   - **ERP style guide**
-   - **[design system] components web**
+4. Identifique os componentes do design system necessários consultando a library de referência:
+   - **design system (base)** ([link](https://www.figma.com/design/HeyN4w209HWh8rfpTDiwyf/design-system)) — única referência para construção de telas, adotada em 2026-07-03
+
+   > As demais libraries (AI Components, ERP components, ERP recursos, ERP style guide, [design system] components web) estão bloqueadas permanentemente em `blockedLibraries`. Ver `figma-config.json`.
 5. Use `search_design_system` sempre com `includeLibraryKeys: searchPriority` (do figma-config.json)
 6. Liste TODAS as telas identificadas e aguarde validação antes de criar
 7. Crie tela por tela com `use_figma`, aguardando feedback a cada entrega

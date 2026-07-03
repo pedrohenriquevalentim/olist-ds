@@ -1,6 +1,6 @@
 ---
 name: ds-sync
-description: Sincroniza o inventário de componentes do Olist Design System buscando nas libraries autorizadas do Figma por ordem de prioridade (AI Components → ERP components → ERP recursos → ERP style guide → DS components web).
+description: Sincroniza o inventário de componentes do Olist Design System buscando na library de referência do Figma (design system (base), decisão adotada em 2026-07-03 — ver figma-config.json).
 version: 1.0
 ---
 
