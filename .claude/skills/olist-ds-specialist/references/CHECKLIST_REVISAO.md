@@ -25,6 +25,7 @@ Use este checklist ao revisar qualquer tela ou componente para consistência vis
 - [ ] Estados de sucesso usam green-500 + green-0 fundo
 - [ ] Badges de status seguem o mapa de cores em CORES.md
 - [ ] Contraste passa WCAG AA (4.5:1 mínimo para texto)
+- [ ] Token semântico é da família/estado corretos, não só do valor visual certo (ver `doNotUseWhen` em GOVERNANCA_TOKENS.md)
 
 ## 3. Espaçamento
 

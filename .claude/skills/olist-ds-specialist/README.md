@@ -1,4 +1,4 @@
-# Olist Design System — Especialista (v3.10 · atualizado em 2026-07-03)
+# Olist Design System — Especialista (v3.11 · atualizado em 2026-07-04)
 
 Skill corporativa para criação de telas, componentes e protótipos a partir de SDDs/PRDs usando o design system da Olist.
 
@@ -89,6 +89,7 @@ olist-ds-specialist/
     ├── ESPACAMENTO.md                  # Grid de 4px, border-radius, escala de espaçamento
     ├── FIGMA_CONFIG.md                 # libraryKeys, workflow de busca e import
     ├── GLOSSARIO_PAPEIS_TEXTO.md       # 10 papéis de texto (Heading, Label, Error, etc.)
+    ├── GOVERNANCA_TOKENS.md
     ├── HARNEES_TELAS.md                # Gate pré-construção: restrições por zona, limites por componente
     ├── MAPA_FONTES.md                  # Estrutura de pastas do repositório (auto-gerado)
     ├── PADROES.md                      # 5 padrões de página (Tabela, Form, Dashboard, Detalhe, Config)
@@ -100,7 +101,7 @@ olist-ds-specialist/
     └── VISAO_GERAL.md                  # Mapa de navegação — leia sempre primeiro
 ```
 
-> **Raiz:** 6 arquivo(s) · **Decisions:** 13 arquivo(s) · **Referências:** 15 arquivo(s) · **Total:** 34 arquivo(s) — atualizado em 2026-07-03 pelo `sync-skill-meta.mjs`
+> **Raiz:** 6 arquivo(s) · **Decisions:** 13 arquivo(s) · **Referências:** 16 arquivo(s) · **Total:** 35 arquivo(s) — atualizado em 2026-07-04 pelo `sync-skill-meta.mjs`
 ## Libraries do Figma (ordem de prioridade)
 
 | # | Library | Conteúdo |
@@ -145,6 +146,9 @@ Use $olist-ds-specialist para criar UI no Figma:
 ```
 
 ## Changelog
+
+### v3.11 (2026-07-04)
+- Versão 3.11
 
 ### v3.10 (2026-07-02)
 - Versão 3.10

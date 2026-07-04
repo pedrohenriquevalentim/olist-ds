@@ -1,11 +1,11 @@
 ---
 name: olist-ds-specialist
 description: Use esta skill para TODO trabalho de UI/UX da Olist — criação de telas a partir de SDDs/PRDs, geração de componentes React, revisão de consistência visual, criação de protótipos no Figma, manutenção do design system e criação/revisão de textos de UI (UX Writing, copy, tom de voz). Acione quando alguém mencionar interface Olist, design system, tokens, componentes, telas, layouts, SDD, PRD, protótipo, wireframe, Figma, Storybook, copy, texto de botão, mensagem de erro, empty state, toast, label, placeholder ou qualquer tarefa de criação ou revisão de UI/copy para produtos Olist. NÃO use para backend, APIs, banco de dados, autenticação ou lógica de negócio sem relação com UI.
-version: 3.10
-lastModified: 2026-07-03
+version: 3.11
+lastModified: 2026-07-04
 ---
 
-# Olist Design System — Especialista v3.10 · 2026-07-03
+# Olist Design System — Especialista v3.11 · 2026-07-04
 
 ## Slash Commands
 
@@ -258,6 +258,7 @@ Qual tipo de tarefa?
 | `TIPOGRAFIA.md` | Criando/revisando UI | Tokens de tipografia (tamanho, peso, altura) |
 | `GLOSSARIO_PAPEIS_TEXTO.md` | **Antes de nomear textos** | 10 papéis de texto (Heading, Label, Error, etc.) |
 | `ESPACAMENTO.md` | Criando/revisando UI | Escala, grid, border-radius |
+| `GOVERNANCA_TOKENS.md` | Criando/revisando UI, escolhendo entre tokens semânticos parecidos | Intenção de uso por família (background/border/text/shape): purpose, useWhen, doNotUseWhen, pairsWith |
 | `COMPONENTES.md` | Criando telas ou componentes | Componentes com props e variantes |
 | `PADROES.md` | Criando telas de SDDs | 5 padrões de página (Tabela, Form, Dashboard, etc.) |
 | `MAPA_FONTES.md` | Antes de criar qualquer coisa | Caminhos reais dos arquivos |
@@ -296,6 +297,7 @@ Qual tipo de tarefa?
    - Crie tela por tela com `use_figma`, aguardando feedback a cada entrega
 10. **Sempre defina `layoutSizing` APÓS `appendChild`** (regra crítica da Figma Plugin API)
 11. **Valores válidos de `counterAxisAlignItems`:** `MIN` `MAX` `CENTER` `BASELINE` (sem STRETCH, sem END)
+12. **Consulte `GOVERNANCA_TOKENS.md` ao escolher entre tokens semânticos parecidos** (mesma cor final, famílias/estados diferentes) — não escolha só pelo valor resolvido
 
 ### ❌ Nunca Faça:
 
@@ -307,6 +309,7 @@ Qual tipo de tarefa?
 6. **Usar o plugin Figma intermediário** — o canal de entrega é sempre `use_figma` direto
 7. **Criar todas as telas de uma vez** — sempre use workflow faseado (tela por tela)
 8. **Hardcodar cores, fontes ou espaçamentos** — sempre usar tokens DS
+9. **Escolher token semântico só pelo valor final resolvido** — respeite `doNotUseWhen` de `GOVERNANCA_TOKENS.md` mesmo quando duas famílias resolvem para a mesma cor hoje
 
 ## Casos de Uso v3.10
 
@@ -440,7 +443,9 @@ Você:
        - NomeComponente.stories.tsx (Storybook v10)
        - index.ts                   (re-export componente + interface)
        Regras: apenas tokens de src/generated/variables.css, rem (nunca px),
-       ícones como ReactNode, aria roles obrigatórios, teclado para interativos
+       ícones como ReactNode, aria roles obrigatórios, teclado para interativos.
+       Ao escolher entre tokens semânticos candidatos para o mesmo elemento
+       (ex: cor de texto/fundo/borda por estado), consultar GOVERNANCA_TOKENS.md
 
    [B] GERAR DOCS NO FIGMA (frame "📄 Docs — NomeComponente"):
        - Criar frame dentro da MESMA section do componente original
@@ -599,9 +604,10 @@ Erros comuns e suas correções — manter para evitar regressão:
 
 ---
 
-**Versão:** 3.10
-**Última atualização:** 2026-07-02
+**Versão:** 3.11
+**Última atualização:** 2026-07-04
 **Decisão permanente (2026-07-03, não versionada):** `design system (base)` é a única library de referência em `figma-config.json`/`searchPriority`; AI Components, ERP components, ERP recursos, ERP style guide e [design system] components web estão bloqueadas permanentemente em `blockedLibraries` (dados preservados para eventual reversão). Ver `decisions/ux-design/FLUXO_PRD_FIGMA.md` para o histórico completo da decisão.
+**Mudanças v3.11:** `GOVERNANCA_TOKENS.md` adicionado como novo arquivo de referência (inspirado na governança de tokens do Harness Design System) — documenta intenção de uso (purpose/useWhen/doNotUseWhen/pairsWith) das famílias de tokens semânticos `color-background-*`, `color-border-*`, `color-text-*` e `color-shape-*`, para orientar a escolha entre tokens candidatos, não só o valor resolvido. Referenciado na tabela `references/`, nas Regras Críticas (item 12 de "Sempre Faça", item 9 de "Nunca Faça") e no passo de geração de código do Caso 7. `decisions/technical/TOKENS.md` e `references/CHECKLIST_REVISAO.md` também atualizados com o link.
 **Mudanças v3.10:** Library "design system (base)" desbloqueada e consolidada como prioridade 6 (fallback final) em `figma-config.json` — as duas entradas antes bloqueadas que referenciavam o mesmo conteúdo por ângulos diferentes ("design system (base)" via libraryKey e "Design System - Fondations, Components & Icons Rebrand (TO-BE)" via fileKey, confirmadas como o mesmo objeto via `get_libraries`) foram unificadas numa única entrada em `libraries[]`/`searchPriority`; "Design System - Components Web (AS-IS)" permanece bloqueada. Tabela de prioridades e `CLAUDE.md` do repo atualizados.
 **Mudanças v3.9:** Caso 9 adicionado — `/ds-handoff` gera manifesto em Markdown listando componentes DS usados numa jornada do Figma (página, frame(s) ou componente(s)), com variantes observadas, imports e gaps sem equivalente DS; não gera código nem persiste artefato no repo, pensado para colar direto na descrição de uma PR ao time de dev; slash command e ramo no Fluxo de Decisão adicionados.
 **Mudanças v3.8:** Slash Commands adicionados (6 comandos explícitos: /ds-tela, /ds-figma, /ds-implementar, /ds-componente, /ds-revisar, /ds-sync); Caso 8 adicionado — /ds-implementar converte tela Figma em código React de produto usando componentes DS com props tipadas, direcionado a devs de BU consumidores do DS.
