@@ -2,8 +2,8 @@
 
 **Auto-gerado por `npm run build`**
 **Última atualização:** 2026-07-04
-**Versão do pacote:** 1.0.59
-**Versão da skill:** 3.11
+**Versão do pacote:** 1.0.60
+**Versão da skill:** 3.13
 
 ---
 

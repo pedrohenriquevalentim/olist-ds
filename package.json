@@ -6,8 +6,8 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
     },
     "./variables.css": "./dist/variables.css"
   },
@@ -56,7 +56,7 @@
   },
   "keywords": [],
   "author": "Pedro Valentim",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "type": "module",
   "peerDependencies": {
     "react": "^19.0.0",

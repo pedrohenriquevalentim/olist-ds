@@ -23,10 +23,21 @@ data = json.load(sys.stdin)
 saved = []
 skipped = []
 
+NAME_RE = re.compile(r'^[a-z0-9][a-z0-9-]*$')
+
 for entry in data:
     name = entry['name'].strip()
     variant = entry['variant']  # 'outline' or 'fill'
     svg = entry['svg']
+
+    # Nome vira caminho de arquivo — restringe ao formato kebab-case dos
+    # ícones para impedir path traversal ("../", separadores, etc.)
+    if not NAME_RE.match(name):
+        skipped.append(f"{name} (nome inválido)")
+        continue
+    if variant not in ('outline', 'fill'):
+        skipped.append(f"{name} (variant inválida: {variant})")
+        continue
 
     filename = f"{name}-fill.svg" if variant == 'fill' else f"{name}.svg"
     filepath = os.path.join(SVG_DIR, filename)

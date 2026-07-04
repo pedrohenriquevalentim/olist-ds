@@ -247,9 +247,11 @@ describe('InputSelect', () => {
       expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
     });
 
-    it('tem atributo disabled no trigger', () => {
+    it('tem aria-disabled e fica fora do tab order quando disabled', () => {
       render(<InputSelect options={mockOptions} disabled aria-label="Estado" />);
-      expect(screen.getByRole('combobox')).toBeDisabled();
+      const trigger = screen.getByRole('combobox');
+      expect(trigger).toHaveAttribute('aria-disabled', 'true');
+      expect(trigger).toHaveAttribute('tabindex', '-1');
     });
   });
 
@@ -358,6 +360,74 @@ describe('InputSelect', () => {
       await userEvent.keyboard('{Escape}');
       expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
     });
+
+    it('expõe o item focado via aria-activedescendant', async () => {
+      render(<InputSelect options={mockOptions} aria-label="Estado" />);
+      const trigger = screen.getByRole('combobox');
+      trigger.focus();
+      expect(trigger).not.toHaveAttribute('aria-activedescendant');
+      await userEvent.keyboard('{ArrowDown}');
+      await userEvent.keyboard('{ArrowDown}');
+      const focusedId = trigger.getAttribute('aria-activedescendant');
+      expect(focusedId).toBeTruthy();
+      expect(document.getElementById(focusedId!)).toHaveTextContent(
+        'Rio de Janeiro',
+      );
+    });
+
+    it('End foca o último item e Home volta ao primeiro', async () => {
+      render(<InputSelect options={mockOptions} aria-label="Estado" />);
+      const trigger = screen.getByRole('combobox');
+      trigger.focus();
+      await userEvent.keyboard('{ArrowDown}');
+      await userEvent.keyboard('{End}');
+      let focusedId = trigger.getAttribute('aria-activedescendant');
+      expect(document.getElementById(focusedId!)).toHaveTextContent(
+        mockOptions[mockOptions.length - 1].label,
+      );
+      await userEvent.keyboard('{Home}');
+      focusedId = trigger.getAttribute('aria-activedescendant');
+      expect(document.getElementById(focusedId!)).toHaveTextContent(
+        mockOptions[0].label,
+      );
+    });
+
+    it('Backspace no trigger remove o último chip em modo multi', async () => {
+      const handleChange = vi.fn();
+      render(
+        <InputSelect
+          selectType="multi"
+          options={mockOptions}
+          value={['sp', 'rj']}
+          onChange={handleChange}
+          aria-label="Estados"
+        />,
+      );
+      screen.getByRole('combobox').focus();
+      await userEvent.keyboard('{Backspace}');
+      expect(handleChange).toHaveBeenCalledWith(['sp']);
+    });
+
+    it('botão de remover chip é um button real e remove ao clicar', async () => {
+      const handleChange = vi.fn();
+      render(
+        <InputSelect
+          selectType="multi"
+          options={mockOptions}
+          value={['sp']}
+          onChange={handleChange}
+          aria-label="Estados"
+        />,
+      );
+      const removeButton = screen.getByRole('button', {
+        name: 'Remover São Paulo',
+      });
+      expect(removeButton.tagName).toBe('BUTTON');
+      await userEvent.click(removeButton);
+      expect(handleChange).toHaveBeenCalledWith([]);
+      // Clique no botão de remover não deve abrir a lista
+      expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+    });
   });
 
   describe('Ícones (ReactNode)', () => {
@@ -404,7 +474,9 @@ describe('InputSelect', () => {
       expect(screen.getByTestId('check-icon')).toBeInTheDocument();
     });
 
-    it('renderiza checkbox em cada item da lista em modo multi select', async () => {
+    it('não renderiza input focável dentro dos itens em modo multi', async () => {
+      // O indicador de seleção é puramente visual (aria-hidden) — um <input>
+      // real seria focável dentro de aria-hidden, violando WCAG 4.1.2
       const { container } = render(
         <InputSelect
           selectType="multi"
@@ -414,13 +486,13 @@ describe('InputSelect', () => {
         />,
       );
       await userEvent.click(screen.getByRole('combobox'));
-      // Checkboxes ficam aria-hidden (decorativos) — estado real via aria-selected no <li>
-      const checkboxInputs = container.querySelectorAll('input[type="checkbox"]');
-      expect(checkboxInputs).toHaveLength(mockOptions.length);
+      expect(container.querySelectorAll('input[type="checkbox"]')).toHaveLength(0);
+      const visuals = container.querySelectorAll('li [aria-hidden="true"]');
+      expect(visuals.length).toBeGreaterThanOrEqual(mockOptions.length);
     });
 
-    it('checkbox do item selecionado está marcado em modo multi', async () => {
-      const { container } = render(
+    it('estado de seleção em modo multi é exposto via aria-selected no item', async () => {
+      render(
         <InputSelect
           selectType="multi"
           options={mockOptions}
@@ -429,9 +501,9 @@ describe('InputSelect', () => {
         />,
       );
       await userEvent.click(screen.getByRole('combobox'));
-      const checkboxInputs = container.querySelectorAll('input[type="checkbox"]');
-      expect(checkboxInputs[0]).toBeChecked();
-      expect(checkboxInputs[1]).not.toBeChecked();
+      const options = screen.getAllByRole('option');
+      expect(options[0]).toHaveAttribute('aria-selected', 'true');
+      expect(options[1]).toHaveAttribute('aria-selected', 'false');
     });
   });
 });

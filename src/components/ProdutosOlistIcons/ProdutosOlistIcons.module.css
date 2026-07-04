@@ -9,9 +9,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 44px;
-  padding: var(--shape-spacing-x125-10px, 10px) var(--shape-spacing-x075-6px, 6px);
+  width: 2.25rem;  /* 36px */
+  height: 2.75rem; /* 44px */
+  padding: var(--shape-spacing-x125-10px, 0.625rem) var(--shape-spacing-x075-6px, 0.375rem);
   border-radius: var(--shape-border-radius-pill-9999px);
   flex-shrink: 0;
 }

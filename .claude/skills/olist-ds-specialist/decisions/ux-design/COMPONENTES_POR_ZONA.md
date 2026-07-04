@@ -1,7 +1,7 @@
 # Decisão UX/Design: Componentes por Zona nos Templates de Produto
 
 **Categoria:** UX/Design
-**Status:** Pendente — confirmação com o time de design
+**Status:** Parcialmente resolvida — item 1 confirmado em 2026-07-04, itens 2-5 seguem pendentes
 **Skill de referência:** `references/TEMPLATES_PRODUTO.md`, `references/HARNEES_TELAS.md`, `component-registry.json`
 
 ---
@@ -16,11 +16,10 @@ Este arquivo existe para que essas perguntas não se percam entre sessões. **Ne
 
 ## Pontos em Aberto
 
-### 1. `Breadcrumb`: texto puro ou componente real?
+### 1. `Breadcrumb`: texto puro ou componente real? ✅ Resolvido em 2026-07-04
 
-- **O que se sabe:** `HARNEES_TELAS.md` (Zona B do template ERP) assume "texto puro, sem componente DS, cor `gray-500`". A `design system (base)` agora tem um `Breadcrumb` component_set publicado.
-- **Impacto se não resolvido:** telas continuam sendo construídas com texto solto na Zona B mesmo havendo um componente real disponível — potencial inconsistência visual entre telas.
-- **Como resolver:** perguntar ao time de design se o `Breadcrumb` novo substitui o texto puro, e se sim, atualizar a Seção 1 do harness.
+- **O que se sabia:** `HARNEES_TELAS.md` (Zona B do template ERP) assumia "texto puro, sem componente DS, cor `gray-500`". A `design system (base)` tinha um `Breadcrumb` component_set publicado, sem uso confirmado.
+- **Resolução:** confirmado que o `Breadcrumb` component_set da `design system (base)` é a instância a ser usada na Zona B do template ERP — substitui o texto puro. `HARNEES_TELAS.md` (Seção 1 e Seção 2), `TEMPLATES_PRODUTO.md`, `PADROES.md` e `decisions/ux-design/ESPACAMENTO_LAYOUT.md` atualizados para refletir a instância real.
 
 ### 2. `Tag` vs `Badge`: mesma função ou usos distintos?
 
@@ -36,7 +35,7 @@ Este arquivo existe para que essas perguntas não se percam entre sessões. **Ne
 
 ### 4. `Context Switch`: propósito não confirmado
 
-- **O que se sabe:** componente novo, nome sugere troca de contexto/workspace. Hipótese: usado na Zona B (Top Bar) dos templates Envios/Hub/Conta Digital, junto a `Logo` e `Avatar`.
+- **O que se sabe:** componente novo, nome sugere troca de contexto/workspace. Hipótese: usado na Zona B (Top Bar) dos templates Envios/Hub/Conta Digital, junto a `Avatar` (o `Logo` não fica na Zona B — já é exibido na Zona A via `Menu Global`, confirmado em 2026-07-04).
 - **Impacto se não resolvido:** nenhum uso documentado — fica fora do harness até ter contexto.
 - **Como resolver:** perguntar ao time de design o que é e onde se aplica.
 
@@ -66,4 +65,6 @@ Este arquivo existe para que essas perguntas não se percam entre sessões. **Ne
 
 ## Histórico
 
+- 2026-07-04 v1.2 — Confirmado que a Zona B (Top Bar) dos templates Envios/Hub/Conta Digital **não exibe o logo do produto** — o logo já faz parte do componente `Menu Global` na Zona A. `HARNEES_TELAS.md` e `TEMPLATES_PRODUTO.md` corrigidos (removido `Logo` das colunas "Pode conter"/"Componentes Recomendados" da Zona B); hipótese do item 4 (`Context Switch`) ajustada para não mencionar mais `Logo` como vizinho de zona.
+- 2026-07-04 v1.1 — Item 1 (`Breadcrumb`) resolvido: passa a ser a instância real do componente DS na Zona B do ERP. Itens 2-5 seguem pendentes.
 - 2026-07-03 v1.0 — Decisão criada a partir da análise de componentes por zona pós-republicação da library.

@@ -4,6 +4,7 @@ export const componentNames = [
   "Button",
   "Checkbox",
   "Chip",
+  "Icon",
   "InputPassword",
   "InputSearch",
   "InputSelect",

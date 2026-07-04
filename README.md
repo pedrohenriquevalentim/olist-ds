@@ -354,7 +354,7 @@ Preciso que você:
 
 ## Skill Corporativa
 
-A skill `olist-ds-specialist` (<!-- AUTO:skill-version-start -->v3.11<!-- AUTO:skill-version-end -->) permite que qualquer pessoa da empresa crie telas a partir de SDDs, implemente componentes React do DS e gere documentação no Figma — com precisão consistente.
+A skill `olist-ds-specialist` (<!-- AUTO:skill-version-start -->v3.13<!-- AUTO:skill-version-end -->) permite que qualquer pessoa da empresa crie telas a partir de SDDs, implemente componentes React do DS e gere documentação no Figma — com precisão consistente.
 
 ### Capacidades
 

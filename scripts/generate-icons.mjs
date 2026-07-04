@@ -32,6 +32,16 @@ function sanitizeSVG(raw) {
   return svg;
 }
 
+// ─── NORMALIZAÇÃO DE COR ──────────────────────────────────
+// Converte cores hex para currentColor no momento da geração: o ícone herda
+// a cor do CSS pai (hover/active/disabled funcionam sem prop), conforme a
+// regra do design system. fill="none" é preservado.
+function normalizeColors(svg) {
+  return svg
+    .replace(/fill="#[0-9A-Fa-f]{3,8}"/g, 'fill="currentColor"')
+    .replace(/stroke="#[0-9A-Fa-f]{3,8}"/g, 'stroke="currentColor"');
+}
+
 // ─── LEITURA E PROCESSAMENTO ──────────────────────────────
 
 const files = readdirSync(SVG_DIR).sort();
@@ -57,7 +67,7 @@ for (const filename of files) {
 
   const key = isFill ? `${iconName}-fill` : iconName;
   const raw = readFileSync(join(SVG_DIR, filename), 'utf-8');
-  const svgContent = sanitizeSVG(raw)
+  const svgContent = normalizeColors(sanitizeSVG(raw))
     .replace(/\n/g, '')
     .replace(/\s{2,}/g, ' ')
     .trim();

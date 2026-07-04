@@ -9,8 +9,12 @@ const dirs = readdirSync(componentsDir)
   .filter(name => {
     const fullPath = join(componentsDir, name);
     if (!statSync(fullPath).isDirectory()) return false;
-    const tsxFile = join(fullPath, `${name}.tsx`);
-    return existsSync(tsxFile);
+    // Convenção Nome/Nome.tsx, ou componente baseado em index.tsx
+    // (ex.: Icon, cujo arquivo é auto-gerado por generate-icons.mjs)
+    return (
+      existsSync(join(fullPath, `${name}.tsx`)) ||
+      existsSync(join(fullPath, 'index.tsx'))
+    );
   });
 
 // Gera src/index.ts
@@ -19,7 +23,10 @@ const indexLines = [
   '',
   '// Auto-generated — NÃO edite manualmente',
   '',
-  ...dirs.map(name => `export { ${name} } from './components/${name}';`),
+  // `export *` re-exporta o componente E as interfaces de Props do index de
+  // cada componente — o campo "exports" do package.json bloqueia deep-imports,
+  // então a raiz é o único caminho dos tipos para o consumidor.
+  ...dirs.map(name => `export * from './components/${name}';`),
   '',
 ];
 writeFileSync(indexPath, indexLines.join('\n'));

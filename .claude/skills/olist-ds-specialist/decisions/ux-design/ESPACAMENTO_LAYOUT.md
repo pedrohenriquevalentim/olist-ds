@@ -67,7 +67,7 @@ Para ASCII diagrams e especificações detalhadas de cada padrão → `reference
 
 ## Navegação
 
-- **Breadcrumbs:** não usados no ERP Olist — usar seta de voltar
+- **Breadcrumbs:** usados na Zona B (Top Bar) do ERP via instância real do componente `Breadcrumb` do DS (não mais texto puro) — ver `HARNEES_TELAS.md`. Na Content Area (Zona D), páginas de Detalhe continuam usando seta de voltar
 - **Tabs:** sub-navegação dentro da página. Para 2-3 opções, usar SegmentedButtons
 - **Sidebar:** sempre presente via MenuSidebar; item ativo com fundo blue-50
 
