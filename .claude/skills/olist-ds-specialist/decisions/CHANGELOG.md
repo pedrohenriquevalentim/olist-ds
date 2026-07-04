@@ -3,6 +3,10 @@
 Histórico de atualizações sincronizado com a skill `olist-ds-specialist`.
 Atualizado automaticamente pelo `sync-skill-meta.mjs` a cada `npm run ship`.
 
+## v3.11 (2026-07-04)
+
+> Skill atualizada para v3.11. Referências sincronizadas automaticamente.
+
 ## v3.10 (2026-07-02)
 
 > Skill atualizada para v3.10. Referências sincronizadas automaticamente.

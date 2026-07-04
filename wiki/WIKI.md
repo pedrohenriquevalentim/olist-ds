@@ -1,8 +1,8 @@
 # Olist Design System — Wiki
 
 **Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.59`  
-**Skill:** v3.10  
-**Última atualização:** 2026-07-03  
+**Skill:** v3.11  
+**Última atualização:** 2026-07-04  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -34,10 +34,10 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 |---|---|
 | Componentes | 10 |
 | Ícones SVG | 550 |
-| Arquivos da Skill | 21 |
+| Arquivos da Skill | 22 |
 | Arquivos Figma permitidos | 1 |
 | Versão npm | 1.0.59 |
-| Versão skill | 3.10 |
+| Versão skill | 3.11 |
 
 ## Componentes
 
@@ -78,7 +78,7 @@ npm run release
     │
     ├── 1. generate:all (testes + stories via Gemini)
     ├── 2. build (compilação TypeScript)
-    ├── 3. sync:skill (atualiza skill v3.10)
+    ├── 3. sync:skill (atualiza skill v3.11)
     ├── 4. npm version patch (incrementa versão)
     ├── 5. npm publish (publica no registry)
     └── 6. git push --follow-tags
@@ -125,11 +125,11 @@ npm run release
 
 ## Skill Claude
 
-### Versão: v3.10
+### Versão: v3.11
 
 **Localização:** `.claude/skills/olist-ds-specialist/`
 
-### Arquivos da Skill (21 total)
+### Arquivos da Skill (22 total)
 
 **Raiz (6):**
 - `CHANGELOG.md`
@@ -139,13 +139,14 @@ npm run release
 - `component-registry.json`
 - `figma-config.json`
 
-**Referências (15):**
+**Referências (16):**
 - `CHECKLIST_REVISAO.md`
 - `COMPONENTES.md`
 - `CORES.md`
 - `ESPACAMENTO.md`
 - `FIGMA_CONFIG.md`
 - `GLOSSARIO_PAPEIS_TEXTO.md`
+- `GOVERNANCA_TOKENS.md`
 - `HARNEES_TELAS.md`
 - `MAPA_FONTES.md`
 - `PADROES.md`
@@ -160,7 +161,7 @@ npm run release
 
 **Auto-gerados** (por `npm run build`): COMPONENTES.md, MAPA_FONTES.md, VISAO_GERAL.md (parcial)
 
-**Manuais** (não são sobrescritos): CHECKLIST_REVISAO.md, CORES.md, ESPACAMENTO.md, FIGMA_CONFIG.md, GLOSSARIO_PAPEIS_TEXTO.md, HARNEES_TELAS.md, PADROES.md, SDD_AVANCADO.md, SDD_PARA_TELA.md, TEMPLATES_PRODUTO.md, TIPOGRAFIA.md, UX_WRITING.md, VISAO_GERAL.md
+**Manuais** (não são sobrescritos): CHECKLIST_REVISAO.md, CORES.md, ESPACAMENTO.md, FIGMA_CONFIG.md, GLOSSARIO_PAPEIS_TEXTO.md, GOVERNANCA_TOKENS.md, HARNEES_TELAS.md, PADROES.md, SDD_AVANCADO.md, SDD_PARA_TELA.md, TEMPLATES_PRODUTO.md, TIPOGRAFIA.md, UX_WRITING.md, VISAO_GERAL.md
 
 ### Como Usar — Slash Commands
 
@@ -192,7 +193,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 2. Customize → Skills → Upload → selecionar pasta da skill
 3. Iniciar conversa e usar um dos slash commands acima
 
-### Regras Críticas v3.10
+### Regras Críticas v3.11
 
 ### ✅ Sempre Faça:
 
@@ -222,6 +223,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
    - Crie tela por tela com `use_figma`, aguardando feedback a cada entrega
 10. **Sempre defina `layoutSizing` APÓS `appendChild`** (regra crítica da Figma Plugin API)
 11. **Valores válidos de `counterAxisAlignItems`:** `MIN` `MAX` `CENTER` `BASELINE` (sem STRETCH, sem END)
+12. **Consulte `GOVERNANCA_TOKENS.md` ao escolher entre tokens semânticos parecidos** (mesma cor final, famílias/estados diferentes) — não escolha só pelo valor resolvido
 
 ### ❌ Nunca Faça:
 
@@ -233,6 +235,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 6. **Usar o plugin Figma intermediário** — o canal de entrega é sempre `use_figma` direto
 7. **Criar todas as telas de uma vez** — sempre use workflow faseado (tela por tela)
 8. **Hardcodar cores, fontes ou espaçamentos** — sempre usar tokens DS
+9. **Escolher token semântico só pelo valor final resolvido** — respeite `doNotUseWhen` de `GOVERNANCA_TOKENS.md` mesmo quando duas famílias resolvem para a mesma cor hoje
 
 ## Sistema de Ícones
 
@@ -393,7 +396,7 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 1. `.claude/figma-config.json` existe?
 2. `searchPriority` tem os libraryKeys corretos?
-3. Skill v3.10 instalada?
+3. Skill v3.11 instalada?
 4. O prompt inclui instrução para ler `figma-config.json` antes do Figma MCP?
 
 ## Changelog
@@ -484,4 +487,4 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ---
 
-*Gerado automaticamente em 2026-07-03 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-07-04 por `generate-wiki.mjs`. Não edite manualmente.*

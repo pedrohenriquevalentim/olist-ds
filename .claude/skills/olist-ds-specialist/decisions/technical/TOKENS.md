@@ -63,9 +63,11 @@ Os tokens são gerados via Style Dictionary + @tokens-studio/sd-transforms a par
 - Paleta completa de cores → `references/CORES.md`
 - Escala tipográfica → `references/TIPOGRAFIA.md`
 - Hierarquia de espaçamento → `references/ESPACAMENTO.md`
+- Qual token semântico escolher (purpose/useWhen/doNotUseWhen/pairsWith) → `references/GOVERNANCA_TOKENS.md`
 
 ---
 
 ## Histórico
 
+- 2026-07-03 v1.1 — Adicionada referência a `GOVERNANCA_TOKENS.md` (governança de tokens semânticos: intenção de uso, não só valor)
 - 2026-06-23 v1.0 — Decisão inicial extraída do CLAUDE.md
