@@ -45,4 +45,4 @@ Exemplo:
 
 ---
 
-**Última atualização:** 2026-07-04 — skill v3.11
+**Última atualização:** 2026-07-04 — skill v3.13

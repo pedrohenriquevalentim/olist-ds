@@ -1,11 +1,11 @@
 ---
 name: olist-ds-specialist
 description: Use esta skill para TODO trabalho de UI/UX da Olist — criação de telas a partir de SDDs/PRDs, geração de componentes React, revisão de consistência visual, criação de protótipos no Figma, manutenção do design system e criação/revisão de textos de UI (UX Writing, copy, tom de voz). Acione quando alguém mencionar interface Olist, design system, tokens, componentes, telas, layouts, SDD, PRD, protótipo, wireframe, Figma, Storybook, copy, texto de botão, mensagem de erro, empty state, toast, label, placeholder ou qualquer tarefa de criação ou revisão de UI/copy para produtos Olist. NÃO use para backend, APIs, banco de dados, autenticação ou lógica de negócio sem relação com UI.
-version: 3.11
+version: 3.13
 lastModified: 2026-07-04
 ---
 
-# Olist Design System — Especialista v3.11 · 2026-07-04
+# Olist Design System — Especialista v3.13 · 2026-07-04
 
 ## Slash Commands
 
@@ -87,7 +87,7 @@ Antes de construir qualquer tela, chamar `search_design_system` com `includeLibr
 
 **Categorias disponíveis (inventário da skill v2.2 — fonte única: design system (base)):**
 - **Action:** Button, Button Icon
-- **Navigation:** Link, Segmented Buttons, Menu Global
+- **Navigation:** Link, Segmented Buttons, Menu Global, Breadcrumb (Zona B do template ERP)
 - **Input:** Input Text, Text Area, Input E-mail, Input Search, Input Token, Input Password, Input Select, Input File, Checkbox, Radio Button, Dropdown, Toggle, Chip
 - **Data Display:** Tags
 - **Feedback:** Tooltip
@@ -604,8 +604,10 @@ Erros comuns e suas correções — manter para evitar regressão:
 
 ---
 
-**Versão:** 3.11
+**Versão:** 3.13
 **Última atualização:** 2026-07-04
+**Mudanças v3.13:** Corrigido harness do template Envios/Hub/Conta Digital — a Zona B (Top Bar) **não exibe o logo do produto**; o logo já faz parte do componente `Menu Global` na Zona A. `Logo` removido da coluna "Pode conter"/"Componentes Recomendados" da Zona B em `references/HARNEES_TELAS.md` e `references/TEMPLATES_PRODUTO.md`, e movido para "Não pode conter"; linha `Logo Olist` em "Contextos Válidos por Componente" corrigida para `Zona A, embutido no Menu Global`. Hipótese do `Context Switch` em `decisions/ux-design/COMPONENTES_POR_ZONA.md` ajustada para não citar mais `Logo` como vizinho de zona.
+**Mudanças v3.12:** Harness da Zona B do template ERP atualizado — `Breadcrumb` passa a ser a instância real do componente DS (`design system (base)`), resolvendo o ponto em aberto #1 de `decisions/ux-design/COMPONENTES_POR_ZONA.md`. Zona C: proibição de `Button` generalizada para qualquer variante com label. Zona D: conteúdo editorial e cards avulsos passam a ser permitidos, mantendo breadcrumb proibido. Regra de fundo do ERP unificada para todas as zonas (A–E). `references/HARNEES_TELAS.md`, `references/TEMPLATES_PRODUTO.md`, `references/PADROES.md`, `decisions/ux-design/ESPACAMENTO_LAYOUT.md` e `decisions/ux-design/COMPONENTES_POR_ZONA.md` atualizados; `Breadcrumb` adicionado ao inventário de categorias (Navigation).
 **Decisão permanente (2026-07-03, não versionada):** `design system (base)` é a única library de referência em `figma-config.json`/`searchPriority`; AI Components, ERP components, ERP recursos, ERP style guide e [design system] components web estão bloqueadas permanentemente em `blockedLibraries` (dados preservados para eventual reversão). Ver `decisions/ux-design/FLUXO_PRD_FIGMA.md` para o histórico completo da decisão.
 **Mudanças v3.11:** `GOVERNANCA_TOKENS.md` adicionado como novo arquivo de referência (inspirado na governança de tokens do Harness Design System) — documenta intenção de uso (purpose/useWhen/doNotUseWhen/pairsWith) das famílias de tokens semânticos `color-background-*`, `color-border-*`, `color-text-*` e `color-shape-*`, para orientar a escolha entre tokens candidatos, não só o valor resolvido. Referenciado na tabela `references/`, nas Regras Críticas (item 12 de "Sempre Faça", item 9 de "Nunca Faça") e no passo de geração de código do Caso 7. `decisions/technical/TOKENS.md` e `references/CHECKLIST_REVISAO.md` também atualizados com o link.
 **Mudanças v3.10:** Library "design system (base)" desbloqueada e consolidada como prioridade 6 (fallback final) em `figma-config.json` — as duas entradas antes bloqueadas que referenciavam o mesmo conteúdo por ângulos diferentes ("design system (base)" via libraryKey e "Design System - Fondations, Components & Icons Rebrand (TO-BE)" via fileKey, confirmadas como o mesmo objeto via `get_libraries`) foram unificadas numa única entrada em `libraries[]`/`searchPriority`; "Design System - Components Web (AS-IS)" permanece bloqueada. Tabela de prioridades e `CLAUDE.md` do repo atualizados.

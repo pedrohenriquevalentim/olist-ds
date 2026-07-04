@@ -92,7 +92,7 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
 
 | Zona | Componentes recomendados |
 |---|---|
-| **B** — Top Bar | `Breadcrumb` ⚠️ (harness histórico assume texto puro, mas hoje existe componente real), `Button` (primary, máx 1), `Button Icon` |
+| **B** — Top Bar | `Breadcrumb` (instância real do componente DS), `Button` (primary, máx 1), `Button Icon` |
 | **C** — Page Header | `Input Search`, `Button Icon` (filtro), `Tag` ou `Badge` ⚠️ (filtro ativo) — Heading é Text Style, não componente |
 | **D** — Content Area | `Table`, `Sort`, `Checkbox`, `Radio Button`, `Toggle`, `Chip`, `Dropdown`, `Input Text`/`Input Email`/`Input Search`/`Input Token`/`Input Password`/`Input File`/`Input Select`/`Input Paragraph`, `Card`, `Segmented Buttons` ou `Tabs` ⚠️ (sub-navegação, escolha em aberto), `Tooltip`, `Avatar` |
 | **E** — Paginação | `Paginator` |
@@ -166,7 +166,7 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
 | Zona | Nome | Descrição | Dimensão |
 |---|---|---|---|
 | **A** | Novo Menu Global | Sidebar fixa à esquerda (mesmo componente do ERP) | 304px largura, 100% altura |
-| **B** | Top Bar | Ações do produto (logo, CTA, carrinho, avatar) | 100% largura, 80px altura |
+| **B** | Top Bar | Ações do produto (CTA, carrinho, avatar) — logo não entra aqui, já está na Zona A via Menu Global | 100% largura, 80px altura |
 | **C** | Page Header + Subtitle | Heading + descrição da página | 100% largura, 68px altura |
 | **D** | Content Area | Área principal (tabela, cards, lista, empty state, summary card) | 100% largura, flex (preenche restante) |
 | **E** | Sticky ou paginação | Barra fixa inferior ou paginação | 100% largura, 80px altura |
@@ -177,7 +177,7 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
 - Zona C SEMPRE inclui subtitle (descrição da página abaixo do heading)
 - Zona D pode conter Summary Card (fundo azul claro) antes do conteúdo principal
 - Zona E é opcional — "sticky" para ações de confirmação ou paginação
-- A Zona A usa o componente **Menu Global** do inventário (304px), com variante `produto` adequada ao contexto (ex: `Envios`, `Conta Digital`, `Ecommerce`)
+- A Zona A usa o componente **Menu Global** do inventário (304px), com variante `produto` adequada ao contexto (ex: `Envios`, `Conta Digital`, `Ecommerce`) — o logo do produto já faz parte deste componente; **a Zona B não exibe logo**
 
 ### Componentes Recomendados por Zona — Envios / Hub / Conta Digital
 
@@ -185,7 +185,7 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
 
 | Zona | Componentes recomendados |
 |---|---|
-| **B** — Top Bar | `Logo`, `Button` (primary, máx 1), `Avatar`, `Badge` ⚠️ (contador de notificação, inferência), `Context Switch` ⚠️ (propósito não confirmado) |
+| **B** — Top Bar | `Button` (primary, máx 1), `Avatar`, `Badge` ⚠️ (contador de notificação, inferência), `Context Switch` ⚠️ (propósito não confirmado) — sem `Logo`, já presente na Zona A via `Menu Global` |
 | **C** — Page Header + Subtitle | Nenhum — Heading e Subheading são Text Styles, não componentes |
 | **D** — Content Area | `Card` (para "Summary Card" — gap conhecido, sem variante dedicada), mesmo conjunto de Form/Tabela/Dashboard da Zona D do ERP, `Input Search` (aqui, dentro do padrão — não solto como no ERP) |
 | **E** — Sticky ou Paginação | `Button` primary + `Button` secondary (máx 2, modo sticky) ou `Paginator` |
@@ -230,8 +230,9 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
 Percepção registrada em 2026-07-03, ainda **não confirmada com o time de design** — não tratar como regra do harness até validação.
 
 > Formalizado como decisão pendente em `decisions/ux-design/COMPONENTES_POR_ZONA.md` (com contexto, impacto e como resolver cada item) — leia lá antes de decidir sozinho entre as opções em disputa.
+>
+> **`Breadcrumb` resolvido em 2026-07-04:** passa a ser a instância real do componente DS na Zona B do ERP — removido desta lista. Ver `HARNEES_TELAS.md` e `decisions/ux-design/COMPONENTES_POR_ZONA.md`.
 
-- **`Breadcrumb`:** o harness (`HARNEES_TELAS.md`) assume "texto puro, sem componente DS" na Zona B do ERP. Hoje existe um `Breadcrumb` component_set real na `design system (base)`. Vale decidir se passa a usar a instância real.
 - **`Tag` vs `Badge`:** a library tem os dois desde a republicação. Não está claro se são intercambiáveis ou se cada um tem um uso específico (ex: `Tag` para status semântico, `Badge` para contador numérico). Documentado como "ou" nas tabelas acima até esclarecer.
 - **`Segmented Buttons` vs `Tabs`:** ambos parecem cobrir sub-navegação dentro da Zona D (padrão Detalhe). O harness só menciona `Segmented Buttons`; `Tabs` é mais novo no inventário. Confirmar qual é o pretendido antes de padronizar.
 - **`Context Switch`:** componente novo, propósito não confirmado — nome sugere troca de contexto/workspace, hipótese de uso na Zona B (Top Bar) dos templates Envios/Hub/Conta Digital, mas isso é inferência, não fato verificado.

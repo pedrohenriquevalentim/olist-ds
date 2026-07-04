@@ -50,6 +50,9 @@ export const InputPassword = ({
   onChange,
   className,
   id: externalId,
+  // "current-password" cobre login (caso mais comum); fluxos de cadastro
+  // devem passar autoComplete="new-password" — WCAG 1.3.5
+  autoComplete = 'current-password',
   ...rest
 }: InputPasswordProps) => {
   const generatedId = useId();
@@ -107,6 +110,7 @@ export const InputPassword = ({
           aria-label={label ?? placeholder}
           aria-invalid={isError ? true : undefined}
           aria-describedby={hasSupport && supportText ? `${inputId}-support` : undefined}
+          autoComplete={autoComplete}
           {...rest}
         />
 

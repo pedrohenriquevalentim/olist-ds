@@ -27,4 +27,10 @@ mkdirSync('./dist', { recursive: true });
 cpSync('./src/generated/variables.css', './dist/variables.css');
 console.log('  ✅ variables.css');
 
+// Os *.module.css fazem `@import '../../generated/variables.css'`; a partir de
+// dist/components/X/ isso resolve para dist/generated/variables.css.
+mkdirSync('./dist/generated', { recursive: true });
+cpSync('./src/generated/variables.css', './dist/generated/variables.css');
+console.log('  ✅ generated/variables.css');
+
 console.log('\n✅ CSS copiados para dist/');

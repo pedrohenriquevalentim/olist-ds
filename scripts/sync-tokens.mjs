@@ -59,20 +59,49 @@ console.log('');
 // 2. Achatar tokens (nested → flat)
 // ============================================================================
 
-function flattenObject(obj, prefix = '') {
-  const result = {};
+const isSelfAlias = (value, fullKey) =>
+  typeof value === 'string' && value === `{${fullKey}}`;
+
+function flattenObject(obj, prefix = '', result = {}) {
   for (const [key, value] of Object.entries(obj)) {
     const fullKey = prefix ? `${prefix}/${key}` : key;
     if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-      Object.assign(result, flattenObject(value, fullKey));
+      flattenObject(value, fullKey, result);
     } else {
+      if (Object.prototype.hasOwnProperty.call(result, fullKey) && result[fullKey] !== value) {
+        // Caso benigno: alias que referencia o próprio caminho (ex.: theme
+        // token "font/weight/light" → "{font/weight/light}" do primitivo).
+        // Resolver para o valor concreto é o que o alias significa — mantê-lo
+        // geraria `--x: var(--x)`, que é inválido em CSS.
+        if (isSelfAlias(value, fullKey)) {
+          console.warn(`⚠️  Alias auto-referente ignorado: "${fullKey}" mantém ${JSON.stringify(result[fullKey])}`);
+          continue;
+        }
+        if (isSelfAlias(result[fullKey], fullKey)) {
+          console.warn(`⚠️  Alias auto-referente substituído: "${fullKey}" passa a ${JSON.stringify(value)}`);
+          result[fullKey] = value;
+          continue;
+        }
+        throw new Error(
+          `Token duplicado: "${fullKey}" já resolvia para ${JSON.stringify(result[fullKey])} e foi sobrescrito por ${JSON.stringify(value)}.\n` +
+          `   Isso normalmente indica uma colisão de nomes entre collections do Figma\n` +
+          `   (ex.: um alias em "02. theme tokens" com o mesmo nome de um primitivo em "01. base tokens").\n` +
+          `   Corrija o nome da variável no Figma antes de reexportar — não sobrescreva este erro.`
+        );
+      }
       result[fullKey] = value;
     }
   }
   return result;
 }
 
-const flatTokens = flattenObject(tokens);
+let flatTokens;
+try {
+  flatTokens = flattenObject(tokens);
+} catch (err) {
+  console.error(`❌ ${err.message}\n`);
+  process.exit(1);
+}
 const tokenCount = Object.keys(flatTokens).length;
 
 // ============================================================================
@@ -85,6 +114,22 @@ function tokenToCSSVar(tokenPath) {
     .replace(/\s+/g, '-')
     .replace(/[^a-zA-Z0-9-]/g, '')
     .toLowerCase();
+}
+
+// Categorias cujo valor numérico não representa pixels (peso de fonte é
+// unitless; opacidade é percentual) — adicionar unidade quebraria a propriedade CSS.
+const UNITLESS_PREFIXES = ['font/weight', 'shape/opacity'];
+function isUnitless(tokenPath) {
+  const normalized = tokenPath.toLowerCase();
+  return UNITLESS_PREFIXES.some((prefix) => normalized.startsWith(prefix));
+}
+
+// O Figma exporta valores em px; o design system usa rem (regra do projeto:
+// "unidades em rem, nunca px") para respeitar o font-size configurado pelo
+// usuário. Base 16px = 1rem.
+function pxToRem(value) {
+  if (value === 0) return '0';
+  return `${value / 16}rem`;
 }
 
 function generateCSS(flat) {
@@ -100,7 +145,8 @@ function generateCSS(flat) {
       const refKey = tokenToCSSVar(refName);
       css += `  ${tokenToCSSVar(key)}: var(${refKey});\n`;
     } else if (typeof value === 'number') {
-      css += `  ${tokenToCSSVar(key)}: ${value}px;\n`;
+      const cssValue = isUnitless(key) ? value : pxToRem(value);
+      css += `  ${tokenToCSSVar(key)}: ${cssValue};\n`;
     } else {
       css += `  ${tokenToCSSVar(key)}: ${value};\n`;
     }

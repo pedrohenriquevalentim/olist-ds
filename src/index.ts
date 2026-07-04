@@ -2,12 +2,13 @@
 
 // Auto-generated — NÃO edite manualmente
 
-export { Button } from './components/Button';
-export { Checkbox } from './components/Checkbox';
-export { Chip } from './components/Chip';
-export { InputPassword } from './components/InputPassword';
-export { InputSearch } from './components/InputSearch';
-export { InputSelect } from './components/InputSelect';
-export { InputText } from './components/InputText';
-export { Logo } from './components/Logo';
-export { ProdutosOlistIcons } from './components/ProdutosOlistIcons';
+export * from './components/Button';
+export * from './components/Checkbox';
+export * from './components/Chip';
+export * from './components/Icon';
+export * from './components/InputPassword';
+export * from './components/InputSearch';
+export * from './components/InputSelect';
+export * from './components/InputText';
+export * from './components/Logo';
+export * from './components/ProdutosOlistIcons';

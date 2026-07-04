@@ -79,12 +79,12 @@
     background-color 0.15s ease;
 }
 
-.inputBase:hover:not(:disabled) {
+.inputBase:hover:not(:disabled):not(.stateDisabled) {
   border-color: var(--input-base-border-color-hover);
   background-color: var(--input-base-color-hover);
 }
 
-.inputBase:active:not(:disabled) {
+.inputBase:active:not(:disabled):not(.stateDisabled) {
   border-width: var(--input-base-border-width-pressed);
   border-color: var(--input-base-border-color-pressed);
   background-color: var(--input-base-color-pressed);
@@ -151,7 +151,9 @@
 }
 
 .inputBase:disabled .placeholderText,
-.inputBase:disabled .selectedText {
+.inputBase:disabled .selectedText,
+.inputBase.stateDisabled .placeholderText,
+.inputBase.stateDisabled .selectedText {
   color: var(--input-base-font-color-disabled);
 }
 
@@ -228,7 +230,8 @@
   display: block;
 }
 
-.inputBase:disabled .chevron {
+.inputBase:disabled .chevron,
+.inputBase.stateDisabled .chevron {
   color: var(--input-base-shape-color-disabled);
 }
 
@@ -361,14 +364,40 @@
   color: var(--list-list-item-font-color-disabled);
 }
 
-/* ── Checkbox wrapper (multi select) ────────────────────────────────────── */
+/* ── Checkbox visual (multi select) ─────────────────────────────────────────
+   Indicador puramente decorativo — a semântica de seleção vem do
+   role="option" + aria-selected no <li>. Replica o visual do componente
+   Checkbox usando os mesmos tokens. */
 
-.checkboxWrapper {
+.checkboxVisual {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   pointer-events: none;
+  width: var(--checkbox-size-box-height);
+  height: var(--checkbox-size-box-height);
+  border-radius: var(--checkbox-border-radius-box);
+  border: var(--checkbox-border-width-enabled) solid var(--checkbox-border-color-enabled);
+  background-color: transparent;
+  color: var(--checkbox-shape-color-selected);
+  box-sizing: border-box;
+}
+
+.checkboxVisualChecked {
+  background-color: var(--checkbox-color-selected);
+  border-color: var(--checkbox-color-selected);
+  border-width: var(--checkbox-border-width-selected);
+}
+
+.checkboxVisualDisabled {
+  border-color: var(--checkbox-border-color-disabled);
+}
+
+.checkboxVisualDisabled.checkboxVisualChecked {
+  background-color: var(--checkbox-color-disabled);
+  border: none;
+  color: var(--checkbox-shape-color-disabled);
 }
 
 /* ── Checkmark (single select) ───────────────────────────────────────────── */
