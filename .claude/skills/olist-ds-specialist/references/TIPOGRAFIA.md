@@ -2,6 +2,22 @@
 
 **⚠️ IMPORTANTE:** Para entender **como nomear cada tipo de texto** (Heading, Label, Error, etc.), leia primeiro `GLOSSARIO_PAPEIS_TEXTO.md`. Este arquivo define apenas os **tokens visuais** (tamanho, peso, altura).
 
+**⚠️ BUG ATIVO em `--font-weight-regular` / `-light` / `-medium` / `-bold`:**
+esses 4 tokens têm referência circular em `src/generated/variables.css` (uma
+colisão de nomes entre collections no Figma) e **não resolvem para o número
+mostrado na tabela abaixo** — o navegador ignora o valor inválido e o
+elemento herda o `font-weight` do pai. Só `--font-weight-xlight` (200),
+`--font-weight-sbold` (600) e `--font-weight-xbold` (800) resolvem
+corretamente hoje. Ao usar qualquer um dos 4 tokens quebrados num
+`.module.css` novo, declare o fallback numérico explícito
+(`var(--font-weight-regular, 400)`, `var(--font-weight-medium, 500)`,
+`var(--font-weight-bold, 700)`, `var(--font-weight-light, 300)`) — é o
+padrão já aplicado em `Button`, `Chip`, `InputText`, `InputSearch`,
+`InputPassword` e `InputSelect`. Detalhe completo da causa raiz e da lista
+de tokens de componente afetados em `GOVERNANCA_TOKENS.md` (seção 3.3).
+Este aviso deve ser removido quando o Figma renomear os aliases colidentes
+e uma nova exportação de tokens confirmar a correção.
+
 ---
 
 ## Família Tipográfica
