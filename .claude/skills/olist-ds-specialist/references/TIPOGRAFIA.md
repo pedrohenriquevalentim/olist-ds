@@ -30,7 +30,6 @@ e uma nova exportação de tokens confirmar a correção.
 ### Carregamento
 
 No Storybook: via `preview-head.html` (link do Google Fonts).
-No Next.js: via `next/font/google` com `variable: "--font-family-jakarta"`.
 
 Pesos carregados: 200, 300, 400, 500, 600, 700, 800.
 

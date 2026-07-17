@@ -2,7 +2,7 @@
 
 Pipeline AI-First que conecta Figma, Claude e Gemini para transformar decisões visuais em componentes React prontos para produção — e transformar SDDs em protótipos no Figma automaticamente.
 
-O design system é um pacote NPM privado (`@pedrohenriquevalentim/olist-ds`) publicado no GitHub Packages. Cada componente consome design tokens exportados do Figma, tem testes gerados por IA, documentação interativa no Storybook, e pode ser instalado em qualquer projeto React ou Next.js.
+O design system é um pacote NPM privado (`@pedrohenriquevalentim/olist-ds`) publicado no GitHub Packages. Cada componente consome design tokens exportados do Figma, tem testes gerados por IA, documentação interativa no Storybook, e pode ser instalado em qualquer projeto React.
 
 A skill integrada (`olist-ds-specialist`) permite criar telas a partir de SDDs e gerar documentação de componentes direto no Figma, usando o design system como base, via Claude.ai ou Claude Code.
 
@@ -36,9 +36,6 @@ FIGMA (source of truth)
 │
 ├──→ CI/CD (GitHub Actions)
 │    Lint → Tokens → Testes → Storybook → Publicação NPM
-│
-├──→ Next.js (ambiente de consumo)
-│    Importa o pacote publicado e renderiza todos os componentes
 │
 └──→ Skill corporativa (auto-sync)
      Atualiza documentação da skill a cada ship
@@ -465,18 +462,6 @@ npm run storybook    # http://localhost:6006
 📁 Foundations (Colors, Typography, Spacing)
 📁 Components (autodocs)
 ```
-
----
-
-## Ambiente de Consumo (Next.js)
-
-```bash
-npx create-next-app@latest olist-ds-next
-cd olist-ds-next
-npm install @pedrohenriquevalentim/olist-ds   # GitHub Packages
-```
-
-O `page.tsx` usa `catalog.ts` para renderizar todos os componentes automaticamente. Novos componentes aparecem sem editar código.
 
 ---
 
