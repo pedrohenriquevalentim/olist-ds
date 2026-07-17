@@ -181,7 +181,8 @@
   background: transparent;
   font-family: var(--font-family-jakarta);
   font-size: var(--text-placeholder-text-font-size);
-  font-weight: var(--text-placeholder-text-font-weight);
+  /* Fallback 400 por bug de referência circular em --font-weight-regular no gerador de tokens */
+  font-weight: var(--text-placeholder-text-font-weight, 400);
   line-height: var(--text-placeholder-text-line-height);
   color: var(--input-base-font-color-filled);
   font-feature-settings: 'ss03' 1, 'lnum' 1, 'tnum' 1;
@@ -215,7 +216,8 @@
 .supportText {
   font-family: var(--font-family-jakarta);
   font-size: var(--text-support-text-font-size);
-  font-weight: var(--text-support-text-font-weight);
+  /* Fallback 400 por bug de referência circular em --font-weight-regular no gerador de tokens */
+  font-weight: var(--text-support-text-font-weight, 400);
   line-height: var(--text-support-text-line-height);
   color: var(--text-support-text-color-enabled);
   overflow: hidden;
