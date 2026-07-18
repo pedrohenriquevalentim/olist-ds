@@ -105,6 +105,52 @@ try {
 const tokenCount = Object.keys(flatTokens).length;
 
 // ============================================================================
+// 2.1 Validar aliases entre collections
+// ============================================================================
+// A partir da v2 do "Olist Token Exporter", aliases que atravessam collections
+// vêm marcados com a origem — "{theme:font/weight/sbold}" em vez de apenas
+// "{font/weight/sbold}". Nomes de variável não são únicos entre collections
+// (theme pode ter "sbold" sem que base tenha), então validar aqui pega na hora
+// do build um alias quebrado (variável renomeada/removida no Figma sem
+// atualizar quem aponta pra ela) — em vez de descobrir depois, olhando CSS
+// renderizado no navegador (caso real: font-weight quebrado em 2026-07-18).
+// Aliases no formato antigo (sem tag) não são validados — comportamento
+// idêntico ao anterior, preservado para não quebrar exports já existentes.
+
+function firstModeObject(nested) {
+  if (!nested) return {};
+  const firstKey = Object.keys(nested)[0];
+  return firstKey ? nested[firstKey] : {};
+}
+
+const flatBase = flattenObject(baseTokens || {});
+const flatTheme = flattenObject(firstModeObject(themeTokens));
+const COLLECTION_MAPS = { base: flatBase, theme: flatTheme, components: flatTokens };
+
+const ALIAS_PATTERN = /^\{([a-z]+):(.+)\}$/;
+
+const brokenAliases = [];
+for (const [key, value] of Object.entries(flatTokens)) {
+  if (typeof value !== 'string') continue;
+  const match = value.match(ALIAS_PATTERN);
+  if (!match) continue;
+  const [, tag, refName] = match;
+  const map = COLLECTION_MAPS[tag];
+  if (map && !(refName in map)) {
+    brokenAliases.push(`   "${key}" → "{${tag}:${refName}}" (não existe na collection "${tag}")`);
+  }
+}
+if (brokenAliases.length > 0) {
+  console.error(`❌ ${brokenAliases.length} alias(es) quebrado(s):\n`);
+  console.error(brokenAliases.join('\n') + '\n');
+  console.error(
+    '   A variável referenciada foi renomeada ou removida no Figma sem atualizar\n' +
+    '   quem aponta pra ela. Corrija no Figma antes de reexportar.\n'
+  );
+  process.exit(1);
+}
+
+// ============================================================================
 // 3. Gerar CSS variables
 // ============================================================================
 
@@ -141,7 +187,11 @@ function generateCSS(flat) {
   for (const [key, value] of Object.entries(flat)) {
     // Pular aliases (referências) — resolver para valor real se possível
     if (typeof value === 'string' && value.startsWith('{') && value.endsWith('}')) {
-      const refName = value.slice(1, -1);
+      // Tag de collection ("{theme:font/weight/sbold}") só serve pra validação
+      // acima — o nome da variável CSS continua baseado só no caminho, pra
+      // não mudar nenhum nome de --var já em uso pelos componentes.
+      const taggedMatch = value.match(ALIAS_PATTERN);
+      const refName = taggedMatch ? taggedMatch[2] : value.slice(1, -1);
       const refKey = tokenToCSSVar(refName);
       css += `  ${tokenToCSSVar(key)}: var(${refKey});\n`;
     } else if (typeof value === 'number') {
