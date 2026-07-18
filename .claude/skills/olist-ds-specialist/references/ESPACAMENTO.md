@@ -2,10 +2,12 @@
 
 ## Escala de Espaçamento
 
-Unidade base: 4px. Todo espaçamento deve ser múltiplo de 4.
+Unidade base: 4px. Todo espaçamento deve ser múltiplo de 4 — exceto
+`--shape-spacing-2px`, adicionado como exceção pontual (ver linha abaixo).
 
 | Token | Valor | Uso comum |
 |---|---|---|
+| `--shape-spacing-2px` | 2px | Exceção à escala de 4px — ajuste fino pontual (ex: gap mínimo entre ícone e badge sobreposto). Não use como substituto de `4px` |
 | `--shape-spacing-4px` | 4px | Gap ícone-texto inline, padding vertical de badge |
 | `--shape-spacing-8px` | 8px | Padding compacto, gaps pequenos, checkbox-label |
 | `--shape-spacing-12px` | 12px | Padding horizontal de input, gaps internos de card |
@@ -25,6 +27,7 @@ Unidade base: 4px. Todo espaçamento deve ser múltiplo de 4.
 | `--shape-border-radius-8px` | 8px | **Padrão**: botões, inputs, cards, modais |
 | `--shape-border-radius-12px` | 12px | Cards grandes, containers |
 | `--shape-border-radius-16px` | 16px | Containers de modal, cards proeminentes |
+| `--shape-border-radius-40px` | 40px | Containers grandes/promocionais (raro) |
 | `--shape-border-radius-9999px` | 9999px | Pills, tags, avatares circulares |
 
 ## Espessura de Borda
