@@ -309,25 +309,50 @@ function syncClaudeMd() {
     console.log('⚠️  Nenhuma library no figma-config.json. Pulando CLAUDE.md...');
     return;
   }
+  const blocked = figmaConfig?.designSystem?.blockedLibraries || [];
 
-  // Gerar bloco de prioridade de libraries
-  const libraryLines = libraries
-    .map(lib => `   - **${lib.name}**${lib.priority === 1 ? ' (master — preferência absoluta)' : ''}`)
-    .join('\n');
-
-  const newPriorityBlock =
-    `4. Identifique os componentes do design system necessários consultando as libraries na ordem de prioridade:\n${libraryLines}`;
+  // Dois formatos de bloco, dependendo de quantas libraries estão ativas:
+  // uma única library ativa (modo atual, desde 2026-07-03) vira uma frase
+  // "library de referência"; várias ativas voltam ao formato antigo de
+  // "libraries na ordem de prioridade". Os dois regex abaixo cobrem ambos,
+  // pra sync nunca ficar mudo silenciosamente quando o modo mudar de novo.
+  let newBlock;
+  if (libraries.length === 1) {
+    const lib = libraries[0];
+    const note = lib.claudeMdNote || lib.description || '';
+    // Entradas marcadas como duplicata (ex.: arquivo AS-IS já coberto por
+    // outra entrada) não entram na frase pro leitor — ver "duplicateOf" em
+    // figma-config.json.
+    const blockedNames = blocked
+      .filter(b => !b.omitFromClaudeMdNote)
+      .map(b => b.name)
+      .join(', ');
+    newBlock =
+      `4. Identifique os componentes do design system necessários consultando a library de referência:\n` +
+      `   - **${lib.name}** ([link](${lib.url})) — ${note}\n` +
+      (blockedNames
+        ? `\n   > As demais libraries (${blockedNames}) estão bloqueadas permanentemente em \`blockedLibraries\`. Ver \`figma-config.json\`.`
+        : '');
+  } else {
+    const libraryLines = libraries
+      .map(lib => `   - **${lib.name}**${lib.priority === 1 ? ' (master — preferência absoluta)' : ''}`)
+      .join('\n');
+    newBlock =
+      `4. Identifique os componentes do design system necessários consultando as libraries na ordem de prioridade:\n${libraryLines}`;
+  }
 
   let content = readFileSync(CLAUDE_MD_PATH, 'utf-8');
 
-  // Substituir o bloco de prioridade de libraries entre o passo 4 e o passo 5
-  const pattern = /4\. Identifique os componentes do design system necessários consultando as libraries na ordem de prioridade:[\s\S]*?(?=\n5\.)/;
+  // Aceita os dois formatos de cabeçalho ao localizar o bloco a substituir,
+  // já que o formato atual no arquivo pode não bater com o que vamos gerar
+  // (ex.: arquivo ainda no formato plural, config já reduzida a 1 library).
+  const pattern = /4\. Identifique os componentes do design system necessários consultando (?:a library de referência|as libraries na ordem de prioridade):[\s\S]*?(?=\n5\.)/;
   if (!pattern.test(content)) {
     console.warn('⚠️  CLAUDE.md sincronizado parcialmente: padrão do passo 4 não encontrado. O arquivo pode ter sido editado manualmente.');
     return;
   }
 
-  content = content.replace(pattern, newPriorityBlock);
+  content = content.replace(pattern, newBlock);
 
   writeFileSync(CLAUDE_MD_PATH, content, 'utf-8');
   console.log('✅ CLAUDE.md sincronizado (libraries atualizadas)\n');

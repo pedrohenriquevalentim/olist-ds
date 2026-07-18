@@ -7,7 +7,8 @@
         "fileKey": "HeyN4w209HWh8rfpTDiwyf",
         "libraryKey": "lk-f068a69b8c4ef3c01d6a883806b21c6ebe73213d3565451a399cfba74694fbc0053c2b4226fb206812f098c679b6a971148aa027e97bc14733e29552c4002cb5",
         "url": "https://www.figma.com/design/HeyN4w209HWh8rfpTDiwyf/design-system",
-        "description": "Adotada em 2026-07-03 como única referência para construção de telas (decisão permanente, substitui a hierarquia anterior de 6 libraries). Mesmo conteúdo antes listado como arquivo bloqueado 'Design System - Fondations, Components & Icons Rebrand (TO-BE)'. Verificada contra o harness em 2026-07-02 — ver harnessCoverageCheck abaixo."
+        "description": "Adotada em 2026-07-03 como única referência para construção de telas (decisão permanente, substitui a hierarquia anterior de 6 libraries). Mesmo conteúdo antes listado como arquivo bloqueado 'Design System - Fondations, Components & Icons Rebrand (TO-BE)'. Verificada contra o harness em 2026-07-02 — ver harnessCoverageCheck abaixo.",
+        "claudeMdNote": "única referência para construção de telas, adotada em 2026-07-03"
       }
     ],
     "searchPriority": [
@@ -17,7 +18,9 @@
       {
         "name": "Design System - Components Web (AS-IS)",
         "fileKey": "QJmwu6sR06xmyGAoBaXuEn",
-        "reason": "Arquivo AS-IS descontinuado como referência direta. Substituído pela library [design system] components web via libraryKey."
+        "reason": "Arquivo AS-IS descontinuado como referência direta. Substituído pela library [design system] components web via libraryKey.",
+        "duplicateOf": "[design system] components web",
+        "omitFromClaudeMdNote": true
       },
       {
         "priority": 1,
