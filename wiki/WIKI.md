@@ -2,7 +2,7 @@
 
 **Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.64`  
 **Skill:** v3.13  
-**Última atualização:** 2026-07-18  
+**Última atualização:** 2026-07-20  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -96,7 +96,7 @@ npm run release
 |---|---|
 | `npm run validate:icons` | `node scripts/validate-icon-migration.mjs` |
 | `npm run sync:skill` | `node scripts/sync-skill.mjs` |
-| `npm run build:tokens` | `node scripts/sync-tokens.mjs` |
+| `npm run build:tokens` | `npm run build --workspace=packages/design-tokens && node ...` |
 | `npm run clean` | `rm -rf dist` |
 | `npm run build` | `npm run clean && npm run build:tokens && node scripts/gen...` |
 | `npm run dev` | `vite` |
@@ -117,7 +117,6 @@ npm run release
 | `npm run version:skill` | `node scripts/version-skill.mjs` |
 | `npm run ship` | `npm run pipeline && npm run sync:skill && npm run sync:sk...` |
 | `npm run mcp:figma` | `figma-mcp` |
-| `npm run watch:tokens` | `style-dictionary build --watch` |
 | `npm run sync:skill-meta` | `node scripts/sync-skill-meta.mjs` |
 | `npm run wiki` | `node scripts/generate-wiki.mjs` |
 | `npm run postrelease` | `npm run wiki` |
@@ -314,6 +313,7 @@ echo '.claude/figma-config.json' >> .gitignore
 ### Disponíveis em `scripts/`
 
 - `copy-css.mjs`
+- `copy-tokens.mjs`
 - `generate-icons.mjs`
 - `generate-index.mjs`
 - `generate-stories.mjs`
@@ -321,7 +321,6 @@ echo '.claude/figma-config.json' >> .gitignore
 - `generate-wiki.mjs`
 - `sync-skill-meta.mjs`
 - `sync-skill.mjs`
-- `sync-tokens.mjs`
 - `validate-icon-migration.mjs`
 - `version-skill.mjs`
 
@@ -487,4 +486,4 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ---
 
-*Gerado automaticamente em 2026-07-18 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-07-20 por `generate-wiki.mjs`. Não edite manualmente.*
