@@ -145,3 +145,57 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ─────────────────────────────────────────────────────────
+  # JOB 4: Publicar @pedrohenriquevalentim/design-tokens
+  # Só roda no push para main (não em PRs).
+  # Pacote e versão independentes do pacote principal — só publica
+  # se a versão em packages/design-tokens/package.json ainda não
+  # existir no registro (evita falhar em merges onde só o pacote
+  # principal mudou de versão).
+  # ─────────────────────────────────────────────────────────
+  publish-tokens:
+    name: Publicar design-tokens no GitHub Packages
+    needs: quality
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js com registro do GitHub Packages
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://npm.pkg.github.com'
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Build do pacote de tokens
+        run: npm run build --workspace=packages/design-tokens
+
+      - name: Verificar se a versão já foi publicada
+        id: check
+        run: |
+          PKG_VERSION=$(node -p "require('./packages/design-tokens/package.json').version")
+          if npm view "@pedrohenriquevalentim/design-tokens@$PKG_VERSION" version >/dev/null 2>&1; then
+            echo "already_published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "already_published=false" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publicar pacote
+        if: steps.check.outputs.already_published == 'false'
+        run: npm publish --workspace=packages/design-tokens
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
