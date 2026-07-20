@@ -385,13 +385,24 @@ partir de tokens semânticos soltos.
 | `breadcrumb-*` | Trilha de navegação hierárquica | Zona B (top bar) do template ERP, indicando profundidade | **Note:** o link é `font-weight-bold` (700) e o item atual é `font-weight-regular` (400) — inversão em relação à maioria dos DS (que deixam o atual em destaque) |
 | `flags-*` | Indicador pequeno de bandeira/idioma | Seletor de idioma/país | Família pequena (3 tokens) — se precisar de mais estados, é gap a reportar, não a improvisar |
 
-**Sobre `Paginator` e filtros:** não existem tokens `pagination-*` nem
-`filter-*` dedicados no arquivo — o padrão correto (usado no protótipo de
-tabela com filtros/paginação já demonstrado nesta conversa) é compor a
-partir de `chip-*` (filtros), `input-base-*`/`dropdown-*` (busca/seleção de
-período) e da escala genérica `shape-size-*`/`shape-spacing-*` (botões de
-página). O mesmo vale para `alert-*`, que não existe: compõe-se a partir de
-`color-background/text/border-feedback-*-subtle` (seção 2.3).
+**Sobre `Paginator`:** resolvido em 2026-07-20 — o componente `Paginator`
+agora existe na `design system (base)` (confirmado via `/ds-sync`, ver
+`figma-config.json` → `harnessCoverageCheck.resolvedGaps`). Use a instância
+real do componente (`search_design_system('paginator', ...)`) em vez de
+compor manualmente. A nota anterior recomendando compor a partir de
+`chip-*`/`input-base-*`/`dropdown-*` não se aplica mais a paginação —
+esses tokens continuam válidos para outros usos (filtros, busca), mas não
+para o controle de páginas em si.
+
+**Sobre filtros e `alert-*`:** ainda não existem tokens `filter-*` nem
+`alert-*` dedicados no arquivo — o padrão correto para filtros continua
+sendo compor a partir de `chip-*` (filtros), `input-base-*`/`dropdown-*`
+(busca/seleção de período) e da escala genérica `shape-size-*`/
+`shape-spacing-*`. Para `alert-*`: compõe-se a partir de
+`color-background/text/border-feedback-*-subtle` (seção 2.3). Os ícones
+`alert-triangle`/`alert`/`alert-circle` encontrados na library são peças
+gráficas (ícone), não um componente de banner/alerta pronto — não confundir
+os dois.
 
 ---
 

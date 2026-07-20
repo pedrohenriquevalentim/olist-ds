@@ -1,7 +1,7 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.64`  
-**Skill:** v3.13  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.65`  
+**Skill:** v3.14  
 **Última atualização:** 2026-07-20  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
@@ -36,8 +36,8 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Ícones SVG | 550 |
 | Arquivos da Skill | 22 |
 | Arquivos Figma permitidos | 1 |
-| Versão npm | 1.0.64 |
-| Versão skill | 3.13 |
+| Versão npm | 1.0.65 |
+| Versão skill | 3.14 |
 
 ## Componentes
 
@@ -78,7 +78,7 @@ npm run release
     │
     ├── 1. generate:all (testes + stories via Gemini)
     ├── 2. build (compilação TypeScript)
-    ├── 3. sync:skill (atualiza skill v3.13)
+    ├── 3. sync:skill (atualiza skill v3.14)
     ├── 4. npm version patch (incrementa versão)
     ├── 5. npm publish (publica no registry)
     └── 6. git push --follow-tags
@@ -124,7 +124,7 @@ npm run release
 
 ## Skill Claude
 
-### Versão: v3.13
+### Versão: v3.14
 
 **Localização:** `.claude/skills/olist-ds-specialist/`
 
@@ -192,7 +192,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 2. Customize → Skills → Upload → selecionar pasta da skill
 3. Iniciar conversa e usar um dos slash commands acima
 
-### Regras Críticas v3.13
+### Regras Críticas v3.14
 
 ### ✅ Sempre Faça:
 
@@ -395,7 +395,7 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 1. `.claude/figma-config.json` existe?
 2. `searchPriority` tem os libraryKeys corretos?
-3. Skill v3.13 instalada?
+3. Skill v3.14 instalada?
 4. O prompt inclui instrução para ler `figma-config.json` antes do Figma MCP?
 
 ## Changelog
