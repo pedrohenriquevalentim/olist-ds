@@ -1,4 +1,4 @@
-# Setup — Olist DS Specialist Skill v3.13
+# Setup — Olist DS Specialist Skill v3.14
 
 Siga este guia para instalar e configurar a skill no seu projeto.
 
