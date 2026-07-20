@@ -2,6 +2,9 @@
   "name": "@pedrohenriquevalentim/olist-ds",
   "version": "1.0.64",
   "description": "Olist Design System — componentes React + tokens",
+  "workspaces": [
+    "packages/*"
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -27,7 +30,7 @@
   "scripts": {
     "validate:icons": "node scripts/validate-icon-migration.mjs",
     "sync:skill": "node scripts/sync-skill.mjs",
-    "build:tokens": "node scripts/sync-tokens.mjs",
+    "build:tokens": "npm run build --workspace=packages/design-tokens && node scripts/copy-tokens.mjs",
     "clean": "rm -rf dist",
     "build": "npm run clean && npm run build:tokens && node scripts/generate-index.mjs && tsc && node scripts/copy-css.mjs && npm run sync:skill && npm run sync:skill-meta",
     "dev": "vite",
@@ -48,7 +51,6 @@
     "version:skill": "node scripts/version-skill.mjs",
     "ship": "npm run pipeline && npm run sync:skill && npm run sync:skill-meta && git add -A && git commit -m 'chore: release' && npm version patch && git push origin HEAD --tags",
     "mcp:figma": "figma-mcp",
-    "watch:tokens": "style-dictionary build --watch",
     "sync:skill-meta": "node scripts/sync-skill-meta.mjs",
     "wiki": "node scripts/generate-wiki.mjs",
     "postrelease": "npm run wiki",
@@ -63,6 +65,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@pedrohenriquevalentim/design-tokens": "*",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "@axe-core/react": "^4.11.1",
