@@ -1,7 +1,7 @@
 # Mapa de Fontes — Estrutura do Repositório
 
 **Auto-gerado por `npm run build`**  
-**Última atualização:** 2026-07-18  
+**Última atualização:** 2026-07-20  
 **Versão da skill:** 3.13
 
 ---
