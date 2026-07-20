@@ -119,7 +119,7 @@ Ver `olist-ds-specialist` Caso 7 para o script completo de geração via `use_fi
   Se não estiver lá, adicione antes de usar `import foo from '*.svg'` — caso contrário o `npm run build` falhará com TS2307.
 
 ## Comandos Disponíveis
-- npm run build:tokens     → gera variáveis CSS a partir dos tokens JSON
+- npm run build:tokens     → builda o workspace packages/design-tokens/ e copia o resultado (CSS/JS/JSON) para src/generated/
 - npm run dev              → servidor de desenvolvimento
 - npm run test:run         → roda testes uma vez
 - npm run storybook        → abre o Storybook

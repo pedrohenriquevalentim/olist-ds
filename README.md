@@ -174,8 +174,13 @@ olist-ds/
 │   ├── preview-head.html                # Google Fonts
 │   ├── theme.ts                         # Branding Olist
 │   └── manager.ts                       # Aplica tema
+├── packages/
+│   └── design-tokens/                   # Pacote agnóstico de framework (@pedrohenriquevalentim/design-tokens)
+│       ├── tokens/                      # JSON do Tokens Studio (DTCG) — base.json, theme.json, tokens.json
+│       ├── scripts/build.mjs            # JSON → CSS Custom Properties + JS (ex-sync-tokens.mjs)
+│       └── dist/                        # Saída: variables.css, tokens.js, tokens.json (não editar)
 ├── scripts/
-│   ├── sync-tokens.mjs                  # JSON → CSS Custom Properties (tokens)
+│   ├── copy-tokens.mjs                  # Copia dist/ do workspace design-tokens para src/generated/
 │   ├── sync-skill.mjs                   # Regenera COMPONENTES.md, MAPA_FONTES.md, VISAO_GERAL.md
 │   ├── sync-skill-meta.mjs              # Atualiza versão, README e wiki da skill
 │   ├── generate-wiki.mjs                # Gera wiki/WIKI.md consolidado
@@ -186,11 +191,7 @@ olist-ds/
 │   ├── copy-css.mjs                     # Copia .module.css para dist/
 │   └── version-skill.mjs                # Bump de versão da skill
 ├── src/
-│   ├── tokens/                          # JSON do Tokens Studio (DTCG)
-│   │   ├── base.json
-│   │   ├── theme.json
-│   │   └── tokens.json
-│   ├── generated/                       # Saída do Style Dictionary (não editar)
+│   ├── generated/                       # Cópia do dist/ de packages/design-tokens/ (não editar)
 │   │   ├── variables.css
 │   │   └── tokens.js
 │   ├── components/                      # <!-- AUTO:component-count -->10<!-- /AUTO:component-count --> componentes
@@ -420,7 +421,7 @@ Um scheduled task (`olist-ds-audit`) executa semanalmente via Claude Code e:
 
 ### Origem
 
-Definidos no Figma com **Tokens Studio** (v2.11.4). Exportados como JSON (DTCG) para `src/tokens/`.
+Definidos no Figma com **Tokens Studio** (v2.11.4). Exportados como JSON (DTCG) para `packages/design-tokens/tokens/`.
 
 ### Transformação
 
@@ -428,7 +429,7 @@ Definidos no Figma com **Tokens Studio** (v2.11.4). Exportados como JSON (DTCG) 
 npm run build:tokens
 ```
 
-O `scripts/sync-tokens.mjs` usa Style Dictionary + `@tokens-studio/sd-transforms` com transforms customizados:
+O `npm run build:tokens` (raiz) builda o pacote workspace `packages/design-tokens/` (`scripts/build.mjs`, ex-`sync-tokens.mjs`) e copia o resultado para `src/generated/`. Internamente usa Style Dictionary + `@tokens-studio/sd-transforms` com transforms customizados:
 - **custom/font-family-quote** — adiciona aspas em nomes com espaço
 - **custom/px-unit** — converte números para px (exceto opacity e font-weight)
 

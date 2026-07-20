@@ -1,0 +1,35 @@
+{
+  "name": "@pedrohenriquevalentim/design-tokens",
+  "version": "0.1.0",
+  "description": "Design tokens da Olist (JSON, CSS custom properties, módulo JS) — agnóstico de framework, consumido por React web, React Native e ERP.",
+  "type": "module",
+  "main": "./dist/tokens.js",
+  "exports": {
+    ".": {
+      "import": "./dist/tokens.js"
+    },
+    "./tokens.json": "./dist/tokens.json",
+    "./variables.css": "./dist/variables.css",
+    "./tokens.js": "./dist/tokens.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pedrohenriquevalentim/olist-ds.git",
+    "directory": "packages/design-tokens"
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && node scripts/build.mjs",
+    "prepublishOnly": "npm run build"
+  },
+  "license": "UNLICENSED"
+}
