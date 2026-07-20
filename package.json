@@ -50,6 +50,7 @@
     "pipeline": "npm run build:tokens && npm run generate:all && npm run lint && tsc --noEmit && npm run test:run && npm run build-storybook",
     "version:skill": "node scripts/version-skill.mjs",
     "ship": "npm run pipeline && npm run sync:skill && npm run sync:skill-meta && git add -A && git commit -m 'chore: release' && npm version patch && git push origin HEAD --tags",
+    "release": "node scripts/release.mjs",
     "mcp:figma": "figma-mcp",
     "sync:skill-meta": "node scripts/sync-skill-meta.mjs",
     "wiki": "node scripts/generate-wiki.mjs",
