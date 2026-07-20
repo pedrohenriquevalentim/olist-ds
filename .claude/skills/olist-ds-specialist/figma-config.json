@@ -62,21 +62,32 @@
       }
     ],
     "harnessCoverageCheck": {
-      "lastVerifiedAt": "2026-07-02",
+      "lastVerifiedAt": "2026-07-20",
       "againstLibrary": "design system (base)",
-      "verifiedVia": "search_design_system real, uma query por requisito do HARNEES_TELAS.md",
-      "status": "cobertura quase completa — 1 gap conhecido",
+      "verifiedVia": "search_design_system real via /ds-sync (Caso 6), busca por termo — não é listagem exaustiva por requisito do HARNEES_TELAS.md como em 2026-07-02, mas cobre todas as categorias já documentadas + termos genéricos de sondagem",
+      "status": "cobertura quase completa — 1 gap conhecido (Summary Card, ver abaixo)",
       "confirmed": [
-        "Menu ERP", "Button", "Button Icon", "Radio Button", "Segmented Buttons", "Link",
-        "Tag (+ tag-desktop, tag-mobile, tag-more, tag-delivery)", "Tooltip", "Logo",
-        "Icon (genérico + ~15 ícones individuais)", "Input Search", "Input Text", "Dropdown",
-        "Checkbox", "Avatar", "Card (genérico)", "Breadcrumb",
+        "Menu", "Menu ERP", "Menu Global", "Button", "Button Icon", "Radio Button", "Segmented Buttons", "Link",
+        "Tag (+ tag-desktop, tag-mobile, tag-more, tag-delivery)", "Badge", "Tooltip", "Logo",
+        "Icon (genérico + Product Icon + dezenas de ícones individuais)", "Input Search", "Input Text",
+        "Input Paragraph (renomeado — antes documentado como 'Text Area')", "Input E-mail", "Input Token",
+        "Input Password", "Input Select", "Input File", "Dropdown", "Checkbox", "Toggle", "Chip",
+        "Avatar", "Card (genérico)", "Breadcrumb", "Profile", "Logout",
+        "Table (+ Table Column, Head, Simple Cell, Spreadsheet)", "Paginator", "Sort", "Reorder",
+        "Bar, Chart Bar Up, Chart Bar Down, Chart Bar Variation (Data Visualization)",
+        "List, Task List", "Dashboard", "Loading", "Overlay", "Cookie",
         "Heading/Subheading via Text Styles (text/H1–H5, paragraph, caption, description) — não como componente, consistente com o harness"
       ],
       "gaps": [
         {
           "requirement": "Summary Card (HARNEES_TELAS.md Seção 1 — template Envios/Hub/Conta Digital, Zona D)",
           "finding": "Não foi encontrado componente/variante dedicada de 'Summary Card' (fundo azul claro). Existe apenas o component_set genérico 'card'. Validar manualmente as variantes desse card (ou com o time de design) antes de usar em telas desses produtos — pode exigir construção com primitivos + documentação de gap (Seção 4 do harness) até confirmação."
+        }
+      ],
+      "resolvedGaps": [
+        {
+          "requirement": "Paginator (mencionado como ausente em references/GOVERNANCA_TOKENS.md seção 9 até 2026-07-20)",
+          "finding": "Componente 'paginator' agora existe na design system (base) (componentKey 2939593d5921fc8ceded785f7c81032fcb2c5b09, atualizado em 2026-07-18). A nota em GOVERNANCA_TOKENS.md que recomendava compor manualmente com chip-*/input-base-*/dropdown-* está desatualizada e deve ser revisada."
         }
       ]
     },
