@@ -1,8 +1,8 @@
 # Mapa de Fontes — Estrutura do Repositório
 
 **Auto-gerado por `npm run build`**  
-**Última atualização:** 2026-07-20  
-**Versão da skill:** 3.14
+**Última atualização:** 2026-07-21  
+**Versão da skill:** 3.15
 
 ---
 
@@ -13,6 +13,7 @@ src/
 ├── components/
 │   ├── Button/
 │   │       ├── Button.mdx
+│   │       ├── Button.metadata.json
 │   │       ├── Button.module.css
 │   │       ├── Button.stories.tsx
 │   │       ├── Button.test.tsx
@@ -20,6 +21,7 @@ src/
 │   │       └── index.ts
 │   ├── Checkbox/
 │   │       ├── Checkbox.mdx
+│   │       ├── Checkbox.metadata.json
 │   │       ├── Checkbox.module.css
 │   │       ├── Checkbox.stories.tsx
 │   │       ├── Checkbox.test.tsx
@@ -27,6 +29,7 @@ src/
 │   │       └── index.ts
 │   ├── Chip/
 │   │       ├── Chip.mdx
+│   │       ├── Chip.metadata.json
 │   │       ├── Chip.module.css
 │   │       ├── Chip.stories.tsx
 │   │       ├── Chip.test.tsx
@@ -34,12 +37,14 @@ src/
 │   │       └── index.ts
 │   ├── Icon/
 │   │       ├── Icon.mdx
+│   │       ├── Icon.metadata.json
 │   │       ├── Icon.stories.tsx
 │   │       ├── Icon.test.tsx
 │   │       ├── index.tsx
 │   │       └── styles.module.css
 │   ├── InputPassword/
 │   │       ├── InputPassword.mdx
+│   │       ├── InputPassword.metadata.json
 │   │       ├── InputPassword.module.css
 │   │       ├── InputPassword.stories.tsx
 │   │       ├── InputPassword.test.tsx
@@ -47,6 +52,7 @@ src/
 │   │       └── index.ts
 │   ├── InputSearch/
 │   │       ├── InputSearch.mdx
+│   │       ├── InputSearch.metadata.json
 │   │       ├── InputSearch.module.css
 │   │       ├── InputSearch.stories.tsx
 │   │       ├── InputSearch.test.tsx
@@ -54,6 +60,7 @@ src/
 │   │       └── index.ts
 │   ├── InputSelect/
 │   │       ├── InputSelect.mdx
+│   │       ├── InputSelect.metadata.json
 │   │       ├── InputSelect.module.css
 │   │       ├── InputSelect.stories.tsx
 │   │       ├── InputSelect.test.tsx
@@ -61,6 +68,7 @@ src/
 │   │       └── index.ts
 │   ├── InputText/
 │   │       ├── InputText.mdx
+│   │       ├── InputText.metadata.json
 │   │       ├── InputText.module.css
 │   │       ├── InputText.stories.tsx
 │   │       ├── InputText.test.tsx
@@ -68,6 +76,7 @@ src/
 │   │       └── index.ts
 │   ├── Logo/
 │   │       ├── Logo.mdx
+│   │       ├── Logo.metadata.json
 │   │       ├── Logo.module.css
 │   │       ├── Logo.stories.tsx
 │   │       ├── Logo.test.tsx
@@ -75,6 +84,7 @@ src/
 │   │       └── index.ts
 │   └── ProdutosOlistIcons/
 │           ├── ProdutosOlistIcons.mdx
+│           ├── ProdutosOlistIcons.metadata.json
 │           ├── ProdutosOlistIcons.module.css
 │           ├── ProdutosOlistIcons.stories.tsx
 │           ├── ProdutosOlistIcons.test.tsx

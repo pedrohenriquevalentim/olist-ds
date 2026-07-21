@@ -1,0 +1,23 @@
+{
+  "name": "Button",
+  "purpose": "Ação primária de interação — dispara uma operação com efeito colateral (salvar, confirmar, navegar com ação associada, excluir).",
+  "useWhen": [
+    "Disparar uma operação que muda estado (salvar, confirmar, enviar, deletar)",
+    "Ação principal, secundária ou terciária dentro de formulário, modal ou toolbar"
+  ],
+  "doNotUseWhen": [
+    "Navegação pura sem efeito colateral — usar link/Anchor semântico",
+    "Seleção entre opções mutuamente exclusivas — usar Segmented Buttons ou Radio",
+    "Alternância de estado binário persistente — usar Checkbox ou Chip"
+  ],
+  "pairsWith": ["Icon"],
+  "note": "leadIcon e actionIcon aceitam qualquer ReactNode, mas devem receber o Icon com color=\"currentColor\" para herdar a cor em todos os estados.",
+  "variants": ["primary", "secondary", "tertiary"],
+  "states": ["enabled", "hover", "pressed", "disabled"],
+  "slots": ["leadIcon", "actionIcon", "label", "children"],
+  "tokens": {
+    "new": ["button-color-primary-*", "button-color-secondary-*", "button-color-tertiary-*", "button-font-font-color-*", "button-border-*", "button-size-height", "button-spacing-*"],
+    "existing": ["focus-border-color-default", "focus-border-width-default", "font-family-jakarta", "shape-size-x2-16px", "effects-distance-2px"]
+  },
+  "figma": { "fileKey": "HeyN4w209HWh8rfpTDiwyf", "nodeId": "470:12997", "componentKey": "7eeea8fba59887a3a224468fe8059d490733579e" }
+}

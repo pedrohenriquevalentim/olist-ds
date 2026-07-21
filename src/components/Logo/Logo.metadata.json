@@ -1,0 +1,20 @@
+{
+  "name": "Logo",
+  "purpose": "Logotipo Olist em três variantes de tamanho/composição, usado para identificar a marca em telas e componentes de navegação.",
+  "useWhen": [
+    "Identificação de marca em telas principais (default)",
+    "Headers compactos e barras de navegação estreitas (simple)",
+    "Espaços muito reduzidos como favicon ou avatar (symbol)"
+  ],
+  "doNotUseWhen": [
+    "Ícone de produto específico na sidebar — usar ProdutosOlistIcons",
+    "Zona B (Top Bar) do harness ERP/Envios/Hub/Conta Digital — o logo já vem embutido no Menu Global, não duplicar (ver decisions/ux-design/COMPONENTES_POR_ZONA.md)"
+  ],
+  "pairsWith": [],
+  "note": "renderiza como role=\"img\" com aria-label — os SVGs internos são puramente decorativos (alt=\"\").",
+  "variants": ["default", "simple", "symbol"],
+  "states": [],
+  "slots": [],
+  "tokens": { "new": ["logo-size-*", "logo-spacing-padding"], "existing": [] },
+  "figma": { "fileKey": "HeyN4w209HWh8rfpTDiwyf", "nodeId": "", "componentKey": "123282975f82f3e75a25a3300cec859957f44eb2" }
+}

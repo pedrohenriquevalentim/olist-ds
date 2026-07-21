@@ -1,4 +1,4 @@
-# Olist Design System — Especialista (v3.14 · atualizado em 2026-07-21)
+# Olist Design System — Especialista (v3.15 · atualizado em 2026-07-21)
 
 Skill corporativa para criação de telas, componentes e protótipos a partir de SDDs/PRDs usando o design system da Olist.
 
@@ -130,6 +130,9 @@ Use $olist-ds-specialist para criar UI no Figma:
 ```
 
 ## Changelog
+
+### v3.15 (2026-07-21)
+- Versão 3.15
 
 ### v3.14 (2026-07-20)
 - `/ds-sync`: inventário de componentes ressincronizado com a `design system (base)` — famílias Tabela, Gráfico (nova categoria "Data Visualization"), `Paginator`, `Badge`, `Sort`, `Reorder`, `Loading`, `Overlay`, `Cookie`, `Logout`, `Profile`, `Dashboard`, `List`, `Task List`, `Avatar`, `Card`

@@ -1,7 +1,7 @@
 # Olist Design System — Wiki
 
 **Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.66`  
-**Skill:** v3.14  
+**Skill:** v3.15  
 **Última atualização:** 2026-07-21  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
@@ -37,7 +37,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Arquivos da Skill | 22 |
 | Arquivos Figma permitidos | 1 |
 | Versão npm | 1.0.66 |
-| Versão skill | 3.14 |
+| Versão skill | 3.15 |
 
 ## Componentes
 
@@ -78,7 +78,7 @@ npm run release
     │
     ├── 1. generate:all (testes + stories via Gemini)
     ├── 2. build (compilação TypeScript)
-    ├── 3. sync:skill (atualiza skill v3.14)
+    ├── 3. sync:skill (atualiza skill v3.15)
     ├── 4. npm version patch (incrementa versão)
     ├── 5. npm publish (publica no registry)
     └── 6. git push --follow-tags
@@ -125,7 +125,7 @@ npm run release
 
 ## Skill Claude
 
-### Versão: v3.14
+### Versão: v3.15
 
 **Localização:** `.claude/skills/olist-ds-specialist/`
 
@@ -193,7 +193,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 2. Customize → Skills → Upload → selecionar pasta da skill
 3. Iniciar conversa e usar um dos slash commands acima
 
-### Regras Críticas v3.14
+### Regras Críticas v3.15
 
 ### ✅ Sempre Faça:
 
@@ -224,6 +224,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 10. **Sempre defina `layoutSizing` APÓS `appendChild`** (regra crítica da Figma Plugin API)
 11. **Valores válidos de `counterAxisAlignItems`:** `MIN` `MAX` `CENTER` `BASELINE` (sem STRETCH, sem END)
 12. **Consulte `GOVERNANCA_TOKENS.md` ao escolher entre tokens semânticos parecidos** (mesma cor final, famílias/estados diferentes) — não escolha só pelo valor resolvido
+13. **No Caso 7, gere e obtenha aprovação do `NomeComponente.metadata.json` ANTES de gerar código ou docs** — é a fonte mais estruturada sobre o componente; documentar antes dele é documentar por suposição
 
 ### ❌ Nunca Faça:
 
@@ -236,6 +237,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 7. **Criar todas as telas de uma vez** — sempre use workflow faseado (tela por tela)
 8. **Hardcodar cores, fontes ou espaçamentos** — sempre usar tokens DS
 9. **Escolher token semântico só pelo valor final resolvido** — respeite `doNotUseWhen` de `GOVERNANCA_TOKENS.md` mesmo quando duas famílias resolvem para a mesma cor hoje
+10. **Gerar código ou docs do Caso 7 sem antes exibir o `metadata.json` completo e obter aprovação explícita do usuário** — sem esse gate, o agente preenche lacunas de intenção (useWhen/doNotUseWhen) por suposição, e o erro se propaga para código e Figma em escala
 
 ## Sistema de Ícones
 
@@ -397,7 +399,7 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 1. `.claude/figma-config.json` existe?
 2. `searchPriority` tem os libraryKeys corretos?
-3. Skill v3.14 instalada?
+3. Skill v3.15 instalada?
 4. O prompt inclui instrução para ler `figma-config.json` antes do Figma MCP?
 
 ## Changelog

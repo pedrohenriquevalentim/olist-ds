@@ -96,7 +96,7 @@ function extractComponentInfo(componentPath) {
 
   if (sourcePath) {
     content = readFileSync(sourcePath, 'utf-8');
-    
+
     // Extrair props da interface (suporta "extends ...")
     const propsMatch = content.match(/export interface \w+Props(?:[^{]*)?\{([^}]+)\}/s);
     if (propsMatch) {
@@ -107,15 +107,28 @@ function extractComponentInfo(componentPath) {
         .map(line => line.trim());
       props = propLines;
     }
-    
+
     // Extrair variantes de types
     const variantMatches = content.matchAll(/type \w+ = ["']([^"']+)["'](?: \| ["']([^"']+)["'])*/g);
     for (const match of variantMatches) {
       variants.push(match[0]);
     }
   }
-  
-  return { props, variants };
+
+  // Metadados de intenção (purpose/useWhen/doNotUseWhen/pairsWith/note), gerados e
+  // aprovados pelo usuário no Caso 7 antes do código existir. Opcional: componentes
+  // antigos, criados antes desta convenção, ainda não têm o arquivo.
+  const metadataPath = join(componentPath, `${componentName}.metadata.json`);
+  let metadata = null;
+  if (existsSync(metadataPath)) {
+    try {
+      metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
+    } catch {
+      console.warn(`⚠️  ${componentName}.metadata.json inválido — ignorando.`);
+    }
+  }
+
+  return { props, variants, metadata };
 }
 
 function generateComponentsMarkdown() {
@@ -153,10 +166,34 @@ Este arquivo contém a API completa de todos os componentes do design system.
 
   for (const componentName of components) {
     const componentPath = join(COMPONENTS_DIR, componentName);
-    const { props, variants } = extractComponentInfo(componentPath);
-    
+    const { props, variants, metadata } = extractComponentInfo(componentPath);
+
     markdown += `### ${componentName}\n\n`;
-    
+
+    if (metadata?.purpose) {
+      markdown += `${metadata.purpose}\n\n`;
+    }
+
+    if (metadata?.useWhen?.length > 0) {
+      markdown += `**Quando usar:**\n`;
+      markdown += metadata.useWhen.map(item => `- ${item}`).join('\n');
+      markdown += `\n\n`;
+    }
+
+    if (metadata?.doNotUseWhen?.length > 0) {
+      markdown += `**Quando NÃO usar:**\n`;
+      markdown += metadata.doNotUseWhen.map(item => `- ${item}`).join('\n');
+      markdown += `\n\n`;
+    }
+
+    if (metadata?.pairsWith?.length > 0) {
+      markdown += `**Combina com:** ${metadata.pairsWith.join(', ')}\n\n`;
+    }
+
+    if (metadata?.note) {
+      markdown += `> **Nota:** ${metadata.note}\n\n`;
+    }
+
     if (props.length > 0) {
       markdown += `**Props:**\n\`\`\`typescript\n`;
       markdown += props.join('\n');

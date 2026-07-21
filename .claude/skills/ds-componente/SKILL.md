@@ -1,6 +1,6 @@
 ---
 name: ds-componente
-description: Implementa um novo componente para o Olist Design System a partir de uma URL do Figma. Gera os 5 arquivos obrigatórios (tsx, module.css, test.tsx, stories.tsx, index.ts) e cria o frame de documentação no Figma em paralelo.
+description: Implementa um novo componente para o Olist Design System a partir de uma URL do Figma. Gera os 6 arquivos obrigatórios (tsx, module.css, test.tsx, stories.tsx, metadata.json, index.ts) — o metadata.json passa por um gate de aprovação do usuário antes do código — e cria o frame de documentação no Figma em paralelo.
 version: 1.0
 ---
 

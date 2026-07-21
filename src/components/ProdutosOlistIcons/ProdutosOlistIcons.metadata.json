@@ -1,0 +1,22 @@
+{
+  "name": "ProdutosOlistIcons",
+  "purpose": "Ícone de produto Olist (Conta Digital, Crédito, Ecommerce, Sistema ERP, Envios, Sistema PDV, Hub de Integração, Agentes de IA) para uso na sidebar de navegação.",
+  "useWhen": [
+    "Identificar visualmente um produto Olist na sidebar de navegação (Menu Global)",
+    "Estado ativo/hover de um item de menu (state=\"active\")"
+  ],
+  "doNotUseWhen": [
+    "Ícone genérico de UI (ação, status, navegação) — usar Icon",
+    "Logotipo da marca Olist — usar Logo"
+  ],
+  "pairsWith": [],
+  "note": "cada produto tem composição própria de camadas SVG (1 a 3 imagens sobrepostas) — não é um set intercambiável como o Icon; novo produto exige mapear os assets certos por state × theme.",
+  "variants": ["Conta Digital", "Crédito", "Agentes de IA", "Ecommerce", "Sistema ERP", "Envios", "Sistema PDV", "Hub de Integração"],
+  "states": ["default-light", "active-light", "default-dark", "active-dark"],
+  "slots": [],
+  "tokens": {
+    "new": [],
+    "existing": ["color-blue-blue-500", "color-cyan-cyan-200", "shape-border-radius-pill-9999px", "shape-spacing-x075-6px", "shape-spacing-x125-10px"]
+  },
+  "figma": { "fileKey": "HeyN4w209HWh8rfpTDiwyf", "nodeId": "", "componentKey": "00d7c4fda6b10c90cf7e778eda2d7b57a86d8c70" }
+}
