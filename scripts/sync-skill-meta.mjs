@@ -162,7 +162,7 @@ function updateSkillMdTitle(skillDir, version, date) {
 function readReadmeVersion(readmePath) {
   if (!existsSync(readmePath)) return null;
   const content = readFileSync(readmePath, 'utf-8');
-  const match = content.match(/Especialista \(v([\d.]+)\)/);
+  const match = content.match(/Especialista \(v([\d.]+)(?:\s·\s[^)]+)?\)/);
   return match ? match[1] : null;
 }
 
@@ -421,7 +421,10 @@ function updateReadme(readmePath, changelogPath, newVersion, lastModified) {
 
   const changelogBlock = readChangelogForVersion(changelogPath, newVersion);
 
-  if (changelogBlock) {
+  const versionEscaped = newVersion.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const novidadesAlreadyPresent = new RegExp(`^## Novidades v${versionEscaped}\\b`, 'm').test(content);
+
+  if (changelogBlock && !novidadesAlreadyPresent) {
     const novidades = buildNovidadesSection(newVersion, today, changelogBlock);
     const insertBefore = /^## Novidades v[\d.]+|^## Estrutura/m;
     if (insertBefore.test(content)) {

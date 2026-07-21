@@ -1,3 +1,23 @@
+## v3.14 (2026-07-20)
+- `/ds-sync`: inventário de componentes ressincronizado com a `design system (base)` — famílias Tabela, Gráfico (nova categoria "Data Visualization"), `Paginator`, `Badge`, `Sort`, `Reorder`, `Loading`, `Overlay`, `Cookie`, `Logout`, `Profile`, `Dashboard`, `List`, `Task List`, `Avatar`, `Card`
+- "Text Area" renomeado para "Input Paragraph" (mesmo componente, nome real confirmado no Figma)
+- Gap do `Paginator`/`Overlay` marcado como resolvido em `GOVERNANCA_TOKENS.md` — componentes já existem na library
+
+## v3.13 (2026-07-04)
+- Sincronização de versão (sem mudanças funcionais documentadas)
+
+## v3.12 (2026-07-04)
+- Sincronização de versão (sem mudanças funcionais documentadas)
+
+## v3.11 (2026-07-04)
+- Sincronização de versão (sem mudanças funcionais documentadas)
+
+## v3.10 (2026-07-02)
+- Sincronização de versão (sem mudanças funcionais documentadas)
+
+## v3.9 (2026-07-02)
+- Sincronização de versão (sem mudanças funcionais documentadas)
+
 ## v3.8 (2026-06-29)
 - **Slash Commands:** 6 skills finas criadas em `.claude/skills/ds-*/` — `/ds-implementar`, `/ds-tela`, `/ds-figma`, `/ds-componente`, `/ds-revisar`, `/ds-sync` — cada uma delega ao caso correspondente da skill principal
 - **Caso 8 (`/ds-implementar`):** novo fluxo para devs de BU converterem telas Figma em JSX tipado usando componentes DS, sem precisar conhecer o inventário de memória
