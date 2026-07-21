@@ -119,23 +119,40 @@ Ver `olist-ds-specialist` Caso 7 para o script completo de geração via `use_fi
   Se não estiver lá, adicione antes de usar `import foo from '*.svg'` — caso contrário o `npm run build` falhará com TS2307.
 
 ## Comandos Disponíveis
-- npm run build:tokens     → builda o workspace packages/design-tokens/ e copia o resultado (CSS/JS/JSON) para src/generated/
-- npm run dev              → servidor de desenvolvimento
-- npm run test:run         → roda testes uma vez
-- npm run storybook        → abre o Storybook
-- npm run build-storybook  → build do Storybook
-- npm run build            → compila tokens + TypeScript
-- npm run pipeline         → build:tokens + generate:all + test:run + build-storybook
-- npm run lint             → verifica qualidade do código
+- npm run dev                 → servidor de desenvolvimento (Vite)
+- npm run build:tokens        → builda o workspace packages/design-tokens/ e copia o resultado (CSS/JS/JSON) para src/generated/
+- npm run build               → clean + build:tokens + generate-index + tsc + copy-css + sync:skill + sync:skill-meta
+- npm run clean               → remove dist/
+- npm run lint                → verifica qualidade do código (eslint)
+- npm run test                → vitest em modo watch
+- npm run test:run            → roda os testes uma vez
+- npm run test:coverage       → testes com relatório de cobertura
+- npm run storybook           → abre o Storybook (dev)
+- npm run build-storybook     → build estático do Storybook
+- npm run pipeline            → build:tokens + generate:all + lint + tsc + test:run + build-storybook (sanity check completo)
+- npm run generate:tests(:all)   → gera testes faltantes / regenera todos via IA
+- npm run generate:stories(:all) → gera stories faltantes / regenera todas via IA
+- npm run generate:all        → generate:tests + generate:stories (faltantes)
+- npm run generate:icons      → regenera o componente Icon a partir do Figma
+- npm run validate:icons      → valida migração de ícones
+- npm run sync:skill          → regenera COMPONENTES.md, MAPA_FONTES.md, VISAO_GERAL.md e a seção de estrutura do README da skill
+- npm run sync:skill-meta     → sincroniza versão, título e wiki da skill (roda após editar SKILL.md/CHANGELOG.md)
+- npm run wiki                → regenera wiki/WIKI.md
+- npm run version:skill       → bump manual da versão da skill
+- npm run release             → **fluxo de publicação correto** — versiona, cria branch e abre PR; o CI publica no GitHub Packages após o merge
+- npm run mcp:figma           → inicia o servidor MCP do Figma
+- npm run chromatic           → publica o Storybook no Chromatic (regressão visual)
+- npm run ship                → **obsoleto, não usar** — fazia `git push` direto na main; quebrado desde que a branch passou a exigir PR + status checks
 
 ## Fluxo de Publicação
+**`main` é protegido** (exige PR + 2 status checks) — `git push` direto nela sempre é rejeitado pelo GitHub. Use `npm run release`.
+
 Após criar/alterar componentes:
-1. npm run build:tokens
-2. npm run test:run
-3. npm run build-storybook
-4. git add . && git commit -m "feat: descricao"
-5. npm version patch
-6. git push && git push --tags
+1. npm run test:run
+2. npm run sync:skill && npm run sync:skill-meta && npm run wiki   (se docs/skill mudaram)
+3. git add -A && git commit -m "feat: descricao"                  (se houver mudanças pendentes)
+4. npm run release                                                (menu interativo: escolhe pacote e tipo de bump; cria branch, versiona e abre o PR)
+5. Merge do PR no GitHub com "Create a merge commit" (nunca squash/rebase — a tag de versão precisa apontar pra um commit alcançável pela main)
 
 ## Fluxo Reverso: PRD → Figma
 
