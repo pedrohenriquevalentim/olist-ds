@@ -1,0 +1,23 @@
+{
+  "name": "InputSelect",
+  "purpose": "Campo de seleção com quatro modos (single, multi, autocomplete, multi-autocomplete), implementando o padrão ARIA combobox/listbox com navegação completa por teclado.",
+  "useWhen": [
+    "Selecionar um ou mais valores de uma lista de opções, com ou sem busca",
+    "Lista de opções grande o suficiente para justificar autocomplete"
+  ],
+  "doNotUseWhen": [
+    "Poucas opções (~5) sempre visíveis e mutuamente exclusivas — usar Radio",
+    "Seleção múltipla curta e sempre visível — usar grupo de Checkbox",
+    "Campo de texto livre sem opções pré-definidas — usar InputText"
+  ],
+  "pairsWith": ["Icon", "Chip"],
+  "note": "selectType é um discriminated union (Single vs Multi) — value/onChange mudam de tipo (string vs string[]) conforme o modo; deixe o TypeScript inferir pelo selectType, não force cast manual.",
+  "variants": ["single", "multi", "autocomplete", "multi-autocomplete"],
+  "states": ["enabled", "hover", "pressed", "focused", "filled", "disabled", "option-selected", "option-disabled"],
+  "slots": ["tooltipIcon", "chevronIcon", "checkIcon", "removeIcon"],
+  "tokens": {
+    "new": ["input-token-gap"],
+    "existing": ["input-base-*", "checkbox-*", "chip-*", "list-*", "text-label-*", "text-placeholder-text-*", "text-support-text-*", "font-family-jakarta", "shape-size-x2-16px", "shape-spacing-x1-8px"]
+  },
+  "figma": { "fileKey": "HeyN4w209HWh8rfpTDiwyf", "nodeId": "5001:163", "componentKey": "6718eb6149b9023bdaa3509fec1d90f01ba34c95" }
+}

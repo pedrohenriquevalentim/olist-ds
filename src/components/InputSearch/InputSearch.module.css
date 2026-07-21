@@ -64,6 +64,12 @@
   background-color: var(--input-base-color-focused);
 }
 
+.inputBase:active:not(:has(input:disabled)) {
+  border-width: var(--input-base-border-width-pressed);
+  border-color: var(--input-base-border-color-pressed);
+  background-color: var(--input-base-color-pressed);
+}
+
 .inputBase:has(input:disabled) {
   border-color: var(--input-base-border-color-disabled);
   background-color: var(--input-base-color-disabled);

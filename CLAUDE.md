@@ -21,11 +21,14 @@ Design System da Olist. Componentes React + TypeScript com tokens vindos do Figm
 Ao criar um componente, SEMPRE gere todos estes arquivos:
 
 src/components/NomeComponente/
-  ├── NomeComponente.tsx          # Componente React
-  ├── NomeComponente.module.css   # Estilos com CSS Modules
-  ├── NomeComponente.test.tsx     # Testes com Vitest
-  ├── NomeComponente.stories.tsx  # Story do Storybook
-  └── index.ts                    # Re-export
+  ├── NomeComponente.tsx           # Componente React
+  ├── NomeComponente.module.css    # Estilos com CSS Modules
+  ├── NomeComponente.test.tsx      # Testes com Vitest
+  ├── NomeComponente.stories.tsx   # Story do Storybook
+  ├── NomeComponente.metadata.json # Intenção de uso: purpose/useWhen/doNotUseWhen (ver Seção 9)
+  └── index.ts                     # Re-export
+
+**IMPORTANTE:** o `.metadata.json` é gerado e aprovado pelo usuário **antes** do código e da documentação (Figma/Storybook) — nunca depois. Ele é a fonte estruturada mais confiável sobre o componente; escrever docs antes dele significa documentar por suposição. Ver Seção 9 e Caso 7 da skill `olist-ds-specialist` para o gate de aprovação.
 
 ## Convenções
 - Componentes como arrow functions com export nomeado
@@ -87,11 +90,35 @@ Cubra obrigatoriamente:
 - Todas as descrições e stories em português
 
 ### 9. Saída Esperada
-Gere EXATAMENTE cinco arquivos em blocos de código separados:
+
+Antes de gerar qualquer arquivo, gere um rascunho de `NomeComponente.metadata.json` com este schema (mesmos campos de `GOVERNANCA_TOKENS.md`, aplicados a componente em vez de família de token):
+
+```json
+{
+  "name": "NomeComponente",
+  "purpose": "o que o componente representa e resolve",
+  "useWhen": ["cenário em que é a escolha certa", "..."],
+  "doNotUseWhen": ["anti-padrão comum + alternativa correta", "..."],
+  "pairsWith": ["outros componentes usados junto"],
+  "note": "pegadinha ou observação não óbvia (ou string vazia)",
+  "variants": ["..."],
+  "states": ["..."],
+  "slots": ["nomes de props que recebem ReactNode/conteúdo"],
+  "tokens": { "new": ["tokens que este componente introduz"], "existing": ["tokens semânticos/primitivos reaproveitados"] },
+  "figma": { "fileKey": "...", "nodeId": "...", "componentKey": "..." }
+}
+```
+
+**Sobre o bloco `figma`:** `fileKey`+`nodeId` identificam o nó específico dentro do arquivo-fonte (extraídos da URL do Figma fornecida no Caso 7 — usados por `get_metadata`/`get_design_context`/`get_screenshot` e para posicionar o frame de docs na mesma section do componente original). `componentKey` é um identificador diferente: aponta para o componente publicado na library, usado para instanciá-lo em telas (`importComponentByKeyAsync`) — geralmente já disponível em `component-registry.json` mesmo quando não há uma URL de arquivo à mão. Preencha cada campo só com o dado real disponível; nunca invente um `nodeId` a partir do `componentKey` (são conceitos diferentes) nem vice-versa.
+
+**Gate obrigatório:** exiba esse JSON por completo e aguarde confirmação explícita do usuário antes de prosseguir. Só depois da aprovação gere os arquivos de código e o frame de docs no Figma — nunca em paralelo com o rascunho do metadata, e nunca salve nenhum arquivo sem essa aprovação prévia.
+
+Após a aprovação, gere EXATAMENTE seis arquivos em blocos de código separados:
 - `NomeComponente.tsx`
 - `NomeComponente.module.css`
 - `NomeComponente.test.tsx`
 - `NomeComponente.stories.tsx`
+- `NomeComponente.metadata.json` (versão final aprovada)
 - `index.ts` (re-export do componente e da interface)
 
 Consulte os componentes em `src/components/` como referência de padrão antes de implementar.

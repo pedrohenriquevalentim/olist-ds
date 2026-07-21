@@ -1,0 +1,22 @@
+{
+  "name": "Checkbox",
+  "purpose": "Controle de seleção binária ou indeterminada — marca/desmarca uma opção de forma independente das demais.",
+  "useWhen": [
+    "Selecionar uma opção independente (não mutuamente exclusiva)",
+    "Padrão 'selecionar todos' com estado indeterminado sobre uma lista parcialmente selecionada"
+  ],
+  "doNotUseWhen": [
+    "Seleção mutuamente exclusiva entre opções — usar Radio",
+    "Ação de filtro visualmente destacada — usar Chip"
+  ],
+  "pairsWith": [],
+  "note": "isIndeterminate é aplicado via useEffect diretamente na propriedade DOM indeterminate — não existe atributo HTML nativo para isso.",
+  "variants": [],
+  "states": ["enabled-unchecked", "enabled-checked", "enabled-indeterminate", "hover-unchecked", "hover-checked", "hover-indeterminate", "pressed-unchecked", "pressed-checked", "pressed-indeterminate", "disabled-unchecked", "disabled-checked", "disabled-indeterminate"],
+  "slots": ["label"],
+  "tokens": {
+    "new": ["checkbox-color-*", "checkbox-border-*", "checkbox-shape-color-*", "checkbox-size-*", "checkbox-spacing-gap"],
+    "existing": ["focus-border-color-default", "focus-border-width-default", "font-family-jakarta", "text-label-*"]
+  },
+  "figma": { "fileKey": "HeyN4w209HWh8rfpTDiwyf", "nodeId": "5168:341", "componentKey": "6ae014154ba2196c2fe582d7be8affe07b6ac6c5" }
+}

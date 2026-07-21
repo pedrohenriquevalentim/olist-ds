@@ -1,11 +1,11 @@
 ---
 name: olist-ds-specialist
 description: Use esta skill para TODO trabalho de UI/UX da Olist — criação de telas a partir de SDDs/PRDs, geração de componentes React, revisão de consistência visual, criação de protótipos no Figma, manutenção do design system e criação/revisão de textos de UI (UX Writing, copy, tom de voz). Acione quando alguém mencionar interface Olist, design system, tokens, componentes, telas, layouts, SDD, PRD, protótipo, wireframe, Figma, Storybook, copy, texto de botão, mensagem de erro, empty state, toast, label, placeholder ou qualquer tarefa de criação ou revisão de UI/copy para produtos Olist. NÃO use para backend, APIs, banco de dados, autenticação ou lógica de negócio sem relação com UI.
-version: 3.14
+version: 3.15
 lastModified: 2026-07-21
 ---
 
-# Olist Design System — Especialista v3.14 · 2026-07-21
+# Olist Design System — Especialista v3.15 · 2026-07-21
 
 ## Slash Commands
 
@@ -17,7 +17,7 @@ Cada capacidade da skill pode ser invocada explicitamente via slash command. O a
 | `/ds-figma` | `/ds-figma <sdd-ou-prd>` | 4 | Designer/Dev: cria telas no Figma com instâncias reais do DS |
 | `/ds-implementar` | `/ds-implementar <figma-url>` | 8 | Dev de BU: converte tela Figma em JSX tipado usando componentes DS |
 | `/ds-handoff` | `/ds-handoff <figma-url(s)>` | 9 | Qualquer dev: gera manifesto Markdown de componentes DS usados numa jornada, para anexar em PR |
-| `/ds-componente` | `/ds-componente <figma-url>` | 7 | Mantenedor DS: gera novo componente DS completo (5 arquivos + docs Figma) |
+| `/ds-componente` | `/ds-componente <figma-url>` | 7 | Mantenedor DS: gera novo componente DS completo (6 arquivos + docs Figma) |
 | `/ds-revisar` | `/ds-revisar` + código ou screenshot | 3 | Qualquer dev: revisa tela/código contra padrões do DS |
 | `/ds-sync` | `/ds-sync` | 6 | Mantenedor DS: sincroniza inventário de componentes das libraries Figma |
 
@@ -301,6 +301,7 @@ Qual tipo de tarefa?
 10. **Sempre defina `layoutSizing` APÓS `appendChild`** (regra crítica da Figma Plugin API)
 11. **Valores válidos de `counterAxisAlignItems`:** `MIN` `MAX` `CENTER` `BASELINE` (sem STRETCH, sem END)
 12. **Consulte `GOVERNANCA_TOKENS.md` ao escolher entre tokens semânticos parecidos** (mesma cor final, famílias/estados diferentes) — não escolha só pelo valor resolvido
+13. **No Caso 7, gere e obtenha aprovação do `NomeComponente.metadata.json` ANTES de gerar código ou docs** — é a fonte mais estruturada sobre o componente; documentar antes dele é documentar por suposição
 
 ### ❌ Nunca Faça:
 
@@ -313,6 +314,7 @@ Qual tipo de tarefa?
 7. **Criar todas as telas de uma vez** — sempre use workflow faseado (tela por tela)
 8. **Hardcodar cores, fontes ou espaçamentos** — sempre usar tokens DS
 9. **Escolher token semântico só pelo valor final resolvido** — respeite `doNotUseWhen` de `GOVERNANCA_TOKENS.md` mesmo quando duas famílias resolvem para a mesma cor hoje
+10. **Gerar código ou docs do Caso 7 sem antes exibir o `metadata.json` completo e obter aprovação explícita do usuário** — sem esse gate, o agente preenche lacunas de intenção (useWhen/doNotUseWhen) por suposição, e o erro se propaga para código e Figma em escala
 
 ## Casos de Uso v3.10
 
@@ -437,14 +439,33 @@ Você:
    - Estados: lista de variantes (ex: state=enabled, state=error…)
    - Visibility variants: props booleanas que geram sub-variantes
    - Partes anatômicas: elementos nomeados no MCP (label, input base, icon, support text…)
-6. PARALELO — executar os dois passos abaixo ao mesmo tempo:
 
-   [A] GERAR CÓDIGO (5 arquivos conforme CLAUDE.md):
-       - NomeComponente.tsx         (React + TypeScript)
-       - NomeComponente.module.css  (CSS Modules + var(--tokens))
-       - NomeComponente.test.tsx    (Vitest + RTL)
-       - NomeComponente.stories.tsx (Storybook v10)
-       - index.ts                   (re-export componente + interface)
+6. GERAR RASCUNHO DE `NomeComponente.metadata.json` (schema completo na Seção 9 do CLAUDE.md
+   raiz): purpose, useWhen, doNotUseWhen, pairsWith, note, variants, states, slots,
+   tokens.new/tokens.existing, figma.fileKey/nodeId/componentKey. Preencha useWhen/doNotUseWhen
+   a partir do nome, das variantes e do contexto do componente no Figma — se a intenção não
+   estiver clara pelos dados do MCP, pergunte ao usuário em vez de supor.
+   - `fileKey`/`nodeId`: extraídos diretamente da URL fornecida pelo usuário (já obtidos no
+     passo 1) — são o nó real que acabou de ser lido via MCP, nunca precisam de suposição aqui.
+   - `componentKey`: buscar em `component-registry.json` pelo nome do componente, se já
+     existir uma entrada (componente publicado na library antes deste fluxo). Se não existir
+     ainda (componente novo), deixar vazio — só é preenchido quando o componente for
+     publicado na library e o registry for atualizado via `/ds-sync`.
+
+7. **GATE — exibir o metadata.json completo e aguardar aprovação explícita do usuário.**
+   Não prossiga para o passo 8 sem essa confirmação. É neste momento que o usuário ajusta
+   useWhen/doNotUseWhen/pairsWith antes de qualquer código ou doc existir — inverter esta
+   ordem (documentar antes do metadata) significa documentar por suposição.
+
+8. PARALELO — com o metadata.json aprovado, executar os dois passos abaixo ao mesmo tempo:
+
+   [A] GERAR CÓDIGO (6 arquivos conforme CLAUDE.md):
+       - NomeComponente.tsx           (React + TypeScript)
+       - NomeComponente.module.css    (CSS Modules + var(--tokens))
+       - NomeComponente.test.tsx      (Vitest + RTL)
+       - NomeComponente.stories.tsx   (Storybook v10)
+       - NomeComponente.metadata.json (versão aprovada no passo 7, sem alterações)
+       - index.ts                     (re-export componente + interface)
        Regras: apenas tokens de src/generated/variables.css, rem (nunca px),
        ícones como ReactNode, aria roles obrigatórios, teclado para interativos.
        Ao escolher entre tokens semânticos candidatos para o mesmo elemento
@@ -474,8 +495,8 @@ Você:
        - placeholder = true nas seções enquanto constroem, false ao concluir cada uma
        - screenshot() após cada seção para validação incremental
 
-7. Entregar código + confirmar que frame de docs foi criado no Figma com URL/nodeId
-8. Informar ao usuário: rodar npm run ship (inclui pipeline completo + versão + push)
+9. Entregar código + confirmar que frame de docs foi criado no Figma com URL/nodeId
+10. Informar ao usuário: rodar npm run ship (inclui pipeline completo + versão + push)
 ```
 
 **Nota sobre disponibilidade de instâncias:**
@@ -607,8 +628,9 @@ Erros comuns e suas correções — manter para evitar regressão:
 
 ---
 
-**Versão:** 3.14
-**Última atualização:** 2026-07-20
+**Versão:** 3.15
+**Última atualização:** 2026-07-21
+**Mudanças v3.15:** Caso 7 (`/ds-componente`) passa a gerar um sexto arquivo, `NomeComponente.metadata.json` (purpose/useWhen/doNotUseWhen/pairsWith/note/variants/states/slots/tokens — mesmo schema de `GOVERNANCA_TOKENS.md`, aplicado a componente), com um gate obrigatório de aprovação do usuário **antes** de código e docs serem gerados (novos passos 6-7 do Caso 7). Motivação: artigo "Como preparei meu design system para ser lido por uma IA" (Mariana Queiroz, UX Collective) — metadados estruturados por componente, gerados antes da documentação, evitam que a IA documente por suposição e propague ambiguidade em escala. `CLAUDE.md` raiz atualizado (Seção "Estrutura de Cada Componente" e Seção 9 "Saída Esperada"); `scripts/sync-skill.mjs` passa a ler o `.metadata.json` de cada componente (quando existir) e incluir `useWhen`/`doNotUseWhen` no `COMPONENTES.md` auto-gerado; `ds-componente/SKILL.md` e a tabela de Slash Commands atualizados (5→6 arquivos). Regras críticas 13 ("Sempre Faça") e 10 ("Nunca Faça") adicionadas. **Correção no mesmo ciclo:** o bloco `figma` do schema ganhou o campo `componentKey` (identificador do componente publicado na library, usado para instanciar via `importComponentByKeyAsync` — diferente de `fileKey`/`nodeId`, que apontam para um nó específico dentro de um arquivo). Os 10 componentes retroativos (ver changelog de decisions/) foram atualizados com `fileKey`/`componentKey` reais lidos de `component-registry.json`; `nodeId` permanece vazio nesses 10 por não haver URL de origem registrada — preencher exigiria supor, o que o gate deste fluxo existe para evitar.
 **Mudanças v3.14:** `/ds-sync` executado — inventário de componentes da `design system (base)` sincronizado. Adicionados à seção "Inventário de Componentes": família Tabela (`Table`, `Table Column`, `Head`, `Simple Cell`, `Spreadsheet`), família Gráfico (`Bar`, `Chart Bar Up/Down/Variation` — nova categoria "Data Visualization"), `Paginator`, `Badge`, `Sort`, `Reorder`, `Loading`, `Overlay`, `Cookie`, `Logout`, `Profile`, `Dashboard`, `List`, `Task List`; `Avatar` e `Card` (já confirmados no `harnessCoverageCheck` mas ausentes desta lista) também adicionados. Corrigido: "Text Area" renomeado para "Input Paragraph" (mesmo componente, nome real confirmado no Figma). Nota histórica sobre ausência de `Paginator`/`pagination-*` em `GOVERNANCA_TOKENS.md` seção 9 marcada como resolvida — componente já existe. `figma-config.json` → `harnessCoverageCheck` atualizado com nova data de verificação. Nenhum componente previamente documentado foi removido.
 **Mudanças v3.13:** Corrigido harness do template Envios/Hub/Conta Digital — a Zona B (Top Bar) **não exibe o logo do produto**; o logo já faz parte do componente `Menu Global` na Zona A. `Logo` removido da coluna "Pode conter"/"Componentes Recomendados" da Zona B em `references/HARNEES_TELAS.md` e `references/TEMPLATES_PRODUTO.md`, e movido para "Não pode conter"; linha `Logo Olist` em "Contextos Válidos por Componente" corrigida para `Zona A, embutido no Menu Global`. Hipótese do `Context Switch` em `decisions/ux-design/COMPONENTES_POR_ZONA.md` ajustada para não citar mais `Logo` como vizinho de zona.
 **Mudanças v3.12:** Harness da Zona B do template ERP atualizado — `Breadcrumb` passa a ser a instância real do componente DS (`design system (base)`), resolvendo o ponto em aberto #1 de `decisions/ux-design/COMPONENTES_POR_ZONA.md`. Zona C: proibição de `Button` generalizada para qualquer variante com label. Zona D: conteúdo editorial e cards avulsos passam a ser permitidos, mantendo breadcrumb proibido. Regra de fundo do ERP unificada para todas as zonas (A–E). `references/HARNEES_TELAS.md`, `references/TEMPLATES_PRODUTO.md`, `references/PADROES.md`, `decisions/ux-design/ESPACAMENTO_LAYOUT.md` e `decisions/ux-design/COMPONENTES_POR_ZONA.md` atualizados; `Breadcrumb` adicionado ao inventário de categorias (Navigation).

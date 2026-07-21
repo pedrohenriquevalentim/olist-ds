@@ -1,0 +1,22 @@
+{
+  "name": "Chip",
+  "purpose": "Filtro ou tag selecionável — alterna um estado de seleção visualmente destacado, tipicamente em grupos.",
+  "useWhen": [
+    "Seleção múltipla de categorias, filtros ou atributos em um grupo",
+    "Tag removível/selecionável dentro de outro componente (ex: chips do InputSelect multi)"
+  ],
+  "doNotUseWhen": [
+    "Ação que dispara uma operação sem estado de seleção — usar Button",
+    "Seleção binária simples fora de contexto de filtro/grupo — usar Checkbox"
+  ],
+  "pairsWith": ["Icon"],
+  "note": "usa role=\"checkbox\" + aria-checked, não aria-pressed — semântica de seleção, não de toggle de ação.",
+  "variants": [],
+  "states": ["enabled", "hover", "pressed", "selected", "selected-hover", "selected-pressed", "disabled"],
+  "slots": ["label"],
+  "tokens": {
+    "new": ["chip-color-*", "chip-border-*", "chip-font-color-*", "chip-shape-color-*", "chip-size-height", "chip-spacing-*"],
+    "existing": ["focus-border-color-default", "focus-border-width-default", "font-family-jakarta", "shape-size-x2-16px", "effects-distance-2px"]
+  },
+  "figma": { "fileKey": "HeyN4w209HWh8rfpTDiwyf", "nodeId": "", "componentKey": "c20828e4cc18036e5ebce48ccaa8250443c49fa3" }
+}

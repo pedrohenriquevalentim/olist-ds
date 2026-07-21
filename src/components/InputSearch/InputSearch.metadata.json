@@ -1,0 +1,22 @@
+{
+  "name": "InputSearch",
+  "purpose": "Campo de busca com borda pill e ação de buscar embutida — botão com texto ou apenas ícone.",
+  "useWhen": [
+    "Busca textual dentro de uma tela ou de um componente de listagem/tabela",
+    "Necessidade de disparar a busca tanto por clique quanto por Enter"
+  ],
+  "doNotUseWhen": [
+    "Campo de texto genérico sem ação de busca — usar InputText",
+    "Filtro por seleção de opções pré-definidas — usar InputSelect"
+  ],
+  "pairsWith": ["Icon"],
+  "note": "onSearch já é disparado tanto pelo clique no botão quanto pelo Enter no input — não duplique o handler no consumidor.",
+  "variants": ["button", "button icon"],
+  "states": ["enabled", "hover", "pressed", "focused", "filled", "with-support", "disabled"],
+  "slots": [],
+  "tokens": {
+    "new": ["input-search-border-radius"],
+    "existing": ["input-base-*", "button-color-primary-*", "button-color-tertiary-*", "button-font-font-color-primary-*", "text-label-*", "text-placeholder-text-*", "text-support-text-*", "font-family-jakarta", "shape-size-x2-16px", "shape-spacing-x1-8px"]
+  },
+  "figma": { "fileKey": "HeyN4w209HWh8rfpTDiwyf", "nodeId": "4926:103", "componentKey": "052324bf69c3705610cbf01e55080375a7a35c6e" }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Icon",
+  "purpose": "Renderiza um ícone SVG inline do inventário do design system, com controle de tamanho e cor via props.",
+  "useWhen": [
+    "Qualquer ícone dentro de outro componente do DS (leadIcon, actionIcon, chevron etc.)",
+    "Ícone standalone em conteúdo de produto, sempre com aria-label quando carregar significado"
+  ],
+  "doNotUseWhen": [
+    "Logotipo da marca — usar Logo",
+    "Ícone de produto na sidebar de navegação — usar ProdutosOlistIcons",
+    "Ícone fora do inventário — não crie SVG solto no consumidor; adicione ao inventário do Icon primeiro"
+  ],
+  "pairsWith": ["Button", "Chip", "InputText", "InputPassword", "InputSearch", "InputSelect"],
+  "note": "o SVG interno já usa currentColor — a prop color funciona em todos os estados de hover/active/disabled do componente pai sem re-render do SVG.",
+  "variants": [],
+  "states": [],
+  "slots": [],
+  "tokens": { "new": [], "existing": [] },
+  "figma": { "fileKey": "HeyN4w209HWh8rfpTDiwyf", "nodeId": "", "componentKey": "bbcdd6c98692e3c10c356fecfec57edfcee109d2" }
+}

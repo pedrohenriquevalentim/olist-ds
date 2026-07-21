@@ -1,0 +1,20 @@
+{
+  "name": "InputText",
+  "purpose": "Campo de texto de linha única — label, ícone de lead, tooltip, texto de suporte e estados de validação.",
+  "useWhen": ["Entrada de texto livre de linha única (nome, e-mail, campo genérico de formulário)"],
+  "doNotUseWhen": [
+    "Campo de senha — usar InputPassword",
+    "Campo com ação de busca embutida — usar InputSearch",
+    "Seleção de opções pré-definidas — usar InputSelect"
+  ],
+  "pairsWith": ["Icon"],
+  "note": "",
+  "variants": [],
+  "states": ["enabled", "hover", "pressed", "focused", "filled", "success", "error", "disabled"],
+  "slots": ["leadIcon"],
+  "tokens": {
+    "new": [],
+    "existing": ["input-base-*", "text-label-*", "text-placeholder-text-*", "text-support-text-*", "font-family-jakarta", "shape-size-x2-16px", "shape-spacing-x1-8px"]
+  },
+  "figma": { "fileKey": "HeyN4w209HWh8rfpTDiwyf", "nodeId": "4221:117", "componentKey": "2f8bc179b629be8489ebd6fcc985d8606ba8c40d" }
+}
