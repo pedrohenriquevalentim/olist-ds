@@ -239,7 +239,6 @@ npm run storybook              # Storybook (porta 6006)
 
 ```bash
 npm run build:tokens           # JSON → CSS Custom Properties
-npm run watch:tokens           # Modo watch
 ```
 
 ### Geração com IA
@@ -279,27 +278,28 @@ npm run wiki                   # Regenera wiki/WIKI.md
 
 ### Publicação
 
-```bash
-npm run ship
-```
-
-Executa o pipeline completo em sequência:
-
-1. `sync:skill` — atualiza docs de componentes e README
-2. `sync:skill-meta` — sincroniza versão e wiki da skill
-3. `pipeline` — build:tokens + generate:all + tsc + test:run + build-storybook
-4. `git add -A && git commit -m 'chore: release'`
-5. `npm version patch` — incrementa versão (patch)
-6. `git push origin HEAD --tags`
-
-Para bump manual de versão minor/major:
+> **`main` é protegido** (exige PR + status checks) — push direto na main sempre é rejeitado pelo GitHub. O fluxo de publicação é via `npm run release`, que cria branch, versiona e abre o PR; a publicação real no GitHub Packages acontece pelo CI, automaticamente, quando o PR é mergeado (`npm run ship` está **obsoleto** — fazia `git push` direto e não funciona mais).
 
 ```bash
-npm run pipeline
-npm version minor              # 1.0.x → 1.1.0 (novo componente)
-npm version major              # 1.x.0 → 2.0.0 (breaking change)
-git push && git push --tags
+# 1. Sincronize docs/skill antes de versionar (se algo mudou)
+npm run sync:skill && npm run sync:skill-meta && npm run wiki
+git add -A && git commit -m "docs: sync"   # só se houver mudanças
+
+# 2. Rode o release (menu interativo: escolhe pacote e tipo de bump)
+npm run release
+# ou direto: node scripts/release.mjs olist-ds patch
+
+# 3. Aguarde os checks do PR e faça merge com "Create a merge commit"
+#    (não squash/rebase — a tag precisa apontar pra um commit alcançável pela main)
 ```
+
+O `npm run release`:
+1. Valida que você está na `main`, sem mudanças pendentes
+2. Roda `npm run pipeline` (build:tokens + generate:all + lint + tsc + test:run + build-storybook) como sanity check
+3. Cria a branch `release/<pacote>-v<versão>`, faz o bump (`npm version patch|minor|major`) e o push
+4. Abre o PR via `gh pr create`
+
+Após o merge, o CI publica automaticamente `@pedrohenriquevalentim/olist-ds` (ou `@pedrohenriquevalentim/design-tokens`) no GitHub Packages — nenhum passo manual de publicação é necessário.
 
 ---
 
@@ -345,7 +345,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 Preciso que você:
 1. Use $olist-ds-specialist para implementar o componente: [LINK]
 2. Rode npm run test:run — se falhar, corrija e rode novamente
-3. Rode npm run ship
+3. Rode npm run release
 ```
 
 ---
@@ -389,7 +389,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 
 ### Auto-sync
 
-A cada `npm run ship`, os arquivos a seguir são regenerados automaticamente:
+Ao rodar `npm run sync:skill && npm run sync:skill-meta && npm run wiki` (passo recomendado antes do `npm run release` — ver seção "Publicação"), os arquivos a seguir são regenerados automaticamente:
 
 | Arquivo | Gerado por |
 |---|---|
@@ -485,7 +485,8 @@ Secret necessário: `GEMINI_API_KEY` (repositório → Settings → Secrets → 
 2. A skill gera automaticamente o frame `📄 Docs` no Figma
 3. `npm run test:run` — valida
 4. `npm run storybook` — visualiza
-5. `npm run ship` — sincroniza docs, versiona e publica
+5. `npm run sync:skill && npm run sync:skill-meta && npm run wiki` — sincroniza docs
+6. `npm run release` — versiona, abre PR; CI publica após o merge
 
 ---
 
