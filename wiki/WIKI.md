@@ -1,8 +1,8 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.65`  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.66`  
 **Skill:** v3.14  
-**Última atualização:** 2026-07-20  
+**Última atualização:** 2026-07-21  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -36,7 +36,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Ícones SVG | 550 |
 | Arquivos da Skill | 22 |
 | Arquivos Figma permitidos | 1 |
-| Versão npm | 1.0.65 |
+| Versão npm | 1.0.66 |
 | Versão skill | 3.14 |
 
 ## Componentes
@@ -116,6 +116,7 @@ npm run release
 | `npm run pipeline` | `npm run build:tokens && npm run generate:all && npm run l...` |
 | `npm run version:skill` | `node scripts/version-skill.mjs` |
 | `npm run ship` | `npm run pipeline && npm run sync:skill && npm run sync:sk...` |
+| `npm run release` | `node scripts/release.mjs` |
 | `npm run mcp:figma` | `figma-mcp` |
 | `npm run sync:skill-meta` | `node scripts/sync-skill-meta.mjs` |
 | `npm run wiki` | `node scripts/generate-wiki.mjs` |
@@ -319,6 +320,7 @@ echo '.claude/figma-config.json' >> .gitignore
 - `generate-stories.mjs`
 - `generate-tests.mjs`
 - `generate-wiki.mjs`
+- `release.mjs`
 - `sync-skill-meta.mjs`
 - `sync-skill.mjs`
 - `validate-icon-migration.mjs`
@@ -399,6 +401,26 @@ npm install --save-dev PACOTE --legacy-peer-deps
 4. O prompt inclui instrução para ler `figma-config.json` antes do Figma MCP?
 
 ## Changelog
+
+## v3.14 (2026-07-20)
+- `/ds-sync`: inventário de componentes ressincronizado com a `design system (base)` — famílias Tabela, Gráfico (nova categoria "Data Visualization"), `Paginator`, `Badge`, `Sort`, `Reorder`, `Loading`, `Overlay`, `Cookie`, `Logout`, `Profile`, `Dashboard`, `List`, `Task List`, `Avatar`, `Card`
+- "Text Area" renomeado para "Input Paragraph" (mesmo componente, nome real confirmado no Figma)
+- Gap do `Paginator`/`Overlay` marcado como resolvido em `GOVERNANCA_TOKENS.md` — componentes já existem na library
+
+## v3.13 (2026-07-04)
+- Sincronização de versão (sem mudanças funcionais documentadas)
+
+## v3.12 (2026-07-04)
+- Sincronização de versão (sem mudanças funcionais documentadas)
+
+## v3.11 (2026-07-04)
+- Sincronização de versão (sem mudanças funcionais documentadas)
+
+## v3.10 (2026-07-02)
+- Sincronização de versão (sem mudanças funcionais documentadas)
+
+## v3.9 (2026-07-02)
+- Sincronização de versão (sem mudanças funcionais documentadas)
 
 ## v3.8 (2026-06-29)
 - **Slash Commands:** 6 skills finas criadas em `.claude/skills/ds-*/` — `/ds-implementar`, `/ds-tela`, `/ds-figma`, `/ds-componente`, `/ds-revisar`, `/ds-sync` — cada uma delega ao caso correspondente da skill principal
@@ -486,4 +508,4 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ---
 
-*Gerado automaticamente em 2026-07-20 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-07-21 por `generate-wiki.mjs`. Não edite manualmente.*
