@@ -99,7 +99,7 @@
       "yellow 950": "#1c1203"
     },
     "none": {
-      "transparent": "rgba(252, 251, 248, 0.00)"
+      "transparent": "rgba(255, 255, 255, 0.00)"
     }
   },
   "font": {

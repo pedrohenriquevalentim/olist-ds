@@ -1,0 +1,219 @@
+/* =============================================================================
+   Toggle — Design Tokens
+   Mova estes tokens para o arquivo global de tokens (ex: src/generated/variables.css)
+   caso o projeto já centralize variáveis lá.
+   ============================================================================= */
+
+/* Light mode (padrão) */
+:root,
+[data-theme="light"] {
+  --toggle-track-bg:              #cecbc0;
+  --toggle-track-bg-disabled:     rgba(126, 125, 119, 0.08);
+  --toggle-overlay-hover:         rgba(31, 31, 30, 0.04);
+  --toggle-overlay-pressed:       rgba(31, 31, 30, 0.12);
+  --toggle-border:                #afada2;
+  --toggle-border-hover:          #827f73;
+  --toggle-border-pressed:        #201f1d;
+  --toggle-border-disabled:       #e7e4da;
+  --toggle-dot-bg:                #fcfbf8;
+}
+
+/* Dark mode (via preferência do sistema) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --toggle-track-bg:              #403f3b;
+    --toggle-track-bg-disabled:     rgba(126, 125, 119, 0.08);
+    --toggle-overlay-hover:         rgba(242, 240, 232, 0.04);
+    --toggle-overlay-pressed:       rgba(242, 240, 232, 0.12);
+    --toggle-border:                #615f56;
+    --toggle-border-hover:          #918e83;
+    --toggle-border-pressed:        #e7e4da;
+    --toggle-border-disabled:       #403f3b;
+    --toggle-dot-bg:                #10100f;
+  }
+}
+
+/* Dark mode (via atributo explícito) */
+[data-theme="dark"] {
+  --toggle-track-bg:              #403f3b;
+  --toggle-track-bg-disabled:     rgba(126, 125, 119, 0.08);
+  --toggle-overlay-hover:         rgba(242, 240, 232, 0.04);
+  --toggle-overlay-pressed:       rgba(242, 240, 232, 0.12);
+  --toggle-border:                #615f56;
+  --toggle-border-hover:          #918e83;
+  --toggle-border-pressed:        #e7e4da;
+  --toggle-border-disabled:       #403f3b;
+  --toggle-dot-bg:                #10100f;
+}
+
+/* Tokens invariantes entre modos */
+:root {
+  --toggle-selected-bg:               #0a4ee4;
+  --toggle-selected-overlay-hover:    rgba(0, 22, 71, 0.24);
+  --toggle-selected-overlay-pressed:  rgba(0, 22, 71, 0.48);
+  --toggle-focus-color:               #0a4ee4;
+  --toggle-focus-width:               0.125rem;   /* 2px  */
+  --toggle-size-w:                    3.5rem;     /* 56px */
+  --toggle-size-h:                    2rem;       /* 32px */
+}
+
+/* =============================================================================
+   Toggle — Estilos do Componente
+   Anatomia: .toggle > .control > .dot
+             .toggle > .focusRing (opcional, visível apenas com foco via teclado)
+   ============================================================================= */
+
+/* ── Track (container externo) ─────────────────────────────────────────────── */
+
+.toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: var(--toggle-size-w, 3.5rem);
+  height: var(--toggle-size-h, 2rem);
+  min-width: var(--toggle-size-w, 3.5rem);
+  max-width: var(--toggle-size-w, 3.5rem);
+  min-height: var(--toggle-size-h, 2rem);
+  max-height: var(--toggle-size-h, 2rem);
+  border-radius: 9999px;
+  background-color: var(--toggle-track-bg);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Hover — unselected */
+.toggle:hover:not(.selected):not(.disabled) {
+  background-image: linear-gradient(
+    var(--toggle-overlay-hover),
+    var(--toggle-overlay-hover)
+  );
+}
+
+/* Pressed — unselected */
+.toggle:active:not(.selected):not(.disabled),
+.toggle.pressed:not(.selected) {
+  background-image: linear-gradient(
+    var(--toggle-overlay-pressed),
+    var(--toggle-overlay-pressed)
+  );
+}
+
+/* Selected — track fica transparente; a cor fica no .control */
+.toggle.selected {
+  background-color: transparent;
+}
+
+/* Disabled */
+.toggle.disabled {
+  background-color: var(--toggle-track-bg-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Control (wrapper interno: borda + dot) ─────────────────────────────────── */
+
+.control {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;       /* 4px */
+  padding: 0.25rem;   /* 4px */
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  border: 0.0625rem solid var(--toggle-border);   /* 1px */
+  transition:
+    border-color      150ms ease,
+    background-color  150ms ease;
+}
+
+/* Control — hover (unselected) */
+.toggle:hover:not(.selected):not(.disabled) .control {
+  border-color: var(--toggle-border-hover);
+}
+
+/* Control — pressed (unselected) */
+.toggle:active:not(.selected):not(.disabled) .control,
+.toggle.pressed:not(.selected) .control {
+  border-color: var(--toggle-border-pressed);
+}
+
+/* Control — disabled */
+.toggle.disabled .control {
+  border-color: var(--toggle-border-disabled);
+}
+
+/* Control — selected */
+.toggle.selected .control {
+  background-color: var(--toggle-selected-bg);
+  border-color: transparent;
+}
+
+/* Control — selected hover */
+.toggle.selected:hover:not(.disabled) .control {
+  background-image: linear-gradient(
+    var(--toggle-selected-overlay-hover),
+    var(--toggle-selected-overlay-hover)
+  );
+  background-color: var(--toggle-selected-bg);
+}
+
+/* Control — selected pressed */
+.toggle.selected:active:not(.disabled) .control,
+.toggle.selected.pressed .control {
+  background-image: linear-gradient(
+    var(--toggle-selected-overlay-pressed),
+    var(--toggle-selected-overlay-pressed)
+  );
+  background-color: var(--toggle-selected-bg);
+}
+
+/* ── Dot ────────────────────────────────────────────────────────────────────── */
+
+/*
+  Dot travel (calculado a partir das dimensões do Figma):
+    Track width 56px - padding 4px×2 = 48px de área útil
+    Dot width 24px → espaço disponível = 24px
+    Centro (pressed) = 12px = 0.75rem
+    Direita (selected) = 24px = 1.5rem
+*/
+
+.dot {
+  width: 1.5rem;    /* 24px */
+  height: 100%;
+  border-radius: 9999px;
+  flex-shrink: 0;
+  background-color: var(--toggle-dot-bg);
+  transform: translateX(0);
+  transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Pressed — unselected → centro */
+.toggle:active:not(.selected) .dot,
+.toggle.pressed:not(.selected) .dot {
+  transform: translateX(0.75rem);
+}
+
+/* Selected → direita */
+.toggle.selected .dot {
+  transform: translateX(1.5rem);
+}
+
+/* Selected pressed → centro */
+.toggle.selected:active .dot,
+.toggle.selected.pressed .dot {
+  transform: translateX(0.75rem);
+}
+
+/* ── Focus ring (visível apenas em foco via teclado — :focus-visible) ──────── */
+
+.focusRing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 3.75rem;   /* 60px */
+  height: 2.25rem;  /* 36px */
+  border-radius: 9999px;
+  border: var(--toggle-focus-width, 0.125rem) solid var(--toggle-focus-color, #0a4ee4);
+  pointer-events: none;
+}

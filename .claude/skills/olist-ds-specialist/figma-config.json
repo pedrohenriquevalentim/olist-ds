@@ -62,26 +62,26 @@
       }
     ],
     "harnessCoverageCheck": {
-      "lastVerifiedAt": "2026-07-20",
+      "lastVerifiedAt": "2026-08-15",
       "againstLibrary": "design system (base)",
-      "verifiedVia": "search_design_system real via /ds-sync (Caso 6), busca por termo — não é listagem exaustiva por requisito do HARNEES_TELAS.md como em 2026-07-02, mas cobre todas as categorias já documentadas + termos genéricos de sondagem",
-      "status": "cobertura quase completa — 1 gap conhecido (Summary Card, ver abaixo)",
+      "verifiedVia": "search_design_system real via /ds-sync (Caso 6), busca por categoria — cobre todas as categorias documentadas + sondagem de novos termos",
+      "status": "cobertura quase completa — 1 gap parcialmente resolvido (Summary Card, ver abaixo)",
       "confirmed": [
-        "Menu", "Menu ERP", "Menu Global", "Button", "Button Icon", "Radio Button", "Segmented Buttons", "Link",
+        "Menu", "Menu ERP", "menu-global (renomeado de 'Menu Global' para hífen em 2026-08-15)", "Button", "Button Icon", "Radio Button", "Segmented Buttons", "Link",
         "Tag (+ tag-desktop, tag-mobile, tag-more, tag-delivery)", "Badge", "Tooltip", "Logo",
         "Icon (genérico + Product Icon + dezenas de ícones individuais)", "Input Search", "Input Text",
         "Input Paragraph (renomeado — antes documentado como 'Text Area')", "Input E-mail", "Input Token",
-        "Input Password", "Input Select", "Input File", "Dropdown", "Checkbox", "Toggle", "Chip",
-        "Avatar", "Card (genérico)", "Breadcrumb", "Profile", "Logout",
+        "Input Password", "Input Select", "Input File", "Dropdown", "Checkbox", "Check (componente público separado, sem prefixo ponto)", "Toggle", "Chip",
+        "Avatar", "Card (genérico + novas variantes internas de notificação: alert/warning/informative, atualizado 2026-08-01)", "Breadcrumb", "Profile", "Logout",
         "Table (+ Table Column, Head, Simple Cell, Spreadsheet)", "Paginator", "Sort", "Reorder",
-        "Bar, Chart Bar Up, Chart Bar Down, Chart Bar Variation (Data Visualization)",
+        "Bar, Chart Bar Up, Chart Bar Down, Chart Bar Variation, Chart Pie (Data Visualization — chart-pie adicionado em 2026-08-15)",
         "List, Task List", "Dashboard", "Loading", "Overlay", "Cookie",
         "Heading/Subheading via Text Styles (text/H1–H5, paragraph, caption, description) — não como componente, consistente com o harness"
       ],
       "gaps": [
         {
           "requirement": "Summary Card (HARNEES_TELAS.md Seção 1 — template Envios/Hub/Conta Digital, Zona D)",
-          "finding": "Não foi encontrado componente/variante dedicada de 'Summary Card' (fundo azul claro). Existe apenas o component_set genérico 'card'. Validar manualmente as variantes desse card (ou com o time de design) antes de usar em telas desses produtos — pode exigir construção com primitivos + documentação de gap (Seção 4 do harness) até confirmação."
+          "finding": "O component_set 'card' foi atualizado em 2026-08-01 e agora possui variantes internas de notificação (alert, warning, informative). Pode ter incorporado o Summary Card como variante — validar manualmente com o time de design antes de usar em telas desses produtos. Caso não exista variante dedicada de fundo azul claro, seguir Seção 4 do harness (construir com primitivos + documentar gap)."
         }
       ],
       "resolvedGaps": [
