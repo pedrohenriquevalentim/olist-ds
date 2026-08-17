@@ -107,7 +107,8 @@
           }
         },
         "utility": {
-          "neutral": "{base:color/gray/gray 100}"
+          "neutral": "{base:color/gray/gray 100}",
+          "unread": "{base:color/blue/blue 0}"
         }
       },
       "border": {
@@ -527,7 +528,8 @@
           }
         },
         "utility": {
-          "neutral": "{base:color/gray/gray 800}"
+          "neutral": "{base:color/gray/gray 800}",
+          "unread": "{base:color/blue/blue 800}"
         }
       },
       "border": {
