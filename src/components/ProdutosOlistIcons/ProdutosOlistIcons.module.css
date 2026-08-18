@@ -5,6 +5,7 @@
    ============================ */
 
 .pill {
+  box-sizing: border-box; /* garante que width/height incluem o padding (36×44px total) */
   display: flex;
   flex-direction: column;
   align-items: center;

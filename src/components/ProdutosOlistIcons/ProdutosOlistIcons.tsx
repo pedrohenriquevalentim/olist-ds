@@ -87,10 +87,12 @@ export type ProdutoOlist =
 
 export interface ProdutosOlistIconsProps {
   product: ProdutoOlist;
-  /** Estado do ícone. 'active' representa o estado ativo/hover no menu. */
+  /** Estado do ícone. 'active' exibe assets brilhantes + gradiente de fundo (dark). */
   state?: 'default' | 'active';
   /** Tema de cor. 'dark' é usado na sidebar (fundo escuro); 'light' em fundos claros. */
   theme?: 'dark' | 'light';
+  /** Exibe os assets "active" (brilhantes) sem aplicar o gradiente de fundo. Usar no hover do menu. */
+  hovered?: boolean;
   className?: string;
   'aria-label'?: string;
 }
@@ -250,10 +252,14 @@ export const ProdutosOlistIcons = ({
   product,
   state = 'default',
   theme = 'dark',
+  hovered = false,
   className,
   'aria-label': ariaLabel,
 }: ProdutosOlistIconsProps) => {
-  const isActiveAndDark = state === 'active' && theme === 'dark';
+  const isActive = state === 'active';
+  const isActiveAndDark = isActive && theme === 'dark';
+  // Ícones brilhantes quando em hover (sem gradiente) OU quando selecionado (com gradiente)
+  const iconState = (isActive || hovered) ? 'active' : 'default';
 
   return (
     <div
@@ -263,13 +269,13 @@ export const ProdutosOlistIcons = ({
       data-theme={theme}
       className={[
         styles.pill,
-        isActiveAndDark ? styles.pillActiveGradient : '',
+        isActiveAndDark ? styles.pillActiveGradient : '', // gradiente só no state='active' dark
         className,
       ]
         .filter(Boolean)
         .join(' ')}
     >
-      {renderProductIcon(product, state, theme)}
+      {renderProductIcon(product, iconState, theme)}
     </div>
   );
 };

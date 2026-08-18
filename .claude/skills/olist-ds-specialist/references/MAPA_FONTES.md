@@ -1,7 +1,7 @@
 # Mapa de Fontes — Estrutura do Repositório
 
 **Auto-gerado por `npm run build`**  
-**Última atualização:** 2026-07-21  
+**Última atualização:** 2026-08-18  
 **Versão da skill:** 3.15
 
 ---
@@ -82,14 +82,23 @@ src/
 │   │       ├── Logo.test.tsx
 │   │       ├── Logo.tsx
 │   │       └── index.ts
-│   └── ProdutosOlistIcons/
-│           ├── ProdutosOlistIcons.mdx
-│           ├── ProdutosOlistIcons.metadata.json
-│           ├── ProdutosOlistIcons.module.css
-│           ├── ProdutosOlistIcons.stories.tsx
-│           ├── ProdutosOlistIcons.test.tsx
-│           ├── ProdutosOlistIcons.tsx
-│           └── index.ts
+│   ├── MenuGlobal/
+│   │       ├── MenuGlobal.metadata.json
+│   │       ├── MenuGlobal.module.css
+│   │       ├── MenuGlobal.stories.tsx
+│   │       ├── MenuGlobal.test.tsx
+│   │       ├── MenuGlobal.tsx
+│   │       └── index.ts
+│   ├── ProdutosOlistIcons/
+│   │       ├── ProdutosOlistIcons.mdx
+│   │       ├── ProdutosOlistIcons.metadata.json
+│   │       ├── ProdutosOlistIcons.module.css
+│   │       ├── ProdutosOlistIcons.stories.tsx
+│   │       ├── ProdutosOlistIcons.test.tsx
+│   │       ├── ProdutosOlistIcons.tsx
+│   │       └── index.ts
+│   └── Toggle/
+│           └── Toggle.module.css
 ├── assets/
 │   └── icons/
 └── index.ts
@@ -108,4 +117,6 @@ src/
 - **InputSelect:** `src/components/InputSelect/InputSelect.tsx`
 - **InputText:** `src/components/InputText/InputText.tsx`
 - **Logo:** `src/components/Logo/Logo.tsx`
+- **MenuGlobal:** `src/components/MenuGlobal/MenuGlobal.tsx`
 - **ProdutosOlistIcons:** `src/components/ProdutosOlistIcons/ProdutosOlistIcons.tsx`
+- **Toggle:** `src/components/Toggle/index.tsx`
