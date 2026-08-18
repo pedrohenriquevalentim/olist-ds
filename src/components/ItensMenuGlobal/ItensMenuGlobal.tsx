@@ -274,7 +274,10 @@ export const ItensMenuGlobal = ({
           ].filter(Boolean).join(' ')}
           aria-label="Módulos do ERP"
         >
-          <div className={styles.primarioScroll}>
+          <div className={[
+            styles.primarioScroll,
+            estadoEfetivo === 'aberto' ? styles.primarioScrollSemScroll : '',
+          ].filter(Boolean).join(' ')}>
             <div className={styles.logoArea}>
               <Logo size="simple" />
             </div>

@@ -32,6 +32,14 @@
   flex-direction: column;
 }
 
+/*
+  Quando o painel secundário está visível (estado=aberto), o scroll único fica
+  no secundário. O primário oculta seu overflow para não gerar um segundo scrollbar.
+*/
+.primarioScrollSemScroll {
+  overflow: hidden;
+}
+
 /* Quando aberto: remove border-radius pois o painel secundário fica à direita */
 .painelPrimarioAberto {
   border-radius: 0;
