@@ -283,7 +283,21 @@ export const ItensMenuGlobal = ({
               aria-label="Módulos do ERP"
             >
               <div className={styles.logoArea}>
-                <Logo size="simple" />
+                {/*
+                  Clip frame 79.2×32px (Figma) — Logo renderiza em 128px de largura
+                  e é centralizado; o overflow:hidden corta topo/baixo/laterais
+                  exibindo apenas o wordmark "olist".
+                */}
+                <div className={styles.logoClip}>
+                  <Logo
+                    size="simple"
+                    style={{
+                      width: 'var(--shape-spacing-128px)',
+                      minWidth: 'var(--shape-spacing-128px)',
+                      maxWidth: 'var(--shape-spacing-128px)',
+                    }}
+                  />
+                </div>
               </div>
 
               <div className={styles.sisErpHeader} aria-hidden="true">

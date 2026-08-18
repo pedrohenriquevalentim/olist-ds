@@ -59,13 +59,32 @@
 
 /* ── Logo area (painel primário) ─────────────────────────────────────────────── */
 
+/*
+  Figma: logo area 248×80px
+  Padding: 24px top/bottom (profile-padding) · 21px left · 20px right
+  Não há tokens para 21px e 20px; valores exatos do Figma em rem.
+*/
 .logoArea {
-  width: 100%;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: var(--menu-container-spacing-profile-padding) var(--menu-container-spacing-action-area-padding);
+  align-items: flex-start;
+  padding: var(--menu-container-spacing-profile-padding) 1.25rem
+           var(--menu-container-spacing-profile-padding) 1.3125rem;
   flex-shrink: 0;
+}
+
+/*
+  Figma: clip frame 79.2×32px com overflow hidden, centralizando o Logo.
+  O Logo (128×80.7px) extravasa e é clipado → só o wordmark fica visível.
+  79.2px ≈ 4.95rem; 32px = var(--shape-spacing-32px).
+*/
+.logoClip {
+  width: 4.95rem;
+  height: var(--shape-spacing-32px);
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ── Header "Sistema ERP" ────────────────────────────────────────────────────── */
