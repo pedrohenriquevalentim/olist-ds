@@ -74,6 +74,13 @@ src/
 │   │       ├── InputText.test.tsx
 │   │       ├── InputText.tsx
 │   │       └── index.ts
+│   ├── ItensMenuGlobal/
+│   │       ├── ItensMenuGlobal.metadata.json
+│   │       ├── ItensMenuGlobal.module.css
+│   │       ├── ItensMenuGlobal.stories.tsx
+│   │       ├── ItensMenuGlobal.test.tsx
+│   │       ├── ItensMenuGlobal.tsx
+│   │       └── index.ts
 │   ├── Logo/
 │   │       ├── Logo.mdx
 │   │       ├── Logo.metadata.json
@@ -116,6 +123,7 @@ src/
 - **InputSearch:** `src/components/InputSearch/InputSearch.tsx`
 - **InputSelect:** `src/components/InputSelect/InputSelect.tsx`
 - **InputText:** `src/components/InputText/InputText.tsx`
+- **ItensMenuGlobal:** `src/components/ItensMenuGlobal/ItensMenuGlobal.tsx`
 - **Logo:** `src/components/Logo/Logo.tsx`
 - **MenuGlobal:** `src/components/MenuGlobal/MenuGlobal.tsx`
 - **ProdutosOlistIcons:** `src/components/ProdutosOlistIcons/ProdutosOlistIcons.tsx`
