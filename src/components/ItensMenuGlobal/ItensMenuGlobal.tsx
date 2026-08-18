@@ -284,20 +284,18 @@ export const ItensMenuGlobal = ({
             >
               <div className={styles.logoArea}>
                 {/*
-                  Clip frame 79.2×32px (Figma) — Logo renderiza em 128px de largura
-                  e é centralizado; o overflow:hidden corta topo/baixo/laterais
-                  exibindo apenas o wordmark "olist".
+                  Logo a 128px de largura (Figma: instance 128×80.7px).
+                  size="default" inclui o toggle + círculo laranja (watermark).
+                  overflow:hidden na logoArea clipa os ~0.35px que extravasam.
                 */}
-                <div className={styles.logoClip}>
-                  <Logo
-                    size="simple"
-                    style={{
-                      width: 'var(--shape-spacing-128px)',
-                      minWidth: 'var(--shape-spacing-128px)',
-                      maxWidth: 'var(--shape-spacing-128px)',
-                    }}
-                  />
-                </div>
+                <Logo
+                  size="default"
+                  style={{
+                    width: 'var(--shape-spacing-128px)',
+                    minWidth: 'var(--shape-spacing-128px)',
+                    maxWidth: 'var(--shape-spacing-128px)',
+                  }}
+                />
               </div>
 
               <div className={styles.sisErpHeader} aria-hidden="true">
