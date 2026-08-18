@@ -75,9 +75,15 @@ export const MenuGlobal = ({
   onNavigate,
   className,
 }: MenuGlobalProps) => {
-  // Estado interno: atualizado imediatamente no clique e sincronizado com a prop
+  // Estado interno: atualizado imediatamente no clique e sincronizado com a prop.
+  // Padrão "derived state during render": chamamos setSelected durante o render quando a prop muda,
+  // evitando useEffect + setState (que causaria cascata e viola react-hooks/set-state-in-effect).
   const [selected, setSelected] = React.useState<ProdutoSelecionado | undefined>(produtoSelecionado);
-  React.useEffect(() => { setSelected(produtoSelecionado); }, [produtoSelecionado]);
+  const [prevProp, setPrevProp] = React.useState<ProdutoSelecionado | undefined>(produtoSelecionado);
+  if (prevProp !== produtoSelecionado) {
+    setPrevProp(produtoSelecionado);
+    setSelected(produtoSelecionado);
+  }
 
   // Rastreio de hover para icon-fill e tooltip
   const [hovered, setHovered] = React.useState<ProdutoSelecionado | null>(null);
