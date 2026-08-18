@@ -274,70 +274,69 @@ export const ItensMenuGlobal = ({
           ].filter(Boolean).join(' ')}
           aria-label="Módulos do ERP"
         >
-          <div className={styles.logoArea}>
-            <Logo size="simple" />
-          </div>
+          <div className={styles.primarioScroll}>
+            <div className={styles.logoArea}>
+              <Logo size="simple" />
+            </div>
 
-          <div className={styles.sisErpHeader} aria-hidden="true">
-            Sistema ERP
-          </div>
+            <div className={styles.sisErpHeader} aria-hidden="true">
+              Sistema ERP
+            </div>
 
-          {/* Lista de módulos — flex:1 para empurrar itens de baixo */}
-          <ul
-            className={styles.itemList}
-            role="menu"
-            aria-label="Módulos"
-          >
-            {MODULOS.map(({ key, label, icon }) => {
-              const selecionado = moduloSelecionado === key;
-              return (
-                <li key={key} role="none">
-                  <button
-                    type="button"
-                    role="menuitem"
-                    aria-current={selecionado ? 'page' : undefined}
-                    className={[
-                      styles.menuItem,
-                      selecionado ? styles.menuItemSelecionado : '',
-                    ].filter(Boolean).join(' ')}
-                    onClick={() => handleModuloClick(key)}
-                  >
-                    <Icon name={icon} size={16} color="currentColor" aria-hidden />
-                    <span className={styles.menuItemLabel}>{label}</span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+            <ul
+              className={styles.itemList}
+              role="menu"
+              aria-label="Módulos"
+            >
+              {MODULOS.map(({ key, label, icon }) => {
+                const selecionado = moduloSelecionado === key;
+                return (
+                  <li key={key} role="none">
+                    <button
+                      type="button"
+                      role="menuitem"
+                      aria-current={selecionado ? 'page' : undefined}
+                      className={[
+                        styles.menuItem,
+                        selecionado ? styles.menuItemSelecionado : '',
+                      ].filter(Boolean).join(' ')}
+                      onClick={() => handleModuloClick(key)}
+                    >
+                      <Icon name={icon} size={16} color="currentColor" aria-hidden />
+                      <span className={styles.menuItemLabel}>{label}</span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
 
-          {/* Configurações */}
-          <ul
-            className={styles.itemListRodape}
-            role="menu"
-            aria-label="Configurações do sistema"
-          >
-            <li role="none">
-              <button type="button" role="menuitem" className={styles.menuItem}>
-                <Icon name="settings" size={16} color="currentColor" aria-hidden />
-                <span className={styles.menuItemLabel}>Configurações</span>
-              </button>
-            </li>
-          </ul>
+            <ul
+              className={styles.itemListRodape}
+              role="menu"
+              aria-label="Configurações do sistema"
+            >
+              <li role="none">
+                <button type="button" role="menuitem" className={styles.menuItem}>
+                  <Icon name="settings" size={16} color="currentColor" aria-hidden />
+                  <span className={styles.menuItemLabel}>Configurações</span>
+                </button>
+              </li>
+            </ul>
 
-          {/* Fixar menu */}
-          <div className={styles.actionArea}>
-            <div className={styles.fixarMenuRow}>
-              <span className={styles.fixarMenuLabel}>Fixar menu</span>
-              <button
-                type="button"
-                role="switch"
-                aria-checked={fixado}
-                aria-label="Fixar menu"
-                className={[styles.toggle, fixado ? styles.toggleLigado : ''].filter(Boolean).join(' ')}
-                onClick={handleFixarToggle}
-              >
-                <span className={styles.toggleDot} />
-              </button>
+            <div className={styles.actionArea}>
+              <div className={styles.fixarMenuRow}>
+                <span className={styles.fixarMenuLabel}>Fixar menu</span>
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={fixado}
+                  aria-label="Fixar menu"
+                  className={[styles.toggle, fixado ? styles.toggleLigado : ''].filter(Boolean).join(' ')}
+                  onClick={handleFixarToggle}
+                >
+                  <span className={styles.toggleDot} />
+                </button>
+              </div>
             </div>
           </div>
         </nav>

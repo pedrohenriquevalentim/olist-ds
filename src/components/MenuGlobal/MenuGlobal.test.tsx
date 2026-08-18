@@ -102,6 +102,14 @@ describe('MenuGlobal', () => {
     expect(screen.getByRole('navigation')).toHaveClass('custom-class');
   });
 
+  it('aplica classe containerComPanel quando panelAdjacenteAberto=true', () => {
+    render(<MenuGlobal panelAdjacenteAberto />);
+    // A classe CSS module tem nome hasheado; verificamos via atributo aria + presença de classe extra
+    const nav = screen.getByRole('navigation', { name: 'Navegação global' });
+    // Deve ter mais de uma classe (container + containerComPanel)
+    expect(nav.className.split(' ').length).toBeGreaterThan(1);
+  });
+
   it('exibe logo da empresa quando companyLogoUrl é fornecida', () => {
     render(<MenuGlobal companyLogoUrl="https://example.com/logo.png" />);
     const avatarBtn = screen.getByRole('menuitem', { name: 'Menu do usuário' });

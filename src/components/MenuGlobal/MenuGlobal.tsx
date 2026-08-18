@@ -61,6 +61,8 @@ export interface MenuGlobalProps {
   notificacoesPendentes?: boolean;
   /** Callback disparado ao clicar em qualquer item de navegação. */
   onNavigate?: (destino: ProdutoSelecionado) => void;
+  /** Zera o border-radius do lado direito quando há painel lateral adjacente (ex: ItensMenuGlobal). */
+  panelAdjacenteAberto?: boolean;
   className?: string;
 }
 
@@ -73,6 +75,7 @@ export const MenuGlobal = ({
   companyLogoLabel,
   notificacoesPendentes = false,
   onNavigate,
+  panelAdjacenteAberto = false,
   className,
 }: MenuGlobalProps) => {
   // Estado interno: atualizado imediatamente no clique e sincronizado com a prop.
@@ -110,7 +113,11 @@ export const MenuGlobal = ({
 
   return (
     <nav
-      className={[styles.container, className].filter(Boolean).join(' ')}
+      className={[
+        styles.container,
+        panelAdjacenteAberto ? styles.containerComPanel : '',
+        className,
+      ].filter(Boolean).join(' ')}
       aria-label="Navegação global"
     >
       {/* Logo */}

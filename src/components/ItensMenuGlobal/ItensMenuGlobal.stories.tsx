@@ -49,7 +49,48 @@ const meta: Meta<typeof ItensMenuGlobal> = {
 export default meta;
 type Story = StoryObj<typeof ItensMenuGlobal>;
 
-/* ── Estados do painel ────────────────────────────────────────────────────────── */
+/* ── Primary / Interativo (estado interno — primeiro na seção Docs) ────────────── */
+
+export const Interativo: Story = {
+  name: 'Interativo — estado gerenciado pelo componente',
+  args: {
+    moduloAtivo: 'Vendas',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Clique em um módulo para abrir o painel secundário; use o toggle "Fixar menu" para entrar no estado fixo.',
+      },
+    },
+  },
+};
+
+/* ── Uso integrado com MenuGlobal ────────────────────────────────────────────── */
+
+export const ComMenuGlobal: Story = {
+  name: 'Integrado com MenuGlobal',
+  render: () => (
+    <div style={{ display: 'flex', height: '100vh' }}>
+      <MenuGlobal
+        produtoSelecionado="Sistema ERP"
+        avatarLabel="PN"
+        panelAdjacenteAberto
+      />
+      <ItensMenuGlobal moduloAtivo="Vendas" />
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Integração real com o MenuGlobal: border-radius direito do menu zerado e painel interativo.',
+      },
+    },
+  },
+};
+
+/* ── Estados estáticos ────────────────────────────────────────────────────────── */
 
 export const Fechado: Story = {
   name: 'Fechado — apenas painel primário',
@@ -110,41 +151,4 @@ export const ModuloContatos: Story = {
 export const ModuloRelatorios: Story = {
   name: 'Módulo: Relatórios (3 seções)',
   args: { moduloAtivo: 'Relatorios', estado: 'aberto' },
-};
-
-/* ── Interativo (estado interno) ─────────────────────────────────────────────── */
-
-export const Interativo: Story = {
-  name: 'Interativo — estado gerenciado pelo componente',
-  args: {
-    moduloAtivo: 'Vendas',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Sem a prop `estado`, o componente gerencia internamente: clique em um módulo para abrir o painel secundário, use o toggle para fixar.',
-      },
-    },
-  },
-};
-
-/* ── Uso integrado com MenuGlobal ────────────────────────────────────────────── */
-
-export const ComMenuGlobal: Story = {
-  name: 'Integrado com MenuGlobal',
-  render: () => (
-    <div style={{ display: 'flex', height: '100vh' }}>
-      <MenuGlobal produtoSelecionado="Sistema ERP" avatarLabel="PN" />
-      <ItensMenuGlobal moduloAtivo="Vendas" estado="aberto" />
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'ItensMenuGlobal posicionado imediatamente após o MenuGlobal — uso real em telas ERP.',
-      },
-    },
-  },
 };

@@ -12,6 +12,11 @@
   height: 100%;
 }
 
+/* Quando há painel lateral adjacente (ItensMenuGlobal), zera border-radius direito */
+.containerComPanel {
+  border-radius: var(--menu-container-border-radius-contracted) 0 0 var(--menu-container-border-radius-contracted);
+}
+
 /* ── Logo ───────────────────────────────────────────────────────────────────── */
 
 .logoArea {
