@@ -395,6 +395,8 @@ companyLogoLabel?: string;
 notificacoesPendentes?: boolean;
 /** Callback disparado ao clicar em qualquer item de navegação. */
 onNavigate?: (destino: ProdutoSelecionado) => void;
+/** Zera o border-radius do lado direito quando há painel lateral adjacente (ex: ItensMenuGlobal). */
+panelAdjacenteAberto?: boolean;
 className?: string;
 ```
 

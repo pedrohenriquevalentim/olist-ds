@@ -2,10 +2,40 @@
 
 /* ── Container ──────────────────────────────────────────────────────────────── */
 
+/*
+  flex-direction: column para que singleScroll (flex:1) ocupe toda a altura.
+  overflow: hidden clipa qualquer extravasamento lateral.
+*/
 .container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 100%;
+  overflow: hidden;
+}
+
+/* ── Scroll único ────────────────────────────────────────────────────────────── */
+/*
+  Único ponto de overflow/scroll do componente inteiro.
+  Primário e secundário rodam juntos — um único scrollbar na borda direita.
+  Sem overflow nos painéis filhos.
+*/
+.singleScroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/*
+  Row interna com min-height: 100% garante que os painéis sempre preencham
+  o container mesmo quando o conteúdo é curto.
+  align-items: stretch (default) faz ambos os painéis terem a mesma altura —
+  o mais alto define o tamanho e o mais curto estica para igualar.
+*/
+.panelsRow {
+  display: flex;
+  flex-direction: row;
+  min-height: 100%;
 }
 
 /* ── Painel Primário (248px) ─────────────────────────────────────────────────── */
@@ -17,27 +47,9 @@
   border-right: var(--menu-container-border-width-default) solid var(--menu-container-border-color-default);
   display: flex;
   flex-direction: column;
-  height: 100%;
   flex-shrink: 0;
-  overflow: hidden;
-}
-
-/* Scroll wrapper — todo o conteúdo do painel primário rola junto (mesmo padrão do secundário) */
-.primarioScroll {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-/*
-  Quando o painel secundário está visível (estado=aberto), o scroll único fica
-  no secundário. O primário oculta seu overflow para não gerar um segundo scrollbar.
-*/
-.primarioScrollSemScroll {
-  overflow: hidden;
+  /* Sem height: 100% — altura definida por align-items: stretch do panelsRow */
+  /* Sem overflow — scroll gerenciado pelo singleScroll ancestral */
 }
 
 /* Quando aberto: remove border-radius pois o painel secundário fica à direita */
@@ -57,17 +69,13 @@
 }
 
 /* ── Header "Sistema ERP" ────────────────────────────────────────────────────── */
-/*
-  Usa font 16px + semibold para diferenciar do section-divider padrão (14px regular).
-  Padding de 16px nos eixos — sem token 20px disponível no sistema.
-*/
 
 .sisErpHeader {
   padding: var(--menu-container-spacing-action-area-padding);
   font-family: var(--font-family-base);
-  font-size: var(--font-size-x2-16px);                   /* 16px — mais próximo do design */
-  font-weight: var(--font-weight-sbold);                  /* 600 */
-  line-height: var(--font-line-height-x3-24px);          /* 24px */
+  font-size: var(--font-size-x2-16px);
+  font-weight: var(--font-weight-sbold);
+  line-height: var(--font-line-height-x3-24px);
   color: var(--menu-menu-item-font-color-enabled);
   flex-shrink: 0;
 }
@@ -82,7 +90,6 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  /* overflow gerenciado pelo .primarioScroll pai */
 }
 
 /* ── Lista de módulos (rodapé — Configurações) ───────────────────────────────── */
@@ -137,7 +144,7 @@
 .menuItemSelecionado {
   background: var(--menu-menu-item-color-selected);
   color: var(--menu-menu-item-font-color-selected);
-  font-weight: var(--font-weight-medium);                /* 500 */
+  font-weight: var(--font-weight-medium);
 }
 
 .menuItemSelecionado:hover {
@@ -165,20 +172,21 @@
   padding: var(--menu-container-spacing-action-area-padding);
   display: flex;
   flex-direction: column;
-  gap: var(--menu-container-spacing-gap-action-area);    /* 16px */
+  gap: var(--menu-container-spacing-gap-action-area);
   flex-shrink: 0;
+  margin-top: auto; /* empurra para o fundo quando o painel é mais alto que o conteúdo */
 }
 
 .fixarMenuRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--menu-menu-item-spacing-gap);                /* 12px */
+  gap: var(--menu-menu-item-spacing-gap);
 }
 
 .fixarMenuLabel {
   font-family: var(--font-family-base);
-  font-size: var(--menu-menu-item-font-size-default);    /* 14px */
+  font-size: var(--menu-menu-item-font-size-default);
   font-weight: var(--menu-menu-item-font-weight-default);
   line-height: var(--menu-menu-item-line-height-default);
   color: var(--menu-menu-item-font-color-enabled);
@@ -212,10 +220,10 @@
 .toggleDot {
   position: absolute;
   top: 50%;
-  left: 0.25rem;                                         /* 4px */
+  left: 0.25rem;
   transform: translateY(-50%);
-  width: 1.5rem;                                         /* 24px */
-  height: 1.5rem;                                        /* 24px */
+  width: 1.5rem;
+  height: 1.5rem;
   background: var(--toggle-color-dot);
   border-radius: 50%;
   transition: left 0.2s ease;
@@ -223,7 +231,7 @@
 }
 
 .toggleLigado .toggleDot {
-  left: calc(100% - 1.5rem - 0.25rem);                  /* 56 - 24 - 4 = 28px */
+  left: calc(100% - 1.5rem - 0.25rem);
 }
 
 /* ── Painel Secundário (248px) ───────────────────────────────────────────────── */
@@ -235,15 +243,13 @@
   border-left: var(--menu-container-border-width-default) solid var(--menu-container-border-color-default);
   display: flex;
   flex-direction: column;
-  height: 100%;
   flex-shrink: 0;
-  overflow: hidden;
+  /* Sem height: 100% — altura definida por align-items: stretch do panelsRow */
+  /* Sem overflow — scroll gerenciado pelo singleScroll ancestral */
 }
 
-.secundarioScroll {
+.secundarioContent {
   flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
   padding: var(--menu-container-spacing-list-padding);   /* 8px */
   display: flex;
   flex-direction: column;
@@ -261,16 +267,15 @@
   border-bottom: var(--menu-section-divider-border-width-default) solid var(--menu-section-divider-border-color-default);
 }
 
-/* No estado fixo, a primeira seção tem gap para acomodar o botão voltar */
 .sectionDividerComVoltar {
   gap: var(--menu-container-spacing-list-padding);       /* 8px */
-  padding-left: var(--menu-container-spacing-list-padding); /* 8px */
+  padding-left: var(--menu-container-spacing-list-padding);
 }
 
 .sectionDividerLabel {
   font-family: var(--font-family-base);
-  font-size: var(--menu-section-divider-font-size-default); /* 14px */
-  font-weight: var(--menu-section-divider-font-weight-default); /* 600 */
+  font-size: var(--menu-section-divider-font-size-default);
+  font-weight: var(--menu-section-divider-font-weight-default);
   line-height: var(--menu-section-divider-line-height-default);
   color: var(--menu-section-divider-font-color-default);
 }
@@ -281,7 +286,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;                                           /* 32px */
+  width: 2rem;
   height: 2rem;
   background: transparent;
   border: none;
@@ -310,5 +315,5 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  margin-bottom: var(--menu-container-spacing-list-padding); /* 8px separação entre grupos */
+  margin-bottom: var(--menu-container-spacing-list-padding);
 }

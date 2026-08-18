@@ -265,138 +265,143 @@ export const ItensMenuGlobal = ({
       className={[styles.container, className].filter(Boolean).join(' ')}
       data-testid="itens-menu-global"
     >
-      {/* ─── Painel Primário ─────────────────────────────────────────────────── */}
-      {mostrarPrimario && (
-        <nav
-          className={[
-            styles.painelPrimario,
-            estadoEfetivo === 'aberto' ? styles.painelPrimarioAberto : '',
-          ].filter(Boolean).join(' ')}
-          aria-label="Módulos do ERP"
-        >
-          <div className={[
-            styles.primarioScroll,
-            estadoEfetivo === 'aberto' ? styles.primarioScrollSemScroll : '',
-          ].filter(Boolean).join(' ')}>
-            <div className={styles.logoArea}>
-              <Logo size="simple" />
-            </div>
+      {/*
+        singleScroll é o único ponto de overflow/scroll do componente inteiro.
+        panelsRow usa min-height: 100% para garantir que os painéis sempre
+        preencham a altura do container, e os dois rolam juntos como um módulo único.
+      */}
+      <div className={styles.singleScroll}>
+        <div className={styles.panelsRow}>
 
-            <div className={styles.sisErpHeader} aria-hidden="true">
-              Sistema ERP
-            </div>
-
-            <ul
-              className={styles.itemList}
-              role="menu"
-              aria-label="Módulos"
+          {/* ─── Painel Primário ───────────────────────────────────────────── */}
+          {mostrarPrimario && (
+            <nav
+              className={[
+                styles.painelPrimario,
+                estadoEfetivo === 'aberto' ? styles.painelPrimarioAberto : '',
+              ].filter(Boolean).join(' ')}
+              aria-label="Módulos do ERP"
             >
-              {MODULOS.map(({ key, label, icon }) => {
-                const selecionado = moduloSelecionado === key;
-                return (
-                  <li key={key} role="none">
-                    <button
-                      type="button"
-                      role="menuitem"
-                      aria-current={selecionado ? 'page' : undefined}
-                      className={[
-                        styles.menuItem,
-                        selecionado ? styles.menuItemSelecionado : '',
-                      ].filter(Boolean).join(' ')}
-                      onClick={() => handleModuloClick(key)}
-                    >
-                      <Icon name={icon} size={16} color="currentColor" aria-hidden />
-                      <span className={styles.menuItemLabel}>{label}</span>
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-
-            <ul
-              className={styles.itemListRodape}
-              role="menu"
-              aria-label="Configurações do sistema"
-            >
-              <li role="none">
-                <button type="button" role="menuitem" className={styles.menuItem}>
-                  <Icon name="settings" size={16} color="currentColor" aria-hidden />
-                  <span className={styles.menuItemLabel}>Configurações</span>
-                </button>
-              </li>
-            </ul>
-
-            <div className={styles.actionArea}>
-              <div className={styles.fixarMenuRow}>
-                <span className={styles.fixarMenuLabel}>Fixar menu</span>
-                <button
-                  type="button"
-                  role="switch"
-                  aria-checked={fixado}
-                  aria-label="Fixar menu"
-                  className={[styles.toggle, fixado ? styles.toggleLigado : ''].filter(Boolean).join(' ')}
-                  onClick={handleFixarToggle}
-                >
-                  <span className={styles.toggleDot} />
-                </button>
+              <div className={styles.logoArea}>
+                <Logo size="simple" />
               </div>
-            </div>
-          </div>
-        </nav>
-      )}
 
-      {/* ─── Painel Secundário ────────────────────────────────────────────────── */}
-      {mostrarSecundario && (
-        <nav
-          className={styles.painelSecundario}
-          aria-label={`Submenu ${moduloLabel}`}
-        >
-          <div className={styles.secundarioScroll}>
-            {secoes.map((secao, idx) => (
-              <React.Fragment key={secao.titulo}>
-                {/* Section divider — primeira seção recebe botão voltar no estado fixo */}
-                <div
-                  className={[
-                    styles.sectionDivider,
-                    idx === 0 && estadoEfetivo === 'fixo' ? styles.sectionDividerComVoltar : '',
-                  ].filter(Boolean).join(' ')}
-                >
-                  {idx === 0 && estadoEfetivo === 'fixo' && (
-                    <button
-                      type="button"
-                      className={styles.voltarBtn}
-                      aria-label="Voltar ao menu principal"
-                      onClick={handleVoltar}
-                    >
-                      <Icon name="arrow-left" size={16} color="currentColor" aria-hidden />
-                    </button>
-                  )}
-                  <span className={styles.sectionDividerLabel}>{secao.titulo}</span>
-                </div>
+              <div className={styles.sisErpHeader} aria-hidden="true">
+                Sistema ERP
+              </div>
 
-                <ul
-                  className={styles.itemListSecundario}
-                  role="menu"
-                  aria-label={secao.titulo}
-                >
-                  {secao.itens.map((item) => (
-                    <li key={item.label} role="none">
+              <ul
+                className={styles.itemList}
+                role="menu"
+                aria-label="Módulos"
+              >
+                {MODULOS.map(({ key, label, icon }) => {
+                  const selecionado = moduloSelecionado === key;
+                  return (
+                    <li key={key} role="none">
                       <button
                         type="button"
                         role="menuitem"
-                        className={styles.menuItem}
+                        aria-current={selecionado ? 'page' : undefined}
+                        className={[
+                          styles.menuItem,
+                          selecionado ? styles.menuItemSelecionado : '',
+                        ].filter(Boolean).join(' ')}
+                        onClick={() => handleModuloClick(key)}
                       >
-                        <Icon name={item.icon} size={16} color="currentColor" aria-hidden />
-                        <span className={styles.menuItemLabel}>{item.label}</span>
+                        <Icon name={icon} size={16} color="currentColor" aria-hidden />
+                        <span className={styles.menuItemLabel}>{label}</span>
                       </button>
                     </li>
-                  ))}
-                </ul>
-              </React.Fragment>
-            ))}
-          </div>
-        </nav>
-      )}
+                  );
+                })}
+              </ul>
+
+              <ul
+                className={styles.itemListRodape}
+                role="menu"
+                aria-label="Configurações do sistema"
+              >
+                <li role="none">
+                  <button type="button" role="menuitem" className={styles.menuItem}>
+                    <Icon name="settings" size={16} color="currentColor" aria-hidden />
+                    <span className={styles.menuItemLabel}>Configurações</span>
+                  </button>
+                </li>
+              </ul>
+
+              <div className={styles.actionArea}>
+                <div className={styles.fixarMenuRow}>
+                  <span className={styles.fixarMenuLabel}>Fixar menu</span>
+                  <button
+                    type="button"
+                    role="switch"
+                    aria-checked={fixado}
+                    aria-label="Fixar menu"
+                    className={[styles.toggle, fixado ? styles.toggleLigado : ''].filter(Boolean).join(' ')}
+                    onClick={handleFixarToggle}
+                  >
+                    <span className={styles.toggleDot} />
+                  </button>
+                </div>
+              </div>
+            </nav>
+          )}
+
+          {/* ─── Painel Secundário ─────────────────────────────────────────── */}
+          {mostrarSecundario && (
+            <nav
+              className={styles.painelSecundario}
+              aria-label={`Submenu ${moduloLabel}`}
+            >
+              <div className={styles.secundarioContent}>
+                {secoes.map((secao, idx) => (
+                  <React.Fragment key={secao.titulo}>
+                    <div
+                      className={[
+                        styles.sectionDivider,
+                        idx === 0 && estadoEfetivo === 'fixo' ? styles.sectionDividerComVoltar : '',
+                      ].filter(Boolean).join(' ')}
+                    >
+                      {idx === 0 && estadoEfetivo === 'fixo' && (
+                        <button
+                          type="button"
+                          className={styles.voltarBtn}
+                          aria-label="Voltar ao menu principal"
+                          onClick={handleVoltar}
+                        >
+                          <Icon name="arrow-left" size={16} color="currentColor" aria-hidden />
+                        </button>
+                      )}
+                      <span className={styles.sectionDividerLabel}>{secao.titulo}</span>
+                    </div>
+
+                    <ul
+                      className={styles.itemListSecundario}
+                      role="menu"
+                      aria-label={secao.titulo}
+                    >
+                      {secao.itens.map((item) => (
+                        <li key={item.label} role="none">
+                          <button
+                            type="button"
+                            role="menuitem"
+                            className={styles.menuItem}
+                          >
+                            <Icon name={item.icon} size={16} color="currentColor" aria-hidden />
+                            <span className={styles.menuItemLabel}>{item.label}</span>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </React.Fragment>
+                ))}
+              </div>
+            </nav>
+          )}
+
+        </div>
+      </div>
     </div>
   );
 };
