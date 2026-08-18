@@ -1,0 +1,70 @@
+{
+  "name": "MenuGlobal",
+  "purpose": "Sidebar de navegação global contraída (56px) da plataforma Olist. Exibe os ícones de todos os produtos disponíveis e as ações de conta do usuário, permitindo alternância rápida entre produtos sem expandir o menu.",
+  "useWhen": [
+    "Zona A do layout em qualquer produto Olist (ERP, Hub, PDV, Conta Digital, Envios, Ecommerce, Crédito, Agentes de IA)",
+    "Sidebar no estado contraído (icon-only) — espaço horizontal limitado ou preferência do usuário pela visão compacta",
+    "Sempre que houver necessidade de indicar qual produto está ativo via destaque visual no ícone correspondente"
+  ],
+  "doNotUseWhen": [
+    "Navegação interna dentro de um produto (seções e sub-páginas) — usar Menu ERP na Zona B",
+    "Telas mobile sem adaptação responsiva (menu bottom-sheet ou hamburger são mais adequados)",
+    "Menus de navegação ad-hoc sem relação com os produtos Olist — usar primitivos de layout direto"
+  ],
+  "pairsWith": ["ProdutosOlistIcons", "Logo"],
+  "note": "O `produtoSelecionado` aceita tanto produtos (mapeia para ProdutosOlistIcons state='active') quanto itens do rodapé ('Menu do Usuario', 'Notificacoes', 'Configuracoes', 'Central de Ajuda'). A versão expandida (248px com labels) é um componente separado. A prop `produtos` permite ocultar produtos não contratados pelo tenant.",
+  "variants": [
+    "ERP", "HUB", "PDV", "OCD", "Envios", "Ecommerce", "Credito", "Lis",
+    "Menu do Usuario", "Notificacoes", "Configuracoes", "Central de Ajuda"
+  ],
+  "states": ["enabled", "hover", "active"],
+  "slots": ["produtos"],
+  "tokens": {
+    "new": [
+      "menu-container-color-product",
+      "menu-container-size-width-contracted",
+      "menu-container-border-radius-contracted",
+      "menu-container-spacing-logo-padding-contracted",
+      "menu-container-spacing-list-padding",
+      "menu-container-spacing-gap-list",
+      "menu-container-spacing-profile-padding",
+      "menu-container-spacing-action-area-padding",
+      "menu-container-spacing-gap-profile",
+      "menu-container-border-width-default",
+      "menu-container-border-color-default",
+      "menu-menu-item-color-hover",
+      "menu-menu-item-color-pressed",
+      "menu-menu-item-color-selected",
+      "menu-menu-item-border-radius-default",
+      "menu-menu-item-shape-color-enabled",
+      "menu-menu-item-shape-color-hover",
+      "menu-menu-item-shape-color-pressed",
+      "menu-menu-item-shape-color-selected",
+      "menu-notification-dot-size-default",
+      "menu-notification-dot-color-enabled",
+      "menu-notification-dot-border-radius-pill"
+    ],
+    "existing": [
+      "avatar-color-bg",
+      "avatar-border-radius-pill",
+      "avatar-size-height",
+      "avatar-font-color-in-circle",
+      "shape-size-x7-56px",
+      "shape-border-radius-x2-16px",
+      "shape-border-radius-pill-9999px",
+      "shape-spacing-x1-8px",
+      "shape-spacing-x3-24px",
+      "font-family-base",
+      "text-label-font-size",
+      "text-label-font-weight",
+      "text-label-line-height",
+      "focus-border-width-default",
+      "focus-border-color-default"
+    ]
+  },
+  "figma": {
+    "fileKey": "HeyN4w209HWh8rfpTDiwyf",
+    "nodeId": "9923:19375",
+    "componentKey": "c2a9753aa84b8296ad1f7587a738ed019aa7d8b3"
+  }
+}

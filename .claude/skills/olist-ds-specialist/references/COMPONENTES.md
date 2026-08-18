@@ -1,7 +1,7 @@
 # Componentes — API Completa
 
 **Auto-gerado por `npm run build`**
-**Última atualização:** 2026-07-21
+**Última atualização:** 2026-08-18
 **Versão do pacote:** 1.0.66
 **Versão da skill:** 3.15
 
@@ -9,7 +9,7 @@
 
 Este arquivo contém a API completa de todos os componentes do design system.
 
-## Componentes Disponíveis (10)
+## Componentes Disponíveis (11)
 
 ### Button
 
@@ -317,6 +317,49 @@ size?: 'default' | 'simple' | 'symbol';
 
 ---
 
+### MenuGlobal
+
+Sidebar de navegação global contraída (56px) da plataforma Olist. Exibe os ícones de todos os produtos disponíveis e as ações de conta do usuário, permitindo alternância rápida entre produtos sem expandir o menu.
+
+**Quando usar:**
+- Zona A do layout em qualquer produto Olist (ERP, Hub, PDV, Conta Digital, Envios, Ecommerce, Crédito, Agentes de IA)
+- Sidebar no estado contraído (icon-only) — espaço horizontal limitado ou preferência do usuário pela visão compacta
+- Sempre que houver necessidade de indicar qual produto está ativo via destaque visual no ícone correspondente
+
+**Quando NÃO usar:**
+- Navegação interna dentro de um produto (seções e sub-páginas) — usar Menu ERP na Zona B
+- Telas mobile sem adaptação responsiva (menu bottom-sheet ou hamburger são mais adequados)
+- Menus de navegação ad-hoc sem relação com os produtos Olist — usar primitivos de layout direto
+
+**Combina com:** ProdutosOlistIcons, Logo
+
+> **Nota:** O `produtoSelecionado` aceita tanto produtos (mapeia para ProdutosOlistIcons state='active') quanto itens do rodapé ('Menu do Usuario', 'Notificacoes', 'Configuracoes', 'Central de Ajuda'). A versão expandida (248px com labels) é um componente separado. A prop `produtos` permite ocultar produtos não contratados pelo tenant.
+
+**Props:**
+```typescript
+/** Lista de produtos a exibir. Padrão: todos os 8 produtos Olist. */
+produtos?: ProdutoOlist[];
+/** Produto ou funcionalidade atualmente ativa (controlado externamente). */
+produtoSelecionado?: ProdutoSelecionado;
+/** Monograma de até 2 caracteres exibido no círculo do usuário. */
+avatarLabel?: string;
+/** URL da foto do usuário (círculo superior, 32×32). */
+avatarImageUrl?: string;
+/** URL do logo da empresa (círculo inferior, 28×28, sobreposto 7px ao do usuário). */
+companyLogoUrl?: string;
+/** Monograma de até 2 caracteres para o logo da empresa quando companyLogoUrl não fornecida. */
+companyLogoLabel?: string;
+/** Exibe badge de notificação no ícone de sino. */
+notificacoesPendentes?: boolean;
+/** Callback disparado ao clicar em qualquer item de navegação. */
+onNavigate?: (destino: ProdutoSelecionado) => void;
+className?: string;
+```
+
+**Caminho:** `src/components/MenuGlobal/`
+
+---
+
 ### ProdutosOlistIcons
 
 Ícone de produto Olist (Conta Digital, Crédito, Ecommerce, Sistema ERP, Envios, Sistema PDV, Hub de Integração, Agentes de IA) para uso na sidebar de navegação.
@@ -334,10 +377,12 @@ size?: 'default' | 'simple' | 'symbol';
 **Props:**
 ```typescript
 product: ProdutoOlist;
-/** Estado do ícone. 'active' representa o estado ativo/hover no menu. */
+/** Estado do ícone. 'active' exibe assets brilhantes + gradiente de fundo (dark). */
 state?: 'default' | 'active';
 /** Tema de cor. 'dark' é usado na sidebar (fundo escuro); 'light' em fundos claros. */
 theme?: 'dark' | 'light';
+/** Exibe os assets "active" (brilhantes) sem aplicar o gradiente de fundo. Usar no hover do menu. */
+hovered?: boolean;
 className?: string;
 'aria-label'?: string;
 ```

@@ -1,0 +1,347 @@
+@import '../../generated/variables.css';
+
+/* ── Container ─────────────────────────────────────────────────────────────── */
+
+.container {
+  width: var(--menu-container-size-width-contracted);
+  background: var(--menu-container-color-product);
+  border-radius: var(--menu-container-border-radius-contracted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+/* ── Logo ───────────────────────────────────────────────────────────────────── */
+
+.logoArea {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: var(--menu-container-spacing-profile-padding);       /* 24px */
+  padding-bottom: var(--menu-container-spacing-action-area-padding); /* 16px */
+  padding-left: var(--menu-container-spacing-logo-padding-contracted);  /* 8px */
+  padding-right: var(--menu-container-spacing-logo-padding-contracted); /* 8px */
+  flex-shrink: 0;
+}
+
+/* ── Divider ────────────────────────────────────────────────────────────────── */
+
+.divider {
+  width: 1rem;
+  height: 0;
+  border: 0;
+  border-top: var(--menu-container-border-width-default) solid var(--menu-container-border-color-default);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* ── Lista de Produtos ─────────────────────────────────────────────────────── */
+
+.productList {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;              /* centra itens 36px na área interna 40px → 10px margem cada lado */
+  gap: var(--shape-spacing-x1-8px); /* 8px entre itens */
+  list-style: none;
+  margin: 0;
+  padding: var(--menu-container-spacing-list-padding); /* 8px */
+  width: 100%;
+  /* overflow intencional: sem overflow-y:auto para que o tooltip (position:absolute)
+     não seja clipado horizontalmente pelo scroll container */
+}
+
+/* ── Animações de hover (spring: escala 1→1.2→1 em 0.32s) ───────────────────── */
+/*
+  Aplicadas ao CONTEÚDO do botão (pill/icon), não ao botão em si.
+  Motivo: o botão tem position:relative com tooltip position:absolute filho —
+  se o botão escalar, o tooltip deslocaria junto durante a animação.
+  Ao escalar apenas o conteúdo interno, o tooltip permanece fixo.
+*/
+
+@keyframes highlight-pulse {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.menuItemContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.menuItemContent.animPulse {
+  animation: highlight-pulse 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* ── Botão base de item (36×44px, border-radius 30px) ───────────────────────── */
+/*
+  Hover: rgba(white, 20%) — valor do design, sem token semântico disponível.
+  Active/selected de produtos: gerenciado internamente pelo ProdutosOlistIcons (pillActiveGradient).
+  Active/selected de ícones do rodapé: classe .itemSelected abaixo.
+*/
+
+.menuItemBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;  /* 36px */
+  height: 2.75rem; /* 44px */
+  background: transparent;
+  border: none;
+  border-radius: 1.875rem; /* 30px — valor literal do design; pill (9999px) é semanticamente igual mas não é o que o Figma especifica */
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.15s ease;
+}
+
+.menuItemBtn:focus-visible {
+  outline: var(--focus-border-width-default) solid var(--focus-border-color-default);
+  outline-offset: 0.125rem;
+}
+
+/* Hover e pressed apenas em itens NÃO selecionados */
+.menuItemBtn:hover:not([aria-current]) {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.menuItemBtn:active:not([aria-current]) {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ── Estado selecionado para ícones do rodapé e avatar ──────────────────────── */
+/*
+  Gradiente azul→ciano idêntico ao pillActiveGradient do ProdutosOlistIcons.
+  Aplicado via prop 'aria-current' + classe utilitária no TSX.
+*/
+
+.itemSelected {
+  background: linear-gradient(
+    to bottom,
+    var(--color-blue-blue-500),
+    var(--color-cyan-cyan-200) 115.91%
+  );
+}
+
+/* ── Botões de ícone simples (bell, help-circle) ────────────────────────────── */
+/*
+  Ícones em fundo de marca (dark navy) exigem cor 'on-brand' (#fcfbf8).
+  --menu-menu-item-shape-color-enabled resolve para neutro (cor para fundo claro) — não usar aqui.
+  A cor do ícone NÃO muda em hover/pressed/selected; apenas o fundo muda.
+*/
+
+.iconBtn {
+  color: var(--icon-color-onbrand); /* #fcfbf8 via --color-shape-content-on-brand */
+}
+
+/* ── Badge de notificação ───────────────────────────────────────────────────── */
+/*
+  Posição confirmada no dev mode: x=17, y=12 dentro do container 36×44.
+*/
+
+.notificationDot {
+  position: absolute;
+  top: 0.75rem;    /* 12px — y=12 no design */
+  left: 1.0625rem; /* 17px — x=17 no design (overlap direito do sino 16px) */
+  width: var(--menu-notification-dot-size-default);
+  height: var(--menu-notification-dot-size-default);
+  background: var(--menu-notification-dot-color-enabled);
+  border-radius: var(--menu-notification-dot-border-radius-pill);
+  pointer-events: none;
+}
+
+/* ── Seção do usuário ───────────────────────────────────────────────────────── */
+
+.userSection {
+  width: 100%;
+  padding-top: var(--menu-container-spacing-profile-padding);  /* 24px */
+  padding-bottom: var(--menu-container-spacing-list-padding);  /* 8px */
+  padding-left: var(--menu-container-spacing-list-padding);    /* 8px */
+  padding-right: var(--menu-container-spacing-list-padding);   /* 8px */
+  flex-shrink: 0;
+}
+
+.userList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--menu-container-spacing-gap-list); /* 0px */
+  align-items: center;
+}
+
+/* ── Botão de avatar (MenuUsuario) ──────────────────────────────────────────── */
+/*
+  Altura auto: conteúdo determina a altura.
+  Com logo da empresa: 10px + 32px (usuário) - 7px (overlap) + 28px (empresa) + 10px = 73px
+  Sem logo da empresa: 10px + 32px (usuário) + 10px = 52px
+  Padding usa rem direto — não há tokens x125-10px / x075-6px no sistema.
+*/
+
+.avatarBtn {
+  height: auto;
+  padding: 0.625rem 0.375rem; /* py: 10px, px: 6px */
+}
+
+/* ── Avatar: anatomia dual (usuário + empresa) ─────────────────────────────── */
+/*
+  Dois círculos em flex column. O círculo do usuário tem margin-bottom: -7px,
+  fazendo o logo da empresa subir 7px para criar a sobreposição do design.
+  Total do conteúdo: 32 - 7 + 28 = 53px.
+*/
+
+.avatarProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Overlap de 7px: apenas quando dentro de avatarProfile (logo da empresa presente) */
+.avatarProfile .avatarInitials,
+.avatarProfile .avatarImage {
+  margin-bottom: -0.4375rem; /* -7px */
+}
+
+/* ── Avatar visual — círculo do usuário (32×32) ──────────────────────────────── */
+
+.avatarInitials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--avatar-size-height);  /* 32px */
+  height: var(--avatar-size-height); /* 32px */
+  border-radius: var(--avatar-border-radius-pill);
+  background: var(--avatar-color-bg);
+  color: var(--avatar-font-color-in-circle);
+  font-family: var(--font-family-base);
+  font-size: var(--text-label-font-size);
+  font-weight: var(--text-label-font-weight);
+  line-height: var(--text-label-line-height);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.avatarImage {
+  width: var(--avatar-size-height);  /* 32px */
+  height: var(--avatar-size-height); /* 32px */
+  border-radius: var(--avatar-border-radius-pill);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* ── Logo da empresa (28×28, sobreposto 7px ao círculo do usuário) ─────────── */
+/*
+  Fundo: token Figma "decoratives/decorative-02" (#e58070 — salmão).
+  Não exportado no CSS gerado; --color-red-red-300 (#f28d7d) é a aproximação mais próxima.
+  Texto interno: token "texts/content primary" (#fcfbf8).
+  outline cria anel de separação visual entre os dois círculos.
+*/
+
+.companyLogo {
+  width: 1.75rem;  /* 28px */
+  height: 1.75rem; /* 28px */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  /* decoratives/decorative-02 = #e58070; closest exported token: --color-red-red-300 */
+  background: var(--color-red-red-300);
+  /* anel de separação visual com o círculo azul do usuário acima */
+  outline: 0.125rem solid var(--menu-container-color-product); /* 2px, navy do container */
+  outline-offset: 0;
+}
+
+.companyLogoImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.companyLogoInitials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-base);
+  font-size: 0.75rem;
+  font-weight: var(--text-label-font-weight);
+  /* texts/content primary = #fcfbf8 */
+  color: var(--color-gray-gray-0);
+  user-select: none;
+}
+
+/* ── Tooltip (design system — pointing=left) ─────────────────────────────────── */
+/*
+  Estrutura: [arrow 4×8px ◁] [label box 32px tall]
+  Arrow aponta para a esquerda (em direção ao item do sidebar).
+  Drop-shadow via filter para incluir o arrow no efeito.
+  Visível apenas em hover — opacidade com transition.
+*/
+
+.tooltipContainer {
+  position: absolute;
+  left: 100%;                /* imediato à direita do botão */
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--tooltip-spacing-gap);   /* 0px */
+  height: var(--tooltip-size-height); /* 32px */
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 100;
+  /* shadow com filter para cobrir também o arrow */
+  filter:
+    drop-shadow(
+      var(--shadow-distance-x)
+      var(--shadow-distance-contact)
+      calc(var(--shadow-blur-contact) / 2)
+      var(--shadow-color-contact)
+    )
+    drop-shadow(
+      var(--shadow-distance-x)
+      var(--shadow-distance-level-3)
+      calc(var(--shadow-blur-level-3) / 2)
+      var(--shadow-color-level-3)
+    );
+}
+
+/* Triângulo CSS ◁ apontando para a esquerda (4px wide × 8px tall) */
+.tooltipArrow {
+  width: 0;
+  height: 0;
+  border-top: var(--tooltip-size-arrow-1) solid transparent;    /* 4px */
+  border-bottom: var(--tooltip-size-arrow-1) solid transparent;  /* 4px */
+  border-right: var(--tooltip-size-arrow-1) solid var(--tooltip-color-bg);
+  flex-shrink: 0;
+}
+
+.tooltipLabel {
+  height: var(--tooltip-size-height);          /* 32px */
+  padding: 0 var(--tooltip-spacing-padding);   /* 0 top/bottom, 12px left/right */
+  display: flex;
+  align-items: center;
+  background: var(--tooltip-color-bg);
+  color: var(--tooltip-font-color);
+  font-family: var(--font-family-base);
+  font-size: var(--tooltip-font-size);
+  font-weight: var(--tooltip-font-weight);
+  line-height: var(--tooltip-font-line-height);
+  border-radius: var(--tooltip-border-radius-default);  /* 4px */
+  white-space: nowrap;
+}
+
+/* Tooltip visível apenas em hover de itens NÃO selecionados */
+.menuItemBtn:hover:not([aria-current]) .tooltipContainer {
+  opacity: 1;
+}
