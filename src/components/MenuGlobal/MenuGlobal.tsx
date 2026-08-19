@@ -119,6 +119,7 @@ export const MenuGlobal = ({
   const solucoesBtnLiRef = React.useRef<HTMLLIElement>(null);
   const [listHeight, setListHeight] = React.useState(0);
   const [flyoutOpen, setFlyoutOpen] = React.useState(false);
+  const [animatingSolucoes, setAnimatingSolucoes] = React.useState(false);
 
   React.useEffect(() => {
     const el = productListRef.current;
@@ -228,9 +229,19 @@ export const MenuGlobal = ({
                 (flyoutOpen || isSolucoesSel) ? styles.itemSelected : '',
               ].filter(Boolean).join(' ')}
               onClick={() => setFlyoutOpen(v => !v)}
+              onMouseEnter={() => { if (!(flyoutOpen || isSolucoesSel)) setAnimatingSolucoes(true); }}
+              onMouseLeave={() => {}}
             >
-              <span className={styles.menuItemContent}>
-                <Icon name="apps" size={16} color="currentColor" aria-hidden />
+              <span
+                className={[
+                  styles.menuItemContent,
+                  animatingSolucoes ? styles.n0HighlightEnter : '',
+                ].filter(Boolean).join(' ')}
+                onAnimationEnd={() => setAnimatingSolucoes(false)}
+              >
+                <span className={animatingSolucoes ? styles.n0IconEnter : ''}>
+                  <Icon name="apps" size={16} color="currentColor" aria-hidden />
+                </span>
               </span>
               <span className={styles.tooltipContainer} aria-hidden="true">
                 <span className={styles.tooltipArrow} />

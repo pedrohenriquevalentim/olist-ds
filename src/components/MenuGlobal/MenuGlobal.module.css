@@ -58,15 +58,26 @@
      não seja clipado horizontalmente pelo scroll container */
 }
 
-/* ── Animações de hover (spring: escala 1→1.2→1 em 0.32s) ───────────────────── */
+/* ── Animações de hover (spring: escala em 0.32s) ────────────────────────────── */
 /*
   Aplicadas ao CONTEÚDO do botão (pill/icon), não ao botão em si.
   Motivo: o botão tem position:relative com tooltip position:absolute filho —
   se o botão escalar, o tooltip deslocaria junto durante a animação.
   Ao escalar apenas o conteúdo interno, o tooltip permanece fixo.
+
+  9dots usa duas camadas independentes:
+  - .n0-highlight-enter → menuItemContent (container) → scale 1.18
+  - .n0-icon-enter      → wrapper em torno do <Icon>  → scale 1.20
+  Os dois elementos NÃO são pai-filho, portanto as escalas NÃO se compõem.
 */
 
 @keyframes highlight-pulse {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+
+@keyframes icon-pulse {
   0%   { transform: scale(1); }
   40%  { transform: scale(1.2); }
   100% { transform: scale(1); }
@@ -81,6 +92,19 @@
 
 .menuItemContent.animPulse {
   animation: highlight-pulse 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 9dots — container (pill area) */
+.n0HighlightEnter {
+  animation: highlight-pulse 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 9dots — ícone interno (escala independente do container) */
+.n0IconEnter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: icon-pulse 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 /* ── Botão base de item (36×44px, border-radius 30px) ───────────────────────── */
@@ -400,7 +424,7 @@
   height: 0;
   border-top: 0.5rem solid transparent;    /* 8px */
   border-bottom: 0.5rem solid transparent;  /* 8px */
-  border-right: 0.625rem solid var(--menu-container-color-default, #fcfbf8); /* 10px */
+  border-right: 0.625rem solid var(--menu-container-border-color-default, #f2f0e8); /* 10px */
   flex-shrink: 0;
 }
 
@@ -429,7 +453,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 0.25rem; /* 4px de respiro ao redor do ícone + label no hover/selected */
   width: 100%;
   border-radius: 0.5rem;
   transition: background 0.15s ease;
@@ -452,7 +476,7 @@
 /* Rótulo textual abaixo do ícone — 14px Regular conforme Figma */
 .flyoutItemLabel {
   font-family: var(--font-family-base);
-  font-size: 0.875rem;           /* 14px */
+  font-size: 0.75rem;            /* 12px */
   font-weight: var(--font-weight-regular); /* 400 — Regular; label padrão do DS é sbold (600) */
   line-height: var(--text-label-line-height);
   color: var(--tooltip-font-color, #10100f);
