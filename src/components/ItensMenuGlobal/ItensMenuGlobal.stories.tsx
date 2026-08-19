@@ -75,6 +75,7 @@ export const ComMenuGlobal: Story = {
       <MenuGlobal
         produtoSelecionado="Sistema ERP"
         avatarLabel="PN"
+        companyLogoUrl="https://www.nike.com.br/images/meta/open-graph-main-image.jpg"
         panelAdjacenteAberto
       />
       <ItensMenuGlobal moduloAtivo="Vendas" />
