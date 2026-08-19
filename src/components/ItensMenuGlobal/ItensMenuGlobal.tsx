@@ -217,22 +217,8 @@ export const ItensMenuGlobal = ({
   const [fixado, setFixado] = React.useState(false);
   const [aberto, setAberto] = React.useState(true);
 
-  // Derived state during render — evita useEffect+setState (react-hooks/set-state-in-effect)
-  // e useRef durante render (react-hooks/refs). Padrão recomendado pelo React docs.
-  const [prevModuloProp, setPrevModuloProp] = React.useState<ModuloERP>(moduloAtivoProp);
-  if (prevModuloProp !== moduloAtivoProp) {
-    setPrevModuloProp(moduloAtivoProp);
-    setModuloSelecionado(moduloAtivoProp);
-  }
-
-  const [prevEstadoProp, setPrevEstadoProp] = React.useState(estadoProp);
-  if (prevEstadoProp !== estadoProp && estadoProp !== undefined) {
-    setPrevEstadoProp(estadoProp);
-    if (estadoProp === 'fixo')    { setFixado(true);  setAberto(true); }
-    if (estadoProp === 'aberto')  { setFixado(false); setAberto(true); }
-    if (estadoProp === 'fechado') { setFixado(false); setAberto(false); }
-  }
-
+  // estadoProp (controlado) tem precedência sobre estado interno (não-controlado).
+  // Quando estadoProp está definido, fixado/aberto são irrelevantes para a exibição.
   const estadoEfetivo: EstadoMenu =
     estadoProp ?? (fixado ? 'fixo' : aberto ? 'aberto' : 'fechado');
 
