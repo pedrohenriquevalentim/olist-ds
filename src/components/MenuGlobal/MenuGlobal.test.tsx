@@ -189,6 +189,23 @@ describe('MenuGlobal', () => {
       expect(screen.getByRole('dialog', { name: 'Soluções Olist' })).toBeInTheDocument();
     });
 
+    it('marca 9dots como aria-current=page quando o flyout está aberto', async () => {
+      const user = userEvent.setup();
+      await renderComOverflow(300);
+      const btn = screen.getByRole('menuitem', { name: 'Soluções Olist' });
+      await user.click(btn);
+      expect(btn).toHaveAttribute('aria-current', 'page');
+    });
+
+    it('remove aria-current do 9dots quando o flyout é fechado', async () => {
+      const user = userEvent.setup();
+      await renderComOverflow(300);
+      const btn = screen.getByRole('menuitem', { name: 'Soluções Olist' });
+      await user.click(btn); // abre
+      await user.click(btn); // fecha
+      expect(btn).not.toHaveAttribute('aria-current');
+    });
+
     it('fecha flyout ao clicar novamente no botão 9dots', async () => {
       const user = userEvent.setup();
       await renderComOverflow(300);

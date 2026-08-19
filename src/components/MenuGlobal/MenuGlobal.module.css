@@ -449,11 +449,11 @@
   background: rgba(10, 78, 228, 0.08);
 }
 
-/* Rótulo textual abaixo do ícone — 14px conforme Figma */
+/* Rótulo textual abaixo do ícone — 14px Regular conforme Figma */
 .flyoutItemLabel {
   font-family: var(--font-family-base);
-  font-size: 0.875rem;  /* 14px — definido no Figma; não usa token de tooltip (12px) */
-  font-weight: var(--text-label-font-weight);
+  font-size: 0.875rem;           /* 14px */
+  font-weight: var(--font-weight-regular); /* 400 — Regular; label padrão do DS é sbold (600) */
   line-height: var(--text-label-line-height);
   color: var(--tooltip-font-color, #10100f);
   text-align: center;

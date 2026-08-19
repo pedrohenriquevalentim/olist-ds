@@ -219,13 +219,13 @@ export const MenuGlobal = ({
               type="button"
               role="menuitem"
               aria-label="Soluções Olist"
-              aria-current={isSolucoesSel ? 'page' : undefined}
+              aria-current={(flyoutOpen || isSolucoesSel) ? 'page' : undefined}
               aria-expanded={flyoutOpen}
               aria-haspopup="true"
               className={[
                 styles.menuItemBtn,
                 styles.iconBtn,
-                isSolucoesSel ? styles.itemSelected : '',
+                (flyoutOpen || isSolucoesSel) ? styles.itemSelected : '',
               ].filter(Boolean).join(' ')}
               onClick={() => setFlyoutOpen(v => !v)}
             >
