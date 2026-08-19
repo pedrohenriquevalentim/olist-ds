@@ -1,15 +1,15 @@
 # Componentes — API Completa
 
 **Auto-gerado por `npm run build`**
-**Última atualização:** 2026-08-18
-**Versão do pacote:** 1.0.66
+**Última atualização:** 2026-08-19
+**Versão do pacote:** 1.0.67
 **Versão da skill:** 3.15
 
 ---
 
 Este arquivo contém a API completa de todos os componentes do design system.
 
-## Componentes Disponíveis (11)
+## Componentes Disponíveis (12)
 
 ### Button
 
@@ -292,6 +292,48 @@ className?: string;
 
 ---
 
+### ItensMenuGlobal
+
+Sub-componente do MenuGlobal que renderiza a barra lateral de navegação hierárquica do ERP. Exibe o painel primário com os módulos de 1º nível (Vendas, Produtos, Suprimentos, Serviços, Finanças, Contatos, Relatórios) e um painel secundário com os sub-itens do módulo ativo, organizados em seções. Ativo somente quando o produto selecionado no MenuGlobal for 'Sistema ERP'.
+
+**Quando usar:**
+- Dentro do MenuGlobal, quando o produto ativo for 'Sistema ERP'
+- Como complemento à navegação global para expor a hierarquia de módulos ERP e seus sub-itens
+- Quando o usuário quer fixar o submenu de um módulo (toggle 'Fixar menu' → estado fixo, somente painel secundário visível)
+
+**Quando NÃO usar:**
+- Fora do MenuGlobal ou de forma isolada — é um sub-componente, não uma navegação autônoma
+- Quando o produto ativo não for 'Sistema ERP' — os demais produtos não têm este painel lateral
+- Em layouts mobile ou responsivos — projetado exclusivamente para desktop (min 1440px)
+
+**Combina com:** MenuGlobal, Icon, Toggle
+
+> **Nota:** No estado 'fixo', o painel primário é ocultado e o secundário ocupa 248px com ícone de seta (back) + nome do módulo no cabeçalho — permite voltar ao painel primário. O conteúdo dos grupos e sub-itens é hardcoded nesta versão inicial, espelhando os módulos reais do ERP Olist.
+
+**Props:**
+```typescript
+/** Módulo ERP ativo — define a seleção no painel primário e o conteúdo do painel secundário. */
+moduloAtivo?: ModuloERP;
+/** Estado do painel lateral. Quando não fornecido, o componente gerencia internamente. */
+estado?: EstadoMenu;
+/** Callback acionado ao clicar em um módulo de 1º nível. */
+onModuloSelect?: (modulo: ModuloERP) => void;
+/** Callback acionado ao alternar o toggle "Fixar menu". */
+onFixarToggle?: (fixado: boolean) => void;
+/** Callback acionado ao clicar no botão voltar no estado fixo. */
+onVoltar?: () => void;
+className?: string;
+```
+
+**Variantes:**
+```typescript
+type EstadoMenu = 'fechado' | 'aberto' | 'fixo'
+```
+
+**Caminho:** `src/components/ItensMenuGlobal/`
+
+---
+
 ### Logo
 
 Logotipo Olist em três variantes de tamanho/composição, usado para identificar a marca em telas e componentes de navegação.
@@ -353,6 +395,8 @@ companyLogoLabel?: string;
 notificacoesPendentes?: boolean;
 /** Callback disparado ao clicar em qualquer item de navegação. */
 onNavigate?: (destino: ProdutoSelecionado) => void;
+/** Zera o border-radius do lado direito quando há painel lateral adjacente (ex: ItensMenuGlobal). */
+panelAdjacenteAberto?: boolean;
 className?: string;
 ```
 

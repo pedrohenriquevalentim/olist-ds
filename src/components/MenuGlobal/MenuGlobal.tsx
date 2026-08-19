@@ -23,6 +23,13 @@ const TODOS_PRODUTOS: ProdutoOlist[] = [
   'Agentes de IA',
 ];
 
+// Constantes para cálculo de overflow — usadas pelo ResizeObserver
+const ITEM_H_PX = 44;
+const ITEM_GAP_PX = 8;
+const ITEM_STEP = ITEM_H_PX + ITEM_GAP_PX; // 52px por slot
+const LIST_PAD_PX = 8;
+const MIN_FOOTER_GAP_PX = 80;
+
 const LABEL_PRODUTO: Record<ProdutoOlist, string> = {
   'Sistema ERP': 'Sistema ERP',
   'Hub de Integração': 'Hub de Integração',
@@ -61,6 +68,8 @@ export interface MenuGlobalProps {
   notificacoesPendentes?: boolean;
   /** Callback disparado ao clicar em qualquer item de navegação. */
   onNavigate?: (destino: ProdutoSelecionado) => void;
+  /** Zera o border-radius do lado direito quando há painel lateral adjacente (ex: ItensMenuGlobal). */
+  panelAdjacenteAberto?: boolean;
   className?: string;
 }
 
@@ -73,6 +82,7 @@ export const MenuGlobal = ({
   companyLogoLabel,
   notificacoesPendentes = false,
   onNavigate,
+  panelAdjacenteAberto = false,
   className,
 }: MenuGlobalProps) => {
   // Estado interno: atualizado imediatamente no clique e sincronizado com a prop.
@@ -104,13 +114,59 @@ export const MenuGlobal = ({
 
   const hasCompanyLogo = Boolean(companyLogoUrl || companyLogoLabel);
 
+  // Overflow: ResizeObserver na lista de produtos para detectar quando o viewport encolhe
+  const productListRef = React.useRef<HTMLUListElement>(null);
+  const solucoesBtnLiRef = React.useRef<HTMLLIElement>(null);
+  const [listHeight, setListHeight] = React.useState(0);
+  const [flyoutOpen, setFlyoutOpen] = React.useState(false);
+  const [animatingSolucoes, setAnimatingSolucoes] = React.useState(false);
+
+  React.useEffect(() => {
+    const el = productListRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => setListHeight(el.clientHeight));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  React.useEffect(() => {
+    if (!flyoutOpen) return;
+    const onDown = (e: MouseEvent) => {
+      if (solucoesBtnLiRef.current && !solucoesBtnLiRef.current.contains(e.target as Node)) {
+        setFlyoutOpen(false);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setFlyoutOpen(false); };
+    document.addEventListener('mousedown', onDown);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onDown);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [flyoutOpen]);
+
+  // Quantos produtos cabem respeitando o gap mínimo de 80px antes do rodapé
+  const maxVisible = listHeight > 0
+    ? Math.max(1, Math.floor((listHeight - LIST_PAD_PX * 2 - MIN_FOOTER_GAP_PX + ITEM_GAP_PX) / ITEM_STEP))
+    : produtos.length;
+  const hasOverflow = maxVisible < produtos.length;
+  // Quando overflow: exibe maxVisible-1 produtos + 1 slot para o botão 9dots
+  const visibleCount = hasOverflow ? Math.max(1, maxVisible - 1) : produtos.length;
+  const visibleProdutos = produtos.slice(0, visibleCount);
+  const overflowProdutos = hasOverflow ? produtos.slice(visibleCount) : [];
+  const isSolucoesSel = overflowProdutos.some(p => isSel(p));
+
   // Ícones do rodapé: outline → fill em hover ou selecionado
   const bellIcon = (hovered === 'Notificacoes' || isSel('Notificacoes')) ? 'bell-fill' : 'bell';
   const helpIcon = (hovered === 'Central de Ajuda' || isSel('Central de Ajuda')) ? 'help-circle-fill' : 'help-circle';
 
   return (
     <nav
-      className={[styles.container, className].filter(Boolean).join(' ')}
+      className={[
+        styles.container,
+        panelAdjacenteAberto ? styles.containerComPanel : '',
+        className,
+      ].filter(Boolean).join(' ')}
       aria-label="Navegação global"
     >
       {/* Logo */}
@@ -121,8 +177,8 @@ export const MenuGlobal = ({
       <hr className={styles.divider} aria-hidden="true" />
 
       {/* Produtos */}
-      <ul className={styles.productList} role="menu" aria-label="Produtos">
-        {produtos.map((produto) => {
+      <ul className={styles.productList} role="menu" aria-label="Produtos" ref={productListRef}>
+        {visibleProdutos.map((produto) => {
           const sel = isSel(produto);
           const isHov = hovered === produto;
           return (
@@ -156,6 +212,76 @@ export const MenuGlobal = ({
             </li>
           );
         })}
+
+        {/* Botão 9dots: agrupa produtos que não cabem no viewport */}
+        {hasOverflow && (
+          <li role="none" className={styles.solucoesBtnLi} ref={solucoesBtnLiRef}>
+            <button
+              type="button"
+              role="menuitem"
+              aria-label="Soluções Olist"
+              aria-current={(flyoutOpen || isSolucoesSel) ? 'page' : undefined}
+              aria-expanded={flyoutOpen}
+              aria-haspopup="true"
+              className={[
+                styles.menuItemBtn,
+                styles.iconBtn,
+                (flyoutOpen || isSolucoesSel) ? styles.itemSelected : '',
+              ].filter(Boolean).join(' ')}
+              onClick={() => setFlyoutOpen(v => !v)}
+              onMouseEnter={() => { if (!(flyoutOpen || isSolucoesSel)) setAnimatingSolucoes(true); }}
+              onMouseLeave={() => {}}
+            >
+              <span
+                className={[
+                  styles.menuItemContent,
+                  animatingSolucoes ? styles.n0HighlightEnter : '',
+                ].filter(Boolean).join(' ')}
+                onAnimationEnd={() => setAnimatingSolucoes(false)}
+              >
+                <span className={animatingSolucoes ? styles.n0IconEnter : ''}>
+                  <Icon name="apps" size={16} color="currentColor" aria-hidden />
+                </span>
+              </span>
+              <span className={styles.tooltipContainer} aria-hidden="true">
+                <span className={styles.tooltipArrow} />
+                <span className={styles.tooltipLabel}>Soluções Olist</span>
+              </span>
+            </button>
+
+            {flyoutOpen && (
+              <div className={styles.flyout} role="dialog" aria-label="Soluções Olist">
+                <span className={styles.flyoutArrow} aria-hidden="true" />
+                <div className={styles.flyoutContent}>
+                  <div className={styles.flyoutGrid}>
+                    {overflowProdutos.map(p => (
+                      <button
+                        key={p}
+                        type="button"
+                        role="menuitem"
+                        aria-label={LABEL_PRODUTO[p]}
+                        aria-current={isSel(p) ? 'page' : undefined}
+                        className={[
+                          styles.flyoutItem,
+                          isSel(p) ? styles.flyoutItemSelected : '',
+                        ].filter(Boolean).join(' ')}
+                        onClick={() => { handle(p); setFlyoutOpen(false); }}
+                      >
+                        <ProdutosOlistIcons
+                          product={p}
+                          state={isSel(p) ? 'active' : 'default'}
+                          theme="light"
+                          aria-hidden
+                        />
+                        <span className={styles.flyoutItemLabel}>{LABEL_PRODUTO[p]}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </li>
+        )}
       </ul>
 
       <hr className={styles.divider} aria-hidden="true" />

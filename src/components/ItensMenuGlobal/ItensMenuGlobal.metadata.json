@@ -1,0 +1,50 @@
+{
+  "name": "ItensMenuGlobal",
+  "purpose": "Sub-componente do MenuGlobal que renderiza a barra lateral de navegação hierárquica do ERP. Exibe o painel primário com os módulos de 1º nível (Vendas, Produtos, Suprimentos, Serviços, Finanças, Contatos, Relatórios) e um painel secundário com os sub-itens do módulo ativo, organizados em seções. Ativo somente quando o produto selecionado no MenuGlobal for 'Sistema ERP'.",
+  "useWhen": [
+    "Dentro do MenuGlobal, quando o produto ativo for 'Sistema ERP'",
+    "Como complemento à navegação global para expor a hierarquia de módulos ERP e seus sub-itens",
+    "Quando o usuário quer fixar o submenu de um módulo (toggle 'Fixar menu' → estado fixo, somente painel secundário visível)"
+  ],
+  "doNotUseWhen": [
+    "Fora do MenuGlobal ou de forma isolada — é um sub-componente, não uma navegação autônoma",
+    "Quando o produto ativo não for 'Sistema ERP' — os demais produtos não têm este painel lateral",
+    "Em layouts mobile ou responsivos — projetado exclusivamente para desktop (min 1440px)"
+  ],
+  "pairsWith": ["MenuGlobal", "Icon", "Toggle"],
+  "note": "No estado 'fixo', o painel primário é ocultado e o secundário ocupa 248px com ícone de seta (back) + nome do módulo no cabeçalho — permite voltar ao painel primário. O conteúdo dos grupos e sub-itens é hardcoded nesta versão inicial, espelhando os módulos reais do ERP Olist.",
+  "variants": ["state=fechado", "state=aberto", "state=fixo"],
+  "states": ["fechado", "aberto", "fixo"],
+  "slots": [],
+  "tokens": {
+    "new": [
+      "--menu-section-divider-size-height",
+      "--menu-section-divider-color-default",
+      "--menu-section-divider-spacing-padding",
+      "--menu-section-divider-spacing-gap",
+      "--menu-section-divider-border-color-default",
+      "--menu-section-divider-font-color-default",
+      "--menu-section-divider-font-size-default",
+      "--menu-section-divider-line-height-default",
+      "--menu-section-divider-font-weight-default"
+    ],
+    "existing": [
+      "--menu-container-color-default", "--menu-container-border-color-default",
+      "--menu-container-size-width-expanded", "--menu-container-spacing-list-padding",
+      "--menu-container-spacing-action-area-padding", "--menu-container-spacing-gap-action-area",
+      "--menu-container-border-radius-expanded", "--menu-menu-item-color-enabled",
+      "--menu-menu-item-color-hover", "--menu-menu-item-color-selected",
+      "--menu-menu-item-spacing-gap", "--menu-menu-item-spacing-padding",
+      "--menu-menu-item-border-radius-default", "--menu-menu-item-font-color-enabled",
+      "--menu-menu-item-font-color-selected", "--menu-menu-item-font-size-default",
+      "--menu-menu-item-font-weight-default", "--menu-menu-item-line-height-default",
+      "--toggle-color-enabled", "--toggle-color-selected", "--toggle-border-color-enabled",
+      "--toggle-size-height", "--toggle-size-width", "--toggle-border-radius-pill"
+    ]
+  },
+  "figma": {
+    "fileKey": "HeyN4w209HWh8rfpTDiwyf",
+    "nodeId": "8799:10509",
+    "componentKey": ""
+  }
+}

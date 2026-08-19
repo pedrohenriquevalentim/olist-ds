@@ -10,5 +10,7 @@ export * from './components/InputPassword';
 export * from './components/InputSearch';
 export * from './components/InputSelect';
 export * from './components/InputText';
+export * from './components/ItensMenuGlobal';
 export * from './components/Logo';
+export * from './components/MenuGlobal';
 export * from './components/ProdutosOlistIcons';

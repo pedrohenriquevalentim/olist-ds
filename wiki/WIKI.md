@@ -2,7 +2,7 @@
 
 **Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.67`  
 **Skill:** v3.15  
-**Última atualização:** 2026-08-18  
+**Última atualização:** 2026-08-19  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -32,7 +32,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 
 | Métrica | Valor |
 |---|---|
-| Componentes | 12 |
+| Componentes | 13 |
 | Ícones SVG | 550 |
 | Arquivos da Skill | 22 |
 | Arquivos Figma permitidos | 1 |
@@ -41,7 +41,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 
 ## Componentes
 
-### Lista Completa (12)
+### Lista Completa (13)
 
 - `Button` — `src/components/Button/`
 - `Checkbox` — `src/components/Checkbox/`
@@ -51,6 +51,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 - `InputSearch` — `src/components/InputSearch/`
 - `InputSelect` — `src/components/InputSelect/`
 - `InputText` — `src/components/InputText/`
+- `ItensMenuGlobal` — `src/components/ItensMenuGlobal/`
 - `Logo` — `src/components/Logo/`
 - `MenuGlobal` — `src/components/MenuGlobal/`
 - `ProdutosOlistIcons` — `src/components/ProdutosOlistIcons/`
@@ -68,6 +69,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | InputSearch | ➖ Sem ícones |
 | InputSelect | ➖ Sem ícones |
 | InputText | ➖ Sem ícones |
+| ItensMenuGlobal | ➖ Sem ícones |
 | Logo | ➖ Sem ícones |
 | MenuGlobal | ➖ Sem ícones |
 | ProdutosOlistIcons | ➖ Sem ícones |
@@ -514,4 +516,4 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ---
 
-*Gerado automaticamente em 2026-08-18 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-08-19 por `generate-wiki.mjs`. Não edite manualmente.*
