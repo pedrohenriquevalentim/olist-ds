@@ -143,3 +143,36 @@ export const ListaPersonalizada: Story = {
     companyLogoUrl: 'https://www.nike.com.br/images/meta/open-graph-main-image.jpg',
   },
 };
+
+export const NoveDots: Story = {
+  name: '9dots — viewport reduzido (overflow)',
+  decorators: [
+    (Story) => (
+      <div style={{ height: '460px', display: 'flex' }}>
+        <Story />
+      </div>
+    ),
+  ],
+  args: {
+    produtoSelecionado: 'Sistema ERP',
+    avatarLabel: 'PN',
+    companyLogoUrl: 'https://www.nike.com.br/images/meta/open-graph-main-image.jpg',
+    notificacoesPendentes: true,
+  },
+};
+
+export const NoveDotsComProdutoSelecionadoNoOverflow: Story = {
+  name: '9dots — produto selecionado está no overflow',
+  decorators: [
+    (Story) => (
+      <div style={{ height: '460px', display: 'flex' }}>
+        <Story />
+      </div>
+    ),
+  ],
+  args: {
+    produtoSelecionado: 'Agentes de IA',
+    avatarLabel: 'PN',
+    companyLogoUrl: 'https://www.nike.com.br/images/meta/open-graph-main-image.jpg',
+  },
+};

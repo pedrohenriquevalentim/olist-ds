@@ -350,3 +350,112 @@
 .menuItemBtn:hover:not([aria-current]) .tooltipContainer {
   opacity: 1;
 }
+
+/* ── Botão 9dots — Soluções Olist ───────────────────────────────────────────── */
+/*
+  O <li> é o contexto de posicionamento para o flyout (position:relative).
+  Posicionado com left:calc(100%+0.625rem) para alinhar a ponta da seta
+  com a borda direita do menu (ver comentário no .flyout).
+*/
+
+.solucoesBtnLi {
+  position: relative;
+}
+
+/* ── Flyout — painel com produtos agrupados ──────────────────────────────────── */
+/*
+  Posicionado a partir do <li> (position:relative).
+  left = 100% (36px, largura do li) + 0.625rem (10px, margem interna do menu até a borda direita)
+  → a ponta da seta fica exatamente na borda direita do container.
+  Flex row: [arrow] [content].
+  drop-shadow via filter para aplicar sombra ao shape completo incluindo a seta.
+*/
+
+.flyout {
+  position: absolute;
+  left: calc(100% + 0.625rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  z-index: 200;
+  filter:
+    drop-shadow(
+      var(--shadow-distance-x)
+      var(--shadow-distance-contact)
+      calc(var(--shadow-blur-contact) / 2)
+      var(--shadow-color-contact)
+    )
+    drop-shadow(
+      var(--shadow-distance-x)
+      var(--shadow-distance-level-2)
+      calc(var(--shadow-blur-level-2) / 2)
+      var(--shadow-color-level-2)
+    );
+}
+
+/* Seta CSS ◁ apontando para a esquerda (10px wide × 16px tall) */
+.flyoutArrow {
+  width: 0;
+  height: 0;
+  border-top: 0.5rem solid transparent;    /* 8px */
+  border-bottom: 0.5rem solid transparent;  /* 8px */
+  border-right: 0.625rem solid var(--menu-container-color-default, #fcfbf8); /* 10px */
+  flex-shrink: 0;
+}
+
+/* Caixa do flyout: fundo claro, borda, sombra e border-radius */
+.flyoutContent {
+  background: var(--menu-container-color-default, #fcfbf8);
+  border: 0.3125rem solid var(--menu-container-border-color-default, #f2f0e8); /* 5px */
+  border-radius: 1rem; /* 16px */
+  padding: 1rem 1rem 1.5rem; /* pt:16px px:16px pb:24px */
+  width: 17.5rem; /* 280px */
+}
+
+/* Grid 3 colunas com gaps definidos no Figma */
+.flyoutGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 1rem;  /* 16px */
+  row-gap: 0.5rem;   /* 8px */
+}
+
+/* Cada célula do grid: ícone empilhado com label */
+.flyoutItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 100%;
+  border-radius: 0.5rem;
+  transition: background 0.15s ease;
+}
+
+.flyoutItem:hover {
+  background: rgba(10, 16, 15, 0.06);
+}
+
+.flyoutItem:focus-visible {
+  outline: var(--focus-border-width-default) solid var(--focus-border-color-default);
+  outline-offset: 0.125rem;
+}
+
+/* Item selecionado no flyout: fundo sutil de destaque */
+.flyoutItemSelected {
+  background: rgba(10, 78, 228, 0.08);
+}
+
+/* Rótulo textual abaixo do ícone — 14px conforme Figma */
+.flyoutItemLabel {
+  font-family: var(--font-family-base);
+  font-size: 0.875rem;  /* 14px — definido no Figma; não usa token de tooltip (12px) */
+  font-weight: var(--text-label-font-weight);
+  line-height: var(--text-label-line-height);
+  color: var(--tooltip-font-color, #10100f);
+  text-align: center;
+  width: 100%;
+}

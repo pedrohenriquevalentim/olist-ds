@@ -1,9 +1,20 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { MenuGlobal } from './MenuGlobal';
 import type { ProdutoOlist } from '../ProdutosOlistIcons';
+
+// ResizeObserver não existe em jsdom — mock que captura o callback para disparo manual
+let resizeCallback: (() => void) | null = null;
+vi.stubGlobal('ResizeObserver', class {
+  constructor(cb: () => void) { resizeCallback = cb; }
+  observe = vi.fn();
+  disconnect = vi.fn();
+  unobserve = vi.fn();
+});
+
+beforeEach(() => { resizeCallback = null; });
 
 describe('MenuGlobal', () => {
   it('renderiza todos os 8 produtos por padrão', () => {
@@ -129,5 +140,86 @@ describe('MenuGlobal', () => {
     // Apenas o círculo do usuário deve estar presente (sem .avatarProfile)
     expect(avatarBtn.querySelectorAll('img')).toHaveLength(0);
     expect(screen.getByText('PN')).toBeInTheDocument();
+  });
+
+  describe('9dots — overflow de produtos', () => {
+    const renderComOverflow = async (alturaPixels: number, extra?: Parameters<typeof MenuGlobal>[0]) => {
+      // Mock clientHeight ANTES do render para que o ResizeObserver já leia o valor correto
+      Object.defineProperty(HTMLElement.prototype, 'clientHeight', {
+        configurable: true,
+        get() {
+          return this.getAttribute('aria-label') === 'Produtos' ? alturaPixels : 0;
+        },
+      });
+      const result = render(<MenuGlobal {...extra} />);
+      // Dispara o callback do ResizeObserver capturado pelo mock
+      await act(async () => { resizeCallback?.(); });
+      return result;
+    };
+
+    it('não exibe botão 9dots quando listHeight=0 (estado inicial)', () => {
+      render(<MenuGlobal />);
+      expect(screen.queryByRole('menuitem', { name: 'Soluções Olist' })).not.toBeInTheDocument();
+    });
+
+    it('exibe botão 9dots quando a altura não comporta todos os produtos', async () => {
+      // 300px → maxVisible = floor((300-16-80+8)/52) = floor(212/52) = 4
+      // hasOverflow=true (8 produtos > 4), exibe 3 produtos + 1 slot 9dots
+      await renderComOverflow(300);
+      expect(screen.getByRole('menuitem', { name: 'Soluções Olist' })).toBeInTheDocument();
+    });
+
+    it('não exibe botão 9dots quando a altura comporta todos os produtos', async () => {
+      // 700px → maxVisible = floor((700-16-80+8)/52) = floor(612/52) = 11 ≥ 8 produtos
+      await renderComOverflow(700);
+      expect(screen.queryByRole('menuitem', { name: 'Soluções Olist' })).not.toBeInTheDocument();
+    });
+
+    it('oculta produtos do overflow da lista principal', async () => {
+      // 300px → visibleCount=3, produto índice 3 (Conta Digital) deve sumir da lista
+      await renderComOverflow(300);
+      expect(screen.queryByRole('menuitem', { name: 'Conta Digital' })).not.toBeInTheDocument();
+    });
+
+    it('abre flyout ao clicar no botão 9dots e exibe produtos do overflow', async () => {
+      const user = userEvent.setup();
+      await renderComOverflow(300);
+      await user.click(screen.getByRole('menuitem', { name: 'Soluções Olist' }));
+      // Produtos do overflow devem aparecer no flyout
+      expect(screen.getByRole('dialog', { name: 'Soluções Olist' })).toBeInTheDocument();
+    });
+
+    it('fecha flyout ao clicar novamente no botão 9dots', async () => {
+      const user = userEvent.setup();
+      await renderComOverflow(300);
+      const btn = screen.getByRole('menuitem', { name: 'Soluções Olist' });
+      await user.click(btn);
+      await user.click(btn);
+      expect(screen.queryByRole('dialog', { name: 'Soluções Olist' })).not.toBeInTheDocument();
+    });
+
+    it('fecha flyout ao pressionar Escape', async () => {
+      const user = userEvent.setup();
+      await renderComOverflow(300);
+      await user.click(screen.getByRole('menuitem', { name: 'Soluções Olist' }));
+      await user.keyboard('{Escape}');
+      expect(screen.queryByRole('dialog', { name: 'Soluções Olist' })).not.toBeInTheDocument();
+    });
+
+    it('marca 9dots como aria-current=page quando produto do overflow está ativo', async () => {
+      // Conta Digital (índice 3) fica no overflow com 300px; se está selecionado, 9dots tem aria-current
+      await renderComOverflow(300, { produtoSelecionado: 'Conta Digital' });
+      expect(screen.getByRole('menuitem', { name: 'Soluções Olist' })).toHaveAttribute('aria-current', 'page');
+    });
+
+    it('chama onNavigate ao clicar em produto no flyout', async () => {
+      const onNavigate = vi.fn();
+      const user = userEvent.setup();
+      await renderComOverflow(300, { onNavigate });
+      await user.click(screen.getByRole('menuitem', { name: 'Soluções Olist' }));
+      // Clica no primeiro produto do overflow (Conta Digital, índice 3)
+      await user.click(screen.getByRole('menuitem', { name: 'Conta Digital' }));
+      expect(onNavigate).toHaveBeenCalledWith('Conta Digital');
+    });
   });
 });

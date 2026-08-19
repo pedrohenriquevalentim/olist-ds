@@ -215,7 +215,7 @@ export const ItensMenuGlobal = ({
 }: ItensMenuGlobalProps) => {
   const [moduloSelecionado, setModuloSelecionado] = React.useState<ModuloERP>(moduloAtivoProp);
   const [fixado, setFixado] = React.useState(false);
-  const [aberto, setAberto] = React.useState(false);
+  const [aberto, setAberto] = React.useState(true);
 
   // Sincroniza moduloAtivo prop sem useEffect
   const prevModuloProp = React.useRef(moduloAtivoProp);
@@ -251,7 +251,7 @@ export const ItensMenuGlobal = ({
 
   const handleVoltar = () => {
     setFixado(false);
-    setAberto(false);
+    setAberto(true);
     onVoltar?.();
   };
 
@@ -262,7 +262,11 @@ export const ItensMenuGlobal = ({
 
   return (
     <div
-      className={[styles.container, className].filter(Boolean).join(' ')}
+      className={[
+        styles.container,
+        estadoEfetivo !== 'fixo' ? styles.containerFlyout : '',
+        className,
+      ].filter(Boolean).join(' ')}
       data-testid="itens-menu-global"
     >
       {/*

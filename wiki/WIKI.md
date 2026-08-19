@@ -2,7 +2,7 @@
 
 **Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.67`  
 **Skill:** v3.15  
-**Última atualização:** 2026-08-18  
+**Última atualização:** 2026-08-19  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -516,4 +516,4 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ---
 
-*Gerado automaticamente em 2026-08-18 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-08-19 por `generate-wiki.mjs`. Não edite manualmente.*

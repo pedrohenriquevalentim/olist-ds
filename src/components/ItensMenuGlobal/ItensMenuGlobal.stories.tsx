@@ -24,7 +24,7 @@ const meta: Meta<typeof ItensMenuGlobal> = {
   },
   decorators: [
     (Story) => (
-      <div style={{ height: '100vh', display: 'flex', alignItems: 'stretch' }}>
+      <div style={{ height: '100vh', display: 'flex', alignItems: 'stretch', position: 'relative' }}>
         <Story />
       </div>
     ),
@@ -53,6 +53,13 @@ type Story = StoryObj<typeof ItensMenuGlobal>;
 
 export const Interativo: Story = {
   name: 'Interativo — estado gerenciado pelo componente',
+  decorators: [
+    (Story) => (
+      <div style={{ height: '100vh', position: 'relative', background: '#f5f3ed' }}>
+        <Story />
+      </div>
+    ),
+  ],
   args: {
     moduloAtivo: 'Vendas',
   },
@@ -60,7 +67,7 @@ export const Interativo: Story = {
     docs: {
       description: {
         story:
-          'Clique em um módulo para abrir o painel secundário; use o toggle "Fixar menu" para entrar no estado fixo.',
+          'Modo flyout: primário e secundário abrem simultaneamente sobre a página. Use o toggle "Fixar menu" para entrar no estado fixo (encaixado no layout).',
       },
     },
   },
@@ -78,7 +85,15 @@ export const ComMenuGlobal: Story = {
         companyLogoUrl="https://www.nike.com.br/images/meta/open-graph-main-image.jpg"
         panelAdjacenteAberto
       />
-      <ItensMenuGlobal moduloAtivo="Vendas" />
+      {/*
+        Wrapper de ancoragem: position:relative para o flyout se posicionar aqui (left:0).
+        Em flyout (position:absolute), tem largura 0 e não empurra o conteúdo.
+        Em fixo (flow normal), cresce para 248px, empurrando o conteúdo para a direita.
+      */}
+      <div style={{ position: 'relative', height: '100%', display: 'flex', flexShrink: 0 }}>
+        <ItensMenuGlobal moduloAtivo="Vendas" />
+      </div>
+      <div style={{ flex: 1, background: '#f5f3ed' }} />
     </div>
   ),
   parameters: {

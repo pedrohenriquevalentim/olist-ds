@@ -7,13 +7,14 @@ import { ItensMenuGlobal } from './ItensMenuGlobal';
 describe('ItensMenuGlobal', () => {
   // ── Renderização básica ──────────────────────────────────────────────────────
 
-  it('renderiza o painel primário por padrão (estado fechado)', () => {
+  it('renderiza primário e secundário por padrão (modo flyout — estado aberto)', () => {
     render(<ItensMenuGlobal />);
     expect(screen.getByRole('navigation', { name: 'Módulos do ERP' })).toBeInTheDocument();
+    expect(screen.getByRole('navigation', { name: 'Submenu Vendas' })).toBeInTheDocument();
   });
 
-  it('não exibe o painel secundário no estado fechado', () => {
-    render(<ItensMenuGlobal />);
+  it('não exibe o painel secundário no estado fechado (controlado)', () => {
+    render(<ItensMenuGlobal estado="fechado" />);
     expect(screen.queryByRole('navigation', { name: /Submenu/i })).not.toBeInTheDocument();
   });
 
@@ -118,13 +119,12 @@ describe('ItensMenuGlobal', () => {
     expect(onVoltar).toHaveBeenCalledTimes(1);
   });
 
-  it('estado fixo: ao clicar em voltar, restaura o painel primário', async () => {
+  it('estado fixo: ao clicar em voltar, retorna ao modo flyout (ambos painéis visíveis)', async () => {
     render(<ItensMenuGlobal />);
-    await userEvent.click(screen.getByRole('menuitem', { name: 'Vendas' }));
     await userEvent.click(screen.getByRole('switch', { name: 'Fixar menu' }));
     await userEvent.click(screen.getByRole('button', { name: 'Voltar ao menu principal' }));
     expect(screen.getByRole('navigation', { name: 'Módulos do ERP' })).toBeInTheDocument();
-    expect(screen.queryByRole('navigation', { name: 'Submenu Vendas' })).not.toBeInTheDocument();
+    expect(screen.getByRole('navigation', { name: 'Submenu Vendas' })).toBeInTheDocument();
   });
 
   // ── Estado controlado via prop ───────────────────────────────────────────────

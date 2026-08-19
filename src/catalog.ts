@@ -9,7 +9,9 @@ export const componentNames = [
   "InputSearch",
   "InputSelect",
   "InputText",
+  "ItensMenuGlobal",
   "Logo",
+  "MenuGlobal",
   "ProdutosOlistIcons"
 ] as const;
 
