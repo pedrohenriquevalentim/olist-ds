@@ -1,0 +1,44 @@
+{
+  "name": "Toggle",
+  "purpose": "Controle de alternância binária (ligado/desligado) para ativar ou desativar uma configuração de forma imediata, sem necessidade de confirmação.",
+  "useWhen": [
+    "Ativar/desativar uma configuração que tem efeito imediato (ex: notificações, modo escuro, visibilidade de um painel)",
+    "O estado é claramente binário e o usuário entende que a ação é instantânea"
+  ],
+  "doNotUseWhen": [
+    "A ação requer confirmação ou tem consequências destrutivas — use Checkbox em formulário com botão de submit",
+    "Há mais de 2 opções — use Radio ou Select",
+    "O item faz parte de uma lista de seleção múltipla — use Checkbox"
+  ],
+  "pairsWith": ["Checkbox", "InputText", "Button"],
+  "note": "O estado 'selected' deve ser controlado externamente (componente controlado). A prop disabled bloqueia pointer-events no CSS, então não dispara onToggle.",
+  "variants": ["default", "selected", "disabled", "disabled-selected"],
+  "states": ["default", "hover", "pressed", "focus", "selected", "disabled"],
+  "slots": [],
+  "tokens": {
+    "new": [
+      "--toggle-track-bg",
+      "--toggle-track-bg-disabled",
+      "--toggle-overlay-hover",
+      "--toggle-overlay-pressed",
+      "--toggle-border",
+      "--toggle-border-hover",
+      "--toggle-border-pressed",
+      "--toggle-border-disabled",
+      "--toggle-dot-bg",
+      "--toggle-selected-bg",
+      "--toggle-selected-overlay-hover",
+      "--toggle-selected-overlay-pressed",
+      "--toggle-focus-color",
+      "--toggle-focus-width",
+      "--toggle-size-w",
+      "--toggle-size-h"
+    ],
+    "existing": []
+  },
+  "figma": {
+    "fileKey": "",
+    "nodeId": "",
+    "componentKey": ""
+  }
+}

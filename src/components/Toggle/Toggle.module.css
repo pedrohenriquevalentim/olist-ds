@@ -216,4 +216,13 @@
   border-radius: 9999px;
   border: var(--toggle-focus-width, 0.125rem) solid var(--toggle-focus-color, #0a4ee4);
   pointer-events: none;
+  opacity: 0;
+}
+
+.toggle:focus-visible .focusRing {
+  opacity: 1;
+}
+
+.toggle:focus {
+  outline: none;
 }

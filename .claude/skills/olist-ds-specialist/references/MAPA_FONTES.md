@@ -105,7 +105,12 @@ src/
 │   │       ├── ProdutosOlistIcons.tsx
 │   │       └── index.ts
 │   └── Toggle/
-│           └── Toggle.module.css
+│           ├── Toggle.metadata.json
+│           ├── Toggle.module.css
+│           ├── Toggle.stories.tsx
+│           ├── Toggle.test.tsx
+│           ├── Toggle.tsx
+│           └── index.ts
 ├── assets/
 │   └── icons/
 └── index.ts
@@ -127,4 +132,4 @@ src/
 - **Logo:** `src/components/Logo/Logo.tsx`
 - **MenuGlobal:** `src/components/MenuGlobal/MenuGlobal.tsx`
 - **ProdutosOlistIcons:** `src/components/ProdutosOlistIcons/ProdutosOlistIcons.tsx`
-- **Toggle:** `src/components/Toggle/index.tsx`
+- **Toggle:** `src/components/Toggle/Toggle.tsx`

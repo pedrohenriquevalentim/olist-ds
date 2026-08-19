@@ -2,14 +2,14 @@
 
 **Auto-gerado por `npm run build`**
 **Última atualização:** 2026-08-19
-**Versão do pacote:** 1.0.67
+**Versão do pacote:** 1.0.68
 **Versão da skill:** 3.15
 
 ---
 
 Este arquivo contém a API completa de todos os componentes do design system.
 
-## Componentes Disponíveis (12)
+## Componentes Disponíveis (13)
 
 ### Button
 
@@ -432,6 +432,35 @@ className?: string;
 ```
 
 **Caminho:** `src/components/ProdutosOlistIcons/`
+
+---
+
+### Toggle
+
+Controle de alternância binária (ligado/desligado) para ativar ou desativar uma configuração de forma imediata, sem necessidade de confirmação.
+
+**Quando usar:**
+- Ativar/desativar uma configuração que tem efeito imediato (ex: notificações, modo escuro, visibilidade de um painel)
+- O estado é claramente binário e o usuário entende que a ação é instantânea
+
+**Quando NÃO usar:**
+- A ação requer confirmação ou tem consequências destrutivas — use Checkbox em formulário com botão de submit
+- Há mais de 2 opções — use Radio ou Select
+- O item faz parte de uma lista de seleção múltipla — use Checkbox
+
+**Combina com:** Checkbox, InputText, Button
+
+> **Nota:** O estado 'selected' deve ser controlado externamente (componente controlado). A prop disabled bloqueia pointer-events no CSS, então não dispara onToggle.
+
+**Props:**
+```typescript
+/** Estado ligado/desligado (controlado externamente). */
+selected?: boolean;
+/** Callback disparado ao clicar. Recebe o próximo estado. */
+onToggle?: (nextSelected: boolean) => void;
+```
+
+**Caminho:** `src/components/Toggle/`
 
 ---
 

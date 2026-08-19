@@ -12,7 +12,8 @@ export const componentNames = [
   "ItensMenuGlobal",
   "Logo",
   "MenuGlobal",
-  "ProdutosOlistIcons"
+  "ProdutosOlistIcons",
+  "Toggle"
 ] as const;
 
 export type ComponentName = typeof componentNames[number];

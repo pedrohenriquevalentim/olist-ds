@@ -14,3 +14,4 @@ export * from './components/ItensMenuGlobal';
 export * from './components/Logo';
 export * from './components/MenuGlobal';
 export * from './components/ProdutosOlistIcons';
+export * from './components/Toggle';
