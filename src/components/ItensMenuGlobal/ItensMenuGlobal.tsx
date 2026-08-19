@@ -217,17 +217,17 @@ export const ItensMenuGlobal = ({
   const [fixado, setFixado] = React.useState(false);
   const [aberto, setAberto] = React.useState(true);
 
-  // Sincroniza moduloAtivo prop sem useEffect
-  const prevModuloProp = React.useRef(moduloAtivoProp);
-  if (prevModuloProp.current !== moduloAtivoProp) {
-    prevModuloProp.current = moduloAtivoProp;
+  // Derived state during render — evita useEffect+setState (react-hooks/set-state-in-effect)
+  // e useRef durante render (react-hooks/refs). Padrão recomendado pelo React docs.
+  const [prevModuloProp, setPrevModuloProp] = React.useState<ModuloERP>(moduloAtivoProp);
+  if (prevModuloProp !== moduloAtivoProp) {
+    setPrevModuloProp(moduloAtivoProp);
     setModuloSelecionado(moduloAtivoProp);
   }
 
-  // Sincroniza estado prop sem useEffect
-  const prevEstadoProp = React.useRef(estadoProp);
-  if (prevEstadoProp.current !== estadoProp && estadoProp !== undefined) {
-    prevEstadoProp.current = estadoProp;
+  const [prevEstadoProp, setPrevEstadoProp] = React.useState(estadoProp);
+  if (prevEstadoProp !== estadoProp && estadoProp !== undefined) {
+    setPrevEstadoProp(estadoProp);
     if (estadoProp === 'fixo')    { setFixado(true);  setAberto(true); }
     if (estadoProp === 'aberto')  { setFixado(false); setAberto(true); }
     if (estadoProp === 'fechado') { setFixado(false); setAberto(false); }
