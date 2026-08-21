@@ -18,22 +18,6 @@ function Divider() {
   return <div style={{ height: 1, background: '#f2f0e8', margin: '32px 0' }} />;
 }
 
-function PropRow({ name, value, description }: { name: string; value: string; description?: string }) {
-  return (
-    <tr style={{ borderBottom: '1px solid #f2f0e8' }}>
-      <td style={{ padding: '8px 12px', verticalAlign: 'top' }}>
-        <code style={{ fontSize: 11, color: '#403f3b', background: '#f2f0e8', padding: '2px 5px', borderRadius: 4 }}>{name}</code>
-      </td>
-      <td style={{ padding: '8px 12px', verticalAlign: 'top' }}>
-        <code style={{ fontSize: 11, color: '#615f56' }}>{value}</code>
-      </td>
-      {description !== undefined && (
-        <td style={{ padding: '8px 12px', color: '#827f73', fontSize: 12, verticalAlign: 'top', lineHeight: 1.4 }}>{description}</td>
-      )}
-    </tr>
-  );
-}
-
 // ─── Story: Papéis de texto ─────────────────────────────────────────────────
 
 export const TextRoles: StoryObj = {
