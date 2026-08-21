@@ -29,7 +29,11 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "npm run clean && node scripts/build.mjs",
+    "build:sd": "rm -rf dist-sd && node style-dictionary/config.mjs",
     "prepublishOnly": "npm run build"
   },
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "style-dictionary": "^5.4.0"
+  }
 }
