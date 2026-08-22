@@ -1,0 +1,46 @@
+{
+  "name": "ButtonIcon",
+  "purpose": "Botão de ação com apenas ícone, sem label. Variante compacta do Button para ações cujo ícone é suficientemente reconhecível no contexto.",
+  "useWhen": [
+    "A ação é universalmente reconhecível pelo ícone (fechar, editar, deletar, expandir)",
+    "Espaço horizontal é limitado e o label seria redundante",
+    "Dentro de toolbars, cards de lista, cabeçalhos de seção ou menus de contexto"
+  ],
+  "doNotUseWhen": [
+    "A ação precisa de texto para ser compreendida — use Button com label",
+    "É a ação principal da tela — prefira Button primary com label visível",
+    "Há mais de 3 ButtonIcon consecutivos sem agrupamento visual claro — use um menu de ações"
+  ],
+  "pairsWith": ["Button", "InputSearch", "Card", "Tooltip"],
+  "note": "Sempre forneça aria-label descritivo — o ícone não é acessível por si só. O componente é 48×48px (área de toque), mas o círculo visual é menor; não reduza o elemento para caber em áreas menores.",
+  "variants": ["primary", "secondary", "tertiary"],
+  "states": ["enabled", "hover", "pressed", "disabled"],
+  "slots": ["icon"],
+  "tokens": {
+    "new": [],
+    "existing": [
+      "--button-color-primary-enabled",
+      "--button-color-primary-hover",
+      "--button-color-primary-pressed",
+      "--button-color-primary-disabled",
+      "--button-color-secondary-enabled",
+      "--button-color-secondary-hover",
+      "--button-color-secondary-pressed",
+      "--button-color-secondary-disabled",
+      "--button-color-tertiary-enabled",
+      "--button-color-tertiary-hover",
+      "--button-color-tertiary-pressed",
+      "--button-color-tertiary-disabled",
+      "--button-font-font-color-primary-enabled",
+      "--button-font-font-color-secondary-enabled",
+      "--button-font-font-color-tertiary-enabled",
+      "--button-border-radius-pill",
+      "--button-size-height"
+    ]
+  },
+  "figma": {
+    "fileKey": "HeyN4w209HWh8rfpTDiwyf",
+    "nodeId": "4926:426",
+    "componentKey": "0a4fdb6997f71ed5c9ed5c9993d682090d55597e"
+  }
+}

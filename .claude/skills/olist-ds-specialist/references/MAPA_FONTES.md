@@ -1,7 +1,7 @@
 # Mapa de Fontes — Estrutura do Repositório
 
 **Auto-gerado por `npm run build`**  
-**Última atualização:** 2026-08-19  
+**Última atualização:** 2026-08-22  
 **Versão da skill:** 3.15
 
 ---
@@ -18,6 +18,20 @@ src/
 │   │       ├── Button.stories.tsx
 │   │       ├── Button.test.tsx
 │   │       ├── Button.tsx
+│   │       └── index.ts
+│   ├── ButtonIcon/
+│   │       ├── ButtonIcon.metadata.json
+│   │       ├── ButtonIcon.module.css
+│   │       ├── ButtonIcon.stories.tsx
+│   │       ├── ButtonIcon.test.tsx
+│   │       ├── ButtonIcon.tsx
+│   │       └── index.ts
+│   ├── Card/
+│   │       ├── Card.metadata.json
+│   │       ├── Card.module.css
+│   │       ├── Card.stories.tsx
+│   │       ├── Card.test.tsx
+│   │       ├── Card.tsx
 │   │       └── index.ts
 │   ├── Checkbox/
 │   │       ├── Checkbox.mdx
@@ -116,6 +130,8 @@ src/
 ## Componentes por Caminho
 
 - **Button:** `src/components/Button/Button.tsx`
+- **ButtonIcon:** `src/components/ButtonIcon/ButtonIcon.tsx`
+- **Card:** `src/components/Card/Card.tsx`
 - **Checkbox:** `src/components/Checkbox/Checkbox.tsx`
 - **Chip:** `src/components/Chip/Chip.tsx`
 - **Icon:** `src/components/Icon/index.tsx`

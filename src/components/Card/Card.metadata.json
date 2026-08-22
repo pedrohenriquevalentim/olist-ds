@@ -1,0 +1,52 @@
+{
+  "name": "Card",
+  "purpose": "Contêiner visual de conteúdo agrupado — apresenta informações relacionadas (mídia, título, texto, ações) em superfície elevada com cantos arredondados grandes.",
+  "useWhen": [
+    "Exibir um item de conteúdo como unidade visual coesa: produto, artigo, plano, notificação",
+    "Agrupar mídia + título + texto + ações em contexto de listagem ou grid",
+    "Fornecer um contêiner genérico com layout controlado para conteúdo personalizado (variant 'slot')"
+  ],
+  "doNotUseWhen": [
+    "Destacar métricas ou KPIs isolados — usar Dashboard ou stat tile específico",
+    "Exibir linhas de tabela — usar Table com Table Column",
+    "Layout de largura total sem superfície elevada — usar seção/container plano"
+  ],
+  "pairsWith": ["Button", "Tag", "Badge", "Avatar"],
+  "note": "A variant 'slot' substitui toda a área de conteúdo por children livre; a mídia no topo continua disponível. Não existe 'Summary Card' separado — apenas este Card genérico (gap confirmado em 2026-07-02 via harnessCoverageCheck).",
+  "variants": ["simple", "slot"],
+  "states": [],
+  "slots": ["children", "media"],
+  "tokens": {
+    "new": [
+      "--card-color-default",
+      "--card-border-radius-default",
+      "--card-spacing-padding",
+      "--card-spacing-gap",
+      "--card-spacing-title-gap",
+      "--card-spacing-action-gap",
+      "--card-size-min-width"
+    ],
+    "existing": [
+      "--text-heading-color",
+      "--text-heading-font-weight",
+      "--text-heading-h3-font-size",
+      "--text-heading-h3-line-height",
+      "--text-heading-h5-font-size",
+      "--text-heading-h5-line-height",
+      "--text-paragraph-color",
+      "--text-paragraph-font-size",
+      "--text-paragraph-line-height",
+      "--text-paragraph-font-weight",
+      "--text-caption-color",
+      "--text-caption-font-size",
+      "--text-caption-line-height",
+      "--text-caption-font-weight",
+      "--text-font-family-default"
+    ]
+  },
+  "figma": {
+    "fileKey": "HeyN4w209HWh8rfpTDiwyf",
+    "nodeId": "8587:133",
+    "componentKey": "6c5bbef10eaba4951d287ce61bd29ec4de5683dc"
+  }
+}

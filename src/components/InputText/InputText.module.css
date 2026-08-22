@@ -67,6 +67,7 @@
    ============================ */
 
 .inputBase {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   gap: var(--input-base-spacing-gap);
@@ -75,9 +76,10 @@
   border-radius: var(--input-base-border-radius-default);
   border: var(--input-base-border-width-enabled) solid var(--input-base-border-color-enabled);
   background-color: var(--input-base-color-enabled);
+  box-shadow: none;
   transition:
     border-color 0.15s ease,
-    border-width 0.1s ease,
+    box-shadow 0.15s ease,
     background-color 0.15s ease;
 }
 
@@ -87,14 +89,14 @@
 }
 
 .inputBase:active:not(:has(input:disabled)) {
-  border-width: var(--input-base-border-width-pressed);
   border-color: var(--input-base-border-color-pressed);
+  box-shadow: inset 0 0 0 1px var(--input-base-border-color-pressed);
   background-color: var(--input-base-color-pressed);
 }
 
 .inputBase:focus-within:not(:has(input:disabled)) {
-  border-width: var(--input-base-border-width-focused);
   border-color: var(--input-base-border-color-focused);
+  box-shadow: inset 0 0 0 1px var(--input-base-border-color-focused);
   background-color: var(--input-base-color-focused);
 }
 
@@ -106,21 +108,20 @@
 
 /* Success */
 .wrapper[data-state='success'] .inputBase {
-  border-width: var(--input-base-border-width-success);
   border-color: var(--input-base-border-color-success);
+  box-shadow: inset 0 0 0 1px var(--input-base-border-color-success);
   background-color: var(--input-base-color-success);
 }
 
 /* Error */
 .wrapper[data-state='error'] .inputBase {
-  border-width: var(--input-base-border-width-error);
   border-color: var(--input-base-border-color-error);
+  box-shadow: inset 0 0 0 1px var(--input-base-border-color-error);
   background-color: var(--input-base-color-error);
 }
 
 /* Disabled */
 .inputBase:has(input:disabled) {
-  border-width: var(--input-base-border-width-disabled);
   border-color: var(--input-base-border-color-disabled);
   background-color: var(--input-base-color-disabled);
 }

@@ -5,7 +5,7 @@ import * as InputSearchStories from './InputSearch.stories';
 
 # InputSearch
 
-Campo de busca com borda pill. Duas variantes de ação: botão com texto (`button`) ou apenas ícone (`button icon`).
+Campo de busca com borda pill e botão ícone de ação.
 
 ## Import
 
@@ -19,20 +19,11 @@ import { InputSearch } from '@pedrohenriquevalentim/olist-ds';
 const [value, setValue] = useState('');
 
 <InputSearch
-  action="button"
   label="Pesquisar pedido"
   placeholder="Digite o número do pedido"
   value={value}
   onChange={setValue}
   onSearch={() => console.log('buscar:', value)}
-/>
-
-{/* Variante compacta com ícone */}
-<InputSearch
-  action="button icon"
-  placeholder="Buscar"
-  value={value}
-  onChange={setValue}
 />
 ```
 
@@ -40,12 +31,6 @@ const [value, setValue] = useState('');
 
 <Canvas of={InputSearchStories.Playground} />
 <Controls of={InputSearchStories.Playground} />
-
-## Variantes
-
-Botão com texto vs. botão ícone.
-
-<Canvas of={InputSearchStories.Variantes} />
 
 ## Estados
 

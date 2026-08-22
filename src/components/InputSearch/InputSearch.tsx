@@ -1,10 +1,9 @@
 import React, { useId } from 'react';
 import styles from './InputSearch.module.css';
 import { Icon } from '../Icon';
+import { ButtonIcon } from '../ButtonIcon';
 
 export interface InputSearchProps {
-  /** Variante da ação ao lado direito do campo */
-  action?: 'button' | 'button icon';
   /** Texto do label acima do campo */
   label?: string;
   /** Placeholder exibido quando o campo está vazio */
@@ -25,7 +24,6 @@ export interface InputSearchProps {
 }
 
 export const InputSearch = ({
-  action = 'button',
   label,
   placeholder = 'Buscar',
   support = false,
@@ -77,34 +75,13 @@ export const InputSearch = ({
           autoComplete="off"
         />
 
-        {action === 'button' && (
-          <button
-            type="button"
-            className={styles.actionButton}
-            onClick={handleSearch}
-            disabled={isDisabled}
-            aria-label="Buscar"
-          >
-            <span className={styles.actionButtonLabel}>buscar</span>
-            <span className={styles.iconWrapper} aria-hidden="true">
-              <Icon name="search" size={16} color="currentColor" />
-            </span>
-          </button>
-        )}
-
-        {action === 'button icon' && (
-          <button
-            type="button"
-            className={styles.actionButtonIcon}
-            onClick={handleSearch}
-            disabled={isDisabled}
-            aria-label="Buscar"
-          >
-            <span className={styles.iconWrapper} aria-hidden="true">
-              <Icon name="search" size={16} color="currentColor" />
-            </span>
-          </button>
-        )}
+        <ButtonIcon
+          variant="tertiary"
+          icon={<Icon name="search" size={16} color="currentColor" />}
+          onClick={handleSearch}
+          disabled={isDisabled}
+          aria-label="Buscar"
+        />
       </div>
 
       {support && supportText && (
