@@ -1,15 +1,15 @@
 # Componentes — API Completa
 
 **Auto-gerado por `npm run build`**
-**Última atualização:** 2026-08-19
-**Versão do pacote:** 1.0.68
+**Última atualização:** 2026-08-22
+**Versão do pacote:** 1.0.69
 **Versão da skill:** 3.15
 
 ---
 
 Este arquivo contém a API completa de todos os componentes do design system.
 
-## Componentes Disponíveis (12)
+## Componentes Disponíveis (14)
 
 ### Button
 
@@ -31,12 +31,81 @@ Ação primária de interação — dispara uma operação com efeito colateral 
 **Props:**
 ```typescript
 variant?: 'primary' | 'secondary' | 'tertiary';
+size?: 'big' | 'medium' | 'small';
 label?: string;
 leadIcon?: React.ReactNode;
 actionIcon?: React.ReactNode;
 ```
 
 **Caminho:** `src/components/Button/`
+
+---
+
+### ButtonIcon
+
+Botão de ação com apenas ícone, sem label. Variante compacta do Button para ações cujo ícone é suficientemente reconhecível no contexto.
+
+**Quando usar:**
+- A ação é universalmente reconhecível pelo ícone (fechar, editar, deletar, expandir)
+- Espaço horizontal é limitado e o label seria redundante
+- Dentro de toolbars, cards de lista, cabeçalhos de seção ou menus de contexto
+
+**Quando NÃO usar:**
+- A ação precisa de texto para ser compreendida — use Button com label
+- É a ação principal da tela — prefira Button primary com label visível
+- Há mais de 3 ButtonIcon consecutivos sem agrupamento visual claro — use um menu de ações
+
+**Combina com:** Button, InputSearch, Card, Tooltip
+
+> **Nota:** Sempre forneça aria-label descritivo — o ícone não é acessível por si só. O componente é 48×48px (área de toque), mas o círculo visual é menor; não reduza o elemento para caber em áreas menores.
+
+**Props:**
+```typescript
+variant?: 'primary' | 'secondary' | 'tertiary';
+icon: React.ReactNode;
+```
+
+**Caminho:** `src/components/ButtonIcon/`
+
+---
+
+### Card
+
+Contêiner visual de conteúdo agrupado — apresenta informações relacionadas (mídia, título, texto, ações) em superfície elevada com cantos arredondados grandes.
+
+**Quando usar:**
+- Exibir um item de conteúdo como unidade visual coesa: produto, artigo, plano, notificação
+- Agrupar mídia + título + texto + ações em contexto de listagem ou grid
+- Fornecer um contêiner genérico com layout controlado para conteúdo personalizado (variant 'slot')
+
+**Quando NÃO usar:**
+- Destacar métricas ou KPIs isolados — usar Dashboard ou stat tile específico
+- Exibir linhas de tabela — usar Table com Table Column
+- Layout de largura total sem superfície elevada — usar seção/container plano
+
+**Combina com:** Button, Tag, Badge, Avatar
+
+> **Nota:** A variant 'slot' substitui toda a área de conteúdo por children livre; a mídia no topo continua disponível. Não existe 'Summary Card' separado — apenas este Card genérico (gap confirmado em 2026-07-02 via harnessCoverageCheck).
+
+**Props:**
+```typescript
+content?: 'simple' | 'slot';
+media?: React.ReactNode;
+titleText?: string;
+subtitle?: boolean;
+subtitleText?: string;
+paragraphText?: string;
+caption?: boolean;
+captionText?: string;
+actions?: boolean;
+secondaryButton?: boolean;
+primaryLabel?: string;
+secondaryLabel?: string;
+onPrimaryAction?: () => void;
+onSecondaryAction?: () => void;
+```
+
+**Caminho:** `src/components/Card/`
 
 ---
 
@@ -192,8 +261,6 @@ Campo de busca com borda pill e ação de buscar embutida — botão com texto o
 
 **Props:**
 ```typescript
-/** Variante da ação ao lado direito do campo */
-action?: 'button' | 'button icon';
 /** Texto do label acima do campo */
 label?: string;
 /** Placeholder exibido quando o campo está vazio */

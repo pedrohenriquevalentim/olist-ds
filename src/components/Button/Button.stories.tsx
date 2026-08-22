@@ -30,6 +30,14 @@ const meta: Meta<typeof Button> = {
         defaultValue: { summary: 'primary' },
       },
     },
+    size: {
+      control: 'select',
+      options: ['big', 'medium', 'small'],
+      description: 'Define o tamanho do botão (altura, padding e tipografia).',
+      table: {
+        defaultValue: { summary: 'big' },
+      },
+    },
     label: {
       control: 'text',
       description: 'Texto exibido no botão. Substituído por `children` quando fornecido.',
@@ -72,6 +80,28 @@ export const Playground: Story = {
   args: {
     label: 'Confirmar',
     variant: 'primary',
+    size: 'big',
+  },
+};
+
+export const Tamanhos: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      {(['big', 'medium', 'small'] as const).map((size) => (
+        <div key={size} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <span style={{ fontSize: '12px', color: '#8f8d85', width: '60px', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
+            {size}
+          </span>
+          <Button size={size} label="Confirmar" leadIcon={<Icon name="add" size={size === 'small' ? 12 : 16} color="currentColor" />} />
+          <Button size={size} variant="secondary" label="Confirmar" />
+          <Button size={size} variant="tertiary" label="Confirmar" />
+        </div>
+      ))}
+    </div>
+  ),
+  parameters: {
+    layout: 'padded',
+    docs: { description: { story: 'Comparação dos três tamanhos (big 48px, medium 40px, small 32px) nas variantes primary, secondary e tertiary.' } },
   },
 };
 

@@ -64,6 +64,30 @@ describe('Button', () => {
     });
   });
 
+  describe('Tamanhos', () => {
+    it('aplica a classe "big" por padrão', () => {
+      render(<Button label="Grande" />);
+      expect(screen.getByRole('button').classList.contains('big')).toBe(true);
+    });
+
+    it('aplica a classe "medium" quando size="medium"', () => {
+      render(<Button label="Médio" size="medium" />);
+      expect(screen.getByRole('button').classList.contains('medium')).toBe(true);
+    });
+
+    it('aplica a classe "small" quando size="small"', () => {
+      render(<Button label="Pequeno" size="small" />);
+      expect(screen.getByRole('button').classList.contains('small')).toBe(true);
+    });
+
+    it('combina variante e tamanho corretamente', () => {
+      render(<Button label="Teste" variant="secondary" size="small" />);
+      const btn = screen.getByRole('button');
+      expect(btn.classList.contains('secondary')).toBe(true);
+      expect(btn.classList.contains('small')).toBe(true);
+    });
+  });
+
   describe('Estado desabilitado', () => {
     it('renderiza com atributo disabled quando disabled=true', () => {
       render(<Button label="Desabilitado" disabled />);

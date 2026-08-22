@@ -73,9 +73,10 @@
   box-sizing: border-box;
   cursor: pointer;
   text-align: left;
+  box-shadow: none;
   transition:
     border-color 0.15s ease,
-    border-width 0.1s ease,
+    box-shadow 0.15s ease,
     background-color 0.15s ease;
 }
 
@@ -85,21 +86,21 @@
 }
 
 .inputBase:active:not(:disabled):not(.stateDisabled) {
-  border-width: var(--input-base-border-width-pressed);
   border-color: var(--input-base-border-color-pressed);
+  box-shadow: inset 0 0 0 1px var(--input-base-border-color-pressed);
   background-color: var(--input-base-color-pressed);
 }
 
 .inputBase:focus-visible {
   outline: none;
-  border-width: var(--input-base-border-width-focused);
   border-color: var(--input-base-border-color-focused);
+  box-shadow: inset 0 0 0 1px var(--input-base-border-color-focused);
   background-color: var(--input-base-color-focused);
 }
 
 .inputBase.stateFocused {
-  border-width: var(--input-base-border-width-focused);
   border-color: var(--input-base-border-color-focused);
+  box-shadow: inset 0 0 0 1px var(--input-base-border-color-focused);
   background-color: var(--input-base-color-focused);
 }
 
@@ -110,7 +111,6 @@
 
 .inputBase.stateDisabled,
 .inputBase:disabled {
-  border-width: var(--input-base-border-width-disabled);
   border-color: var(--input-base-border-color-disabled);
   background-color: var(--input-base-color-disabled);
   cursor: not-allowed;
@@ -271,12 +271,13 @@
   font-feature-settings: 'ss03' 1;
   outline: none;
   box-sizing: border-box;
-  transition: border-color 0.15s ease, border-width 0.1s ease;
+  box-shadow: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .searchInput:focus {
-  border-width: var(--input-base-border-width-focused);
   border-color: var(--input-base-border-color-focused);
+  box-shadow: inset 0 0 0 1px var(--input-base-border-color-focused);
 }
 
 /* ── Listbox ─────────────────────────────────────────────────────────────── */

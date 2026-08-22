@@ -41,25 +41,20 @@ describe('InputSearch', () => {
     expect(handleSearch).toHaveBeenCalledWith('olist');
   });
 
-  it('renderiza botão "buscar" na variante button', () => {
-    render(<InputSearch action="button" />);
+  it('renderiza o botão ícone de busca', () => {
+    render(<InputSearch />);
     expect(screen.getByRole('button', { name: 'Buscar' })).toBeInTheDocument();
   });
 
-  it('chama onSearch ao clicar no botão de ação', () => {
+  it('chama onSearch ao clicar no botão ícone', () => {
     const handleSearch = vi.fn();
-    render(<InputSearch action="button" value="tênis" onSearch={handleSearch} />);
+    render(<InputSearch value="tênis" onSearch={handleSearch} />);
     fireEvent.click(screen.getByRole('button', { name: 'Buscar' }));
     expect(handleSearch).toHaveBeenCalledWith('tênis');
   });
 
-  it('renderiza botão ícone na variante button icon', () => {
-    render(<InputSearch action="button icon" />);
-    expect(screen.getByRole('button', { name: 'Buscar' })).toBeInTheDocument();
-  });
-
   it('desabilita o input e o botão quando isDisabled=true', () => {
-    render(<InputSearch isDisabled action="button" />);
+    render(<InputSearch isDisabled />);
     expect(screen.getByRole('searchbox')).toBeDisabled();
     expect(screen.getByRole('button', { name: 'Buscar' })).toBeDisabled();
   });

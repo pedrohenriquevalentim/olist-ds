@@ -3,6 +3,7 @@ import styles from './Button.module.css';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'tertiary';
+  size?: 'big' | 'medium' | 'small';
   label?: string;
   leadIcon?: React.ReactNode;
   actionIcon?: React.ReactNode;
@@ -10,6 +11,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 export const Button = ({
   variant = 'primary',
+  size = 'big',
   label,
   leadIcon,
   actionIcon,
@@ -22,7 +24,7 @@ export const Button = ({
 
   return (
     <button
-      className={[styles.button, styles[variant], className].filter(Boolean).join(' ')}
+      className={[styles.button, styles[variant], styles[size], className].filter(Boolean).join(' ')}
       disabled={disabled}
       {...rest}
     >
