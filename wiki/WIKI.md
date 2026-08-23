@@ -415,6 +415,19 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ## Changelog
 
+## v3.16 (2026-08-22)
+- **Caso 5 (`/ds-construir`):** novo caso de uso e slash command para criar ou evoluir componentes no Figma com arquitetura correta de tokens. Fluxo token-first: auditoria via `get_variable_defs`, decision tree base→theme→component, Gate 1 (plano de tokens para aprovação), construção com Auto Layout e bind de variáveis, Gate 2 (screenshot). Suporta modo NOVO (intenção textual) e modo EVOLUÇÃO (URL Figma). Termina no Figma — não gera código React.
+- Pasta `.claude/skills/ds-construir/` criada com `SKILL.md` wrapper delegando ao Caso 5
+- Caso 4 atualizado: nota de fallback no passo 9 referencia `/ds-construir` quando componente não existe no inventário
+- Fluxo de Decisão e tabela de Slash Commands atualizados com `/ds-construir`
+
+## v3.15 (2026-08-19)
+- **Caso 7 (`/ds-componente`):** passa a gerar `NomeComponente.metadata.json` como sexto arquivo obrigatório (purpose/useWhen/doNotUseWhen/pairsWith/note/variants/states/slots/tokens/figma), com gate obrigatório de aprovação do usuário antes de código e docs
+- Campo `componentKey` adicionado ao bloco `figma` do schema de metadata (identificador do componente publicado na library, diferente de `fileKey`/`nodeId`)
+- `CLAUDE.md` raiz atualizado: seção "Estrutura de Cada Componente" e seção 9 "Saída Esperada"
+- Regras críticas 13 ("Sempre Faça") e 10 ("Nunca Faça") adicionadas
+- 10 componentes retroativos atualizados com `fileKey`/`componentKey` reais de `component-registry.json`
+
 ## v3.14 (2026-07-20)
 - `/ds-sync`: inventário de componentes ressincronizado com a `design system (base)` — famílias Tabela, Gráfico (nova categoria "Data Visualization"), `Paginator`, `Badge`, `Sort`, `Reorder`, `Loading`, `Overlay`, `Cookie`, `Logout`, `Profile`, `Dashboard`, `List`, `Task List`, `Avatar`, `Card`
 - "Text Area" renomeado para "Input Paragraph" (mesmo componente, nome real confirmado no Figma)
