@@ -100,7 +100,7 @@ Para caminhos dos arquivos, leia `MAPA_FONTES.md`.
 |---|---|---|
 | **VISAO_GERAL.md** | Este arquivo — mapa de navegação | Sempre primeiro |
 | **FIGMA_CONFIG.md** | libraryKeys, componentKeys, workflow de busca e import | **ANTES** de usar `search_design_system` |
-| **TEMPLATES_PRODUTO.md** | **Antes de criar telas no Figma** | Zonas de layout por produto (ERP, Envios, Hub, Conta Digital) |
+| **TEMPLATES_PRODUTO.md** | Zonas de layout por produto (ERP, Envios, Hub, Conta Digital) | **Antes de criar telas no Figma** |
 | **HARNEES_TELAS.md** | Restrições executáveis por zona, gate pré-construção, limites de componentes | **ANTES** de criar qualquer frame no Figma |
 | **CORES.md** | Paleta de cores, regras, DO/DON'T | Ao escolher cores |
 | **TIPOGRAFIA.md** | Tokens de tipografia (tamanho, peso, altura) | Ao estilizar texto |

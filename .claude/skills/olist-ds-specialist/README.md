@@ -12,11 +12,11 @@ A [`design system (base)`](https://www.figma.com/design/HeyN4w209HWh8rfpTDiwyf/d
 - **Caso 8 (`/ds-implementar`):** novo fluxo para devs de BU converterem telas Figma em JSX tipado usando componentes DS, sem precisar conhecer o inventário de memória
 - **Fluxo de Decisão:** roteamento explícito por slash command adicionado antes da detecção automática de intenção
 - **`generate-wiki.mjs`:** seção "Como Usar" atualizada com tabela de slash commands
-- **`package.json`:** `ship` corrigido para incluir `.storybook/`, `README.md` e `package.json` no `git add`
+- **`package.json`:** `ship` corrigido para incluir `.storybook/`, `README.md` e `package.json` no `git add` _(removido posteriormente — fluxo migrado para `npm run release`)_
 
 ## Novidades v3.7 (2026-06-25)
 
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
+- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos — agora 6 desde v3.15, que adicionou `metadata.json`) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
 - `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
 - Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
 
@@ -33,7 +33,7 @@ A [`design system (base)`](https://www.figma.com/design/HeyN4w209HWh8rfpTDiwyf/d
 
 ## Novidades v3.1 (2026-06-05)
 
-- `HARNESS_TELAS.md` adicionado como gate pré-construção obrigatório no Figma
+- `HARNEES_TELAS.md` adicionado como gate pré-construção obrigatório no Figma
 
 ## Novidades v3.0 (2026-06-03)
 

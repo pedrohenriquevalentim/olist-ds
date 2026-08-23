@@ -35,8 +35,8 @@ cp -r olist-ds-specialist/ .claude/skills/olist-ds-specialist/
 
 ## Passo 3: Configurar as libraries do Figma
 
-O `figma-config.json` já vem com as **libraryKeys** das 5 libraries autorizadas da Olist.  
-Na maioria dos casos, **não é necessário editar nada** — as libraryKeys são estáveis e já estão configuradas.
+O `figma-config.json` já vem com a **libraryKey** da 1 library autorizada da Olist (`design system (base)`, desde 2026-07-03).  
+Na maioria dos casos, **não é necessário editar nada** — a libraryKey é estável e já está configurada.
 
 ### Verificar o arquivo:
 
@@ -149,16 +149,10 @@ Use $olist-ds-specialist para criar a tela de upgrade de planos no Figma
 
 ## Como a busca de componentes funciona
 
-Claude sempre filtra pelas libraries autorizadas, em ordem de prioridade:
-
-```
-AI Components (master) → ERP components → ERP recursos → ERP style guide → [DS] components web
-```
-
-> **Decisão permanente desde 2026-07-03:** a ordem acima foi descontinuada. Claude filtra só por `design system (base)`, adotada como única library de referência. Ver `figma-config.json` e `decisions/ux-design/FLUXO_PRD_FIGMA.md`.
+Claude sempre filtra pela única library autorizada: **`design system (base)`** (decisão permanente desde 2026-07-03 — ver `figma-config.json` e `decisions/ux-design/FLUXO_PRD_FIGMA.md`).
 
 Ao pedir "crie a tela X no Figma", Claude automaticamente:
-1. Busca `Button`, `Menu Global`, `Tags` etc. nas libraries acima
+1. Busca `Button`, `Menu Global`, `Tags` etc. na `design system (base)`
 2. Importa as instâncias reais com `importComponentByKeyAsync`
 3. Constrói o frame via `use_figma` com tokens e fills reais do DS
 4. Retorna screenshot + link do Figma para validação
@@ -191,7 +185,7 @@ Se não existir, repita o Passo 2.
 
 A skill está instalada. Claude vai:
 
-- Buscar componentes apenas nas 5 libraries autorizadas
+- Buscar componentes apenas na library autorizada (`design system (base)`)
 - Usar instâncias reais do DS (não primitivos manuais)
 - Seguir o glossário de nomenclatura da Olist
 - Criar telas no Figma com workflow faseado (tela por tela)
