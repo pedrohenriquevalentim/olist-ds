@@ -26,22 +26,39 @@ A Olist é uma plataforma B2B de e-commerce para sellers. A linguagem visual com
 
 ### Referência Rápida de Tokens
 
+> ⚠️ Nomes primitivos têm segmento **duplicado**: `--color-gray-gray-0`, não `--color-gray-0`.
+> Prefira sempre os tokens semânticos abaixo — são os que os componentes reais usam.
+
 ```css
---color-gray-0: #fcfbf8;      /* fundo da página */
---color-gray-900: #10100f;     /* texto principal */
---color-gray-500: #827f73;     /* texto secundário */
---color-gray-100: #e7e4da;     /* bordas */
---color-blue-500: #0a4ee4;     /* ação primária, links */
---color-red-500: #e64e36;      /* erro, destrutivo */
---color-green-500: #779e3d;    /* sucesso */
---color-yellow-500: #f0a028;   /* alerta */
+/* Fundos */
+--color-background-surface-container: #fcfbf8;  /* fundo de cards e página */
+--color-background-surface-system: #f2f0e8;     /* hover de linha de tabela */
+--color-background-selected-neutral-brand: #e7edf8; /* item selecionado */
+
+/* Texto */
+--color-text-container-title: #10100f;   /* título principal */
+--color-text-container-text: #403f3b;    /* texto de suporte */
+--color-text-enabled-neutral: #615f56;   /* texto secundário, captions */
+--color-text-enabled-brand: #043fbe;     /* links e ações de texto */
+--color-text-disabled-default: #cecbc0;  /* texto desabilitado */
+
+/* Bordas */
+--color-border-container-outside: #e7e4da; /* borda de card/container */
+--color-border-enabled-neutral: #afada2;   /* borda de input padrão */
+--color-border-selected-default: #0a4ee4;  /* foco e selecionado */
+
+/* Tipografia */
 --font-family-jakarta: 'Plus Jakarta Sans';
---font-size-14px: 14px;        /* corpo padrão */
---font-weight-regular: 400;    /* corpo */
---font-weight-semibold: 600;   /* labels, headers */
---shape-spacing-16px: 16px;    /* padding padrão */
---shape-border-radius-8px: 8px; /* radius padrão */
+--font-size-14px: 14px;
+--font-weight-regular: 400;
+--font-weight-600: 600;         /* semibold — alias --font-weight-semibold NÃO existe */
+
+/* Espaçamento */
+--shape-spacing-16px: 16px;
+--shape-border-radius-8px: 8px;
 ```
+
+Para o catálogo completo com todos os 1.194 tokens e valores Figma RGB → `TOKEN_CATALOG.md`.
 
 ### Componentes Existentes
 
@@ -63,10 +80,11 @@ Para caminhos dos arquivos, leia `MAPA_FONTES.md`.
 
 #### Criando ou revisando componentes React:
 1. `COMPONENTES.md` — props, tokens, estados de cada componente
-2. `CORES.md` — paleta de cores e regras de uso
-3. `TIPOGRAFIA.md` — tokens de tipografia (tamanho, peso, altura)
-4. `GLOSSARIO_PAPEIS_TEXTO.md` —  como nomear cada tipo de texto (Heading, Label, Error, etc.)
-5. `ESPACAMENTO.md` — grid de 4px e regras de padding/margin
+2. `TOKEN_CATALOG.md` — catálogo completo de 1.194 tokens com nomes corretos e valores
+3. `CORES.md` — paleta de cores com tokens semânticos e regras de uso
+4. `TIPOGRAFIA.md` — tokens de tipografia (tamanho, peso, altura)
+5. `GLOSSARIO_PAPEIS_TEXTO.md` —  como nomear cada tipo de texto (Heading, Label, Error, etc.)
+6. `ESPACAMENTO.md` — grid de 4px e regras de padding/margin
 
 #### Traduzindo SDD/PRD em decisões de UI:
 1. `SDD_PARA_TELA.md` — 10 passos para traduzir SDD em telas
@@ -74,10 +92,11 @@ Para caminhos dos arquivos, leia `MAPA_FONTES.md`.
 3. `SDD_AVANCADO.md` —  traduzir RNFs, DACI, Métricas, Rollout, Observabilidade
 4. `PADROES.md` — 5 padrões de página (Tabela, Form, Dashboard, Detalhe, Configurações)
 
-#### Criando telas/páginas completas:
+#### Criando telas/páginas completas (com ou sem repo):
 1. `PADROES.md` — escolher o padrão de página correto
 2. `SDD_PARA_TELA.md` — traduzir requisitos em componentes
 3. `COMPONENTES.md` — verificar componentes disponíveis
+4. `TOKEN_CATALOG.md` → Seção 1 — valores Figma RGB prontos para fills na Plugin API
 
 #### Revisando qualidade de UI:
 1. `CHECKLIST_REVISAO.md` — 9 categorias de revisão + UX Writing

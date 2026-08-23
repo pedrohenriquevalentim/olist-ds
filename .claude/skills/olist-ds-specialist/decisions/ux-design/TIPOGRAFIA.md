@@ -36,7 +36,7 @@ font-family: var(--font-family-jakarta); /* 'Plus Jakarta Sans' */
 Pesos válidos:
 - `--font-weight-regular: 400`
 - `--font-weight-medium: 500`
-- `--font-weight-semibold: 600`
+- `--font-weight-600: 600`
 - `--font-weight-bold: 700`
 
 ---
@@ -70,7 +70,7 @@ Elementos de texto internos a componentes (`<label>`, helper text, placeholder, 
 /* ✅ correto */
 .label {
   font-size: var(--font-size-14px);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-600);
   line-height: var(--line-height-normal);
   color: var(--color-gray-900);
 }

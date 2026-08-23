@@ -1,6 +1,6 @@
 {
   "name": "@pedrohenriquevalentim/olist-ds",
-  "version": "1.0.70",
+  "version": "1.0.71",
   "description": "Olist Design System — componentes React + tokens",
   "workspaces": [
     "packages/*"
