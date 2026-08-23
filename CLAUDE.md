@@ -169,7 +169,6 @@ Ver `olist-ds-specialist` Caso 7 para o script completo de geração via `use_fi
 - npm run release             → **fluxo de publicação correto** — versiona, cria branch e abre PR; o CI publica no GitHub Packages após o merge
 - npm run mcp:figma           → inicia o servidor MCP do Figma
 - npm run chromatic           → publica o Storybook no Chromatic (regressão visual)
-- npm run ship                → **obsoleto, não usar** — fazia `git push` direto na main; quebrado desde que a branch passou a exigir PR + status checks
 
 ## Fluxo de Publicação
 **`main` é protegido** (exige PR + 2 status checks) — `git push` direto nela sempre é rejeitado pelo GitHub. Use `npm run release`.
