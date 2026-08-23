@@ -1,11 +1,11 @@
 ---
 name: olist-ds-specialist
 description: Use esta skill para TODO trabalho de UI/UX da Olist — criação de telas a partir de SDDs/PRDs, geração de componentes React, revisão de consistência visual, criação de protótipos no Figma, manutenção do design system e criação/revisão de textos de UI (UX Writing, copy, tom de voz). Acione quando alguém mencionar interface Olist, design system, tokens, componentes, telas, layouts, SDD, PRD, protótipo, wireframe, Figma, Storybook, copy, texto de botão, mensagem de erro, empty state, toast, label, placeholder ou qualquer tarefa de criação ou revisão de UI/copy para produtos Olist. NÃO use para backend, APIs, banco de dados, autenticação ou lógica de negócio sem relação com UI.
-version: 3.15
-lastModified: 2026-08-19
+version: 3.16
+lastModified: 2026-08-23
 ---
 
-# Olist Design System — Especialista v3.15 · 2026-08-19
+# Olist Design System — Especialista v3.16 · 2026-08-23
 
 ## Slash Commands
 
@@ -15,6 +15,7 @@ Cada capacidade da skill pode ser invocada explicitamente via slash command. O a
 |---|---|---|---|
 | `/ds-tela` | `/ds-tela <sdd-ou-prd>` | 1 + 2 | Dev de BU: gera tela React a partir de SDD/PRD usando componentes DS |
 | `/ds-figma` | `/ds-figma <sdd-ou-prd>` | 4 | Designer/Dev: cria telas no Figma com instâncias reais do DS |
+| `/ds-construir` | `/ds-construir <intenção-ou-figma-url>` | 5 | Mantenedor DS: cria ou evolui componente no Figma com arquitetura correta de tokens |
 | `/ds-implementar` | `/ds-implementar <figma-url>` | 8 | Dev de BU: converte tela Figma em JSX tipado usando componentes DS |
 | `/ds-handoff` | `/ds-handoff <figma-url(s)>` | 9 | Qualquer dev: gera manifesto Markdown de componentes DS usados numa jornada, para anexar em PR |
 | `/ds-componente` | `/ds-componente <figma-url>` | 7 | Mantenedor DS: gera novo componente DS completo (6 arquivos + docs Figma) |
@@ -136,13 +137,14 @@ Receber solicitação
     ↓
 A mensagem começa com um slash command?
     │
-    ├── /ds-implementar <figma-url> → ir direto para Caso 8
-    ├── /ds-handoff <figma-url(s)>  → ir direto para Caso 9
-    ├── /ds-componente <figma-url>  → ir direto para Caso 7
-    ├── /ds-tela <sdd-ou-prd>       → ir direto para Caso 1 ou 2 (auto-detectar se tem RNFs/DACI)
-    ├── /ds-figma <sdd-ou-prd>      → ir direto para Caso 4
-    ├── /ds-revisar                 → ir direto para Caso 3
-    └── /ds-sync                   → ir direto para Caso 6
+    ├── /ds-implementar <figma-url>        → ir direto para Caso 8
+    ├── /ds-handoff <figma-url(s)>        → ir direto para Caso 9
+    ├── /ds-componente <figma-url>        → ir direto para Caso 7
+    ├── /ds-construir <intenção-ou-url>   → ir direto para Caso 5
+    ├── /ds-tela <sdd-ou-prd>             → ir direto para Caso 1 ou 2 (auto-detectar se tem RNFs/DACI)
+    ├── /ds-figma <sdd-ou-prd>            → ir direto para Caso 4
+    ├── /ds-revisar                       → ir direto para Caso 3
+    └── /ds-sync                          → ir direto para Caso 6
     │
     ↓ (sem slash command — detecção automática de intenção)
 É trabalho de UI/UX? → Não → Recusar, explicar escopo
@@ -152,6 +154,18 @@ Ler references/VISAO_GERAL.md (sempre)
 Ler decisions/INDEX.md (verificar decisões ativas que se aplicam à tarefa)
     ↓
 Qual tipo de tarefa?
+    │
+    ├── Criar ou evoluir componente no Figma (/ds-construir)
+    │   → Ler figma-config.json
+    │   → Ler CORES.md + TIPOGRAFIA.md + ESPACAMENTO.md + GOVERNANCA_TOKENS.md
+    │   → Detectar modo: NOVO (intenção textual) ou EVOLUÇÃO (URL Figma fornecida)
+    │   → Auditoria de tokens: get_variable_defs → mapear propriedades necessárias
+    │     → Para cada propriedade: percorrer base tokens → theme tokens → component tokens
+    │     → Criar tokens faltantes na coleção certa antes de qualquer nó
+    │   → Gate 1: exibir plano de tokens (criar / reutilizar) → aguardar aprovação
+    │   → Construir component set no Figma com Auto Layout + bind de variáveis
+    │   → Organizar grade de variantes (colunas = dimensão semântica A, linhas = dimensão B)
+    │   → Gate 2: get_screenshot → validação visual → aguardar confirmação
     │
     ├── Criar tela no Figma (workflow principal)
     │   → Ler FIGMA_CONFIG.md (identifiers, libraries)
@@ -316,7 +330,7 @@ Qual tipo de tarefa?
 9. **Escolher token semântico só pelo valor final resolvido** — respeite `doNotUseWhen` de `GOVERNANCA_TOKENS.md` mesmo quando duas famílias resolvem para a mesma cor hoje
 10. **Gerar código ou docs do Caso 7 sem antes exibir o `metadata.json` completo e obter aprovação explícita do usuário** — sem esse gate, o agente preenche lacunas de intenção (useWhen/doNotUseWhen) por suposição, e o erro se propaga para código e Figma em escala
 
-## Casos de Uso v3.10
+## Casos de Uso v3.16
 
 ### Caso 1: SDD básico — tela React
 ```
@@ -384,6 +398,15 @@ Você:
    d. use_figma → construir frame com instâncias + fills/tokens reais
    e. get_design_context → screenshot + URL
    f. Aguardar feedback → próxima tela
+
+   ⚠️ Se um componente necessário NÃO for encontrado em nenhuma library:
+      - Construir com primitivos seguindo tokens DS (fills: CORES.md,
+        tipografia: TIPOGRAFIA.md, espaçamento: ESPACAMENTO.md)
+      - Nomear claramente como custom (ex: "Card/PlanCard — custom")
+      - Informar ao usuário: "Componente X não encontrado no DS. Construído
+        com primitivos. Sugestão: criar via /ds-construir (Caso 5) antes de
+        usar em outras telas."
+
 10. Checklist final:
    - Auto Layout em 100% dos frames
    - Nomes semânticos seguindo padrão do HARNESS_TELAS.md Seção 5
@@ -392,22 +415,114 @@ Você:
    - Todos os estados obrigatórios do padrão de página entregues
 ```
 
-### Caso 5: Componente não existe no inventário
+### Caso 5: Criar ou evoluir componente no Figma `/ds-construir`
+
+> **Para mantenedores do DS** que precisam criar um componente do zero ou adicionar
+> variantes/tamanhos/estados a um componente já existente, seguindo a arquitetura
+> correta de tokens (base → theme → component → componente).
+> Este caso termina no Figma — não gera arquivos React nem metadata.json.
+> Para implementar em React depois, usar /ds-componente (Caso 7) com a URL do
+> componente recém-criado/atualizado.
+
 ```
-Ao montar tela no Figma, se componente necessário NÃO for encontrado em nenhuma library:
+Usuário: /ds-construir Button com variantes de tamanho medium e small
+Usuário: /ds-construir https://figma.com/design/FILE?node-id=X [adicionar estado error]
 
-1. Construir com primitivos use_figma seguindo tokens DS:
-   - fills: cores do CORES.md
-   - typography: Plus Jakarta Sans + tokens do TIPOGRAFIA.md
-   - spacing: grid 4px do ESPACAMENTO.md
-   - border-radius: 8px padrão / 4px pequeno / 9999px pill
+Você:
 
-2. Nomear claramente como custom (ex: "Card/PlanCard — custom")
+--- PREPARAÇÃO ---
 
-3. Documentar para o designer:
-   "Componente 'Plan Card' não encontrado no DS.
-    Construído com primitivos seguindo tokens.
-    Sugestão: criar no DS e publicar na AI Components."
+1. Ler figma-config.json (file de destino, modeIds das coleções)
+2. Ler CORES.md + TIPOGRAFIA.md + ESPACAMENTO.md + GOVERNANCA_TOKENS.md
+3. Detectar modo:
+   - NOVO: intenção descrita em texto → o componente não existe ainda no Figma
+   - EVOLUÇÃO: URL fornecida → extrair fileKey e nodeId; chamar
+     get_metadata(depth=3) e get_design_context para mapear variantes e
+     propriedades existentes; get_screenshot como referência visual
+
+--- AUDITORIA DE TOKENS (obrigatória antes de qualquer nó) ---
+
+4. get_variable_defs → listar todas as variáveis das 3 coleções:
+   - 01. base tokens   (valores primitivos: cores, tamanhos, espaçamentos brutos)
+   - 02. theme tokens  (aliases semânticos: light/dark, brand, estados)
+   - 03. component tokens (aliases específicos do componente)
+
+5. Para cada propriedade de design necessária (cor, altura, padding, gap,
+   font-size, font-weight, line-height, border-radius, border-width):
+
+   ┌─ Existe em 03. component tokens? ──────────────────── usar direto
+   ├─ Existe em 02. theme tokens mas não em 03? ─────────── criar alias em 03 → theme var
+   ├─ Existe em 01. base tokens mas não em 02 nem 03? ───── criar alias em 02 → base var
+   │                                                        criar alias em 03 → theme var
+   └─ Não existe em nenhuma coleção? ───────────────────── criar valor em 01 (valor bruto)
+                                                            criar alias em 02 → base var
+                                                            criar alias em 03 → theme var
+
+   Regras de nomenclatura:
+   - 01. base tokens: família/escala (ex: shape/size/40px, font/size/12px)
+   - 02. theme tokens: semântico/escala (ex: shape/size/x5 (40px))
+   - 03. component tokens: componente/grupo/propriedade
+     (ex: button/size/height-medium)
+
+   Regras de bind de variáveis na Figma Plugin API:
+   - Fills/strokes: dentro do objeto paint como
+     { type:'SOLID', color:{...}, boundVariables:{ color:{ type:'VARIABLE_ALIAS', id:var.id } } }
+     NUNCA via node.setBoundVariable('fills', var) — lança erro silencioso
+   - Layout (height, padding*, gap, cornerRadius): via node.setBoundVariable(field, var)
+   - Tipografia: criar text style com figma.createTextStyle() e aplicar via
+     node.textStyleId = style.id; bind de fontSize/fontWeight/lineHeight/fontFamily
+     via style.setBoundVariable(field, var)
+   - Antes de resize(): limpar node.minHeight = null e node.maxHeight = null
+
+--- GATE 1 (obrigatório) ---
+
+6. Exibir plano de tokens em tabela:
+   | Propriedade | Token 03 | Referência 02 | Referência 01 | Ação |
+   |-------------|----------|---------------|---------------|------|
+   | altura medium | button/size/height-medium | shape/size/x5 (40px) | shape/size/40px | criar alias |
+   | ...          | ...      | ...           | ...           | reutilizar |
+
+   Aguardar aprovação explícita antes de prosseguir para construção.
+
+--- CONSTRUÇÃO NO FIGMA ---
+
+7. Modo NOVO — criar component set:
+   a. Definir todas as dimensões de variante (ex: variant, size, state, icon)
+   b. Criar cada variante como componente filho com Auto Layout
+   c. Aplicar fills/strokes via boundVariables no objeto paint
+   d. Aplicar layout props via setBoundVariable (paddingLeft, paddingRight,
+      paddingTop, paddingBottom, itemSpacing, minHeight desativado)
+   e. Aplicar tipografia via textStyleId com variáveis bound na style
+   f. Adicionar ao component set com figma.combineAsVariants()
+
+   Modo EVOLUÇÃO — estender component set existente:
+   a. Localizar o component set via nodeId
+   b. Clonar uma variante existente como base para cada nova variante
+   c. Ajustar: limpar minHeight/maxHeight antes de resize(); rebindar
+      variáveis nos nós ajustados (não herdar valores primitivos do clone)
+   d. Adicionar nova dimensão de variante ao component set se necessário
+
+8. Organizar grade de variantes:
+   - Colunas: dimensão com mais variações visuais (ex: variant=primary/secondary/tertiary)
+   - Linhas: demais dimensões em ordem lógica (ex: size → icon mode → state)
+   - Gap entre colunas: 40px; gap entre linhas: 40px
+
+--- GATE 2 (obrigatório) ---
+
+9. get_screenshot → exibir ao usuário
+   Confirmar: nenhum valor primitivo hardcoded nos nós
+   (toda propriedade de cor/tamanho/tipografia tem variável bound)
+   Aguardar confirmação do usuário
+
+--- ENTREGA ---
+
+10. Informar:
+    - Tokens criados (nome, coleção, valor/alias)
+    - Variantes adicionadas/criadas
+    - Próximos passos sugeridos:
+      · Publicar variáveis na library (Assets panel → Publish changes)
+      · Se o componente for novo: usar /ds-componente (Caso 7) para gerar o código React
+      · Se for evolução de existente: atualizar props no código React do repositório olist-ds
 ```
 
 ### Caso 6: Sincronizar inventário de componentes
@@ -628,8 +743,9 @@ Erros comuns e suas correções — manter para evitar regressão:
 
 ---
 
-**Versão:** 3.15
-**Última atualização:** 2026-07-21
+**Versão:** 3.16
+**Última atualização:** 2026-08-22
+**Mudanças v3.16:** Caso 5 reformulado — substituído o fallback inline "componente não encontrado" por um caso de uso próprio com slash command `/ds-construir`. O Caso 5 cobre criação de componentes do zero e evolução de componentes existentes no Figma, ambos com a mesma disciplina de token-first: auditoria via `get_variable_defs`, decisão tree base→theme→component, gate de aprovação do plano de tokens antes de qualquer nó, construção com Auto Layout e bind de variáveis, e gate de screenshot ao final. Inclui regras explícitas de bind (fills via boundVariables no objeto paint, layout via setBoundVariable, tipografia via textStyleId) e armadilhas conhecidas (minHeight/maxHeight antes de resize). O conteúdo anterior do Caso 5 foi absorvido como nota no passo 9 do Caso 4 com referência ao novo Caso 5. Fluxo de Decisão e tabela de Slash Commands atualizados.
 **Mudanças v3.15:** Caso 7 (`/ds-componente`) passa a gerar um sexto arquivo, `NomeComponente.metadata.json` (purpose/useWhen/doNotUseWhen/pairsWith/note/variants/states/slots/tokens — mesmo schema de `GOVERNANCA_TOKENS.md`, aplicado a componente), com um gate obrigatório de aprovação do usuário **antes** de código e docs serem gerados (novos passos 6-7 do Caso 7). Motivação: artigo "Como preparei meu design system para ser lido por uma IA" (Mariana Queiroz, UX Collective) — metadados estruturados por componente, gerados antes da documentação, evitam que a IA documente por suposição e propague ambiguidade em escala. `CLAUDE.md` raiz atualizado (Seção "Estrutura de Cada Componente" e Seção 9 "Saída Esperada"); `scripts/sync-skill.mjs` passa a ler o `.metadata.json` de cada componente (quando existir) e incluir `useWhen`/`doNotUseWhen` no `COMPONENTES.md` auto-gerado; `ds-componente/SKILL.md` e a tabela de Slash Commands atualizados (5→6 arquivos). Regras críticas 13 ("Sempre Faça") e 10 ("Nunca Faça") adicionadas. **Correção no mesmo ciclo:** o bloco `figma` do schema ganhou o campo `componentKey` (identificador do componente publicado na library, usado para instanciar via `importComponentByKeyAsync` — diferente de `fileKey`/`nodeId`, que apontam para um nó específico dentro de um arquivo). Os 10 componentes retroativos (ver changelog de decisions/) foram atualizados com `fileKey`/`componentKey` reais lidos de `component-registry.json`; `nodeId` permanece vazio nesses 10 por não haver URL de origem registrada — preencher exigiria supor, o que o gate deste fluxo existe para evitar.
 **Mudanças v3.14:** `/ds-sync` executado — inventário de componentes da `design system (base)` sincronizado. Adicionados à seção "Inventário de Componentes": família Tabela (`Table`, `Table Column`, `Head`, `Simple Cell`, `Spreadsheet`), família Gráfico (`Bar`, `Chart Bar Up/Down/Variation` — nova categoria "Data Visualization"), `Paginator`, `Badge`, `Sort`, `Reorder`, `Loading`, `Overlay`, `Cookie`, `Logout`, `Profile`, `Dashboard`, `List`, `Task List`; `Avatar` e `Card` (já confirmados no `harnessCoverageCheck` mas ausentes desta lista) também adicionados. Corrigido: "Text Area" renomeado para "Input Paragraph" (mesmo componente, nome real confirmado no Figma). Nota histórica sobre ausência de `Paginator`/`pagination-*` em `GOVERNANCA_TOKENS.md` seção 9 marcada como resolvida — componente já existe. `figma-config.json` → `harnessCoverageCheck` atualizado com nova data de verificação. Nenhum componente previamente documentado foi removido.
 **Mudanças v3.13:** Corrigido harness do template Envios/Hub/Conta Digital — a Zona B (Top Bar) **não exibe o logo do produto**; o logo já faz parte do componente `Menu Global` na Zona A. `Logo` removido da coluna "Pode conter"/"Componentes Recomendados" da Zona B em `references/HARNEES_TELAS.md` e `references/TEMPLATES_PRODUTO.md`, e movido para "Não pode conter"; linha `Logo Olist` em "Contextos Válidos por Componente" corrigida para `Zona A, embutido no Menu Global`. Hipótese do `Context Switch` em `decisions/ux-design/COMPONENTES_POR_ZONA.md` ajustada para não citar mais `Logo` como vizinho de zona.
