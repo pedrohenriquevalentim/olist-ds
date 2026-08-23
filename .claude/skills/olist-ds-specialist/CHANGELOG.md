@@ -36,10 +36,10 @@
 - **Caso 8 (`/ds-implementar`):** novo fluxo para devs de BU converterem telas Figma em JSX tipado usando componentes DS, sem precisar conhecer o inventário de memória
 - **Fluxo de Decisão:** roteamento explícito por slash command adicionado antes da detecção automática de intenção
 - **`generate-wiki.mjs`:** seção "Como Usar" atualizada com tabela de slash commands
-- **`package.json`:** `ship` corrigido para incluir `.storybook/`, `README.md` e `package.json` no `git add`
+- **`package.json`:** `ship` corrigido para incluir `.storybook/`, `README.md` e `package.json` no `git add` _(npm run ship foi removido posteriormente; fluxo migrado para npm run release)_
 
 ## v3.7 (2026-06-25)
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
+- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos — agora 6 desde v3.15, que adicionou metadata.json) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
 - `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
 - `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
 - Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
@@ -75,7 +75,7 @@
 - `SKILL.md` atualizado para v3.2
 
 ## v3.1 (2026-06-05)
-- **Harness:** `HARNESS_TELAS.md` adicionado como gate pré-construção obrigatório no fluxo Figma
+- **Harness:** `HARNEES_TELAS.md` adicionado como gate pré-construção obrigatório no fluxo Figma
 - Gate com 6 itens binários — o Claude só avança para criação de frames se todos forem marcados
 - Restrições de zona por template (ERP e Envios/Hub/Conta Digital): colunas "Pode conter" e "Não pode conter" para cada zona A–E
 - Limites quantitativos por componente (ex: máx 1 `Button` primary por tela, máx 1 `Heading` por tela)

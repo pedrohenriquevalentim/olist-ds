@@ -194,12 +194,13 @@ olist-ds/
 │   ├── generated/                       # Cópia do dist/ de packages/design-tokens/ (não editar)
 │   │   ├── variables.css
 │   │   └── tokens.js
-│   ├── components/                      # <!-- AUTO:component-count -->15<!-- /AUTO:component-count --> componentes
+│   ├── components/                      # <!-- AUTO:component-count -->14<!-- /AUTO:component-count --> componentes
 │   │   └── [ComponentName]/
 │   │       ├── ComponentName.tsx
 │   │       ├── ComponentName.module.css
 │   │       ├── ComponentName.test.tsx
 │   │       ├── ComponentName.stories.tsx
+│   │       ├── ComponentName.metadata.json
 │   │       └── index.ts
 │   ├── docs/                            # Páginas MDX do Storybook
 │   │   ├── Introduction.mdx
@@ -221,7 +222,7 @@ olist-ds/
 ### Componentes disponíveis
 
 <!-- AUTO:component-list-start -->
-Button, ButtonIcon, Card, Checkbox, Chip, Icon, InputPassword, InputSearch, InputSelect, InputText, ItensMenuGlobal, Logo, MenuGlobal, ProdutosOlistIcons, Toggle
+Button, ButtonIcon, Card, Checkbox, Chip, Icon, InputPassword, InputSearch, InputSelect, InputText, ItensMenuGlobal, Logo, MenuGlobal, ProdutosOlistIcons
 <!-- AUTO:component-list-end -->
 
 ---

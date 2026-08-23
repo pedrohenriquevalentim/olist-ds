@@ -143,4 +143,4 @@ src/
 - **Logo:** `src/components/Logo/Logo.tsx`
 - **MenuGlobal:** `src/components/MenuGlobal/MenuGlobal.tsx`
 - **ProdutosOlistIcons:** `src/components/ProdutosOlistIcons/ProdutosOlistIcons.tsx`
-- **Toggle:** `src/components/Toggle/index.tsx`
+- **Toggle:** `src/components/Toggle/` ⚠️ incompleto

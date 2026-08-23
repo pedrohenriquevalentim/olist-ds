@@ -32,7 +32,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 
 | Métrica | Valor |
 |---|---|
-| Componentes | 15 |
+| Componentes | 14 |
 | Ícones SVG | 550 |
 | Arquivos da Skill | 22 |
 | Arquivos Figma permitidos | 1 |
@@ -41,7 +41,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 
 ## Componentes
 
-### Lista Completa (15)
+### Lista Completa (14)
 
 - `Button` — `src/components/Button/`
 - `ButtonIcon` — `src/components/ButtonIcon/`
@@ -57,7 +57,6 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 - `Logo` — `src/components/Logo/`
 - `MenuGlobal` — `src/components/MenuGlobal/`
 - `ProdutosOlistIcons` — `src/components/ProdutosOlistIcons/`
-- `Toggle` — `src/components/Toggle/`
 
 ### Status de Migração de Ícones
 
@@ -77,7 +76,6 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Logo | ➖ Sem ícones |
 | MenuGlobal | ➖ Sem ícones |
 | ProdutosOlistIcons | ➖ Sem ícones |
-| Toggle | ➖ Sem ícones |
 
 ## Pipeline de Build e Release
 
@@ -216,7 +214,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
    - Use `searchPriority` como `includeLibraryKeys` em todo `search_design_system`
    - `searchPriority` tem apenas `design system (base)` — única library de referência desde 2026-07-03 (hierarquia anterior de AI Components/ERP components/etc. foi descontinuada, dados preservados em `blockedLibraries`)
    - Ignore resultados de `blockedLibraries`
-4. **Leia `HARNESS_TELAS.md` antes de criar qualquer frame no Figma:**
+4. **Leia `HARNEES_TELAS.md` antes de criar qualquer frame no Figma:**
    - Execute o gate pré-construção (Seção 1) — só avance com todos os itens marcados
    - Verifique limites por tela (Seção 2) antes de instanciar componentes
    - Identifique o padrão da Zona D (Seção 3) antes de montar o conteúdo
@@ -455,10 +453,10 @@ npm install --save-dev PACOTE --legacy-peer-deps
 - **Caso 8 (`/ds-implementar`):** novo fluxo para devs de BU converterem telas Figma em JSX tipado usando componentes DS, sem precisar conhecer o inventário de memória
 - **Fluxo de Decisão:** roteamento explícito por slash command adicionado antes da detecção automática de intenção
 - **`generate-wiki.mjs`:** seção "Como Usar" atualizada com tabela de slash commands
-- **`package.json`:** `ship` corrigido para incluir `.storybook/`, `README.md` e `package.json` no `git add`
+- **`package.json`:** `ship` corrigido para incluir `.storybook/`, `README.md` e `package.json` no `git add` _(npm run ship foi removido posteriormente; fluxo migrado para npm run release)_
 
 ## v3.7 (2026-06-25)
-- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
+- **Fluxo unificado Figma → código + docs:** Caso 7 adicionado ao `SKILL.md` — implementação de componente a partir de URL do Figma executa em paralelo geração de código (5 arquivos — agora 6 desde v3.15, que adicionou metadata.json) e geração de frame de docs no Figma (demo · props · anatomia · acessibilidade)
 - `CLAUDE.md` atualizado: passo 10 na seção "Geração de Componentes" e nota de redirecionamento para `olist-ds-specialist` Caso 7
 - `decisions/technical/COMPONENTES_REACT.md` atualizado: seção "Documentação no Figma" adicionada
 - Ramo "Criar componente" no Fluxo de Decisão expandido para cobrir o fluxo unificado
@@ -494,7 +492,7 @@ npm install --save-dev PACOTE --legacy-peer-deps
 - `SKILL.md` atualizado para v3.2
 
 ## v3.1 (2026-06-05)
-- **Harness:** `HARNESS_TELAS.md` adicionado como gate pré-construção obrigatório no fluxo Figma
+- **Harness:** `HARNEES_TELAS.md` adicionado como gate pré-construção obrigatório no fluxo Figma
 - Gate com 6 itens binários — o Claude só avança para criação de frames se todos forem marcados
 - Restrições de zona por template (ERP e Envios/Hub/Conta Digital): colunas "Pode conter" e "Não pode conter" para cada zona A–E
 - Limites quantitativos por componente (ex: máx 1 `Button` primary por tela, máx 1 `Heading` por tela)

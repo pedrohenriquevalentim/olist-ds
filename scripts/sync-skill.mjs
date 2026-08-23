@@ -275,8 +275,13 @@ src/
 
     for (const componentName of components) {
       const compDir = join(COMPONENTS_DIR, componentName);
-      const mainFile = readdirSync(compDir).find(f => f === `${componentName}.tsx`) ?? 'index.tsx';
-      markdown += `- **${componentName}:** \`src/components/${componentName}/${mainFile}\`\n`;
+      const files = readdirSync(compDir);
+      const mainFile = files.find(f => f === `${componentName}.tsx`) ?? files.find(f => f === 'index.tsx');
+      if (mainFile) {
+        markdown += `- **${componentName}:** \`src/components/${componentName}/${mainFile}\`\n`;
+      } else {
+        markdown += `- **${componentName}:** \`src/components/${componentName}/\` ⚠️ incompleto\n`;
+      }
     }
   }
   
@@ -407,7 +412,11 @@ function syncReadmeMd() {
   }
 
   const componentDirs = readdirSync(COMPONENTS_DIR)
-    .filter(f => statSync(join(COMPONENTS_DIR, f)).isDirectory())
+    .filter(f => {
+      const p = join(COMPONENTS_DIR, f);
+      return statSync(p).isDirectory() &&
+        (existsSync(join(p, 'index.tsx')) || existsSync(join(p, `${f}.tsx`)));
+    })
     .sort();
 
   let content = readFileSync(readmePath, 'utf-8');
