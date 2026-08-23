@@ -1,8 +1,8 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.68`  
-**Skill:** v3.15  
-**Última atualização:** 2026-08-19  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.70`  
+**Skill:** v3.16  
+**Última atualização:** 2026-08-23  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -32,18 +32,20 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 
 | Métrica | Valor |
 |---|---|
-| Componentes | 13 |
+| Componentes | 15 |
 | Ícones SVG | 550 |
 | Arquivos da Skill | 22 |
 | Arquivos Figma permitidos | 1 |
-| Versão npm | 1.0.68 |
-| Versão skill | 3.15 |
+| Versão npm | 1.0.70 |
+| Versão skill | 3.16 |
 
 ## Componentes
 
-### Lista Completa (13)
+### Lista Completa (15)
 
 - `Button` — `src/components/Button/`
+- `ButtonIcon` — `src/components/ButtonIcon/`
+- `Card` — `src/components/Card/`
 - `Checkbox` — `src/components/Checkbox/`
 - `Chip` — `src/components/Chip/`
 - `Icon` — `src/components/Icon/`
@@ -62,6 +64,8 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Componente | Status |
 |---|---|
 | Button | ➖ Sem ícones |
+| ButtonIcon | ➖ Sem ícones |
+| Card | ➖ Sem ícones |
 | Checkbox | ➖ Sem ícones |
 | Chip | ➖ Sem ícones |
 | Icon | ✅ Componente central |
@@ -84,7 +88,7 @@ npm run release
     │
     ├── 1. generate:all (testes + stories via Gemini)
     ├── 2. build (compilação TypeScript)
-    ├── 3. sync:skill (atualiza skill v3.15)
+    ├── 3. sync:skill (atualiza skill v3.16)
     ├── 4. npm version patch (incrementa versão)
     ├── 5. npm publish (publica no registry)
     └── 6. git push --follow-tags
@@ -103,6 +107,7 @@ npm run release
 | `npm run validate:icons` | `node scripts/validate-icon-migration.mjs` |
 | `npm run sync:skill` | `node scripts/sync-skill.mjs` |
 | `npm run build:tokens` | `npm run build --workspace=packages/design-tokens && node ...` |
+| `npm run build:tokens:sd` | `npm run build:sd --workspace=packages/design-tokens` |
 | `npm run clean` | `rm -rf dist` |
 | `npm run build` | `npm run clean && npm run build:tokens && node scripts/gen...` |
 | `npm run dev` | `vite` |
@@ -131,7 +136,7 @@ npm run release
 
 ## Skill Claude
 
-### Versão: v3.15
+### Versão: v3.16
 
 **Localização:** `.claude/skills/olist-ds-specialist/`
 
@@ -199,7 +204,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 2. Customize → Skills → Upload → selecionar pasta da skill
 3. Iniciar conversa e usar um dos slash commands acima
 
-### Regras Críticas v3.15
+### Regras Críticas v3.16
 
 ### ✅ Sempre Faça:
 
@@ -405,7 +410,7 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 1. `.claude/figma-config.json` existe?
 2. `searchPriority` tem os libraryKeys corretos?
-3. Skill v3.15 instalada?
+3. Skill v3.16 instalada?
 4. O prompt inclui instrução para ler `figma-config.json` antes do Figma MCP?
 
 ## Changelog
@@ -516,4 +521,4 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ---
 
-*Gerado automaticamente em 2026-08-19 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-08-23 por `generate-wiki.mjs`. Não edite manualmente.*
