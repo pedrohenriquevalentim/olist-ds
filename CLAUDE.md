@@ -164,7 +164,7 @@ Ver `olist-ds-specialist` Caso 7 para o script completo de geração via `use_fi
 - npm run validate:icons      → valida migração de ícones
 - npm run sync:skill          → regenera COMPONENTES.md, MAPA_FONTES.md, VISAO_GERAL.md e a seção de estrutura do README da skill
 - npm run sync:skill-meta     → sincroniza versão, título e wiki da skill (roda após editar SKILL.md/CHANGELOG.md)
-- npm run wiki                → regenera wiki/WIKI.md
+- npm run wiki                → regenera wiki/WIKI.md (chamado internamente por sync:skill-meta — não rodar separadamente)
 - npm run version:skill       → bump manual da versão da skill
 - npm run release             → **fluxo de publicação correto** — versiona, cria branch e abre PR; o CI publica no GitHub Packages após o merge
 - npm run mcp:figma           → inicia o servidor MCP do Figma
@@ -175,7 +175,7 @@ Ver `olist-ds-specialist` Caso 7 para o script completo de geração via `use_fi
 
 Após criar/alterar componentes:
 1. npm run test:run
-2. npm run sync:skill && npm run sync:skill-meta && npm run wiki   (se docs/skill mudaram)
+2. npm run sync:skill && npm run sync:skill-meta                  (se docs/skill mudaram)
 3. git add -A && git commit -m "feat: descricao"                  (se houver mudanças pendentes)
 4. npm run release                                                (menu interativo: escolhe pacote e tipo de bump; cria branch, versiona e abre o PR)
 5. Merge do PR no GitHub com "Create a merge commit" (nunca squash/rebase — a tag de versão precisa apontar pra um commit alcançável pela main)

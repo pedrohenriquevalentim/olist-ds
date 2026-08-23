@@ -94,8 +94,11 @@ const version = pkg.version || '?.?.?';
 const scripts = pkg.scripts || {};
 const pkgName = pkg.name || 'olist-ds';
 
-// Components
-const components = listDirs(COMPONENTS_DIR);
+// Components — only count directories with a .tsx entry point (excludes incomplete stubs like Toggle)
+const components = listDirs(COMPONENTS_DIR).filter(name => {
+  const p = join(COMPONENTS_DIR, name);
+  return existsSync(join(p, `${name}.tsx`)) || existsSync(join(p, 'index.tsx'));
+});
 
 // Skill files
 const skillRootFiles = existsSync(SKILL_DIR)

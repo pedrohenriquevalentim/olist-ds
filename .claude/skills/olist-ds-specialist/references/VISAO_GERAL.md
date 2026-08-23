@@ -94,18 +94,20 @@ Para caminhos dos arquivos, leia `MAPA_FONTES.md`.
 
 ---
 
-## Arquivos de Referência (15 total)
+## Arquivos de Referência (17 total)
 
 | Arquivo | O que contém | Quando consultar |
 |---|---|---|
 | **VISAO_GERAL.md** | Este arquivo — mapa de navegação | Sempre primeiro |
 | **FIGMA_CONFIG.md** | libraryKeys, componentKeys, workflow de busca e import | **ANTES** de usar `search_design_system` |
 | **TEMPLATES_PRODUTO.md** | **Antes de criar telas no Figma** | Zonas de layout por produto (ERP, Envios, Hub, Conta Digital) |
+| **HARNEES_TELAS.md** | Restrições executáveis por zona, gate pré-construção, limites de componentes | **ANTES** de criar qualquer frame no Figma |
 | **CORES.md** | Paleta de cores, regras, DO/DON'T | Ao escolher cores |
 | **TIPOGRAFIA.md** | Tokens de tipografia (tamanho, peso, altura) | Ao estilizar texto |
 | **GLOSSARIO_PAPEIS_TEXTO.md** | Definição dos 10 papéis de texto (Heading, Label, etc.) | Ao nomear textos na UI |
-| **UX_WRITING.md** | **NOVO** — Protocolo de triagem, 4 pilares, 12 tipos de texto, tom B2B/B2C, abrasileiramento | Ao criar ou revisar qualquer copy de UI |
+| **UX_WRITING.md** | Protocolo de triagem, 4 pilares, 12 tipos de texto, tom B2B/B2C, abrasileiramento | Ao criar ou revisar qualquer copy de UI |
 | **ESPACAMENTO.md** | Grid de 4px, padding, margin | Ao definir layout |
+| **GOVERNANCA_TOKENS.md** | Intenção de uso por família de token (purpose, useWhen, doNotUseWhen) | Ao escolher entre tokens semânticos parecidos |
 | **COMPONENTES.md** | Props, tokens, estados de cada componente | Ao usar/criar componentes |
 | **PADROES.md** | 5 padrões de página com ASCII diagrams | Ao criar telas completas |
 | **SDD_PARA_TELA.md** | 10 passos para traduzir SDD em UI | Ao ler SDD/PRD |
@@ -115,7 +117,7 @@ Para caminhos dos arquivos, leia `MAPA_FONTES.md`.
 
 ---
 
-## Novidades (v2.0 — 2026-05-04)
+## Novidades (v3.16 — 2026-08-22)
 
 ### Arquivos Novos:
 1. **`GLOSSARIO_PAPEIS_TEXTO.md`** — Define exatamente como nomear cada tipo de texto na UI
@@ -203,4 +205,4 @@ COMPONENTES.md
 
 ---
 
-**Última atualização:** 2026-06-03 (v3.0 — workflow use_figma, libraryKeys como fonte da verdade, plugin JSON descontinuado)
+**Última atualização:** 2026-08-22 (v3.16 — /ds-construir adicionado; metadata.json como 6º arquivo obrigatório; HARNEES_TELAS.md e GOVERNANCA_TOKENS.md adicionados à tabela de referências; fluxo de release via PR documentado)

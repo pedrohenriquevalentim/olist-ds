@@ -170,12 +170,12 @@ Qual tipo de tarefa?
     ├── Criar tela no Figma (workflow principal)
     │   → Ler FIGMA_CONFIG.md (identifiers, libraries)
     │   → Ler TEMPLATES_PRODUTO.md (zonas de layout por produto)
-    │   → Ler HARNESS_TELAS.md (restrições executáveis — gate pré-construção)
+    │   → Ler HARNEES_TELAS.md (restrições executáveis — gate pré-construção)
     │   → Ler SDD_PARA_TELA.md + SDD_AVANCADO.md (se aplicável)
     │   → Ler GLOSSARIO_PAPEIS_TEXTO.md (nomenclatura de layers)
     │   → Ler CORES.md + TIPOGRAFIA.md + ESPACAMENTO.md
     │   → ANTES de criar: listar todas as telas → aguardar validação
-    │   → Para cada tela validada: executar gate obrigatório do HARNESS_TELAS.md
+    │   → Para cada tela validada: executar gate obrigatório do HARNEES_TELAS.md
     │   → Para cada tela validada:
     │     1. search_design_system(componentes necessários, includeLibraryKeys: searchPriority)
     │     2. importComponentSetByKeyAsync(componentKey) → instâncias reais
@@ -270,7 +270,7 @@ Qual tipo de tarefa?
 | `VISAO_GERAL.md` | **Sempre primeiro** | Mapa de navegação, identidade visual, princípios |
 | `FIGMA_CONFIG.md` | **Antes de usar Figma MCP** | libraryKeys, componentKeys, workflow de busca e import |
 | `TEMPLATES_PRODUTO.md` | **Antes de criar telas no Figma** | Zonas de layout por produto (ERP, Envios, Hub, Conta Digital) |
-| `HARNESS_TELAS.md` | **Antes de criar qualquer frame no Figma** | Restrições executáveis: o que pode/não pode em cada zona, limites de componentes, primitivos permitidos, nomenclatura de layers, estados obrigatórios |
+| `HARNEES_TELAS.md` | **Antes de criar qualquer frame no Figma** | Restrições executáveis: o que pode/não pode em cada zona, limites de componentes, primitivos permitidos, nomenclatura de layers, estados obrigatórios |
 | `CORES.md` | Criando/revisando UI | Sistema de cores com regras de uso |
 | `TIPOGRAFIA.md` | Criando/revisando UI | Tokens de tipografia (tamanho, peso, altura) |
 | `GLOSSARIO_PAPEIS_TEXTO.md` | **Antes de nomear textos** | 10 papéis de texto (Heading, Label, Error, etc.) |
@@ -294,7 +294,7 @@ Qual tipo de tarefa?
    - Use `searchPriority` como `includeLibraryKeys` em todo `search_design_system`
    - `searchPriority` tem apenas `design system (base)` — única library de referência desde 2026-07-03 (hierarquia anterior de AI Components/ERP components/etc. foi descontinuada, dados preservados em `blockedLibraries`)
    - Ignore resultados de `blockedLibraries`
-4. **Leia `HARNESS_TELAS.md` antes de criar qualquer frame no Figma:**
+4. **Leia `HARNEES_TELAS.md` antes de criar qualquer frame no Figma:**
    - Execute o gate pré-construção (Seção 1) — só avance com todos os itens marcados
    - Verifique limites por tela (Seção 2) antes de instanciar componentes
    - Identifique o padrão da Zona D (Seção 3) antes de montar o conteúdo
@@ -387,12 +387,12 @@ Você:
 2. Ler figma-config.json (libraryKeys, searchPriority, blockedLibraries)
 3. Ler FIGMA_CONFIG.md (workflow de busca e import)
 4. Ler TEMPLATES_PRODUTO.md (zonas de layout)
-5. Ler HARNESS_TELAS.md (restrições executáveis)
+5. Ler HARNEES_TELAS.md (restrições executáveis)
 6. Ler SDD_PARA_TELA.md + SDD_AVANCADO.md (se aplicável)
 7. Ler GLOSSARIO_PAPEIS_TEXTO.md (nomenclatura de layers)
 8. Listar TODAS as telas identificadas → aguardar validação do usuário
 9. Para cada tela validada:
-   a. Executar gate pré-construção do HARNESS_TELAS.md
+   a. Executar gate pré-construção do HARNEES_TELAS.md
    b. search_design_system(componente, includeLibraryKeys: searchPriority)
    c. importComponentSetByKeyAsync(componentKey) → instância real
    d. use_figma → construir frame com instâncias + fills/tokens reais
@@ -409,7 +409,7 @@ Você:
 
 10. Checklist final:
    - Auto Layout em 100% dos frames
-   - Nomes semânticos seguindo padrão do HARNESS_TELAS.md Seção 5
+   - Nomes semânticos seguindo padrão do HARNEES_TELAS.md Seção 5
    - Instâncias reais do DS (sem primitivos manuais para componentes existentes)
    - layoutSizing definido após appendChild
    - Todos os estados obrigatórios do padrão de página entregues
@@ -759,4 +759,4 @@ Erros comuns e suas correções — manter para evitar regressão:
 **Mudanças v3.6:** Versão anterior.
 **Mudanças v3.3:** Pasta `decisions/` criada dentro da skill com 10 decisões de design (5 técnicas, 5 UX/Design); `decisions/INDEX.md` adicionado como leitura obrigatória no Fluxo de Decisão e nas Regras Críticas; tabela de referências separada em `decisions/` e `references/`.
 **Mudanças v3.2:** Adição do `UX_WRITING.md` como referência de copy e tom de voz; novo ramo no Fluxo de Decisão para criação/revisão de textos de UI; seção 10 de UX Writing no `CHECKLIST_REVISAO.md`; regra crítica 5 sobre consultar `UX_WRITING.md` ao criar textos.
-**Mudanças v3.1:** Adição do `HARNESS_TELAS.md` como gate pré-construção obrigatório no fluxo de criação de telas no Figma; integração nas regras críticas e no Caso 4.
+**Mudanças v3.1:** Adição do `HARNEES_TELAS.md` como gate pré-construção obrigatório no fluxo de criação de telas no Figma; integração nas regras críticas e no Caso 4.
