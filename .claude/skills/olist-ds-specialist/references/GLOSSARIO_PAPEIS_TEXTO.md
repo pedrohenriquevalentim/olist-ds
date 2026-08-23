@@ -8,16 +8,16 @@
 
 | Papel | Definição | Exemplo de uso | Tokens típicos |
 |---|---|---|---|
-| **Heading** | Título principal da tela. Apenas 1 por tela. | "Pedidos", "Configurações de Conta" | `--font-size-24px`, `--font-weight-bold`, `--color-gray-900` |
+| **Heading** | Título principal da tela. Apenas 1 por tela. | "Pedidos", "Configurações de Conta" | `--font-size-24px`, `--font-weight-bold`, `--color-gray-gray-900` |
 | **Subheading** | Texto de apoio logo abaixo do Heading. Contexto ou descrição curta. | "Gerencie todos os pedidos da sua loja" | `--font-size-14px`, `--font-weight-regular`, `--color-gray-500` |
-| **Section Title** | Título de uma seção dentro da tela. Pode haver múltiplos. | "Filtros", "Pedidos Recentes", "Histórico" | `--font-size-16px`, `--font-weight-semibold`, `--color-gray-900` |
-| **Body** | Parágrafo de conteúdo. Texto descritivo, instruções longas. | "Para alterar o status, selecione os pedidos..." | `--font-size-14px`, `--font-weight-regular`, `--color-gray-900` |
+| **Section Title** | Título de uma seção dentro da tela. Pode haver múltiplos. | "Filtros", "Pedidos Recentes", "Histórico" | `--font-size-16px`, `--font-weight-600`, `--color-gray-gray-900` |
+| **Body** | Parágrafo de conteúdo. Texto descritivo, instruções longas. | "Para alterar o status, selecione os pedidos..." | `--font-size-14px`, `--font-weight-regular`, `--color-gray-gray-900` |
 | **Label** | Rótulo de campo de formulário. Identifica o input. | "Nome do produto", "E-mail", "CPF" | `--font-size-14px`, `--font-weight-medium`, `--color-gray-700` |
 | **Helper** | Texto auxiliar abaixo de um campo. Instrução ou dica. | "Digite apenas números", "Mínimo 8 caracteres" | `--font-size-12px`, `--font-weight-regular`, `--color-gray-500` |
-| **Error** | Mensagem de erro de validação. Aparece quando campo está inválido. | "E-mail inválido", "Campo obrigatório" | `--font-size-12px`, `--font-weight-regular`, `--color-red-500` |
+| **Error** | Mensagem de erro de validação. Aparece quando campo está inválido. | "E-mail inválido", "Campo obrigatório" | `--font-size-12px`, `--font-weight-regular`, `--color-red-red-500` |
 | **Caption** | Texto pequeno e secundário. Metadados, timestamps, legendas. | "Atualizado há 2 minutos", "12/04/2026 14:32" | `--font-size-12px`, `--font-weight-regular`, `--color-gray-500` |
-| **CTA Label** | Texto dentro de botão primário ou secundário. Ação clara. | "Salvar", "Aprovar Pedidos", "Exportar CSV" | `--font-size-14px`, `--font-weight-semibold`, cor do botão |
-| **Link** | Texto clicável inline. Sempre sublinhado ao hover. | "Ver detalhes", "Esqueci minha senha" | `--font-size-14px`, `--font-weight-regular`, `--color-blue-500` |
+| **CTA Label** | Texto dentro de botão primário ou secundário. Ação clara. | "Salvar", "Aprovar Pedidos", "Exportar CSV" | `--font-size-14px`, `--font-weight-600`, cor do botão |
+| **Link** | Texto clicável inline. Sempre sublinhado ao hover. | "Ver detalhes", "Esqueci minha senha" | `--font-size-14px`, `--font-weight-regular`, `--color-blue-blue-500` |
 
 ---
 

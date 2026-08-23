@@ -33,15 +33,17 @@ Pesos carregados: 200, 300, 400, 500, 600, 700, 800.
 
 ## Escala de Pesos
 
-| Token | Valor | Uso |
-|---|---|---|
-| `--font-weight-extra-light` | 200 | Apenas decorativo (evitar no ERP) |
-| `--font-weight-light` | 300 | Números grandes de exibição |
-| `--font-weight-regular` | 400 | **Texto corpo padrão**, descrições, células de tabela |
-| `--font-weight-medium` | 500 | Labels de input, labels de formulário, ênfase sutil |
-| `--font-weight-semibold` | 600 | **Headers, texto de botão, headers de tabela, badges** |
-| `--font-weight-bold` | 700 | Títulos de página, ênfase forte, métricas |
-| `--font-weight-extra-bold` | 800 | Apenas marketing (evitar no ERP) |
+> ⚠️ Nem todos os pesos têm alias nomeado no CSS. Use `--font-weight-600` para semibold — o alias `--font-weight-600` **não existe**.
+
+| Token correto | Alias | Valor | Uso |
+|---|---|---|---|
+| `--font-weight-200` | — | 200 | Apenas decorativo (evitar no ERP) |
+| `--font-weight-300` | `--font-weight-light` | 300 | Números grandes de exibição |
+| `--font-weight-400` | `--font-weight-regular` | 400 | **Texto corpo padrão**, descrições, células de tabela |
+| `--font-weight-500` | `--font-weight-medium` | 500 | Labels de input, labels de formulário, ênfase sutil |
+| `--font-weight-600` | — | 600 | **Headers, texto de botão, headers de tabela, badges** |
+| `--font-weight-700` | `--font-weight-bold` | 700 | Títulos de página, ênfase forte, métricas |
+| `--font-weight-800` | — | 800 | Apenas marketing (evitar no ERP) |
 
 ## Escala de Altura de Linha
 
@@ -106,7 +108,7 @@ Cada papel de texto (definido em `GLOSSARIO_PAPEIS_TEXTO.md`) tem uma combinaç�
 .sectionTitle {
   font-family: var(--font-family-jakarta), sans-serif;
   font-size: var(--font-size-16px);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-600);
   line-height: var(--font-line-height-24px);
   color: var(--color-gray-900);
 }
@@ -144,7 +146,7 @@ Cada papel de texto (definido em `GLOSSARIO_PAPEIS_TEXTO.md`) tem uma combinaç�
   font-size: var(--font-size-12px);
   font-weight: var(--font-weight-regular);
   line-height: var(--font-line-height-16px);
-  color: var(--color-red-500);
+  color: var(--color-text-feedback-negative-subtle); /* --color-red-red-500 via semântico */
 }
 
 /* Caption — texto secundário (timestamps, metadados) */
@@ -160,7 +162,7 @@ Cada papel de texto (definido em `GLOSSARIO_PAPEIS_TEXTO.md`) tem uma combinaç�
 .ctaLabel {
   font-family: var(--font-family-jakarta), sans-serif;
   font-size: var(--font-size-14px);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-600);
   line-height: var(--font-line-height-20px);
   /* cor herdada do botão */
 }
@@ -171,7 +173,7 @@ Cada papel de texto (definido em `GLOSSARIO_PAPEIS_TEXTO.md`) tem uma combinaç�
   font-size: var(--font-size-14px);
   font-weight: var(--font-weight-regular);
   line-height: var(--font-line-height-20px);
-  color: var(--color-blue-500);
+  color: var(--color-text-enabled-brand); /* --color-blue-blue-600 via semântico */
   text-decoration: none;
 }
 

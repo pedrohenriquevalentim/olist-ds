@@ -164,12 +164,33 @@ Quando um componente não existe no inventário DS, o Claude pode construir com 
 
 Quando construir um componente custom (Caso 5 do SKILL.md):
 
-1. **Fills:** somente cores de `CORES.md`
-2. **Tipografia:** somente tokens de `TIPOGRAFIA.md` com `Plus Jakarta Sans`
+1. **Fills e strokes:** use valores RGB 0–1 de `CORES.md` → coluna "Figma RGB" ou `TOKEN_CATALOG.md` → Seção 1
+
+   ```javascript
+   // ✅ Fundo de card
+   frame.fills = [{ type: 'SOLID', color: { r: 0.988, g: 0.984, b: 0.973 } }]; // gray-gray-0
+   // ✅ Borda de input
+   frame.strokes = [{ type: 'SOLID', color: { r: 0.686, g: 0.678, b: 0.635 } }]; // gray-gray-300
+   // ✅ Stroke width
+   frame.strokeWeight = 1;
+   frame.strokeAlign = 'INSIDE';
+   ```
+
+2. **Tipografia:** somente tokens de `TIPOGRAFIA.md` com `Plus Jakarta Sans`. Carregue a fonte antes de editar:
+
+   ```javascript
+   await figma.loadFontAsync({ family: 'Plus Jakarta Sans', style: 'Regular' });
+   textNode.fontName = { family: 'Plus Jakarta Sans', style: 'SemiBold' };
+   textNode.fontSize = 14;
+   textNode.lineHeight = { value: 20, unit: 'PIXELS' };
+   ```
+
 3. **Espaçamento:** somente múltiplos de 4px da escala de `ESPACAMENTO.md`
-4. **Border-radius:** somente `4px` (pequeno), `8px` (padrão), `12px` (card grande), `9999px` (pill)
+4. **Border-radius:** somente `4` (pequeno), `8` (padrão), `12` (card grande), `9999` (pill) — valores em pixels inteiros
 5. **Nome do layer:** sufixo `— custom` obrigatório (ex: `Card/PlanCard — custom`)
 6. **Documentação:** comentário no Figma com: nome do componente ausente, sugestão de criação no DS
+
+> ⚠️ Na Figma Plugin API, **não existe `var(--token)`** — sempre use valores numéricos RGB. A coluna "Figma RGB" em `CORES.md` e em `TOKEN_CATALOG.md` → Seção 1 já entrega os valores prontos.
 
 ---
 

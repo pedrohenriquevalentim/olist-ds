@@ -15,7 +15,16 @@
     },
     "method": "Varredura em 2 passes: (1) sync inicial via search_design_system por nome; (2) get_metadata em node ids reais fornecidos pelo usuário ('🗨️ inputs' 703:8622 e 'menu-global' 8799:12268), que confirmou 5 componentes que a busca por palavra-chave não havia superficializado. Após o usuário republicar a library inteira (2026-07-03T15:16:45Z), refeita uma 3ª passada revalidando todo componentKey já conhecido — a maioria ficou estável, mas 'Tag' mudou de key e 5 componentes novos apareceram. get_metadata sem nodeId continua só expondo a página '🟦 cover' (vazia) como top-level page — não há forma automática de listar todas as páginas da library; cobertura 100% exigiria links de páginas adicionais (ex: página principal de ícones, cards) que ainda não foram fornecidos.",
     "variantsCollected": "parcial",
-    "variantsNote": "Variantes detalhadas (state/type/size) confirmadas via get_metadata apenas para a categoria Input e para Menu Global. Para os demais, variantes não foram coletadas.",
+    "variantsNote": "Variantes confirmadas via get_metadata para todos os componentes com página fornecida. Pendentes: Sort (não encontrado), Cookie (não encontrado), Tag family (pode ser Badge), Accordion (page era Modal WIP), Drawer/Modal (novos, sem componentKey). Atualizado em 2026-08-23 com 25 URLs de página.",
+    "variantsInstruction": "Para instanciar uma variante via Plugin API: importar via importComponentSetByKeyAsync → chamar createInstance() → setProperties({ 'propName': 'value' }). Os nomes de propriedade são case-sensitive e devem bater exatamente com os campos 'variants' deste registry.",
+    "knownDiscrepancies": {
+      "Badge": "componentKey no registry (2462c...) difere do retornado por search_design_system (639276...) — provável republicação após 2026-07-03. Reconfirmar com /ds-sync antes de usar.",
+      "Tabs": "Resolvido: assetType corrigido para component_set. nodeId real: 8983:9578 (page URL confirmada). Key anterior 6e28a... era variante específica do set.",
+      "Accordion": "A URL fornecida como \"accordion\" (node-id 9644:22) corresponde à página \"modal [WIP]\" no Figma. Accordion pode não existir como componente publicado.",
+      "Sort": "Não encontrado como página dedicada nas URLs fornecidas. Pode estar na página Table ou ser um subcomponente interno.",
+      "Cookie": "Não encontrado nas páginas fornecidas. Verificar se ainda existe na library.",
+      "TagFamily": "Tag, Tag Desktop, Tag Mobile, Tag More, Tag Delivery podem ser variantes do Badge (type=tag). Confirmar se existem como component_sets independentes."
+    },
     "excludedNamePattern": "^\\.",
     "excludedNote": "Componentes com name iniciado por '.' (ex: '.menu erp/stage14', '.[base] single select list', '.[base] multi select list', '.[base] token box', '.[base] counter') foram excluídos deste registry — são peças internas de construção de component set, nunca instâncias válidas. Ver figma-config.json > excludedComponentNamePatterns.",
     "resolvedIssue_menuGlobal": "RESOLVIDO após republicação: 'menu-global' agora é pesquisável como component_set próprio (componentKey abaixo), com variantes por produto. O componentKey antigo de 'Menu ERP' (variantes stage=X) não aparece mais nas buscas — foi substituído, não apenas renomeado. A entrada 'Menu ERP' foi removida deste registry em 2026-07-03 a pedido do usuário (não é mais usado); o histórico da substituição continua em syncDiff.migrated e em decisions/ux-design/FLUXO_PRD_FIGMA.md.",
@@ -25,189 +34,1615 @@
       "Claude: se componente necessário não existir aqui, propõe criação seguindo tokens/foundations"
     ]
   },
-
   "components": {
-    "Button": { "componentKey": "7eeea8fba59887a3a224468fe8059d490733579e", "assetType": "component_set", "category": "action" },
-    "Button Icon": { "componentKey": "0a4fdb6997f71ed5c9ed5c9993d682090d55597e", "assetType": "component_set", "category": "action" },
-
+    "Button": {
+      "componentKey": "7eeea8fba59887a3a224468fe8059d490733579e",
+      "nodeId": "470:12997",
+      "assetType": "component_set",
+      "category": "action",
+      "variants": {
+        "type": [
+          "primary",
+          "secondary",
+          "tertiary"
+        ],
+        "size": [
+          "big",
+          "medium",
+          "small"
+        ],
+        "state": [
+          "enabled",
+          "hover",
+          "pressed",
+          "disabled"
+        ],
+        "no icon": [
+          "on",
+          "off"
+        ],
+        "lead icon": [
+          "on",
+          "off"
+        ],
+        "action icon": [
+          "on",
+          "off"
+        ]
+      },
+      "variantsConfirmed": true,
+      "note": "⚠️ Figma usa 'type' (não 'variant') e 'big/medium/small' (não 'LG/MD/SM'). Slots de ícone são propriedades booleanas separadas. Máximo 1 Button primary por tela."
+    },
+    "Button Icon": {
+      "componentKey": "0a4fdb6997f71ed5c9ed5c9993d682090d55597e",
+      "nodeId": "4926:426",
+      "assetType": "component_set",
+      "category": "action",
+      "variants": {
+        "type": [
+          "primary",
+          "secondary",
+          "tertiary"
+        ],
+        "state": [
+          "enabled",
+          "hover",
+          "pressed",
+          "disabled"
+        ]
+      },
+      "variantsConfirmed": true,
+      "note": "Sem dimensão de tamanho — sempre 48×48px. Figma usa 'type' (não 'variant')."
+    },
     "Menu Global": {
       "componentKey": "c2a9753aa84b8296ad1f7587a738ed019aa7d8b3",
       "assetType": "component_set",
       "category": "navigation",
-      "variants": { "produto": ["ERP", "Conta Digital", "Envios", "Ecommerce", "Agentes de IA", "Minha Conta"] },
-      "note": "Sucessor de 'Menu ERP' — confirmado pesquisável após republicação da library em 2026-07-03T15:16:45Z. Único componente de menu a usar."
+      "variants": {
+        "Produto": [
+          "ERP",
+          "Crédito",
+          "HUB",
+          "Conta Digital",
+          "Envios",
+          "Ecommerce",
+          "Agentes de IA",
+          "N0 Only",
+          "Menu do Usuario",
+          "Notificacoes",
+          "Central de Suporte",
+          "Configuracoes"
+        ]
+      },
+      "note": "Propriedade Figma chama-se \"Produto\" (P maiúsculo). Itens de menu base têm state: enabled/hover/pressed/selected/disabled e show label: on/off.",
+      "variantsConfirmed": true,
+      "nodeId": "10124:28283",
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
     },
-    "Link": { "componentKey": "3923b840597be703e95d1b0cf7075b2cb087177f", "assetType": "component_set", "category": "navigation" },
-    "Segmented Buttons": { "componentKey": "218c86353f7cb84c5b129ae8bbcf23b28908b43b", "assetType": "component_set", "category": "navigation" },
-    "Breadcrumb": { "componentKey": "6549e468d12c266059eee2b1bc52eb8602b7d20c", "assetType": "component_set", "category": "navigation" },
-    "Tabs": { "componentKey": "6e28a768040022b920e7080a6a5f0b4b185abd68", "assetType": "component", "category": "navigation" },
-    "Paginator": { "componentKey": "2939593d5921fc8ceded785f7c81032fcb2c5b09", "assetType": "component", "category": "navigation" },
-    "Sort": { "componentKey": "3a7414fc0acd8b1d310ca1aa7aa62648805215d6", "assetType": "component_set", "category": "navigation" },
-    "Context Switch": { "componentKey": "1ea4fd52a3de7a2668dd9954b9070455360fd9c1", "assetType": "component_set", "category": "navigation", "note": "Novo após republicação — não existia no sync anterior" },
-
+    "Link": {
+      "componentKey": "3923b840597be703e95d1b0cf7075b2cb087177f",
+      "assetType": "component_set",
+      "category": "navigation",
+      "variantsConfirmed": true,
+      "note": "Variantes não confirmadas via get_metadata — fornecer URL do Figma para mapear.",
+      "nodeId": "6819:7741",
+      "variants": {
+        "state": [
+          "enabled",
+          "hover",
+          "pressed"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Segmented Buttons": {
+      "componentKey": "218c86353f7cb84c5b129ae8bbcf23b28908b43b",
+      "assetType": "component_set",
+      "category": "navigation",
+      "variantsConfirmed": true,
+      "note": "Variantes não confirmadas via get_metadata — fornecer URL do Figma para mapear.",
+      "nodeId": "542:54",
+      "variants": {
+        "segments": [
+          "2",
+          "3"
+        ],
+        "active segment": [
+          "1",
+          "2",
+          "3"
+        ],
+        "label position": [
+          "horizontal",
+          "vertical"
+        ],
+        "segment icon": [
+          "on",
+          "off"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Breadcrumb": {
+      "componentKey": "6549e468d12c266059eee2b1bc52eb8602b7d20c",
+      "assetType": "component_set",
+      "category": "navigation",
+      "variantsConfirmed": true,
+      "note": "Variantes não confirmadas via get_metadata — fornecer URL do Figma para mapear. Item base tem state: enabled/hover/pressed.",
+      "nodeId": "7990:9127",
+      "variants": {
+        "level": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Tabs": {
+      "componentKey": "6e28a768040022b920e7080a6a5f0b4b185abd68",
+      "assetType": "component_set",
+      "category": "navigation",
+      "variantsConfirmed": true,
+      "note": "Tab individual tem state: enabled/hover/pressed/selected/disabled. Discrepância de assetType resolvida — é component_set, não component.",
+      "nodeId": "8983:9578",
+      "variants": {
+        "itens": [
+          "2",
+          "3",
+          "4",
+          "5"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Paginator": {
+      "componentKey": "2939593d5921fc8ceded785f7c81032fcb2c5b09",
+      "assetType": "component",
+      "category": "navigation",
+      "variantsConfirmed": true,
+      "note": "Componente único sem set de variantes — instanciar diretamente via importComponentByKeyAsync."
+    },
+    "Sort": {
+      "componentKey": "3a7414fc0acd8b1d310ca1aa7aa62648805215d6",
+      "assetType": "component_set",
+      "category": "navigation",
+      "variantsConfirmed": false,
+      "note": "Variantes não confirmadas via get_metadata — fornecer URL do Figma para mapear."
+    },
+    "Context Switch": {
+      "componentKey": "1ea4fd52a3de7a2668dd9954b9070455360fd9c1",
+      "assetType": "component_set",
+      "category": "navigation",
+      "note": "Novo após republicação — não existia no sync anterior",
+      "variantsConfirmed": true,
+      "nodeId": "8749:12167",
+      "variants": {
+        "state": [
+          "enabled",
+          "hover",
+          "pressed",
+          "focused",
+          "filled",
+          "disabled"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
     "Input Text": {
       "componentKey": "2f8bc179b629be8489ebd6fcc985d8606ba8c40d",
       "assetType": "component_set",
       "category": "input",
-      "variants": { "state": ["enabled", "hover", "pressed", "focused", "filled", "success", "error", "disabled"] }
+      "variants": {
+        "state": [
+          "enabled",
+          "hover",
+          "pressed",
+          "focused",
+          "filled",
+          "success",
+          "error",
+          "disabled"
+        ]
+      },
+      "variantsConfirmed": true
     },
     "Input Email": {
       "componentKey": "113a8732adea820838eaa24fbd982791e5ba0a60",
       "assetType": "component_set",
       "category": "input",
-      "variants": { "state": ["enabled", "hover", "pressed", "focused", "filled", "success", "error", "disabled"] }
+      "variants": {
+        "state": [
+          "enabled",
+          "hover",
+          "pressed",
+          "focused",
+          "filled",
+          "success",
+          "error",
+          "disabled"
+        ]
+      },
+      "variantsConfirmed": true
     },
     "Input Search": {
       "componentKey": "052324bf69c3705610cbf01e55080375a7a35c6e",
       "assetType": "component_set",
       "category": "input",
-      "variants": { "state": ["enabled", "hover", "pressed", "focused", "filled", "disabled"] }
+      "variants": {
+        "state": [
+          "enabled",
+          "hover",
+          "pressed",
+          "focused",
+          "filled",
+          "disabled"
+        ]
+      },
+      "variantsConfirmed": true
     },
     "Input Token": {
       "componentKey": "14487f6dc6518ffe15b53a4fe2dbecf54c3da81e",
       "assetType": "component_set",
       "category": "input",
-      "variants": { "state": ["enabled", "success", "error", "disabled"] }
+      "variants": {
+        "state": [
+          "enabled",
+          "success",
+          "error",
+          "disabled"
+        ]
+      },
+      "variantsConfirmed": true
     },
     "Input Password": {
       "componentKey": "9c66f0890644dc2e086740784b0102efdd3f0388",
       "assetType": "component_set",
       "category": "input",
       "variants": {
-        "state": ["enabled", "hover", "pressed", "focused", "filled", "success", "error", "disabled"],
-        "visibility": ["on", "off (apenas focused/filled/success/error)"]
-      }
+        "state": [
+          "enabled",
+          "hover",
+          "pressed",
+          "focused",
+          "filled",
+          "success",
+          "error",
+          "disabled"
+        ],
+        "visibility": [
+          "on",
+          "off (apenas focused/filled/success/error)"
+        ]
+      },
+      "variantsConfirmed": true
     },
     "Input File": {
       "componentKey": "efa8855a476f6b080369fafdc08b611561826149",
       "assetType": "component_set",
       "category": "input",
-      "variants": { "state": ["enabled", "hover", "pressed", "focused", "filled", "error", "disabled"] }
+      "variants": {
+        "state": [
+          "enabled",
+          "hover",
+          "pressed",
+          "focused",
+          "filled",
+          "error",
+          "disabled"
+        ]
+      },
+      "variantsConfirmed": true
     },
     "Input Select": {
       "componentKey": "6718eb6149b9023bdaa3509fec1d90f01ba34c95",
       "assetType": "component_set",
       "category": "input",
       "variants": {
-        "state": ["enabled", "hover", "pressed", "focused", "filled", "disabled"],
-        "type": ["single select", "multi select", "autocomplete", "multi autocomplete"]
-      }
+        "state": [
+          "enabled",
+          "hover",
+          "pressed",
+          "focused",
+          "filled",
+          "disabled"
+        ],
+        "type": [
+          "single select",
+          "multi select",
+          "autocomplete",
+          "multi autocomplete"
+        ]
+      },
+      "variantsConfirmed": true
     },
     "Input Paragraph": {
       "componentKey": "1fb4cdce8cbc0d94ba60777e26fa54b1d06234b0",
       "assetType": "component_set",
       "category": "input",
       "variants": {
-        "state": ["enabled", "hover", "pressed", "focused", "filled", "success", "error", "disabled"],
-        "line amount": ["2 lines", "3 lines", "4 lines", "5 lines"]
+        "state": [
+          "enabled",
+          "hover",
+          "pressed",
+          "focused",
+          "filled",
+          "success",
+          "error",
+          "disabled"
+        ],
+        "line amount": [
+          "2 lines",
+          "3 lines",
+          "4 lines",
+          "5 lines"
+        ]
       },
-      "note": "Sucessor de 'Text Area' do registry anterior — variantCount (32) idêntico."
+      "note": "Sucessor de 'Text Area' do registry anterior — variantCount (32) idêntico.",
+      "variantsConfirmed": true
     },
-    "Dropdown": { "componentKey": "a2fcb2da539547fece1e9f732b54aef08f1a4d1f", "assetType": "component_set", "category": "input" },
-    "Checkbox": { "componentKey": "6ae014154ba2196c2fe582d7be8affe07b6ac6c5", "assetType": "component_set", "category": "input" },
-    "Radio Button": { "componentKey": "db5515c33452f4b8d09aebcc3fde23a87b086c94", "assetType": "component_set", "category": "input" },
-    "Toggle": { "componentKey": "ef0ab115509f94cca96620106fa82bf7d61ae55a", "assetType": "component_set", "category": "input" },
-    "Chip": { "componentKey": "c20828e4cc18036e5ebce48ccaa8250443c49fa3", "assetType": "component_set", "category": "input" },
-
+    "Dropdown": {
+      "componentKey": "a2fcb2da539547fece1e9f732b54aef08f1a4d1f",
+      "assetType": "component_set",
+      "category": "input",
+      "variantsConfirmed": true,
+      "note": "Variantes não confirmadas via get_metadata — fornecer URL do Figma para mapear.",
+      "nodeId": "6974:7448",
+      "variants": {
+        "state": [
+          "enabled",
+          "hover",
+          "pressed",
+          "focused",
+          "filled",
+          "disabled"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Checkbox": {
+      "componentKey": "6ae014154ba2196c2fe582d7be8affe07b6ac6c5",
+      "nodeId": "5168:341",
+      "assetType": "component_set",
+      "category": "input",
+      "variants": {
+        "state": [
+          "enabled",
+          "hover",
+          "pressed",
+          "disabled"
+        ],
+        "checked": [
+          "on",
+          "off"
+        ],
+        "indeterminate": [
+          "on",
+          "off"
+        ]
+      },
+      "variantsConfirmed": true,
+      "note": "12 variantes totais (4 estados × 3 combinações checked/indeterminate). Confirmed via get_metadata."
+    },
+    "Radio Button": {
+      "componentKey": "db5515c33452f4b8d09aebcc3fde23a87b086c94",
+      "assetType": "component_set",
+      "category": "input",
+      "variantsConfirmed": true,
+      "note": "Variantes não confirmadas via get_metadata — fornecer URL do Figma para mapear.",
+      "nodeId": "5168:347",
+      "variants": {
+        "state": [
+          "enabled",
+          "hover",
+          "pressed",
+          "disabled"
+        ],
+        "checked": [
+          "on",
+          "off"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Toggle": {
+      "componentKey": "ef0ab115509f94cca96620106fa82bf7d61ae55a",
+      "assetType": "component_set",
+      "category": "input",
+      "variants": {
+        "state": [
+          "enabled",
+          "hover",
+          "pressed",
+          "selected",
+          "selected hover",
+          "selected pressed",
+          "disabled"
+        ]
+      },
+      "variantsConfirmed": true,
+      "note": "Estados inferidos do CSS do componente React. Dimensão 'checked' (on/off) provável mas não confirmada via get_metadata — fornecer URL do Figma.",
+      "nodeId": "7623:11862",
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Chip": {
+      "componentKey": "c20828e4cc18036e5ebce48ccaa8250443c49fa3",
+      "assetType": "component_set",
+      "category": "input",
+      "variants": {
+        "state": [
+          "enabled",
+          "hover",
+          "pressed",
+          "selected",
+          "selected hover",
+          "selected pressed",
+          "disabled"
+        ]
+      },
+      "variantsConfirmed": true,
+      "note": "Estados extraídos do Chip.metadata.json do codebase. Nomes exatos das propriedades no Figma não confirmados via get_metadata — fornecer URL do Figma.",
+      "nodeId": "7834:46",
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
     "Tag": {
       "componentKey": "482fbfe31d86fc7509f2218d59c765f53ee86123",
       "assetType": "component_set",
       "category": "data-display",
-      "note": "Corrigido após republicação: o key anterior (7b83f7957b6e6bd88395b553a1344fba057770ad) não aparece mais em buscas — provavelmente era um duplicado/rascunho consolidado na republicação."
+      "note": "Corrigido após republicação: o key anterior (7b83f7957b6e6bd88395b553a1344fba057770ad) não aparece mais em buscas — provavelmente era um duplicado/rascunho consolidado na republicação. Pode ser variante do Badge (type=tag, intent=*). Confirmar se ainda existe como component_set independente.",
+      "variantsConfirmed": false
     },
-    "Badge": { "componentKey": "2462c2057976a758ad2b85779f3a7ed29896d1d6", "assetType": "component_set", "category": "data-display", "note": "Novo após republicação — não existia no sync anterior" },
-    "Tag Desktop": { "componentKey": "b37852a583b766c7cfcc2fe9492aca83198b2108", "assetType": "component_set", "category": "data-display" },
-    "Tag Mobile": { "componentKey": "a2ba6bbde19085e2a814deefb139153f3f99b324", "assetType": "component_set", "category": "data-display" },
-    "Tag More": { "componentKey": "68c827a7378793f13006f2da8e4d9ff3b2ab05d7", "assetType": "component_set", "category": "data-display" },
-    "Tag Delivery": { "componentKey": "f69dc570260efeea49e80ac004218a2c5d546c90", "assetType": "component_set", "category": "data-display" },
-    "Table": { "componentKey": "57db0c99d57bcb4da8cdd9b02938a65af734ed67", "assetType": "component", "category": "data-display" },
-    "Card": {
-      "componentKey": "6c5bbef10eaba4951d287ce61bd29ec4de5683dc",
+    "Badge": {
+      "componentKey": "2462c2057976a758ad2b85779f3a7ed29896d1d6",
       "assetType": "component_set",
       "category": "data-display",
-      "note": "Gap 'Summary Card' reconfirmado após republicação — segue existindo só este Card genérico."
+      "variantsConfirmed": true,
+      "keyDiscrepancy": "search_design_system retornou key diferente (639276068d6c0b961c1ecfb529c0e67bc9ffce46) — provável republicação após 2026-07-03. Rodar /ds-sync antes de usar.",
+      "note": "type=tag não tem intent=success/error/warning. type=status não tem intent=accent. Notification (dot/number/text) é subcomponente base interno. ⚠️ componentKey no registry pode estar desatualizado — ver knownDiscrepancies em _meta.",
+      "nodeId": "8986:12209",
+      "variants": {
+        "type": [
+          "tag",
+          "status"
+        ],
+        "intent": [
+          "brand",
+          "accent",
+          "informative",
+          "neutral",
+          "success",
+          "error",
+          "warning"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
     },
-    "Avatar": { "componentKey": "a8dff04fe9f4403ace175b38b0e4b0e41956f176", "assetType": "component", "category": "data-display" },
-
-    "Tooltip": { "componentKey": "90fd1f88654fb8501bdba141445c7ba9ab86a836", "assetType": "component_set", "category": "feedback" },
-    "Cookie": { "componentKey": "57f03259ba3c9ab1b0843924179054c09a5eda6f", "assetType": "component_set", "category": "feedback" },
-
-    "Logo": { "componentKey": "123282975f82f3e75a25a3300cec859957f44eb2", "assetType": "component_set", "category": "brand" },
-
-    "Icon": { "componentKey": "bbcdd6c98692e3c10c356fecfec57edfcee109d2", "assetType": "component_set", "category": "icon", "note": "Componente genérico de ícone — usar como wrapper quando aplicável" },
-    "Product Icon": { "componentKey": "00d7c4fda6b10c90cf7e778eda2d7b57a86d8c70", "assetType": "component_set", "category": "icon", "note": "Sucessor de 'Produtos Olist - Icons' do registry anterior" },
-    "Chevron Right": { "componentKey": "a12afe7f6aaf44c1126c968a7c288aeef2f976bc", "assetType": "component_set", "category": "icon" },
-    "Chevron Down": { "componentKey": "8fb826e386688cca84bedaae1232f41933c5c699", "assetType": "component_set", "category": "icon" },
-    "Chevron Up Down Circle": { "componentKey": "14b7e2c4dbfb5501f9bf76afbc969f04cd818499", "assetType": "component_set", "category": "icon" },
-    "Add": { "componentKey": "1a346fb54347e17eaa418b7bc848ccc321194171", "assetType": "component_set", "category": "icon" },
-    "Add Circle": { "componentKey": "d504a189c880f138db82042ea8eef0183ac80934", "assetType": "component_set", "category": "icon" },
-    "Open In New": { "componentKey": "b1b1b1591ef9e45ca731b91062708c56a59a4cbb", "assetType": "component_set", "category": "icon" },
-    "Image": { "componentKey": "ab9f4cfc232be10a6c31ce5f07a515579bd3e7a6", "assetType": "component_set", "category": "icon" },
-    "Ecommerce": { "componentKey": "898525ea273c1ec97839e457fa1739a5626621ef", "assetType": "component_set", "category": "icon" },
-    "Money Hand": { "componentKey": "8886d226e28086ead44107b3283cf15d898eb1a2", "assetType": "component_set", "category": "icon" },
-    "Money Coin": { "componentKey": "989b5d8389c4a95c0048d8ea4ae3c0ecbe929945", "assetType": "component_set", "category": "icon" },
-    "Money In": { "componentKey": "c44e5c76f3cf63d73c4f5475f55bfe9a2fe0460e", "assetType": "component_set", "category": "icon" },
-    "Pencil": { "componentKey": "d04ef7d639a3f526afadfd0f4b8c0f9b8777cd3d", "assetType": "component_set", "category": "icon" },
-    "Confirm": { "componentKey": "8c57006b5536144cb5bfb69d474391f6cdab536d", "assetType": "component_set", "category": "icon" },
-    "Clock": { "componentKey": "4192b5872b2654f46e6644c9400f6dcd429b70df", "assetType": "component_set", "category": "icon" },
-    "Close": { "componentKey": "8b5470dd4d13775e41892397c367467540163345", "assetType": "component_set", "category": "icon" },
-    "Shopping Cart": { "componentKey": "e6d64691149a243d86ffef3d0668bd5fbd3bbb4b", "assetType": "component_set", "category": "icon" },
-    "Home": { "componentKey": "e8464d482335af177793767108d9af33fea85386", "assetType": "component_set", "category": "icon" },
-    "Pan Hand": { "componentKey": "5e1c5f948897c596b08d6b857ba6f298aa59e785", "assetType": "component_set", "category": "icon" },
-    "Circle": { "componentKey": "b7bd631b1a21bbdf8da0539e034c6a26b65a673d", "assetType": "component_set", "category": "icon" },
-    "Apps": { "componentKey": "fefec466539afc9e513ce0cd8e32485e2c3fa2fe", "assetType": "component_set", "category": "icon" },
-    "File Import": { "componentKey": "a769dcbf38a83526550cda4eeb8e1831189383e4", "assetType": "component_set", "category": "icon" },
-    "Reorder": { "componentKey": "fee4994049b6bdfc8026b9ab0aa277cd9c0d486a", "assetType": "component_set", "category": "icon" },
-    "Logout": { "componentKey": "f538b61b1345050150cd6d3cae6dddcc15c75e9f", "assetType": "component_set", "category": "icon", "note": "Novo após republicação — não existia no sync anterior" },
-    "Play": { "componentKey": "da97c375a465ab2f42e6c99077dac6100378d84f", "assetType": "component_set", "category": "icon", "note": "Novo após republicação — não existia no sync anterior" },
-    "More H": { "componentKey": "5a2ff40a2401ae0226662732ff3fa429428177d2", "assetType": "component_set", "category": "icon", "note": "Novo após republicação — não existia no sync anterior" }
+    "Tag Desktop": {
+      "componentKey": "b37852a583b766c7cfcc2fe9492aca83198b2108",
+      "assetType": "component_set",
+      "category": "data-display",
+      "variantsConfirmed": false,
+      "note": "Variantes não confirmadas via get_metadata — fornecer URL do Figma para mapear. Pode ser variante do Badge (type=tag, intent=*). Confirmar se ainda existe como component_set independente."
+    },
+    "Tag Mobile": {
+      "componentKey": "a2ba6bbde19085e2a814deefb139153f3f99b324",
+      "assetType": "component_set",
+      "category": "data-display",
+      "variantsConfirmed": false,
+      "note": "Variantes não confirmadas via get_metadata — fornecer URL do Figma para mapear. Pode ser variante do Badge (type=tag, intent=*). Confirmar se ainda existe como component_set independente."
+    },
+    "Tag More": {
+      "componentKey": "68c827a7378793f13006f2da8e4d9ff3b2ab05d7",
+      "assetType": "component_set",
+      "category": "data-display",
+      "variantsConfirmed": false,
+      "note": "Variantes não confirmadas via get_metadata — fornecer URL do Figma para mapear. Pode ser variante do Badge (type=tag, intent=*). Confirmar se ainda existe como component_set independente."
+    },
+    "Tag Delivery": {
+      "componentKey": "f69dc570260efeea49e80ac004218a2c5d546c90",
+      "assetType": "component_set",
+      "category": "data-display",
+      "variantsConfirmed": false,
+      "note": "Variantes não confirmadas via get_metadata — fornecer URL do Figma para mapear. Pode ser variante do Badge (type=tag, intent=*). Confirmar se ainda existe como component_set independente."
+    },
+    "Table": {
+      "componentKey": "57db0c99d57bcb4da8cdd9b02938a65af734ed67",
+      "assetType": "component",
+      "category": "data-display",
+      "variantsConfirmed": true,
+      "note": "Componente único sem set de variantes. Sub-componentes publicados acessíveis: 'table column' (9149cc08...), 'head' (01776494...), 'simple cell' (23255b80...) — usar estes para montar tabelas compostas."
+    },
+    "Card": {
+      "componentKey": "6c5bbef10eaba4951d287ce61bd29ec4de5683dc",
+      "nodeId": "8587:133",
+      "assetType": "component_set",
+      "category": "data-display",
+      "variants": {
+        "content": [
+          "simple",
+          "slot"
+        ]
+      },
+      "variantsConfirmed": true,
+      "note": "Apenas 2 variantes: 'simple' (conteúdo fixo) e 'slot' (conteúdo customizável). Gap 'Summary Card' reconfirmado ausente — não existe variante dedicada."
+    },
+    "Avatar": {
+      "componentKey": "a8dff04fe9f4403ace175b38b0e4b0e41956f176",
+      "assetType": "component",
+      "category": "data-display",
+      "variantsConfirmed": true,
+      "note": "Propriedade 'image' está no componente base '.[base] avatar circle'.",
+      "nodeId": "56:2400",
+      "variants": {
+        "image": [
+          "on",
+          "off"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Tooltip": {
+      "componentKey": "90fd1f88654fb8501bdba141445c7ba9ab86a836",
+      "assetType": "component_set",
+      "category": "feedback",
+      "variantsConfirmed": true,
+      "note": "Variantes não confirmadas via get_metadata — fornecer URL do Figma para mapear.",
+      "nodeId": "148:5228",
+      "variants": {
+        "pointing": [
+          "right",
+          "left",
+          "down",
+          "up"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Cookie": {
+      "componentKey": "57f03259ba3c9ab1b0843924179054c09a5eda6f",
+      "assetType": "component_set",
+      "category": "feedback",
+      "variantsConfirmed": false,
+      "note": "Variantes não confirmadas via get_metadata — fornecer URL do Figma para mapear."
+    },
+    "Logo": {
+      "componentKey": "123282975f82f3e75a25a3300cec859957f44eb2",
+      "assetType": "component_set",
+      "category": "brand",
+      "variants": {
+        "size": [
+          "default",
+          "simple",
+          "symbol"
+        ]
+      },
+      "variantsConfirmed": true,
+      "note": "Variantes confirmadas via codebase (Logo.metadata.json + stories). Propriedade Figma provavelmente 'size' — confirmar via get_metadata se necessário.",
+      "nodeId": "916:15812",
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Icon": {
+      "componentKey": "bbcdd6c98692e3c10c356fecfec57edfcee109d2",
+      "assetType": "component_set",
+      "category": "icon",
+      "note": "~235 ícones organizados por categoria. Cada ícone é um component_set com fill (on/off) e size (32px/24px/16px). Usar a propriedade \"name\" ao instanciar para selecionar o ícone correto.",
+      "variantsConfirmed": true,
+      "nodeId": "916:8864",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ],
+        "name": [
+          "package",
+          "stock",
+          "map-pin",
+          "package-check",
+          "package-more",
+          "package-cancel",
+          "package-open",
+          "package-cart",
+          "package-manage",
+          "truck",
+          "weight",
+          "scale",
+          "ruler",
+          "square",
+          "gift",
+          "barcode-reader",
+          "fragile",
+          "package-bike",
+          "package-storage",
+          "map",
+          "conveyor",
+          "delivery",
+          "truck-express",
+          "truck-loading",
+          "tag-delivery",
+          "shopping-cart",
+          "send",
+          "megaphone",
+          "invoice",
+          "inbox",
+          "order-cancel",
+          "trophy",
+          "star",
+          "bip",
+          "graph-desktop",
+          "package-desktop",
+          "package-desktop-check",
+          "tag-desktop",
+          "sales-check",
+          "nf",
+          "tag-mobile",
+          "graph-mobile",
+          "package-mobile",
+          "sales-oms",
+          "package-shopping",
+          "sales-extensions",
+          "omnichannel",
+          "smart-pricing",
+          "tag",
+          "shopping-bag",
+          "tag-more",
+          "product-catalog",
+          "segments",
+          "ecommerce",
+          "store",
+          "services",
+          "marketplaces",
+          "wholesale",
+          "industry",
+          "feedback",
+          "chat-bubbles",
+          "alert",
+          "alert-triangle",
+          "alert-circle",
+          "mail",
+          "informative",
+          "informative-circle",
+          "help",
+          "help-circle",
+          "chat",
+          "attachtment",
+          "repeat",
+          "user",
+          "profile",
+          "profile-cancel",
+          "profile-add",
+          "profile-manage",
+          "profile-lock",
+          "profile-folder",
+          "id-card",
+          "bell",
+          "storage",
+          "billing",
+          "chart-bar-up",
+          "chart-bar-down",
+          "chart-bar-variation",
+          "chart-pie",
+          "credit-card",
+          "wallet",
+          "qr-code",
+          "barcode",
+          "bank",
+          "discount-hand",
+          "checkings-account",
+          "money-notification",
+          "transaction",
+          "percentual",
+          "limits",
+          "credit",
+          "pix",
+          "money-in",
+          "money-in-out",
+          "money-circle",
+          "discount",
+          "money-change",
+          "cashback",
+          "money-hand",
+          "money-bag",
+          "verified",
+          "money-coin",
+          "money-paper",
+          "nfc",
+          "reports",
+          "file",
+          "file-text",
+          "file-graph",
+          "file-certified",
+          "file-nf",
+          "file-pdf",
+          "file-sign",
+          "file-pie-chart",
+          "file-spreadsheet",
+          "file-money",
+          "file-cancel",
+          "file-check",
+          "file-import",
+          "desktop",
+          "mobile",
+          "calendar",
+          "light-bulb",
+          "rocket",
+          "search",
+          "book",
+          "phone",
+          "globe",
+          "clock",
+          "print",
+          "camera",
+          "image",
+          "bolt",
+          "scissors",
+          "folder",
+          "folder-open",
+          "clipboard",
+          "tool",
+          "tools",
+          "extension",
+          "code-integration",
+          "desktop-code-integration",
+          "fingerprint",
+          "face-id",
+          "hourglass",
+          "key",
+          "library-books",
+          "life-saver",
+          "video",
+          "outlet",
+          "devices",
+          "cake",
+          "task-list",
+          "mic",
+          "server",
+          "t-shirt",
+          "spreadsheet",
+          "calculator",
+          "sitemap_h",
+          "sitemap_v",
+          "mail-open",
+          "dashboard",
+          "handshake",
+          "traffic-cone",
+          "basket",
+          "arrow-move",
+          "pencil",
+          "target",
+          "pay-machine-card",
+          "support",
+          "ticket",
+          "baby-stroller",
+          "female",
+          "male",
+          "keyboard",
+          "pin",
+          "cookie",
+          "umbrella",
+          "usb",
+          "no-connection",
+          "brain",
+          "actions",
+          "trash",
+          "forward",
+          "reply",
+          "filter",
+          "visibility-off",
+          "visibility-on",
+          "home",
+          "lock",
+          "unlock",
+          "settings",
+          "upload",
+          "logout",
+          "download",
+          "open-in-new",
+          "edit",
+          "copy-paste",
+          "sliders-tune",
+          "url-link",
+          "url-unlink",
+          "loading",
+          "circle",
+          "update",
+          "zoom-out",
+          "zoom-in",
+          "remove-circle",
+          "add-circle",
+          "add",
+          "remove",
+          "sort",
+          "list",
+          "audio-on",
+          "power-off",
+          "share",
+          "arrow-split",
+          "layers",
+          "pan-hand",
+          "pan-hand-arrow",
+          "arrow-left",
+          "arrow-right",
+          "arrow-up",
+          "arrow-down",
+          "chevron-left",
+          "chevron-right",
+          "chevron-top",
+          "chevron-down",
+          "chevron-left-right",
+          "chevron-up-down",
+          "swap-h",
+          "more-h",
+          "more-v",
+          "apps",
+          "menu",
+          "expand",
+          "collapse",
+          "close",
+          "check",
+          "layout-sidebar",
+          "reorder",
+          "view-large",
+          "view-medium",
+          "view-small",
+          "column",
+          "arrow-right-circle",
+          "arrow-left-circle",
+          "arrow-up-circle",
+          "arrow-down-circle",
+          "cancel",
+          "confirm",
+          "pending",
+          "reaction-good",
+          "reaction-bad",
+          "reaction-neutral",
+          "reaction-nice",
+          "pause",
+          "play",
+          "stop",
+          "chevron-left-circle",
+          "chevron-right-circle",
+          "chevron-up-circle",
+          "chevron-down-circle",
+          "chevron-left-right-circle",
+          "chevron-up-down-circle",
+          "cheer-clap",
+          "follow",
+          "comment",
+          "like",
+          "bookmark",
+          "whatsapp",
+          "instagram",
+          "facebook",
+          "youtube",
+          "linkedin",
+          "tiktok",
+          "rss"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Product Icon": {
+      "componentKey": "00d7c4fda6b10c90cf7e778eda2d7b57a86d8c70",
+      "assetType": "component_set",
+      "category": "icon",
+      "note": "Sucessor de 'Produtos Olist - Icons' do registry anterior theme=light não tem state=hover.",
+      "variantsConfirmed": true,
+      "nodeId": "9589:23399",
+      "variants": {
+        "product": [
+          "Conta Digital",
+          "Crédito",
+          "Agentes de IA",
+          "Ecommerce",
+          "Sistema ERP",
+          "Envios",
+          "Sistema PDV",
+          "Hub de Integração"
+        ],
+        "state": [
+          "default",
+          "hover",
+          "active"
+        ],
+        "theme": [
+          "dark",
+          "light"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Chevron Right": {
+      "componentKey": "a12afe7f6aaf44c1126c968a7c288aeef2f976bc",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"chevron-right\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Chevron Down": {
+      "componentKey": "8fb826e386688cca84bedaae1232f41933c5c699",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"chevron-down\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Chevron Up Down Circle": {
+      "componentKey": "14b7e2c4dbfb5501f9bf76afbc969f04cd818499",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"chevron-up-down-circle\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Add": {
+      "componentKey": "1a346fb54347e17eaa418b7bc848ccc321194171",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"add\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Add Circle": {
+      "componentKey": "d504a189c880f138db82042ea8eef0183ac80934",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"add-circle\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Open In New": {
+      "componentKey": "b1b1b1591ef9e45ca731b91062708c56a59a4cbb",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"open-in-new\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Image": {
+      "componentKey": "ab9f4cfc232be10a6c31ce5f07a515579bd3e7a6",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"image\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Ecommerce": {
+      "componentKey": "898525ea273c1ec97839e457fa1739a5626621ef",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"ecommerce\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Money Hand": {
+      "componentKey": "8886d226e28086ead44107b3283cf15d898eb1a2",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"money-hand\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Money Coin": {
+      "componentKey": "989b5d8389c4a95c0048d8ea4ae3c0ecbe929945",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"money-coin\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Money In": {
+      "componentKey": "c44e5c76f3cf63d73c4f5475f55bfe9a2fe0460e",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"money-in\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Pencil": {
+      "componentKey": "d04ef7d639a3f526afadfd0f4b8c0f9b8777cd3d",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"pencil\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Confirm": {
+      "componentKey": "8c57006b5536144cb5bfb69d474391f6cdab536d",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"confirm\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Clock": {
+      "componentKey": "4192b5872b2654f46e6644c9400f6dcd429b70df",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"clock\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Close": {
+      "componentKey": "8b5470dd4d13775e41892397c367467540163345",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"close\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Shopping Cart": {
+      "componentKey": "e6d64691149a243d86ffef3d0668bd5fbd3bbb4b",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"shopping-cart\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Home": {
+      "componentKey": "e8464d482335af177793767108d9af33fea85386",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"home\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Pan Hand": {
+      "componentKey": "5e1c5f948897c596b08d6b857ba6f298aa59e785",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"pan-hand\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Circle": {
+      "componentKey": "b7bd631b1a21bbdf8da0539e034c6a26b65a673d",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"circle\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Apps": {
+      "componentKey": "fefec466539afc9e513ce0cd8e32485e2c3fa2fe",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"apps\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "File Import": {
+      "componentKey": "a769dcbf38a83526550cda4eeb8e1831189383e4",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"file-import\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Reorder": {
+      "componentKey": "fee4994049b6bdfc8026b9ab0aa277cd9c0d486a",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": true,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"reorder\" ao instanciar.",
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Logout": {
+      "componentKey": "f538b61b1345050150cd6d3cae6dddcc15c75e9f",
+      "assetType": "component_set",
+      "category": "icon",
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"logout\" ao instanciar.",
+      "variantsConfirmed": true,
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Play": {
+      "componentKey": "da97c375a465ab2f42e6c99077dac6100378d84f",
+      "assetType": "component_set",
+      "category": "icon",
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"play\" ao instanciar.",
+      "variantsConfirmed": true,
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "More H": {
+      "componentKey": "5a2ff40a2401ae0226662732ff3fa429428177d2",
+      "assetType": "component_set",
+      "category": "icon",
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"more-h\" ao instanciar.",
+      "variantsConfirmed": true,
+      "variants": {
+        "fill": [
+          "on",
+          "off"
+        ],
+        "size": [
+          "32px",
+          "24px",
+          "16px"
+        ]
+      },
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+    },
+    "Drawer": {
+      "componentKey": null,
+      "nodeId": "9088:12931",
+      "assetType": "component_set",
+      "category": "overlay",
+      "variants": {
+        "content": [
+          "simple"
+        ]
+      },
+      "variantsConfirmed": false,
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23",
+      "note": "Componente novo — não estava no registry anterior. componentKey não coletado ainda (requer search_design_system). Apenas 1 variante visível no depth=3."
+    },
+    "Modal": {
+      "componentKey": null,
+      "nodeId": "9644:23",
+      "assetType": "component_set",
+      "category": "overlay",
+      "variants": {
+        "content": [
+          "simple"
+        ]
+      },
+      "variantsConfirmed": false,
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23",
+      "note": "⚠️ Componente WIP (work-in-progress). A página fornecida como \"accordion\" (9644:22) corresponde na verdade a este modal. Accordion pode não existir ou estar em outra página — investigar. componentKey não coletado."
+    }
   },
-
   "categories": {
-    "action": ["Button", "Button Icon"],
-    "navigation": ["Menu Global", "Link", "Segmented Buttons", "Breadcrumb", "Tabs", "Paginator", "Sort", "Context Switch"],
-    "input": ["Input Text", "Input Email", "Input Search", "Input Token", "Input Password", "Input File", "Input Select", "Input Paragraph", "Dropdown", "Checkbox", "Radio Button", "Toggle", "Chip"],
-    "data-display": ["Tag", "Badge", "Tag Desktop", "Tag Mobile", "Tag More", "Tag Delivery", "Table", "Card", "Avatar"],
-    "feedback": ["Tooltip", "Cookie"],
-    "brand": ["Logo"],
-    "icon": ["Icon", "Product Icon", "Chevron Right", "Chevron Down", "Chevron Up Down Circle", "Add", "Add Circle", "Open In New", "Image", "Ecommerce", "Money Hand", "Money Coin", "Money In", "Pencil", "Confirm", "Clock", "Close", "Shopping Cart", "Home", "Pan Hand", "Circle", "Apps", "File Import", "Reorder", "Logout", "Play", "More H"]
+    "action": [
+      "Button",
+      "Button Icon"
+    ],
+    "navigation": [
+      "Menu Global",
+      "Link",
+      "Segmented Buttons",
+      "Breadcrumb",
+      "Tabs",
+      "Paginator",
+      "Sort",
+      "Context Switch"
+    ],
+    "input": [
+      "Input Text",
+      "Input Email",
+      "Input Search",
+      "Input Token",
+      "Input Password",
+      "Input File",
+      "Input Select",
+      "Input Paragraph",
+      "Dropdown",
+      "Checkbox",
+      "Radio Button",
+      "Toggle",
+      "Chip"
+    ],
+    "data-display": [
+      "Tag",
+      "Badge",
+      "Tag Desktop",
+      "Tag Mobile",
+      "Tag More",
+      "Tag Delivery",
+      "Table",
+      "Card",
+      "Avatar"
+    ],
+    "feedback": [
+      "Tooltip",
+      "Cookie"
+    ],
+    "brand": [
+      "Logo"
+    ],
+    "icon": [
+      "Icon",
+      "Product Icon",
+      "Chevron Right",
+      "Chevron Down",
+      "Chevron Up Down Circle",
+      "Add",
+      "Add Circle",
+      "Open In New",
+      "Image",
+      "Ecommerce",
+      "Money Hand",
+      "Money Coin",
+      "Money In",
+      "Pencil",
+      "Confirm",
+      "Clock",
+      "Close",
+      "Shopping Cart",
+      "Home",
+      "Pan Hand",
+      "Circle",
+      "Apps",
+      "File Import",
+      "Reorder",
+      "Logout",
+      "Play",
+      "More H"
+    ],
+    "overlay": [
+      "Drawer",
+      "Modal"
+    ]
   },
-
   "textStyles": {
     "note": "Papéis de texto (Heading/Subheading/etc.) não são componentes nesta library — são Text Styles. Usar via style key, não componentKey.",
-    "styles": ["text/H1", "text/H2", "text/H3", "text/H4", "text/H5", "text/caption", "text/paragraph", "text/description"]
+    "styles": [
+      "text/H1",
+      "text/H2",
+      "text/H3",
+      "text/H4",
+      "text/H5",
+      "text/caption",
+      "text/paragraph",
+      "text/description"
+    ]
   },
-
   "excludedInternal": {
     "note": "Confirmados via search_design_system e get_metadata, nunca usar diretamente — ver _meta.excludedNote",
-    "components": [".menu erp/stage14", ".[base] single select list", ".[base] multi select list", ".[base] token box", ".[base] counter"]
+    "components": [
+      ".menu erp/stage14",
+      ".[base] single select list",
+      ".[base] multi select list",
+      ".[base] token box",
+      ".[base] counter"
+    ]
   },
-
   "syncDiff": {
     "comparedAgainst": "component-registry.json anterior (source: AI-Components, extractedAt: 2026-06-03)",
     "resolvedAfterFullSweep": {
       "note": "Confirmados via get_metadata na página real 'inputs' — a busca por palavra-chave não os superficializava.",
-      "components": ["Input Email", "Input Token", "Input Password", "Input File", "Input Paragraph (= antiga 'Text Area')"]
+      "components": [
+        "Input Email",
+        "Input Token",
+        "Input Password",
+        "Input File",
+        "Input Paragraph (= antiga 'Text Area')"
+      ]
     },
     "changedByRepublish_2026_07_03": {
       "note": "Diferenças detectadas revalidando todo o registry após o usuário republicar a library inteira.",
       "componentKeyChanged": [
-        { "component": "Tag", "from": "7b83f7957b6e6bd88395b553a1344fba057770ad", "to": "482fbfe31d86fc7509f2218d59c765f53ee86123", "note": "Key antigo não aparece mais em buscas; provável consolidação de duplicado" },
-        { "component": "Menu ERP → Menu Global", "from": "4556c8fdb1ee00d2aa13c690ab312cbf468baeab", "to": "c2a9753aa84b8296ad1f7587a738ed019aa7d8b3", "note": "Renomeado + variantes trocadas de stage=X para produto=X; tratado como substituição, não simples rename" }
+        {
+          "component": "Tag",
+          "from": "7b83f7957b6e6bd88395b553a1344fba057770ad",
+          "to": "482fbfe31d86fc7509f2218d59c765f53ee86123",
+          "note": "Key antigo não aparece mais em buscas; provável consolidação de duplicado"
+        },
+        {
+          "component": "Menu ERP → Menu Global",
+          "from": "4556c8fdb1ee00d2aa13c690ab312cbf468baeab",
+          "to": "c2a9753aa84b8296ad1f7587a738ed019aa7d8b3",
+          "note": "Renomeado + variantes trocadas de stage=X para produto=X; tratado como substituição, não simples rename"
+        }
       ],
-      "newComponents": ["Badge", "Context Switch", "Logout", "Play", "More H"],
+      "newComponents": [
+        "Badge",
+        "Context Switch",
+        "Logout",
+        "Play",
+        "More H"
+      ],
       "unchanged": "Todos os demais componentKeys já catalogados permaneceram estáveis"
     },
     "migrated": [
-      { "from": "Produtos Olist - Icons", "to": "Product Icon", "note": "Mesmo conceito, componentKey novo" },
-      { "from": "Tags", "to": "Tag", "note": "Nome singular, componentKey novo, ganhou variantes Desktop/Mobile/More/Delivery" },
-      { "from": "Text Area", "to": "Input Paragraph", "note": "variantCount idêntico (32)" },
-      { "from": "Menu ERP", "to": "Menu Global", "note": "Confirmado definitivo após republicação — ver changedByRepublish_2026_07_03" }
+      {
+        "from": "Produtos Olist - Icons",
+        "to": "Product Icon",
+        "note": "Mesmo conceito, componentKey novo"
+      },
+      {
+        "from": "Tags",
+        "to": "Tag",
+        "note": "Nome singular, componentKey novo, ganhou variantes Desktop/Mobile/More/Delivery"
+      },
+      {
+        "from": "Text Area",
+        "to": "Input Paragraph",
+        "note": "variantCount idêntico (32)"
+      },
+      {
+        "from": "Menu ERP",
+        "to": "Menu Global",
+        "note": "Confirmado definitivo após republicação — ver changedByRepublish_2026_07_03"
+      }
     ],
-    "gapStillOpen": ["Summary Card — reconfirmado ausente após republicação, só existe Card genérico"],
+    "gapStillOpen": [
+      "Summary Card — reconfirmado ausente após republicação, só existe Card genérico"
+    ],
     "unchanged": [
-      "Button", "Button Icon", "Link", "Segmented Buttons", "Tooltip",
-      "Input Text", "Input Search", "Input Select", "Checkbox", "Radio Button", "Dropdown", "Toggle", "Chip",
+      "Button",
+      "Button Icon",
+      "Link",
+      "Segmented Buttons",
+      "Tooltip",
+      "Input Text",
+      "Input Search",
+      "Input Select",
+      "Checkbox",
+      "Radio Button",
+      "Dropdown",
+      "Toggle",
+      "Chip",
       "Logo (era 'Logo Olist')"
     ]
   }

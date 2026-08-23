@@ -36,8 +36,8 @@ WCAG AA mínimo. Contraste 4.5:1. Navegável por teclado. Compatível com leitor
 | Elemento | Valor |
 |---|---|
 | Fonte | Plus Jakarta Sans (Google Fonts) |
-| Cor primária | `--color-blue-500: #0a4ee4` |
-| Cor de fundo | `--color-gray-0: #fcfbf8` (neutros quentes) |
+| Cor primária | `--color-blue-blue-500: #0a4ee4` |
+| Cor de fundo | `--color-background-surface-container: #fcfbf8` (neutros quentes) |
 | Espaçamento | Grid de 4px |
 | Border-radius | 8px padrão, 4px pequenos, 9999px pills |
 | Sombras | Sutis — `rgba(5,5,5)` em baixa opacidade |
