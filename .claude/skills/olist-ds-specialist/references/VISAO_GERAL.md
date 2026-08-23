@@ -47,7 +47,7 @@ A Olist é uma plataforma B2B de e-commerce para sellers. A linguagem visual com
 
 Antes de criar QUALQUER elemento novo, verifique se um destes já existe:
 
-- Button, ButtonIcon, Card, Checkbox, Chip, Icon, InputPassword, InputSearch, InputSelect, InputText, ItensMenuGlobal, Logo, MenuGlobal, ProdutosOlistIcons, Toggle
+- Button, ButtonIcon, Card, Checkbox, Chip, Icon, InputPassword, InputSearch, InputSelect, InputText, ItensMenuGlobal, Logo, MenuGlobal, ProdutosOlistIcons, Toggle _(stub incompleto — apenas module.css, sem tsx)_
 
 Para API completa dos componentes, leia `COMPONENTES.md`.
 Para caminhos dos arquivos, leia `MAPA_FONTES.md`.
@@ -65,13 +65,13 @@ Para caminhos dos arquivos, leia `MAPA_FONTES.md`.
 1. `COMPONENTES.md` — props, tokens, estados de cada componente
 2. `CORES.md` — paleta de cores e regras de uso
 3. `TIPOGRAFIA.md` — tokens de tipografia (tamanho, peso, altura)
-4. `GLOSSARIO_PAPEIS_TEXTO.md` — **NOVO** — como nomear cada tipo de texto (Heading, Label, Error, etc.)
+4. `GLOSSARIO_PAPEIS_TEXTO.md` —  como nomear cada tipo de texto (Heading, Label, Error, etc.)
 5. `ESPACAMENTO.md` — grid de 4px e regras de padding/margin
 
 #### Traduzindo SDD/PRD em decisões de UI:
 1. `SDD_PARA_TELA.md` — 10 passos para traduzir SDD em telas
-2. `GLOSSARIO_PAPEIS_TEXTO.md` — **NOVO** — mapear texto do SDD em papéis de texto
-3. `SDD_AVANCADO.md` — **NOVO** — traduzir RNFs, DACI, Métricas, Rollout, Observabilidade
+2. `GLOSSARIO_PAPEIS_TEXTO.md` —  mapear texto do SDD em papéis de texto
+3. `SDD_AVANCADO.md` —  traduzir RNFs, DACI, Métricas, Rollout, Observabilidade
 4. `PADROES.md` — 5 padrões de página (Tabela, Form, Dashboard, Detalhe, Configurações)
 
 #### Criando telas/páginas completas:
@@ -94,7 +94,7 @@ Para caminhos dos arquivos, leia `MAPA_FONTES.md`.
 
 ---
 
-## Arquivos de Referência (17 total)
+## Arquivos de Referência (16 total)
 
 | Arquivo | O que contém | Quando consultar |
 |---|---|---|
@@ -119,26 +119,14 @@ Para caminhos dos arquivos, leia `MAPA_FONTES.md`.
 
 ## Novidades (v3.16 — 2026-08-22)
 
-### Arquivos Novos:
-1. **`GLOSSARIO_PAPEIS_TEXTO.md`** — Define exatamente como nomear cada tipo de texto na UI
-   - 10 papéis: Heading, Subheading, Section Title, Body, Label, Helper, Error, Caption, CTA Label, Link
-   - Mapeamento SDD → papel de texto
-   - Tokens corretos para cada papel
+### Novo slash command:
+- **`/ds-construir`** — Cria ou evolui componentes no Figma seguindo arquitetura correta de tokens (base → theme → component). Abrange Caso 5 da skill. Fluxo termina no Figma — não gera código React.
 
-2. **`SDD_AVANCADO.md`** — Tradução de seções técnicas do SDD para UI
-   - Requisitos Não Funcionais → UI (Performance, Segurança, Compliance)
-   - DACI (Stakeholders) → Personas de UI
-   - Métricas de Sucesso → UI observável (cards, gráficos, badges)
-   - Plano de Rollout → Feature flags, banners de aviso
-   - Observabilidade → Logs, health checks, trace IDs
-   - Glossário do SDD → Labels de UI
+### Novo arquivo obrigatório por componente:
+- **`ComponentName.metadata.json`** — Gate de aprovação antes do código. Define `purpose`, `useWhen`, `doNotUseWhen`, `pairsWith`, `variants`, `states`, `slots`, `tokens` e `figma`. O total de arquivos por componente passa de 5 para **6**.
 
-### Arquivos Incrementados:
-1. **`TIPOGRAFIA.md`** — Agora referencia `GLOSSARIO_PAPEIS_TEXTO.md` e mapeia papéis → tokens
-2. **`SDD_PARA_TELA.md`** — Adicionados Passos 8, 9 e 10:
-   - Passo 8: Traduzir Métricas de Sucesso
-   - Passo 9: Mapear Plano de Rollout
-   - Passo 10: Usar Glossário do SDD
+### Fluxo de release atualizado:
+- `npm run release` cria branch `release/*`, faz bump de versão, abre PR — a publicação no GitHub Packages ocorre pelo CI após o merge. Não há mais `npm publish` direto nem `npm run ship`.
 
 ---
 

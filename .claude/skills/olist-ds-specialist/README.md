@@ -119,7 +119,9 @@ Settings → Customize → Skills → Upload `olist-ds-specialist.zip`
 | `/ds-implementar <figma-url>` | Dev de BU | Converte tela Figma em JSX com componentes DS |
 | `/ds-tela <sdd-ou-prd>` | Dev de BU | Gera tela React a partir de SDD/PRD |
 | `/ds-figma <sdd-ou-prd>` | Designer/Dev | Cria telas no Figma com instâncias reais DS |
-| `/ds-componente <figma-url>` | Mantenedor DS | Gera novo componente DS completo (5 arquivos + docs) |
+| `/ds-construir <figma-url ou descrição>` | Mantenedor DS | Cria ou evolui componentes no Figma com arquitetura correta de tokens |
+| `/ds-componente <figma-url>` | Mantenedor DS | Gera novo componente DS completo (6 arquivos + docs) |
+| `/ds-handoff <figma-url(s)>` | Qualquer dev | Gera manifesto Markdown de componentes DS usados numa jornada |
 | `/ds-revisar` | Qualquer dev | Revisa tela/código contra padrões DS |
 | `/ds-sync` | Mantenedor DS | Sincroniza inventário de componentes |
 

@@ -274,7 +274,7 @@ npm run pipeline               # build:tokens + generate:all + tsc + test:run + 
 ```bash
 npm run sync:skill             # Regenera COMPONENTES.md, MAPA_FONTES.md, VISAO_GERAL.md, README (estrutura)
 npm run sync:skill-meta        # Atualiza versão, título e wiki da skill
-npm run wiki                   # Regenera wiki/WIKI.md
+npm run wiki                   # Regenera wiki/WIKI.md (chamado internamente por sync:skill-meta)
 ```
 
 ### Publicação
