@@ -1,3 +1,11 @@
+## v3.17 (2026-08-23)
+- **TOKEN_CATALOG.md criado:** catálogo completo de 1.194 tokens CSS com valores e Figma RGB 0–1 para uso direto na Plugin API. Deve ser regenerado com `npm run sync:skill` quando o CSS mudar.
+- **component-registry.json:** 55 de 64 componentes com `variantsConfirmed: true` (antes: 17). Todas as propriedades Figma confirmadas via `get_metadata` com 25 URLs de página. Dois novos componentes adicionados: Drawer e Modal (WIP).
+- **CORES.md reescrito:** nomes primitivos corrigidos (`--color-gray-gray-0`, não `--color-gray-0`); tokens semânticos (`--color-background-*`, `--color-text-*`, `--color-border-*`, `--color-shape-*`) adicionados como seção principal; nova seção "Uso em Figma Plugin API" com sintaxe correta de fills (RGB 0–1).
+- **TOKENS.md (decisions/technical) reescrito:** hierarquia 3 camadas (Primitivo → Semântico → Componente), tabela "com repo vs sem repo", nomes corretos vs incorretos.
+- **Correções de token em 6 arquivos:** `--font-weight-semibold` → `--font-weight-600` (alias não existe no CSS); cores primitivas corrigidas para nomes reais.
+- **HARNEES_TELAS.md:** sintaxe Figma Plugin API documentada para fills, strokes e loadFontAsync.
+
 ## v3.16 (2026-08-22)
 - **Caso 5 (`/ds-construir`):** novo caso de uso e slash command para criar ou evoluir componentes no Figma com arquitetura correta de tokens. Fluxo token-first: auditoria via `get_variable_defs`, decision tree base→theme→component, Gate 1 (plano de tokens para aprovação), construção com Auto Layout e bind de variáveis, Gate 2 (screenshot). Suporta modo NOVO (intenção textual) e modo EVOLUÇÃO (URL Figma). Termina no Figma — não gera código React.
 - Pasta `.claude/skills/ds-construir/` criada com `SKILL.md` wrapper delegando ao Caso 5
