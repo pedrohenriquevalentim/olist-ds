@@ -202,7 +202,7 @@ Qual tipo de tarefa?
     │   → get_design_context(nodeId) → extrair props completas, tokens, estados
     │   → get_screenshot → referência visual
     │   → [PARALELO]
-    │     ├── Gerar 5 arquivos de código (ver CLAUDE.md — Estrutura de Componente)
+    │     ├── Gerar 6 arquivos de código (ver CLAUDE.md — Estrutura de Componente)
     │     └── Gerar frame "📄 Docs — NomeComponente" na mesma section do Figma
     │           (demo · props · anatomia · acessibilidade)
     │   → Aguardar feedback
@@ -284,7 +284,7 @@ Qual tipo de tarefa?
 | `UX_WRITING.md` | **Ao criar ou revisar qualquer copy de UI** | Protocolo de triagem, 4 pilares, 12 tipos de texto, tom B2B/B2C, abrasileiramento, nomenclatura Olist |
 | `CHECKLIST_REVISAO.md` | Revisando telas | 9 categorias de revisão visual e acessibilidade + seção 10 de UX Writing |
 
-## Regras Críticas v3.1
+## Regras Críticas v3.16
 
 ### ✅ Sempre Faça:
 
@@ -611,7 +611,7 @@ Você:
        - screenshot() após cada seção para validação incremental
 
 9. Entregar código + confirmar que frame de docs foi criado no Figma com URL/nodeId
-10. Informar ao usuário: rodar npm run ship (inclui pipeline completo + versão + push)
+10. Informar ao usuário: rodar npm run release (cria branch, versiona e abre PR; CI publica no GitHub Packages após o merge)
 ```
 
 **Nota sobre disponibilidade de instâncias:**

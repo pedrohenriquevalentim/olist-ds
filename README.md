@@ -32,13 +32,13 @@ FIGMA (source of truth)
 │    Documentação interativa com autodocs, foundations e catálogo visual
 │
 ├──→ wiki/WIKI.md (auto-gerado)
-│    Visão consolidada: componentes, ícones, skill, Figma — atualizada a cada ship
+│    Visão consolidada: componentes, ícones, skill, Figma — atualizada a cada release
 │
 ├──→ CI/CD (GitHub Actions)
 │    Lint → Tokens → Testes → Storybook → Publicação NPM
 │
 └──→ Skill corporativa (auto-sync)
-     Atualiza documentação da skill a cada ship
+     Atualiza documentação da skill a cada release
      Auditoria automática semanal via scheduled task
      Disponível para toda a empresa via Claude.ai ou Claude Code
 ```
@@ -140,7 +140,7 @@ olist-ds/
 ├── .github/workflows/pipeline.yml        # CI/CD
 ├── .claude/
 │   ├── settings.json                     # Permissões e hooks do Claude Code
-│   └── skills/olist-ds-specialist/       # Skill corporativa (v3.7)
+│   └── skills/olist-ds-specialist/       # Skill corporativa (v3.16)
 │       ├── SKILL.md                      # Role, escopo, decision flow
 │       ├── README.md                     # Visão geral e changelog da skill
 │       ├── SETUP.md                      # Guia de instalação
@@ -278,11 +278,11 @@ npm run wiki                   # Regenera wiki/WIKI.md
 
 ### Publicação
 
-> **`main` é protegido** (exige PR + status checks) — push direto na main sempre é rejeitado pelo GitHub. O fluxo de publicação é via `npm run release`, que cria branch, versiona e abre o PR; a publicação real no GitHub Packages acontece pelo CI, automaticamente, quando o PR é mergeado (`npm run ship` está **obsoleto** — fazia `git push` direto e não funciona mais).
+> **`main` é protegido** (exige PR + status checks) — push direto na main sempre é rejeitado pelo GitHub. O fluxo de publicação é via `npm run release`, que cria branch, versiona e abre o PR; a publicação real no GitHub Packages acontece pelo CI, automaticamente, quando o PR é mergeado.
 
 ```bash
 # 1. Sincronize docs/skill antes de versionar (se algo mudou)
-npm run sync:skill && npm run sync:skill-meta && npm run wiki
+npm run sync:skill && npm run sync:skill-meta
 git add -A && git commit -m "docs: sync"   # só se houver mudanças
 
 # 2. Rode o release (menu interativo: escolhe pacote e tipo de bump)
@@ -321,7 +321,7 @@ Use $olist-ds-specialist para implementar este componente:
 https://www.figma.com/design/XXXX/YYYY?node-id=123:456
 ```
 
-A skill lê o design, mapeia os tokens, gera os 5 arquivos obrigatórios (tsx, css, test, stories, index) e, ao final, cria automaticamente o frame `📄 Docs — NomeComponente` no Figma com demo, tabela de props, anatomia e guia de acessibilidade.
+A skill lê o design, mapeia os tokens, gera os 6 arquivos obrigatórios (tsx, css, test, stories, metadata.json, index) e, ao final, cria automaticamente o frame `📄 Docs — NomeComponente` no Figma com demo, tabela de props, anatomia e guia de acessibilidade.
 
 **Via prompt direto (sem skill):**
 ```
@@ -356,7 +356,7 @@ A skill `olist-ds-specialist` (<!-- AUTO:skill-version-start -->v3.16<!-- AUTO:s
 
 ### Capacidades
 
-- **Figma → React** — lê componente no Figma, gera tsx + css + test + stories + index
+- **Figma → React** — lê componente no Figma, gera tsx + css + test + stories + metadata.json + index
 - **PRD/SDD → Figma** — lê SDD, consulta libraries do DS, monta telas com instâncias reais
 - **Docs no Figma** — gera frame `📄 Docs — NomeComponente` com demo, props, anatomia e a11y
 - **Decisões documentadas** — `decisions/` com Architecture Decision Records (técnicos e UX)
@@ -389,7 +389,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 
 ### Auto-sync
 
-Ao rodar `npm run sync:skill && npm run sync:skill-meta && npm run wiki` (passo recomendado antes do `npm run release` — ver seção "Publicação"), os arquivos a seguir são regenerados automaticamente:
+Ao rodar `npm run sync:skill && npm run sync:skill-meta` (passo recomendado antes do `npm run release` — ver seção "Publicação"), os arquivos a seguir são regenerados automaticamente:
 
 | Arquivo | Gerado por |
 |---|---|
@@ -403,7 +403,7 @@ Ao rodar `npm run sync:skill && npm run sync:skill-meta && npm run wiki` (passo 
 Para sincronizar manualmente sem publicar:
 
 ```bash
-npm run sync:skill && npm run sync:skill-meta && npm run wiki
+npm run sync:skill && npm run sync:skill-meta
 ```
 
 ### Auditoria automática
@@ -481,11 +481,11 @@ Secret necessário: `GEMINI_API_KEY` (repositório → Settings → Secrets → 
 
 ## Criar Novo Componente (Checklist)
 
-1. Claude Code lê o componente no Figma via skill e gera os 5 arquivos
+1. Claude Code lê o componente no Figma via skill e gera os 6 arquivos
 2. A skill gera automaticamente o frame `📄 Docs` no Figma
 3. `npm run test:run` — valida
 4. `npm run storybook` — visualiza
-5. `npm run sync:skill && npm run sync:skill-meta && npm run wiki` — sincroniza docs
+5. `npm run sync:skill && npm run sync:skill-meta` — sincroniza docs
 6. `npm run release` — versiona, abre PR; CI publica após o merge
 
 ---
