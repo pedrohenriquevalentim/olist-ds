@@ -86,12 +86,13 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 ```
 npm run release
     │
-    ├── 1. generate:all (testes + stories via Gemini)
-    ├── 2. build (compilação TypeScript)
-    ├── 3. sync:skill (atualiza skill v3.16)
-    ├── 4. npm version patch (incrementa versão)
-    ├── 5. npm publish (publica no registry)
-    └── 6. git push --follow-tags
+    ├── 1. Valida branch main sem mudanças pendentes
+    ├── 2. npm run pipeline (sanity check: tokens + tests + storybook)
+    ├── 3. sync:skill + sync:skill-meta (atualiza docs e wiki)
+    ├── 4. Cria branch release/<pacote>-v<versão>
+    ├── 5. npm version patch|minor|major (bump)
+    ├── 6. git push branch + abre PR automaticamente
+    └── 7. CI publica no GitHub Packages após o merge do PR
 ```
 
 ### Pré-requisitos
