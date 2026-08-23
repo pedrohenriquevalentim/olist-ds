@@ -126,7 +126,6 @@ npm run release
 | `npm run prepublishOnly` | `npm run build` |
 | `npm run pipeline` | `npm run build:tokens && npm run generate:all && npm run l...` |
 | `npm run version:skill` | `node scripts/version-skill.mjs` |
-| `npm run ship` | `npm run pipeline && npm run sync:skill && npm run sync:sk...` |
 | `npm run release` | `node scripts/release.mjs` |
 | `npm run mcp:figma` | `figma-mcp` |
 | `npm run sync:skill-meta` | `node scripts/sync-skill-meta.mjs` |
@@ -178,19 +177,21 @@ npm run release
 
 | Comando | Para quem | O que faz |
 |---|---|---|
-| `/ds-implementar <figma-url>` | Dev de BU | Converte tela Figma em JSX com componentes DS |
-| `/ds-tela <sdd-ou-prd>` | Dev de BU | Gera tela React a partir de SDD/PRD |
-| `/ds-figma <sdd-ou-prd>` | Designer/Dev | Cria telas no Figma com instâncias reais DS |
-| `/ds-componente <figma-url>` | Mantenedor DS | Gera novo componente DS completo (5 arquivos + docs) |
-| `/ds-revisar` | Qualquer dev | Revisa tela/código contra padrões DS |
-| `/ds-sync` | Mantenedor DS | Sincroniza inventário de componentes das libraries |
+| `/ds-tela <sdd-ou-prd>` | Dev de BU | gera tela React a partir de SDD/PRD usando componentes DS |
+| `/ds-figma <sdd-ou-prd>` | Designer/Dev | cria telas no Figma com instâncias reais do DS |
+| `/ds-construir <intenção-ou-figma-url>` | Mantenedor DS | cria ou evolui componente no Figma com arquitetura correta de tokens |
+| `/ds-implementar <figma-url>` | Dev de BU | converte tela Figma em JSX tipado usando componentes DS |
+| `/ds-handoff <figma-url(s)>` | Qualquer dev | gera manifesto Markdown de componentes DS usados numa jornada, para anexar em PR |
+| `/ds-componente <figma-url>` | Mantenedor DS | gera novo componente DS completo (6 arquivos + docs Figma) |
+| `/ds-revisar + código ou screenshot` | Qualquer dev | revisa tela/código contra padrões do DS |
+| `/ds-sync` | Mantenedor DS | sincroniza inventário de componentes das libraries Figma |
 
 **No Claude Code — exemplos:**
 ```
-/ds-implementar https://www.figma.com/design/XXXX/YYYY?node-id=123:456
-/ds-componente https://www.figma.com/design/XXXX/YYYY?node-id=123:456
 /ds-tela [COLAR O SDD]
-/ds-revisar [COLAR O CÓDIGO]
+/ds-figma [COLAR O SDD]
+/ds-construir https://www.figma.com/design/XXXX/YYYY?node-id=123:456
+/ds-implementar https://www.figma.com/design/XXXX/YYYY?node-id=123:456
 ```
 
 **Ou invocar por descrição (detecção automática):**

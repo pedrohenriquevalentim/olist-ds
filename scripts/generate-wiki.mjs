@@ -252,6 +252,30 @@ npm run release
 ${scriptsList}`);
 
 // Skill — Regras Críticas extraídas do SKILL.md
+// Slash Commands — lidos dinamicamente do SKILL.md para nunca ficarem desatualizados
+function parseSlashCommands() {
+  const skillMd = safeRead(join(SKILL_DIR, 'SKILL.md'));
+  if (!skillMd) return [];
+
+  const section = skillMd.match(/## Slash Commands[\s\S]*?(?=\n## )/)?.[0];
+  if (!section) return [];
+
+  const commands = [];
+  for (const line of section.split('\n')) {
+    if (!line.startsWith('| `')) continue;
+    const cells = line.split('|').map(c => c.trim()).filter(Boolean);
+    if (cells.length < 4) continue;
+    // cells[1] = uso/sintaxe com args; cells[3] = "Audiência: descrição"
+    const usage = cells[1].replace(/`/g, '').trim();
+    const full = cells[3];
+    const colon = full.indexOf(':');
+    const audience = colon > -1 ? full.slice(0, colon).trim() : full.trim();
+    const description = colon > -1 ? full.slice(colon + 1).trim() : '';
+    commands.push({ usage, audience, description });
+  }
+  return commands;
+}
+
 function extractRegrasCriticas() {
   const skillMd = safeRead(join(SKILL_DIR, 'SKILL.md'));
   if (!skillMd) return '_Não foi possível ler SKILL.md_';
@@ -290,21 +314,26 @@ ${skillRefFiles.map(f => `- \`${f}\``).join('\n')}
 
 ### Como Usar — Slash Commands
 
-| Comando | Para quem | O que faz |
-|---|---|---|
-| \`/ds-implementar <figma-url>\` | Dev de BU | Converte tela Figma em JSX com componentes DS |
-| \`/ds-tela <sdd-ou-prd>\` | Dev de BU | Gera tela React a partir de SDD/PRD |
-| \`/ds-figma <sdd-ou-prd>\` | Designer/Dev | Cria telas no Figma com instâncias reais DS |
-| \`/ds-componente <figma-url>\` | Mantenedor DS | Gera novo componente DS completo (5 arquivos + docs) |
-| \`/ds-revisar\` | Qualquer dev | Revisa tela/código contra padrões DS |
-| \`/ds-sync\` | Mantenedor DS | Sincroniza inventário de componentes das libraries |
+${(() => {
+  const cmds = parseSlashCommands();
+  if (!cmds.length) return '_Slash commands não encontrados em SKILL.md_';
+  const header = '| Comando | Para quem | O que faz |\n|---|---|---|';
+  const rows = cmds.map(c => `| \`${c.usage}\` | ${c.audience} | ${c.description} |`).join('\n');
+  return header + '\n' + rows;
+})()}
 
 **No Claude Code — exemplos:**
 \`\`\`
-/ds-implementar https://www.figma.com/design/XXXX/YYYY?node-id=123:456
-/ds-componente https://www.figma.com/design/XXXX/YYYY?node-id=123:456
-/ds-tela [COLAR O SDD]
-/ds-revisar [COLAR O CÓDIGO]
+${(() => {
+  const cmds = parseSlashCommands();
+  return cmds.slice(0, 4).map(c => {
+    const usage = c.usage;
+    if (usage.includes('figma-url')) return `${usage.split(' ')[0]} https://www.figma.com/design/XXXX/YYYY?node-id=123:456`;
+    if (usage.includes('sdd-ou-prd')) return `${usage.split(' ')[0]} [COLAR O SDD]`;
+    if (usage.includes('intenção-ou-figma-url')) return `${usage.split(' ')[0]} Button com variante medium`;
+    return usage.split(' ')[0];
+  }).join('\n');
+})()}
 \`\`\`
 
 **Ou invocar por descrição (detecção automática):**
