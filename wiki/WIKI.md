@@ -1,7 +1,7 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.70`  
-**Skill:** v3.16  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.71`  
+**Skill:** v3.17  
 **Última atualização:** 2026-08-23  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
@@ -34,10 +34,10 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 |---|---|
 | Componentes | 14 |
 | Ícones SVG | 550 |
-| Arquivos da Skill | 22 |
+| Arquivos da Skill | 23 |
 | Arquivos Figma permitidos | 1 |
-| Versão npm | 1.0.70 |
-| Versão skill | 3.16 |
+| Versão npm | 1.0.71 |
+| Versão skill | 3.17 |
 
 ## Componentes
 
@@ -134,11 +134,11 @@ npm run release
 
 ## Skill Claude
 
-### Versão: v3.16
+### Versão: v3.17
 
 **Localização:** `.claude/skills/olist-ds-specialist/`
 
-### Arquivos da Skill (22 total)
+### Arquivos da Skill (23 total)
 
 **Raiz (6):**
 - `CHANGELOG.md`
@@ -148,7 +148,7 @@ npm run release
 - `component-registry.json`
 - `figma-config.json`
 
-**Referências (16):**
+**Referências (17):**
 - `CHECKLIST_REVISAO.md`
 - `COMPONENTES.md`
 - `CORES.md`
@@ -163,6 +163,7 @@ npm run release
 - `SDD_PARA_TELA.md`
 - `TEMPLATES_PRODUTO.md`
 - `TIPOGRAFIA.md`
+- `TOKEN_CATALOG.md`
 - `UX_WRITING.md`
 - `VISAO_GERAL.md`
 
@@ -170,7 +171,7 @@ npm run release
 
 **Auto-gerados** (por `npm run build`): COMPONENTES.md, MAPA_FONTES.md, VISAO_GERAL.md (parcial)
 
-**Manuais** (não são sobrescritos): CHECKLIST_REVISAO.md, CORES.md, ESPACAMENTO.md, FIGMA_CONFIG.md, GLOSSARIO_PAPEIS_TEXTO.md, GOVERNANCA_TOKENS.md, HARNEES_TELAS.md, PADROES.md, SDD_AVANCADO.md, SDD_PARA_TELA.md, TEMPLATES_PRODUTO.md, TIPOGRAFIA.md, UX_WRITING.md, VISAO_GERAL.md
+**Manuais** (não são sobrescritos): CHECKLIST_REVISAO.md, CORES.md, ESPACAMENTO.md, FIGMA_CONFIG.md, GLOSSARIO_PAPEIS_TEXTO.md, GOVERNANCA_TOKENS.md, HARNEES_TELAS.md, PADROES.md, SDD_AVANCADO.md, SDD_PARA_TELA.md, TEMPLATES_PRODUTO.md, TIPOGRAFIA.md, TOKEN_CATALOG.md, UX_WRITING.md, VISAO_GERAL.md
 
 ### Como Usar — Slash Commands
 
@@ -204,7 +205,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 2. Customize → Skills → Upload → selecionar pasta da skill
 3. Iniciar conversa e usar um dos slash commands acima
 
-### Regras Críticas v3.16
+### Regras Críticas v3.17
 
 ### ✅ Sempre Faça:
 
@@ -410,10 +411,18 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 1. `.claude/figma-config.json` existe?
 2. `searchPriority` tem os libraryKeys corretos?
-3. Skill v3.16 instalada?
+3. Skill v3.17 instalada?
 4. O prompt inclui instrução para ler `figma-config.json` antes do Figma MCP?
 
 ## Changelog
+
+## v3.17 (2026-08-23)
+- **TOKEN_CATALOG.md criado:** catálogo completo de 1.194 tokens CSS com valores e Figma RGB 0–1 para uso direto na Plugin API. Deve ser regenerado com `npm run sync:skill` quando o CSS mudar.
+- **component-registry.json:** 55 de 64 componentes com `variantsConfirmed: true` (antes: 17). Todas as propriedades Figma confirmadas via `get_metadata` com 25 URLs de página. Dois novos componentes adicionados: Drawer e Modal (WIP).
+- **CORES.md reescrito:** nomes primitivos corrigidos (`--color-gray-gray-0`, não `--color-gray-0`); tokens semânticos (`--color-background-*`, `--color-text-*`, `--color-border-*`, `--color-shape-*`) adicionados como seção principal; nova seção "Uso em Figma Plugin API" com sintaxe correta de fills (RGB 0–1).
+- **TOKENS.md (decisions/technical) reescrito:** hierarquia 3 camadas (Primitivo → Semântico → Componente), tabela "com repo vs sem repo", nomes corretos vs incorretos.
+- **Correções de token em 6 arquivos:** `--font-weight-semibold` → `--font-weight-600` (alias não existe no CSS); cores primitivas corrigidas para nomes reais.
+- **HARNEES_TELAS.md:** sintaxe Figma Plugin API documentada para fills, strokes e loadFontAsync.
 
 ## v3.16 (2026-08-22)
 - **Caso 5 (`/ds-construir`):** novo caso de uso e slash command para criar ou evoluir componentes no Figma com arquitetura correta de tokens. Fluxo token-first: auditoria via `get_variable_defs`, decision tree base→theme→component, Gate 1 (plano de tokens para aprovação), construção com Auto Layout e bind de variáveis, Gate 2 (screenshot). Suporta modo NOVO (intenção textual) e modo EVOLUÇÃO (URL Figma). Termina no Figma — não gera código React.
