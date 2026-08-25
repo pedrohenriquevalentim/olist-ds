@@ -78,12 +78,7 @@
         "List, Task List", "Dashboard", "Loading", "Overlay", "Cookie",
         "Heading/Subheading via Text Styles (text/H1–H5, paragraph, caption, description) — não como componente, consistente com o harness"
       ],
-      "gaps": [
-        {
-          "requirement": "Summary Card (HARNEES_TELAS.md Seção 1 — template Envios/Hub/Conta Digital, Zona D)",
-          "finding": "O component_set 'card' foi atualizado em 2026-08-01 e agora possui variantes internas de notificação (alert, warning, informative). Pode ter incorporado o Summary Card como variante — validar manualmente com o time de design antes de usar em telas desses produtos. Caso não exista variante dedicada de fundo azul claro, seguir Seção 4 do harness (construir com primitivos + documentar gap)."
-        }
-      ],
+      "gaps": [],
       "resolvedGaps": [
         {
           "requirement": "Paginator (mencionado como ausente em references/GOVERNANCA_TOKENS.md seção 9 até 2026-07-20)",

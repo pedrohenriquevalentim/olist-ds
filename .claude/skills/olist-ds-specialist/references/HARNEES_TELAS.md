@@ -1,7 +1,7 @@
 # Harness de Construção de Telas
 
-**Versão:** 1.2  
-**Última atualização:** 2026-07-04  
+**Versão:** 1.4  
+**Última atualização:** 2026-08-25  
 **Leia após:** `TEMPLATES_PRODUTO.md`  
 **Leia antes de:** criar qualquer frame via `use_figma`
 
@@ -23,7 +23,7 @@ A diferença em relação ao `CHECKLIST_REVISAO.md`:
 Execute este gate antes de criar qualquer frame. Se qualquer item falhar, **resolva antes de continuar**.
 
 ```
-[ ] 1. Template identificado (erp | envios | conta-digital | hub)?
+[ ] 1. Template identificado (erp — único template para todos os produtos)?
 [ ] 2. Todas as zonas necessárias mapeadas pelo template?
 [ ] 3. Padrão de página da Zona D (Content Area) identificado (Tabela | Form | Dashboard | Detalhe | Empty)?
 [ ] 4. Componentes necessários têm componentKey válido nas libraries autorizadas?
@@ -41,40 +41,24 @@ Execute este gate antes de criar qualquer frame. Se qualquer item falhar, **reso
 Define o que pode e **não pode** entrar em cada zona do template.  
 A coluna "Proibido" é exaustiva para os casos mais comuns — outros casos devem ser consultados com o usuário.
 
-### Template: ERP (`viewport: 1588 × 832px`)
+### Template: ERP (`viewport: 1366 × 768px`)
 
-| Zona | Nome | Pode conter | Não pode conter |
-|---|---|---|---|
-| **A** | Novo Menu Global | `Menu Global` (instância real, `produto` definido) | Qualquer outro componente. Nenhum elemento custom. |
-| **B** | Top Bar | `Breadcrumb` (instância real do componente DS), máx 1 `Button` primary, `Button` secondary ou icon ilimitados | Inputs, formulários, tabelas, cards, badges soltos, ilustrações |
-| **C** | Page Header | `Heading` (1 único), `Input Search` (opcional), `Button` com ícone para filtros (sem label), `Tag` de filtro ativo | `Subheading`, cards de métrica, gráficos, tabelas, `Button` com label (primary ou secondary) |
-| **D** | Content Area | Um padrão de página (ver Seção 3): Tabela, Form, Dashboard, Detalhe, ou Empty State; conteúdo editorial; `Card`s (dentro do padrão ou como bloco de apoio) | Breadcrumb, demais elementos de navegação (sidebar items), CTAs primários fora do contexto do padrão |
-| **E** | Paginação | Paginação numérica (prev / números / next), contador de resultados ("Mostrando 1-20 de 248") | Botões de ação, formulários, conteúdo editorial. **Zona E é opcional** — só aparece com tabelas de múltiplas páginas |
+| Zona | Nome | Altura | Pode conter | Não pode conter |
+|---|---|---|---|---|
+| **A** | Novo Menu Global | 304px largura | `Menu Global` (instância real, `produto` definido) | Qualquer outro componente. Nenhum elemento custom. |
+| **B** | Top Bar + Título | 116px | `breadcrumb` (esquerda do nav header) + `button` secondary × N + `button` primary × 1 (action bar direita); abaixo: título H1 + subtítulo (text styles) | Inputs, formulários, tabelas, cards, badges soltos, ilustrações |
+| **C** | Filter Bar | 72px | `input search` (460px fixo) + `button` secondary/tertiary × N como filtros rápidos | `tag` como filtro ativo nesta zona; `button` primary; `heading` |
+| **D** | Tabs | 48px | `tabs` (componente DS real, instância) + `button` secondary (ação contextual) + `button icon` (toggle de modo) | `Segmented Buttons`, qualquer input, breadcrumb, CTAs primários. **Zona D é opcional** — incluir só quando houver sub-navegação |
+| **E** | Content Area | 452px | Um padrão de página (ver Seção 3): Tabela, Form, Dashboard, Detalhe ou Empty State; `card`s dentro do padrão | Breadcrumb, elementos de navegação, CTAs primários soltos |
+| **F** | Bottom Bar | 80px | `Paginator` + text styles para totais | Botões de ação, formulários, conteúdo editorial. **Zona F é opcional** — só aparece com tabelas de múltiplas páginas |
 
 **Regras específicas ERP:**
-- Gap entre zonas B-C-D-E: **0px**
-- Fundo (todas as zonas, A–E): `--backgrounds/bg` (`#fcfbf8`)
-- Breadcrumb na Zona B: instância real do componente `Breadcrumb` (`design system (base)`, componentKey em `component-registry.json`) — não construir com texto solto
-
----
-
-### Template: Envios | Hub | Conta Digital (`viewport: 1440 × 852px`)
-
-| Zona | Nome | Pode conter | Não pode conter |
-|---|---|---|---|
-| **A** | Novo Menu Global | `Menu Global` (instância real, `produto` definido) | Qualquer outro componente. Nenhum elemento custom. |
-| **B** | Top Bar | Ações do produto (avatar, notificações), máx 1 `Button` primary | Logo do produto (já exibido na Zona A via `Menu Global`), breadcrumb, inputs de busca, filtros |
-| **C** | Page Header + Subtitle | `Heading` (1 único) + `Subheading` obrigatório (descrição da página) | `Input Search`, filtros, `Button` de qualquer tipo, badges |
-| **D** | Content Area | `Summary Card` (opcional, antes do conteúdo principal), um padrão de página (Tabela, Form, Dashboard, Detalhe, Empty State), `Input Search` (dentro do padrão) | CTAs primários soltos fora do padrão, breadcrumb, elementos de navegação |
-| **E** | Sticky ou Paginação | Barra fixa de ações de confirmação (máx 2 botões: 1 primary + 1 secondary) ou paginação numérica | Formulários completos, tabelas, conteúdo editorial. **Zona E é opcional** |
-
-**Regras específicas Envios/Hub/Conta Digital:**
-- Gap entre zonas B-C-D-E: **24px**
-- `Subheading` na Zona C é **obrigatório** (diferença crítica em relação ao ERP)
-- `Summary Card` (fundo azul claro) é opcional — aparece antes do conteúdo quando há métricas de resumo
-- Zona A: mesmo componente `Menu Global` do ERP, `produto` adequado ao contexto — o logo do produto já faz parte deste componente; **não duplicar na Zona B**
-
-> ⚠️ **Gap conhecido (verificado em 2026-07-02):** não foi encontrada uma variante dedicada de `Summary Card` na library `design system (base)` — apenas o component_set genérico `card`. Antes de usar `Summary Card` numa tela desses templates, verificar as variantes do `card` (pode existir uma variante equivalente com outro nome) ou seguir a Seção 4 (primitivos + documentar gap) e a Seção 8 (reportar violação) deste harness. Ver `figma-config.json` → `harnessCoverageCheck.gaps`.
+- Gap entre zonas B–F: **0px** (container VERTICAL, gap: 0)
+- Fundo (todas as zonas, A–F): `--backgrounds/bg` (`#fcfbf8`)
+- Zona B é dividida internamente: `nav header` (47px) + gap 20px + `page title` (49px) = 116px total
+- `breadcrumb` na Zona B: instância real do componente DS (`component-registry.json`) — nunca construir com texto solto
+- `tabs` na Zona D: componente DS real (não `Segmented Buttons`) — confirmado no frame Figma `10170:11866`
+- Total de alturas B+C+D+E+F: **768px** (com Zona A de 768px de altura, em layout horizontal)
 
 ---
 
@@ -89,23 +73,23 @@ Define limites quantitativos e contextos válidos para cada componente.
 | `Button` — variante primary | **1** | Hierarquia de CTA. Mais de 1 primary = falha crítica. |
 | `Heading` (papel de texto) | **1** | Um único título de página por tela. |
 | `Menu Global` | **1** | Sempre na Zona A. Nunca duplicar. |
-| `Input Search` | **1** | Uma busca por tela. ERP: Zona C. Envios/Hub: Zona D. |
-| `Summary Card` | **1** | Opcional. Apenas em Envios/Hub/Conta Digital, Zona D, antes do padrão. |
-| `Breadcrumb` | **1** | Sempre na Zona B do ERP. Não aparece nos templates Envios/Hub/Conta Digital. |
+| `Input Search` | **1** | Uma busca por tela. Zona C (Filter Bar). |
+| `tabs` | **1** | Opcional. Zona D, sub-navegação. |
+| `Breadcrumb` | **1** | Sempre na Zona B. |
 
 ### Contextos Válidos por Componente
 
 | Componente | Zonas válidas | Zonas proibidas |
 |---|---|---|
-| `Button` primary | B (ERP), B (Envios), E sticky | C, D (solto fora de form/modal) |
+| `Button` primary | B (Zona B), E sticky (Zona F) | C, D (solto fora de form/modal) |
 | `Button` secondary / icon | B, C (ícone apenas), D (dentro de padrão), E | A |
 | `Tag` / `Badge` de status | Células de tabela (Zona D), Page Header (Zona C, filtro ativo) | Zonas A, B, E; flutuando fora de contexto |
 | `Input Text`, `Input Search`, `Dropdown` | Zona C (ERP, busca), Zona D (dentro de form ou filtro de tabela) | Zonas A, B, E |
 | `Checkbox`, `Radio Button` | Zona D (dentro de tabela ou formulário) | Zonas A, B, C, E |
-| `Segmented Buttons` | Zona D (sub-navegação interna ao conteúdo) | Zona B, C, E |
+| `tabs` (DS real) | Zona D — ERP (sub-navegação em abas) | Zonas A, B, C, E, F |
 | `Tooltip` | Qualquer zona, associado a um elemento interativo | Flutuando sem âncora |
 | `Logo Olist` | Zona A, embutido no `Menu Global` (todos os templates) | Zona B, C, D, E — nunca como elemento solto de zona |
-| `Breadcrumb` | Zona B (ERP apenas) | Zonas A, C, D, E; templates Envios/Hub/Conta Digital |
+| `Breadcrumb` | Zona B | Zonas A, C, D, E, F |
 
 ### Variantes Obrigatórias
 
@@ -132,7 +116,7 @@ A Zona D deve sempre implementar um dos 5 padrões canônicos. Combinações for
 **Proibido na Zona D:**
 - Layout livre sem padrão canônico
 - Mistura de padrões (ex: tabela + formulário lado a lado sem modal/drawer)
-- Tabs de sub-navegação diretamente na Zona D sem usar `Segmented Buttons` do DS
+- `Segmented Buttons` em qualquer zona — usar `tabs` (componente DS real) na Zona D do ERP
 
 ---
 
@@ -293,9 +277,11 @@ Como prefere prosseguir?
 
 ---
 
-**Versão:** 1.2  
+**Versão:** 1.4  
 **Criado em:** 2026-06-05  
 **Atualizado em:** 2026-07-04 (2) — Zona B do template Envios/Hub/Conta Digital deixa de permitir "Logo do produto": o logo já é exibido na Zona A via `Menu Global`, e sua duplicação na Zona B foi removida da coluna "Pode conter" e movida para "Não pode conter". A linha `Logo Olist` em "Contextos Válidos por Componente" (Seção 2) foi corrigida para refletir que o logo só existe embutido no `Menu Global` (Zona A, todos os templates), nunca como elemento solto de zona.  
 **Atualizado em:** 2026-07-04 — Zona B (ERP): `Breadcrumb` passa a ser a instância real do componente DS (não mais "texto puro, sem componente"), resolvendo o ponto em aberto #1 de `decisions/ux-design/COMPONENTES_POR_ZONA.md`. Zona C: proibição de `Button` generalizada para qualquer variante com label (antes só "primary"), mantendo o botão de ícone de filtro permitido. Zona D: `conteúdo editorial` e `Card`s avulsos passam a ser permitidos, mantendo `Breadcrumb` e demais elementos de navegação proibidos. Regra de fundo unificada para todas as zonas (A–E), removendo a exceção antes registrada para a Zona A. Seção 2 ganhou linhas de `Breadcrumb` em "Limites por Tela" e "Contextos Válidos por Componente".  
 **Atualizado em:** 2026-07-03 — `Menu ERP` (variante `stage=X`) substituído por `Menu Global` (variante `produto=X`), confirmado após republicação da library. Ver `component-registry.json` para o componentKey e a lista completa de produtos.  
+**Atualizado em:** 2026-08-25 (v1.3) — Template ERP: viewport corrigido `1588×832` → `1366×768`; zonas reestruturadas de A–E para A–F alinhando ao `TEMPLATES_PRODUTO.md` v1.7 (Zona C=72px Filter Bar, Zona D=48px Tabs, Zona E=452px Content, Zona F=80px Bottom Bar); `Segmented Buttons` removido de todos os contextos válidos e substituído por `tabs` DS real (confirmado em 2026-08-25, frame `10170:11866`); adicionada linha de `tabs` nos Limites por Tela.  
+**Atualizado em:** 2026-08-25 (v1.4) — Template unificado: seção "Template: Envios | Hub | Conta Digital" removida. Todos os produtos (ERP, Envios, Hub, Conta Digital) passam a usar exclusivamente o template ERP. Gate item 1 simplificado. Seção 2 simplificada: removida linha de `Summary Card`, ajustados contextos de `Input Search`, `Breadcrumb` e `Button primary` para refletir template único.  
 **Próxima revisão sugerida:** após 10 telas geradas com o harness ativo — coletar violações recorrentes e adicionar à Seção 2 (Limites por Componente) e Seção 3 (Padrões proibidos emergentes)
