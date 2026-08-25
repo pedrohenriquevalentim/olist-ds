@@ -3,6 +3,12 @@
 Histórico de atualizações sincronizado com a skill `olist-ds-specialist`.
 Atualizado automaticamente pelo `sync-skill-meta.mjs` a cada `npm run ship`.
 
+## v3.18 (2026-08-25)
+
+> Skill atualizada para v3.18. Referências sincronizadas automaticamente.
+
+- Arquivos da skill modificados: README.md, SKILL.md, component-registry.json, decisions/INDEX.md, decisions/ux-design/COMPONENTES_POR_ZONA.md, decisions/ux-design/ESPACAMENTO_LAYOUT.md, figma-config.json, references/COMPONENTES.md, references/HARNEES_TELAS.md, references/MAPA_FONTES.md, references/TEMPLATES_PRODUTO.md
+
 ## v3.17 (2026-08-23)
 
 > Skill atualizada para v3.17. Referências sincronizadas automaticamente.

@@ -1,10 +1,14 @@
-# Olist Design System — Especialista (v3.17 · atualizado em 2026-08-25)
+# Olist Design System — Especialista (v3.18 · atualizado em 2026-08-25)
 
 Skill corporativa para criação de telas, componentes e protótipos a partir de SDDs/PRDs usando o design system da Olist.
 
 ## 📌 Library de referência (decisão permanente desde 2026-07-03)
 
 A [`design system (base)`](https://www.figma.com/design/HeyN4w209HWh8rfpTDiwyf/design-system) é a **única library de referência** para construção de telas, em `figma-config.json`/`searchPriority`. A hierarquia anterior (AI Components, ERP components, ERP recursos, ERP style guide, [design system] components web) foi descontinuada e está em `blockedLibraries` com os dados preservados. Histórico completo da decisão, incluindo checagem de cobertura contra o harness, em `decisions/ux-design/FLUXO_PRD_FIGMA.md`.
+
+## Novidades v3.18 (2026-08-25)
+
+- Arquivos da skill modificados: README.md, SKILL.md, component-registry.json, decisions/INDEX.md, decisions/ux-design/COMPONENTES_POR_ZONA.md, decisions/ux-design/ESPACAMENTO_LAYOUT.md, figma-config.json, references/COMPONENTES.md, references/HARNEES_TELAS.md, references/MAPA_FONTES.md, references/TEMPLATES_PRODUTO.md
 
 ## Novidades v3.8 (2026-06-29)
 
@@ -133,6 +137,9 @@ Use $olist-ds-specialist para criar UI no Figma:
 ```
 
 ## Changelog
+
+### v3.18 (2026-08-25)
+- Arquivos da skill modificados: README.md, SKILL.md, component-registry.json, decisions/INDEX.md, decisions/ux-design/COMPONENTES_POR_ZONA.md, decisions/ux-design/ESPACAMENTO_LAYOUT.md, figma-config.json, references/COMPONENTES.md, references/HARNEES_TELAS.md, references/MAPA_FONTES.md, references/TEMPLATES_PRODUTO.md
 
 ### v3.17 (2026-08-23)
 - Versão 3.17

@@ -46,4 +46,4 @@ Exemplo:
 
 ---
 
-**Última atualização:** 2026-08-25 — template unificado (ERP para todos os produtos); skill v3.17
+**Última atualização:** 2026-08-25 — skill v3.18

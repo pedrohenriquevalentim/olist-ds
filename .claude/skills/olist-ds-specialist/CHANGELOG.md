@@ -1,3 +1,6 @@
+## v3.18 (2026-08-25)
+- Arquivos da skill modificados: README.md, SKILL.md, component-registry.json, decisions/INDEX.md, decisions/ux-design/COMPONENTES_POR_ZONA.md, decisions/ux-design/ESPACAMENTO_LAYOUT.md, figma-config.json, references/COMPONENTES.md, references/HARNEES_TELAS.md, references/MAPA_FONTES.md, references/TEMPLATES_PRODUTO.md
+
 ## v3.17 (2026-08-23)
 - **TOKEN_CATALOG.md criado:** catálogo completo de 1.194 tokens CSS com valores e Figma RGB 0–1 para uso direto na Plugin API. Deve ser regenerado com `npm run sync:skill` quando o CSS mudar.
 - **component-registry.json:** 55 de 64 componentes com `variantsConfirmed: true` (antes: 17). Todas as propriedades Figma confirmadas via `get_metadata` com 25 URLs de página. Dois novos componentes adicionados: Drawer e Modal (WIP).

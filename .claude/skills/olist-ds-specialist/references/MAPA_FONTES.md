@@ -2,7 +2,7 @@
 
 **Auto-gerado por `npm run build`**  
 **Última atualização:** 2026-08-25  
-**Versão da skill:** 3.17
+**Versão da skill:** 3.18
 
 ---
 
