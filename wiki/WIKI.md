@@ -1,7 +1,7 @@
 # Olist Design System — Wiki
 
 **Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.72`  
-**Skill:** v3.17  
+**Skill:** v3.18  
 **Última atualização:** 2026-08-25  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
@@ -37,7 +37,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Arquivos da Skill | 23 |
 | Arquivos Figma permitidos | 1 |
 | Versão npm | 1.0.72 |
-| Versão skill | 3.17 |
+| Versão skill | 3.18 |
 
 ## Componentes
 
@@ -134,7 +134,7 @@ npm run release
 
 ## Skill Claude
 
-### Versão: v3.17
+### Versão: v3.18
 
 **Localização:** `.claude/skills/olist-ds-specialist/`
 
@@ -205,7 +205,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 2. Customize → Skills → Upload → selecionar pasta da skill
 3. Iniciar conversa e usar um dos slash commands acima
 
-### Regras Críticas v3.17
+### Regras Críticas v3.18
 
 ### ✅ Sempre Faça:
 
@@ -411,10 +411,13 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 1. `.claude/figma-config.json` existe?
 2. `searchPriority` tem os libraryKeys corretos?
-3. Skill v3.17 instalada?
+3. Skill v3.18 instalada?
 4. O prompt inclui instrução para ler `figma-config.json` antes do Figma MCP?
 
 ## Changelog
+
+## v3.18 (2026-08-25)
+- Arquivos da skill modificados: README.md, SKILL.md, component-registry.json, decisions/INDEX.md, decisions/ux-design/COMPONENTES_POR_ZONA.md, decisions/ux-design/ESPACAMENTO_LAYOUT.md, figma-config.json, references/COMPONENTES.md, references/HARNEES_TELAS.md, references/MAPA_FONTES.md, references/TEMPLATES_PRODUTO.md
 
 ## v3.17 (2026-08-23)
 - **TOKEN_CATALOG.md criado:** catálogo completo de 1.194 tokens CSS com valores e Figma RGB 0–1 para uso direto na Plugin API. Deve ser regenerado com `npm run sync:skill` quando o CSS mudar.
