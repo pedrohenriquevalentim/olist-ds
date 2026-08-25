@@ -24,7 +24,7 @@ Este arquivo existe para que essas perguntas não se percam entre sessões. **Ne
 ### 2. `Tag` vs `Badge`: mesma função ou usos distintos?
 
 - **O que se sabe:** ambos existem na library desde a republicação. `Tag` já era documentado (status semântico com cor mapeada). `Badge` é novo, propósito não confirmado.
-- **Impacto se não resolvido:** risco de escolher o componente errado ao implementar filtro ativo (Zona C, ERP) ou indicador de notificação (Zona B, Envios/Hub/Conta Digital) — os dois viram "candidatos" hoje em `TEMPLATES_PRODUTO.md`.
+- **Impacto se não resolvido:** risco de escolher o componente errado ao implementar filtro ativo (Zona C) ou indicador de notificação (Zona B) — os dois viram "candidatos" hoje em `TEMPLATES_PRODUTO.md`.
 - **Como resolver:** perguntar ao time de design a diferença de propósito (ex: `Tag` = status semântico de linha/registro; `Badge` = contador numérico sobre ícone?).
 
 ### 3. `Segmented Buttons` vs `Tabs`: qual usar para sub-navegação?
@@ -35,7 +35,7 @@ Este arquivo existe para que essas perguntas não se percam entre sessões. **Ne
 
 ### 4. `Context Switch`: propósito não confirmado
 
-- **O que se sabe:** componente novo, nome sugere troca de contexto/workspace. Hipótese: usado na Zona B (Top Bar) dos templates Envios/Hub/Conta Digital, junto a `Avatar` (o `Logo` não fica na Zona B — já é exibido na Zona A via `Menu Global`, confirmado em 2026-07-04).
+- **O que se sabe:** componente novo, nome sugere troca de contexto/workspace. Sem hipótese de zona estabelecida — o `Logo` não fica em nenhuma Zona B (já é exibido na Zona A via `Menu Global`, confirmado em 2026-07-04). Com o template unificado (2026-08-25), a Zona B é a Top Bar do ERP para todos os produtos.
 - **Impacto se não resolvido:** nenhum uso documentado — fica fora do harness até ter contexto.
 - **Como resolver:** perguntar ao time de design o que é e onde se aplica.
 
@@ -65,6 +65,7 @@ Este arquivo existe para que essas perguntas não se percam entre sessões. **Ne
 
 ## Histórico
 
+- 2026-08-25 v1.3 — Template unificado: todos os produtos passam a usar o template ERP. Referências a "templates Envios/Hub/Conta Digital" atualizadas para refletir template único. Item 4 (`Context Switch`) revisado.
 - 2026-07-04 v1.2 — Confirmado que a Zona B (Top Bar) dos templates Envios/Hub/Conta Digital **não exibe o logo do produto** — o logo já faz parte do componente `Menu Global` na Zona A. `HARNEES_TELAS.md` e `TEMPLATES_PRODUTO.md` corrigidos (removido `Logo` das colunas "Pode conter"/"Componentes Recomendados" da Zona B); hipótese do item 4 (`Context Switch`) ajustada para não mencionar mais `Logo` como vizinho de zona.
 - 2026-07-04 v1.1 — Item 1 (`Breadcrumb`) resolvido: passa a ser a instância real do componente DS na Zona B do ERP. Itens 2-5 seguem pendentes.
 - 2026-07-03 v1.0 — Decisão criada a partir da análise de componentes por zona pós-republicação da library.

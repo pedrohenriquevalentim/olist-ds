@@ -1,10 +1,10 @@
 # Templates de Página por Produto
 
-**Versão:** 1.3  
-**Última atualização:** 2026-07-03 (v1.3 — adicionada seção "Componentes Recomendados por Zona" por template, com base no inventário confirmado em `component-registry.json`; pontos em aberto documentados separadamente)  
-**Fonte Figma:** `9pCeYLXBj1O0QPUiHANaqh` — Página "📐 Templates dos produtos - Inventário" (node `8063:818`)
+**Versão:** 1.8  
+**Última atualização:** 2026-08-25 (v1.8 — template unificado: Envios, Hub de Integração e Conta Digital (Internet Banking) passam a usar o mesmo template do ERP. Removido o segundo template. Todos os produtos agora mapeiam para o node ERP `8790:9484`.)  
+**Fonte Figma:** `HeyN4w209HWh8rfpTDiwyf` — arquivo `design system (base)`, node raiz `8790:9475`
 
-> **Nota:** este arquivo Figma é **diferente** da library de componentes `design system (base)` (`HeyN4w209HWh8rfpTDiwyf`, ver `figma-config.json`). Os templates aqui são wireframes de estrutura/zona (frames com labels de texto, não componentes publicados) — verificado em 2026-07-03 via `get_metadata` direto nos nodes: `8063:818`, `8063:3669` e `8063:20969` continuam válidos e as dimensões batem exatamente com o documentado abaixo. Não há necessidade de migrar este conteúdo para a `design system (base)` — são artefatos de tipos diferentes (wireframe de layout vs. component library).
+> **Nota:** os templates foram migrados para o arquivo `design system (base)` (`HeyN4w209HWh8rfpTDiwyf`, ver `figma-config.json`) — o arquivo anterior (`9pCeYLXBj1O0QPUiHANaqh`) foi esvaziado e não deve mais ser referenciado. O node raiz `8790:9475` foi verificado em 2026-08-24 via `get_metadata` e retorna conteúdo. Os sub-nodes específicos de ERP (`8063:3669`) e Envios/Hub/Conta Digital (`8063:20969`) usam IDs do arquivo antigo e precisam ser re-verificados no novo arquivo para obter os IDs corretos.
 
 Antes de criar telas no Figma, identificar o PRODUTO no SDD/PRD e usar o template correspondente. As zonas descritas aqui refletem exatamente a estrutura definida no Figma.
 
@@ -14,11 +14,11 @@ Antes de criar telas no Figma, identificar o PRODUTO no SDD/PRD e usar o templat
 
 Os templates são mantidos no Figma como fonte da verdade:
 
-- **ERP:** node `8063:3669`
-- **Envios / Hub / Conta Digital:** node `8063:20969`
+- **Raiz:** node `8790:9475` (arquivo `HeyN4w209HWh8rfpTDiwyf`)
+- **Template único (todos os produtos):** node `8790:9484`
 
 Quando o usuário pedir "sincronizar templates" ou "atualizar templates":
-1. Acessar Figma MCP → arquivo `9pCeYLXBj1O0QPUiHANaqh`, nodes acima
+1. Acessar Figma MCP → arquivo `HeyN4w209HWh8rfpTDiwyf`, node raiz `8790:9475`
 2. Usar `get_design_context` para extrair zonas atualizadas
 3. Atualizar este arquivo com as mudanças
 
@@ -35,35 +35,41 @@ Palavras-chave no SDD que indicam o produto:
 | **Conta Digital** | conta digital, internet banking, saldo, extrato, transferência, Pix, boleto, pagamento |
 | **Hub** | hub, integração, marketplace, canal de venda, sincronização |
 
+> **Todos os produtos usam o mesmo template (ERP).** A identificação de produto serve apenas para escolher a variante correta do `Menu Global` (prop `produto`).
+
 Se o SDD não especificar o produto: **perguntar ao usuário.**
 
 ---
 
 ## Template: ERP
 
-**Figma node:** `8063:3669`  
-**Viewport:** 1588 x 832px  
+**Figma node:** `8790:9484`  
+**Viewport:** 1366 × 768px  
 **Layout:** horizontal (Zona A + Container)
+
+> **v1.5 — alinhado ao ERP Real ("Pagina média"):** viewport reduzido, header dividido em Top Bar + Título, Filter Bar separada do header, Zona D (Tabs) adicionada, Content Area reajustada.
 
 ```
 ┌───────────────────────────────────────────────────────────────┐
 │ ┌──────────┐ ┌──────────────────────────────────────────────┐ │
-│ │           │ │  Zona B — Top Bar                    68px h │ │
-│ │           │ │  Com Breadcrumb e demais ações               │ │
-│ │           │ ├──────────────────────────────────────────────┤ │
-│ │  Zona A   │ │  Zona C — Page Header               124px h │ │
-│ │  304px w  │ │  Heading + Input de pesquisa e                │ │
-│ │           │ │  ações de Filtros                             │ │
+│ │           │ │  Zona B — Top Bar + Título          120px h │ │
+│ │           │ │  Nav Bar 47px: Breadcrumb + Ações            │ │
+│ │           │ │  Título  53px: Heading + Subtitle            │ │
+│ │  Zona A   │ ├──────────────────────────────────────────────┤ │
+│ │  304px w  │ │  Zona C — Filter Bar                 54px h │ │
+│ │           │ │  Input Search + Tags (filtros) + Link        │ │
 │ │  Novo     │ ├──────────────────────────────────────────────┤ │
-│ │  Menu     │ │                                              │ │
-│ │  Global   │ │  Zona D — Content Area              560px h │ │
-│ │           │ │                                              │ │
-│ │  Sidebar  │ │  Tabela / Formulário / Cards /               │ │
-│ │  fixa à   │ │  Dashboard                                   │ │
-│ │  esquerda │ │                                              │ │
+│ │  Menu     │ │  Zona D — Tabs                       43px h │ │
+│ │  Global   │ │  Segmented Buttons (sub-navegação)           │ │
+│ │           │ ├──────────────────────────────────────────────┤ │
+│ │  Sidebar  │ │                                              │ │
+│ │  fixa à   │ │  Zona E — Content Area              452px h │ │
+│ │  esquerda │ │  Tabela / Formulário / Cards /               │ │
+│ │           │ │  Dashboard                                   │ │
 │ │           │ │                                              │ │
 │ │           │ ├──────────────────────────────────────────────┤ │
-│ │           │ │  Zona E — Paginação (se necessário)  80px h │ │
+│ │           │ │  Zona F — Bottom Bar                 80px h │ │
+│ │           │ │  Paginator + Totais                          │ │
 │ └──────────┘ └──────────────────────────────────────────────┘ │
 └───────────────────────────────────────────────────────────────┘
 ```
@@ -73,35 +79,92 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
 | Zona | Nome | Descrição | Dimensão |
 |---|---|---|---|
 | **A** | Novo Menu Global | Sidebar fixa à esquerda | 304px largura, 100% altura |
-| **B** | Top Bar | Breadcrumb e demais ações | 100% largura, 68px altura |
-| **C** | Page Header | Heading + Input de pesquisa + ações de filtros | 100% largura, 124px altura |
-| **D** | Content Area | Área principal (tabela, form, cards, dashboard) | 100% largura, flex (preenche restante) |
-| **E** | Paginação | Paginação numérica (se necessário) | 100% largura, 80px altura |
+| **B** | Top Bar + Título | Nav Bar (Breadcrumb + ações) + Título (Heading + Subtitle) | 100% largura, 116px altura |
+| **C** | Filter Bar | Input Search + Botões de filtro rápido | 100% largura, 72px altura |
+| **D** | Tabs | Sub-navegação em abas (`tabs` DS real) + ações de visualização | 100% largura, 48px altura |
+| **E** | Content Area | Área principal (tabela, form, cards, dashboard) | 100% largura, 452px altura |
+| **F** | Bottom Bar | Paginação + totais | 100% largura, 80px altura |
 
 ### Regras ERP
 
-- Container (Zona B-E) não tem gap entre zonas (gap: 0)
+- Container (Zona B-F) não tem gap entre zonas (gap: 0)
 - Fundo do Container: `--backgrounds/bg` (`#fcfbf8`)
 - Zona A: fundo neutro (`#d9d9d9` no wireframe)
-- Zona E é opcional — só aparece quando há tabela com muitos itens
-- Máximo 1 CTA primário na Zona B (Top Bar)
+- Zona B é dividida internamente: `nav header` (47px) + 20px gap + `page title` (49px) = 116px total
+- Padding lateral interno de todas as zonas: **25px** (content width efetiva 1012px)
+- Zona D (Tabs) é opcional — usar apenas quando houver sub-navegação na página
+- Zona F é opcional — só aparece quando há tabela com muitos itens
+- Máximo 1 CTA primário na Zona B (action bar)
+- Zona D: usar o componente `tabs` do DS (confirmado no frame real 10170:11866) — **não usar `Segmented Buttons`**
 
 ### Componentes Recomendados por Zona — ERP
 
-> Baseado no inventário confirmado em `component-registry.json` (63 componentes, pós-republicação de 2026-07-03). Zona A não entra aqui — é exclusiva do `Menu Global` (ver Regras acima). Itens marcados ⚠️ são percepção, não regra fechada — ver "Observações e Pontos em Aberto" ao final deste arquivo.
+> Alinhado aos frames reais do Figma (nodes 10156:8272, 10170:9662, 10170:11866) em 2026-08-25. Zona A não entra aqui — é exclusiva do `Menu Global`. Itens marcados ⚠️ são percepção, não regra fechada — ver "Observações e Pontos em Aberto" ao final deste arquivo.
 
 | Zona | Componentes recomendados |
 |---|---|
-| **B** — Top Bar | `Breadcrumb` (instância real do componente DS), `Button` (primary, máx 1), `Button Icon` |
-| **C** — Page Header | `Input Search`, `Button Icon` (filtro), `Tag` ou `Badge` ⚠️ (filtro ativo) — Heading é Text Style, não componente |
-| **D** — Content Area | `Table`, `Sort`, `Checkbox`, `Radio Button`, `Toggle`, `Chip`, `Dropdown`, `Input Text`/`Input Email`/`Input Search`/`Input Token`/`Input Password`/`Input File`/`Input Select`/`Input Paragraph`, `Card`, `Segmented Buttons` ou `Tabs` ⚠️ (sub-navegação, escolha em aberto), `Tooltip`, `Avatar` |
-| **E** — Paginação | `Paginator` |
+| **B** — Top Bar + Título | `breadcrumb` + `button` (back, à esquerda do breadcrumb); action bar direita: `button` × até 3 + `dropdown` × 1; título via Text Style H1 + body text |
+| **C** — Filter Bar | `input search` (460px fixo) + `button` × N como filtros rápidos (secondary/tertiary); **não usar `tag` como filtro ativo nesta zona** |
+| **D** — Tabs | `tabs` (componente DS real, confirmado em frame 10170:11866) + `button` (ação secundária) + `button icon` (toggle de modo de visualização) |
+| **E** — Content Area | `Table`, `Sort`, `Checkbox`, `Radio Button`, `Toggle`, `Chip`, `Dropdown`, `Input Text`/`Input Email`/`Input Search`/`Input Token`/`Input Password`/`Input File`/`Input Select`/`Input Paragraph`, `Card`, `Tooltip`, `Avatar` |
+| **F** — Bottom Bar | `Paginator`, Text Styles para totais (sem componente dedicado) |
+
+### Diagramação Interna das Zonas — ERP
+
+> Medidas extraídas dos frames reais do Figma em 2026-08-25. Padding lateral interno de todas as zonas: **25px** (content width efetiva = 1012px dentro de 1062px de container).
+
+#### Zona B — Top Bar + Título (116px) · node `10156:8272`
+
+```
+┌─────────────────────────────────────── 1062px ──────────────────────────────────────┐
+│  25px │                         nav header · 47px                          │  25px  │
+│       │ [button-back] [breadcrumb ────────] [──── space ────] [btn btn btn dropdown] │
+│  25px │                         gap · 20px                                 │  25px  │
+│       │                         page title · 49px                          │        │
+│       │ [H1 Título da página                                              ] │        │
+│       │ [description text                                                 ] │        │
+└──────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+- `nav header` (47px): `breadcrumb` à esquerda + `action bar` à direita (`button` × até 3 + `dropdown` × 1, gap 8px entre itens)
+- `page title` (49px, y=67): título H1 + description text abaixo; hidden: `tag` de feedback (BETA etc.)
+- Gap entre nav header e page title: **20px** (y do container de título = 67px)
+
+#### Zona C — Filter Bar (72px) · node `10170:9662`
+
+```
+┌─────────────────────────────────────── 1062px ──────────────────────────────────────┐
+│  25px │ [input search ──── 460px ────]  8px  [btn btn btn btn──107px──]    │  25px  │
+└──────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+- `input search`: largura fixa **460px**, altura **72px** (campo + label — altura natural do componente DS)
+- Gap entre input e grupo de botões: **8px**
+- Grupo de filtros: `button` × 3 (64px cada, gap 8px) + `button` largo (107px) para filtros com label
+- **Não usar `tag` componente aqui** — os filtros rápidos são `button` (secondary/tertiary)
+
+#### Zona D — Tabs (48px) · node `10170:11866`
+
+```
+┌─────────────────────────────────────── 1062px ──────────────────────────────────────┐
+│  25px │ [tabs ──────────── 572px ──────────]  8px  [btn · 63px]  [btn-icon · 32px]  │
+└──────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+- `tabs`: componente DS real (**não** `Segmented Buttons`), largura 572px
+- Gap entre tabs e ações da direita: **8px**
+- `button` (63px): ação contextual (ex: filtro de período)
+- `button icon` (32px): toggle de modo de visualização (lista/grid)
 
 ### Estrutura de Layout — ERP (referência para use_figma)
 
 ```json
 {
   "template": "erp",
+  "figmaNode": "8790:9484",
+  "viewport": "1366x768",
+  "paddingLateral": 25,
+  "contentWidth": 1012,
   "layout": {
     "direction": "horizontal",
     "gap": 0,
@@ -109,8 +172,7 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
       {
         "id": "zona-a",
         "type": "component",
-        "component": "Menu Global",
-        "variant": { "produto": "ERP" },
+        "component": "menu erp",
         "width": 304
       },
       {
@@ -118,104 +180,22 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
         "type": "frame",
         "direction": "vertical",
         "gap": 0,
+        "width": 1062,
         "children": [
-          { "id": "zona-b", "type": "frame", "height": 68, "..." : "Top Bar" },
-          { "id": "zona-c", "type": "frame", "height": 124, "..." : "Page Header" },
-          { "id": "zona-d", "type": "frame", "..." : "Content Area" },
-          { "id": "zona-e", "type": "frame", "height": 80, "..." : "Paginação" }
-        ]
-      }
-    ]
-  }
-}
-```
-
----
-
-## Template: Envios | Hub de Integração | Internet Banking (Conta Digital)
-
-**Figma node:** `8063:20969`  
-**Viewport:** 1440 x 852px  
-**Layout:** horizontal (Zona A + Main)
-
-```
-┌───────────────────────────────────────────────────────────────┐
-│ ┌──────────┐ ┌──────────────────────────────────────────────┐ │
-│ │           │ │  Zona B — Top Bar                    80px h │ │
-│ │           │ │  Ações                                       │ │
-│ │           │ ├──────────────────────────────────────────────┤ │
-│ │  Zona A   │ │  Zona C — Page Header + Subtitle     68px h │ │
-│ │  304px w  │ │                                              │ │
-│ │           │ ├──────────────────────────────────────────────┤ │
-│ │  Novo     │ │                                              │ │
-│ │  Menu     │ │  Zona D — Content Area              flex    │ │
-│ │  Global   │ │                                              │ │
-│ │           │ │  Tabela / Cards / Lista /                    │ │
-│ │  Sidebar  │ │  Empty State / Summary Card                  │ │
-│ │  fixa à   │ │                                              │ │
-│ │  esquerda │ │                                              │ │
-│ │           │ │                                              │ │
-│ │           │ ├──────────────────────────────────────────────┤ │
-│ │           │ │  Zona E — Sticky ou paginação        80px h │ │
-│ └──────────┘ └──────────────────────────────────────────────┘ │
-└───────────────────────────────────────────────────────────────┘
-```
-
-### Zonas Envios / Hub / Conta Digital
-
-| Zona | Nome | Descrição | Dimensão |
-|---|---|---|---|
-| **A** | Novo Menu Global | Sidebar fixa à esquerda (mesmo componente do ERP) | 304px largura, 100% altura |
-| **B** | Top Bar | Ações do produto (CTA, carrinho, avatar) — logo não entra aqui, já está na Zona A via Menu Global | 100% largura, 80px altura |
-| **C** | Page Header + Subtitle | Heading + descrição da página | 100% largura, 68px altura |
-| **D** | Content Area | Área principal (tabela, cards, lista, empty state, summary card) | 100% largura, flex (preenche restante) |
-| **E** | Sticky ou paginação | Barra fixa inferior ou paginação | 100% largura, 80px altura |
-
-### Regras Envios / Hub / Conta Digital
-
-- Container (Main) tem gap de **24px** entre zonas
-- Zona C SEMPRE inclui subtitle (descrição da página abaixo do heading)
-- Zona D pode conter Summary Card (fundo azul claro) antes do conteúdo principal
-- Zona E é opcional — "sticky" para ações de confirmação ou paginação
-- A Zona A usa o componente **Menu Global** do inventário (304px), com variante `produto` adequada ao contexto (ex: `Envios`, `Conta Digital`, `Ecommerce`) — o logo do produto já faz parte deste componente; **a Zona B não exibe logo**
-
-### Componentes Recomendados por Zona — Envios / Hub / Conta Digital
-
-> Baseado no inventário confirmado em `component-registry.json`. Zona A não entra aqui — é exclusiva do `Menu Global`. Itens marcados ⚠️ são percepção, não regra fechada — ver "Observações e Pontos em Aberto" ao final deste arquivo.
-
-| Zona | Componentes recomendados |
-|---|---|
-| **B** — Top Bar | `Button` (primary, máx 1), `Avatar`, `Badge` ⚠️ (contador de notificação, inferência), `Context Switch` ⚠️ (propósito não confirmado) — sem `Logo`, já presente na Zona A via `Menu Global` |
-| **C** — Page Header + Subtitle | Nenhum — Heading e Subheading são Text Styles, não componentes |
-| **D** — Content Area | `Card` (para "Summary Card" — gap conhecido, sem variante dedicada), mesmo conjunto de Form/Tabela/Dashboard da Zona D do ERP, `Input Search` (aqui, dentro do padrão — não solto como no ERP) |
-| **E** — Sticky ou Paginação | `Button` primary + `Button` secondary (máx 2, modo sticky) ou `Paginator` |
-
-### Estrutura de Layout — Envios / Hub / Conta Digital (referência para use_figma)
-
-```json
-{
-  "template": "envios",
-  "layout": {
-    "direction": "horizontal",
-    "gap": 0,
-    "children": [
-      {
-        "id": "zona-a",
-        "type": "component",
-        "component": "Menu Global",
-        "variant": { "produto": "Envios" },
-        "width": 304
-      },
-      {
-        "id": "main",
-        "type": "frame",
-        "direction": "vertical",
-        "gap": 24,
-        "children": [
-          { "id": "zona-b", "type": "frame", "height": 80, "..." : "Top Bar" },
-          { "id": "zona-c", "type": "frame", "height": 68, "..." : "Page Header + Subtitle" },
-          { "id": "zona-d", "type": "frame", "..." : "Content Area" },
-          { "id": "zona-e", "type": "frame", "height": 80, "..." : "Sticky ou paginação" }
+          {
+            "id": "zona-b", "height": 116, "label": "Top Bar + Título",
+            "children": [
+              { "id": "nav-header", "height": 47, "content": "breadcrumb + action-bar" },
+              { "gap": 20 },
+              { "id": "page-title", "height": 49, "content": "H1 + description" }
+            ]
+          },
+          { "id": "zona-c", "height": 72, "label": "Filter Bar",
+            "content": "input-search(460px, 72px natural) + gap(8px) + button×N" },
+          { "id": "zona-d", "height": 48, "label": "Tabs (opcional)",
+            "content": "tabs(572px) + gap(8px) + button + button-icon" },
+          { "id": "zona-e", "height": 452, "label": "Content Area" },
+          { "id": "zona-f", "height": 80,  "label": "Bottom Bar (opcional)" }
         ]
       }
     ]
@@ -234,32 +214,16 @@ Percepção registrada em 2026-07-03, ainda **não confirmada com o time de desi
 > **`Breadcrumb` resolvido em 2026-07-04:** passa a ser a instância real do componente DS na Zona B do ERP — removido desta lista. Ver `HARNEES_TELAS.md` e `decisions/ux-design/COMPONENTES_POR_ZONA.md`.
 
 - **`Tag` vs `Badge`:** a library tem os dois desde a republicação. Não está claro se são intercambiáveis ou se cada um tem um uso específico (ex: `Tag` para status semântico, `Badge` para contador numérico). Documentado como "ou" nas tabelas acima até esclarecer.
-- **`Segmented Buttons` vs `Tabs`:** ambos parecem cobrir sub-navegação dentro da Zona D (padrão Detalhe). O harness só menciona `Segmented Buttons`; `Tabs` é mais novo no inventário. Confirmar qual é o pretendido antes de padronizar.
-- **`Context Switch`:** componente novo, propósito não confirmado — nome sugere troca de contexto/workspace, hipótese de uso na Zona B (Top Bar) dos templates Envios/Hub/Conta Digital, mas isso é inferência, não fato verificado.
+- ~~**`Segmented Buttons` vs `Tabs` (Zona D ERP):**~~ **Resolvido em 2026-08-25:** o componente `tabs` existe no DS e foi confirmado no frame real `10170:11866` (instance name="tabs"). Usar `tabs` diretamente na Zona D — remover qualquer referência a `Segmented Buttons` como aproximação.
+- **`Context Switch`:** componente novo, propósito não confirmado — nome sugere troca de contexto/workspace, mas uso e zona não foram validados com o time de design.
 - **`Tooltip` e `Cookie`:** não pertencem a nenhuma zona específica — são overlays (Tooltip ancorado a qualquer elemento interativo; Cookie provavelmente banner de página inteira).
 - **`Sort`:** provavelmente acoplado ao cabeçalho de coluna da `Table`, não uma peça solta de zona — não incluído como item independente nas tabelas acima por esse motivo, mas fica registrado aqui como parte do padrão Tabela.
 
 ---
 
-## Diferenças entre Templates
-
-| Aspecto | ERP | Envios / Hub / Conta Digital |
-|---|---|---|
-| **Zona A (Sidebar)** | Novo Menu Global (304px) | Novo Menu Global (304px) — IGUAL |
-| **Zona B (Top Bar)** | 68px — Breadcrumb + ações | 80px — Ações do produto |
-| **Zona C (Header)** | 124px — Heading + pesquisa + filtros | 68px — Heading + subtitle |
-| **Zona D (Content)** | flex — conteúdo principal | flex — conteúdo principal |
-| **Zona E (Bottom)** | 80px — Paginação numérica | 80px — Sticky ou paginação |
-| **Gap entre zonas** | 0px | 24px |
-| **Breadcrumb** | Sim (Zona B) | Não |
-| **Subtitle na página** | Não | Sim (Zona C) |
-| **Input de pesquisa** | Zona C (junto ao header) | Zona D (dentro do content) |
-
----
-
 ## Identificador de Template
 
-> Referência interna — usado para identificar o template correto ao planejar a tela antes de construir via `use_figma`.
+> Referência interna — usado para identificar o template correto ao planejar a tela antes de construir via `use_figma`. Todos os produtos usam o mesmo template ERP.
 
 ```json
 {
@@ -275,25 +239,21 @@ Percepção registrada em 2026-07-03, ainda **não confirmada com o time de desi
 
 | template | Produtos | Figma node |
 |---|---|---|
-| `"erp"` | ERP | `8063:3669` |
-| `"envios"` | Envios | `8063:20969` |
-| `"conta-digital"` | Conta Digital (Internet Banking) | `8063:20969` |
-| `"hub"` | Hub de Integração | `8063:20969` |
+| `"erp"` | ERP, Envios, Conta Digital (Internet Banking), Hub de Integração | `8790:9484` |
 
-`"envios"`, `"conta-digital"` e `"hub"` compartilham o mesmo template.
+> A variante do `Menu Global` (prop `produto`) ainda varia por produto: `ERP`, `Envios`, `Conta Digital`, `Ecommerce`, `Agentes de IA`, `Minha Conta`.
 
 ---
 
 ## Regra para Claude
 
-1. Ler o SDD → identificar produto (pelas palavras-chave)
-2. Consultar este arquivo → usar o template correto com as zonas definidas
-3. Construir o frame no Figma respeitando a hierarquia de zonas (A → B → C → D → E) via use_figma
-4. Respeitar gaps: 0px para ERP, 24px para Envios/Hub/Conta Digital
-5. Zona E é opcional — incluir apenas quando fizer sentido (tabela com paginação, ações fixas)
+1. Ler o SDD → identificar produto (pelas palavras-chave) → escolher a variante correta do `Menu Global`
+2. Todos os produtos usam o **template ERP** (Zonas A → B → C → D → E → F)
+3. Construir o frame no Figma respeitando a hierarquia de zonas via `use_figma`
+4. Gap entre zonas: **0px** (único padrão)
+5. Zonas D e F são opcionais — incluir apenas quando fizer sentido
 6. Se o SDD não especificar o produto → **perguntar ao usuário**
-7. Nunca misturar zonas de templates diferentes
 
 ---
 
-*Fonte da verdade: Figma arquivo `9pCeYLXBj1O0QPUiHANaqh`, página "📐 Templates dos produtos - Inventário"*
+*Fonte da verdade: Figma arquivo `HeyN4w209HWh8rfpTDiwyf` (`design system (base)`), node raiz `8790:9475`*

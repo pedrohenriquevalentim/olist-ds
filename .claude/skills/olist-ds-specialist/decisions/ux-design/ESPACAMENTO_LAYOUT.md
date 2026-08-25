@@ -77,7 +77,7 @@ Para ASCII diagrams e especificações detalhadas de cada padrão → `reference
 
 - Grid e regras de padding/margin completos → `references/ESPACAMENTO.md`
 - 5 padrões de página com diagramas → `references/PADROES.md`
-- Zonas de layout por produto (ERP, Envios, Hub, Conta Digital) → `references/TEMPLATES_PRODUTO.md`
+- Zonas de layout por produto (template único ERP — todos os produtos) → `references/TEMPLATES_PRODUTO.md`
 
 ---
 

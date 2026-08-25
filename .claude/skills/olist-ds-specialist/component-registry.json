@@ -168,7 +168,7 @@
       "assetType": "component_set",
       "category": "navigation",
       "variantsConfirmed": true,
-      "note": "Variantes não confirmadas via get_metadata — fornecer URL do Figma para mapear. Item base tem state: enabled/hover/pressed.",
+      "note": "Variantes confirmadas via get_metadata (node-id=7990-9). Component set real: 7990:9127. Item base (.[base] levelpage) tem state: enabled/hover/pressed.",
       "nodeId": "7990:9127",
       "variants": {
         "level": [
@@ -179,7 +179,7 @@
           "5"
         ]
       },
-      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-24"
     },
     "Tabs": {
       "componentKey": "6e28a768040022b920e7080a6a5f0b4b185abd68",
