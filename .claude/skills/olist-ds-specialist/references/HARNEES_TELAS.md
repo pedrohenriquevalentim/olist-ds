@@ -45,20 +45,25 @@ A coluna "Proibido" é exaustiva para os casos mais comuns — outros casos deve
 
 | Zona | Nome | Altura | Pode conter | Não pode conter |
 |---|---|---|---|---|
-| **A** | Novo Menu Global | 304px largura | `Menu Global` (instância real, `produto` definido) | Qualquer outro componente. Nenhum elemento custom. |
-| **B** | Top Bar + Título | 116px | `breadcrumb` (esquerda do nav header) + `button` secondary × N + `button` primary × 1 (action bar direita); abaixo: título H1 + subtítulo (text styles) | Inputs, formulários, tabelas, cards, badges soltos, ilustrações |
-| **C** | Filter Bar | 72px | `input search` (460px fixo) + `button` secondary/tertiary × N como filtros rápidos | `tag` como filtro ativo nesta zona; `button` primary; `heading` |
+| **A** | Menu Global | 304px largura, 752px altura | `menu-global` com `Produto=ERP` (instância real) | Qualquer outro componente. NÃO usar `menu erp` com `stage=*` (descontinuado). |
+| **B** | Top Bar + Título | 116px | `breadcrumb` (esquerda do nav header) + `button` secondary × N + `button` primary × 1 (action bar direita, `size=small`); abaixo: título H1 + subtítulo (text styles) | Inputs, formulários, tabelas, cards, badges soltos, ilustrações; `button size=big` ou `size=medium` |
+| **C** | Filter Bar | 72px | `input search` (460px fixo, label oculto) + `button` secondary/tertiary × N `size=small` como filtros rápidos | `tag` como filtro ativo nesta zona; `button` primary; `heading`; label visível no input search |
 | **D** | Tabs | 48px | `tabs` (componente DS real, instância) + `button` secondary (ação contextual) + `button icon` (toggle de modo) | `Segmented Buttons`, qualquer input, breadcrumb, CTAs primários. **Zona D é opcional** — incluir só quando houver sub-navegação |
-| **E** | Content Area | 452px | Um padrão de página (ver Seção 3): Tabela, Form, Dashboard, Detalhe ou Empty State; `card`s dentro do padrão | Breadcrumb, elementos de navegação, CTAs primários soltos |
-| **F** | Bottom Bar | 80px | `Paginator` + text styles para totais | Botões de ação, formulários, conteúdo editorial. **Zona F é opcional** — só aparece com tabelas de múltiplas páginas |
+| **E** | Content Area | flex | Um padrão de página (ver Seção 3): Tabela (`TableCellExtended`), Form, Dashboard, Detalhe ou Empty State; `card`s dentro do padrão | Breadcrumb, elementos de navegação, CTAs primários soltos; frames primitivos no lugar de `TableCellExtended` |
+| **F** | Bottom Bar | 72px | `Paginator` + text styles para totais | Botões de ação, formulários, conteúdo editorial. **Zona F é opcional** — só aparece com tabelas de múltiplas páginas |
 
-**Regras específicas ERP:**
-- Gap entre zonas B–F: **0px** (container VERTICAL, gap: 0)
-- Fundo (todas as zonas, A–F): `--backgrounds/bg` (`#fcfbf8`)
-- Zona B é dividida internamente: `nav header` (47px) + gap 20px + `page title` (49px) = 116px total
+**Regras específicas ERP (atualizadas 2026-08-29):**
+- Frame raiz (`1366×768`): `padding: 8px` em todos os lados · `fills: #F1F0E8` · `gap: 8px` entre Zona A e Container
+- Container (Zonas B–F): `cornerRadius: 12px` · `fills: #fcfbf8` · gap `0` entre zonas
+- Zona B: `topLeftRadius: 12` · `topRightRadius: 12` · bottom radii: `0`
+- Zona F: `bottomLeftRadius: 12` · `bottomRightRadius: 12` · top radii: `0`; quando ausente, Zona E recebe `bottomLeft/bottomRight: 12`
+- Todas as zonas: `clipsContent: false` · `strokes: []`
+- Zona A: componente `menu-global` com `Produto=ERP`, resize para `304×752px`
+- Zona B é dividida internamente: `nav header` (47px) + `page title` (49px) = 116px total; botões sempre `size=small`
+- Zona C: `input search` com layer `"label"` setado `visible = false` após `appendChild`; botões sempre `size=small`
 - `breadcrumb` na Zona B: instância real do componente DS (`component-registry.json`) — nunca construir com texto solto
 - `tabs` na Zona D: componente DS real (não `Segmented Buttons`) — confirmado no frame Figma `10170:11866`
-- Total de alturas B+C+D+E+F: **768px** (com Zona A de 768px de altura, em layout horizontal)
+- Zona E (tabela): usar `TableCellExtended` (`8ba1fe2c9d32e56a058c3946e17142223784c557`) — nunca `head`/`simple cell` isolados ou frames primitivos
 
 ---
 
@@ -282,6 +287,7 @@ Como prefere prosseguir?
 **Atualizado em:** 2026-07-04 (2) — Zona B do template Envios/Hub/Conta Digital deixa de permitir "Logo do produto": o logo já é exibido na Zona A via `Menu Global`, e sua duplicação na Zona B foi removida da coluna "Pode conter" e movida para "Não pode conter". A linha `Logo Olist` em "Contextos Válidos por Componente" (Seção 2) foi corrigida para refletir que o logo só existe embutido no `Menu Global` (Zona A, todos os templates), nunca como elemento solto de zona.  
 **Atualizado em:** 2026-07-04 — Zona B (ERP): `Breadcrumb` passa a ser a instância real do componente DS (não mais "texto puro, sem componente"), resolvendo o ponto em aberto #1 de `decisions/ux-design/COMPONENTES_POR_ZONA.md`. Zona C: proibição de `Button` generalizada para qualquer variante com label (antes só "primary"), mantendo o botão de ícone de filtro permitido. Zona D: `conteúdo editorial` e `Card`s avulsos passam a ser permitidos, mantendo `Breadcrumb` e demais elementos de navegação proibidos. Regra de fundo unificada para todas as zonas (A–E), removendo a exceção antes registrada para a Zona A. Seção 2 ganhou linhas de `Breadcrumb` em "Limites por Tela" e "Contextos Válidos por Componente".  
 **Atualizado em:** 2026-07-03 — `Menu ERP` (variante `stage=X`) substituído por `Menu Global` (variante `produto=X`), confirmado após republicação da library. Ver `component-registry.json` para o componentKey e a lista completa de produtos.  
-**Atualizado em:** 2026-08-25 (v1.3) — Template ERP: viewport corrigido `1588×832` → `1366×768`; zonas reestruturadas de A–E para A–F alinhando ao `TEMPLATES_PRODUTO.md` v1.7 (Zona C=72px Filter Bar, Zona D=48px Tabs, Zona E=452px Content, Zona F=80px Bottom Bar); `Segmented Buttons` removido de todos os contextos válidos e substituído por `tabs` DS real (confirmado em 2026-08-25, frame `10170:11866`); adicionada linha de `tabs` nos Limites por Tela.  
+**Atualizado em:** 2026-08-25 (v1.3) — Template ERP: viewport corrigido `1588×832` → `1366×768`; zonas reestruturadas de A–E para A–F alinhando ao `TEMPLATES_PRODUTO.md` v1.7 (Zona C=72px Filter Bar, Zona D=48px Tabs, Zona E=452px Content, Zona F=80px Bottom Bar); `Segmented Buttons` removido de todos os contextos válidos e substituído por `tabs` DS real (confirmado em 2026-08-25, frame `10170:11866`); adicionada linha de `tabs` nos Limites por Tela.
+**Atualizado em:** 2026-08-29 (v1.5) — Convenções de layout ERP formalizadas: frame raiz `padding: 8px` + `fills: #F1F0E8` + `gap: 8px`; `cornerRadius` por zona (B topo, F base, demais 0); `clipsContent: false` e `strokes: []` obrigatórios em todas as zonas; Zona E altura alterada de `452px` para `flex`; Zona F altura corrigida de `80px` para `72px`; `TableCellExtended` (`8ba1fe2c...`) definido como unidade construtiva obrigatória para tabelas; Zona A renomeada de "Novo Menu Global" para "Menu Global" com regra `Produto=ERP` explicitada; botões nas Zonas B e C passam a exigir `size=small`; label do `input search` da Zona C deve ter `visible = false`.  
 **Atualizado em:** 2026-08-25 (v1.4) — Template unificado: seção "Template: Envios | Hub | Conta Digital" removida. Todos os produtos (ERP, Envios, Hub, Conta Digital) passam a usar exclusivamente o template ERP. Gate item 1 simplificado. Seção 2 simplificada: removida linha de `Summary Card`, ajustados contextos de `Input Search`, `Breadcrumb` e `Button primary` para refletir template único.  
 **Próxima revisão sugerida:** após 10 telas geradas com o harness ativo — coletar violações recorrentes e adicionar à Seção 2 (Limites por Componente) e Seção 3 (Padrões proibidos emergentes)

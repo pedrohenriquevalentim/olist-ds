@@ -1,8 +1,8 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.72`  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.73`  
 **Skill:** v3.18  
-**Última atualização:** 2026-08-25  
+**Última atualização:** 2026-08-29  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -36,7 +36,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Ícones SVG | 550 |
 | Arquivos da Skill | 23 |
 | Arquivos Figma permitidos | 1 |
-| Versão npm | 1.0.72 |
+| Versão npm | 1.0.73 |
 | Versão skill | 3.18 |
 
 ## Componentes
@@ -250,6 +250,14 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 8. **Hardcodar cores, fontes ou espaçamentos** — sempre usar tokens DS
 9. **Escolher token semântico só pelo valor final resolvido** — respeite `doNotUseWhen` de `GOVERNANCA_TOKENS.md` mesmo quando duas famílias resolvem para a mesma cor hoje
 10. **Gerar código ou docs do Caso 7 sem antes exibir o `metadata.json` completo e obter aprovação explícita do usuário** — sem esse gate, o agente preenche lacunas de intenção (useWhen/doNotUseWhen) por suposição, e o erro se propaga para código e Figma em escala
+11. **Aplicar `clipsContent: true` em frames de zona** — todas as zonas ERP devem ter `clipsContent: false`
+12. **Aplicar `strokes` diretamente em frames de zona** — `strokes: []` é obrigatório em todas as zonas; bordas visuais entre zonas vêm do design, não de strokes de frame
+13. **Usar botão `size=big` ou `size=medium` nas Zonas B e C** — `size=small` é o único tamanho permitido nessas zonas
+14. **Exibir o label do `input search` na Zona C** — o layer `"label"` deve ter `visible = false` após `appendChild`
+15. **Instanciar `menu erp` com `stage=*`** — o componente "Menu ERP" foi descontinuado em 2026-07-03; usar exclusivamente `menu-global` com `Produto=ERP` na Zona A
+16. **Montar tabelas com frames primitivos ou sub-componentes isolados** (`head`, `simple cell`) — usar `TableCellExtended` (`8ba1fe2c9d32e56a058c3946e17142223784c557`) como unidade construtiva obrigatória na Zona E
+17. **Omitir `padding: 8px` no frame raiz ERP** — o frame raiz (`1366×768`) deve ter `padding: 8px` em todos os lados e `gap: 8px` entre Zona A e Container
+18. **Usar `#fcfbf8` como `fills` do frame raiz** — o frame raiz tem `fills: #F1F0E8`; `#fcfbf8` é o fundo do Container (Zonas B–F)
 
 ## Sistema de Ícones
 
@@ -416,6 +424,33 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ## Changelog
 
+## v3.19 (2026-08-29)
+
+### Convenções de layout ERP — definidas e registradas
+
+**Arquivos modificados:** `references/TEMPLATES_PRODUTO.md`, `component-registry.json`, `SKILL.md`
+
+#### Added
+- **Frame raiz:** `padding 8px` em todos os lados + `fills #F1F0E8` + `gap 8px` entre Zona A e Container
+- **Container (Zonas B–F):** `cornerRadius 12px`
+- **Zona B:** `topLeftRadius 12` · `topRightRadius 12` · bottom 0
+- **Zona F:** `bottomLeftRadius 12` · `bottomRightRadius 12` · top 0
+- **`TableCellExtended`** adicionado ao `component-registry.json` — componentKey `8ba1fe2c9d32e56a058c3946e17142223784c557`, variantes `role × type`, props `header text#10193:5` e `cell text#10193:6`, dimensões confirmadas, usage pattern documentado
+- **Regras 11–18** adicionadas ao "Nunca Faça" do `SKILL.md`: clipsContent em zonas (11), strokes em zonas (12), button big/medium em B e C (13), label visível no input search (14), menu erp stage=* (15), tabela com primitivos (16), omitir padding 8px (17), #fcfbf8 no frame raiz (18)
+
+#### Changed
+- **`menu-global`** no registry: `note` e `erpLayoutRule` atualizados com regra `Produto=ERP` obrigatória na Zona A e resize correto (304×752px)
+- **`Table`** no registry: `note` reescrita — proíbe instanciação direta; redireciona para `TableCellExtended`; marca `head` e `simple cell` como sub-peças internas
+- **`TEMPLATES_PRODUTO.md`:** tabela de Zonas ERP, bloco "Regras ERP" e JSON de Estrutura de Layout atualizados com padding, gap, fills, cornerRadius por zona e TableCellExtended
+- **Botões nas Zonas B e C:** `size=small` definido como padrão obrigatório
+- **Zona E sem Zona F:** recebe `bottomLeftRadius: 12` e `bottomRightRadius: 12`
+
+#### Fixed
+- Referência a `"menu erp"` removida do JSON de Estrutura de Layout → substituída por `"menu-global"` com componentKey e `Produto=ERP`
+- `clipsContent: false` e `strokes: []` definidos como obrigatórios em todas as zonas (explicitados no checklist)
+
+---
+
 ## v3.18 (2026-08-25)
 - Arquivos da skill modificados: README.md, SKILL.md, component-registry.json, decisions/INDEX.md, decisions/ux-design/COMPONENTES_POR_ZONA.md, decisions/ux-design/ESPACAMENTO_LAYOUT.md, figma-config.json, references/COMPONENTES.md, references/HARNEES_TELAS.md, references/MAPA_FONTES.md, references/TEMPLATES_PRODUTO.md
 
@@ -546,4 +581,4 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ---
 
-*Gerado automaticamente em 2026-08-25 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-08-29 por `generate-wiki.mjs`. Não edite manualmente.*

@@ -2,10 +2,10 @@
 name: olist-ds-specialist
 description: Use esta skill para TODO trabalho de UI/UX da Olist — criação de telas a partir de SDDs/PRDs, geração de componentes React, revisão de consistência visual, criação de protótipos no Figma, manutenção do design system e criação/revisão de textos de UI (UX Writing, copy, tom de voz). Acione quando alguém mencionar interface Olist, design system, tokens, componentes, telas, layouts, SDD, PRD, protótipo, wireframe, Figma, Storybook, copy, texto de botão, mensagem de erro, empty state, toast, label, placeholder ou qualquer tarefa de criação ou revisão de UI/copy para produtos Olist. NÃO use para backend, APIs, banco de dados, autenticação ou lógica de negócio sem relação com UI.
 version: 3.18
-lastModified: 2026-08-25
+lastModified: 2026-08-29
 ---
 
-# Olist Design System — Especialista v3.18 · 2026-08-25
+# Olist Design System — Especialista v3.18 · 2026-08-29
 
 ## Slash Commands
 
@@ -80,7 +80,7 @@ Regra **permanente**, independente de qual library está ativa. Componentes de c
 - Padrões cadastrados em `figma-config.json` → `excludedComponentNamePatterns`
 - Se o único resultado para um componente necessário for um `.nome` ou `.[base] ...`, tratar como **não encontrado** e seguir a Seção 4 do `HARNEES_TELAS.md` (construir com primitivos + documentar gap para o designer)
 
-**Checagem de cobertura do harness (2026-07-02):** a `design system (base)` foi verificada componente a componente contra os requisitos do `HARNEES_TELAS.md` via `search_design_system` real. Cobertura confirmada para Menu ERP, Button(+Icon), Radio Button, Segmented Buttons, Tag (+variantes), Tooltip, Logo, Icon, Input Search/Text, Dropdown, Checkbox, Card genérico, Breadcrumb, e Heading/Subheading via Text Styles. **Gap conhecido:** não existe variante dedicada de `Summary Card` (fundo azul) — apenas `card` genérico; validar manualmente antes de usar em telas Envios/Hub/Conta Digital. Detalhes em `figma-config.json` → `harnessCoverageCheck`.
+**Checagem de cobertura do harness (2026-07-02):** a `design system (base)` foi verificada componente a componente contra os requisitos do `HARNEES_TELAS.md` via `search_design_system` real. Cobertura confirmada para `menu-global` (antes "Menu ERP" com `stage=*`, renomeado em 2026-07-03), Button(+Icon), Radio Button, Segmented Buttons, Tag (+variantes), Tooltip, Logo, Icon, Input Search/Text, Dropdown, Checkbox, Card genérico, Breadcrumb, e Heading/Subheading via Text Styles. **Gap conhecido:** não existe variante dedicada de `Summary Card` (fundo azul) — apenas `card` genérico; validar manualmente antes de usar em telas Envios/Hub/Conta Digital. Detalhes em `figma-config.json` → `harnessCoverageCheck`.
 
 ## Inventário de Componentes
 
@@ -88,9 +88,9 @@ Antes de construir qualquer tela, chamar `search_design_system` com `includeLibr
 
 **Categorias disponíveis (inventário sincronizado via `/ds-sync` em 2026-07-20 — fonte única: design system (base)):**
 - **Action:** Button, Button Icon
-- **Navigation:** Link, Segmented Buttons, Menu, Menu Global, Menu ERP, Breadcrumb (Zona B do template ERP), Paginator, Logout
+- **Navigation:** Link, Segmented Buttons, Menu, menu-global (usar com `Produto=ERP` na Zona A — "Menu ERP" com `stage=*` descontinuado em 2026-07-03), Breadcrumb (Zona B do template ERP), Paginator, Logout
 - **Input:** Input Text, Input Paragraph (antes documentado como "Text Area" — mesmo componente, nome real no Figma é `input paragraph`), Input E-mail, Input Search, Input Token, Input Password, Input Select, Input File, Checkbox, Radio Button, Dropdown, Toggle, Chip
-- **Data Display:** Tags (+ tag-desktop, tag-mobile, tag-more, tag-delivery), Badge, Table (+ Table Column, Head, Simple Cell, Spreadsheet), List, Task List, Dashboard, Sort, Reorder, Avatar, Profile, Card
+- **Data Display:** Tags (+ tag-desktop, tag-mobile, tag-more, tag-delivery), Badge, Table (unidade construtiva: `TableCellExtended` — não instanciar `Table` diretamente; sub-peças internas: Head, Simple Cell; + Spreadsheet), List, Task List, Dashboard, Sort, Reorder, Avatar, Profile, Card
 - **Data Visualization:** Bar, Chart Bar Up, Chart Bar Down, Chart Bar Variation
 - **Feedback:** Tooltip, Loading, Overlay, Cookie
 - **Brand:** Logo Olist, Ícones rebrand 24 (na design system (base))
@@ -329,6 +329,14 @@ Qual tipo de tarefa?
 8. **Hardcodar cores, fontes ou espaçamentos** — sempre usar tokens DS
 9. **Escolher token semântico só pelo valor final resolvido** — respeite `doNotUseWhen` de `GOVERNANCA_TOKENS.md` mesmo quando duas famílias resolvem para a mesma cor hoje
 10. **Gerar código ou docs do Caso 7 sem antes exibir o `metadata.json` completo e obter aprovação explícita do usuário** — sem esse gate, o agente preenche lacunas de intenção (useWhen/doNotUseWhen) por suposição, e o erro se propaga para código e Figma em escala
+11. **Aplicar `clipsContent: true` em frames de zona** — todas as zonas ERP devem ter `clipsContent: false`
+12. **Aplicar `strokes` diretamente em frames de zona** — `strokes: []` é obrigatório em todas as zonas; bordas visuais entre zonas vêm do design, não de strokes de frame
+13. **Usar botão `size=big` ou `size=medium` nas Zonas B e C** — `size=small` é o único tamanho permitido nessas zonas
+14. **Exibir o label do `input search` na Zona C** — o layer `"label"` deve ter `visible = false` após `appendChild`
+15. **Instanciar `menu erp` com `stage=*`** — o componente "Menu ERP" foi descontinuado em 2026-07-03; usar exclusivamente `menu-global` com `Produto=ERP` na Zona A
+16. **Montar tabelas com frames primitivos ou sub-componentes isolados** (`head`, `simple cell`) — usar `TableCellExtended` (`8ba1fe2c9d32e56a058c3946e17142223784c557`) como unidade construtiva obrigatória na Zona E
+17. **Omitir `padding: 8px` no frame raiz ERP** — o frame raiz (`1366×768`) deve ter `padding: 8px` em todos os lados e `gap: 8px` entre Zona A e Container
+18. **Usar `#fcfbf8` como `fills` do frame raiz** — o frame raiz tem `fills: #F1F0E8`; `#fcfbf8` é o fundo do Container (Zonas B–F)
 
 ## Casos de Uso v3.16
 
