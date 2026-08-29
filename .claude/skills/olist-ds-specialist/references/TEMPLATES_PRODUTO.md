@@ -58,17 +58,17 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
 │ │  Zona A   │ ├──────────────────────────────────────────────┤ │
 │ │  304px w  │ │  Zona C — Filter Bar                 54px h │ │
 │ │           │ │  Input Search + Tags (filtros) + Link        │ │
-│ │  Novo     │ ├──────────────────────────────────────────────┤ │
-│ │  Menu     │ │  Zona D — Tabs                       43px h │ │
-│ │  Global   │ │  Segmented Buttons (sub-navegação)           │ │
-│ │           │ ├──────────────────────────────────────────────┤ │
-│ │  Sidebar  │ │                                              │ │
-│ │  fixa à   │ │  Zona E — Content Area              452px h │ │
-│ │  esquerda │ │  Tabela / Formulário / Cards /               │ │
-│ │           │ │  Dashboard                                   │ │
+│ │  menu-    │ ├──────────────────────────────────────────────┤ │
+│ │  global   │ │  Zona D — Tabs                       48px h │ │
+│ │  Produto= │ │  tabs DS real (sub-navegação)                │ │
+│ │  ERP      │ ├──────────────────────────────────────────────┤ │
 │ │           │ │                                              │ │
+│ │  Sidebar  │ │  Zona E — Content Area              flex h  │ │
+│ │  fixa à   │ │  TableCellExtended / Form / Cards /          │ │
+│ │  esquerda │ │  Dashboard                                   │ │
+│ │  752px h  │ │                                              │ │
 │ │           │ ├──────────────────────────────────────────────┤ │
-│ │           │ │  Zona F — Bottom Bar                 80px h │ │
+│ │           │ │  Zona F — Bottom Bar                 72px h │ │
 │ │           │ │  Paginator + Totais                          │ │
 │ └──────────┘ └──────────────────────────────────────────────┘ │
 └───────────────────────────────────────────────────────────────┘
@@ -78,22 +78,38 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
 
 | Zona | Nome | Descrição | Dimensão |
 |---|---|---|---|
-| **A** | Novo Menu Global | Sidebar fixa à esquerda | 304px largura, 100% altura |
+| **A** | Menu Global | Sidebar fixa à esquerda — componente `menu-global` com `Produto=ERP` | 304px largura, 752px altura (com padding 8px no frame raiz) |
 | **B** | Top Bar + Título | Nav Bar (Breadcrumb + ações) + Título (Heading + Subtitle) | 100% largura, 116px altura |
 | **C** | Filter Bar | Input Search + Botões de filtro rápido | 100% largura, 72px altura |
 | **D** | Tabs | Sub-navegação em abas (`tabs` DS real) + ações de visualização | 100% largura, 48px altura |
-| **E** | Content Area | Área principal (tabela, form, cards, dashboard) | 100% largura, 452px altura |
-| **F** | Bottom Bar | Paginação + totais | 100% largura, 80px altura |
+| **E** | Content Area | Área principal (tabela, form, cards, dashboard) | 100% largura, flex altura |
+| **F** | Bottom Bar | Paginação + totais | 100% largura, 72px altura |
 
 ### Regras ERP
 
-- Container (Zona B-F) não tem gap entre zonas (gap: 0)
-- Fundo do Container: `--backgrounds/bg` (`#fcfbf8`)
-- Zona A: fundo neutro (`#d9d9d9` no wireframe)
-- Zona B é dividida internamente: `nav header` (47px) + 20px gap + `page title` (49px) = 116px total
-- Padding lateral interno de todas as zonas: **25px** (content width efetiva 1012px)
+**Convenções de layout obrigatórias (todas as telas ERP) — definidas em 2026-08-29:**
+
+| Elemento | Regra |
+|---|---|
+| Frame raiz | `padding: 8px` em todos os lados · `fills: #F1F0E8` · `gap: 8px` entre Zona A e Container |
+| Container (Zonas B–F) | `cornerRadius: 12px` · `fills: #fcfbf8` · `gap: 0` entre zonas |
+| Zona B | `topLeftRadius: 12` · `topRightRadius: 12` · `bottomLeftRadius: 0` · `bottomRightRadius: 0` |
+| Zona C | `cornerRadius: 0` · botões sempre `size=small` · label do `input search` oculto (`visible: false`) |
+| Zona D | `cornerRadius: 0` |
+| Zona E | `cornerRadius: 0` (ou `bottomLeft/bottomRight: 12` quando não há Zona F) |
+| Zona F | `topLeftRadius: 0` · `topRightRadius: 0` · `bottomLeftRadius: 12` · `bottomRightRadius: 12` |
+| Todas as zonas | `clipsContent: false` · `strokes: []` — nunca aplicar stroke diretamente em frame de zona |
+
+**Demais regras:**
+
+- Zona A: componente `menu-global` com `Produto=ERP` — NÃO usar `menu erp` (stage=*) que foi descontinuado
+- Zona B: botões da action bar sempre `size=small` — nunca `big` ou `medium`
+- Zona B é dividida internamente: `nav header` (47px) + gap (8px no itemSpacing) + `page title` (49px) = ~116px total
+- Zona C: `input search` sem label visível (layer `"label"` com `visible = false` após `appendChild`)
 - Zona D (Tabs) é opcional — usar apenas quando houver sub-navegação na página
-- Zona F é opcional — só aparece quando há tabela com muitos itens
+- Zona F é opcional — só aparece quando há tabela com muitos itens; quando ausente, Zona E recebe `bottomLeft/bottomRight: 12`
+- Zona E (padrão Tabela): usar `TableCellExtended` (`8ba1fe2c9d32e56a058c3946e17142223784c557`) — nunca frames primitivos nem `head`/`simple cell` isolados
+- Padding lateral interno de todas as zonas: **25px** (content width efetiva 1012px dentro de 1038px de container)
 - Máximo 1 CTA primário na Zona B (action bar)
 - Zona D: usar o componente `tabs` do DS (confirmado no frame real 10170:11866) — **não usar `Segmented Buttons`**
 
@@ -165,37 +181,64 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
   "viewport": "1366x768",
   "paddingLateral": 25,
   "contentWidth": 1012,
+  "frameRaiz": {
+    "padding": 8,
+    "fills": "#F1F0E8",
+    "gap": 8,
+    "note": "padding 8px todos os lados; gap 8px entre Zona A e Container"
+  },
   "layout": {
     "direction": "horizontal",
-    "gap": 0,
     "children": [
       {
         "id": "zona-a",
         "type": "component",
-        "component": "menu erp",
-        "width": 304
+        "component": "menu-global",
+        "componentKey": "c76f80e6de1b8c4bd100b60329f3d68d28653e68",
+        "prop": "Produto=ERP",
+        "width": 304,
+        "height": 752,
+        "note": "altura = 768 - 8(top) - 8(bottom) = 752px"
       },
       {
         "id": "container",
         "type": "frame",
         "direction": "vertical",
         "gap": 0,
-        "width": 1062,
+        "width": 1038,
+        "height": 752,
+        "fills": "#fcfbf8",
+        "cornerRadius": 12,
+        "note": "largura = 1366 - 8(left) - 8(right) - 304(menu) - 8(gap) = 1038px",
         "children": [
           {
             "id": "zona-b", "height": 116, "label": "Top Bar + Título",
+            "topLeftRadius": 12, "topRightRadius": 12,
+            "bottomLeftRadius": 0, "bottomRightRadius": 0,
             "children": [
-              { "id": "nav-header", "height": 47, "content": "breadcrumb + action-bar" },
-              { "gap": 20 },
+              { "id": "nav-header", "height": 47, "content": "breadcrumb + action-bar (botões size=small)" },
               { "id": "page-title", "height": 49, "content": "H1 + description" }
             ]
           },
-          { "id": "zona-c", "height": 72, "label": "Filter Bar",
-            "content": "input-search(460px, 72px natural) + gap(8px) + button×N" },
-          { "id": "zona-d", "height": 48, "label": "Tabs (opcional)",
-            "content": "tabs(572px) + gap(8px) + button + button-icon" },
-          { "id": "zona-e", "height": 452, "label": "Content Area" },
-          { "id": "zona-f", "height": 80,  "label": "Bottom Bar (opcional)" }
+          {
+            "id": "zona-c", "height": 72, "label": "Filter Bar", "cornerRadius": 0,
+            "content": "input-search(460px, label oculto) + gap(8px) + button×N(size=small)"
+          },
+          {
+            "id": "zona-d", "height": 48, "label": "Tabs (opcional)", "cornerRadius": 0,
+            "content": "tabs(572px) + gap(8px) + button + button-icon"
+          },
+          {
+            "id": "zona-e", "label": "Content Area", "cornerRadius": 0,
+            "tableComponent": "TableCellExtended (8ba1fe2c...)",
+            "note": "cornerRadius bottom 12px quando Zona F ausente"
+          },
+          {
+            "id": "zona-f", "height": 72, "label": "Bottom Bar (opcional)",
+            "topLeftRadius": 0, "topRightRadius": 0,
+            "bottomLeftRadius": 12, "bottomRightRadius": 12,
+            "content": "Paginator + totais"
+          }
         ]
       }
     ]

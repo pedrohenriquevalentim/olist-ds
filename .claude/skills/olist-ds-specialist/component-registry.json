@@ -114,10 +114,11 @@
           "Configuracoes"
         ]
       },
-      "note": "Propriedade Figma chama-se \"Produto\" (P maiúsculo). Itens de menu base têm state: enabled/hover/pressed/selected/disabled e show label: on/off.",
+      "note": "Propriedade Figma chama-se \"Produto\" (P maiúsculo). Para telas ERP: usar SEMPRE com Produto=ERP — é o único valor válido para a Zona A do template ERP. NÃO usar variantes com stage=* (componente 'Menu ERP' foi descontinuado e removido do registry em 2026-07-03). Itens de menu base têm state: enabled/hover/pressed/selected/disabled e show label: on/off.",
       "variantsConfirmed": true,
       "nodeId": "10124:28283",
-      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23",
+      "erpLayoutRule": "Zona A obrigatória. Resize para 304×752px quando frame raiz tem padding 8px."
     },
     "Link": {
       "componentKey": "3923b840597be703e95d1b0cf7075b2cb087177f",
@@ -552,7 +553,7 @@
       "assetType": "component",
       "category": "data-display",
       "variantsConfirmed": true,
-      "note": "Componente único sem set de variantes. Sub-componentes publicados acessíveis: 'table column' (9149cc08...), 'head' (01776494...), 'simple cell' (23255b80...) — usar estes para montar tabelas compostas."
+      "note": "Componente de referência — NÃO instanciar diretamente para montar tabelas. Usar TableCellExtended (componentKey 8ba1fe2c9d32e56a058c3946e17142223784c557) como unidade construtiva. Sub-componentes internos 'head' (01776494...) e 'simple cell' (23255b80...) são peças internas — não usar isolados."
     },
     "Card": {
       "componentKey": "6c5bbef10eaba4951d287ce61bd29ec4de5683dc",
@@ -1460,6 +1461,52 @@
       "variantsConfirmed": false,
       "variantsSource": "get_metadata depth=3 via page URL 2026-08-23",
       "note": "⚠️ Componente WIP (work-in-progress). A página fornecida como \"accordion\" (9644:22) corresponde na verdade a este modal. Accordion pode não existir ou estar em outra página — investigar. componentKey não coletado."
+    },
+    "TableCellExtended": {
+      "componentKey": "8ba1fe2c9d32e56a058c3946e17142223784c557",
+      "assetType": "component_set",
+      "category": "data-display",
+      "figmaPageUrl": "https://www.figma.com/design/HeyN4w209HWh8rfpTDiwyf/design-system?node-id=6158-9350",
+      "variantsConfirmed": true,
+      "variantsSource": "importComponentSetByKeyAsync via use_figma 2026-08-29",
+      "variants": {
+        "role": [
+          "head",
+          "body"
+        ],
+        "type": [
+          "checkbox",
+          "text",
+          "image",
+          "action"
+        ]
+      },
+      "variantsDimensions": {
+        "role=head,type=text": "200x48",
+        "role=head,type=action": "80x48",
+        "role=head,type=checkbox": "120x48",
+        "role=body,type=text": "200x64",
+        "role=body,type=action": "80x64",
+        "role=body,type=image": "200x64",
+        "role=body,type=checkbox": "120x64"
+      },
+      "props": {
+        "header text#10193:5": "TEXT — texto do cabeçalho (default: 'Header text')",
+        "cell text#10193:6": "TEXT — texto da célula (default: 'Cell text')",
+        "role": "VARIANT — head | body",
+        "type": "VARIANT — checkbox | text | image | action"
+      },
+      "usage": {
+        "pattern": "1 row frame HORIZONTAL com células role=head (48px h) + N row frames HORIZONTAL com células role=body (64px h)",
+        "setTextViaSetProperties": true,
+        "fallbackToDirectTextEdit": true,
+        "prohibitedAlternatives": [
+          "'head' isolado (01776494...)",
+          "'simple cell' isolado (23255b80...)",
+          "frames primitivos para linhas/colunas"
+        ]
+      },
+      "note": "Componente OBRIGATÓRIO para tabelas na Zona E. Instanciar via importComponentSetByKeyAsync antes de qualquer use_figma. Nunca substituir por frames primitivos quando este componente está disponível."
     }
   },
   "categories": {
