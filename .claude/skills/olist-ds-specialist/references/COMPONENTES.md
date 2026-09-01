@@ -1,9 +1,9 @@
 # Componentes — API Completa
 
 **Auto-gerado por `npm run build`**
-**Última atualização:** 2026-08-25
-**Versão do pacote:** 1.0.72
-**Versão da skill:** 3.18
+**Última atualização:** 2026-09-01
+**Versão do pacote:** 1.0.74
+**Versão da skill:** 3.19
 
 ---
 
@@ -436,7 +436,7 @@ Sidebar de navegação global contraída (56px) da plataforma Olist. Exibe os í
 - Sempre que houver necessidade de indicar qual produto está ativo via destaque visual no ícone correspondente
 
 **Quando NÃO usar:**
-- Navegação interna dentro de um produto (seções e sub-páginas) — usar `menu-global` com `Produto=ERP` na Zona A (o "Menu ERP" com `stage=*` foi descontinuado em 2026-07-03)
+- Navegação interna dentro de um produto (seções e sub-páginas) — usar Menu ERP na Zona B
 - Telas mobile sem adaptação responsiva (menu bottom-sheet ou hamburger são mais adequados)
 - Menus de navegação ad-hoc sem relação com os produtos Olist — usar primitivos de layout direto
 
