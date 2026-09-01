@@ -1,10 +1,26 @@
-# Olist Design System — Especialista (v3.18 · atualizado em 2026-08-29)
+# Olist Design System — Especialista (v3.19 · atualizado em 2026-09-01)
 
 Skill corporativa para criação de telas, componentes e protótipos a partir de SDDs/PRDs usando o design system da Olist.
 
 ## 📌 Library de referência (decisão permanente desde 2026-07-03)
 
 A [`design system (base)`](https://www.figma.com/design/HeyN4w209HWh8rfpTDiwyf/design-system) é a **única library de referência** para construção de telas, em `figma-config.json`/`searchPriority`. A hierarquia anterior (AI Components, ERP components, ERP recursos, ERP style guide, [design system] components web) foi descontinuada e está em `blockedLibraries` com os dados preservados. Histórico completo da decisão, incluindo checagem de cobertura contra o harness, em `decisions/ux-design/FLUXO_PRD_FIGMA.md`.
+
+## Novidades v3.19 (2026-09-01)
+
+- **Frame raiz:** `padding 8px` em todos os lados + `fills #F1F0E8` + `gap 8px` entre Zona A e Container
+- **Container (Zonas B–F):** `cornerRadius 12px`
+- **Zona B:** `topLeftRadius 12` · `topRightRadius 12` · bottom 0
+- **Zona F:** `bottomLeftRadius 12` · `bottomRightRadius 12` · top 0
+- **`TableCellExtended`** adicionado ao `component-registry.json` — componentKey `8ba1fe2c9d32e56a058c3946e17142223784c557`, variantes `role × type`, props `header text#10193:5` e `cell text#10193:6`, dimensões confirmadas, usage pattern documentado
+- **Regras 11–18** adicionadas ao "Nunca Faça" do `SKILL.md`: clipsContent em zonas (11), strokes em zonas (12), button big/medium em B e C (13), label visível no input search (14), menu erp stage=* (15), tabela com primitivos (16), omitir padding 8px (17), #fcfbf8 no frame raiz (18)
+- **`menu-global`** no registry: `note` e `erpLayoutRule` atualizados com regra `Produto=ERP` obrigatória na Zona A e resize correto (304×752px)
+- **`Table`** no registry: `note` reescrita — proíbe instanciação direta; redireciona para `TableCellExtended`; marca `head` e `simple cell` como sub-peças internas
+- **`TEMPLATES_PRODUTO.md`:** tabela de Zonas ERP, bloco "Regras ERP" e JSON de Estrutura de Layout atualizados com padding, gap, fills, cornerRadius por zona e TableCellExtended
+- **Botões nas Zonas B e C:** `size=small` definido como padrão obrigatório
+- **Zona E sem Zona F:** recebe `bottomLeftRadius: 12` e `bottomRightRadius: 12`
+- Referência a `"menu erp"` removida do JSON de Estrutura de Layout → substituída por `"menu-global"` com componentKey e `Produto=ERP`
+- `clipsContent: false` e `strokes: []` definidos como obrigatórios em todas as zonas (explicitados no checklist)
 
 ## Novidades v3.18 (2026-08-25)
 
@@ -90,7 +106,7 @@ olist-ds-specialist/
     └── VISAO_GERAL.md                  # Mapa de navegação — leia sempre primeiro
 ```
 
-> **Raiz:** 6 arquivo(s) · **Decisions:** 13 arquivo(s) · **Referências:** 17 arquivo(s) · **Total:** 36 arquivo(s) — atualizado em 2026-08-29 pelo `sync-skill-meta.mjs`
+> **Raiz:** 6 arquivo(s) · **Decisions:** 13 arquivo(s) · **Referências:** 17 arquivo(s) · **Total:** 36 arquivo(s) — atualizado em 2026-09-01 pelo `sync-skill-meta.mjs`
 ## Libraries do Figma (ordem de prioridade)
 
 | # | Library | Conteúdo |
@@ -137,6 +153,32 @@ Use $olist-ds-specialist para criar UI no Figma:
 ```
 
 ## Changelog
+
+### v3.19 (2026-09-01)
+### Convenções de layout ERP — definidas e registradas
+
+**Arquivos modificados:** `references/TEMPLATES_PRODUTO.md`, `component-registry.json`, `SKILL.md`
+
+#### Added
+- **Frame raiz:** `padding 8px` em todos os lados + `fills #F1F0E8` + `gap 8px` entre Zona A e Container
+- **Container (Zonas B–F):** `cornerRadius 12px`
+- **Zona B:** `topLeftRadius 12` · `topRightRadius 12` · bottom 0
+- **Zona F:** `bottomLeftRadius 12` · `bottomRightRadius 12` · top 0
+- **`TableCellExtended`** adicionado ao `component-registry.json` — componentKey `8ba1fe2c9d32e56a058c3946e17142223784c557`, variantes `role × type`, props `header text#10193:5` e `cell text#10193:6`, dimensões confirmadas, usage pattern documentado
+- **Regras 11–18** adicionadas ao "Nunca Faça" do `SKILL.md`: clipsContent em zonas (11), strokes em zonas (12), button big/medium em B e C (13), label visível no input search (14), menu erp stage=* (15), tabela com primitivos (16), omitir padding 8px (17), #fcfbf8 no frame raiz (18)
+
+#### Changed
+- **`menu-global`** no registry: `note` e `erpLayoutRule` atualizados com regra `Produto=ERP` obrigatória na Zona A e resize correto (304×752px)
+- **`Table`** no registry: `note` reescrita — proíbe instanciação direta; redireciona para `TableCellExtended`; marca `head` e `simple cell` como sub-peças internas
+- **`TEMPLATES_PRODUTO.md`:** tabela de Zonas ERP, bloco "Regras ERP" e JSON de Estrutura de Layout atualizados com padding, gap, fills, cornerRadius por zona e TableCellExtended
+- **Botões nas Zonas B e C:** `size=small` definido como padrão obrigatório
+- **Zona E sem Zona F:** recebe `bottomLeftRadius: 12` e `bottomRightRadius: 12`
+
+#### Fixed
+- Referência a `"menu erp"` removida do JSON de Estrutura de Layout → substituída por `"menu-global"` com componentKey e `Produto=ERP`
+- `clipsContent: false` e `strokes: []` definidos como obrigatórios em todas as zonas (explicitados no checklist)
+
+---
 
 ### v3.18 (2026-08-25)
 - Arquivos da skill modificados: README.md, SKILL.md, component-registry.json, decisions/INDEX.md, decisions/ux-design/COMPONENTES_POR_ZONA.md, decisions/ux-design/ESPACAMENTO_LAYOUT.md, figma-config.json, references/COMPONENTES.md, references/HARNEES_TELAS.md, references/MAPA_FONTES.md, references/TEMPLATES_PRODUTO.md
