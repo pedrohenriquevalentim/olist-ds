@@ -37,6 +37,36 @@ src/components/NomeComponente/
 - Descrições e stories em português
 - Estenda atributos nativos HTML nas Props (ex: `ButtonHTMLAttributes<HTMLButtonElement>`)
 
+## Estilo de Código
+Ao modificar código existente, siga os padrões já presentes no arquivo:
+- Se o arquivo usa callbacks, não mude para async/await
+- Se o arquivo usa componentes de classe, não refatore para hooks
+- Mantenha o estilo existente mesmo que você o implementasse de forma diferente
+
+## Testes
+Nunca modifique testes existentes, a menos que a alteração atualize intencionalmente o comportamento que eles cobrem. Se um teste falhar após sua alteração, a SUA alteração está errada — corrija o código para o teste existente passar, nunca o contrário.
+
+## Dependências
+- Não adicione novas dependências para algo que pode ser feito com poucas linhas de código
+- Não adicione uma dependência quando uma já existente atender ao caso de uso
+- Se precisar adicionar uma dependência, explique o motivo na descrição do PR
+
+## Segurança
+- Nunca inclua arquivos `.env`, chaves de API, tokens, chaves privadas ou credenciais no commit
+- Nunca registre dados sensíveis em logs
+- Nunca coloque segredos em comentários ou arquivos de teste
+- Se precisar de um segredo para testes, use variáveis de ambiente com valores de placeholder
+
+## Git
+Use o formato de commit convencional: `tipo(escopo): descrição`
+
+Tipos: `feat`, `fix`, `refactor`, `test`, `docs`, `chore`
+
+Mantenha os commits focados em uma única alteração lógica.
+
+## Comunicação
+Ao concluir uma tarefa, explique a decisão tomada, não o que o código faz. Se encontrou algo inesperado ou tomou uma decisão por julgamento, mencione o raciocínio em 2–3 frases.
+
 ## Geração de Componentes a partir do Figma
 
 > **Use a skill `$olist-ds-specialist` (Caso 7) para este fluxo.** Ela executa em paralelo a geração de código e a geração do frame de docs no Figma. As regras abaixo são o detalhamento técnico — a skill contém o workflow completo e orquestrado.
