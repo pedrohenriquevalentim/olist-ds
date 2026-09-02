@@ -1,7 +1,7 @@
 # Harness de Construção de Telas
 
-**Versão:** 1.4  
-**Última atualização:** 2026-08-25  
+**Versão:** 1.6  
+**Última atualização:** 2026-09-02  
 **Leia após:** `TEMPLATES_PRODUTO.md`  
 **Leia antes de:** criar qualquer frame via `use_figma`
 
@@ -30,6 +30,7 @@ Execute este gate antes de criar qualquer frame. Se qualquer item falhar, **reso
 [ ] 4b. Nenhum componentKey escolhido veio de um resultado com name iniciado por "." (componente interno de construção — ver FIGMA_CONFIG.md)?
 [ ] 5. Nenhuma regra de limite por tela será violada (ver Seção 2)?
 [ ] 6. Componentes ausentes identificados e marcados como "— custom" (ver Seção 4)?
+[ ] 7. **BLOQUEANTE — Tokens semânticos:** Para CADA primitivo custom, todos os fills, strokes e cores de texto estão mapeados a tokens SEMÂNTICOS (`--color-background-*`, `--color-text-*`, `--color-border-*`, `--color-shape-*`) — nunca a tokens primitivos (`--color-gray-gray-*`, `--color-blue-blue-*`)?
 ```
 
 → Só avançar se TODOS os itens estão marcados.
@@ -153,17 +154,58 @@ Quando um componente não existe no inventário DS, o Claude pode construir com 
 
 Quando construir um componente custom (Caso 5 do SKILL.md):
 
-1. **Fills e strokes:** use valores RGB 0–1 de `CORES.md` → coluna "Figma RGB" ou `TOKEN_CATALOG.md` → Seção 1
+1. **Fills e strokes — REGRA IMUTÁVEL: vincule a variável semântica via `importVariableByKeyAsync` + `setBoundVariableForPaint`. NUNCA use raw RGB como fill final.**
+
+   Passar apenas um valor RGB resolve o visual mas deixa o fill sem binding — o Figma mostra o hex solto, sem rastreabilidade de token. O padrão correto é sempre importar e vincular:
 
    ```javascript
-   // ✅ Fundo de card
-   frame.fills = [{ type: 'SOLID', color: { r: 0.988, g: 0.984, b: 0.973 } }]; // gray-gray-0
-   // ✅ Borda de input
-   frame.strokes = [{ type: 'SOLID', color: { r: 0.686, g: 0.678, b: 0.635 } }]; // gray-gray-300
-   // ✅ Stroke width
-   frame.strokeWeight = 1;
-   frame.strokeAlign = 'INSIDE';
+   // ✅ CORRETO — importar variável da library e vincular ao fill/stroke
+   const varContainer = await figma.variables.importVariableByKeyAsync(
+     'b1c5fa26eed208b1b871333c5efafca1803c1239' // color/background/surface/container
+   );
+   const newFill = figma.variables.setBoundVariableForPaint(
+     { type: 'SOLID', color: { r: 0, g: 0, b: 0 } }, // base necessária — será sobrescrita pelo binding
+     'color',
+     varContainer
+   );
+   frame.fills = [newFill]; // Figma mostrará "color/background/surface/container", não o hex
+
+   // ✅ CORRETO — para strokes
+   const varBorder = await figma.variables.importVariableByKeyAsync(
+     '21a14f571453de1e135556f877bf837f59a52f01' // color/border/container/outside
+   );
+   const newStroke = figma.variables.setBoundVariableForPaint(node.strokes[0], 'color', varBorder);
+   node.strokes = [newStroke];
+
+   // ❌ ERRADO — raw RGB sem binding (visual OK, sem rastreabilidade de token)
+   // frame.fills = [{ type: 'SOLID', color: { r: 0.988, g: 0.984, b: 0.973 } }]; ← PROIBIDO
+   // ❌ ERRADO — RGB de token primitivo
+   // frame.fills = [{ type: 'SOLID', color: {...} }]; // color-gray-gray-0 ← PROIBIDO
    ```
+
+   > **Hierarquia obrigatória:** semântico → componente. Primitivos são a camada mais baixa da arquitetura de tokens — eles existem apenas para construir os semânticos. Usar RGB solto (mesmo do token semântico) sem binding é equivalente a hardcodar um hex — não há rastreabilidade.
+
+   ### Como obter a key de qualquer variável semântica
+
+   Nunca hardcode keys — elas podem mudar. Sempre busque no DS file em runtime com um `use_figma` prévio:
+
+   ```javascript
+   // Passo 1: use_figma no DS file (HeyN4w209HWh8rfpTDiwyf) — buscar keys dos tokens necessários
+   const allVars = await figma.variables.getLocalVariablesAsync('COLOR');
+   const needed = ['color/background/surface/container', 'color/text/container/title']; // exemplo
+   return allVars
+     .filter(v => needed.includes(v.name))
+     .map(v => ({ name: v.name, key: v.key }));
+   ```
+
+   ```javascript
+   // Passo 2: use_figma no arquivo alvo — importar e vincular com as keys obtidas no passo 1
+   const v = await figma.variables.importVariableByKeyAsync('<key-do-passo-1>');
+   const newFill = figma.variables.setBoundVariableForPaint(baseFill, 'color', v);
+   node.fills = [newFill];
+   ```
+
+   O catálogo completo de tokens com nomes e estrutura está em `TOKEN_CATALOG.md` — use-o para identificar qual token semântico aplicar a cada elemento antes de buscar a key.
 
 2. **Tipografia:** somente tokens de `TIPOGRAFIA.md` com `Plus Jakarta Sans`. Carregue a fonte antes de editar:
 
@@ -179,7 +221,7 @@ Quando construir um componente custom (Caso 5 do SKILL.md):
 5. **Nome do layer:** sufixo `— custom` obrigatório (ex: `Card/PlanCard — custom`)
 6. **Documentação:** comentário no Figma com: nome do componente ausente, sugestão de criação no DS
 
-> ⚠️ Na Figma Plugin API, **não existe `var(--token)`** — sempre use valores numéricos RGB. A coluna "Figma RGB" em `CORES.md` e em `TOKEN_CATALOG.md` → Seção 1 já entrega os valores prontos.
+> ⚠️ Na Figma Plugin API, **não existe `var(--token)`** — use `importVariableByKeyAsync` + `setBoundVariableForPaint`. Raw RGB é proibido como fill final em componentes custom, mesmo que o valor seja o correto do token semântico.
 
 ---
 
@@ -282,7 +324,7 @@ Como prefere prosseguir?
 
 ---
 
-**Versão:** 1.4  
+**Versão:** 1.6  
 **Criado em:** 2026-06-05  
 **Atualizado em:** 2026-07-04 (2) — Zona B do template Envios/Hub/Conta Digital deixa de permitir "Logo do produto": o logo já é exibido na Zona A via `Menu Global`, e sua duplicação na Zona B foi removida da coluna "Pode conter" e movida para "Não pode conter". A linha `Logo Olist` em "Contextos Válidos por Componente" (Seção 2) foi corrigida para refletir que o logo só existe embutido no `Menu Global` (Zona A, todos os templates), nunca como elemento solto de zona.  
 **Atualizado em:** 2026-07-04 — Zona B (ERP): `Breadcrumb` passa a ser a instância real do componente DS (não mais "texto puro, sem componente"), resolvendo o ponto em aberto #1 de `decisions/ux-design/COMPONENTES_POR_ZONA.md`. Zona C: proibição de `Button` generalizada para qualquer variante com label (antes só "primary"), mantendo o botão de ícone de filtro permitido. Zona D: `conteúdo editorial` e `Card`s avulsos passam a ser permitidos, mantendo `Breadcrumb` e demais elementos de navegação proibidos. Regra de fundo unificada para todas as zonas (A–E), removendo a exceção antes registrada para a Zona A. Seção 2 ganhou linhas de `Breadcrumb` em "Limites por Tela" e "Contextos Válidos por Componente".  
@@ -290,4 +332,6 @@ Como prefere prosseguir?
 **Atualizado em:** 2026-08-25 (v1.3) — Template ERP: viewport corrigido `1588×832` → `1366×768`; zonas reestruturadas de A–E para A–F alinhando ao `TEMPLATES_PRODUTO.md` v1.7 (Zona C=72px Filter Bar, Zona D=48px Tabs, Zona E=452px Content, Zona F=80px Bottom Bar); `Segmented Buttons` removido de todos os contextos válidos e substituído por `tabs` DS real (confirmado em 2026-08-25, frame `10170:11866`); adicionada linha de `tabs` nos Limites por Tela.
 **Atualizado em:** 2026-08-29 (v1.5) — Convenções de layout ERP formalizadas: frame raiz `padding: 8px` + `fills: #F1F0E8` + `gap: 8px`; `cornerRadius` por zona (B topo, F base, demais 0); `clipsContent: false` e `strokes: []` obrigatórios em todas as zonas; Zona E altura alterada de `452px` para `flex`; Zona F altura corrigida de `80px` para `72px`; `TableCellExtended` (`8ba1fe2c...`) definido como unidade construtiva obrigatória para tabelas; Zona A renomeada de "Novo Menu Global" para "Menu Global" com regra `Produto=ERP` explicitada; botões nas Zonas B e C passam a exigir `size=small`; label do `input search` da Zona C deve ter `visible = false`.  
 **Atualizado em:** 2026-08-25 (v1.4) — Template unificado: seção "Template: Envios | Hub | Conta Digital" removida. Todos os produtos (ERP, Envios, Hub, Conta Digital) passam a usar exclusivamente o template ERP. Gate item 1 simplificado. Seção 2 simplificada: removida linha de `Summary Card`, ajustados contextos de `Input Search`, `Breadcrumb` e `Button primary` para refletir template único.  
+**Atualizado em:** 2026-09-02 (v1.7) — Seção 4 reescrita: padrão de fill/stroke passa a exigir `importVariableByKeyAsync` + `setBoundVariableForPaint` — raw RGB proibido mesmo que correto (fill sem binding não rastreia token no Figma). Tabela de keys das 10 variáveis semânticas mais usadas em customs adicionada. Nota final atualizada.
+**Atualizado em:** 2026-09-02 (v1.6) — Gate item 7 adicionado (BLOQUEANTE: fills/strokes de custom components devem referenciar tokens SEMÂNTICOS, nunca primitivos). Seção 4 reescrita: exemplos de código corrigidos para referenciar tokens semânticos; adicionada hierarquia obrigatória semântico → componente com explicação de por que primitivos são proibidos diretamente em telas/customs. Nota final da seção reforçada com "O Figma RGB DEVE vir do token semântico".  
 **Próxima revisão sugerida:** após 10 telas geradas com o harness ativo — coletar violações recorrentes e adicionar à Seção 2 (Limites por Componente) e Seção 3 (Padrões proibidos emergentes)
