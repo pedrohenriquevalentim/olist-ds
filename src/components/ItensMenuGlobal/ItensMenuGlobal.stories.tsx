@@ -75,15 +75,16 @@ export const Interativo: Story = {
 
 /* ── Uso integrado com MenuGlobal ────────────────────────────────────────────── */
 
-export const ComMenuGlobal: Story = {
-  name: 'Integrado com MenuGlobal',
-  render: () => (
+const ComMenuGlobalRender = () => {
+  const [fixado, setFixado] = React.useState(false);
+  return (
     <div style={{ display: 'flex', height: '100vh' }}>
       <MenuGlobal
         produtoSelecionado="Sistema ERP"
         avatarLabel="PN"
         companyLogoUrl="https://www.nike.com.br/images/meta/open-graph-main-image.jpg"
         panelAdjacenteAberto
+        panelFixado={fixado}
       />
       {/*
         Wrapper de ancoragem: position:relative para o flyout se posicionar aqui (left:0).
@@ -91,11 +92,16 @@ export const ComMenuGlobal: Story = {
         Em fixo (flow normal), cresce para 248px, empurrando o conteúdo para a direita.
       */}
       <div style={{ position: 'relative', height: '100%', display: 'flex', flexShrink: 0 }}>
-        <ItensMenuGlobal moduloAtivo="Vendas" />
+        <ItensMenuGlobal moduloAtivo="Vendas" onFixarToggle={setFixado} />
       </div>
       <div style={{ flex: 1, background: '#f5f3ed' }} />
     </div>
-  ),
+  );
+};
+
+export const ComMenuGlobal: Story = {
+  name: 'Integrado com MenuGlobal',
+  render: () => <ComMenuGlobalRender />,
   parameters: {
     docs: {
       description: {

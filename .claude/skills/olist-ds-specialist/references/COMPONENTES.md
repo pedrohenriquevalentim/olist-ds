@@ -1,8 +1,8 @@
 # Componentes — API Completa
 
 **Auto-gerado por `npm run build`**
-**Última atualização:** 2026-09-02
-**Versão do pacote:** 1.0.74
+**Última atualização:** 2026-09-03
+**Versão do pacote:** 1.0.75
 **Versão da skill:** 3.19
 
 ---
@@ -464,6 +464,8 @@ notificacoesPendentes?: boolean;
 onNavigate?: (destino: ProdutoSelecionado) => void;
 /** Zera o border-radius do lado direito quando há painel lateral adjacente (ex: ItensMenuGlobal). */
 panelAdjacenteAberto?: boolean;
+/** Quando o painel adjacente está fixado no layout (não flyout), o pill logo (N0) volta a ficar visível. */
+panelFixado?: boolean;
 className?: string;
 ```
 

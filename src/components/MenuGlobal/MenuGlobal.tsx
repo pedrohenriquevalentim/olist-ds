@@ -70,6 +70,8 @@ export interface MenuGlobalProps {
   onNavigate?: (destino: ProdutoSelecionado) => void;
   /** Zera o border-radius do lado direito quando há painel lateral adjacente (ex: ItensMenuGlobal). */
   panelAdjacenteAberto?: boolean;
+  /** Quando o painel adjacente está fixado no layout (não flyout), o pill logo (N0) volta a ficar visível. */
+  panelFixado?: boolean;
   className?: string;
 }
 
@@ -83,6 +85,7 @@ export const MenuGlobal = ({
   notificacoesPendentes = false,
   onNavigate,
   panelAdjacenteAberto = false,
+  panelFixado = false,
   className,
 }: MenuGlobalProps) => {
   // Estado interno: atualizado imediatamente no clique e sincronizado com a prop.
@@ -169,8 +172,8 @@ export const MenuGlobal = ({
       ].filter(Boolean).join(' ')}
       aria-label="Navegação global"
     >
-      {/* Logo */}
-      <div className={styles.logoArea}>
+      {/* Logo pill: opacity 0 no flyout (N1 watermark assume o papel), opacity 1 quando fixado ou sem painel. */}
+      <div className={[styles.logoArea, panelAdjacenteAberto && !panelFixado ? styles.logoAreaHidden : ''].filter(Boolean).join(' ')}>
         <Logo size="symbol" />
       </div>
 
