@@ -216,6 +216,9 @@ export const ItensMenuGlobal = ({
   const [moduloSelecionado, setModuloSelecionado] = React.useState<ModuloERP>(moduloAtivoProp);
   const [fixado, setFixado] = React.useState(false);
   const [aberto, setAberto] = React.useState(true);
+  // Flag: quando o usuário clica em Voltar a partir do modo fixo, entra em flyout transitório.
+  // O próximo clique em qualquer módulo re-fixa automaticamente (pill N0 volta a opacity 1).
+  const [voltouDeFixado, setVoltouDeFixado] = React.useState(false);
 
   // estadoProp (controlado) tem precedência sobre estado interno (não-controlado).
   // Quando estadoProp está definido, fixado/aberto são irrelevantes para a exibição.
@@ -224,13 +227,22 @@ export const ItensMenuGlobal = ({
 
   const handleModuloClick = (modulo: ModuloERP) => {
     setModuloSelecionado(modulo);
-    if (!fixado) setAberto(true);
+    if (voltouDeFixado) {
+      // Retorno do flyout transitório: re-fixa e notifica o pai.
+      setFixado(true);
+      setAberto(true);
+      setVoltouDeFixado(false);
+      onFixarToggle?.(true);
+    } else if (!fixado) {
+      setAberto(true);
+    }
     onModuloSelect?.(modulo);
   };
 
   const handleFixarToggle = () => {
     const novoFixado = !fixado;
     setFixado(novoFixado);
+    setVoltouDeFixado(false);
     if (novoFixado) setAberto(true);
     onFixarToggle?.(novoFixado);
   };
@@ -238,6 +250,8 @@ export const ItensMenuGlobal = ({
   const handleVoltar = () => {
     setFixado(false);
     setAberto(true);
+    setVoltouDeFixado(true);
+    onFixarToggle?.(false); // notifica o pai que saiu do fixed (pill N0 → opacity 0)
     onVoltar?.();
   };
 
