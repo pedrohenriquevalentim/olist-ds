@@ -1,343 +1,222 @@
-# UX Writing — Diretrizes de Texto para UI Olist
+# Decisão UX/Design: Tom de Voz e UX Writing
 
-**Fonte:** Skill de UX Writing da equipe de CX Writing (v2.0 — 2026-06-12)  
-**Propósito:** Operacionalizar o Tom de Voz da Marca Olist em diretrizes práticas de UX writing para todos os textos de UI.
-
----
-
-## 🚨 PROTOCOLO OBRIGATÓRIO: Antes de Criar Qualquer Texto
-
-Valide estas 3 perguntas antes de escrever qualquer copy:
-
-### 1. Qual é o componente ou canal?
-Identifique **exatamente** onde o texto vai aparecer:
-- **UI:** Botão, Modal, Toast, Banner, Empty State, Tooltip, Label, Helper, Erro, Badge, Breadcrumb, Placeholder
-- **Transacional:** Email, WhatsApp, SMS, Push Notification
-- **Página:** Heading, Subheading, Body Text, CTA
-
-❌ **Se não souber, PARE.** Pergunte: "Onde essa mensagem vai aparecer?"
-
-### 2. Qual é o contexto?
-- **Quem é o usuário?** Lojista (seller/B2B) ou consumidor final (B2C)?
-- **Qual é a situação?** Sucesso, erro, aviso, informação, onboarding?
-- **Qual é a jornada?** Operacional, pós-venda, inicial?
-
-### 3. Qual é o objetivo?
-- A mensagem resolve um problema ou celebra um resultado?
-- Qual é o próximo passo para o usuário?
+**Categoria:** UX/Design
+**Status:** Ativa
+**Skill de referência:** `.claude/skills/olist-ds-specialist/references/UX_WRITING.md`, `references/GLOSSARIO_PAPEIS_TEXTO.md`
 
 ---
 
-## Os 4 Pilares de Conteúdo Olist
+## Decisão
 
-Toda mensagem é validada contra estes 4 critérios. Se falha em um, revisa.
-
-### 1. Conciso
-Vá direto ao ponto. Remova palavras desnecessárias.
-
-❌ "Por favor, verifique sua conexão com a internet e tente novamente mais tarde."  
-✅ "Verifique sua conexão e tente novamente."
-
-### 2. Claro
-Use linguagem do usuário, não jargão técnico.
-
-❌ "Erro 422: validação de payload falhou."  
-✅ "CPF inválido. Digite apenas números."
-
-### 3. Significativo
-Mantenha coerência com vocabulário Olist. Cada palavra tem propósito.
-
-❌ "Processo concluído."  
-✅ "Seu cupom foi ativado. Está pronto para impulsionar suas vendas."
-
-### 4. Dialógico
-Deixe claro o próximo passo. Ofereça sempre um caminho (link, botão, dica).
-
-❌ "Nenhum pedido encontrado."  
-✅ "Nenhum pedido encontrado. Criar seu primeiro pedido?"
+Todo texto de UI (copy, labels, mensagens de erro, empty states, CTAs) segue as diretrizes de UX Writing da Olist. O tom é B2B — direto, profissional e orientado à tarefa do lojista (evitar "seller" em qualquer texto voltado ao usuário final).
 
 ---
 
-## Tom de Voz: Semi-Formal + Humanizado
+## Tom de Voz
 
-Você é **parceiro** do empreendedor brasileiro — acolhedor e ágil, nunca corporativo frio.
+- **Direto:** vai ao ponto, sem rodeios — o lojista tem pressa para resolver problemas.
+- **Semi-formal e humanizado:** equilibra a seriedade do B2B com empatia de parceria — nunca corporativo frio, nunca casual demais.
+- **Orientado à tarefa:** cada texto ajuda o lojista a completar uma ação ou entender o próximo passo.
+- **Positivo, sem sensacionalismo:** apresenta benefício e otimismo, mas sem promessa excessiva ("A Olist vai impulsionar suas vendas", não "você vai vender muito mais").
+- **Abrasileirado:** português do Brasil, não de Portugal.
 
-| Evite (formal/técnico) | Prefira (humanizado) |
-|---|---|
-| "O usuário deverá inserir dados…" | "Preencha os dados abaixo" |
-| "Processamento realizado com êxito" | "Tudo certo! Seu pedido foi criado" |
-| "Aguarde processamento" | "Estamos processando… um momento" |
-| "Operação não permitida" | "Você ainda não pode fazer isso" |
-| "Insira credenciais de acesso" | "Faça seu login" |
-| "Transação não processada" | "Não conseguimos processar. Tente outro método de pagamento" |
+Conceito-guia da marca: toda comunicação é uma **"troca que impulsiona"** — precisa ser clara, gerar impacto e trazer um novo ponto de vista para o lojista.
 
----
-
-## Contextos: Sellers (B2B) vs. Consumidores Finais (B2C)
-
-### Para Sellers (Lojistas) — B2B
-- **Tom:** Parceiro focado em negócio, respeitoso com tempo
-- **Foco:** Impacto nas vendas, eficiência operacional, crescimento
-- **Linguagem:** "você", "sua loja", "seu negócio"
-- ✅ "Ative este cupom para impulsionar suas vendas"
-- ✅ "Você tem 5 pedidos pendentes de processamento"
-- ✅ "Sua loja está pronta para vender no Marketplace"
-
-### Para Consumidores Finais (B2C)
-- **Tom:** Acolhedor, confiável, direto
-- **Foco:** Facilitar compra, resolver dúvidas, tranquilidade
-- **Linguagem:** "você", "seu pedido"
-- ✅ "Confira o status do seu pedido"
-- ✅ "Seu endereço foi confirmado. Próximo passo: pagamento"
-- ✅ "Seu produto chegará entre 2 e 5 dias úteis"
+> **Nota conceitual — Voz vs. Tom:** os cinco atributos acima descrevem a **voz** da Olist — o
+> conjunto de características que se mantém consistente em toda a experiência e faz a marca ser
+> reconhecível, independentemente da tela. O **tom** é a variação dessa mesma voz conforme o
+> contexto: um erro crítico, uma celebração de meta batida e um lembrete de rotina soam
+> diferentes entre si, mas devem ser reconhecíveis como a mesma marca. Ao escrever para um
+> contexto novo, a pergunta não é "que tom uso?" isoladamente, mas "como a voz da Olist (os 5
+> atributos acima) se expressa neste contexto específico?". *(síntese própria a partir de
+> Podmajersky,* Strategic Writing for UX*, 2E — ver Framework aplicado ao final deste documento)*
 
 ---
 
-## Nomenclatura: Referências aos Produtos Olist
+## Os 4 Pilares de Conteúdo
 
-### Regra de Ouro
-- **Primeira menção:** Nome completo + "da Olist"
-- **Menções posteriores:** Nome completo, abreviação ou só nome
+Toda mensagem é validada contra estes 4 critérios antes de publicar:
 
-| Produto | Primeira Menção | Menções Posteriores |
+| Pilar | Significa | Exemplo |
 |---|---|---|
-| ERP | "Sistema ERP da Olist" | "Sistema ERP", "ERP da Olist" ou "ERP" |
-| PDV | "Sistema PDV da Olist" | "Sistema PDV", "PDV da Olist" ou "PDV" |
-| Ecommerce | "Plataforma de Ecommerce da Olist" | "Plataforma de Ecommerce", "Ecommerce" |
-| Hub | "Hub de Integração da Olist" | "Hub de Integração" ou "Hub" |
-| Envios | "Envios da Olist" | "Envios" |
-| Crédito | "Crédito da Olist" | "Crédito" |
-| Conta Digital | "Conta Digital da Olist" | "Conta Digital" |
-| Loja | "Loja da Olist" | "Loja" |
-| IA | "Agente de IA da Olist (Lis)" | "Agente de IA" ou "Lis" |
+| **Conciso** | Remover palavras desnecessárias | "Verifique sua conexão e tente novamente" |
+| **Claro** | Linguagem do usuário, nunca jargão técnico | "CPF inválido. Digite apenas números" (não "Erro 422") |
+| **Significativo** | Vocabulário consistente com a marca, cada palavra com propósito | "Seu cupom foi ativado. Está pronto para impulsionar suas vendas" |
+| **Dialógico** | Sempre indicar o próximo passo | "Nenhum pedido encontrado. Criar seu primeiro pedido?" |
 
-### Observações
-- ✅ Sem hífen: "ecommerce", "email", "ebook"
-- ✅ Maiúsculas apenas em nomes próprios
-- ✅ Nunca use "seller" em comunicações externas → use "você", "lojista" ou "parceiro"
-- ✅ Ecossistema → "Ecossistema da Olist" (maiúscula no E)
-
----
-
-## Regras Gerais de Estilo
-
-### Maiúsculas e Sentence Case
-- **Apenas maiúsculas em:** Títulos de página, nomes próprios, primeiras palavras após ponto
-- **Sentence case em tudo mais:** Labels, helpers, erros, botões
-
-❌ "Qual São as Dores dos Empreendedores do Brasil"  
-✅ "Qual são as dores dos empreendedores do Brasil"
-
-### Pontuação
-- **Sem ponto final em:** Labels, helpers, CTAs, placeholders, toasts, badges
-- **Com ponto final em:** Erros (mensagens completas), modals (explicações), avisos críticos
-- Após dois pontos `:` sempre letra **minúscula**
-
-### Abreviações
-- ✅ "e" em vez de "&"
-- ✅ "ou" em vez de "|"
-- ❌ Evite "Add", "Edit", "Msg" → use "Adicionar", "Editar", "Mensagem"
-
-### Números
-- Sempre numeral: "100 produtos" (não "cem produtos")
-- Valores monetários com símbolo: "R$ 1.000,00"
-- Datas em formato local: "12/04/2026" ou "12/04/2026 às 14:32"
-
-### Linguagem Positiva
-- Prefira dizer o que **pode** fazer, não o que **não pode**
-- ❌ "Não pode deletar este produto"
-- ✅ "Você pode deletar este produto após confirmação"
-
-### Evitar Sensacionalismo
-| Evite | Prefira |
-|---|---|
-| "Você vai aumentar suas vendas em 300%!" | "Este cupom pode impulsionar suas vendas" |
-| "Seu negócio vai explodir!" | "Potencialize sua operação com este recurso" |
-| "Revolucione seu ecommerce!" | "Otimize sua gestão de estoque" |
-
----
-
-## Abrasileiramento e Estrangeirismos
-
-### Princípio 1: Palavras compostas com "e-"
-Sem hífen — já entraram no vocabulário português:
-
-| Evite | Prefira |
-|---|---|
-| "e-commerce" | "ecommerce" |
-| "e-mail" | "email" |
-| "e-book" | "ebook" |
-
-"feedback" e "download" já são consolidados — mantenha sem tradução forçada.
-
-### Princípio 2: Termos técnicos consolidados
-Manter em inglês, mas **sempre contextualizar em português**:
-
-✅ "Nosso Agente de IA usa Machine Learning (aprendizado automático) para otimizar suas vendas."  
-❌ "Nosso Agente de IA usa Machine Learning." (sem contextualização)
-
-### Princípio 3: Termos internos — nunca externos
-| Termo Interno | Uso Externo |
-|---|---|
-| "Seller" | "você", "lojista", "parceiro", "empreendedor" |
-| "Customer" | "cliente", "consumidor", "você" |
-| "Deal" | "oferta", "cupom", "promoção" |
-| "Stock" | "estoque", "inventário" |
-| "Checkout" | "finalizar compra" |
-
-### Princípio 4: Nomes próprios mantêm escrita original
-✅ "Marketplace" (nome próprio, mantém inglês)  
-✅ "Plataforma de Ecommerce da Olist" (adaptado, sem hífen)
-
----
-
-## Os 12 Tipos de Texto de UX Writing
-
-| Tipo | Definição | Máx. Caracteres | Dialógico? |
-|---|---|---|---|
-| **CTA Primária** | Ação principal clara em botão primário | 30 | Sim |
-| **CTA Secundária** | Ação alternativa ou descarte | 20 | Sim |
-| **Label de Campo** | Identifica campo de input | 30 | Sim |
-| **Helper Text** | Instrução ou dica abaixo do campo | 80 | Sim |
-| **Erro de Validação** | Mensagem quando validação falha | 80 | Sim |
-| **Toast/Notificação** | Mensagem temporária (sucesso, erro, info) | 60 (título) | Sim |
-| **Placeholder** | Texto cinzento dentro de input vazio | 40 | Não |
-| **Empty State** | Mensagem quando lista está vazia | 50 | Sim |
-| **Modal Title** | Título de modal ou diálogo | 40 | Sim |
-| **Modal Body** | Contexto ou instruções dentro de modal | 120 | Sim |
-| **Breadcrumb/Navegação** | Texto de links de navegação | 30 | Sim |
-| **Badge/Status** | Etiqueta de status ou categoria | 15 | Não |
+> **Como aplicar os 4 Pilares na prática — ciclo de revisão em ordem:** ao revisar um texto que
+> já existe (não um rascunho novo), é mais eficaz passar pelos pilares em uma ordem específica em
+> vez de tentar os quatro ao mesmo tempo:
+> 1. **Significativo primeiro** — antes de cortar qualquer palavra, confirme o que o texto
+>    *precisa* fazer pela pessoa e pela Olist. É normal o texto crescer nesta etapa, porque
+>    você está garantindo que nada essencial ficou de fora.
+> 2. **Conciso** — corte tudo que não serve a esse propósito.
+> 3. **Dialógico** — depois de cortado, confirme que ainda sobrou espaço para indicar o próximo
+>    passo; um texto cortado demais pode virar só um aviso sem direção.
+> 4. **Claro** — checagem final: uma pessoa que nunca viu esse texto entenderia exatamente o que
+>    fazer e por quê?
+>
+> *(síntese própria adaptada do ciclo de edição em 4 fases — Propositado, Conciso,
+> Conversacional, Claro — de Podmajersky,* Strategic Writing for UX*, 2E)*
 
 ---
 
 ## Regras por Tipo de Texto
 
-### CTAs (Botões)
-✅ "Salvar Produto" (verbo + objeto)  
-✅ "Excluir Permanentemente" (deixa claro o que acontece)  
-✅ "Adicionar 5 Produtos" (específico)  
-❌ "OK", "Sim", "Enviar" (vago)  
-❌ "Clique aqui" (não é ação)  
-❌ "Próximo" (contexto não fica claro)
+Consultar `references/UX_WRITING.md` para as 12 categorias completas. Regras-chave:
 
-### Labels de Campo
-✅ "CPF do vendedor" / "Data de nascimento" / "Descrição do produto"  
-❌ "Insira seu CPF aqui" (é instrução, não label)  
-❌ "Data" (muito vago)  
-❌ "Informações pessoais" (muito genérico)
+| Tipo | Regra |
+|---|---|
+| Botões (CTA) | Verbo no infinitivo + objeto — "Salvar pedido", não "Salvar" genérico quando há ambiguidade. Ver regra de **case por superfície** abaixo — é a atualização mais importante desta versão. |
+| Mensagens de erro | Descrever o problema + orientar a solução — nunca só "Erro". Se a causa for externa (Receita Federal, bancos, transportadoras), evitar linguagem de culpa ("atualize seu cadastro", não "corrija seus dados") |
+| Empty states | Explicar por que está vazio + oferecer ação para resolver |
+| Labels de campo | Substantivo conciso — nunca verbo ou instrução ("CPF do vendedor", não "Insira seu CPF") |
+| Toasts de sucesso | Confirmar o que aconteceu, sem festividade excessiva de e-commerce B2C — "Pedido salvo", não "Oba! Pedido salvo 🎉" |
+| Placeholders | Exemplo real do formato esperado — nunca só "Digite aqui" |
 
-### Helper Text
-✅ "Digite apenas números" / "Máximo 100 caracteres" / "Formato: DD/MM/AAAA"  
-❌ "Você não pode colocar mais de 100 caracteres" (muito longo)  
-❌ "Por favor, forneça a data no formato correto" (redundante)
+### Aprofundamento — Mensagens de Erro
 
-### Erros de Validação
-✅ "CPF inválido. Use apenas números."  
-✅ "E-mail já cadastrado. Use outro ou faça login."  
-✅ "Mínimo 8 caracteres. Você digitou 5."  
-❌ "Erro" / "Campo inválido" / "HTTP 400: Bad Request" (sem contexto ou muito técnico)
+A regra da tabela acima ("descrever o problema + orientar a solução") pode ser desdobrada em
+três verificações práticas ao revisar qualquer erro:
 
-### Empty States
-✅ "Nenhum pedido encontrado. Crie seu primeiro pedido?"  
-✅ "Sem produtos nesta categoria. Adicionar produto?"  
-❌ "Nenhum resultado" (sem ação)  
-❌ "Sem dados" (vago e impessoal)
+1. **Nunca culpe o lojista.** Prefira instruir a insultar: "Digite seu CPF" em vez de "Você não
+   digitou o CPF"; "Digite um CEP válido" em vez de "Este CEP é inválido".
+2. **Seja específico sobre a solução**, não apenas sobre o problema. "O produto foi movido ou
+   excluído" não ajuda — diga o que fazer a seguir (buscar novamente, ver histórico, contatar
+   suporte).
+3. **Humor só em erros de baixo impacto** (ex: página não encontrada), nunca em erros que
+   bloqueiam uma tarefa fiscal, financeira ou de pedido — nesses casos, o lojista quer resolver,
+   não sorrir.
 
-### Toast/Notificações
-✅ "Produto salvo com sucesso"  
-✅ "Falha ao conectar. Verifique sua conexão e tente novamente."  
-✅ "Tudo certo! Seu pedido foi criado"  
-❌ "OK" / "Error 500" / "Operação concluída"
+*(síntese própria a partir de Tham, Howard & Verhulsdonck,* UX Writing: Designing
+User-Centered Content*, Cap. 9 — ver Framework aplicado ao final deste documento)*
 
-### Modal — Confirmações Destrutivas
-**Título:** "Confirmar exclusão?"  
-**Body:** "Esta ação não pode ser desfeita. Todos os dados relacionados a este produto serão perdidos."  
-**CTAs:** [Cancelar] [Excluir Permanentemente] ← botão de ação em vermelho  
-❌ Título: "Tem certeza?" (vago)  
-❌ CTA: "Sim" (sem clareza de consequência)
+### Aprofundamento — Formulários e Labels
 
-### Textos de Loading
-✅ "Estamos processando… um momento"  
-✅ "Criando sua loja…"  
-❌ "Aguarde processamento" / "Carregando…" (sem contexto)
+Complementa a regra de Labels da tabela acima quando o texto faz parte de um formulário maior:
+
+- **Reduza o número de campos visíveis.** Não peça informação redundante (ex: endereço de
+  cobrança igual ao de entrega); esconda campos opcionais por padrão e ofereça expandir se
+  necessário.
+- **Priorize autofill/preenchimento automático** sempre que a plataforma permitir, para campos
+  rotineiros (nome, e-mail, CNPJ já cadastrado).
+- **O rótulo deve deixar claro o que é obrigatório vs. opcional** antes mesmo de a pessoa errar —
+  isso evita boa parte dos erros de preenchimento, que não são uma atividade natural para
+  ninguém.
+
+*(síntese própria a partir de Tham, Howard & Verhulsdonck,* UX Writing: Designing
+User-Centered Content*, Cap. 9)*
 
 ---
 
-## Emoji Policy
+## Case de CTA por Superfície — ⚠️ atualização
 
-Emoji é bem-vindo, mas com moderação. **Máx 1-2 por mensagem.**
+O padrão de capitalização do texto de botão **não é único em todo o Ecossistema da Olist** — varia conforme a superfície:
 
-### Use em:
-- ✓ Toasts de sucesso
-- 📭 Empty states empáticos
-- ⚠️ Avisos importantes
-- 🚀 Celebrações B2B
-
-### NÃO use em:
-- Labels de campo
-- Mensagens de erro técnico
-- CTAs
-- Breadcrumbs
-
-**Regra de ouro:** Emoji comunica tom e contexto, não substitui palavras.
-
----
-
-## Mapeamento SDD → Tipo de Texto
-
-| Frase típica no SDD | Tipo correto | Exemplo |
+| Superfície | Padrão de case | Exemplo |
 |---|---|---|
-| "Um botão para salvar o formulário" | CTA Primária | "Salvar Produto" |
-| "Um link para cancelar" | CTA Secundária | "Cancelar" |
-| "Campo de entrada para nome" | Label + Input | Label: "Nome do Vendedor" |
-| "Dica: o campo aceita apenas números" | Helper Text | "Apenas números" |
-| "Se o CPF for inválido, mostrar mensagem" | Erro de Validação | "CPF inválido. Digite novamente." |
-| "Após salvar, mostrar confirmação" | Toast | "Alterações salvas com sucesso" |
-| "Se a lista estiver vazia, mostrar mensagem" | Empty State | "Nenhum pedido encontrado. Criar novo?" |
-| "Um modal pedindo confirmação antes de deletar" | Modal Title + Body | Title: "Confirmar exclusão?"; Body: "Essa ação não pode ser desfeita." |
-| "Status do pedido (Aprovado, Pendente, Rejeitado)" | Badge/Status | "Aprovado", "Pendente", "Rejeitado" |
+| **Sistema ERP da Olist** e demais produtos do ecossistema da Olist | **Tudo minúsculo** — nenhuma letra maiúscula, nem a primeira | "salvar pedido", "excluir permanentemente", "adicionar produto" |
+| **Sites institucionais e Landing Pages (LPs) da Olist** | **Primeira letra maiúscula, restante minúsculo** (sentence case) — este padrão é **exclusivo** desse contexto, não deve ser replicado no ERP | "Salvar pedido", "Fale com um especialista" |
+
+Antes desta atualização, a documentação indicava lowercase genérico para CTAs sem diferenciar por superfície. A regra correta é: **lowercase total é o padrão do ERP**; a variação com inicial maiúscula pertence somente a sites e LPs (superfícies de marketing/institucional), nunca a produto.
+
+Ao revisar ou propor um CTA, a primeira pergunta é sempre: "essa tela é ERP (produto) ou site/LP (institucional)?" — a resposta define o case antes de qualquer outra regra de conteúdo.
 
 ---
 
-## Tokens Visuais para UX Writing
+## Regras Gerais de Estilo
 
-| Tipo | Font-size | Font-weight | Color Token | Classe CSS |
-|---|---|---|---|---|
-| CTA Primária | 14px | semibold (600) | cor do botão | `.ctaLabel` |
-| CTA Secundária | 14px | semibold (600) | cor do botão | `.ctaLabel` |
-| Label | 14px | medium (500) | gray-700 | `.label` |
-| Helper | 12px | regular (400) | gray-500 | `.helper` |
-| Erro | 12px | regular (400) | red-500 | `.error` |
-| Placeholder | 12px | regular (400) | gray-400 | `::placeholder` |
-| Toast Title | 14px | semibold (600) | cor de status | `.toastTitle` |
-| Empty State | 16px | regular (400) | gray-600 | `.emptyState` |
-| Badge | 12px | semibold (600) | cor do status | `.badge` |
+- **Maiúsculas:** fora da regra de CTA acima, use maiúsculas apenas em títulos de página, nomes próprios e primeira palavra após ponto final. Sentence case em labels, helpers e erros.
+- **Depois de dois-pontos (":"):** sempre letra minúscula.
+- **Pontuação:** sem ponto final em labels, helpers, CTAs, placeholders, toasts e badges; com ponto final em erros completos, modais e avisos críticos.
+- **Abrasileiramento:** sem hífen em "ecommerce", "email" e "ebook". "Seller" é termo interno — nunca aparece em comunicação externa (usar "você", "lojista" ou "parceiro").
+- **Números:** numeral sempre ("100 produtos"), valores monetários com símbolo ("R$ 1.000,00"), datas em formato local ("12/04/2026").
+- **Emoji:** bem-vindo com moderação, máximo 1-2 por mensagem. Nunca em labels, erros, CTAs ou breadcrumbs.
+- **Sensacionalismo:** evitar promessas excessivas ("Revolucione seu ecommerce!") — preferir afirmação sóbria e otimista ("Otimize sua gestão de estoque").
 
 ---
 
-## Glossário Rápido: Referência de Tom
+## Boas Práticas por Componente In-App
 
-| Situação | Tom | Exemplo |
-|---|---|---|
-| Sucesso operacional | Celebratório, humanizado | "Tudo certo! Seu produto foi criado" |
-| Erro operacional | Claro, orientado a solução | "CPF inválido. Use apenas números" |
-| Aviso crítico | Sério, sem sensacionalismo | "Esta ação não pode ser desfeita" |
-| Empty state | Empático, dialógico | "Sem produtos aqui. Criar seu primeiro?" |
-| Carregamento | Reconfortante, sem jargão | "Estamos processando… um momento" |
-| Onboarding | Acolhedor, claro | "Bem-vindo! Vamos começar a configurar sua loja?" |
-| Transacional | Confiável, direto | "Seu pedido foi confirmado. Acompanhe o status aqui" |
+Fonte: documentação Appcues (ferramenta de publicação usada para essas mensagens). Válido para
+qualquer texto de comunicação in-app, sempre combinado com os 4 Pilares e as Regras Gerais de
+Estilo acima.
+
+| Componente | Boas práticas de conteúdo |
+|---|---|
+| **Slideout** | Título até 45 caracteres, descrição até 2 linhas. CTA claro e direto ("Experimentar", "Avaliar", "Agendar", "Participar", "Responder"). Emoji só ao final do texto, com cautela. Em pesquisas, prefira múltipla escolha rápida (até 5 opções). |
+| **Modal** | Título em uma linha, com verbo de ação ("Ativar", "Configurar", "Revisar") — evitar genéricos como "Atenção" ou "Importante". Descrição curta e escaneável, até 3 linhas. CTA sempre verbo no infinitivo ("Ativar rastreio"), nunca genérico ("OK", "Sim", "Quero"). Se não houver X para fechar, inclua opção secundária ("Fechar" ou "Deixar para depois"). |
+| **Checklist** | Comece com frase de boas-vindas que destaque o benefício do checklist. Máximo 5 itens, começando por uma tarefa fácil ou já concluída. Articule o benefício junto com a ação (ex: "Configure os dados fiscais para emitir notas sem erros"). |
+| **Launchpad** | Nomeie com clareza o que a pessoa vai encontrar (ex: "Emissão de Notas"). Priorize dúvidas/tickets recorrentes de Suporte com linguagem positiva (não "Corrija os erros no preenchimento de NCMs", sim "Como aprimorar as sugestões do Sugestor de NCM"). Títulos priorizando a ação ("Como emitir nota fiscal"). Máximo ~7 conteúdos ativos, atualizados mensalmente. |
+| **Banner** | Nunca cubra botões ou atrapalhe ações importantes da página. Evite excesso de informação — priorize clareza. |
+| **Tooltip** | Frase única, até 120 caracteres, no máximo 2 linhas. Linguagem natural, respondendo apenas uma pergunta por vez ("o que é isso?", "por que importa?" ou "como funciona?"). Evite interrogações, exclamações ou reticências. Nunca repita o texto que já está no botão, campo ou componente. |
+| **Pin/Hotspot** | Máximo 3-4 por flow/tour. Frases curtas, até 80 caracteres, começando com verbo de ação/convite ("Explore", "Veja", "Teste", "Saiba", "Ative"). Direto e instigante, sem excesso de mistério. |
+
+> **Nota — Launchpad e organização de ajuda:** ao priorizar quais dúvidas viram conteúdo do
+> Launchpad, vale usar o mesmo critério de agrupamento recomendado para guias de ajuda em geral:
+> ordenar por frequência real de chamados/tickets primeiro, depois por categoria funcional, e só
+> então por nível de complexidade (básico vs. avançado). Isso evita publicar conteúdo sobre
+> dúvidas raras enquanto dúvidas recorrentes ficam sem resposta. *(síntese própria a partir de
+> Tham, Howard & Verhulsdonck,* UX Writing*, Cap. 9)*
 
 ---
 
-## Referências Cruzadas
+## Papéis de Texto (interface com GLOSSARIO)
 
-- **`GLOSSARIO_PAPEIS_TEXTO.md`** — Papéis visuais de texto (Heading, Label, Error). Este arquivo define como ESCREVER.
-- **`TIPOGRAFIA.md`** — Tokens de tipografia. Cada tipo de UX Writing mapeia a um token.
-- **`SDD_PARA_TELA.md`** — Como traduzir SDD em UI. Use em conjunto com este arquivo.
-- **`CHECKLIST_REVISAO.md`** — Checklist completo que inclui revisão de UX Writing.
-- **`COMPONENTES.md`** — Componentes que contêm texto (Button, Input, etc.).
+O nome do papel de texto define o token tipográfico e o tratamento visual.
+Consultar `references/GLOSSARIO_PAPEIS_TEXTO.md` para o mapeamento completo dos 10 papéis:
+
+Heading, Subheading, Section Title, Body, Label, Helper, Error, Caption, CTA Label, Link
 
 ---
 
-**Última atualização:** 2026-06-15 (v1.0 — integrado ao olist-ds-specialist)  
-**Fonte original:** UX_WRITING.md — Equipe de CX Writing Olist (v2.0 — 2026-06-12)
+## Nomenclatura de Produtos
+
+Estrutura correta: **nome do produto + "da" + Olist** (ex: "Sistema ERP da Olist", "Crédito da Olist"). Primeira menção com nome completo; menções posteriores podem usar a forma abreviada ("ERP", "Crédito"). Exceção: "Sistema PDV" nunca deve ser abreviado para só "PDV", pois isolado tem significado próprio. Para o conjunto de produtos, usar "Ecossistema da Olist" (E maiúsculo).
+
+---
+
+## Referências na Skill
+
+- Protocolo de triagem, 4 pilares, 12 tipos de texto → `references/UX_WRITING.md`
+- Papéis visuais de texto e mapeamento SDD → `references/GLOSSARIO_PAPEIS_TEXTO.md`
+- Checklist de revisão de copy → `references/CHECKLIST_REVISAO.md`
+- Boas práticas por componente in-app (Slideout, Modal, Checklist, Launchpad, Banner, Tooltip,
+  Pin/Hotspot), fonte Appcues → `references/componentes-in-app.md`
+
+---
+
+## Framework Aplicado — Síntese Própria de Referências Externas
+
+> Os dois blocos abaixo resumem, em texto próprio, conceitos de duas referências técnicas de
+> UX Writing usadas para embasar as notas conceituais inseridas neste documento (marcadas acima
+> com *"síntese própria"*). Não são reproduções dos livros originais, que são obras protegidas
+> por direitos autorais — servem como pano de fundo teórico. Em qualquer conflito com as
+> decisões e regras da Olist acima, **as regras da Olist têm prioridade**.
+
+**Voz vs. Tom e o Voice Chart** (Podmajersky, *Strategic Writing for UX*, 2ª ed.): a voz é o
+conjunto de características de escolha de palavras consistente em toda a experiência; o tom é a
+variação contextual dessa mesma voz. Uma ferramenta prática para documentar isso é o *voice
+chart*: colunas = princípios/atributos do produto (na Olist, os 5 atributos da seção "Tom de
+Voz" acima poderiam virar colunas), linhas = 6 aspectos de escrita a definir por atributo —
+Conceitos, Vocabulário, Verbosidade, Gramática, Pontuação, Capitalização. Isso ajudaria a tornar
+explícito, por exemplo, como "Direto" se traduz em vocabulário e verbosidade de forma diferente
+de "Positivo, sem sensacionalismo" — hoje essa diferenciação existe de forma implícita nas regras
+gerais de estilo, mas não está documentada atributo a atributo.
+
+**Edição em quatro fases e gêneros práticos** (Tham, Howard & Verhulsdonck, *UX Writing:
+Designing User-Centered Content*): o ciclo Propositado → Conciso → Conversacional → Claro é a
+base da adaptação feita na seção "Como aplicar os 4 Pilares na prática" acima. O mesmo livro
+também documenta boas práticas por gênero de conteúdo (erros, formulários, onboarding, tooltips,
+guias de ajuda), usadas para enriquecer as seções "Aprofundamento — Mensagens de Erro",
+"Aprofundamento — Formulários e Labels" e a nota sobre Launchpad acima.
+
+---
+
+## Histórico
+
+- 2026-06-23 v1.0 — Decisão inicial extraída do CLAUDE.md e UX_WRITING.md
+- 2026-09-04 v1.1 — Consolidação dos parâmetros de UX Writing definidos com a skill de referência (4 pilares, tom semi-formal humanizado, regras de estilo, abrasileiramento, nomenclatura de produtos, papéis de texto). Correção crítica: o case lowercase de CTA é o padrão do **Sistema ERP** (tudo minúsculo); a variação com inicial maiúscula é **exclusiva de sites institucionais e LPs**, não do ERP — a documentação anterior não fazia essa distinção por superfície.
+- 2026-09-04 v1.2 — Adicionada a seção "Boas Práticas por Componente In-App" (Slideout, Modal, Checklist, Launchpad, Banner, Tooltip, Pin/Hotspot), consolidada a partir da referência Appcues da skill.
+- 2026-09-04 v1.3 — Complementado com sínteses próprias de duas referências técnicas de UX Writing: nota conceitual de Voz vs. Tom e menção ao voice chart (Podmajersky, *Strategic Writing for UX*, 2E); ciclo prático de aplicação dos 4 Pilares em ordem, aprofundamento de regras de mensagens de erro e formulários/labels, e nota sobre priorização de conteúdo do Launchpad (Tham, Howard & Verhulsdonck, *UX Writing: Designing User-Centered Content*). Nova seção "Framework Aplicado" ao final, resumindo as fontes. Nenhuma regra ou decisão original foi removida ou substituída — apenas complementada.
+- 2026-09-04 v1.4 — Ajuste na tabela "Case de CTA por Superfície": a superfície antes descrita como "Sistema ERP da Olist (e demais produtos do ERP)" passa a ser "Sistema ERP da Olist e demais produtos do ecossistema da Olist" — o lowercase total de CTA não se limita ao ERP em si, mas se estende a todos os produtos do ecossistema (fora de sites institucionais e LPs).
