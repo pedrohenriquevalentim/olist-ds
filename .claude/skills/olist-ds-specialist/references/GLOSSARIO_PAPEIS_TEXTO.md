@@ -8,16 +8,16 @@
 
 | Papel | Definição | Exemplo de uso | Tokens típicos |
 |---|---|---|---|
-| **Heading** | Título principal da tela. Apenas 1 por tela. | "Pedidos", "Configurações de Conta" | `--font-size-24px`, `--font-weight-bold`, `--color-gray-gray-900` |
+| **Heading** | Título principal da tela. Apenas 1 por tela. | "Pedidos", "Configurações de Conta" | `--font-size-24px`, `--font-weight-bold`, `--color-gray-900` |
 | **Subheading** | Texto de apoio logo abaixo do Heading. Contexto ou descrição curta. | "Gerencie todos os pedidos da sua loja" | `--font-size-14px`, `--font-weight-regular`, `--color-gray-500` |
-| **Section Title** | Título de uma seção dentro da tela. Pode haver múltiplos. | "Filtros", "Pedidos Recentes", "Histórico" | `--font-size-16px`, `--font-weight-600`, `--color-gray-gray-900` |
-| **Body** | Parágrafo de conteúdo. Texto descritivo, instruções longas. | "Para alterar o status, selecione os pedidos..." | `--font-size-14px`, `--font-weight-regular`, `--color-gray-gray-900` |
+| **Section Title** | Título de uma seção dentro da tela. Pode haver múltiplos. | "Filtros", "Pedidos Recentes", "Histórico" | `--font-size-16px`, `--font-weight-semibold`, `--color-gray-900` |
+| **Body** | Parágrafo de conteúdo. Texto descritivo, instruções longas. | "Para alterar o status, selecione os pedidos..." | `--font-size-14px`, `--font-weight-regular`, `--color-gray-900` |
 | **Label** | Rótulo de campo de formulário. Identifica o input. | "Nome do produto", "E-mail", "CPF" | `--font-size-14px`, `--font-weight-medium`, `--color-gray-700` |
 | **Helper** | Texto auxiliar abaixo de um campo. Instrução ou dica. | "Digite apenas números", "Mínimo 8 caracteres" | `--font-size-12px`, `--font-weight-regular`, `--color-gray-500` |
-| **Error** | Mensagem de erro de validação. Aparece quando campo está inválido. | "E-mail inválido", "Campo obrigatório" | `--font-size-12px`, `--font-weight-regular`, `--color-red-red-500` |
+| **Error** | Mensagem de erro de validação. Aparece quando campo está inválido. | "E-mail inválido", "Campo obrigatório" | `--font-size-12px`, `--font-weight-regular`, `--color-red-500` |
 | **Caption** | Texto pequeno e secundário. Metadados, timestamps, legendas. | "Atualizado há 2 minutos", "12/04/2026 14:32" | `--font-size-12px`, `--font-weight-regular`, `--color-gray-500` |
-| **CTA Label** | Texto dentro de botão primário ou secundário. Ação clara. | "Salvar", "Aprovar Pedidos", "Exportar CSV" | `--font-size-14px`, `--font-weight-600`, cor do botão |
-| **Link** | Texto clicável inline. Sempre sublinhado ao hover. | "Ver detalhes", "Esqueci minha senha" | `--font-size-14px`, `--font-weight-regular`, `--color-blue-blue-500` |
+| **CTA Label** | Texto dentro de botão primário ou secundário. Ação clara. | "Salvar", "Aprovar Pedidos", "Exportar CSV" | `--font-size-14px`, `--font-weight-semibold`, cor do botão |
+| **Link** | Texto clicável inline. Sempre sublinhado ao hover. | "Ver detalhes", "Esqueci minha senha" | `--font-size-14px`, `--font-weight-regular`, `--color-blue-500` |
 
 ---
 
@@ -106,6 +106,70 @@
 
 ---
 
+## Padrões Funcionais de UX Text (complementar aos Papéis Visuais)
+
+> Os 10 papéis acima respondem **"que token tipográfico este texto usa?"**. Mas ao ler um SDD,
+> muitas vezes a pergunta que vem primeiro é funcional — **"que tipo de situação de UX este texto
+> resolve?"** — e essa situação normalmente é composta por *mais de um papel* trabalhando junto.
+> Esta seção mapeia os padrões funcionais mais comuns (com base em Podmajersky, *Strategic
+> Writing for UX*, 2ª ed. — síntese própria, sem reprodução do texto original) aos papéis visuais
+> que os compõem, para fechar a lacuna entre "o que o SDD pede" e "como nomear cada peça".
+
+| Padrão funcional | O que resolve | Papéis visuais que o compõem |
+|---|---|---|
+| **Empty State** | Explica por que uma área está vazia e oferece uma ação para resolver | Heading ou Section Title (mensagem principal) + Body (explicação) + CTA Label (ação) |
+| **Confirmation Message** | Confirma que uma ação foi concluída com sucesso | Section Title (ex: título do toast) + Body (detalhe da confirmação) |
+| **Notification** | Avisa sobre um evento assíncrono (fora do fluxo ativo da pessoa) | Section Title (assunto) + Body (detalhe) + Link ou CTA Label (ação, quando houver) |
+| **Controls** (toggles, checkboxes, radios, dropdowns) | Identifica uma opção configurável e seu estado | Label (nome da opção) + Helper (explicação do efeito, quando necessário) |
+| **Transitional Text** | Acompanha estados de espera/carregamento | Body ou Caption, conforme o peso visual do momento de espera |
+| **Text Input Fields** | Guia o preenchimento de um campo | Label + Helper (instrução) + Error (validação) — os três papéis já existentes, mas sempre usados **juntos** nesse padrão, nunca isolados |
+| **Titles** | Nomeia uma tela, seção ou bloco de conteúdo | Heading (tela) ou Section Title (bloco/seção) |
+| **Buttons and Menus** | Aciona uma ação ou abre um conjunto de opções | CTA Label (botão) — itens de menu seguem o mesmo token de CTA Label quando acionáveis, ou de Link quando são navegação |
+| **Descriptions** | Explica o propósito de uma tela, seção ou funcionalidade | Subheading (nível de tela) ou Body (nível de seção/componente) |
+| **Errors** | Já coberto como papel isolado — ver linha **Error** na tabela principal | Error |
+| **Labels** | Já coberto como papel isolado — ver linha **Label** na tabela principal | Label |
+
+Ao mapear um SDD que descreve uma situação funcional (ex: "tela vazia com CTA para criar o
+primeiro pedido"), primeiro identifique o **padrão funcional** na tabela acima, depois decomponha
+nos **papéis visuais** correspondentes — isso evita tanto inventar um papel novo quanto atribuir
+o papel errado a uma peça do padrão.
+
+---
+
+## Diretrizes de Escrita por Papel (complementar aos tokens)
+
+> Esta seção não define tokens — define **como escrever bem** dentro de cada papel, uma vez que
+> ele já foi corretamente atribuído. Síntese própria a partir de Tham, Howard & Verhulsdonck,
+> *UX Writing: Designing User-Centered Content* (Cap. 9). Em conflito com as regras de tom/estilo
+> da Olist em `UX_WRITING.md`, **as regras da Olist têm prioridade**.
+
+- **Error:** nunca culpar a pessoa pelo erro ("Digite seu CPF", não "Você esqueceu o CPF"); usar
+  linguagem neutra ou positiva ("Digite um CEP válido", não "CEP inválido"); ser específico sobre
+  como resolver, não só descrever o problema.
+- **Label:** priorizar clareza sobre criatividade — um rótulo bom é entendido sem precisar de um
+  Helper de apoio; quando o campo for opcional, isso deve ficar visualmente claro (não é papel do
+  texto do Label resolver isso sozinho, mas o texto não deve mascarar a obrigatoriedade).
+- **Helper:** usar para reduzir erros *antes* que aconteçam (formato esperado, exemplo real) —
+  não para repetir o que o Label já disse.
+- **CTA Label:** um bom CTA Label descreve a ação, não o estado do sistema — "Salvar produto",
+  não "Enviando...", que é um estado de Transitional Text, não de CTA Label.
+
+---
+
+## Microcopy vs. Microconteúdo
+
+> Nota conceitual (síntese própria a partir de Tham, Howard & Verhulsdonck, *UX Writing*): todos
+> os 10 papéis deste glossário são exemplos de **microcopy** — textos curtos de interface.
+> **Microconteúdo** é um conceito relacionado, mas diferente: é a versão resumida de um conteúdo
+> originalmente longo (ex: transformar um parágrafo de política de frete em 3 bullets dentro de
+> um tooltip). Ao decompor um SDD que pede para "resumir" ou "simplificar" um texto longo para a
+> UI, o resultado normalmente vira **Body** (se for um bloco corrido) ou uma lista dentro de um
+> **Body**, nunca um papel novo — mas vale nomear explicitamente essa transformação como
+> "microconteúdo" na documentação da tela, para deixar claro que o conteúdo completo existe em
+> outro lugar (ex: um link "Ver política completa").
+
+---
+
 ## Exemplo Completo: Tela de Cadastro de Produto
 
 ```tsx
@@ -185,6 +249,11 @@ Ao revisar uma tela ou componente, verificar:
 - [ ] Links inline usam o papel **Link** (não CTA Label)
 - [ ] Tokens usados estão corretos para cada papel
 - [ ] Nenhum texto foi deixado sem classificação
+- [ ] Se o texto faz parte de um padrão funcional (Empty State, Confirmation, Notification,
+      Text Input Field), todos os papéis que compõem esse padrão foram atribuídos — não só o
+      papel mais óbvio
+- [ ] Erros seguem as diretrizes de escrita da seção "Diretrizes de Escrita por Papel" (sem
+      culpar a pessoa, linguagem neutra/positiva, específico sobre a solução)
 
 ---
 
@@ -192,3 +261,19 @@ Ao revisar uma tela ou componente, verificar:
 - `TIPOGRAFIA.md` — tokens de tipografia (tamanho, peso, altura)
 - `SDD_PARA_TELA.md` — como mapear requisitos do SDD em papéis de texto
 - `COMPONENTES.md` — componentes que usam esses papéis
+- `UX_WRITING.md` — tom de voz, 4 pilares e regras de conteúdo por tipo de texto
+
+---
+
+## Histórico
+
+- 2026-09-04 v1.1 — Adicionadas três seções complementares aos papéis tipográficos originais,
+  com base em sínteses próprias de referências técnicas de UX Writing (não reprodução dos textos
+  originais, que são obras protegidas por direitos autorais): "Padrões Funcionais de UX Text"
+  (mapeamento dos 10 papéis visuais aos padrões funcionais de Podmajersky — Empty State,
+  Confirmation Message, Notification, Controls, Transitional Text, Text Input Fields, Titles,
+  Buttons and Menus, Descriptions), "Diretrizes de Escrita por Papel" (boas práticas de redação
+  para Error, Label, Helper e CTA Label, de Tham, Howard & Verhulsdonck) e "Microcopy vs.
+  Microconteúdo" (distinção conceitual, mesma fonte). Checklist de revisão ampliado com dois
+  itens novos. Nenhum papel, token ou regra original foi removido ou alterado — apenas
+  complementado.
