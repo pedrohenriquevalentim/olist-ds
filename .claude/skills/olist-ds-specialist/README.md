@@ -1,10 +1,17 @@
-# Olist Design System — Especialista (v3.19 · atualizado em 2026-09-07)
+# Olist Design System — Especialista (v3.20 · atualizado em 2026-09-09)
 
 Skill corporativa para criação de telas, componentes e protótipos a partir de SDDs/PRDs usando o design system da Olist.
 
 ## 📌 Library de referência (decisão permanente desde 2026-07-03)
 
 A [`design system (base)`](https://www.figma.com/design/HeyN4w209HWh8rfpTDiwyf/design-system) é a **única library de referência** para construção de telas, em `figma-config.json`/`searchPriority`. A hierarquia anterior (AI Components, ERP components, ERP recursos, ERP style guide, [design system] components web) foi descontinuada e está em `blockedLibraries` com os dados preservados. Histórico completo da decisão, incluindo checagem de cobertura contra o harness, em `decisions/ux-design/FLUXO_PRD_FIGMA.md`.
+
+## Novidades v3.20 (2026-09-09)
+
+- **Protocolo de Inicialização de Arquivo (Seção 0):** sempre criar arquivo novo, configurar 3 páginas (☀️ Bom dia · Cover · Telas), importar sentinels de componente (Button) e variável semântica da `design system (base)`, verificar via `get_libraries` + `get_variable_defs` antes de qualquer frame — resolve dois gaps silenciosos que causavam components não instanciados e fills hardcoded
+- **Cover com layout oficial do rebrand Olist:** Passo 2 da Seção 0 monta o cover seguindo a spec do node `10942:33207` — fundo `#f2f0e8`, pill "DESIGN TEAM" `#779e3d`, 5 campos dinâmicos substituídos automaticamente (`{NOME DO USUÁRIO}` · `{nome do projeto}` · `{unidade de negócio}` · `{status}` · `{ano atual}`)
+- **`references/METADATA_SCHEMA.md` criado:** skill auto-contida para o Caso 7 — schema do `NomeComponente.metadata.json` não depende mais do `CLAUDE.md` raiz do repositório `olist-ds`
+- **`FIGMA_CONFIG.md`** e **`SKILL.md`** atualizados com Gate [0], regras 14/19 e PRÉ-FLIGHT do Caso 5
 
 ## Novidades v3.19 (2026-09-01)
 
@@ -94,19 +101,20 @@ olist-ds-specialist/
     ├── FIGMA_CONFIG.md                 # libraryKeys, workflow de busca e import
     ├── GLOSSARIO_PAPEIS_TEXTO.md       # 10 papéis de texto (Heading, Label, Error, etc.)
     ├── GOVERNANCA_TOKENS.md
-    ├── HARNEES_TELAS.md                # Gate pré-construção: restrições por zona, limites por componente
+    ├── HARNEES_TELAS.md                # Gate pré-construção: Seção 0 (init), restrições por zona, limites por componente
     ├── MAPA_FONTES.md                  # Estrutura de pastas do repositório (auto-gerado)
     ├── PADROES.md                      # 5 padrões de página (Tabela, Form, Dashboard, Detalhe, Config)
     ├── SDD_AVANCADO.md                 # RNFs, DACI, Métricas, Rollout, Observabilidade → UI
     ├── SDD_PARA_TELA.md                # 10 passos para traduzir SDD/PRD em decisões de UI
     ├── TEMPLATES_PRODUTO.md            # Zonas de layout por produto (ERP, Envios, Hub, CD)
     ├── TIPOGRAFIA.md                   # Tokens de tipografia (tamanho, peso, altura)
+    ├── METADATA_SCHEMA.md              # Schema do NomeComponente.metadata.json (Caso 7 — auto-contido)
     ├── TOKEN_CATALOG.md
     ├── UX_WRITING.md                   # Tom de voz, 4 pilares, 12 tipos de texto, diretrizes B2B/B2C
     └── VISAO_GERAL.md                  # Mapa de navegação — leia sempre primeiro
 ```
 
-> **Raiz:** 6 arquivo(s) · **Decisions:** 13 arquivo(s) · **Referências:** 17 arquivo(s) · **Total:** 36 arquivo(s) — atualizado em 2026-09-07 pelo `sync-skill-meta.mjs`
+> **Raiz:** 6 arquivo(s) · **Decisions:** 13 arquivo(s) · **Referências:** 18 arquivo(s) · **Total:** 37 arquivo(s) — atualizado em 2026-09-09
 ## Libraries do Figma (ordem de prioridade)
 
 | # | Library | Conteúdo |
@@ -153,6 +161,9 @@ Use $olist-ds-specialist para criar UI no Figma:
 ```
 
 ## Changelog
+
+### v3.20 (2026-09-09)
+- Protocolo de Inicialização de Arquivo (Seção 0) + cover rebrand Olist + `METADATA_SCHEMA.md` criado (Caso 7 auto-contido) — ver `CHANGELOG.md` para detalhes
 
 ### v3.19 (2026-09-01)
 ### Convenções de layout ERP — definidas e registradas

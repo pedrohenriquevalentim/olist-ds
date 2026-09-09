@@ -239,6 +239,10 @@ Ignorar mesmo que apareçam em buscas sem filtro:
 ## Checklist Antes de Usar Figma MCP
 
 - [ ] `figma-config.json` existe e tem `searchPriority` preenchido (1 libraryKey: design system (base))
+- [ ] `libraryKey` validado: após ler `figma-config.json`, chamar `get_libraries` no arquivo de trabalho e confirmar que o valor `lk-...` de `searchPriority` aparece na lista retornada; se não bater (library renomeada ou republicada), atualizar `figma-config.json` com a key devolvida pelo `get_libraries` antes de qualquer operação
+- [ ] Protocolo de Inicialização de Arquivo (HARNEES_TELAS.md — Seção 0) executado: arquivo novo criado, páginas configuradas (☀️ Bom dia · Cover · Telas), sentinel de componente e variável importados
+- [ ] `get_libraries` confirmou "design system (base)" como library ativa no arquivo de trabalho
+- [ ] `get_variable_defs` confirmou pelo menos uma coleção não-vazia (se vazio: PARAR — ver Seção 0 do HARNEES_TELAS.md)
 - [ ] `search_design_system` será chamado com `includeLibraryKeys: searchPriority`
 - [ ] Nenhum resultado de `blockedLibraries` será usado
 - [ ] Fonts carregadas antes de editar texto em instâncias

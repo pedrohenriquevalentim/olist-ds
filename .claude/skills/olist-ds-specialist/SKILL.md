@@ -1,11 +1,11 @@
 ---
 name: olist-ds-specialist
 description: Use esta skill para TODO trabalho de UI/UX da Olist — criação de telas a partir de SDDs/PRDs, geração de componentes React, revisão de consistência visual, criação de protótipos no Figma, manutenção do design system e criação/revisão de textos de UI (UX Writing, copy, tom de voz). Acione quando alguém mencionar interface Olist, design system, tokens, componentes, telas, layouts, SDD, PRD, protótipo, wireframe, Figma, Storybook, copy, texto de botão, mensagem de erro, empty state, toast, label, placeholder ou qualquer tarefa de criação ou revisão de UI/copy para produtos Olist. NÃO use para backend, APIs, banco de dados, autenticação ou lógica de negócio sem relação com UI.
-version: 3.19
-lastModified: 2026-09-07
+version: 3.20
+lastModified: 2026-09-09
 ---
 
-# Olist Design System — Especialista v3.19 · 2026-09-07
+# Olist Design System — Especialista v3.20 · 2026-09-09
 
 ## Slash Commands
 
@@ -170,12 +170,13 @@ Qual tipo de tarefa?
     ├── Criar tela no Figma (workflow principal)
     │   → Ler FIGMA_CONFIG.md (identifiers, libraries)
     │   → Ler TEMPLATES_PRODUTO.md (zonas de layout por produto)
-    │   → Ler HARNEES_TELAS.md (restrições executáveis — gate pré-construção)
+    │   → Ler HARNEES_TELAS.md (Seção 0 + gate pré-construção)
     │   → Ler SDD_PARA_TELA.md + SDD_AVANCADO.md (se aplicável)
     │   → Ler GLOSSARIO_PAPEIS_TEXTO.md (nomenclatura de layers)
     │   → Ler CORES.md + TIPOGRAFIA.md + ESPACAMENTO.md
-    │   → ANTES de criar: listar todas as telas → aguardar validação
-    │   → Para cada tela validada: executar gate obrigatório do HARNEES_TELAS.md
+    │   → Executar Seção 0 do HARNEES_TELAS.md (criar arquivo, páginas, subscrever library)
+    │   → Listar todas as telas → aguardar validação
+    │   → Para cada tela validada: executar gate obrigatório (itens 1–7)
     │   → Para cada tela validada:
     │     1. search_design_system(componentes necessários, includeLibraryKeys: searchPriority)
     │     2. importComponentSetByKeyAsync(componentKey) → instâncias reais
@@ -284,7 +285,7 @@ Qual tipo de tarefa?
 | `UX_WRITING.md` | **Ao criar ou revisar qualquer copy de UI** | Protocolo de triagem, 4 pilares, 12 tipos de texto, tom B2B/B2C, abrasileiramento, nomenclatura Olist |
 | `CHECKLIST_REVISAO.md` | Revisando telas | 9 categorias de revisão visual e acessibilidade + seção 10 de UX Writing |
 
-## Regras Críticas v3.16
+## Regras Críticas v3.20
 
 ### ✅ Sempre Faça:
 
@@ -316,6 +317,7 @@ Qual tipo de tarefa?
 11. **Valores válidos de `counterAxisAlignItems`:** `MIN` `MAX` `CENTER` `BASELINE` (sem STRETCH, sem END)
 12. **Consulte `GOVERNANCA_TOKENS.md` ao escolher entre tokens semânticos parecidos** (mesma cor final, famílias/estados diferentes) — não escolha só pelo valor resolvido
 13. **No Caso 7, gere e obtenha aprovação do `NomeComponente.metadata.json` ANTES de gerar código ou docs** — é a fonte mais estruturada sobre o componente; documentar antes dele é documentar por suposição
+14. **Em qualquer operação Figma que crie frames, execute o Protocolo de Inicialização de Arquivo (HARNEES_TELAS.md — Seção 0) antes de qualquer `use_figma`** — cria o arquivo, configura as páginas padrão (☀️ Bom dia · Cover · Telas) e garante a library subscrita com variáveis acessíveis
 
 ### ❌ Nunca Faça:
 
@@ -337,6 +339,7 @@ Qual tipo de tarefa?
 16. **Montar tabelas com frames primitivos ou sub-componentes isolados** (`head`, `simple cell`) — usar `TableCellExtended` (`8ba1fe2c9d32e56a058c3946e17142223784c557`) como unidade construtiva obrigatória na Zona E
 17. **Omitir `padding: 8px` no frame raiz ERP** — o frame raiz (`1366×768`) deve ter `padding: 8px` em todos os lados e `gap: 8px` entre Zona A e Container
 18. **Usar `#fcfbf8` como `fills` do frame raiz** — o frame raiz tem `fills: #F1F0E8`; `#fcfbf8` é o fundo do Container (Zonas B–F)
+19. **Iniciar criação de frames no Figma sem executar o Protocolo de Inicialização de Arquivo (HARNEES_TELAS.md — Seção 0)** — sem inicialização, a library pode não estar subscrita e `get_variable_defs` pode retornar vazio, resultando em fills hardcoded e falhas silenciosas em `importComponentByKeyAsync`
 
 ## Casos de Uso v3.16
 
@@ -398,24 +401,32 @@ Você:
 5. Ler HARNEES_TELAS.md (restrições executáveis)
 6. Ler SDD_PARA_TELA.md + SDD_AVANCADO.md (se aplicável)
 7. Ler GLOSSARIO_PAPEIS_TEXTO.md (nomenclatura de layers)
-8. Listar TODAS as telas identificadas → aguardar validação do usuário
-9. Para cada tela validada:
-   a. Executar gate pré-construção do HARNEES_TELAS.md
+8. Executar Protocolo de Inicialização de Arquivo (HARNEES_TELAS.md — Seção 0):
+   - create_new_file com nome da jornada/produto
+   - Configurar páginas padrão: ☀️ Bom dia · Cover · Telas
+   - Importar sentinel de componente (Button) e variável semântica da design system (base)
+   - Verificar com get_libraries + get_variable_defs → só avançar se ambos passarem
+
+9. Listar TODAS as telas identificadas → aguardar validação do usuário
+10. Para cada tela validada:
+   a. Executar gate pré-construção do HARNEES_TELAS.md (itens 1–7)
    b. search_design_system(componente, includeLibraryKeys: searchPriority)
    c. importComponentSetByKeyAsync(componentKey) → instância real
    d. use_figma → construir frame com instâncias + fills/tokens reais
    e. get_design_context → screenshot + URL
    f. Aguardar feedback → próxima tela
 
-   ⚠️ Se um componente necessário NÃO for encontrado em nenhuma library:
-      - Construir com primitivos seguindo tokens DS (fills: CORES.md,
-        tipografia: TIPOGRAFIA.md, espaçamento: ESPACAMENTO.md)
-      - Nomear claramente como custom (ex: "Card/PlanCard — custom")
+   ⚠️ Se importComponentByKeyAsync falhar ou componente não for encontrado:
+      - Distinguir causa antes de usar primitivos:
+        · Library não acessível → PARAR e instruir o usuário (não é gap de componente)
+        · Componente genuinamente ausente do DS → construir com primitivos seguindo tokens
+          DS (fills: CORES.md, tipografia: TIPOGRAFIA.md, espaçamento: ESPACAMENTO.md)
+      - Se ausente: nomear claramente como custom (ex: "Card/PlanCard — custom")
       - Informar ao usuário: "Componente X não encontrado no DS. Construído
         com primitivos. Sugestão: criar via /ds-construir (Caso 5) antes de
         usar em outras telas."
 
-10. Checklist final:
+11. Checklist final:
    - Auto Layout em 100% dos frames
    - Nomes semânticos seguindo padrão do HARNEES_TELAS.md Seção 5
    - Instâncias reais do DS (sem primitivos manuais para componentes existentes)
@@ -437,6 +448,13 @@ Usuário: /ds-construir Button com variantes de tamanho medium e small
 Usuário: /ds-construir https://figma.com/design/FILE?node-id=X [adicionar estado error]
 
 Você:
+
+--- PRÉ-FLIGHT (executa no DS file antes de qualquer criação) ---
+
+0. use_figma no arquivo da design system (base) (fileKey: `HeyN4w209HWh8rfpTDiwyf`):
+   → `get_variable_defs` → confirmar presença das 3 coleções: `01. base tokens`, `02. theme tokens`, `03. component tokens`
+   → Se qualquer coleção estiver ausente: **PARAR** — não é possível construir componentes
+     com tokens reais. Informar ao usuário antes de qualquer nó ou token novo.
 
 --- PREPARAÇÃO ---
 
@@ -563,8 +581,8 @@ Você:
    - Visibility variants: props booleanas que geram sub-variantes
    - Partes anatômicas: elementos nomeados no MCP (label, input base, icon, support text…)
 
-6. GERAR RASCUNHO DE `NomeComponente.metadata.json` (schema completo na Seção 9 do CLAUDE.md
-   raiz): purpose, useWhen, doNotUseWhen, pairsWith, note, variants, states, slots,
+6. GERAR RASCUNHO DE `NomeComponente.metadata.json` (schema completo em `references/METADATA_SCHEMA.md`):
+   purpose, useWhen, doNotUseWhen, pairsWith, note, variants, states, slots,
    tokens.new/tokens.existing, figma.fileKey/nodeId/componentKey. Preencha useWhen/doNotUseWhen
    a partir do nome, das variantes e do contexto do componente no Figma — se a intenção não
    estiver clara pelos dados do MCP, pergunte ao usuário em vez de supor.
@@ -582,7 +600,7 @@ Você:
 
 8. PARALELO — com o metadata.json aprovado, executar os dois passos abaixo ao mesmo tempo:
 
-   [A] GERAR CÓDIGO (6 arquivos conforme CLAUDE.md):
+   [A] GERAR CÓDIGO (6 arquivos — estrutura conforme `references/METADATA_SCHEMA.md`, regras conforme `decisions/technical/COMPONENTES_REACT.md`):
        - NomeComponente.tsx           (React + TypeScript)
        - NomeComponente.module.css    (CSS Modules + var(--tokens))
        - NomeComponente.test.tsx      (Vitest + RTL)
@@ -751,8 +769,9 @@ Erros comuns e suas correções — manter para evitar regressão:
 
 ---
 
-**Versão:** 3.16
-**Última atualização:** 2026-08-23
+**Versão:** 3.20
+**Última atualização:** 2026-09-09
+**Mudanças v3.20:** Protocolo de Inicialização de Arquivo adicionado como etapa obrigatória para todos os casos Figma (4, 5). Em vez de verificar se a library está subscrita num arquivo existente, o agente agora sempre cria um arquivo novo via `create_new_file`, configura as páginas padrão (☀️ Bom dia · Cover · Telas), importa sentinels de componente (Button) e variável semântica da `design system (base)`, e verifica via `get_libraries` + `get_variable_defs` antes de qualquer frame. Este protocolo está documentado em `HARNEES_TELAS.md` Seção 0 e referenciado como Gate item [0] (BLOQUEANTE). Caso 4 renumerado (passos 8→11). Caso 5 ganha bloco PRÉ-FLIGHT com verificação das 3 coleções de tokens. "Nunca Faça" item 19 adicionado. "Sempre Faça" item 14 adicionado. `FIGMA_CONFIG.md` checklist expandido com validação de `libraryKey` e verificação pós-sentinel. Caso 7 desacopla do `CLAUDE.md` raiz: schema do `metadata.json` migrado para `references/METADATA_SCHEMA.md` (skill auto-contida). Referência a CLAUDE.md substituída por `references/METADATA_SCHEMA.md` + `decisions/technical/COMPONENTES_REACT.md`.
 **Mudanças v3.16:** Caso 5 reformulado — substituído o fallback inline "componente não encontrado" por um caso de uso próprio com slash command `/ds-construir`. O Caso 5 cobre criação de componentes do zero e evolução de componentes existentes no Figma, ambos com a mesma disciplina de token-first: auditoria via `get_variable_defs`, decisão tree base→theme→component, gate de aprovação do plano de tokens antes de qualquer nó, construção com Auto Layout e bind de variáveis, e gate de screenshot ao final. Inclui regras explícitas de bind (fills via boundVariables no objeto paint, layout via setBoundVariable, tipografia via textStyleId) e armadilhas conhecidas (minHeight/maxHeight antes de resize). O conteúdo anterior do Caso 5 foi absorvido como nota no passo 9 do Caso 4 com referência ao novo Caso 5. Fluxo de Decisão e tabela de Slash Commands atualizados.
 **Mudanças v3.15:** Caso 7 (`/ds-componente`) passa a gerar um sexto arquivo, `NomeComponente.metadata.json` (purpose/useWhen/doNotUseWhen/pairsWith/note/variants/states/slots/tokens — mesmo schema de `GOVERNANCA_TOKENS.md`, aplicado a componente), com um gate obrigatório de aprovação do usuário **antes** de código e docs serem gerados (novos passos 6-7 do Caso 7). Motivação: artigo "Como preparei meu design system para ser lido por uma IA" (Mariana Queiroz, UX Collective) — metadados estruturados por componente, gerados antes da documentação, evitam que a IA documente por suposição e propague ambiguidade em escala. `CLAUDE.md` raiz atualizado (Seção "Estrutura de Cada Componente" e Seção 9 "Saída Esperada"); `scripts/sync-skill.mjs` passa a ler o `.metadata.json` de cada componente (quando existir) e incluir `useWhen`/`doNotUseWhen` no `COMPONENTES.md` auto-gerado; `ds-componente/SKILL.md` e a tabela de Slash Commands atualizados (5→6 arquivos). Regras críticas 13 ("Sempre Faça") e 10 ("Nunca Faça") adicionadas. **Correção no mesmo ciclo:** o bloco `figma` do schema ganhou o campo `componentKey` (identificador do componente publicado na library, usado para instanciar via `importComponentByKeyAsync` — diferente de `fileKey`/`nodeId`, que apontam para um nó específico dentro de um arquivo). Os 10 componentes retroativos (ver changelog de decisions/) foram atualizados com `fileKey`/`componentKey` reais lidos de `component-registry.json`; `nodeId` permanece vazio nesses 10 por não haver URL de origem registrada — preencher exigiria supor, o que o gate deste fluxo existe para evitar.
 **Mudanças v3.14:** `/ds-sync` executado — inventário de componentes da `design system (base)` sincronizado. Adicionados à seção "Inventário de Componentes": família Tabela (`Table`, `Table Column`, `Head`, `Simple Cell`, `Spreadsheet`), família Gráfico (`Bar`, `Chart Bar Up/Down/Variation` — nova categoria "Data Visualization"), `Paginator`, `Badge`, `Sort`, `Reorder`, `Loading`, `Overlay`, `Cookie`, `Logout`, `Profile`, `Dashboard`, `List`, `Task List`; `Avatar` e `Card` (já confirmados no `harnessCoverageCheck` mas ausentes desta lista) também adicionados. Corrigido: "Text Area" renomeado para "Input Paragraph" (mesmo componente, nome real confirmado no Figma). Nota histórica sobre ausência de `Paginator`/`pagination-*` em `GOVERNANCA_TOKENS.md` seção 9 marcada como resolvida — componente já existe. `figma-config.json` → `harnessCoverageCheck` atualizado com nova data de verificação. Nenhum componente previamente documentado foi removido.
