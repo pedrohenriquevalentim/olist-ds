@@ -1,3 +1,31 @@
+## v3.20 (2026-09-09)
+
+### Protocolo de Inicialização de Arquivo + Cover Rebrand Olist + Skill auto-contida para Caso 7
+
+**Arquivos modificados:** `SKILL.md`, `references/HARNEES_TELAS.md`, `references/FIGMA_CONFIG.md`  
+**Arquivo criado:** `references/METADATA_SCHEMA.md`
+
+#### Added
+- **Seção 0 — Protocolo de Inicialização de Arquivo** em `HARNEES_TELAS.md` (v1.6 → v2.0): 4 passos obrigatórios antes de qualquer frame — `create_new_file`, configuração das 3 páginas padrão, import de sentinels (Button + variável semântica), verificação via `get_libraries` + `get_variable_defs`
+- **Layout oficial do cover** (referência `HeyN4w209HWh8rfpTDiwyf` node `10942:33207`): 1920×960px, fundo `#f2f0e8`, 5 campos dinâmicos com resolução automática — `{NOME DO USUÁRIO}` (primeiro nome do operador, CAIXA ALTA), `{nome do projeto}` (title case, máx 45 chars), `{unidade de negócio}` (detectado do contexto), `{status}` (default "Em exploração"), `{ano atual}` (YYYY). Pill "DESIGN TEAM" verde `#779e3d`, pill do designer dark navy `#001647` em x=590 y=150
+- **`references/METADATA_SCHEMA.md`** (novo): schema completo do `NomeComponente.metadata.json` para o Caso 7 (`/ds-componente`) — elimina dependência do `CLAUDE.md` raiz do repositório `olist-ds`; skill passa a ser auto-contida para geração de componentes
+- **Gate Obrigatório item [0]** em `HARNEES_TELAS.md`: "Protocolo de Inicialização (Seção 0) concluído — arquivo criado, páginas configuradas, sentinel importado, `get_libraries` e `get_variable_defs` passando?" — **BLOQUEANTE**
+- **`FIGMA_CONFIG.md`** checklist: 2 novos itens — validação de `libraryKey` via `get_libraries` e confirmação de `get_variable_defs` pós-sentinel
+- **`SKILL.md`** "Sempre Faça" item 14: executar Protocolo de Inicialização antes de qualquer `use_figma`
+- **`SKILL.md`** "Nunca Faça" item 19: criar frames sem protocolo de inicialização concluído
+- **`SKILL.md`** Caso 5 PRÉ-FLIGHT: `get_variable_defs` no arquivo DS confirma 3 coleções antes de criar tokens
+
+#### Changed
+- **Caso 4**: passo 8 (inicialização) adicionado; passos renumerados 9–11; fallback distingue "library inacessível" (PARAR) de "componente genuinamente ausente" (usar primitivos)
+- **Caso 7** referência de schema: `CLAUDE.md` raiz → `references/METADATA_SCHEMA.md` + `decisions/technical/COMPONENTES_REACT.md`
+- **`HARNEES_TELAS.md`** Passo 2 reescrito com spec visual completa do cover: tabela de campos dinâmicos, tabela de elementos, implementação com caminho primário (componente DS real) + fallback (primitivos com spec exata)
+
+#### Fixed
+- **Gap crítico silencioso 1**: `importComponentByKeyAsync` falhava sem erro em arquivos novos/sem library subscrita — resolvido por sentinel obrigatório no Passo 3 da Seção 0
+- **Gap crítico silencioso 2**: `get_variable_defs` retornava vazio em arquivos novos, resultando em fills hardcoded em vez de tokens DS — resolvido pela verificação bloqueante no Passo 4
+
+---
+
 ## v3.19 (2026-08-29)
 
 ### Convenções de layout ERP — definidas e registradas
