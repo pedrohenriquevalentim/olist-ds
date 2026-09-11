@@ -2,7 +2,7 @@
 
 **Fonte:** Figma `design-system` · node `916:8864` ("all icons")
 **Gerado em:** 2026-09-11
-**Total de ícones:** 277 no Figma · 272 no componente `Icon`
+**Total de ícones:** 277 no Figma · 277 no componente `Icon`
 
 ---
 
@@ -86,7 +86,7 @@ Todos os 272 ícones do componente possuem ambas as variantes (`name` e `name-fi
 | `package-desktop-check` | `package-desktop-check-fill` |
 | `tag-desktop` | `tag-desktop-fill` |
 | `sales-check` | `sales-check-fill` |
-| `nf` | `nf-fill` · ⚠️ ausente no componente |
+| `nf` | `nf-fill` |
 | `tag-mobile` | `tag-mobile-fill` |
 | `graph-mobile` | `graph-mobile-fill` |
 | `package-mobile` | `package-mobile-fill` |
@@ -256,8 +256,8 @@ Todos os 272 ícones do componente possuem ambas as variantes (`name` e `name-fi
 | `t-shirt` | `t-shirt-fill` |
 | `spreadsheet` | `spreadsheet-fill` |
 | `calculator` | `calculator-fill` |
-| `sitemap_h` | `sitemap_h-fill` · ⚠️ ausente no componente |
-| `sitemap_v` | `sitemap_v-fill` · ⚠️ ausente no componente |
+| `sitemap_h` | `sitemap_h-fill` |
+| `sitemap_v` | `sitemap_v-fill` |
 | `mail-open` | `mail-open-fill` |
 | `dashboard` | `dashboard-fill` |
 | `handshake` | `handshake-fill` |
@@ -304,7 +304,7 @@ Todos os 272 ícones do componente possuem ambas as variantes (`name` e `name-fi
 | `copy-paste` | `copy-paste-fill` |
 | `sliders-tune` | `sliders-tune-fill` |
 | `url-link` | `url-link-fill` |
-| `url-unlink` | `url-unlink-fill` · ⚠️ ausente no componente |
+| `url-unlink` | `url-unlink-fill` |
 | `loading` | `loading-fill` |
 | `circle` | `circle-fill` |
 | `update` | `update-fill` |
@@ -349,7 +349,7 @@ Todos os 272 ícones do componente possuem ambas as variantes (`name` e `name-fi
 | `collapse` | `collapse-fill` |
 | `close` | `close-fill` |
 | `check` | `check-fill` |
-| `layout-sidebar` | `layout-sidebar-fill` · ⚠️ ausente no componente |
+| `layout-sidebar` | `layout-sidebar-fill` |
 | `reorder` | `reorder-fill` |
 | `view-large` | `view-large-fill` |
 | `view-medium` | `view-medium-fill` |
@@ -397,16 +397,6 @@ Todos os 272 ícones do componente possuem ambas as variantes (`name` e `name-fi
 
 ---
 
-## Ícones ausentes no componente (5)
+## Cobertura
 
-Existem no Figma mas ainda não foram exportados para `src/assets/icons/svgs/`:
-
-| Nome | Categoria |
-|---|---|
-| `nf` | sales |
-| `url-unlink` | actions |
-| `layout-sidebar` | dashboard |
-| `sitemap_h` | objects |
-| `sitemap_v` | objects |
-
-Para adicioná-los: exporte os SVGs do Figma (node `916:8864`), salve em `src/assets/icons/svgs/` seguindo a convenção `nome-off.svg` / `nome-on.svg`, então execute `npm run generate:icons`.
+Todos os 277 ícones do Figma estão presentes no componente `Icon`. Catálogo 100% sincronizado em 2026-09-11.
