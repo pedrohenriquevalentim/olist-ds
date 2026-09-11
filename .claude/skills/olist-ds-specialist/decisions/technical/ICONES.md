@@ -51,6 +51,17 @@ export const Button = ({ icon, children, ...props }: ButtonProps) => (
 - Se o MCP retornar URL `localhost` para um SVG, usar diretamente — nunca substituir por placeholder
 - Armazenar em `src/assets/` ou inline como componente React em `src/components/ui/icons/`
 
+### Catálogo obrigatório ao gerar telas e componentes
+
+**Ao gerar qualquer tela ou componente que use ícones, consulte SEMPRE o catálogo:**
+`references/ICONES_CATALOGO.md`
+
+Regras:
+1. Use `<Icon name="nome-exato" />` com um nome presente no catálogo
+2. Nunca invente nomes — se não encontrar o ícone ideal no catálogo, escolha o mais próximo semanticamente
+3. Nunca gere SVG inline em telas — o SVG fica dentro do componente `Icon`
+4. Ícones marcados com ⚠️ no catálogo ainda não estão no componente — use uma alternativa disponível
+
 ### Declaração de tipo para `.svg`
 
 O arquivo `src/css-modules.d.ts` deve conter:
