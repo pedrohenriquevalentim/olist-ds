@@ -14,7 +14,7 @@ Cada decisão referencia o arquivo da skill que governa os detalhes completos.
 |---|---|---|
 | [technical/TOKENS.md](technical/TOKENS.md) | Uso de tokens CSS — regras de consumo | `references/CORES.md`, `references/TIPOGRAFIA.md`, `references/ESPACAMENTO.md` |
 | [technical/COMPONENTES_REACT.md](technical/COMPONENTES_REACT.md) | Convenções de componentes React | `references/COMPONENTES.md`, `references/MAPA_FONTES.md` |
-| [technical/ICONES.md](technical/ICONES.md) | Gerenciamento de ícones e assets SVG | `references/COMPONENTES.md` |
+| [technical/ICONES.md](technical/ICONES.md) | Gerenciamento de ícones e assets SVG | `references/COMPONENTES.md`, **`references/ICONES_CATALOGO.md`** |
 | [technical/ACESSIBILIDADE.md](technical/ACESSIBILIDADE.md) | Regras de acessibilidade (W3C/WCAG) | `references/CHECKLIST_REVISAO.md` |
 | [technical/ASSETS_FIGMA.md](technical/ASSETS_FIGMA.md) | Assets via Figma MCP | `references/FIGMA_CONFIG.md`, `figma-config.json` |
 
@@ -46,4 +46,4 @@ Exemplo:
 
 ---
 
-**Última atualização:** 2026-09-07 — skill v3.19
+**Última atualização:** 2026-09-11 — catálogo de ícones adicionado (`references/ICONES_CATALOGO.md`)
