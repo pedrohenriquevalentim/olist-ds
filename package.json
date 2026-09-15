@@ -1,6 +1,6 @@
 {
   "name": "@pedrohenriquevalentim/olist-ds",
-  "version": "1.0.76",
+  "version": "1.0.77",
   "description": "Olist Design System — componentes React + tokens",
   "workspaces": [
     "packages/*"
@@ -29,6 +29,7 @@
   },
   "scripts": {
     "validate:icons": "node scripts/validate-icon-migration.mjs",
+    "validate:tokens": "node scripts/validate-tokens.mjs",
     "sync:skill": "node scripts/sync-skill.mjs",
     "build:tokens": "npm run build --workspace=packages/design-tokens && node scripts/copy-tokens.mjs",
     "build:tokens:sd": "npm run build:sd --workspace=packages/design-tokens",
@@ -48,7 +49,7 @@
     "build-storybook": "storybook build",
     "lint": "eslint src/",
     "prepublishOnly": "npm run build",
-    "pipeline": "npm run build:tokens && npm run generate:all && npm run lint && tsc --noEmit && npm run test:run && npm run build-storybook",
+    "pipeline": "npm run build:tokens && npm run generate:all && npm run lint && npm run validate:tokens && tsc --noEmit && npm run test:run && npm run build-storybook",
     "version:skill": "node scripts/version-skill.mjs",
     "release": "node scripts/release.mjs",
     "mcp:figma": "figma-mcp",

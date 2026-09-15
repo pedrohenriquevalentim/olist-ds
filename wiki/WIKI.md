@@ -1,8 +1,8 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.76`  
-**Skill:** v3.19  
-**Última atualização:** 2026-09-07  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.77`  
+**Skill:** v3.21  
+**Última atualização:** 2026-09-15  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -33,11 +33,11 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Métrica | Valor |
 |---|---|
 | Componentes | 14 |
-| Ícones SVG | 550 |
-| Arquivos da Skill | 23 |
+| Ícones SVG | 556 |
+| Arquivos da Skill | 25 |
 | Arquivos Figma permitidos | 1 |
-| Versão npm | 1.0.76 |
-| Versão skill | 3.19 |
+| Versão npm | 1.0.77 |
+| Versão skill | 3.21 |
 
 ## Componentes
 
@@ -104,6 +104,7 @@ npm run release
 | Comando | Executa |
 |---|---|
 | `npm run validate:icons` | `node scripts/validate-icon-migration.mjs` |
+| `npm run validate:tokens` | `node scripts/validate-tokens.mjs` |
 | `npm run sync:skill` | `node scripts/sync-skill.mjs` |
 | `npm run build:tokens` | `npm run build --workspace=packages/design-tokens && node ...` |
 | `npm run build:tokens:sd` | `npm run build:sd --workspace=packages/design-tokens` |
@@ -134,11 +135,11 @@ npm run release
 
 ## Skill Claude
 
-### Versão: v3.19
+### Versão: v3.21
 
 **Localização:** `.claude/skills/olist-ds-specialist/`
 
-### Arquivos da Skill (23 total)
+### Arquivos da Skill (25 total)
 
 **Raiz (6):**
 - `CHANGELOG.md`
@@ -148,7 +149,7 @@ npm run release
 - `component-registry.json`
 - `figma-config.json`
 
-**Referências (17):**
+**Referências (19):**
 - `CHECKLIST_REVISAO.md`
 - `COMPONENTES.md`
 - `CORES.md`
@@ -157,7 +158,9 @@ npm run release
 - `GLOSSARIO_PAPEIS_TEXTO.md`
 - `GOVERNANCA_TOKENS.md`
 - `HARNEES_TELAS.md`
+- `ICONES_CATALOGO.md`
 - `MAPA_FONTES.md`
+- `METADATA_SCHEMA.md`
 - `PADROES.md`
 - `SDD_AVANCADO.md`
 - `SDD_PARA_TELA.md`
@@ -171,7 +174,7 @@ npm run release
 
 **Auto-gerados** (por `npm run build`): COMPONENTES.md, MAPA_FONTES.md, VISAO_GERAL.md (parcial)
 
-**Manuais** (não são sobrescritos): CHECKLIST_REVISAO.md, CORES.md, ESPACAMENTO.md, FIGMA_CONFIG.md, GLOSSARIO_PAPEIS_TEXTO.md, GOVERNANCA_TOKENS.md, HARNEES_TELAS.md, PADROES.md, SDD_AVANCADO.md, SDD_PARA_TELA.md, TEMPLATES_PRODUTO.md, TIPOGRAFIA.md, TOKEN_CATALOG.md, UX_WRITING.md, VISAO_GERAL.md
+**Manuais** (não são sobrescritos): CHECKLIST_REVISAO.md, CORES.md, ESPACAMENTO.md, FIGMA_CONFIG.md, GLOSSARIO_PAPEIS_TEXTO.md, GOVERNANCA_TOKENS.md, HARNEES_TELAS.md, ICONES_CATALOGO.md, METADATA_SCHEMA.md, PADROES.md, SDD_AVANCADO.md, SDD_PARA_TELA.md, TEMPLATES_PRODUTO.md, TIPOGRAFIA.md, TOKEN_CATALOG.md, UX_WRITING.md, VISAO_GERAL.md
 
 ### Como Usar — Slash Commands
 
@@ -205,7 +208,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 2. Customize → Skills → Upload → selecionar pasta da skill
 3. Iniciar conversa e usar um dos slash commands acima
 
-### Regras Críticas v3.19
+### Regras Críticas v3.21
 
 ### ✅ Sempre Faça:
 
@@ -237,6 +240,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 11. **Valores válidos de `counterAxisAlignItems`:** `MIN` `MAX` `CENTER` `BASELINE` (sem STRETCH, sem END)
 12. **Consulte `GOVERNANCA_TOKENS.md` ao escolher entre tokens semânticos parecidos** (mesma cor final, famílias/estados diferentes) — não escolha só pelo valor resolvido
 13. **No Caso 7, gere e obtenha aprovação do `NomeComponente.metadata.json` ANTES de gerar código ou docs** — é a fonte mais estruturada sobre o componente; documentar antes dele é documentar por suposição
+14. **Em qualquer operação Figma que crie frames, execute o Protocolo de Inicialização de Arquivo (HARNEES_TELAS.md — Seção 0) antes de qualquer `use_figma`** — cria o arquivo, configura as páginas padrão (☀️ Bom dia · Cover · Telas) e garante a library subscrita com variáveis acessíveis
 
 ### ❌ Nunca Faça:
 
@@ -265,7 +269,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 
 ```
 src/components/Icon/     → Componente React
-src/assets/icons/svgs/   → 550 SVGs (24px, Outline, currentColor)
+src/assets/icons/svgs/   → 556 SVGs (24px, Outline, currentColor)
 ```
 
 ### Uso
@@ -346,6 +350,7 @@ echo '.claude/figma-config.json' >> .gitignore
 - `sync-skill-meta.mjs`
 - `sync-skill.mjs`
 - `validate-icon-migration.mjs`
+- `validate-tokens.mjs`
 - `version-skill.mjs`
 
 ### Principais
@@ -419,10 +424,38 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 1. `.claude/figma-config.json` existe?
 2. `searchPriority` tem os libraryKeys corretos?
-3. Skill v3.19 instalada?
+3. Skill v3.21 instalada?
 4. O prompt inclui instrução para ler `figma-config.json` antes do Figma MCP?
 
 ## Changelog
+
+## v3.20 (2026-09-09)
+
+### Protocolo de Inicialização de Arquivo + Cover Rebrand Olist + Skill auto-contida para Caso 7
+
+**Arquivos modificados:** `SKILL.md`, `references/HARNEES_TELAS.md`, `references/FIGMA_CONFIG.md`  
+**Arquivo criado:** `references/METADATA_SCHEMA.md`
+
+#### Added
+- **Seção 0 — Protocolo de Inicialização de Arquivo** em `HARNEES_TELAS.md` (v1.6 → v2.0): 4 passos obrigatórios antes de qualquer frame — `create_new_file`, configuração das 3 páginas padrão, import de sentinels (Button + variável semântica), verificação via `get_libraries` + `get_variable_defs`
+- **Layout oficial do cover** (referência `HeyN4w209HWh8rfpTDiwyf` node `10942:33207`): 1920×960px, fundo `#f2f0e8`, 5 campos dinâmicos com resolução automática — `{NOME DO USUÁRIO}` (primeiro nome do operador, CAIXA ALTA), `{nome do projeto}` (title case, máx 45 chars), `{unidade de negócio}` (detectado do contexto), `{status}` (default "Em exploração"), `{ano atual}` (YYYY). Pill "DESIGN TEAM" verde `#779e3d`, pill do designer dark navy `#001647` em x=590 y=150
+- **`references/METADATA_SCHEMA.md`** (novo): schema completo do `NomeComponente.metadata.json` para o Caso 7 (`/ds-componente`) — elimina dependência do `CLAUDE.md` raiz do repositório `olist-ds`; skill passa a ser auto-contida para geração de componentes
+- **Gate Obrigatório item [0]** em `HARNEES_TELAS.md`: "Protocolo de Inicialização (Seção 0) concluído — arquivo criado, páginas configuradas, sentinel importado, `get_libraries` e `get_variable_defs` passando?" — **BLOQUEANTE**
+- **`FIGMA_CONFIG.md`** checklist: 2 novos itens — validação de `libraryKey` via `get_libraries` e confirmação de `get_variable_defs` pós-sentinel
+- **`SKILL.md`** "Sempre Faça" item 14: executar Protocolo de Inicialização antes de qualquer `use_figma`
+- **`SKILL.md`** "Nunca Faça" item 19: criar frames sem protocolo de inicialização concluído
+- **`SKILL.md`** Caso 5 PRÉ-FLIGHT: `get_variable_defs` no arquivo DS confirma 3 coleções antes de criar tokens
+
+#### Changed
+- **Caso 4**: passo 8 (inicialização) adicionado; passos renumerados 9–11; fallback distingue "library inacessível" (PARAR) de "componente genuinamente ausente" (usar primitivos)
+- **Caso 7** referência de schema: `CLAUDE.md` raiz → `references/METADATA_SCHEMA.md` + `decisions/technical/COMPONENTES_REACT.md`
+- **`HARNEES_TELAS.md`** Passo 2 reescrito com spec visual completa do cover: tabela de campos dinâmicos, tabela de elementos, implementação com caminho primário (componente DS real) + fallback (primitivos com spec exata)
+
+#### Fixed
+- **Gap crítico silencioso 1**: `importComponentByKeyAsync` falhava sem erro em arquivos novos/sem library subscrita — resolvido por sentinel obrigatório no Passo 3 da Seção 0
+- **Gap crítico silencioso 2**: `get_variable_defs` retornava vazio em arquivos novos, resultando em fills hardcoded em vez de tokens DS — resolvido pela verificação bloqueante no Passo 4
+
+---
 
 ## v3.19 (2026-08-29)
 
@@ -581,4 +614,4 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ---
 
-*Gerado automaticamente em 2026-09-07 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-09-15 por `generate-wiki.mjs`. Não edite manualmente.*

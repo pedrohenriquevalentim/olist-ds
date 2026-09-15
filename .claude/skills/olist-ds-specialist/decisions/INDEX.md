@@ -46,4 +46,4 @@ Exemplo:
 
 ---
 
-**Última atualização:** 2026-09-11 — catálogo de ícones adicionado (`references/ICONES_CATALOGO.md`)
+**Última atualização:** 2026-09-15 — skill v3.21

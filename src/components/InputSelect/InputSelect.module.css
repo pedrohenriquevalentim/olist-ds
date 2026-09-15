@@ -346,10 +346,10 @@
 
 .listItemLabel {
   font-family: var(--font-family-jakarta), sans-serif;
-  font-size: var(--list-list-item-font-size-default);
-  font-weight: var(--list-list-item-font-weight-default, 400);
-  line-height: var(--list-list-item-line-height-default);
-  color: var(--list-list-item-font-color-enabled);
+  font-size: var(--list-list-item-font-font-size-label);
+  font-weight: var(--list-list-item-font-font-weight-label);
+  line-height: var(--list-list-item-font-line-height-label);
+  color: var(--list-list-item-font-font-color-enabled);
   font-feature-settings: 'ss03' 1;
   flex: 1;
   overflow: hidden;
@@ -358,11 +358,11 @@
 }
 
 .listItemSelected .listItemLabel {
-  color: var(--list-list-item-font-color-selected);
+  color: var(--list-list-item-font-font-color-selected);
 }
 
 .listItemDisabled .listItemLabel {
-  color: var(--list-list-item-font-color-disabled);
+  color: var(--list-list-item-font-font-color-disabled);
 }
 
 /* ── Checkbox visual (multi select) ─────────────────────────────────────────
@@ -424,10 +424,10 @@
 .emptyMessage {
   padding: var(--list-list-item-spacing-padding);
   font-family: var(--font-family-jakarta), sans-serif;
-  font-size: var(--list-list-item-font-size-default);
-  font-weight: var(--list-list-item-font-weight-default, 400);
-  line-height: var(--list-list-item-line-height-default);
-  color: var(--list-list-item-font-color-disabled);
+  font-size: var(--list-list-item-font-font-size-label);
+  font-weight: var(--list-list-item-font-font-weight-label);
+  line-height: var(--list-list-item-font-line-height-label);
+  color: var(--list-list-item-font-font-color-disabled);
   text-align: center;
 }
 

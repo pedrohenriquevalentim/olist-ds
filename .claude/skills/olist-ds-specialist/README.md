@@ -1,4 +1,4 @@
-# Olist Design System — Especialista (v3.20 · atualizado em 2026-09-09)
+# Olist Design System — Especialista (v3.21 · atualizado em 2026-09-15)
 
 Skill corporativa para criação de telas, componentes e protótipos a partir de SDDs/PRDs usando o design system da Olist.
 
@@ -101,20 +101,21 @@ olist-ds-specialist/
     ├── FIGMA_CONFIG.md                 # libraryKeys, workflow de busca e import
     ├── GLOSSARIO_PAPEIS_TEXTO.md       # 10 papéis de texto (Heading, Label, Error, etc.)
     ├── GOVERNANCA_TOKENS.md
-    ├── HARNEES_TELAS.md                # Gate pré-construção: Seção 0 (init), restrições por zona, limites por componente
+    ├── HARNEES_TELAS.md                # Gate pré-construção: restrições por zona, limites por componente
+    ├── ICONES_CATALOGO.md
     ├── MAPA_FONTES.md                  # Estrutura de pastas do repositório (auto-gerado)
+    ├── METADATA_SCHEMA.md
     ├── PADROES.md                      # 5 padrões de página (Tabela, Form, Dashboard, Detalhe, Config)
     ├── SDD_AVANCADO.md                 # RNFs, DACI, Métricas, Rollout, Observabilidade → UI
     ├── SDD_PARA_TELA.md                # 10 passos para traduzir SDD/PRD em decisões de UI
     ├── TEMPLATES_PRODUTO.md            # Zonas de layout por produto (ERP, Envios, Hub, CD)
     ├── TIPOGRAFIA.md                   # Tokens de tipografia (tamanho, peso, altura)
-    ├── METADATA_SCHEMA.md              # Schema do NomeComponente.metadata.json (Caso 7 — auto-contido)
     ├── TOKEN_CATALOG.md
     ├── UX_WRITING.md                   # Tom de voz, 4 pilares, 12 tipos de texto, diretrizes B2B/B2C
     └── VISAO_GERAL.md                  # Mapa de navegação — leia sempre primeiro
 ```
 
-> **Raiz:** 6 arquivo(s) · **Decisions:** 13 arquivo(s) · **Referências:** 18 arquivo(s) · **Total:** 37 arquivo(s) — atualizado em 2026-09-09
+> **Raiz:** 6 arquivo(s) · **Decisions:** 13 arquivo(s) · **Referências:** 19 arquivo(s) · **Total:** 38 arquivo(s) — atualizado em 2026-09-15 pelo `sync-skill-meta.mjs`
 ## Libraries do Figma (ordem de prioridade)
 
 | # | Library | Conteúdo |
@@ -161,6 +162,9 @@ Use $olist-ds-specialist para criar UI no Figma:
 ```
 
 ## Changelog
+
+### v3.21 (2026-09-15)
+- Versão 3.21
 
 ### v3.20 (2026-09-09)
 - Protocolo de Inicialização de Arquivo (Seção 0) + cover rebrand Olist + `METADATA_SCHEMA.md` criado (Caso 7 auto-contido) — ver `CHANGELOG.md` para detalhes
