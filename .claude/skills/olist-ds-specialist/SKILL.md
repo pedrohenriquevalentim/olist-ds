@@ -1,11 +1,11 @@
 ---
 name: olist-ds-specialist
 description: Use esta skill para TODO trabalho de UI/UX da Olist — criação de telas a partir de SDDs/PRDs, geração de componentes React, revisão de consistência visual, criação de protótipos no Figma, manutenção do design system e criação/revisão de textos de UI (UX Writing, copy, tom de voz). Acione quando alguém mencionar interface Olist, design system, tokens, componentes, telas, layouts, SDD, PRD, protótipo, wireframe, Figma, Storybook, copy, texto de botão, mensagem de erro, empty state, toast, label, placeholder ou qualquer tarefa de criação ou revisão de UI/copy para produtos Olist. NÃO use para backend, APIs, banco de dados, autenticação ou lógica de negócio sem relação com UI.
-version: 3.20
-lastModified: 2026-09-09
+version: 3.21
+lastModified: 2026-09-15
 ---
 
-# Olist Design System — Especialista v3.20 · 2026-09-09
+# Olist Design System — Especialista v3.21 · 2026-09-15
 
 ## Slash Commands
 
@@ -155,79 +155,16 @@ Ler decisions/INDEX.md (verificar decisões ativas que se aplicam à tarefa)
     ↓
 Qual tipo de tarefa?
     │
-    ├── Criar ou evoluir componente no Figma (/ds-construir)
-    │   → Ler figma-config.json
-    │   → Ler CORES.md + TIPOGRAFIA.md + ESPACAMENTO.md + GOVERNANCA_TOKENS.md
-    │   → Detectar modo: NOVO (intenção textual) ou EVOLUÇÃO (URL Figma fornecida)
-    │   → Auditoria de tokens: get_variable_defs → mapear propriedades necessárias
-    │     → Para cada propriedade: percorrer base tokens → theme tokens → component tokens
-    │     → Criar tokens faltantes na coleção certa antes de qualquer nó
-    │   → Gate 1: exibir plano de tokens (criar / reutilizar) → aguardar aprovação
-    │   → Construir component set no Figma com Auto Layout + bind de variáveis
-    │   → Organizar grade de variantes (colunas = dimensão semântica A, linhas = dimensão B)
-    │   → Gate 2: get_screenshot → validação visual → aguardar confirmação
-    │
-    ├── Criar tela no Figma (workflow principal)
-    │   → Ler FIGMA_CONFIG.md (identifiers, libraries)
-    │   → Ler TEMPLATES_PRODUTO.md (zonas de layout por produto)
-    │   → Ler HARNEES_TELAS.md (Seção 0 + gate pré-construção)
-    │   → Ler SDD_PARA_TELA.md + SDD_AVANCADO.md (se aplicável)
-    │   → Ler GLOSSARIO_PAPEIS_TEXTO.md (nomenclatura de layers)
-    │   → Ler CORES.md + TIPOGRAFIA.md + ESPACAMENTO.md
-    │   → Executar Seção 0 do HARNEES_TELAS.md (criar arquivo, páginas, subscrever library)
-    │   → Listar todas as telas → aguardar validação
-    │   → Para cada tela validada: executar gate obrigatório (itens 1–7)
-    │   → Para cada tela validada:
-    │     1. search_design_system(componentes necessários, includeLibraryKeys: searchPriority)
-    │     2. importComponentSetByKeyAsync(componentKey) → instâncias reais
-    │     3. use_figma → montar frame com fills/strokes/tokens reais
-    │     4. get_design_context → screenshot → validação visual
-    │     5. Aguardar feedback → próxima tela
-    │
-    ├── Criar tela a partir de SDD/PRD básico (React)
-    │   → Ler SDD_PARA_TELA.md (passos 1-7)
-    │   → Ler GLOSSARIO_PAPEIS_TEXTO.md (nomear textos)
-    │   → Buscar COMPONENTES.md atualizado do GitHub (ver seção "Fonte dos Componentes React")
-    │   → Ler PADROES.md + MAPA_FONTES.md
-    │
-    ├── Criar tela a partir de SDD/PRD completo (React)
-    │   → Ler SDD_PARA_TELA.md (passos 1-10)
-    │   → Ler SDD_AVANCADO.md (RNFs, DACI, Métricas, Rollout, Observabilidade)
-    │   → Ler GLOSSARIO_PAPEIS_TEXTO.md (nomear textos)
-    │   → Buscar COMPONENTES.md atualizado do GitHub (ver seção "Fonte dos Componentes React")
-    │   → Ler PADROES.md + MAPA_FONTES.md
-    │
-    ├── Implementar componente a partir do Figma (fluxo unificado — ver Caso 7)
-    │   → Extrair fileKey e nodeId da URL do Figma
-    │   → get_metadata(nodeId) → mapear variantes, props e structure
-    │   → get_design_context(nodeId) → extrair props completas, tokens, estados
-    │   → get_screenshot → referência visual
-    │   → [PARALELO]
-    │     ├── Gerar 6 arquivos de código (ver CLAUDE.md — Estrutura de Componente)
-    │     └── Gerar frame "📄 Docs — NomeComponente" na mesma section do Figma
-    │           (demo · props · anatomia · acessibilidade)
-    │   → Aguardar feedback
-    │
-    ├── Criar ou revisar textos de UI (copy/UX Writing)
-    │   → Ler UX_WRITING.md (protocolo obrigatório: componente → contexto → objetivo)
-    │   → Validar contra Os 4 Pilares (Conciso, Claro, Significativo, Dialógico)
-    │   → Aplicar regras por tipo de texto (CTA, Label, Helper, Erro, Toast, etc.)
-    │   → Verificar tom correto: B2B (lojista) ou B2C (consumidor)
-    │   → Verificar nomenclatura de produtos Olist + abrasileiramento
-    │
-    ├── Revisar tela existente
-    │   → Ler CHECKLIST_REVISAO.md (inclui seção 10 — UX Writing)
-    │   → Ler GLOSSARIO_PAPEIS_TEXTO.md + UX_WRITING.md
-    │   → Ler MAPA_FONTES.md
-    │
-    ├── Gerar manifesto de handoff de jornada (Caso 9 — ver `/ds-handoff`)
-    │   → get_metadata em cada link recebido → resolver telas da jornada
-    │   → Para cada tela: get_design_context → comparar com COMPONENTES.md
-    │   → Agregar componentes usados + gaps entre todas as telas
-    │   → Entregar Markdown (sem gerar código, sem commitar)
-    │
-    └── Gerar testes/stories
-        → Ler COMPONENTES.md + MAPA_FONTES.md
+    ├── Criar ou evoluir componente no Figma  → Caso 5
+    ├── Criar tela no Figma                   → Caso 4
+    ├── Criar tela React (SDD básico)         → Caso 1
+    ├── Criar tela React (SDD completo)       → Caso 2
+    ├── Implementar componente do Figma       → Caso 7
+    ├── Converter tela Figma em código        → Caso 8
+    ├── Criar ou revisar textos de UI         → UX_WRITING.md (contexto dos Casos 1–4)
+    ├── Revisar tela existente                → Caso 3
+    ├── Gerar manifesto de handoff            → Caso 9
+    └── Gerar testes/stories                  → COMPONENTES.md + MAPA_FONTES.md
 ```
 
 ## Comportamento Esperado
@@ -339,7 +276,6 @@ Qual tipo de tarefa?
 16. **Montar tabelas com frames primitivos ou sub-componentes isolados** (`head`, `simple cell`) — usar `TableCellExtended` (`8ba1fe2c9d32e56a058c3946e17142223784c557`) como unidade construtiva obrigatória na Zona E
 17. **Omitir `padding: 8px` no frame raiz ERP** — o frame raiz (`1366×768`) deve ter `padding: 8px` em todos os lados e `gap: 8px` entre Zona A e Container
 18. **Usar `#fcfbf8` como `fills` do frame raiz** — o frame raiz tem `fills: #F1F0E8`; `#fcfbf8` é o fundo do Container (Zonas B–F)
-19. **Iniciar criação de frames no Figma sem executar o Protocolo de Inicialização de Arquivo (HARNEES_TELAS.md — Seção 0)** — sem inicialização, a library pode não estar subscrita e `get_variable_defs` pode retornar vazio, resultando em fills hardcoded e falhas silenciosas em `importComponentByKeyAsync`
 
 ## Casos de Uso v3.16
 
@@ -769,8 +705,9 @@ Erros comuns e suas correções — manter para evitar regressão:
 
 ---
 
-**Versão:** 3.20
-**Última atualização:** 2026-09-09
+**Versão:** 3.21
+**Última atualização:** 2026-09-15
+**Mudanças v3.21:** Ramos do Fluxo de Decisão simplificados — cada branch agora aponta para o Caso correspondente em vez de repetir os passos já detalhados nos Casos de Uso (~55 linhas removidas). "Nunca Faça" item 19 removido por ser duplicata exata do "Sempre Faça" item 14. Ambas as mudanças reduzem redundância sem perda de informação; o conteúdo canônico permanece nos Casos de Uso.
 **Mudanças v3.20:** Protocolo de Inicialização de Arquivo adicionado como etapa obrigatória para todos os casos Figma (4, 5). Em vez de verificar se a library está subscrita num arquivo existente, o agente agora sempre cria um arquivo novo via `create_new_file`, configura as páginas padrão (☀️ Bom dia · Cover · Telas), importa sentinels de componente (Button) e variável semântica da `design system (base)`, e verifica via `get_libraries` + `get_variable_defs` antes de qualquer frame. Este protocolo está documentado em `HARNEES_TELAS.md` Seção 0 e referenciado como Gate item [0] (BLOQUEANTE). Caso 4 renumerado (passos 8→11). Caso 5 ganha bloco PRÉ-FLIGHT com verificação das 3 coleções de tokens. "Nunca Faça" item 19 adicionado. "Sempre Faça" item 14 adicionado. `FIGMA_CONFIG.md` checklist expandido com validação de `libraryKey` e verificação pós-sentinel. Caso 7 desacopla do `CLAUDE.md` raiz: schema do `metadata.json` migrado para `references/METADATA_SCHEMA.md` (skill auto-contida). Referência a CLAUDE.md substituída por `references/METADATA_SCHEMA.md` + `decisions/technical/COMPONENTES_REACT.md`.
 **Mudanças v3.16:** Caso 5 reformulado — substituído o fallback inline "componente não encontrado" por um caso de uso próprio com slash command `/ds-construir`. O Caso 5 cobre criação de componentes do zero e evolução de componentes existentes no Figma, ambos com a mesma disciplina de token-first: auditoria via `get_variable_defs`, decisão tree base→theme→component, gate de aprovação do plano de tokens antes de qualquer nó, construção com Auto Layout e bind de variáveis, e gate de screenshot ao final. Inclui regras explícitas de bind (fills via boundVariables no objeto paint, layout via setBoundVariable, tipografia via textStyleId) e armadilhas conhecidas (minHeight/maxHeight antes de resize). O conteúdo anterior do Caso 5 foi absorvido como nota no passo 9 do Caso 4 com referência ao novo Caso 5. Fluxo de Decisão e tabela de Slash Commands atualizados.
 **Mudanças v3.15:** Caso 7 (`/ds-componente`) passa a gerar um sexto arquivo, `NomeComponente.metadata.json` (purpose/useWhen/doNotUseWhen/pairsWith/note/variants/states/slots/tokens — mesmo schema de `GOVERNANCA_TOKENS.md`, aplicado a componente), com um gate obrigatório de aprovação do usuário **antes** de código e docs serem gerados (novos passos 6-7 do Caso 7). Motivação: artigo "Como preparei meu design system para ser lido por uma IA" (Mariana Queiroz, UX Collective) — metadados estruturados por componente, gerados antes da documentação, evitam que a IA documente por suposição e propague ambiguidade em escala. `CLAUDE.md` raiz atualizado (Seção "Estrutura de Cada Componente" e Seção 9 "Saída Esperada"); `scripts/sync-skill.mjs` passa a ler o `.metadata.json` de cada componente (quando existir) e incluir `useWhen`/`doNotUseWhen` no `COMPONENTES.md` auto-gerado; `ds-componente/SKILL.md` e a tabela de Slash Commands atualizados (5→6 arquivos). Regras críticas 13 ("Sempre Faça") e 10 ("Nunca Faça") adicionadas. **Correção no mesmo ciclo:** o bloco `figma` do schema ganhou o campo `componentKey` (identificador do componente publicado na library, usado para instanciar via `importComponentByKeyAsync` — diferente de `fileKey`/`nodeId`, que apontam para um nó específico dentro de um arquivo). Os 10 componentes retroativos (ver changelog de decisions/) foram atualizados com `fileKey`/`componentKey` reais lidos de `component-registry.json`; `nodeId` permanece vazio nesses 10 por não haver URL de origem registrada — preencher exigiria supor, o que o gate deste fluxo existe para evitar.
