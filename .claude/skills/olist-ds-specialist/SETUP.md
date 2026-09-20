@@ -81,7 +81,17 @@ seu-projeto/
 ├── .claude/
 │   └── skills/
 │       └── olist-ds-specialist/
-│           ├── SKILL.md
+│           ├── SKILL.md                  # Dispatcher: slash commands e roteamento
+│           ├── globals.md                # Invariantes compartilhados entre casos
+│           ├── cases/                    # Passos detalhados por caso de uso
+│           │   ├── caso-1-2-tela-react.md
+│           │   ├── caso-3-revisar.md
+│           │   ├── caso-4-figma.md
+│           │   ├── caso-5-construir.md
+│           │   ├── caso-6-sync.md
+│           │   ├── caso-7-componente.md
+│           │   ├── caso-8-implementar.md
+│           │   └── caso-9-handoff.md
 │           ├── README.md
 │           ├── SETUP.md
 │           ├── CHANGELOG.md

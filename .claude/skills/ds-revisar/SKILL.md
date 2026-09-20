@@ -14,5 +14,6 @@ O usuário colou código ou um screenshot. Revise contra os padrões do DS.
 
 ## Passos obrigatórios
 
-1. Carregar a skill principal: ler `.claude/skills/olist-ds-specialist/SKILL.md`
-2. Executar o **Caso 3** dessa skill na íntegra
+1. Ler `.claude/skills/olist-ds-specialist/globals.md`
+2. Ler `.claude/skills/olist-ds-specialist/cases/caso-3-revisar.md`
+3. Executar o **Caso 3** na íntegra
