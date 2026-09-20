@@ -1,3 +1,37 @@
+## v3.21 (2026-09-20)
+
+### Dispatcher + globals.md + cases/ — redução de 65–75% nos tokens por invocação
+
+**Arquivos modificados:** `SKILL.md`  
+**Arquivos criados:** `globals.md`, `cases/caso-1-2-tela-react.md`, `cases/caso-3-revisar.md`, `cases/caso-4-figma.md`, `cases/caso-5-construir.md`, `cases/caso-6-sync.md`, `cases/caso-7-componente.md`, `cases/caso-8-implementar.md`, `cases/caso-9-handoff.md`  
+**Sub-skills atualizadas:** `ds-tela`, `ds-componente`, `ds-figma`, `ds-revisar`, `ds-sync`, `ds-handoff`, `ds-implementar`, `ds-construir`
+
+#### Motivação
+
+O `SKILL.md` original (726 linhas, 53 KB) era carregado integralmente em toda invocação de qualquer sub-skill. Um `/ds-tela` carregava as instruções do Caso 7, as regras do Caso 5, a tabela de Figma Plugin API e o changelog completo — nenhum deles relevante para gerar uma tela React. Cada invocação consumia ~746 linhas de contexto para usar no máximo 15% delas.
+
+#### Changed
+
+- **`SKILL.md`** reescrito como dispatcher puro (75 linhas): tabela de slash commands, fluxo de decisão, tabela de roteamento caso → arquivo, instrução de carregamento (`globals.md` + `cases/caso-N.md`). Sem conteúdo de caso inline.
+- **8 sub-skills** (`ds-*/SKILL.md`): substituem `ler SKILL.md principal` por `ler globals.md` + `ler cases/caso-N.md`.
+
+#### Added
+
+- **`globals.md`** (123 linhas): invariantes compartilhados — papel/escopo, regras de library Figma (`searchPriority`, `blockedLibraries`, filtro `.[base]`), inventário de componentes compacto, URL do COMPONENTES.md no GitHub, tabela de arquivos de referência, tabela de erros da Figma Plugin API, regras críticas do/don't.
+- **`cases/`** (8 arquivos, 428 linhas total): cada arquivo contém apenas os passos do caso correspondente — extração direta do SKILL.md anterior sem perda de conteúdo.
+
+#### Ganho por invocação (linhas carregadas)
+
+| Sub-skill | Antes | Depois | Redução |
+|---|---|---|---|
+| `/ds-tela` | 746 | 195 | 74% |
+| `/ds-figma` | 746 | 190 | 75% |
+| `/ds-componente` | 746 | 227 | 70% |
+| `/ds-construir` | 746 | 258 | 65% |
+| `olist-ds-specialist` (auto) | 726 | 314 (pior caso) | 57% |
+
+---
+
 ## v3.20 (2026-09-09)
 
 ### Protocolo de Inicialização de Arquivo + Cover Rebrand Olist + Skill auto-contida para Caso 7

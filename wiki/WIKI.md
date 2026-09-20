@@ -1,8 +1,8 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.77`  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.78`  
 **Skill:** v3.21  
-**Última atualização:** 2026-09-15  
+**Última atualização:** 2026-09-20  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -34,9 +34,9 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 |---|---|
 | Componentes | 14 |
 | Ícones SVG | 556 |
-| Arquivos da Skill | 25 |
+| Arquivos da Skill | 26 |
 | Arquivos Figma permitidos | 1 |
-| Versão npm | 1.0.77 |
+| Versão npm | 1.0.78 |
 | Versão skill | 3.21 |
 
 ## Componentes
@@ -139,15 +139,16 @@ npm run release
 
 **Localização:** `.claude/skills/olist-ds-specialist/`
 
-### Arquivos da Skill (25 total)
+### Arquivos da Skill (26 total)
 
-**Raiz (6):**
+**Raiz (7):**
 - `CHANGELOG.md`
 - `README.md`
 - `SETUP.md`
 - `SKILL.md`
 - `component-registry.json`
 - `figma-config.json`
+- `globals.md`
 
 **Referências (19):**
 - `CHECKLIST_REVISAO.md`
@@ -180,12 +181,12 @@ npm run release
 
 | Comando | Para quem | O que faz |
 |---|---|---|
-| `/ds-tela <sdd-ou-prd>` | Dev de BU | gera tela React a partir de SDD/PRD usando componentes DS |
+| `/ds-tela <sdd-ou-prd>` | Dev de BU | gera tela React a partir de SDD/PRD |
 | `/ds-figma <sdd-ou-prd>` | Designer/Dev | cria telas no Figma com instâncias reais do DS |
-| `/ds-construir <intenção-ou-figma-url>` | Mantenedor DS | cria ou evolui componente no Figma com arquitetura correta de tokens |
-| `/ds-implementar <figma-url>` | Dev de BU | converte tela Figma em JSX tipado usando componentes DS |
-| `/ds-handoff <figma-url(s)>` | Qualquer dev | gera manifesto Markdown de componentes DS usados numa jornada, para anexar em PR |
-| `/ds-componente <figma-url>` | Mantenedor DS | gera novo componente DS completo (6 arquivos + docs Figma) |
+| `/ds-construir <intenção-ou-figma-url>` | Mantenedor DS | cria ou evolui componente no Figma |
+| `/ds-implementar <figma-url>` | Dev de BU | converte tela Figma em JSX tipado |
+| `/ds-handoff <figma-url(s)>` | Qualquer dev | gera manifesto Markdown de handoff para PR |
+| `/ds-componente <figma-url>` | Mantenedor DS | gera componente DS completo (6 arquivos + docs Figma) |
 | `/ds-revisar + código ou screenshot` | Qualquer dev | revisa tela/código contra padrões do DS |
 | `/ds-sync` | Mantenedor DS | sincroniza inventário de componentes das libraries Figma |
 
@@ -210,58 +211,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 
 ### Regras Críticas v3.21
 
-### ✅ Sempre Faça:
-
-1. **Leia `VISAO_GERAL.md` primeiro** — é o mapa de navegação
-2. **Leia `decisions/INDEX.md` logo em seguida** — contém decisões de produto ativas que têm precedência sobre defaults. Leia os arquivos específicos apontados pelo INDEX que se aplicam à tarefa atual.
-3. **Leia `figma-config.json` antes de usar Figma MCP:**
-   - Use `searchPriority` como `includeLibraryKeys` em todo `search_design_system`
-   - `searchPriority` tem apenas `design system (base)` — única library de referência desde 2026-07-03 (hierarquia anterior de AI Components/ERP components/etc. foi descontinuada, dados preservados em `blockedLibraries`)
-   - Ignore resultados de `blockedLibraries`
-4. **Leia `HARNEES_TELAS.md` antes de criar qualquer frame no Figma:**
-   - Execute o gate pré-construção (Seção 1) — só avance com todos os itens marcados
-   - Verifique limites por tela (Seção 2) antes de instanciar componentes
-   - Identifique o padrão da Zona D (Seção 3) antes de montar o conteúdo
-   - Reporte conflitos com o harness antes de criar, nunca depois
-5. **Consulte `GLOSSARIO_PAPEIS_TEXTO.md` antes de nomear textos**
-   - Se o SDD diz "título da página" → use **Heading**
-   - Se o SDD diz "mensagem de erro" → use **Error**
-6. **Consulte `UX_WRITING.md` ao criar qualquer texto na UI:**
-   - Execute o protocolo de triagem (componente → contexto → objetivo)
-   - Valide contra Os 4 Pilares antes de finalizar qualquer copy
-   - Use a tabela de mapeamento SDD → Tipo de Texto para traduzir requisitos em copy
-7. **Leia `SDD_AVANCADO.md` se o SDD tiver:**
-   - Requisitos Não Funcionais (RNF), DACI, Métricas, Rollout, Observabilidade
-8. **Use os passos 1-10 de `SDD_PARA_TELA.md`** ao traduzir SDDs completos
-9. **No Figma, sempre use workflow faseado:**
-   - Liste todas as telas ANTES de criar → aguarde validação
-   - Crie tela por tela com `use_figma`, aguardando feedback a cada entrega
-10. **Sempre defina `layoutSizing` APÓS `appendChild`** (regra crítica da Figma Plugin API)
-11. **Valores válidos de `counterAxisAlignItems`:** `MIN` `MAX` `CENTER` `BASELINE` (sem STRETCH, sem END)
-12. **Consulte `GOVERNANCA_TOKENS.md` ao escolher entre tokens semânticos parecidos** (mesma cor final, famílias/estados diferentes) — não escolha só pelo valor resolvido
-13. **No Caso 7, gere e obtenha aprovação do `NomeComponente.metadata.json` ANTES de gerar código ou docs** — é a fonte mais estruturada sobre o componente; documentar antes dele é documentar por suposição
-14. **Em qualquer operação Figma que crie frames, execute o Protocolo de Inicialização de Arquivo (HARNEES_TELAS.md — Seção 0) antes de qualquer `use_figma`** — cria o arquivo, configura as páginas padrão (☀️ Bom dia · Cover · Telas) e garante a library subscrita com variáveis acessíveis
-
-### ❌ Nunca Faça:
-
-1. **Buscar componentes sem filtrar por `includeLibraryKeys`**
-2. **Usar libraries de `blockedLibraries`** mesmo que apareçam em buscas
-3. **Construir elementos UI do zero** quando o componente DS existe (Button, Tag, Menu Global, etc.)
-4. **Inventar nomes de papéis de texto** fora de `GLOSSARIO_PAPEIS_TEXTO.md`
-5. **Ignorar RNFs** — eles afetam UI (skeleton loaders, permissões, etc.)
-6. **Usar o plugin Figma intermediário** — o canal de entrega é sempre `use_figma` direto
-7. **Criar todas as telas de uma vez** — sempre use workflow faseado (tela por tela)
-8. **Hardcodar cores, fontes ou espaçamentos** — sempre usar tokens DS
-9. **Escolher token semântico só pelo valor final resolvido** — respeite `doNotUseWhen` de `GOVERNANCA_TOKENS.md` mesmo quando duas famílias resolvem para a mesma cor hoje
-10. **Gerar código ou docs do Caso 7 sem antes exibir o `metadata.json` completo e obter aprovação explícita do usuário** — sem esse gate, o agente preenche lacunas de intenção (useWhen/doNotUseWhen) por suposição, e o erro se propaga para código e Figma em escala
-11. **Aplicar `clipsContent: true` em frames de zona** — todas as zonas ERP devem ter `clipsContent: false`
-12. **Aplicar `strokes` diretamente em frames de zona** — `strokes: []` é obrigatório em todas as zonas; bordas visuais entre zonas vêm do design, não de strokes de frame
-13. **Usar botão `size=big` ou `size=medium` nas Zonas B e C** — `size=small` é o único tamanho permitido nessas zonas
-14. **Exibir o label do `input search` na Zona C** — o layer `"label"` deve ter `visible = false` após `appendChild`
-15. **Instanciar `menu erp` com `stage=*`** — o componente "Menu ERP" foi descontinuado em 2026-07-03; usar exclusivamente `menu-global` com `Produto=ERP` na Zona A
-16. **Montar tabelas com frames primitivos ou sub-componentes isolados** (`head`, `simple cell`) — usar `TableCellExtended` (`8ba1fe2c9d32e56a058c3946e17142223784c557`) como unidade construtiva obrigatória na Zona E
-17. **Omitir `padding: 8px` no frame raiz ERP** — o frame raiz (`1366×768`) deve ter `padding: 8px` em todos os lados e `gap: 8px` entre Zona A e Container
-18. **Usar `#fcfbf8` como `fills` do frame raiz** — o frame raiz tem `fills: #F1F0E8`; `#fcfbf8` é o fundo do Container (Zonas B–F)
+_Seção Regras Críticas não encontrada no SKILL.md_
 
 ## Sistema de Ícones
 
@@ -428,6 +378,40 @@ npm install --save-dev PACOTE --legacy-peer-deps
 4. O prompt inclui instrução para ler `figma-config.json` antes do Figma MCP?
 
 ## Changelog
+
+## v3.21 (2026-09-20)
+
+### Dispatcher + globals.md + cases/ — redução de 65–75% nos tokens por invocação
+
+**Arquivos modificados:** `SKILL.md`  
+**Arquivos criados:** `globals.md`, `cases/caso-1-2-tela-react.md`, `cases/caso-3-revisar.md`, `cases/caso-4-figma.md`, `cases/caso-5-construir.md`, `cases/caso-6-sync.md`, `cases/caso-7-componente.md`, `cases/caso-8-implementar.md`, `cases/caso-9-handoff.md`  
+**Sub-skills atualizadas:** `ds-tela`, `ds-componente`, `ds-figma`, `ds-revisar`, `ds-sync`, `ds-handoff`, `ds-implementar`, `ds-construir`
+
+#### Motivação
+
+O `SKILL.md` original (726 linhas, 53 KB) era carregado integralmente em toda invocação de qualquer sub-skill. Um `/ds-tela` carregava as instruções do Caso 7, as regras do Caso 5, a tabela de Figma Plugin API e o changelog completo — nenhum deles relevante para gerar uma tela React. Cada invocação consumia ~746 linhas de contexto para usar no máximo 15% delas.
+
+#### Changed
+
+- **`SKILL.md`** reescrito como dispatcher puro (75 linhas): tabela de slash commands, fluxo de decisão, tabela de roteamento caso → arquivo, instrução de carregamento (`globals.md` + `cases/caso-N.md`). Sem conteúdo de caso inline.
+- **8 sub-skills** (`ds-*/SKILL.md`): substituem `ler SKILL.md principal` por `ler globals.md` + `ler cases/caso-N.md`.
+
+#### Added
+
+- **`globals.md`** (123 linhas): invariantes compartilhados — papel/escopo, regras de library Figma (`searchPriority`, `blockedLibraries`, filtro `.[base]`), inventário de componentes compacto, URL do COMPONENTES.md no GitHub, tabela de arquivos de referência, tabela de erros da Figma Plugin API, regras críticas do/don't.
+- **`cases/`** (8 arquivos, 428 linhas total): cada arquivo contém apenas os passos do caso correspondente — extração direta do SKILL.md anterior sem perda de conteúdo.
+
+#### Ganho por invocação (linhas carregadas)
+
+| Sub-skill | Antes | Depois | Redução |
+|---|---|---|---|
+| `/ds-tela` | 746 | 195 | 74% |
+| `/ds-figma` | 746 | 190 | 75% |
+| `/ds-componente` | 746 | 227 | 70% |
+| `/ds-construir` | 746 | 258 | 65% |
+| `olist-ds-specialist` (auto) | 726 | 314 (pior caso) | 57% |
+
+---
 
 ## v3.20 (2026-09-09)
 
@@ -614,4 +598,4 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ---
 
-*Gerado automaticamente em 2026-09-15 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-09-20 por `generate-wiki.mjs`. Não edite manualmente.*

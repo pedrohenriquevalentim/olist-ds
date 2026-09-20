@@ -14,17 +14,6 @@ O usuário forneceu uma URL do Figma de uma tela de produto. Gere o código Reac
 
 ## Passos obrigatórios
 
-1. Carregar a skill principal: ler `.claude/skills/olist-ds-specialist/SKILL.md`
-2. Executar o **Caso 8** dessa skill na íntegra
-
-## Resumo do Caso 8
-
-1. Extrair `fileKey` e `nodeId` da URL
-2. `get_metadata` → mapear estrutura da tela
-3. `get_design_context` → identificar elementos visuais
-4. `get_screenshot` → referência visual
-5. Buscar `COMPONENTES.md` do GitHub para obter props reais:
-   `https://raw.githubusercontent.com/pedrohenriquevalentim/olist-ds/main/.claude/skills/olist-ds-specialist/references/COMPONENTES.md`
-6. Para cada elemento: mapear para componente DS ou HTML semântico + tokens CSS
-7. Gerar componente React com imports de `@pedrohenriquevalentim/olist-ds`
-8. Entregar: código + lista de componentes DS usados + elementos sem equivalente DS
+1. Ler `.claude/skills/olist-ds-specialist/globals.md`
+2. Ler `.claude/skills/olist-ds-specialist/cases/caso-8-implementar.md`
+3. Executar o **Caso 8** na íntegra

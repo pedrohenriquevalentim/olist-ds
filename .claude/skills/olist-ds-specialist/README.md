@@ -1,10 +1,15 @@
-# Olist Design System — Especialista (v3.21 · atualizado em 2026-09-15)
+# Olist Design System — Especialista (v3.21 · atualizado em 2026-09-20)
 
 Skill corporativa para criação de telas, componentes e protótipos a partir de SDDs/PRDs usando o design system da Olist.
 
 ## 📌 Library de referência (decisão permanente desde 2026-07-03)
 
 A [`design system (base)`](https://www.figma.com/design/HeyN4w209HWh8rfpTDiwyf/design-system) é a **única library de referência** para construção de telas, em `figma-config.json`/`searchPriority`. A hierarquia anterior (AI Components, ERP components, ERP recursos, ERP style guide, [design system] components web) foi descontinuada e está em `blockedLibraries` com os dados preservados. Histórico completo da decisão, incluindo checagem de cobertura contra o harness, em `decisions/ux-design/FLUXO_PRD_FIGMA.md`.
+
+## Novidades v3.21 (2026-09-20)
+
+- **Dispatcher + globals.md + cases/:** `SKILL.md` reescrito como dispatcher puro (75 linhas). Invariantes compartilhados extraídos para `globals.md` (123 linhas). Cada caso migrado para `cases/caso-N.md`. Sub-skills atualizadas para carregar só `globals.md` + arquivo do caso específico.
+- **Ganho:** 65–75% de redução nas linhas carregadas por invocação — `/ds-tela` passa de 746 para 195 linhas, sem perda de conteúdo ou funcionalidade.
 
 ## Novidades v3.20 (2026-09-09)
 
@@ -74,7 +79,17 @@ olist-ds-specialist/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
-├── SKILL.md                   # Instruções, workflow, regras e fluxo de decisão
+├── SKILL.md                   # Dispatcher: slash commands, roteamento, instrução de carregamento
+├── globals.md                 # Invariantes compartilhados: library Figma, inventário, referências, regras críticas
+├── cases/                     # Um arquivo por caso de uso (carregado sob demanda)
+│   ├── caso-1-2-tela-react.md     # Casos 1 e 2: gerar tela React a partir de SDD/PRD
+│   ├── caso-3-revisar.md          # Caso 3: revisão de tela/código contra padrões DS
+│   ├── caso-4-figma.md            # Caso 4: criar tela no Figma com instâncias reais DS
+│   ├── caso-5-construir.md        # Caso 5: criar ou evoluir componente no Figma (token-first)
+│   ├── caso-6-sync.md             # Caso 6: sincronizar inventário de componentes
+│   ├── caso-7-componente.md       # Caso 7: implementar componente DS (6 arquivos + docs Figma)
+│   ├── caso-8-implementar.md      # Caso 8: converter tela Figma em código de produto
+│   └── caso-9-handoff.md          # Caso 9: gerar manifesto de handoff para PR
 ├── component-registry.json    # Cache local de componentKeys por categoria
 ├── figma-config.json          # Libraries autorizadas (libraryKeys e searchPriority)
 ├── decisions/
@@ -115,7 +130,7 @@ olist-ds-specialist/
     └── VISAO_GERAL.md                  # Mapa de navegação — leia sempre primeiro
 ```
 
-> **Raiz:** 6 arquivo(s) · **Decisions:** 13 arquivo(s) · **Referências:** 19 arquivo(s) · **Total:** 38 arquivo(s) — atualizado em 2026-09-15 pelo `sync-skill-meta.mjs`
+> **Raiz:** 7 arquivo(s) · **Decisions:** 13 arquivo(s) · **Referências:** 19 arquivo(s) · **Total:** 39 arquivo(s) — atualizado em 2026-09-20 pelo `sync-skill-meta.mjs`
 ## Libraries do Figma (ordem de prioridade)
 
 | # | Library | Conteúdo |

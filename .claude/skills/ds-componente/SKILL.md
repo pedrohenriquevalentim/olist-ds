@@ -14,5 +14,6 @@ O usuário forneceu uma URL do Figma de um componente do DS. Implemente-o como c
 
 ## Passos obrigatórios
 
-1. Carregar a skill principal: ler `.claude/skills/olist-ds-specialist/SKILL.md`
-2. Executar o **Caso 7** dessa skill na íntegra
+1. Ler `.claude/skills/olist-ds-specialist/globals.md`
+2. Ler `.claude/skills/olist-ds-specialist/cases/caso-7-componente.md`
+3. Executar o **Caso 7** na íntegra

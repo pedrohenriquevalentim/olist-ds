@@ -14,14 +14,6 @@ O usuário forneceu um ou mais links do Figma representando uma jornada (página
 
 ## Passos obrigatórios
 
-1. Carregar a skill principal: ler `.claude/skills/olist-ds-specialist/SKILL.md`
-2. Executar o **Caso 9** dessa skill na íntegra
-
-## Resumo do Caso 9
-
-1. Extrair `fileKey` e `nodeId` de cada link recebido
-2. `get_metadata` em cada um → identificar tipo do nó (PAGE, FRAME ou COMPONENT/COMPONENT_SET/INSTANCE) e resolver a lista de "telas" da jornada
-3. Para cada tela: `get_design_context` → listar instâncias e comparar com `COMPONENTES.md`/`component-registry.json`
-4. Agregar entre telas: deduplicar componentes usados (unindo variantes e telas onde aparecem); manter gaps por tela
-5. Entregar Markdown com três seções: componentes DS utilizados, elementos sem equivalente DS, resumo numérico
-6. Não gerar código, não commitar, não abrir PR — artefato é ad-hoc, só o bloco Markdown pronto para colar
+1. Ler `.claude/skills/olist-ds-specialist/globals.md`
+2. Ler `.claude/skills/olist-ds-specialist/cases/caso-9-handoff.md`
+3. Executar o **Caso 9** na íntegra
