@@ -6,7 +6,8 @@
     "figmaLibraryKey": "lk-f068a69b8c4ef3c01d6a883806b21c6ebe73213d3565451a399cfba74694fbc0053c2b4226fb206812f098c679b6a971148aa027e97bc14733e29552c4002cb5",
     "extractedAt": "2026-07-03",
     "republishedAt": "2026-07-03T15:16:45Z",
-    "totalComponents": 62,
+    "lastSyncAt": "2026-09-25",
+    "totalComponents": 71,
     "published": true,
     "previousSource": {
       "name": "AI-Components",
@@ -18,12 +19,18 @@
     "variantsNote": "Variantes confirmadas via get_metadata para todos os componentes com página fornecida. Pendentes: Sort (não encontrado), Cookie (não encontrado), Tag family (pode ser Badge), Accordion (page era Modal WIP), Drawer/Modal (novos, sem componentKey). Atualizado em 2026-08-23 com 25 URLs de página.",
     "variantsInstruction": "Para instanciar uma variante via Plugin API: importar via importComponentSetByKeyAsync → chamar createInstance() → setProperties({ 'propName': 'value' }). Os nomes de propriedade são case-sensitive e devem bater exatamente com os campos 'variants' deste registry.",
     "knownDiscrepancies": {
-      "Badge": "componentKey no registry (2462c...) difere do retornado por search_design_system (639276...) — provável republicação após 2026-07-03. Reconfirmar com /ds-sync antes de usar.",
-      "Tabs": "Resolvido: assetType corrigido para component_set. nodeId real: 8983:9578 (page URL confirmada). Key anterior 6e28a... era variante específica do set.",
+      "MenuGlobal": "Key corrigida em 2026-09-25: era c2a9753... agora c76f80e6... — provável republicação.",
+      "Tabs": "Key corrigida em 2026-09-25: era 6e28a768... agora f0c6d6f3... — provável republicação.",
+      "Badge": "Key corrigida em 2026-09-25: era 2462c... agora 639276... — provável republicação.",
       "Accordion": "A URL fornecida como \"accordion\" (node-id 9644:22) corresponde à página \"modal [WIP]\" no Figma. Accordion pode não existir como componente publicado.",
-      "Sort": "Não encontrado como página dedicada nas URLs fornecidas. Pode estar na página Table ou ser um subcomponente interno.",
-      "Cookie": "Não encontrado nas páginas fornecidas. Verificar se ainda existe na library.",
-      "TagFamily": "Tag, Tag Desktop, Tag Mobile, Tag More, Tag Delivery podem ser variantes do Badge (type=tag). Confirmar se existem como component_sets independentes."
+      "Menu": "Novo componente 'menu' (key 4a05e281...) encontrado em 2026-09-25 — variantsConfirmed: false. Confirmar se é menu contextual/dropdown.",
+      "PayMachineCard": "pay-machine-card (key 6630f719...) confirmado como ÍCONE rebrand 24 em 2026-09-25 — não é componente UI independente.",
+      "Loading": "Adicionado ao registry em 2026-09-25 com key 0d32737a... — variantsConfirmed: false.",
+      "ChartComponents": "Chart Bar Up/Down/Variation e Chart Pie adicionados ao registry em 2026-09-25 — category: data-visualization, variantsConfirmed: false para todos.",
+      "DrawerComponentKey": "Drawer componentKey resolvido em 2026-09-25 (era null): f466ce17b00d813e1a9e48fdbf4030980371e6c5.",
+      "Overlay": "Overlay mencionado em globals.md feedback mas sem componentKey no registry — possivelmente é o Drawer (sobreposição semântica). Investigar se existe como componente publicado separado.",
+      "Modal": "Modal ainda WIP — componentKey não encontrado em search_design_system (busca 'modal' não retornou modal component_set). Pode não estar publicado.",
+      "TagFamily": "Tag, Tag Desktop, Tag Mobile, Tag More, Tag Delivery confirmados como component_sets independentes em 2026-09-25 (todos retornados por search_design_system)."
     },
     "excludedNamePattern": "^\\.",
     "excludedNote": "Componentes com name iniciado por '.' (ex: '.menu erp/stage14', '.[base] single select list', '.[base] multi select list', '.[base] token box', '.[base] counter') foram excluídos deste registry — são peças internas de construção de component set, nunca instâncias válidas. Ver figma-config.json > excludedComponentNamePatterns.",
@@ -95,7 +102,7 @@
       "note": "Sem dimensão de tamanho — sempre 48×48px. Figma usa 'type' (não 'variant')."
     },
     "Menu Global": {
-      "componentKey": "c2a9753aa84b8296ad1f7587a738ed019aa7d8b3",
+      "componentKey": "c76f80e6de1b8c4bd100b60329f3d68d28653e68",
       "assetType": "component_set",
       "category": "navigation",
       "variants": {
@@ -182,8 +189,15 @@
       },
       "variantsSource": "get_metadata depth=3 via page URL 2026-08-24"
     },
+    "Menu": {
+      "componentKey": "4a05e281286e36fef2941bbb670b1ef76a2176a8",
+      "assetType": "component_set",
+      "category": "navigation",
+      "variantsConfirmed": false,
+      "note": "Novo componente encontrado em 2026-09-25 via /ds-sync. Distinto de menu-global (navegação lateral) e menu erp (descontinuado). Parece ser um menu contextual ou dropdown de ações — confirmar via get_metadata fornecendo URL do Figma."
+    },
     "Tabs": {
-      "componentKey": "6e28a768040022b920e7080a6a5f0b4b185abd68",
+      "componentKey": "f0c6d6f3695edcc13e25a2a2436f6f1e52429da3",
       "assetType": "component_set",
       "category": "navigation",
       "variantsConfirmed": true,
@@ -496,12 +510,11 @@
       "variantsConfirmed": false
     },
     "Badge": {
-      "componentKey": "2462c2057976a758ad2b85779f3a7ed29896d1d6",
+      "componentKey": "639276068d6c0b961c1ecfb529c0e67bc9ffce46",
       "assetType": "component_set",
       "category": "data-display",
       "variantsConfirmed": true,
-      "keyDiscrepancy": "search_design_system retornou key diferente (639276068d6c0b961c1ecfb529c0e67bc9ffce46) — provável republicação após 2026-07-03. Rodar /ds-sync antes de usar.",
-      "note": "type=tag não tem intent=success/error/warning. type=status não tem intent=accent. Notification (dot/number/text) é subcomponente base interno. ⚠️ componentKey no registry pode estar desatualizado — ver knownDiscrepancies em _meta.",
+      "note": "type=tag não tem intent=success/error/warning. type=status não tem intent=accent. Notification (dot/number/text) é subcomponente base interno. Key corrigida em 2026-09-25 via /ds-sync (key anterior 2462c2057... estava desatualizada).",
       "nodeId": "8986:12209",
       "variants": {
         "type": [
@@ -607,6 +620,41 @@
       "category": "feedback",
       "variantsConfirmed": false,
       "note": "Variantes não confirmadas via get_metadata — fornecer URL do Figma para mapear."
+    },
+    "Loading": {
+      "componentKey": "0d32737ae3b73820a283a1453b7e85d9ffa5c669",
+      "assetType": "component_set",
+      "category": "feedback",
+      "variantsConfirmed": false,
+      "note": "componentKey obtido em 2026-09-25 via /ds-sync. Variantes não confirmadas — fornecer URL do Figma para mapear."
+    },
+    "Chart Bar Up": {
+      "componentKey": "3c38a34f5274263c4479f4b2e36ae1408d267bb3",
+      "assetType": "component_set",
+      "category": "data-visualization",
+      "variantsConfirmed": false,
+      "note": "componentKey obtido em 2026-09-25 via /ds-sync. Componente de visualização de dados — distinto do ícone homônimo no Icon set. Variantes não confirmadas."
+    },
+    "Chart Bar Down": {
+      "componentKey": "96fe68620e7cbf9a260d11ea92bb977ba6538eda",
+      "assetType": "component_set",
+      "category": "data-visualization",
+      "variantsConfirmed": false,
+      "note": "componentKey obtido em 2026-09-25 via /ds-sync. Variantes não confirmadas."
+    },
+    "Chart Bar Variation": {
+      "componentKey": "2bce9d5ceda54275f6dba9b9d76013a0205248d7",
+      "assetType": "component_set",
+      "category": "data-visualization",
+      "variantsConfirmed": false,
+      "note": "componentKey obtido em 2026-09-25 via /ds-sync. Variantes não confirmadas."
+    },
+    "Chart Pie": {
+      "componentKey": "ee651e8b537c48811171cf49ff6d754f1a93b0a4",
+      "assetType": "component_set",
+      "category": "data-visualization",
+      "variantsConfirmed": false,
+      "note": "componentKey obtido em 2026-09-25 via /ds-sync. Variantes não confirmadas."
     },
     "Logo": {
       "componentKey": "123282975f82f3e75a25a3300cec859957f44eb2",
@@ -1434,8 +1482,22 @@
       },
       "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
     },
+    "Update": {
+      "componentKey": "d6a0734de0d76ea39dd0adfc3e0a356e900bf663",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": false,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"update\" ao instanciar. componentKey obtido em 2026-09-25 via /ds-sync."
+    },
+    "File Pie Chart": {
+      "componentKey": "39806c4ceeffa09ff8a020b656cfb528e60d6005",
+      "assetType": "component_set",
+      "category": "icon",
+      "variantsConfirmed": false,
+      "note": "Ícone individual — subconjunto do component_set 'Icon'. Usar name=\"file-pie-chart\" ao instanciar. componentKey obtido em 2026-09-25 via /ds-sync."
+    },
     "Drawer": {
-      "componentKey": null,
+      "componentKey": "f466ce17b00d813e1a9e48fdbf4030980371e6c5",
       "nodeId": "9088:12931",
       "assetType": "component_set",
       "category": "overlay",
@@ -1446,7 +1508,7 @@
       },
       "variantsConfirmed": false,
       "variantsSource": "get_metadata depth=3 via page URL 2026-08-23",
-      "note": "Componente novo — não estava no registry anterior. componentKey não coletado ainda (requer search_design_system). Apenas 1 variante visível no depth=3."
+      "note": "componentKey obtido em 2026-09-25 via /ds-sync. Variantes completas não mapeadas — apenas 1 visível no depth=3; fornecer URL do Figma para confirmar."
     },
     "Modal": {
       "componentKey": null,
@@ -1552,7 +1614,14 @@
     ],
     "feedback": [
       "Tooltip",
-      "Cookie"
+      "Cookie",
+      "Loading"
+    ],
+    "data-visualization": [
+      "Chart Bar Up",
+      "Chart Bar Down",
+      "Chart Bar Variation",
+      "Chart Pie"
     ],
     "brand": [
       "Logo"
@@ -1584,7 +1653,9 @@
       "Reorder",
       "Logout",
       "Play",
-      "More H"
+      "More H",
+      "Update",
+      "File Pie Chart"
     ],
     "overlay": [
       "Drawer",

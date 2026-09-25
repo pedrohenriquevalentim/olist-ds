@@ -1,4 +1,4 @@
-# Olist Design System — Especialista (v3.21 · atualizado em 2026-09-20)
+# Olist Design System — Especialista (v3.21 · atualizado em 2026-09-25)
 
 Skill corporativa para criação de telas, componentes e protótipos a partir de SDDs/PRDs usando o design system da Olist.
 
@@ -79,19 +79,10 @@ olist-ds-specialist/
 ├── CHANGELOG.md               # Histórico de versões da skill
 ├── README.md                  # Este arquivo — visão geral e changelog
 ├── SETUP.md                   # Guia de instalação e configuração
-├── SKILL.md                   # Dispatcher: slash commands, roteamento, instrução de carregamento
-├── globals.md                 # Invariantes compartilhados: library Figma, inventário, referências, regras críticas
-├── cases/                     # Um arquivo por caso de uso (carregado sob demanda)
-│   ├── caso-1-2-tela-react.md     # Casos 1 e 2: gerar tela React a partir de SDD/PRD
-│   ├── caso-3-revisar.md          # Caso 3: revisão de tela/código contra padrões DS
-│   ├── caso-4-figma.md            # Caso 4: criar tela no Figma com instâncias reais DS
-│   ├── caso-5-construir.md        # Caso 5: criar ou evoluir componente no Figma (token-first)
-│   ├── caso-6-sync.md             # Caso 6: sincronizar inventário de componentes
-│   ├── caso-7-componente.md       # Caso 7: implementar componente DS (6 arquivos + docs Figma)
-│   ├── caso-8-implementar.md      # Caso 8: converter tela Figma em código de produto
-│   └── caso-9-handoff.md          # Caso 9: gerar manifesto de handoff para PR
+├── SKILL.md                   # Instruções, workflow, regras e fluxo de decisão
 ├── component-registry.json    # Cache local de componentKeys por categoria
 ├── figma-config.json          # Libraries autorizadas (libraryKeys e searchPriority)
+├── globals.md
 ├── decisions/
 │   ├── CHANGELOG.md                # Histórico de decisões de design
 │   ├── INDEX.md                    # Índice navegável de todas as decisões
@@ -130,7 +121,7 @@ olist-ds-specialist/
     └── VISAO_GERAL.md                  # Mapa de navegação — leia sempre primeiro
 ```
 
-> **Raiz:** 7 arquivo(s) · **Decisions:** 13 arquivo(s) · **Referências:** 19 arquivo(s) · **Total:** 39 arquivo(s) — atualizado em 2026-09-20 pelo `sync-skill-meta.mjs`
+> **Raiz:** 7 arquivo(s) · **Decisions:** 13 arquivo(s) · **Referências:** 19 arquivo(s) · **Total:** 39 arquivo(s) — atualizado em 2026-09-25 pelo `sync-skill-meta.mjs`
 ## Libraries do Figma (ordem de prioridade)
 
 | # | Library | Conteúdo |

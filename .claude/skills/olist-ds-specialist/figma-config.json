@@ -62,21 +62,37 @@
       }
     ],
     "harnessCoverageCheck": {
-      "lastVerifiedAt": "2026-08-15",
+      "lastVerifiedAt": "2026-09-25",
       "againstLibrary": "design system (base)",
-      "verifiedVia": "search_design_system real via /ds-sync (Caso 6), busca por categoria — cobre todas as categorias documentadas + sondagem de novos termos",
-      "status": "cobertura quase completa — 1 gap parcialmente resolvido (Summary Card, ver abaixo)",
+      "verifiedVia": "search_design_system real via /ds-sync (Caso 6), busca por 14 categorias — cobre todas as categorias documentadas + sondagem de novos termos",
+      "status": "2ª rodada de sync (2026-09-25): Drawer key resolvido, Loading adicionado, 4 chart components adicionados, 2 icon entries adicionados. Gaps pendentes: Modal (WIP), Overlay, Menu (variantsConfirmed: false).",
+      "keysFixed": [
+        "Menu Global: c2a9753... → c76f80e6de1b8c4bd100b60329f3d68d28653e68",
+        "Tabs: 6e28a768... → f0c6d6f3695edcc13e25a2a2436f6f1e52429da3",
+        "Badge: 2462c... → 639276068d6c0b961c1ecfb529c0e67bc9ffce46",
+        "Drawer: null → f466ce17b00d813e1a9e48fdbf4030980371e6c5"
+      ],
+      "newComponents": [
+        "menu (key 4a05e281...) — menu contextual, variantsConfirmed: false",
+        "pay-machine-card — confirmado como ícone, não UI component",
+        "Loading (key 0d32737a...) — adicionado ao registry como feedback component",
+        "Chart Bar Up (key 3c38a34f...)",
+        "Chart Bar Down (key 96fe6862...)",
+        "Chart Bar Variation (key 2bce9d5c...)",
+        "Chart Pie (key ee651e8b...)",
+        "Update icon (key d6a0734d...)",
+        "File Pie Chart icon (key 39806c4c...)"
+      ],
       "confirmed": [
-        "Menu", "Menu ERP", "menu-global (renomeado de 'Menu Global' para hífen em 2026-08-15)", "Button", "Button Icon", "Radio Button", "Segmented Buttons", "Link",
+        "menu-global", "Button", "Button Icon", "Radio Button", "Segmented Buttons", "Link", "Tabs",
         "Tag (+ tag-desktop, tag-mobile, tag-more, tag-delivery)", "Badge", "Tooltip", "Logo",
         "Icon (genérico + Product Icon + dezenas de ícones individuais)", "Input Search", "Input Text",
-        "Input Paragraph (renomeado — antes documentado como 'Text Area')", "Input E-mail", "Input Token",
-        "Input Password", "Input Select", "Input File", "Dropdown", "Checkbox", "Check (componente público separado, sem prefixo ponto)", "Toggle", "Chip",
-        "Avatar", "Card (genérico + novas variantes internas de notificação: alert/warning/informative, atualizado 2026-08-01)", "Breadcrumb", "Profile", "Logout",
-        "Table (+ Table Column, Head, Simple Cell, Spreadsheet)", "Paginator", "Sort", "Reorder",
-        "Bar, Chart Bar Up, Chart Bar Down, Chart Bar Variation, Chart Pie (Data Visualization — chart-pie adicionado em 2026-08-15)",
-        "List, Task List", "Dashboard", "Loading", "Overlay", "Cookie",
-        "Heading/Subheading via Text Styles (text/H1–H5, paragraph, caption, description) — não como componente, consistente com o harness"
+        "Input Paragraph", "Input E-mail", "Input Token",
+        "Input Password", "Input Select", "Input File", "Dropdown", "Checkbox", "Check", "Toggle", "Chip",
+        "Avatar", "Card", "Breadcrumb", "Profile", "Logout",
+        "Table (+ Table Column, Head, Simple Cell, Spreadsheet, Table Cell Extended)", "Paginator", "Sort", "Reorder",
+        "Bar, Chart Bar Up, Chart Bar Down, Chart Bar Variation, Chart Pie",
+        "List, Task List", "Dashboard", "Loading", "Overlay", "Cookie"
       ],
       "gaps": [],
       "resolvedGaps": [
