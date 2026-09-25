@@ -237,8 +237,9 @@ get_libraries  → "design system (base)" deve aparecer como library ativa no ar
 get_variable_defs → pelo menos uma coleção deve retornar resultados não-vazios
 ```
 
-⛔ **BLOQUEANTE:** Se `get_libraries` não confirmar `design system (base)` como ativa — **não prosseguir**.  
-Informar ao usuário: *"A library design system (base) não está acessível. Verifique se sua conta Figma tem acesso à library e tente novamente."*
+⛔ **BLOQUEANTE (mas tentativa automática primeiro):** Se `get_libraries` não confirmar `design system (base)` como ativa, **não exibir aviso ao usuário ainda** — executar silenciosamente o Passo 3 (import sentinel) e repetir `get_libraries`. A library ausente é o estado normal de um arquivo recém-criado; o sentinel import a subscreve automaticamente. Só reportar erro ao usuário se o import sentinel lançar exceção:
+
+> *"Não foi possível subscrever a library design system (base). Verifique se sua conta Figma tem acesso à library e tente novamente."*
 
 ⛔ **BLOQUEANTE:** Se `get_variable_defs` retornar vazio após o import sentinel — **não prosseguir**.  
 Primitivos custom não poderão ter tokens vinculados — qualquer fill ou stroke aplicado seria hardcoded, violando a regra imutável da Seção 4.
@@ -260,7 +261,9 @@ Execute este gate antes de criar qualquer frame. Se qualquer item falhar, **reso
 [ ] 4b. Nenhum componentKey escolhido veio de um resultado com name iniciado por "." (componente interno de construção — ver FIGMA_CONFIG.md)?
 [ ] 5. Nenhuma regra de limite por tela será violada (ver Seção 2)?
 [ ] 6. Componentes ausentes identificados e marcados como "— custom" (ver Seção 4)?
-[ ] 7. **BLOQUEANTE — Tokens semânticos:** Para CADA primitivo custom, todos os fills, strokes e cores de texto estão mapeados a tokens SEMÂNTICOS (`--color-background-*`, `--color-text-*`, `--color-border-*`, `--color-shape-*`) — nunca a tokens primitivos (`--color-gray-gray-*`, `--color-blue-blue-*`)?
+[ ] 7. **BLOQUEANTE — Tokens semânticos:** Para CADA frame ou primitivo (custom ou de layout), todos os fills, strokes e cores de texto estão mapeados a tokens SEMÂNTICOS via `importVariableByKeyAsync` + `setBoundVariableForPaint` — nunca RGB hardcoded, nunca tokens primitivos (`--color-gray-gray-*`, `--color-blue-blue-*`)?
+[ ] 8. **BLOQUEANTE — clipsContent:** Todos os frames têm `clipsContent: false`? (Verificar antes de executar — não depois)
+[ ] 9. **BLOQUEANTE — Spacer frames:** Não há frames vazios sendo criados apenas para adicionar espaçamento? (Todo gap usa `itemSpacing` no frame pai)
 ```
 
 → Só avançar se TODOS os itens estão marcados.
@@ -288,7 +291,8 @@ A coluna "Proibido" é exaustiva para os casos mais comuns — outros casos deve
 - Container (Zonas B–F): `cornerRadius: 12px` · `fills: #fcfbf8` · gap `0` entre zonas
 - Zona B: `topLeftRadius: 12` · `topRightRadius: 12` · bottom radii: `0`
 - Zona F: `bottomLeftRadius: 12` · `bottomRightRadius: 12` · top radii: `0`; quando ausente, Zona E recebe `bottomLeft/bottomRight: 12`
-- Todas as zonas: `clipsContent: false` · `strokes: []`
+- **Todas as zonas — e todos os frames sem exceção:** `clipsContent: false` · `strokes: []`
+- **Espaçamento entre elementos:** usar `itemSpacing` (gap) com múltiplo de 4px — **nunca frame vazio como spacer**
 - Zona A: componente `menu-global` com `Produto=ERP`, resize para `304×752px`
 - Zona B é dividida internamente: `nav header` (47px) + `page title` (49px) = 116px total; botões sempre `size=small`
 - Zona C: `input search` com layer `"label"` setado `visible = false` após `appendChild`; botões sempre `size=small`
@@ -379,14 +383,16 @@ Quando um componente não existe no inventário DS, o Claude pode construir com 
 | `polygon` / `star` | ❌ | Não faz parte do vocabulário visual do DS |
 | Qualquer shape | ❌ com cor hex hardcoded | Sempre usar variáveis CSS de token |
 | `text` com border-radius | ❌ sem container | Badges e Tags são componentes DS — nunca simular com texto arredondado |
+| Frame vazio como spacer | ❌ para criar espaçamento entre elementos | Usar `itemSpacing` no frame pai; frames vazios quebram o Auto Layout e inflam a hierarquia de layers |
+| `clipsContent: true` | ❌ em qualquer frame | Corta componentes, tooltips, estados de foco e hover; sempre `clipsContent: false` |
 
-### Regras de primitivos para componente custom
+### Regras de primitivos — aplicam-se a QUALQUER frame ou elemento custom
 
-Quando construir um componente custom (Caso 5 do SKILL.md):
+Sejam frames de layout, containers de zona ou componentes custom (Caso 5):
 
-1. **Fills e strokes — REGRA IMUTÁVEL: vincule a variável semântica via `importVariableByKeyAsync` + `setBoundVariableForPaint`. NUNCA use raw RGB como fill final.**
+1. **Fills e strokes — REGRA IMUTÁVEL: vincule a variável semântica via `importVariableByKeyAsync` + `setBoundVariableForPaint`. NUNCA use raw RGB como fill final — em nenhum elemento, em nenhum contexto.**
 
-   Passar apenas um valor RGB resolve o visual mas deixa o fill sem binding — o Figma mostra o hex solto, sem rastreabilidade de token. O padrão correto é sempre importar e vincular:
+   Passar apenas um valor RGB resolve o visual mas deixa o fill sem binding — o Figma mostra o hex solto, sem rastreabilidade de token. Isso vale para backgrounds de zonas, containers de layout, cards, textos e qualquer frame que você criar. O padrão correto é sempre importar e vincular:
 
    ```javascript
    // ✅ CORRETO — importar variável da library e vincular ao fill/stroke
@@ -554,7 +560,7 @@ Como prefere prosseguir?
 
 ---
 
-**Versão:** 2.0  
+**Versão:** 2.1  
 **Criado em:** 2026-06-05  
 **Atualizado em:** 2026-07-04 (2) — Zona B do template Envios/Hub/Conta Digital deixa de permitir "Logo do produto": o logo já é exibido na Zona A via `Menu Global`, e sua duplicação na Zona B foi removida da coluna "Pode conter" e movida para "Não pode conter". A linha `Logo Olist` em "Contextos Válidos por Componente" (Seção 2) foi corrigida para refletir que o logo só existe embutido no `Menu Global` (Zona A, todos os templates), nunca como elemento solto de zona.  
 **Atualizado em:** 2026-07-04 — Zona B (ERP): `Breadcrumb` passa a ser a instância real do componente DS (não mais "texto puro, sem componente"), resolvendo o ponto em aberto #1 de `decisions/ux-design/COMPONENTES_POR_ZONA.md`. Zona C: proibição de `Button` generalizada para qualquer variante com label (antes só "primary"), mantendo o botão de ícone de filtro permitido. Zona D: `conteúdo editorial` e `Card`s avulsos passam a ser permitidos, mantendo `Breadcrumb` e demais elementos de navegação proibidos. Regra de fundo unificada para todas as zonas (A–E), removendo a exceção antes registrada para a Zona A. Seção 2 ganhou linhas de `Breadcrumb` em "Limites por Tela" e "Contextos Válidos por Componente".  
@@ -564,5 +570,6 @@ Como prefere prosseguir?
 **Atualizado em:** 2026-08-25 (v1.4) — Template unificado: seção "Template: Envios | Hub | Conta Digital" removida. Todos os produtos (ERP, Envios, Hub, Conta Digital) passam a usar exclusivamente o template ERP. Gate item 1 simplificado. Seção 2 simplificada: removida linha de `Summary Card`, ajustados contextos de `Input Search`, `Breadcrumb` e `Button primary` para refletir template único.  
 **Atualizado em:** 2026-09-02 (v1.7) — Seção 4 reescrita: padrão de fill/stroke passa a exigir `importVariableByKeyAsync` + `setBoundVariableForPaint` — raw RGB proibido mesmo que correto (fill sem binding não rastreia token no Figma). Tabela de keys das 10 variáveis semânticas mais usadas em customs adicionada. Nota final atualizada.
 **Atualizado em:** 2026-09-02 (v1.6) — Gate item 7 adicionado (BLOQUEANTE: fills/strokes de custom components devem referenciar tokens SEMÂNTICOS, nunca primitivos). Seção 4 reescrita: exemplos de código corrigidos para referenciar tokens semânticos; adicionada hierarquia obrigatória semântico → componente com explicação de por que primitivos são proibidos diretamente em telas/customs. Nota final da seção reforçada com "O Figma RGB DEVE vir do token semântico".  
+**Atualizado em:** 2026-09-25 (v2.1) — Seção 0: library não subscrita passa a ser resolvida silenciosamente via sentinel import; o warning só vai ao usuário se o import falhar. Gate pré-construção: adicionados itens 8 (clipsContent: false universal) e 9 (proibição de spacer frames). Seção 1: `clipsContent: false` e `itemSpacing` explicitados como regras universais (não só zonas ERP). Seção 4: proibição de frame vazio como spacer + `clipsContent: true` adicionados à tabela "O que é proibido construir". Regra de fills/strokes via `importVariableByKeyAsync` extendida de "componentes custom" para qualquer frame ou primitivo.
 **Atualizado em:** 2026-09-09 (v2.0) — Seção 0 adicionada: Protocolo de Inicialização de Arquivo. Antes de qualquer frame, o agente cria um arquivo novo via `create_new_file`, configura as páginas padrão (☀️ Bom dia · Cover · Telas), importa o sentinel de componente (Button — `7eeea8fba59887a3a224468fe8059d490733579e`) e o sentinel de variável (`b1c5fa26eed208b1b871333c5efafca1803c1239` — `color/background/surface/container`) da `design system (base)`, e verifica via `get_libraries` + `get_variable_defs` antes de prosseguir. Gate Obrigatório recebe item [0] (BLOQUEANTE) confirmando que a Seção 0 foi executada. O protocolo elimina estruturalmente o gap de library não-subscrita e de `get_variable_defs` retornando vazio — causa das duas falhas mais silenciosas do workflow Figma.  
 **Próxima revisão sugerida:** após 10 telas geradas com o harness ativo — coletar violações recorrentes e adicionar à Seção 2 (Limites por Componente) e Seção 3 (Padrões proibidos emergentes)

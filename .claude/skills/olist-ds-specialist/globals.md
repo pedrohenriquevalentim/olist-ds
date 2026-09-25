@@ -28,14 +28,14 @@ Fora do escopo: backend, APIs, banco, autenticação, regras de negócio.
 
 **Gap confirmado:** `Summary Card` (fundo azul) não tem variante dedicada — usar `card` genérico + validar manualmente em telas Envios/Hub/Conta Digital.
 
-## Inventário de Componentes (design system (base), sincronizado 2026-07-20)
+## Inventário de Componentes (design system (base), sincronizado 2026-09-25)
 
 - **Action:** Button, Button Icon
-- **Navigation:** Link, Segmented Buttons, menu-global, Breadcrumb, Paginator, Logout
+- **Navigation:** Link, Segmented Buttons, menu-global, Tabs, Breadcrumb, Paginator, Logout, Menu (contextual — variantes a confirmar)
 - **Input:** Input Text, Input Paragraph, Input E-mail, Input Search, Input Token, Input Password, Input Select, Input File, Checkbox, Radio Button, Dropdown, Toggle, Chip
 - **Data Display:** Tags (+ tag-desktop/mobile/more/delivery), Badge, Table (unidade: `TableCellExtended`), List, Task List, Dashboard, Sort, Reorder, Avatar, Profile, Card
-- **Data Visualization:** Bar, Chart Bar Up, Chart Bar Down, Chart Bar Variation
-- **Feedback:** Tooltip, Loading, Overlay, Cookie
+- **Data Visualization:** Bar, Chart Bar Up, Chart Bar Down, Chart Bar Variation, Chart Pie
+- **Feedback:** Tooltip, Loading, Cookie (Overlay: investigar se existe publicado separado do Drawer)
 - **Brand:** Logo Olist, Ícones rebrand 24
 
 ⚠️ Tabelas: usar `TableCellExtended` como unidade construtiva obrigatória — não instanciar `Table`, `Head` ou `Simple Cell` isoladamente.
@@ -93,6 +93,9 @@ Fallback: `references/COMPONENTES.md` local.
 | Cards igual-altura | Grid `FIXED` + cards `FIXED` + `SPACE_BETWEEN` | `counterAxisAlignItems='STRETCH'` |
 | Fonts | `await loadFontAsync` ANTES de editar texto | Editar sem carregar fonte |
 | Spacer FILL | Só se card pai tiver altura `FIXED` | FILL dentro de card com HUG |
+| `clipsContent` | **Sempre `false`** em todo frame — sem exceção | `true` corta componentes e estados de foco/hover |
+| Espaçamento entre filhos | `itemSpacing` com múltiplo de 4px | Frame vazio como spacer entre elementos |
+| Fills/strokes de qualquer frame | `importVariableByKeyAsync` + `setBoundVariableForPaint` com token semântico | RGB hardcoded mesmo que o valor seja "correto" |
 
 ## Regras Críticas
 
@@ -112,7 +115,7 @@ Fallback: `references/COMPONENTES.md` local.
 - Criar todas as telas de uma vez — sempre workflow faseado
 - Hardcodar cores, fontes ou espaçamentos
 - Escolher token semântico só pelo valor final — respeitar `doNotUseWhen` de `GOVERNANCA_TOKENS.md`
-- `clipsContent: true` em frames de zona ERP
+- **`clipsContent: true` em qualquer frame** — regra universal, não só zonas ERP; sempre `clipsContent: false`
 - `strokes` diretamente em frames de zona (strokes: [])
 - Botão `size=big` ou `size=medium` nas Zonas B e C (só `size=small`)
 - Label do `input search` visível na Zona C (visible = false)
@@ -121,3 +124,6 @@ Fallback: `references/COMPONENTES.md` local.
 - Omitir `padding: 8px` no frame raiz ERP
 - `#fcfbf8` como fills do frame raiz (frame raiz = `#F1F0E8`)
 - No Caso 7: gerar código/docs sem exibir `metadata.json` completo e obter aprovação explícita
+- **Criar frames vazios para adicionar espaçamento** — usar `itemSpacing` com múltiplo de 4px na propriedade `gap` do Auto Layout pai
+- **RGB hardcoded em fills/strokes de qualquer frame ou primitivo** — mesmo que o valor numérico corresponda a um token semântico, a fill DEVE usar `importVariableByKeyAsync` + `setBoundVariableForPaint`; sem binding o Figma mostra hex solto e perde rastreabilidade
+- **Exibir aviso de "library não subscrita" ao usuário** antes de tentar o sentinel import — ao detectar library ausente em `get_libraries`, silenciosamente executar o Protocolo de Inicialização (Seção 0, Passo 3 do `HARNEES_TELAS.md`); só reportar erro se o próprio import sentinel falhar
