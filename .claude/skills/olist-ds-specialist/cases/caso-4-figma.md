@@ -45,4 +45,8 @@ Você:
    - Instâncias reais do DS (sem primitivos manuais para componentes existentes)
    - layoutSizing definido após appendChild
    - Todos os estados obrigatórios do padrão de página entregues
+   - **Todos os fills/strokes de frames custom vinculados a variáveis semânticas** via
+     `importVariableByKeyAsync` + `setBoundVariableForPaint` — nenhum RGB hardcoded
+   - **Compatibilidade dark mode:** usar get_screenshot com o tema escuro ativo e confirmar
+     que nenhum fill/stroke aparece como hex solto no painel de inspeção do Figma
 ```

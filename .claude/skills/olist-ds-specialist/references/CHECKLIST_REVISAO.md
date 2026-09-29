@@ -4,37 +4,37 @@ Use este checklist ao revisar qualquer tela ou componente para consistência vis
 
 ## 1. Tipografia
 
-- [ ] Fonte é Plus Jakarta Sans em todos os lugares
-- [ ] Nenhum tamanho fora da escala de tokens (10, 12, 14, 16, 20, 24, 32, 40, 48)
-- [ ] Texto corpo é 14px regular gray-900
-- [ ] Headers usam semibold (600) ou bold (700)
-- [ ] Texto secundário usa gray-500 (não gray-400 ou mais claro)
-- [ ] Headers de tabela usam 12px semibold gray-600
-- [ ] Nenhum text-transform: uppercase
+- [ ] Fonte usa `var(--font-family-base)` (Plus Jakarta Sans) em todos os lugares
+- [ ] Nenhum tamanho fora da escala de tokens — use `var(--text-*-font-size)`, nunca valor fixo em px/rem
+- [ ] Texto de corpo usa `var(--text-paragraph-font-size)` + `var(--font-weight-regular)` + `var(--color-text-container-text)`
+- [ ] Headers usam `var(--font-weight-sbold)` ou `var(--font-weight-bold)` conforme papel semântico
+- [ ] Texto secundário usa `var(--color-text-container-label)` — não `var(--color-text-disabled-default)` nem primitivo
+- [ ] Headers de tabela usam `var(--table-head-font-size)` + `var(--table-head-font-weight)` + `var(--table-head-color)`
+- [ ] Nenhum `text-transform: uppercase`
 - [ ] Nenhum itálico para ênfase
-- [ ] Alturas de linha correspondem à escala
+- [ ] `line-height` sempre via token semântico correspondente ao `font-size` escolhido (ver `TIPOGRAFIA.md`)
 
 ## 2. Cores
 
-- [ ] Nenhum valor hex hardcoded — todas as cores usam variáveis CSS
-- [ ] Fundo da página é gray-0 (#fcfbf8), não branco (#fff)
-- [ ] Ações primárias usam blue-500
-- [ ] Bordas usam gray-100 (leve) ou gray-200 (ênfase)
-- [ ] Elementos desabilitados usam gray-300 + token de fundo disabled
-- [ ] Estados de erro usam red-500 texto/borda + red-0 fundo
-- [ ] Estados de sucesso usam green-500 + green-0 fundo
-- [ ] Badges de status seguem o mapa de cores em CORES.md
-- [ ] Contraste passa WCAG AA (4.5:1 mínimo para texto)
-- [ ] Token semântico é da família/estado corretos, não só do valor visual certo (ver `doNotUseWhen` em GOVERNANCA_TOKENS.md)
+- [ ] Nenhum valor hex hardcoded — todas as cores usam `var(--token-semântico)`
+- [ ] Fundo de página usa `var(--color-background-surface-container)`, nunca hex fixo
+- [ ] Ações primárias usam `var(--button-color-primary)` / `var(--color-background-enabled-full-brand)`
+- [ ] Bordas de container usam `var(--color-border-container-outside)` (leve) ou `var(--color-border-container-inside)` (ênfase)
+- [ ] Elementos desabilitados usam `var(--color-background-disabled-neutral)` + `var(--color-text-disabled-default)`
+- [ ] Estados de erro: texto/borda via `var(--color-border-feedback-negative-subtle)` + fundo `var(--color-background-feedback-negative-subtle)`
+- [ ] Estados de sucesso: `var(--color-border-feedback-positive-subtle)` + `var(--color-background-feedback-positive-subtle)`
+- [ ] Badges de status seguem o mapa de cores em `CORES.md` (tokens `color-background-feedback-*`)
+- [ ] Contraste passa WCAG 2.1 AA (4.5:1 mínimo para texto) em modo **claro e escuro**
+- [ ] Token semântico é da família/estado corretos, não só do valor visual certo (ver `doNotUseWhen` em `GOVERNANCA_TOKENS.md`)
 
 ## 3. Espaçamento
 
-- [ ] Todos os valores são múltiplos de 4px
-- [ ] Padding da área de conteúdo é 24px ou 32px
-- [ ] Gap entre seções é 24px ou 32px
-- [ ] Gap dentro de seções é 16px
-- [ ] Padding de card é 16px (compacto) ou 24px (padrão)
-- [ ] Nenhum valor arbitrário (5px, 7px, 13px)
+- [ ] Todos os valores usam `var(--shape-spacing-*)` — nenhum valor fixo em px/rem
+- [ ] Padding da área de conteúdo usa `var(--shape-spacing-24px)` ou `var(--shape-spacing-32px)`
+- [ ] Gap entre seções usa `var(--shape-spacing-24px)` ou `var(--shape-spacing-32px)`
+- [ ] Gap dentro de seções usa `var(--shape-spacing-16px)`
+- [ ] Padding de card usa `var(--shape-spacing-16px)` (compacto) ou `var(--shape-spacing-24px)` (padrão)
+- [ ] Nenhum valor fora da escala de 4px (não existem tokens para 5px, 7px, 13px)
 
 ## 4. Layout
 
@@ -58,10 +58,10 @@ Use este checklist ao revisar qualquer tela ou componente para consistência vis
 - [ ] Estado de carregamento existe (placeholders skeleton)
 - [ ] Estado vazio existe (mensagem + ação opcional)
 - [ ] Estado de erro existe (mensagem + tentar novamente)
-- [ ] Estados de hover usam tokens corretos (effects-hover-*)
-- [ ] Estados de foco têm outline 2px blue-500 visível
-- [ ] Estados desabilitados usam gray-300 + opacidade reduzida
-- [ ] Estados ativos/pressed usam tokens corretos (effects-pressed-*)
+- [ ] Estados de hover usam `var(--color-background-hover-*)` (não `effects-hover-*` diretamente)
+- [ ] Estados de foco têm outline via `var(--focus-border-width-default)` + `var(--focus-border-color-default)` no `:focus-visible`
+- [ ] Estados desabilitados usam `var(--color-background-disabled-neutral)` + `var(--color-text-disabled-default)` — sem opacidade arbitrária
+- [ ] Estados ativos/pressed usam `var(--color-background-pressed-*)` (não `effects-pressed-*` diretamente)
 
 ## 7. Acessibilidade
 
@@ -111,6 +111,13 @@ Use este checklist ao revisar qualquer tela ou componente para consistência vis
 - [ ] Emoji: máx 1-2 por mensagem, nunca em labels/erros/CTAs/breadcrumbs
 
 **Consulte `UX_WRITING.md` para regras completas por tipo de texto.**
+
+## 11. Modo Escuro
+
+- [ ] Todos os fills/strokes usam tokens semânticos — nenhum hex fixo (tokens semânticos resolvem automaticamente em dark mode)
+- [ ] Contraste 4.5:1 verificado também com o tema escuro ativo (WCAG 2.1 AA SC 1.4.3)
+- [ ] Nenhum valor de cor hardcoded no CSS ou na Figma Plugin API (nem em fallback)
+- [ ] Componentes testados visualmente nos dois modos antes do merge
 
 ## Níveis de Severidade
 
