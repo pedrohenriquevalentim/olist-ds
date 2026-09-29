@@ -12,9 +12,10 @@ Fora do escopo: backend, APIs, banco, autenticação, regras de negócio.
 1. **Ler `references/VISAO_GERAL.md` primeiro** — é o mapa de navegação
 2. **Ler `decisions/INDEX.md` logo após** — decisões ativas têm precedência sobre defaults; ler os arquivos específicos que se aplicam à tarefa
 3. **Ler `figma-config.json` antes de qualquer Figma MCP** — obtém `searchPriority` e `blockedLibraries`
-4. **Nunca hardcodar cores/fontes/espaçamentos** — sempre `var(--token)` em `rem`
+4. **Nunca hardcodar cores/fontes/espaçamentos** — sempre `var(--token)` em `rem`; no Figma Plugin API, sempre `importVariableByKeyAsync` + `setBoundVariableForPaint` (RGB sem binding é proibido)
 5. **Consultar `references/GLOSSARIO_PAPEIS_TEXTO.md` antes de nomear textos** ("título da página" → Heading, "mensagem de erro" → Error)
 6. **Consultar `references/UX_WRITING.md` ao criar qualquer copy** — protocolo de triagem + 4 pilares
+7. **Tokens semânticos são o mecanismo de dark mode** — nenhum fill/stroke de cor primitiva ou hex fixo é aceito; verificar compatibilidade nos dois modos (claro e escuro) antes de concluir qualquer caso que produza UI
 
 ## Figma — Library e Busca
 

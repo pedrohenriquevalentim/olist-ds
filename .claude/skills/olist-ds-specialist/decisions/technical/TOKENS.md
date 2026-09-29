@@ -95,17 +95,30 @@ Lista completa → `references/TOKEN_CATALOG.md` → Seção 2.
 
 ## Regras para Figma Plugin API
 
-Na Figma Plugin API **não existem variáveis CSS** — você precisa de valores numéricos.
+Na Figma Plugin API **não existem variáveis CSS** — o binding de cor é feito via variável Figma, não via string CSS.
 
 ```javascript
-// ✅ Correto para Figma Plugin API
-node.fills = [{ type: 'SOLID', color: { r: 0.039, g: 0.306, b: 0.894 } }]; // blue-blue-500
+// ✅ Correto — binding de variável semântica (mantém rastreabilidade no Figma)
+const blueVar = await figma.variables.importVariableByKeyAsync(BLUE_500_VAR_KEY);
+node.fills = [{
+  type: 'SOLID',
+  color: { r: 0.039, g: 0.306, b: 0.894 }, // valor de fallback apenas
+  boundVariables: { color: { type: 'VARIABLE_ALIAS', id: blueVar.id } }
+}];
 
-// ❌ Inválido na Plugin API
+// ❌ Inválido — variável CSS não funciona na Plugin API
 node.fills = [{ type: 'SOLID', color: 'var(--color-blue-blue-500)' }];
+
+// ❌ Proibido — RGB hardcoded sem binding perde rastreabilidade
+//    (o Figma exibe hex solto; o modo claro/escuro não funciona)
+node.fills = [{ type: 'SOLID', color: { r: 0.039, g: 0.306, b: 0.894 } }];
 ```
 
-Tabela completa de hex → RGB 0-1 para uso na Figma Plugin API → `references/TOKEN_CATALOG.md` → Seção 1, coluna "Figma RGB".
+> **Regra (globals.md):** toda fill/stroke de frame ou componente DEVE usar
+> `importVariableByKeyAsync` + `setBoundVariableForPaint`. RGB sem binding é
+> proibido mesmo quando o valor numérico corresponde a um token semântico.
+
+Tabela completa de keys de variável e hex → RGB 0-1 → `references/TOKEN_CATALOG.md` → Seção 1, colunas "Figma RGB" e "Variable Key".
 
 ---
 
@@ -129,6 +142,7 @@ npm run build:tokens
 
 ## Histórico
 
+- 2026-09-29 v1.3 — Corrigida contradição crítica no exemplo Figma Plugin API: RGB hardcoded **não é** a forma correta — é proibida. A abordagem correta é `importVariableByKeyAsync` + `setBoundVariableForPaint` com o RGB apenas como fallback no objeto paint. Alinhado com regra equivalente em globals.md.
 - 2026-08-23 v1.2 — Corrigida contradição sobre hardcode hex (só proibido em CSS, necessário na Figma Plugin API). Adicionada hierarquia de três camadas, nomes corretos dos primitivos (segmento duplicado), referência ao TOKEN_CATALOG.md como fonte primária sem repo. Removida referência exclusiva a `src/generated/variables.css`.
 - 2026-07-03 v1.1 — Adicionada referência a `GOVERNANCA_TOKENS.md`
 - 2026-06-23 v1.0 — Decisão inicial extraída do CLAUDE.md

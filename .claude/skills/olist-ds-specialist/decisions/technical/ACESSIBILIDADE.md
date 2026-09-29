@@ -8,7 +8,7 @@
 
 ## Decisão
 
-Todo componente interativo deve atender ao mínimo WCAG AA. Acessibilidade não é opcional — é critério de aceite.
+Todo componente interativo deve atender ao mínimo **WCAG 2.1 AA**. Acessibilidade não é opcional — é critério de aceite. Isso inclui verificação nos modos **claro e escuro**: o contraste mínimo de 4.5:1 deve ser satisfeito nas duas paletas de cor.
 
 ---
 
@@ -16,7 +16,7 @@ Todo componente interativo deve atender ao mínimo WCAG AA. Acessibilidade não 
 
 ### Elementos interativos
 - Sempre definir `role` + `aria-label` (ou texto visível equivalente)
-- Contraste mínimo 4.5:1
+- Contraste mínimo 4.5:1 em modo claro **e** escuro (WCAG 2.1 AA SC 1.4.3)
 
 ### Roles semânticos para componentes complexos
 
