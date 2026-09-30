@@ -16,6 +16,14 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
+  viteFinal: (config) => {
+    // GitHub Pages serve sob /olist-ds/ — sem esse base os chunks dinâmicos
+    // não são encontrados e os componentes falham ao renderizar.
+    if (process.env.NODE_ENV === 'production') {
+      config.base = '/olist-ds/';
+    }
+    return config;
+  },
 };
 
 export default config;
