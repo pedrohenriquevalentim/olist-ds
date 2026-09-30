@@ -27,7 +27,9 @@ const ROOT = process.cwd();
 const SOURCE_DIR = join(ROOT, 'packages', 'design-tokens', 'dist');
 const GENERATED_DIR = join(ROOT, 'src', 'generated');
 
-const FILES = ['variables.css', 'tokens.js', 'tokens.json'];
+// tokens-dark.json é opcional (só existe quando o Figma tem dark mode configurado)
+const REQUIRED_FILES = ['variables.css', 'tokens.js', 'tokens.json'];
+const OPTIONAL_FILES = ['tokens-dark.json'];
 
 if (!existsSync(SOURCE_DIR)) {
   console.error(`❌ ${SOURCE_DIR} não existe.`);
@@ -38,7 +40,7 @@ if (!existsSync(SOURCE_DIR)) {
 
 mkdirSync(GENERATED_DIR, { recursive: true });
 
-for (const file of FILES) {
+for (const file of REQUIRED_FILES) {
   const from = join(SOURCE_DIR, file);
   if (!existsSync(from)) {
     console.error(`❌ ${from} não encontrado — o build do pacote de tokens pode ter falhado.`);
@@ -46,6 +48,14 @@ for (const file of FILES) {
   }
   cpSync(from, join(GENERATED_DIR, file));
   console.log(`✅ src/generated/${file} (copiado de packages/design-tokens/dist/${file})`);
+}
+
+for (const file of OPTIONAL_FILES) {
+  const from = join(SOURCE_DIR, file);
+  if (existsSync(from)) {
+    cpSync(from, join(GENERATED_DIR, file));
+    console.log(`✅ src/generated/${file} (copiado de packages/design-tokens/dist/${file})`);
+  }
 }
 
 console.log('\n🎉 Tokens copiados do workspace @pedrohenriquevalentim/design-tokens.\n');

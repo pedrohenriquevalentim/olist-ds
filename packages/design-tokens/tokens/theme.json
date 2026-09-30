@@ -6,6 +6,7 @@
         "system": "{base:font/family/arial}"
       },
       "size": {
+        "x1 (8px)": "{base:font/size/8px}",
         "x1_25 (10px)": "{base:font/size/10px}",
         "x1_5 (12px)": "{base:font/size/12px}",
         "x1_75 (14px)": "{base:font/size/14px}",
@@ -135,7 +136,8 @@
         },
         "selected": {
           "default": "{base:color/blue/blue 500}",
-          "utility": "{base:color/blue/blue 50}"
+          "utility": "{base:color/blue/blue 50}",
+          "subtle": "{base:color/blue/blue 300}"
         },
         "feedback": {
           "positive": {
@@ -427,6 +429,7 @@
         "system": "{base:font/family/arial}"
       },
       "size": {
+        "x1 (8px)": "{base:font/size/8px}",
         "x1_25 (10px)": "{base:font/size/10px}",
         "x1_5 (12px)": "{base:font/size/12px}",
         "x1_75 (14px)": "{base:font/size/14px}",
@@ -556,7 +559,8 @@
         },
         "selected": {
           "default": "{base:color/blue/blue 500}",
-          "utility": "{base:color/blue/blue 800}"
+          "utility": "{base:color/blue/blue 800}",
+          "subtle": "{base:color/blue/blue 300}"
         },
         "feedback": {
           "positive": {

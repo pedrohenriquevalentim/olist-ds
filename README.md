@@ -176,9 +176,9 @@ olist-ds/
 │   └── manager.ts                       # Aplica tema
 ├── packages/
 │   └── design-tokens/                   # Pacote agnóstico de framework (@pedrohenriquevalentim/design-tokens)
-│       ├── tokens/                      # JSON do Tokens Studio (DTCG) — base.json, theme.json, tokens.json
-│       ├── scripts/build.mjs            # JSON → CSS Custom Properties + JS (ex-sync-tokens.mjs)
-│       └── dist/                        # Saída: variables.css, tokens.js, tokens.json (não editar)
+│       ├── tokens/                      # JSONs exportados do Figma via plugin — base.json, theme.json, tokens-light.json, tokens-dark.json, tokens-components.json
+│       ├── scripts/build.mjs            # JSON → CSS Custom Properties + JS (light + dark mode)
+│       └── dist/                        # Saída: variables.css, tokens.js, tokens.json, tokens-dark.json (não editar)
 ├── scripts/
 │   ├── copy-tokens.mjs                  # Copia dist/ do workspace design-tokens para src/generated/
 │   ├── sync-skill.mjs                   # Regenera COMPONENTES.md, MAPA_FONTES.md, VISAO_GERAL.md
