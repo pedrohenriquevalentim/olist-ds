@@ -83,6 +83,54 @@ npm run test:run
 
 ## Storybook (v10)
 
+### Formato obrigatório: CSF3
+
+Toda story usa **Component Story Format 3** — objeto exportado em vez de função, com `satisfies` para inferência de tipo:
+
+```tsx
+// ✅ CSF3 correto
+import type { Meta, StoryObj } from '@storybook/react';
+
+const meta = {
+  title: 'Components/NomeComponente',
+  component: NomeComponente,
+  parameters: { layout: 'centered' },
+} satisfies Meta<typeof NomeComponente>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Padrao: Story = {
+  args: { label: 'Exemplo' },
+};
+
+// ❌ CSF2 proibido
+export const Padrao = () => <NomeComponente label="Exemplo" />;
+```
+
+### Dark mode obrigatório
+
+Todo `meta` deve incluir `backgrounds` com as duas opções de tema. Use os valores resolvidos dos tokens semânticos (Storybook não aceita `var(--token)` em `backgrounds.values`):
+
+```tsx
+parameters: {
+  layout: 'centered',
+  backgrounds: {
+    default: 'claro',
+    values: [
+      { name: 'claro', value: '#fcfbf8' }, // --color-background-surface-container light
+      { name: 'escuro', value: '#1a1a1a' }, // --color-background-surface-container dark
+    ],
+  },
+},
+```
+
+> **Exceção documentada:** `backgrounds.values` é a única permissão de hex resolvido em stories — Storybook não suporta `var()` nesse campo. Nenhum outro uso de valor fixo é permitido.
+
+### Zero hardcode em stories
+
+- Nenhum `style={{ color: '...', fontSize: '...' }}` inline nos decorators ou nos args
+- Decorators usam classes CSS ou tokens via `var(--token)` quando precisam de estilo
 - Props de ícone: `argTypes` com `mapping` e `control: { type: 'select' }`
 - Componentes com opções (Selects): mock robusto de dados na Story
 - Todas as descrições e stories em **português**
@@ -113,5 +161,6 @@ Ver `SKILL.md` Caso 7 e `CLAUDE.md` passo 10 para o script completo via `use_fig
 
 ## Histórico
 
+- 2026-09-30 v1.3 — Storybook: CSF3 obrigatório, `backgrounds` claro/escuro obrigatório em todo `meta`, zero hardcode em stories (exceção documentada para `backgrounds.values`).
 - 2026-06-25 v1.1 — Adicionada seção sobre geração de docs no Figma (fluxo unificado v3.7)
 - 2026-06-23 v1.0 — Decisão inicial extraída do CLAUDE.md
