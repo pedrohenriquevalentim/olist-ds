@@ -1,10 +1,22 @@
-# Olist Design System — Especialista (v3.21 · atualizado em 2026-09-25)
+# Olist Design System — Especialista (v3.22 · atualizado em 2026-09-30)
 
 Skill corporativa para criação de telas, componentes e protótipos a partir de SDDs/PRDs usando o design system da Olist.
 
 ## 📌 Library de referência (decisão permanente desde 2026-07-03)
 
 A [`design system (base)`](https://www.figma.com/design/HeyN4w209HWh8rfpTDiwyf/design-system) é a **única library de referência** para construção de telas, em `figma-config.json`/`searchPriority`. A hierarquia anterior (AI Components, ERP components, ERP recursos, ERP style guide, [design system] components web) foi descontinuada e está em `blockedLibraries` com os dados preservados. Histórico completo da decisão, incluindo checagem de cobertura contra o harness, em `decisions/ux-design/FLUXO_PRD_FIGMA.md`.
+
+## Novidades v3.22 (2026-09-29)
+
+- **Drawer componentKey:** era `null` — resolvido para `f466ce17b00d813e1a9e48fdbf4030980371e6c5`.
+- **Loading** adicionado ao registry (key `0d32737ae3b73820a283a1453b7e85d9ffa5c669`, category: feedback) — estava no inventário do `globals.md` mas sem entry no registry.
+- **Chart Bar Up / Bar Down / Bar Variation / Chart Pie** adicionados ao registry com seus componentKeys (category: data-visualization) — estavam no inventário mas sem componentKeys.
+- **Update** (ícone individual, key `d6a0734de0d76ea39dd0adfc3e0a356e900bf663`) adicionado ao registry.
+- **File Pie Chart** (ícone individual, key `39806c4ceeffa09ff8a020b656cfb528e60d6005`) adicionado ao registry.
+- `totalComponents` atualizado: 63 → 71.
+- **Modal** — busca `modal` retornou `card` mas não um component_set `modal`. Ainda WIP, componentKey: null.
+- **Overlay** — não retornou em busca direta; pode ser sinônimo do Drawer ou não publicado.
+- **Menu** (key `4a05e281...`) — variantsConfirmed: false, aguarda URL do Figma.
 
 ## Novidades v3.21 (2026-09-20)
 
@@ -121,7 +133,7 @@ olist-ds-specialist/
     └── VISAO_GERAL.md                  # Mapa de navegação — leia sempre primeiro
 ```
 
-> **Raiz:** 7 arquivo(s) · **Decisions:** 13 arquivo(s) · **Referências:** 19 arquivo(s) · **Total:** 39 arquivo(s) — atualizado em 2026-09-25 pelo `sync-skill-meta.mjs`
+> **Raiz:** 7 arquivo(s) · **Decisions:** 13 arquivo(s) · **Referências:** 19 arquivo(s) · **Total:** 39 arquivo(s) — atualizado em 2026-09-30 pelo `sync-skill-meta.mjs`
 ## Libraries do Figma (ordem de prioridade)
 
 | # | Library | Conteúdo |
@@ -168,6 +180,31 @@ Use $olist-ds-specialist para criar UI no Figma:
 ```
 
 ## Changelog
+
+### v3.22 (2026-09-29)
+### component-registry.json + figma-config.json + globals.md — 2ª rodada de /ds-sync
+
+**Arquivos modificados:** `component-registry.json`, `figma-config.json`, `globals.md`
+
+#### Fixed
+
+- **Drawer componentKey:** era `null` — resolvido para `f466ce17b00d813e1a9e48fdbf4030980371e6c5`.
+
+#### Added
+
+- **Loading** adicionado ao registry (key `0d32737ae3b73820a283a1453b7e85d9ffa5c669`, category: feedback) — estava no inventário do `globals.md` mas sem entry no registry.
+- **Chart Bar Up / Bar Down / Bar Variation / Chart Pie** adicionados ao registry com seus componentKeys (category: data-visualization) — estavam no inventário mas sem componentKeys.
+- **Update** (ícone individual, key `d6a0734de0d76ea39dd0adfc3e0a356e900bf663`) adicionado ao registry.
+- **File Pie Chart** (ícone individual, key `39806c4ceeffa09ff8a020b656cfb528e60d6005`) adicionado ao registry.
+- `totalComponents` atualizado: 63 → 71.
+
+#### Gaps identificados
+
+- **Modal** — busca `modal` retornou `card` mas não um component_set `modal`. Ainda WIP, componentKey: null.
+- **Overlay** — não retornou em busca direta; pode ser sinônimo do Drawer ou não publicado.
+- **Menu** (key `4a05e281...`) — variantsConfirmed: false, aguarda URL do Figma.
+
+---
 
 ### v3.21 (2026-09-15)
 - Versão 3.21
