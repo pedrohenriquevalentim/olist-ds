@@ -3,6 +3,36 @@
 Histórico de atualizações sincronizado com a skill `olist-ds-specialist`.
 Atualizado automaticamente pelo `sync-skill-meta.mjs` a cada `npm run ship`.
 
+## v3.22 (2026-09-29)
+
+> Skill atualizada para v3.22. Referências sincronizadas automaticamente.
+
+ — 2ª rodada
+
+### component-registry.json + figma-config.json + globals.md — 2ª rodada de /ds-sync
+
+**Arquivos modificados:** `component-registry.json`, `figma-config.json`, `globals.md`
+
+#### Fixed
+
+- **Drawer componentKey:** era `null` — resolvido para `f466ce17b00d813e1a9e48fdbf4030980371e6c5`.
+
+#### Added
+
+- **Loading** adicionado ao registry (key `0d32737ae3b73820a283a1453b7e85d9ffa5c669`, category: feedback) — estava no inventário do `globals.md` mas sem entry no registry.
+- **Chart Bar Up / Bar Down / Bar Variation / Chart Pie** adicionados ao registry com seus componentKeys (category: data-visualization) — estavam no inventário mas sem componentKeys.
+- **Update** (ícone individual, key `d6a0734de0d76ea39dd0adfc3e0a356e900bf663`) adicionado ao registry.
+- **File Pie Chart** (ícone individual, key `39806c4ceeffa09ff8a020b656cfb528e60d6005`) adicionado ao registry.
+- `totalComponents` atualizado: 63 → 71.
+
+#### Gaps identificados
+
+- **Modal** — busca `modal` retornou `card` mas não um component_set `modal`. Ainda WIP, componentKey: null.
+- **Overlay** — não retornou em busca direta; pode ser sinônimo do Drawer ou não publicado.
+- **Menu** (key `4a05e281...`) — variantsConfirmed: false, aguarda URL do Figma.
+
+---
+
 ## v3.21 (2026-09-15)
 
 > Skill atualizada para v3.21. Referências sincronizadas automaticamente.
