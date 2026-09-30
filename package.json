@@ -1,6 +1,6 @@
 {
   "name": "@pedrohenriquevalentim/olist-ds",
-  "version": "1.0.79",
+  "version": "1.0.80",
   "description": "Olist Design System — componentes React + tokens",
   "workspaces": [
     "packages/*"
@@ -67,17 +67,16 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@pedrohenriquevalentim/design-tokens": "*",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
     "@axe-core/react": "^4.11.1",
     "@chromatic-com/storybook": "^5.2.1",
     "@eslint/js": "^10.0.1",
     "@google/generative-ai": "^0.24.1",
-    "@storybook/addon-a11y": "^10.4.6",
-    "@storybook/addon-docs": "^10.4.6",
-    "@storybook/addon-vitest": "^10.4.6",
-    "@storybook/react-vite": "^10.4.6",
+    "@pedrohenriquevalentim/design-tokens": "*",
+    "@storybook/addon-a11y": "^10.6.1",
+    "@storybook/addon-docs": "^10.6.1",
+    "@storybook/addon-themes": "^10.6.1",
+    "@storybook/addon-vitest": "^10.6.1",
+    "@storybook/react-vite": "^10.6.1",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
@@ -94,7 +93,9 @@
     "figma-mcp": "^0.1.4",
     "jsdom": "^29.0.1",
     "playwright": "^1.59.1",
-    "storybook": "^10.4.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "storybook": "^10.6.1",
     "style-dictionary": "^5.4.0",
     "typescript": "^6.0.2",
     "typescript-eslint": "^8.61.1",

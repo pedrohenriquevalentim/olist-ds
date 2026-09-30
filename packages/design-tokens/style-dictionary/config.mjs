@@ -24,7 +24,7 @@ StyleDictionary.registerTransform(jsNameTransform);
 StyleDictionary.registerFormat(cssInJsFormat);
 
 const sd = new StyleDictionary({
-  source: ['tokens/tokens.json'],
+  source: ['tokens/tokens-light.json'],
   parsers: ['olist-tokens-json'],
   platforms: {
     css: {

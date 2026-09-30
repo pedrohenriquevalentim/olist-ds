@@ -62,10 +62,10 @@
       }
     ],
     "harnessCoverageCheck": {
-      "lastVerifiedAt": "2026-09-25",
+      "lastVerifiedAt": "2026-09-30",
       "againstLibrary": "design system (base)",
-      "verifiedVia": "search_design_system real via /ds-sync (Caso 6), busca por 14 categorias — cobre todas as categorias documentadas + sondagem de novos termos",
-      "status": "2ª rodada de sync (2026-09-25): Drawer key resolvido, Loading adicionado, 4 chart components adicionados, 2 icon entries adicionados. Gaps pendentes: Modal (WIP), Overlay, Menu (variantsConfirmed: false).",
+      "verifiedVia": "search_design_system real via /ds-sync (Caso 6), busca por 15 categorias + get_metadata do nó 11279:16608",
+      "status": "3ª rodada de sync (2026-09-30): 9 novos componentes adicionados (calendar, alert-bar, inbox, invoice, bell, money-notification, credit-card, id-card, card-notification). Dark mode confirmado em '02. theme tokens' mas valores do modo Dark não exportáveis via MCP — requer plugin do usuário para gerar variables.css com html.dark {}. Atualizações hoje em: link, input paragraph, calendar/single, dropdown.",
       "keysFixed": [
         "Menu Global: c2a9753... → c76f80e6de1b8c4bd100b60329f3d68d28653e68",
         "Tabs: 6e28a768... → f0c6d6f3695edcc13e25a2a2436f6f1e52429da3",
@@ -81,7 +81,16 @@
         "Chart Bar Variation (key 2bce9d5c...)",
         "Chart Pie (key ee651e8b...)",
         "Update icon (key d6a0734d...)",
-        "File Pie Chart icon (key 39806c4c...)"
+        "File Pie Chart icon (key 39806c4c...)",
+        "calendar (key c4d9635bccfa68edd96151e9a624df3ebdc228ad) — component_set seletor de datas",
+        "calendar/single (key 534f049e7707e8b77b19e2406a0ba9ae2fde3b3d) — calendar mensal seleção single, adicionado 2026-09-30",
+        "alert-bar (nodeId 11279:16608) — inline alert com intents: brand, informative, neutral, success, error, warning",
+        "inbox (key 72528d44096bc3419976ee04ec320e498b51d30b) — component_set",
+        "invoice (key 69825aa77706f50d7745d04de522917ff4b0d7a7) — component_set",
+        "bell (key 7dab82ab39ba3851c0a436655292b06a385b8ef8) — component_set notificação/sino",
+        "money-notification (key 10d1aa5c7b52677107000105f0b705eeed3ddb12) — component_set",
+        "credit-card (key 2a4b8e588c7d89308eb60a2d192aafa8a75b0b1e) — component_set",
+        "id-card (key e9329af4b81298c72189fbe98653a40a80e02c10) — component_set"
       ],
       "confirmed": [
         "menu-global", "Button", "Button Icon", "Radio Button", "Segmented Buttons", "Link", "Tabs",
@@ -92,7 +101,9 @@
         "Avatar", "Card", "Breadcrumb", "Profile", "Logout",
         "Table (+ Table Column, Head, Simple Cell, Spreadsheet, Table Cell Extended)", "Paginator", "Sort", "Reorder",
         "Bar, Chart Bar Up, Chart Bar Down, Chart Bar Variation, Chart Pie",
-        "List, Task List", "Dashboard", "Loading", "Overlay", "Cookie"
+        "List, Task List", "Dashboard", "Loading", "Overlay", "Cookie",
+        "Calendar (+ calendar/single)", "Alert Bar (intents: brand/informative/neutral/success/error/warning)",
+        "Inbox", "Invoice", "Bell", "Money Notification", "Credit Card", "ID Card"
       ],
       "gaps": [],
       "resolvedGaps": [

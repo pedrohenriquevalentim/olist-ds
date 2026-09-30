@@ -1,13 +1,25 @@
 #!/usr/bin/env node
 
 /**
- * build.mjs (ex-sync-tokens.mjs) — pacote @pedrohenriquevalentim/design-tokens
+ * build.mjs — pacote @pedrohenriquevalentim/design-tokens
  *
  * Lê os JSONs da pasta tokens/ (exportados do Figma via plugin)
  * e gera os arquivos consumíveis na pasta dist/
  *
- * Entrada:  tokens/base.json, tokens/theme.json, tokens/tokens.json
+ * Entrada:  tokens/base.json, tokens/theme.json,
+ *           tokens/tokens-light.json, tokens/tokens-dark.json
+ *           tokens/tokens-components.json  (opcional)
+ *
+ * Compatibilidade: se tokens-light.json não existir, lê tokens.json como fallback
+ *
  * Saída:    dist/variables.css, dist/tokens.js, dist/tokens.json
+ *           dist/tokens-dark.json  (apenas se dark tokens existirem)
+ *
+ * Dark mode CSS gerado:
+ *   :root                           → light (padrão)
+ *   @media (prefers-color-scheme)   → dark automático (sistema)
+ *   [data-theme="dark"]             → dark manual (toggle JS)
+ *   [data-theme="light"]            → força light quando sistema é dark
  *
  * Uso:
  *   npm run build --workspace=packages/design-tokens
@@ -33,27 +45,35 @@ function readJSON(path) {
   catch { return null; }
 }
 
-const baseTokens = readJSON(join(TOKENS_DIR, 'base.json'));
-const themeTokens = readJSON(join(TOKENS_DIR, 'theme.json'));
-const allTokens = readJSON(join(TOKENS_DIR, 'tokens.json'));
+const baseTokens       = readJSON(join(TOKENS_DIR, 'base.json'));
+const themeTokens      = readJSON(join(TOKENS_DIR, 'theme.json'));
+const lightTokens      = readJSON(join(TOKENS_DIR, 'tokens-light.json'));
+const darkTokens       = readJSON(join(TOKENS_DIR, 'tokens-dark.json'));
+const componentTokens  = readJSON(join(TOKENS_DIR, 'tokens-components.json'));
 
-if (!baseTokens && !themeTokens && !allTokens) {
-  console.error('❌ Nenhum arquivo encontrado em packages/design-tokens/tokens/\n');
+// {} vazio = placeholder aguardando export do Figma; tratar como "sem dark mode"
+const hasDarkMode = !!darkTokens && Object.keys(darkTokens).length > 0;
+
+if (!lightTokens) {
+  console.error('❌ tokens-light.json não encontrado em packages/design-tokens/tokens/\n');
   console.log('Para gerar os JSONs, use o plugin "Olist Token Exporter" no Figma:');
   console.log('  1. Abrir Figma → Plugins → Olist Token Exporter');
   console.log('  2. Clicar "Extrair Tokens"');
-  console.log('  3. Baixar os 3 arquivos para a pasta packages/design-tokens/tokens/');
+  console.log('  3. Baixar os arquivos para a pasta packages/design-tokens/tokens/');
+  console.log('     Estrutura esperada: base.json, theme.json, tokens-light.json, tokens-dark.json');
   console.log('  4. Rodar npm run build:tokens na raiz do repositório novamente');
   process.exit(1);
 }
 
-// Combinar tudo se tokens.json não existir
-const tokens = allTokens || { ...(baseTokens || {}), ...(themeTokens || {}) };
+const lightSource = lightTokens;
 
 console.log(`📂 tokens/ encontrado:`);
-if (baseTokens) console.log(`   ✅ base.json`);
-if (themeTokens) console.log(`   ✅ theme.json`);
-if (allTokens) console.log(`   ✅ tokens.json`);
+if (baseTokens)      console.log(`   ✅ base.json`);
+if (themeTokens)     console.log(`   ✅ theme.json`);
+if (lightTokens)     console.log(`   ✅ tokens-light.json`);
+if (darkTokens)      console.log(`   ✅ tokens-dark.json`);
+if (componentTokens) console.log(`   ✅ tokens-components.json`);
+if (hasDarkMode)     console.log(`\n   🌙 Dark mode ativo`);
 console.log('');
 
 // ============================================================================
@@ -70,10 +90,6 @@ function flattenObject(obj, prefix = '', result = {}) {
       flattenObject(value, fullKey, result);
     } else {
       if (Object.prototype.hasOwnProperty.call(result, fullKey) && result[fullKey] !== value) {
-        // Caso benigno: alias que referencia o próprio caminho (ex.: theme
-        // token "font/weight/light" → "{font/weight/light}" do primitivo).
-        // Resolver para o valor concreto é o que o alias significa — mantê-lo
-        // geraria `--x: var(--x)`, que é inválido em CSS.
         if (isSelfAlias(value, fullKey)) {
           console.warn(`⚠️  Alias auto-referente ignorado: "${fullKey}" mantém ${JSON.stringify(result[fullKey])}`);
           continue;
@@ -96,27 +112,49 @@ function flattenObject(obj, prefix = '', result = {}) {
   return result;
 }
 
-let flatTokens;
+// tokens-components.json é referência — os componentes já estão mesclados
+// dentro de tokens-light.json e tokens-dark.json pelo plugin do Figma.
+// Não mesclar aqui para evitar tokens duplicados.
+// tokens-components.json: os caminhos no Figma têm a raiz "component/"
+// (ex.: "component/button/size/height"), mas as variáveis CSS geradas omitem
+// esse prefixo ("--button-size-height"). Extraímos a sub-árvore "component"
+// para achatar sem ele — preservando compatibilidade com os .module.css existentes.
+// Componentes também fazem aliases internos {components:globals/...} que
+// precisam ser resolvidos usando o mesmo mapa sem prefixo.
+let flatComponents = {};
+if (componentTokens && Object.keys(componentTokens).length > 0) {
+  const componentData = componentTokens.component || componentTokens;
+  flatComponents = flattenObject(componentData);
+  console.log(`   ℹ️  tokens-components.json: ${Object.keys(flatComponents).length} tokens de componente`);
+}
+
+let flatLight;
 try {
-  flatTokens = flattenObject(tokens);
+  flatLight = flattenObject(lightSource);
+  // Mesclar componentes após o light source — sem risco de duplicata pois
+  // tokens-light.json não inclui a collection de componentes
+  Object.assign(flatLight, flatComponents);
 } catch (err) {
   console.error(`❌ ${err.message}\n`);
   process.exit(1);
 }
-const tokenCount = Object.keys(flatTokens).length;
+
+let flatDark = null;
+if (hasDarkMode) {
+  try {
+    flatDark = flattenObject(darkTokens);
+    Object.assign(flatDark, flatComponents);
+  } catch (err) {
+    console.error(`❌ (dark mode) ${err.message}\n`);
+    process.exit(1);
+  }
+}
+
+const tokenCount = Object.keys(flatLight).length;
 
 // ============================================================================
 // 2.1 Validar aliases entre collections
 // ============================================================================
-// A partir da v2 do "Olist Token Exporter", aliases que atravessam collections
-// vêm marcados com a origem — "{theme:font/weight/sbold}" em vez de apenas
-// "{font/weight/sbold}". Nomes de variável não são únicos entre collections
-// (theme pode ter "sbold" sem que base tenha), então validar aqui pega na hora
-// do build um alias quebrado (variável renomeada/removida no Figma sem
-// atualizar quem aponta pra ela) — em vez de descobrir depois, olhando CSS
-// renderizado no navegador (caso real: font-weight quebrado em 2026-07-18).
-// Aliases no formato antigo (sem tag) não são validados — comportamento
-// idêntico ao anterior, preservado para não quebrar exports já existentes.
 
 function firstModeObject(nested) {
   if (!nested) return {};
@@ -126,21 +164,31 @@ function firstModeObject(nested) {
 
 const flatBase = flattenObject(baseTokens || {});
 const flatTheme = flattenObject(firstModeObject(themeTokens));
-const COLLECTION_MAPS = { base: flatBase, theme: flatTheme, components: flatTokens };
+// O mapa de components usa o mesmo flatComponents (sem prefixo "component/")
+// para que aliases {components:globals/font/weight/label} sejam encontrados
+const COLLECTION_MAPS = { base: flatBase, theme: flatTheme, components: flatComponents };
 
 const ALIAS_PATTERN = /^\{([a-z]+):(.+)\}$/;
 
-const brokenAliases = [];
-for (const [key, value] of Object.entries(flatTokens)) {
-  if (typeof value !== 'string') continue;
-  const match = value.match(ALIAS_PATTERN);
-  if (!match) continue;
-  const [, tag, refName] = match;
-  const map = COLLECTION_MAPS[tag];
-  if (map && !(refName in map)) {
-    brokenAliases.push(`   "${key}" → "{${tag}:${refName}}" (não existe na collection "${tag}")`);
+function validateAliases(flat, label) {
+  const broken = [];
+  for (const [key, value] of Object.entries(flat)) {
+    if (typeof value !== 'string') continue;
+    const match = value.match(ALIAS_PATTERN);
+    if (!match) continue;
+    const [, tag, refName] = match;
+    const map = COLLECTION_MAPS[tag];
+    if (map && !(refName in map)) {
+      broken.push(`   "${key}" → "{${tag}:${refName}}" (não existe na collection "${tag}")`);
+    }
   }
+  return broken;
 }
+
+const brokenLight = validateAliases(flatLight, 'light');
+const brokenDark  = flatDark ? validateAliases(flatDark, 'dark') : [];
+const brokenAliases = [...brokenLight, ...brokenDark];
+
 if (brokenAliases.length > 0) {
   console.error(`❌ ${brokenAliases.length} alias(es) quebrado(s):\n`);
   console.error(brokenAliases.join('\n') + '\n');
@@ -152,7 +200,23 @@ if (brokenAliases.length > 0) {
 }
 
 // ============================================================================
-// 3. Gerar CSS variables
+// 3. Calcular dark overrides (diff light vs dark)
+// ============================================================================
+
+// Apenas os tokens que diferem entre light e dark vão nos blocos de override.
+// Tokens idênticos nos dois modos não precisam ser repetidos no CSS dark.
+function computeDarkOverrides(light, dark) {
+  const overrides = {};
+  for (const [key, val] of Object.entries(dark)) {
+    if (light[key] !== val) overrides[key] = val;
+  }
+  return overrides;
+}
+
+const darkOverrides = flatDark ? computeDarkOverrides(flatLight, flatDark) : null;
+
+// ============================================================================
+// 4. Gerar CSS variables
 // ============================================================================
 
 function tokenToCSSVar(tokenPath) {
@@ -163,52 +227,70 @@ function tokenToCSSVar(tokenPath) {
     .toLowerCase();
 }
 
-// Categorias cujo valor numérico não representa pixels (peso de fonte é
-// unitless; opacidade é percentual) — adicionar unidade quebraria a propriedade CSS.
 const UNITLESS_PREFIXES = ['font/weight', 'shape/opacity'];
 function isUnitless(tokenPath) {
   const normalized = tokenPath.toLowerCase();
   return UNITLESS_PREFIXES.some((prefix) => normalized.startsWith(prefix));
 }
 
-// O Figma exporta valores em px; o design system usa rem (regra do projeto:
-// "unidades em rem, nunca px") para respeitar o font-size configurado pelo
-// usuário. Base 16px = 1rem.
 function pxToRem(value) {
   if (value === 0) return '0';
   return `${value / 16}rem`;
 }
 
-function generateCSS(flat) {
+function tokenDeclarations(flat, indent = '  ') {
+  let out = '';
+  for (const [key, value] of Object.entries(flat)) {
+    if (typeof value === 'string' && value.startsWith('{') && value.endsWith('}')) {
+      const taggedMatch = value.match(ALIAS_PATTERN);
+      const refName = taggedMatch ? taggedMatch[2] : value.slice(1, -1);
+      out += `${indent}${tokenToCSSVar(key)}: var(${tokenToCSSVar(refName)});\n`;
+    } else if (typeof value === 'number') {
+      const cssValue = isUnitless(key) ? value : pxToRem(value);
+      out += `${indent}${tokenToCSSVar(key)}: ${cssValue};\n`;
+    } else {
+      out += `${indent}${tokenToCSSVar(key)}: ${value};\n`;
+    }
+  }
+  return out;
+}
+
+function generateCSS(flatL, overrides) {
   let css = `/* Auto-generated by @pedrohenriquevalentim/design-tokens — NÃO EDITAR */\n`;
   css += `/* Última atualização: ${TODAY} */\n`;
   css += `/* Fonte: packages/design-tokens/tokens/ (exportado do Figma via plugin) */\n\n`;
-  css += `:root {\n`;
 
-  for (const [key, value] of Object.entries(flat)) {
-    // Pular aliases (referências) — resolver para valor real se possível
-    if (typeof value === 'string' && value.startsWith('{') && value.endsWith('}')) {
-      // Tag de collection ("{theme:font/weight/sbold}") só serve pra validação
-      // acima — o nome da variável CSS continua baseado só no caminho, pra
-      // não mudar nenhum nome de --var já em uso pelos componentes.
-      const taggedMatch = value.match(ALIAS_PATTERN);
-      const refName = taggedMatch ? taggedMatch[2] : value.slice(1, -1);
-      const refKey = tokenToCSSVar(refName);
-      css += `  ${tokenToCSSVar(key)}: var(${refKey});\n`;
-    } else if (typeof value === 'number') {
-      const cssValue = isUnitless(key) ? value : pxToRem(value);
-      css += `  ${tokenToCSSVar(key)}: ${cssValue};\n`;
-    } else {
-      css += `  ${tokenToCSSVar(key)}: ${value};\n`;
-    }
+  // Light mode (padrão)
+  css += `:root {\n`;
+  css += tokenDeclarations(flatL);
+  css += `}\n`;
+
+  if (overrides && Object.keys(overrides).length > 0) {
+    const darkDecls = tokenDeclarations(overrides);
+
+    // Sistema: segue preferência do OS
+    css += `\n@media (prefers-color-scheme: dark) {\n`;
+    css += `  :root {\n`;
+    css += tokenDeclarations(overrides, '    ');
+    css += `  }\n`;
+    css += `}\n`;
+
+    // Override manual via atributo (toggle JS)
+    css += `\n[data-theme="dark"] {\n`;
+    css += darkDecls;
+    css += `}\n`;
+
+    // Força light quando sistema é dark mas usuário preferiu light
+    css += `\n[data-theme="light"] {\n`;
+    css += tokenDeclarations(flatL);
+    css += `}\n`;
   }
 
-  css += `}\n`;
   return css;
 }
 
 // ============================================================================
-// 4. Gerar JS exports
+// 5. Gerar JS exports
 // ============================================================================
 
 function tokenToJSName(tokenPath) {
@@ -222,50 +304,72 @@ function tokenToJSName(tokenPath) {
     .replace(/[^a-zA-Z0-9]/g, '');
 }
 
-function generateJS(flat) {
+function generateJS(flatL, flatD) {
   let js = `// Auto-generated by @pedrohenriquevalentim/design-tokens — NÃO EDITAR\n`;
   js += `// Última atualização: ${TODAY}\n`;
   js += `// Fonte: packages/design-tokens/tokens/ (exportado do Figma via plugin)\n\n`;
 
-  const entries = [];
+  const lightEntries = [];
 
-  for (const [key, value] of Object.entries(flat)) {
+  for (const [key, value] of Object.entries(flatL)) {
     const name = tokenToJSName(key);
     const jsValue = typeof value === 'string' ? `"${value}"` : value;
     js += `export const ${name} = ${jsValue};\n`;
-    entries.push({ name, jsValue });
+    lightEntries.push({ name, jsValue });
   }
 
-  js += `\nexport const tokens = {\n`;
-  for (const { name, jsValue } of entries) {
+  // Objeto light (mesmo shape de antes — compatibilidade)
+  js += `\nexport const light = {\n`;
+  for (const { name, jsValue } of lightEntries) {
     js += `  ${name}: ${jsValue},\n`;
   }
   js += `};\n`;
 
+  // Objeto dark (se existir)
+  if (flatD) {
+    js += `\nexport const dark = {\n`;
+    for (const [key, value] of Object.entries(flatD)) {
+      const name = tokenToJSName(key);
+      const jsValue = typeof value === 'string' ? `"${value}"` : value;
+      js += `  ${name}: ${jsValue},\n`;
+    }
+    js += `};\n`;
+  }
+
+  // tokens = light (compatibilidade com código existente que importa `tokens`)
+  js += `\nexport const tokens = light;\n`;
   js += `\nexport default tokens;\n`;
 
   return js;
 }
 
 // ============================================================================
-// 5. Escrever arquivos
+// 6. Escrever arquivos
 // ============================================================================
 
 mkdirSync(GENERATED_DIR, { recursive: true });
 
-// dist/tokens.json (flat)
-writeFileSync(join(GENERATED_DIR, 'tokens.json'), JSON.stringify(flatTokens, null, 2), 'utf-8');
-console.log(`✅ dist/tokens.json (${tokenCount} tokens)`);
+// dist/tokens.json (flat light — compatibilidade com consumers existentes)
+writeFileSync(join(GENERATED_DIR, 'tokens.json'), JSON.stringify(flatLight, null, 2), 'utf-8');
+console.log(`✅ dist/tokens.json (${tokenCount} tokens, light mode)`);
+
+// dist/tokens-dark.json (flat dark — apenas se dark tokens existirem)
+if (flatDark) {
+  writeFileSync(join(GENERATED_DIR, 'tokens-dark.json'), JSON.stringify(flatDark, null, 2), 'utf-8');
+  const darkCount = Object.keys(flatDark).length;
+  const overrideCount = darkOverrides ? Object.keys(darkOverrides).length : 0;
+  console.log(`✅ dist/tokens-dark.json (${darkCount} tokens, ${overrideCount} overrides vs light)`);
+}
 
 // dist/variables.css
-const css = generateCSS(flatTokens);
+const css = generateCSS(flatLight, darkOverrides);
 writeFileSync(join(GENERATED_DIR, 'variables.css'), css, 'utf-8');
 const cssVarCount = (css.match(/--/g) || []).length;
-console.log(`✅ dist/variables.css (${cssVarCount} variáveis)`);
+console.log(`✅ dist/variables.css (${cssVarCount} declarações${hasDarkMode ? ', light + dark mode' : ''})`);
 
 // dist/tokens.js
-const js = generateJS(flatTokens);
+const js = generateJS(flatLight, flatDark);
 writeFileSync(join(GENERATED_DIR, 'tokens.js'), js, 'utf-8');
-console.log(`✅ dist/tokens.js`);
+console.log(`✅ dist/tokens.js${flatDark ? ' (exports: light, dark, tokens)' : ''}`);
 
 console.log(`\n🎉 Concluído! ${tokenCount} tokens sincronizados. (${TODAY})\n`);

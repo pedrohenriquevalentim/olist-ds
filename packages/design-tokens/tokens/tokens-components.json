@@ -1,0 +1,1410 @@
+{
+  "component": {
+    "globals": {
+      "size": {
+        "interaction": "{theme:shape/size/x6 (48px)}",
+        "inside interaction": "{theme:shape/size/x5 (40px)}",
+        "smallest": "{theme:shape/size/x4 (32px)}"
+      },
+      "border radius": {
+        "interaction": "{theme:shape/border radius/x1_5 (12px)}",
+        "inside interaction": "{theme:shape/border radius/x1 (8px)}",
+        "smallest": "{theme:shape/border radius/x0_5 (4px)}",
+        "pill": "{theme:shape/border radius/pill (9999px)}"
+      },
+      "font": {
+        "weight": {
+          "caption": "{theme:font/weight/regular}",
+          "inside": "{theme:font/weight/regular}",
+          "label": "{theme:font/weight/sbold}"
+        },
+        "size": {
+          "caption": "{theme:font/size/x1_5 (12px)}",
+          "inside": "{theme:font/size/x1_75 (14px)}",
+          "label": "{theme:font/size/x1_75 (14px)}"
+        },
+        "line height": {
+          "caption": "{theme:font/line height/x1_75 (14px)}",
+          "inside": "{theme:font/line height/x2 (16px)}",
+          "label": "{theme:font/line height/x2 (16px)}"
+        }
+      }
+    },
+    "logo": {
+      "size": {
+        "min default": "{theme:shape/size/x20 (160px)}",
+        "max simple": "{theme:shape/size/x19 (152px)}",
+        "min simple": "{theme:shape/size/x10 (80px)}",
+        "max symbol": "{theme:shape/size/x6 (48px)}",
+        "min symbol": "{theme:shape/size/x2 (16px)}"
+      },
+      "color": {
+        "neutral bg": "{theme:color/logo/neutral}",
+        "colorful bg": "{theme:color/logo/colorfull}",
+        "toggle red": "{theme:color/logo/red}",
+        "toggle yellow": "{theme:color/logo/yellow}",
+        "toggle green": "{theme:color/logo/green}",
+        "toggle pink": "{theme:color/logo/pink}",
+        "toggle blue": "{theme:color/logo/blue}",
+        "toggle dark blue": "{theme:color/logo/darkblue}"
+      },
+      "spacing": {
+        "padding": "{theme:shape/spacing/x0 (0px)}"
+      }
+    },
+    "text": {
+      "font family": {
+        "default": "{theme:font/family/base}",
+        "system": "{theme:font/family/system}"
+      },
+      "heading": {
+        "color": "{theme:color/text/container/title}",
+        "font weight": "{theme:font/weight/sbold}",
+        "H5 font size": "{theme:font/size/x2 (16px)}",
+        "H4 font size": "{theme:font/size/x3 (24px)}",
+        "H3 font size": "{theme:font/size/x4 (32px)}",
+        "H2 font size": "{theme:font/size/x5 (40px)}",
+        "H1 font size": "{theme:font/size/x6 (48px)}",
+        "H5 line height": "{theme:font/line height/x3 (24px)}",
+        "H4 line height": "{theme:font/line height/x4 (32px)}",
+        "H3 line height": "{theme:font/line height/x5 (40px)}",
+        "H2 line height": "{theme:font/line height/x6 (48px)}",
+        "H1 line height": "{theme:font/line height/x7  (56px)}"
+      },
+      "paragraph": {
+        "color": "{theme:color/text/container/text}",
+        "font weight": "{theme:font/weight/regular}",
+        "font size": "{theme:font/size/x2 (16px)}",
+        "line height": "{theme:font/line height/x3 (24px)}"
+      },
+      "description": {
+        "color": "{theme:color/text/container/text}",
+        "font weight": "{theme:font/weight/regular}",
+        "font size": "{theme:font/size/x1_75 (14px)}",
+        "line height": "{theme:font/line height/x2_5 (20px)}"
+      },
+      "caption": {
+        "color": "{theme:color/text/container/text}",
+        "font weight": "{theme:font/weight/regular}",
+        "font size": "{theme:font/size/x1_5 (12px)}",
+        "line height": "{theme:font/line height/x2 (16px)}"
+      },
+      "label": {
+        "height": "{theme:shape/size/x2 (16px)}",
+        "gap": "{theme:shape/spacing/x1 (8px)}",
+        "color": {
+          "enabled": "{theme:color/text/container/label}",
+          "disabled": "{theme:color/text/disabled/default}"
+        },
+        "font weight": "{components:globals/font/weight/label}",
+        "font size": "{components:globals/font/size/label}",
+        "line height": "{components:globals/font/line height/label}"
+      },
+      "support text": {
+        "gap": "{theme:shape/spacing/x1 (8px)}",
+        "height": "{theme:shape/size/x1_5 (12px)}",
+        "color": {
+          "enabled": "{theme:color/text/container/text}",
+          "confirmed": "{theme:color/text/feedback/positive/subtle}",
+          "error": "{theme:color/text/feedback/negative/subtle}",
+          "disabled": "{theme:color/text/disabled/default}"
+        },
+        "font weight": "{components:globals/font/weight/caption}",
+        "font size": "{components:globals/font/size/caption}",
+        "line height": "{components:globals/font/line height/caption}"
+      },
+      "placeholder text": {
+        "font weight": "{components:globals/font/weight/inside}",
+        "font size": "{components:globals/font/size/inside}",
+        "line height": "{components:globals/font/line height/inside}"
+      }
+    },
+    "icon": {
+      "size": {
+        "small": "{theme:shape/size/x2 (16px)}",
+        "medium": "{theme:shape/size/x3 (24px)}",
+        "large": "{theme:shape/size/x4 (32px)}"
+      },
+      "color": {
+        "default": "{theme:color/shape/content/default}",
+        "onbrand": "{theme:color/shape/content/on brand}"
+      },
+      "spacing": {
+        "default": "{theme:shape/spacing/x0 (0px)}"
+      },
+      "border radius": {
+        "default": "{theme:shape/border radius/x0 (0px)}"
+      }
+    },
+    "shadow": {
+      "distance": {
+        "X": "{theme:effects/distance/x0 (0px)}",
+        "contact": "{theme:effects/distance/x0 (0px)}",
+        "level 1": "{theme:effects/distance/x0_5 (4px)}",
+        "level 2": "{theme:effects/distance/x1 (8px)}",
+        "level 3": "{theme:effects/distance/x2 (16px)}"
+      },
+      "blur": {
+        "contact": "{theme:effects/blur/light (4px)}",
+        "level 1": "{theme:effects/blur/medium (8px)}",
+        "level 2": "{theme:effects/blur/strong (16px)}",
+        "level 3": "{theme:effects/blur/harsh (32px)}"
+      },
+      "color": {
+        "contact": "{theme:effects/shadow/contact}",
+        "level 1": "{theme:effects/shadow/level 1}",
+        "level 2": "{theme:effects/shadow/level 2}",
+        "level 3": "{theme:effects/shadow/level 3}"
+      }
+    },
+    "flags": {
+      "size": {
+        "height": "{theme:shape/size/x3 (24px)}"
+      },
+      "spacing": {
+        "gap": "{theme:shape/spacing/x1 (8px)}"
+      },
+      "border radius": {
+        "pill": "{theme:shape/border radius/pill (9999px)}"
+      }
+    },
+    "focus": {
+      "border width": {
+        "default": "{theme:shape/border width/x2 (2px)}"
+      },
+      "border color": {
+        "default": "{theme:color/border/selected/default}"
+      }
+    },
+    "button": {
+      "size": {
+        "height": "{components:globals/size/interaction}"
+      },
+      "color": {
+        "primary enabled": "{theme:color/background/enabled/full brand}",
+        "secondary enabled": "{theme:color/background/enabled/neutral}",
+        "tertiary enabled": "{theme:color/background/enabled/transparent}",
+        "primary hover": "{theme:color/background/hover/full brand}",
+        "secondary hover": "{theme:color/background/hover/neutral}",
+        "tertiary hover": "{theme:color/background/hover/neutral}",
+        "primary pressed": "{theme:color/background/pressed/full brand}",
+        "secondary pressed": "{theme:color/background/pressed/neutral}",
+        "tertiary pressed": "{theme:color/background/pressed/neutral}",
+        "primary disabled": "{theme:color/background/disabled/default}",
+        "secondary disabled": "{theme:color/background/disabled/transparent}",
+        "tertiary disabled": "{theme:color/background/disabled/transparent}"
+      },
+      "spacing": {
+        "gap": "{theme:shape/spacing/x1 (8px)}",
+        "padding": "{theme:shape/spacing/x2 (16px)}"
+      },
+      "border radius": {
+        "pill": "{components:globals/border radius/pill}"
+      },
+      "border width": {
+        "enabled": "{theme:shape/border width/x1 (1px)}",
+        "hover": "{theme:shape/border width/x1 (1px)}",
+        "pressed": "{theme:shape/border width/x2 (2px)}",
+        "disabled": "{theme:shape/border width/x1 (1px)}"
+      },
+      "border color": {
+        "enabled": "{theme:color/border/enabled/neutral}",
+        "hover": "{theme:color/border/hover/neutral}",
+        "pressed": "{theme:color/border/pressed/neutral}",
+        "disabled": "{theme:color/border/disabled/default}"
+      },
+      "shape color": {
+        "primary enabled": "{theme:color/shape/enabled/on brand}",
+        "secondary enabled": "{theme:color/shape/enabled/neutral}",
+        "tertiary enabled": "{theme:color/shape/enabled/neutral}",
+        "primary hover": "{theme:color/shape/hover/on brand}",
+        "secondary hover": "{theme:color/shape/hover/neutral}",
+        "tertiary hover": "{theme:color/shape/hover/neutral}",
+        "primary pressed": "{theme:color/shape/pressed/on brand}",
+        "secondary pressed": "{theme:color/shape/pressed/neutral}",
+        "tertiary pressed": "{theme:color/shape/pressed/neutral}",
+        "primary disabled": "{theme:color/shape/disabled/default}",
+        "secondary disabled": "{theme:color/shape/disabled/default}",
+        "tertiary disabled": "{theme:color/shape/disabled/default}"
+      },
+      "font": {
+        "font color": {
+          "primary enabled": "{theme:color/text/enabled/on brand}",
+          "secondary enabled": "{theme:color/text/enabled/neutral}",
+          "tertiary enabled": "{theme:color/text/enabled/neutral}",
+          "primary hover": "{theme:color/text/hover/on brand}",
+          "secondary hover": "{theme:color/text/hover/neutral}",
+          "tertiary hover": "{theme:color/text/hover/neutral}",
+          "primary pressed": "{theme:color/text/pressed/on brand}",
+          "secondary pressed": "{theme:color/text/pressed/neutral}",
+          "tertiary pressed": "{theme:color/text/pressed/neutral}",
+          "primary disabled": "{theme:color/text/disabled/default}",
+          "secondary disabled": "{theme:color/text/disabled/default}",
+          "tertiary disabled": "{theme:color/text/disabled/default}"
+        },
+        "size": "{theme:font/size/x1_75 (14px)}",
+        "weight": "{theme:font/weight/medium}",
+        "line height": "{theme:font/line height/x2 (16px)}",
+        "size-small": "{theme:font/size/x1_5 (12px)}"
+      }
+    },
+    "segmented button": {
+      "segment": {
+        "size": {
+          "height": "{components:globals/size/inside interaction}"
+        },
+        "color": {
+          "enabled": "{theme:color/background/enabled/transparent}",
+          "selected": "{theme:color/background/selected/neutral brand}",
+          "hover": "{theme:color/background/hover/neutral}",
+          "pressed": "{theme:color/background/pressed/neutral}",
+          "disabled": "{theme:color/background/disabled/transparent}"
+        },
+        "spacing": {
+          "padding": "{theme:shape/spacing/x2 (16px)}",
+          "gap": "{theme:shape/spacing/x1 (8px)}"
+        },
+        "border radius": {
+          "pill": "{components:globals/border radius/pill}"
+        },
+        "shape color": {
+          "enabled": "{theme:color/shape/enabled/neutral}",
+          "hover": "{theme:color/shape/hover/neutral}",
+          "pressed": "{theme:color/shape/pressed/neutral}",
+          "selected": "{theme:color/shape/selected/neutral}",
+          "disabled": "{theme:color/shape/disabled/default}"
+        },
+        "font": {
+          "color": {
+            "enabled": "{theme:color/text/enabled/neutral}",
+            "selected": "{theme:color/text/selected/neutral}",
+            "hover": "{theme:color/text/hover/neutral}",
+            "pressed": "{theme:color/text/pressed/neutral}",
+            "disabled": "{theme:color/text/disabled/default}"
+          },
+          "size": "{components:globals/font/size/inside}",
+          "weight": "{components:globals/font/weight/inside}",
+          "line height": "{components:globals/font/line height/inside}"
+        }
+      },
+      "control": {
+        "size": {
+          "height": "{components:globals/size/interaction}"
+        },
+        "spacing": {
+          "gap": "{theme:shape/spacing/x0_5 (4px)}",
+          "padding": "{theme:shape/spacing/x0_5 (4px)}"
+        },
+        "border radius": {
+          "pill": "{components:globals/border radius/pill}"
+        },
+        "border color": {
+          "default": "{theme:color/border/container/inside}"
+        }
+      },
+      "segmented button": {
+        "spacing": {
+          "gap": "{theme:shape/spacing/x1 (8px)}",
+          "padding": "{theme:shape/spacing/x0 (0px)}"
+        }
+      }
+    },
+    "avatar": {
+      "size": {
+        "height": "{theme:shape/size/x4 (32px)}"
+      },
+      "color": {
+        "bg": "{theme:color/background/surface/brand 01}"
+      },
+      "spacing": {
+        "padding": "{theme:shape/spacing/x0 (0px)}",
+        "gap": "{theme:shape/spacing/x1 (8px)}"
+      },
+      "border radius": {
+        "pill": "{components:globals/border radius/pill}"
+      },
+      "font color": {
+        "name": "{theme:color/text/container/label}",
+        "in circle": "{theme:color/text/container/on brand}"
+      }
+    },
+    "tooltip": {
+      "size": {
+        "height": "{components:globals/size/smallest}",
+        "arrow 1": "{theme:shape/size/x0_5 (4px)}",
+        "arrow 2": "{theme:shape/size/x1 (8px)}"
+      },
+      "color": {
+        "bg": "{theme:color/background/surface/container}"
+      },
+      "spacing": {
+        "gap": "{theme:shape/spacing/x0 (0px)}",
+        "padding": "{theme:shape/spacing/x1_5 (12px)}"
+      },
+      "border radius": {
+        "default": "{components:globals/border radius/smallest}"
+      },
+      "font": {
+        "color": "{theme:color/text/container/label}",
+        "size": "{components:globals/font/size/caption}",
+        "weight": "{components:globals/font/weight/caption}",
+        "line height": "{components:globals/font/line height/caption}"
+      }
+    },
+    "list": {
+      "color": {
+        "bg": "{theme:color/background/surface/container}"
+      },
+      "spacing": {
+        "gap": "{theme:shape/spacing/x0 (0px)}",
+        "padding": "{theme:shape/spacing/x1 (8px)}"
+      },
+      "border radius": {
+        "default": "{components:globals/border radius/interaction}"
+      },
+      "list item": {
+        "size": {
+          "height": "{components:globals/size/interaction}"
+        },
+        "color": {
+          "enabled": "{theme:color/background/enabled/neutral}",
+          "hover": "{theme:color/background/hover/neutral}",
+          "pressed": "{theme:color/background/pressed/neutral}",
+          "disabled": "{theme:color/background/disabled/default}",
+          "selected enabled": "{theme:color/background/selected/neutral brand}",
+          "selected hover": "{theme:color/background/hover/neutral brand}",
+          "selected pressed": "{theme:color/background/pressed/neutral brand}",
+          "selected disabled": "{theme:color/background/disabled/default}"
+        },
+        "font": {
+          "font color": {
+            "enabled": "{theme:color/text/enabled/neutral}",
+            "hover": "{theme:color/text/hover/neutral}",
+            "pressed": "{theme:color/text/pressed/neutral}",
+            "selected": "{theme:color/text/selected/neutral}",
+            "disabled": "{theme:color/text/disabled/default}"
+          },
+          "font size": {
+            "label": "{components:globals/font/size/inside}",
+            "description": "{components:globals/font/size/caption}"
+          },
+          "font weight": {
+            "label": "{components:globals/font/weight/inside}",
+            "description": "{components:globals/font/weight/caption}"
+          },
+          "line height": {
+            "label": "{components:globals/font/line height/inside}",
+            "description": "{components:globals/font/line height/caption}"
+          }
+        },
+        "spacing": {
+          "gap": "{theme:shape/spacing/x1_5 (12px)}",
+          "gap content": "{theme:shape/spacing/x1 (8px)}",
+          "padding": "{theme:shape/spacing/x1_5 (12px)}"
+        },
+        "border radius": {
+          "default": "{theme:shape/border radius/x1 (8px)}"
+        },
+        "shape color": {
+          "enabled": "{theme:color/shape/enabled/neutral}",
+          "hover": "{theme:color/shape/hover/neutral}",
+          "pressed": "{theme:color/shape/pressed/neutral}",
+          "selected": "{theme:color/shape/selected/neutral}",
+          "disabled": "{theme:color/shape/disabled/default}"
+        }
+      }
+    },
+    "badges": {
+      "base": {
+        "size": {
+          "height": "{components:globals/size/smallest}"
+        },
+        "spacing": {
+          "padding": "{theme:shape/spacing/x1_5 (12px)}",
+          "icon padding": "{theme:shape/spacing/x1 (8px)}",
+          "gap": "{theme:shape/spacing/x0_5 (4px)}"
+        },
+        "border radius": {
+          "pill": "{components:globals/border radius/pill}"
+        },
+        "font": {
+          "size": "{components:globals/font/size/caption}",
+          "weight": "{components:globals/font/weight/caption}",
+          "line height": "{components:globals/font/line height/caption}"
+        }
+      },
+      "status": {
+        "color": {
+          "brand": "{theme:color/background/feedback/brand/subtle}",
+          "informative": "{theme:color/background/feedback/informative/subtle}",
+          "neutral": "{theme:color/background/feedback/neutral/subtle}",
+          "success": "{theme:color/background/feedback/positive/subtle}",
+          "error": "{theme:color/background/feedback/negative/subtle}",
+          "warning": "{theme:color/background/feedback/warning/subtle}"
+        },
+        "shape color": {
+          "brand": "{theme:color/shape/feedback/brand/subtle}",
+          "informative": "{theme:color/shape/feedback/informative/subtle}",
+          "neutral": "{theme:color/shape/feedback/neutral/subtle}",
+          "success": "{theme:color/shape/feedback/positive/subtle}",
+          "error": "{theme:color/shape/feedback/negative/subtle}",
+          "warning": "{theme:color/shape/feedback/warning/subtle}"
+        },
+        "font color": {
+          "brand": "{theme:color/text/feedback/brand/subtle}",
+          "informative": "{theme:color/text/feedback/informative/subtle}",
+          "neutral": "{theme:color/text/feedback/neutral/subtle}",
+          "success": "{theme:color/text/feedback/positive/subtle}",
+          "error": "{theme:color/text/feedback/negative/subtle}",
+          "warning": "{theme:color/text/feedback/warning/subtle}"
+        }
+      },
+      "tag": {
+        "color": {
+          "brand": "{theme:color/background/feedback/brand/colored}",
+          "accent": "{theme:color/background/feedback/accent/colored}",
+          "informative": "{theme:color/background/feedback/informative/colored}",
+          "neutral": "{theme:color/background/feedback/neutral/colored}"
+        },
+        "shape color": {
+          "brand": "{theme:color/shape/feedback/brand/colored}",
+          "accent": "{theme:color/shape/feedback/accent/colored}",
+          "informative": "{theme:color/shape/feedback/informative/colored}",
+          "neutral": "{theme:color/shape/feedback/neutral/colored}"
+        },
+        "font color": {
+          "brand": "{theme:color/text/feedback/brand/colored}",
+          "accent": "{theme:color/text/feedback/accent/colored}",
+          "informative": "{theme:color/text/feedback/informative/colored}",
+          "neutral": "{theme:color/text/feedback/neutral/colored}"
+        }
+      },
+      "notification": {
+        "size": {
+          "height": "{theme:shape/size/x3 (24px)}",
+          "dot": "{theme:shape/size/x1 (8px)}"
+        },
+        "spacing": {
+          "padding": "{theme:shape/spacing/x1 (8px)}"
+        },
+        "border radius": {
+          "pill": "{theme:shape/border radius/pill (9999px)}"
+        }
+      }
+    },
+    "dropdown": {
+      "spacing": {
+        "gap content": "{theme:shape/spacing/x1 (8px)}",
+        "gap": "{theme:shape/spacing/x1 (8px)}",
+        "padding": "{theme:shape/spacing/x2 (16px)}"
+      },
+      "size": {
+        "height": "{components:globals/size/interaction}"
+      },
+      "color": {
+        "enabled": "{theme:color/background/enabled/transparent}",
+        "hover": "{theme:color/background/hover/neutral}",
+        "pressed": "{theme:color/background/pressed/neutral}",
+        "focused": "{theme:color/background/enabled/transparent}",
+        "filled": "{theme:color/background/enabled/transparent}",
+        "disabled": "{theme:color/background/disabled/transparent}"
+      },
+      "font": {
+        "font color": {
+          "enabled": "{theme:color/text/enabled/neutral}",
+          "hover": "{theme:color/text/hover/neutral}",
+          "pressed": "{theme:color/text/pressed/neutral}",
+          "focused": "{theme:color/text/focused/neutral}",
+          "filled": "{theme:color/text/filled/neutral}",
+          "disabled": "{theme:color/text/disabled/default}"
+        },
+        "font size": {
+          "label": "{components:globals/font/size/inside}",
+          "description": "{components:globals/font/size/caption}"
+        },
+        "font weight": {
+          "label": "{components:globals/font/weight/inside}",
+          "description": "{components:globals/font/weight/caption}"
+        },
+        "line height": {
+          "label": "{components:globals/font/line height/inside}",
+          "description": "{components:globals/font/line height/caption}"
+        }
+      },
+      "border radius": {
+        "pill": "{components:globals/border radius/pill}"
+      },
+      "border width": {
+        "focused": "{components:focus/border width/default}"
+      },
+      "border color": {
+        "focused": "{components:focus/border color/default}"
+      },
+      "shape color": {
+        "enabled": "{theme:color/shape/enabled/neutral}",
+        "hover": "{theme:color/shape/hover/neutral}",
+        "pressed": "{theme:color/shape/pressed/neutral}",
+        "focused": "{theme:color/shape/focused/neutral}",
+        "filled": "{theme:color/shape/filled/neutral}",
+        "disabled": "{theme:color/shape/disabled/default}"
+      }
+    },
+    "context switch": {
+      "spacing": {
+        "gap content": "{theme:shape/spacing/x1 (8px)}",
+        "gap": "{theme:shape/spacing/x1_5 (12px)}",
+        "padding": "{theme:shape/spacing/x1_5 (12px)}"
+      },
+      "size": {
+        "height": "{components:globals/size/interaction}"
+      },
+      "color": {
+        "enabled": "{theme:color/background/enabled/transparent}",
+        "hover": "{theme:color/background/hover/neutral}",
+        "pressed": "{theme:color/background/pressed/neutral}",
+        "focused": "{theme:color/background/enabled/transparent}",
+        "filled": "{theme:color/background/enabled/transparent}",
+        "disabled": "{theme:color/background/disabled/transparent}"
+      },
+      "font": {
+        "font color": {
+          "enabled": "{theme:color/text/enabled/neutral}",
+          "hover": "{theme:color/text/hover/neutral}",
+          "pressed": "{theme:color/text/pressed/neutral}",
+          "focused": "{theme:color/text/focused/neutral}",
+          "filled": "{theme:color/text/filled/neutral}",
+          "disabled": "{theme:color/text/disabled/default}"
+        },
+        "font size": {
+          "label": "{components:globals/font/size/inside}",
+          "description": "{components:globals/font/size/caption}"
+        },
+        "font weight": {
+          "label": "{components:globals/font/weight/inside}",
+          "description": "{components:globals/font/weight/caption}"
+        },
+        "line height": {
+          "label": "{components:globals/font/line height/inside}",
+          "description": "{components:globals/font/line height/caption}"
+        }
+      },
+      "border radius": {
+        "default": "{components:globals/border radius/interaction}"
+      },
+      "border width": {
+        "enabled": "{theme:shape/border width/x1 (1px)}",
+        "hover": "{theme:shape/border width/x1 (1px)}",
+        "pressed": "{theme:shape/border width/x2 (2px)}",
+        "focused": "{components:focus/border width/default}",
+        "filled": "{theme:shape/border width/x1 (1px)}",
+        "success": "{theme:shape/border width/x1 (1px)}",
+        "error": "{theme:shape/border width/x1 (1px)}",
+        "disabled": "{theme:shape/border width/x1 (1px)}"
+      },
+      "border color": {
+        "enabled": "{theme:color/border/enabled/neutral}",
+        "hover": "{theme:color/border/hover/neutral}",
+        "pressed": "{theme:color/border/pressed/neutral}",
+        "focused": "{components:focus/border color/default}",
+        "filled": "{theme:color/border/filled/neutral}",
+        "disabled": "{theme:color/border/disabled/default}"
+      },
+      "shape color": {
+        "enabled": "{theme:color/shape/enabled/neutral}",
+        "hover": "{theme:color/shape/hover/neutral}",
+        "pressed": "{theme:color/shape/pressed/neutral}",
+        "focused": "{theme:color/shape/focused/neutral}",
+        "filled": "{theme:color/shape/filled/neutral}",
+        "disabled": "{theme:color/shape/disabled/default}"
+      }
+    },
+    "scrollbar": {
+      "size": {
+        "width": "{theme:shape/size/x1 (8px)}"
+      },
+      "color": {
+        "background": "{theme:color/background/utility/neutral}",
+        "enabled": "{theme:color/background/enabled/utility}",
+        "hover": "{theme:color/background/hover/utility}",
+        "pressed": "{theme:color/background/pressed/utility}"
+      },
+      "border radius": {
+        "default": "{components:globals/border radius/pill}"
+      }
+    },
+    "menu": {
+      "container": {
+        "color": {
+          "default": "{theme:color/background/surface/container}",
+          "product": "{theme:color/background/surface/brand 02}"
+        },
+        "size": {
+          "width expanded": "{theme:shape/size/x31 (248px)}",
+          "width contracted": "{theme:shape/size/x7 (56px)}",
+          "logo area": "{theme:shape/size/x11 (88px)}"
+        },
+        "spacing": {
+          "default": "{theme:shape/spacing/x0 (0px)}",
+          "list padding": "{theme:shape/spacing/x1 (8px)}",
+          "gap list": "{theme:shape/spacing/x0 (0px)}",
+          "logo padding contracted": "{theme:shape/spacing/x1 (8px)}",
+          "logo padding expanded": "{theme:shape/spacing/x0 (0px)}",
+          "gap logo": "{theme:shape/spacing/x0 (0px)}",
+          "profile padding": "{theme:shape/spacing/x3 (24px)}",
+          "action area padding": "{theme:shape/spacing/x2 (16px)}",
+          "gap action area": "{theme:shape/spacing/x2 (16px)}",
+          "gap profile": "{theme:shape/spacing/x2 (16px)}"
+        },
+        "opacity": {
+          "default": "{theme:shape/opacity/full (100%)}"
+        },
+        "border radius": {
+          "default": "{theme:shape/border radius/x0 (0px)}",
+          "expanded": "{theme:shape/border radius/x2 (16px)}",
+          "contracted": "{theme:shape/border radius/x2 (16px)}"
+        },
+        "border width": {
+          "default": "{theme:shape/border width/x1 (1px)}"
+        },
+        "border color": {
+          "default": "{theme:color/border/container/inside}"
+        }
+      },
+      "menu item": {
+        "size": {
+          "height": "{theme:shape/size/x5 (40px)}",
+          "width label": "{theme:shape/size/x29 (232px)}",
+          "width icon": "{theme:shape/size/x5 (40px)}"
+        },
+        "color": {
+          "enabled": "{theme:color/background/enabled/neutral}",
+          "hover": "{theme:color/background/hover/neutral}",
+          "pressed": "{theme:color/background/pressed/neutral}",
+          "selected": "{theme:color/background/selected/neutral brand}",
+          "disabled": "{theme:color/background/disabled/default}"
+        },
+        "spacing": {
+          "gap": "{theme:shape/spacing/x1_5 (12px)}",
+          "padding": "{theme:shape/spacing/x1_5 (12px)}"
+        },
+        "opacity": {
+          "default": "{theme:shape/opacity/full (100%)}"
+        },
+        "border radius": {
+          "default": "{theme:shape/border radius/x1 (8px)}"
+        },
+        "shape color": {
+          "enabled": "{theme:color/shape/enabled/neutral}",
+          "hover": "{theme:color/shape/hover/neutral}",
+          "pressed": "{theme:color/shape/pressed/neutral}",
+          "selected": "{theme:color/shape/selected/neutral}",
+          "disabled": "{theme:color/shape/disabled/default}"
+        },
+        "font color": {
+          "enabled": "{theme:color/text/enabled/neutral}",
+          "hover": "{theme:color/text/hover/neutral}",
+          "pressed": "{theme:color/text/pressed/neutral}",
+          "selected": "{theme:color/text/selected/neutral}",
+          "disabled": "{theme:color/text/disabled/default}"
+        },
+        "font size": {
+          "default": "{theme:font/size/x1_75 (14px)}"
+        },
+        "font weight": {
+          "default": "{theme:font/weight/medium}"
+        },
+        "line height": {
+          "default": "{theme:font/line height/x2_5 (20px)}"
+        }
+      },
+      "notification dot": {
+        "size": {
+          "default": "{theme:shape/size/x1 (8px)}"
+        },
+        "color": {
+          "enabled": "{theme:color/background/enabled/full brand}",
+          "hover": "{theme:color/background/hover/full brand}",
+          "pressed": "{theme:color/background/pressed/full brand}",
+          "read": "{theme:color/background/disabled/default}",
+          "hover read": "{theme:color/background/hover/neutral}",
+          "pressed read": "{theme:color/background/pressed/neutral}"
+        },
+        "spacing": {
+          "padding": "{theme:shape/spacing/x0_5 (4px)}",
+          "gap": "{theme:shape/spacing/x0 (0px)}"
+        },
+        "opacity": {
+          "default": "{theme:shape/opacity/full (100%)}"
+        },
+        "border radius": {
+          "pill": "{theme:shape/border radius/pill (9999px)}"
+        }
+      },
+      "notification card": {
+        "color": {
+          "read": "{theme:color/background/surface/container}",
+          "unread": "{theme:color/background/utility/unread}",
+          "hover": "{theme:color/background/hover/neutral brand}"
+        }
+      },
+      "section divider": {
+        "size": {
+          "height": "{theme:shape/size/x6 (48px)}"
+        },
+        "color": {
+          "default": "{theme:color/background/surface/container}"
+        },
+        "spacing": {
+          "padding": "{theme:shape/spacing/x2 (16px)}",
+          "gap": "{theme:shape/spacing/x1_5 (12px)}"
+        },
+        "opacity": {
+          "default": "{theme:shape/opacity/full (100%)}"
+        },
+        "border radius": {
+          "default": "{theme:shape/border radius/x0 (0px)}"
+        },
+        "border width": {
+          "default": "{theme:shape/border width/x1 (1px)}"
+        },
+        "border color": {
+          "default": "{theme:color/border/container/inside}"
+        },
+        "font color": {
+          "default": "{theme:color/text/container/label}"
+        },
+        "font size": {
+          "default": "{theme:font/size/x1_75 (14px)}"
+        },
+        "line height": {
+          "default": "{theme:font/line height/x2 (16px)}"
+        },
+        "font weight": {
+          "default": "{theme:font/weight/sbold}"
+        }
+      }
+    },
+    "input": {
+      "base": {
+        "size": {
+          "input height": "{components:globals/size/interaction}"
+        },
+        "color": {
+          "enabled": "{theme:color/background/enabled/transparent}",
+          "hover": "{theme:color/background/hover/neutral}",
+          "pressed": "{theme:color/background/pressed/neutral}",
+          "focused": "{theme:color/background/enabled/transparent}",
+          "filled": "{theme:color/background/enabled/transparent}",
+          "success": "{theme:color/background/feedback/positive/subtle}",
+          "error": "{theme:color/background/feedback/negative/subtle}",
+          "disabled": "{theme:color/background/disabled/transparent}"
+        },
+        "spacing": {
+          "gap": "{theme:shape/spacing/x1 (8px)}",
+          "padding": "{theme:shape/spacing/x2 (16px)}",
+          "button padding": "{theme:shape/spacing/x0_5 (4px)}"
+        },
+        "border radius": {
+          "default": "{components:globals/border radius/interaction}"
+        },
+        "border width": {
+          "enabled": "{theme:shape/border width/x1 (1px)}",
+          "hover": "{theme:shape/border width/x1 (1px)}",
+          "pressed": "{theme:shape/border width/x2 (2px)}",
+          "focused": "{components:focus/border width/default}",
+          "filled": "{theme:shape/border width/x1 (1px)}",
+          "success": "{theme:shape/border width/x1 (1px)}",
+          "error": "{theme:shape/border width/x1 (1px)}",
+          "disabled": "{theme:shape/border width/x1 (1px)}"
+        },
+        "border color": {
+          "enabled": "{theme:color/border/enabled/neutral}",
+          "hover": "{theme:color/border/hover/neutral}",
+          "pressed": "{theme:color/border/pressed/neutral}",
+          "focused": "{components:focus/border color/default}",
+          "filled": "{theme:color/border/filled/neutral}",
+          "success": "{theme:color/border/feedback/positive/subtle}",
+          "error": "{theme:color/border/feedback/negative/subtle}",
+          "disabled": "{theme:color/border/disabled/default}"
+        },
+        "shape color": {
+          "enabled": "{theme:color/shape/enabled/neutral}",
+          "hover": "{theme:color/shape/hover/neutral}",
+          "pressed": "{theme:color/shape/pressed/neutral}",
+          "focused": "{theme:color/shape/focused/neutral}",
+          "filled": "{theme:color/shape/filled/neutral}",
+          "success": "{theme:color/shape/feedback/positive/subtle}",
+          "error": "{theme:color/shape/feedback/negative/subtle}",
+          "disabled": "{theme:color/shape/disabled/default}"
+        },
+        "font color": {
+          "enabled": "{theme:color/text/enabled/neutral}",
+          "hover": "{theme:color/text/hover/neutral}",
+          "pressed": "{theme:color/text/pressed/neutral}",
+          "focused": "{theme:color/text/focused/neutral}",
+          "filled": "{theme:color/text/filled/neutral}",
+          "success": "{theme:color/text/feedback/positive/subtle}",
+          "error": "{theme:color/text/feedback/negative/subtle}",
+          "disabled": "{theme:color/text/disabled/default}"
+        }
+      },
+      "token": {
+        "gap": "{theme:shape/spacing/x1 (8px)}",
+        "width": "{theme:shape/size/x5 (40px)}"
+      },
+      "paragraph": {
+        "2 lines height": "{theme:shape/size/x8 (64px)}",
+        "3 lines height": "{theme:shape/size/x10 (80px)}",
+        "4 lines height": "{theme:shape/size/x12 (96px)}",
+        "5 lines height": "{theme:shape/size/x13_5 (108px)}"
+      },
+      "search": {
+        "border radius": "{theme:shape/border radius/pill (9999px)}"
+      },
+      "file": {
+        "height": "{theme:shape/size/x10 (80px)}"
+      }
+    },
+    "checkbox": {
+      "size": {
+        "box height": "{theme:shape/size/x2 (16px)}",
+        "height": "{components:globals/size/interaction}"
+      },
+      "color": {
+        "enabled": "{theme:color/background/enabled/transparent}",
+        "hover": "{theme:color/background/hover/neutral}",
+        "pressed": "{theme:color/background/pressed/neutral}",
+        "disabled": "{theme:color/background/disabled/default}",
+        "selected": "{theme:color/background/selected/full brand}"
+      },
+      "spacing": {
+        "gap": "{theme:shape/spacing/x0_5 (4px)}"
+      },
+      "border radius": {
+        "box": "{theme:shape/border radius/x0_5 (4px)}",
+        "area": "{components:globals/border radius/interaction}"
+      },
+      "border width": {
+        "enabled": "{theme:shape/border width/x2 (2px)}",
+        "hover": "{theme:shape/border width/x2 (2px)}",
+        "pressed": "{theme:shape/border width/x2 (2px)}",
+        "selected": "{theme:shape/border width/x2 (2px)}",
+        "disabled": "{theme:shape/border width/x2 (2px)}"
+      },
+      "border color": {
+        "enabled": "{theme:color/border/enabled/neutral}",
+        "hover": "{theme:color/border/hover/neutral}",
+        "pressed": "{theme:color/border/pressed/neutral}",
+        "selected": "{theme:color/border/selected/default}",
+        "disabled": "{theme:color/border/disabled/default}"
+      },
+      "shape color": {
+        "selected": "{theme:color/shape/selected/on brand}",
+        "disabled": "{theme:color/shape/disabled/default}"
+      }
+    },
+    "radio button": {
+      "size": {
+        "box height": "{theme:shape/size/x2 (16px)}",
+        "height": "{components:globals/size/interaction}"
+      },
+      "color": {
+        "enabled": "{theme:color/background/enabled/transparent}",
+        "hover": "{theme:color/background/hover/neutral}",
+        "pressed": "{theme:color/background/pressed/neutral}",
+        "disabled": "{theme:color/background/disabled/default}",
+        "selected": "{theme:color/background/selected/full brand}"
+      },
+      "spacing": {
+        "gap": "{theme:shape/spacing/x0_5 (4px)}"
+      },
+      "border radius": {
+        "box": "{theme:shape/border radius/pill (9999px)}",
+        "area": "{components:globals/border radius/interaction}"
+      },
+      "border width": {
+        "enabled": "{theme:shape/border width/x2 (2px)}",
+        "hover": "{theme:shape/border width/x2 (2px)}",
+        "pressed": "{theme:shape/border width/x2 (2px)}",
+        "selected": "{theme:shape/border width/x0 (0px)}",
+        "disabled": "{theme:shape/border width/x2 (2px)}"
+      },
+      "border color": {
+        "enabled": "{theme:color/border/enabled/neutral}",
+        "hover": "{theme:color/border/hover/neutral}",
+        "pressed": "{theme:color/border/pressed/neutral}",
+        "selected": "{theme:color/border/selected/default}",
+        "disabled": "{theme:color/border/disabled/default}"
+      },
+      "shape color": {
+        "selected": "{theme:color/shape/selected/on brand}",
+        "disabled": "{theme:color/shape/disabled/default}"
+      }
+    },
+    "table": {
+      "border radius": {
+        "default": "{components:globals/border radius/interaction}"
+      },
+      "border color": {
+        "default": "{theme:color/border/enabled/neutral}"
+      },
+      "cell": {
+        "color": {
+          "enabled": "{theme:color/background/enabled/neutral}",
+          "hover": "{theme:color/background/hover/neutral}"
+        },
+        "size": {
+          "height": "{components:globals/size/interaction}"
+        },
+        "spacing": {
+          "padding": "{theme:shape/spacing/x2 (16px)}"
+        },
+        "font": {
+          "color": {
+            "enabled": "{theme:color/text/enabled/neutral}",
+            "hover": "{theme:color/text/hover/neutral}"
+          },
+          "weight": {
+            "cell": "{components:globals/font/weight/inside}",
+            "head": "{components:globals/font/weight/label}"
+          },
+          "size": {
+            "default": "{components:globals/font/size/inside}"
+          },
+          "line height": {
+            "default": "{components:globals/font/line height/inside}"
+          }
+        },
+        "border width": {
+          "default": "{theme:shape/border width/x1 (1px)}"
+        },
+        "border color": {
+          "enabled": "{theme:color/border/enabled/utility}",
+          "hover": "{theme:color/border/hover/utility}"
+        }
+      },
+      "head": {
+        "border color": {
+          "enabled": "{theme:color/border/enabled/neutral}",
+          "hover": "{theme:color/border/hover/neutral}"
+        }
+      }
+    },
+    "link": {
+      "font": {
+        "font color": {
+          "enabled": "{theme:color/text/enabled/brand}",
+          "hover": "{theme:color/text/hover/brand}",
+          "pressed": "{theme:color/text/pressed/brand}",
+          "disabled": "{theme:color/text/disabled/default}"
+        },
+        "font size": {
+          "paragraph": "{components:text/paragraph/font size}",
+          "description": "{components:text/description/font size}"
+        },
+        "weight": "{components:text/paragraph/font weight}",
+        "line height": "{components:text/paragraph/line height}"
+      },
+      "spacing": {
+        "gap": "{theme:shape/spacing/x1 (8px)}"
+      },
+      "shape color": {
+        "enabled": "{theme:color/shape/enabled/brand}",
+        "hover": "{theme:color/shape/hover/brand}",
+        "pressed": "{theme:color/shape/pressed/brand}",
+        "disabled": "{theme:color/shape/disabled/default}"
+      }
+    },
+    "toggle": {
+      "size": {
+        "height": "{components:globals/size/smallest}",
+        "width": "{theme:shape/size/x7 (56px)}"
+      },
+      "color": {
+        "dot": "{theme:color/background/enabled/neutral}",
+        "enabled": "{theme:color/background/enabled/utility}",
+        "hover": "{theme:color/background/hover/neutral}",
+        "pressed": "{theme:color/background/pressed/neutral}",
+        "selected": "{theme:color/background/enabled/full brand}",
+        "selected hover": "{theme:color/background/hover/full brand}",
+        "selected pressed": "{theme:color/background/pressed/full brand}",
+        "disabled": "{theme:color/background/disabled/default}"
+      },
+      "border radius": {
+        "pill": "{components:globals/border radius/pill}"
+      },
+      "border color": {
+        "enabled": "{theme:color/border/enabled/neutral}",
+        "hover": "{theme:color/border/hover/neutral}",
+        "pressed": "{theme:color/border/pressed/neutral}",
+        "disabled": "{theme:color/border/disabled/default}"
+      }
+    },
+    "chip": {
+      "size": {
+        "height": "{components:globals/size/smallest}"
+      },
+      "color": {
+        "enabled": "{theme:color/background/enabled/neutral}",
+        "hover": "{theme:color/background/hover/neutral}",
+        "pressed": "{theme:color/background/pressed/neutral}",
+        "selected": "{theme:color/background/selected/neutral brand}",
+        "selected hover": "{theme:color/background/hover/neutral brand}",
+        "selected pressed": "{theme:color/background/pressed/neutral brand}",
+        "disabled": "{theme:color/background/disabled/default}"
+      },
+      "spacing": {
+        "icon padding": "{theme:shape/spacing/x1 (8px)}",
+        "gap": "{theme:shape/spacing/x0_5 (4px)}",
+        "padding": "{theme:shape/spacing/x1_5 (12px)}"
+      },
+      "font": {
+        "color": {
+          "enabled": "{theme:color/text/enabled/neutral}",
+          "hover": "{theme:color/text/hover/neutral}",
+          "pressed": "{theme:color/text/pressed/neutral}",
+          "selected": "{theme:color/text/selected/neutral}",
+          "selected hover": "{theme:color/text/hover/brand}",
+          "selected pressed": "{theme:color/text/pressed/brand}",
+          "disabled": "{theme:color/text/disabled/default}"
+        },
+        "size": "{components:globals/font/size/caption}",
+        "weight": "{components:globals/font/weight/caption}",
+        "line height": "{components:globals/font/line height/caption}"
+      },
+      "border radius": {
+        "pill": "{components:globals/border radius/pill}"
+      },
+      "border width": {
+        "default": "{theme:shape/border width/x1 (1px)}"
+      },
+      "border color": {
+        "enabled": "{theme:color/border/enabled/neutral}",
+        "hover": "{theme:color/border/hover/neutral}",
+        "pressed": "{theme:color/border/pressed/neutral}",
+        "selected": "{theme:color/border/enabled/brand}",
+        "selected hover": "{theme:color/border/hover/brand}",
+        "selected pressed": "{theme:color/border/pressed/brand}",
+        "disabled": "{theme:color/border/disabled/default}"
+      },
+      "shape color": {
+        "selected": "{theme:color/shape/enabled/brand}",
+        "selected hover": "{theme:color/shape/hover/brand}",
+        "selected pressed": "{theme:color/shape/pressed/brand}"
+      },
+      "icon": {
+        "color": {
+          "enabled": "{theme:color/text/enabled/neutral}",
+          "selected": "{theme:color/text/selected/neutral}"
+        }
+      }
+    },
+    "breadcrumb": {
+      "font": {
+        "font color": {
+          "current": "{theme:color/text/container/text}",
+          "enabled": "{components:link/font/font color/enabled}",
+          "hover": "{components:link/font/font color/hover}",
+          "pressed": "{components:link/font/font color/pressed}"
+        },
+        "size": "{components:globals/font/size/caption}",
+        "font weight": {
+          "current": "{components:globals/font/weight/inside}",
+          "link": "{components:globals/font/weight/label}"
+        },
+        "line height": "{components:globals/font/line height/caption}"
+      },
+      "size": {
+        "height": "{components:globals/size/interaction}"
+      },
+      "spacing": {
+        "padding": "{theme:shape/spacing/x0_5 (4px)}"
+      },
+      "shape color": {
+        "current": "{theme:color/shape/enabled/neutral}"
+      }
+    },
+    "tabs": {
+      "size": {
+        "height": "{components:globals/size/interaction}"
+      },
+      "color": {
+        "enabled": "{theme:color/background/enabled/transparent}",
+        "hover": "{theme:color/background/hover/neutral}",
+        "pressed": "{theme:color/background/pressed/neutral}",
+        "selected": "{theme:color/background/selected/neutral brand}",
+        "disabled": "{theme:color/background/disabled/transparent}"
+      },
+      "spacing": {
+        "padding": "{theme:shape/spacing/x2 (16px)}",
+        "gap": "{theme:shape/spacing/x1 (8px)}"
+      },
+      "border radius": {
+        "default": "{components:globals/border radius/interaction}"
+      },
+      "border width": {
+        "enabled": "{theme:shape/border width/x1 (1px)}",
+        "hover": "{theme:shape/border width/x1 (1px)}",
+        "pressed": "{theme:shape/border width/x2 (2px)}",
+        "selected": "{theme:shape/border width/x2 (2px)}",
+        "disabled": "{theme:shape/border width/x1 (1px)}"
+      },
+      "border color": {
+        "enabled": "{theme:color/border/enabled/neutral}",
+        "hover": "{theme:color/border/hover/neutral}",
+        "pressed": "{theme:color/border/pressed/neutral}",
+        "selected": "{theme:color/border/selected/default}",
+        "disabled": "{theme:color/border/disabled/default}"
+      },
+      "font": {
+        "color": {
+          "enabled": "{theme:color/text/enabled/neutral}",
+          "hover": "{theme:color/text/hover/neutral}",
+          "pressed": "{theme:color/text/pressed/neutral}",
+          "selected": "{theme:color/text/selected/neutral}",
+          "disabled": "{theme:color/text/disabled/default}"
+        },
+        "size": "{components:globals/font/size/inside}",
+        "weight": "{components:globals/font/weight/inside}",
+        "line height": "{components:globals/font/line height/inside}"
+      }
+    },
+    "paginator": {
+      "page item": {
+        "size": {
+          "height": "{components:globals/size/inside interaction}"
+        },
+        "color": {
+          "enabled": "{theme:color/background/enabled/transparent}",
+          "hover": "{theme:color/background/hover/neutral}",
+          "pressed": "{theme:color/background/pressed/neutral}",
+          "selected": "{theme:color/background/selected/neutral brand}",
+          "disabled": "{theme:color/background/disabled/transparent}"
+        },
+        "spacing": {
+          "padding": "{theme:shape/spacing/x1 (8px)}"
+        },
+        "border radius": {
+          "default": "{components:globals/border radius/inside interaction}"
+        },
+        "font": {
+          "size": "{components:globals/font/size/inside}",
+          "weight": "{components:globals/font/weight/inside}",
+          "line height": "{components:globals/font/line height/inside}",
+          "color": {
+            "enabled": "{theme:color/text/enabled/neutral}",
+            "selected": "{theme:color/text/selected/neutral}",
+            "hover": "{theme:color/text/hover/neutral}",
+            "pressed": "{theme:color/text/pressed/neutral}",
+            "disabled": "{theme:color/text/disabled/default}"
+          }
+        },
+        "shape color": {
+          "enabled": "{theme:color/shape/enabled/neutral}",
+          "hover": "{theme:color/shape/hover/neutral}",
+          "pressed": "{theme:color/shape/pressed/neutral}",
+          "disabled": "{theme:color/shape/disabled/default}"
+        }
+      },
+      "control": {
+        "size": {
+          "height": "{components:globals/size/interaction}"
+        },
+        "spacing": {
+          "padding": "{theme:shape/spacing/x0_5 (4px)}"
+        },
+        "border radius": {
+          "default": "{components:globals/border radius/interaction}"
+        },
+        "border color": {
+          "default": "{theme:color/border/container/inside}"
+        }
+      }
+    },
+    "card": {
+      "size": {
+        "min width": 280
+      },
+      "color": {
+        "default": "{theme:color/background/surface/container}"
+      },
+      "border radius": {
+        "default": "{theme:shape/border radius/x5 (40px)}"
+      },
+      "spacing": {
+        "padding": "{theme:shape/spacing/x4 (32px)}",
+        "gap": "{theme:shape/spacing/x3 (24px)}",
+        "title gap": "{theme:shape/spacing/x0_5 (4px)}",
+        "action gap": "{theme:shape/spacing/x1 (8px)}"
+      }
+    },
+    "overlay": {
+      "color": {
+        "default": "{theme:effects/overlay/default}"
+      }
+    },
+    "drawer": {
+      "size": {
+        "min width": 400
+      },
+      "color": {
+        "default": "{theme:color/background/surface/container}"
+      },
+      "border radius": {
+        "default": "{theme:shape/border radius/x5 (40px)}"
+      },
+      "spacing": {
+        "padding": "{theme:shape/spacing/x4 (32px)}",
+        "gap": "{theme:shape/spacing/x3 (24px)}",
+        "title gap": "{theme:shape/spacing/x0_5 (4px)}",
+        "content gap": "{theme:shape/spacing/x3 (24px)}",
+        "action gap": "{theme:shape/spacing/x1 (8px)}"
+      }
+    },
+    "accordion": {
+      "border color": {
+        "enabled": "{theme:color/border/enabled/neutral}",
+        "hover": "{theme:color/border/hover/neutral}",
+        "pressed": "{theme:color/border/pressed/neutral}",
+        "disabled": "{theme:color/border/disabled/default}"
+      },
+      "border radius": {
+        "default": "{components:globals/border radius/interaction}"
+      },
+      "border width": {
+        "enabled": "{theme:shape/border width/x1 (1px)}",
+        "hover": "{theme:shape/border width/x1 (1px)}",
+        "pressed": "{theme:shape/border width/x2 (2px)}",
+        "disabled": "{theme:shape/border width/x1 (1px)}"
+      },
+      "color": {
+        "enabled": "{theme:color/background/enabled/neutral}",
+        "hover": "{theme:color/background/hover/neutral}",
+        "pressed": "{theme:color/background/pressed/neutral}",
+        "open": "{theme:color/background/enabled/neutral}",
+        "disabled": "{theme:color/background/disabled/default}"
+      },
+      "font": {
+        "font color": {
+          "enabled": "{theme:color/text/enabled/neutral}",
+          "hover": "{theme:color/text/hover/neutral}",
+          "pressed": "{theme:color/text/pressed/neutral}",
+          "open": "{theme:color/text/enabled/neutral}",
+          "disabled": "{theme:color/text/disabled/default}"
+        },
+        "line height": "{components:globals/font/line height/inside}",
+        "size": "{components:globals/font/size/inside}",
+        "weight": "{components:globals/font/weight/label}"
+      },
+      "shape color": {
+        "enabled": "{theme:color/shape/enabled/neutral}",
+        "hover": "{theme:color/shape/hover/neutral}",
+        "pressed": "{theme:color/shape/pressed/neutral}",
+        "open": "{theme:color/shape/enabled/neutral}",
+        "disabled": "{theme:color/shape/disabled/default}"
+      },
+      "size": {
+        "height": "{components:globals/size/interaction}"
+      },
+      "spacing": {
+        "gap": "{theme:shape/spacing/x1 (8px)}",
+        "padding": "{theme:shape/spacing/x2 (16px)}",
+        "content padding": "{theme:shape/spacing/x2 (16px)}"
+      }
+    },
+    "modal": {
+      "size": {
+        "min width": 280
+      },
+      "color": {
+        "default": "{theme:color/background/surface/container}"
+      },
+      "border radius": {
+        "default": "{theme:shape/border radius/x5 (40px)}"
+      },
+      "spacing": {
+        "padding": "{theme:shape/spacing/x4 (32px)}",
+        "gap": "{theme:shape/spacing/x3 (24px)}",
+        "title gap": "{theme:shape/spacing/x0_5 (4px)}",
+        "action gap": "{theme:shape/spacing/x1 (8px)}"
+      }
+    },
+    "alert bar": {
+      "size": {
+        "min height": "{components:globals/size/interaction}"
+      },
+      "spacing": {
+        "padding": "{theme:shape/spacing/x1 (8px)}",
+        "gap": "{theme:shape/spacing/x1_5 (12px)}"
+      },
+      "color": {
+        "error": "{theme:color/background/feedback/negative/subtle}",
+        "warning": "{theme:color/background/feedback/warning/subtle}",
+        "success": "{theme:color/background/feedback/positive/subtle}",
+        "informative": "{theme:color/background/feedback/informative/subtle}",
+        "brand": "{theme:color/background/feedback/brand/subtle}",
+        "neutral": "{theme:color/background/feedback/neutral/subtle}"
+      },
+      "font color": {
+        "error": "{theme:color/text/feedback/negative/subtle}",
+        "warning": "{theme:color/text/feedback/warning/subtle}",
+        "success": "{theme:color/text/feedback/positive/subtle}",
+        "informative": "{theme:color/text/feedback/informative/subtle}",
+        "brand": "{theme:color/text/feedback/brand/subtle}",
+        "neutral": "{theme:color/text/feedback/neutral/subtle}"
+      },
+      "shape color": {
+        "error": "{theme:color/shape/feedback/negative/subtle}",
+        "warning": "{theme:color/shape/feedback/warning/subtle}",
+        "success": "{theme:color/shape/feedback/positive/subtle}",
+        "informative": "{theme:color/shape/feedback/informative/subtle}",
+        "brand": "{theme:color/shape/feedback/brand/subtle}",
+        "neutral": "{theme:color/shape/feedback/neutral/subtle}"
+      },
+      "border color": {
+        "error": "{theme:color/border/feedback/negative/subtle}",
+        "warning": "{theme:color/border/feedback/warning/subtle}",
+        "success": "{theme:color/border/feedback/positive/subtle}",
+        "informative": "{theme:color/border/feedback/informative/subtle}",
+        "brand": "{theme:color/border/feedback/brand/subtle}",
+        "neutral": "{theme:color/border/feedback/neutral/subtle}"
+      }
+    },
+    "calendar": {
+      "day": {
+        "size": {
+          "height": "{components:globals/size/inside interaction}"
+        },
+        "color": {
+          "enabled": "{theme:color/background/enabled/transparent}",
+          "hover": "{theme:color/background/hover/neutral}",
+          "pressed": "{theme:color/background/pressed/neutral}",
+          "selected": "{theme:color/background/selected/neutral brand}",
+          "disabled": "{theme:color/background/disabled/transparent}"
+        },
+        "spacing": {
+          "padding": "{theme:shape/spacing/x1 (8px)}",
+          "gap": "{theme:shape/spacing/x0_5 (4px)}"
+        },
+        "border radius": {
+          "default": "{components:globals/border radius/inside interaction}"
+        },
+        "font": {
+          "size": {
+            "day": "{components:globals/font/size/inside}",
+            "caption": "{theme:font/size/x1 (8px)}"
+          },
+          "weight": "{components:globals/font/weight/inside}",
+          "line height": "{components:globals/font/line height/inside}",
+          "color": {
+            "enabled": "{theme:color/text/enabled/neutral}",
+            "selected": "{theme:color/text/selected/neutral}",
+            "hover": "{theme:color/text/hover/neutral}",
+            "pressed": "{theme:color/text/pressed/neutral}",
+            "outside": "{theme:color/text/disabled/default}"
+          }
+        }
+      }
+    }
+  }
+}
