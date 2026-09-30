@@ -29,15 +29,17 @@ Fora do escopo: backend, APIs, banco, autenticação, regras de negócio.
 
 **Gap confirmado:** `Summary Card` (fundo azul) não tem variante dedicada — usar `card` genérico + validar manualmente em telas Envios/Hub/Conta Digital.
 
-## Inventário de Componentes (design system (base), sincronizado 2026-09-25)
+## Inventário de Componentes (design system (base), sincronizado 2026-09-30)
 
 - **Action:** Button, Button Icon
 - **Navigation:** Link, Segmented Buttons, menu-global, Tabs, Breadcrumb, Paginator, Logout, Menu (contextual — variantes a confirmar)
-- **Input:** Input Text, Input Paragraph, Input E-mail, Input Search, Input Token, Input Password, Input Select, Input File, Checkbox, Radio Button, Dropdown, Toggle, Chip
-- **Data Display:** Tags (+ tag-desktop/mobile/more/delivery), Badge, Table (unidade: `TableCellExtended`), List, Task List, Dashboard, Sort, Reorder, Avatar, Profile, Card
+- **Input:** Input Text, Input Paragraph, Input E-mail, Input Search, Input Token, Input Password, Input Select, Input File, Checkbox, Radio Button, Dropdown, Toggle, Chip, Calendar (+ calendar/single)
+- **Data Display:** Tags (+ tag-desktop/mobile/more/delivery), Badge, Table (unidade: `TableCellExtended`), List, Task List, Dashboard, Sort, Reorder, Avatar, Profile, Card, Credit Card, ID Card, Invoice, Inbox
 - **Data Visualization:** Bar, Chart Bar Up, Chart Bar Down, Chart Bar Variation, Chart Pie
-- **Feedback:** Tooltip, Loading, Cookie (Overlay: investigar se existe publicado separado do Drawer)
+- **Feedback:** Tooltip, Loading, Alert Bar (intents: brand/informative/neutral/success/error/warning), Cookie, Bell, Money Notification (Overlay: investigar se existe publicado separado do Drawer)
 - **Brand:** Logo Olist, Ícones rebrand 24
+
+⚠️ **Dark mode — pendente de exportação:** A collection `02. theme tokens` contém modo Dark no Figma, mas a API MCP não expõe os valores por modo. Para ativar dark mode no repositório, usar o plugin de exportação de tokens para gerar `html.dark { ... }` em `src/generated/variables.css`.
 
 ⚠️ Tabelas: usar `TableCellExtended` como unidade construtiva obrigatória — não instanciar `Table`, `Head` ou `Simple Cell` isoladamente.
 

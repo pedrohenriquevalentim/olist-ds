@@ -19,6 +19,86 @@ Nunca use `src/generated/variables.css` como referência sem antes verificar que
 
 ---
 
+## Dark Mode
+
+O sistema suporta dark mode via tokens exportados do Figma em dois arquivos separados.
+
+### Arquivos de tokens (pasta `packages/design-tokens/tokens/`)
+
+| Arquivo | Conteúdo |
+|---|---|
+| `base.json` | Tokens primitivos (paleta completa, sem modo) |
+| `theme.json` | Tokens semânticos por modo (`{ "Light": {...}, "Dark": {...} }`) |
+| `tokens-light.json` | Merge flat: base + theme(Light) + components(Light) |
+| `tokens-dark.json` | Merge flat: base + theme(Dark) + components(Dark) |
+| `tokens-components.json` | Tokens de componente (opcional, separado) |
+
+### CSS gerado (`src/generated/variables.css`)
+
+```css
+/* Light — padrão */
+:root {
+  --color-background-surface-container: #ffffff;
+  /* ... */
+}
+
+/* Dark — segue preferência do sistema */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background-surface-container: #111111;
+    /* ... apenas tokens com valores diferentes no dark */
+  }
+}
+
+/* Dark — override manual via JS */
+[data-theme="dark"] {
+  --color-background-surface-container: #111111;
+  /* ... */
+}
+
+/* Força light quando sistema é dark mas usuário preferiu light */
+[data-theme="light"] {
+  --color-background-surface-container: #ffffff;
+  /* ... */
+}
+```
+
+### Ativar/desativar dark mode em React
+
+```tsx
+// Ativar dark mode
+document.documentElement.setAttribute('data-theme', 'dark');
+
+// Ativar light mode (sobrescreve preferência do sistema)
+document.documentElement.setAttribute('data-theme', 'light');
+
+// Remover override — volta a seguir o sistema
+document.documentElement.removeAttribute('data-theme');
+```
+
+### Regra: tokens que funcionam em dark mode
+
+Use **apenas tokens semânticos** (camada theme ou component) — eles têm valores diferentes por modo.  
+Tokens **primitivos** (camada base) têm o mesmo valor em light e dark — use-os só quando não há semântico disponível.
+
+```css
+/* ✅ Correto — semântico, adapta ao modo */
+color: var(--color-text-container-title);
+background: var(--color-background-surface-container);
+
+/* ⚠️ Cuidado — primitivo, idêntico em ambos os modos */
+color: var(--color-gray-gray-900);
+```
+
+### JS tokens com dark mode
+
+```ts
+import { light, dark, tokens } from '@pedrohenriquevalentim/design-tokens';
+// tokens === light (compatibilidade com código existente)
+```
+
+---
+
 ## Hierarquia de Tokens
 
 O sistema tem três camadas — **use sempre a mais semântica disponível**:
@@ -142,6 +222,7 @@ npm run build:tokens
 
 ## Histórico
 
+- 2026-09-30 v1.4 — Adicionado suporte a dark mode: nova estrutura de arquivos (tokens-light/dark.json), documentação do CSS gerado (`:root` + `@media` + `[data-theme]`), regras de uso de tokens semânticos vs primitivos em contexto dark, e exports JS `light`/`dark`.
 - 2026-09-29 v1.3 — Corrigida contradição crítica no exemplo Figma Plugin API: RGB hardcoded **não é** a forma correta — é proibida. A abordagem correta é `importVariableByKeyAsync` + `setBoundVariableForPaint` com o RGB apenas como fallback no objeto paint. Alinhado com regra equivalente em globals.md.
 - 2026-08-23 v1.2 — Corrigida contradição sobre hardcode hex (só proibido em CSS, necessário na Figma Plugin API). Adicionada hierarquia de três camadas, nomes corretos dos primitivos (segmento duplicado), referência ao TOKEN_CATALOG.md como fonte primária sem repo. Removida referência exclusiva a `src/generated/variables.css`.
 - 2026-07-03 v1.1 — Adicionada referência a `GOVERNANCA_TOKENS.md`
