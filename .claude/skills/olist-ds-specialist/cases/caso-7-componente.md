@@ -39,13 +39,19 @@ Você:
        - NomeComponente.tsx           (React + TypeScript)
        - NomeComponente.module.css    (CSS Modules + var(--tokens))
        - NomeComponente.test.tsx      (Vitest + RTL)
-       - NomeComponente.stories.tsx   (Storybook v10)
+       - NomeComponente.stories.tsx   (Storybook v10 — ver regras abaixo)
        - NomeComponente.metadata.json (versão aprovada no passo 7, sem alterações)
        - index.ts                     (re-export componente + interface)
-       Regras: apenas tokens de src/generated/variables.css, rem (nunca px),
-       ícones como ReactNode, aria roles obrigatórios, teclado para interativos.
-       Ao escolher entre tokens semânticos candidatos para o mesmo elemento
-       (ex: cor de texto/fundo/borda por estado), consultar GOVERNANCA_TOKENS.md
+       Regras .tsx / .module.css: apenas tokens de src/generated/variables.css,
+       rem (nunca px), ícones como ReactNode, aria roles obrigatórios, teclado
+       para interativos. Consultar GOVERNANCA_TOKENS.md para tokens semânticos.
+
+       Regras .stories.tsx (obrigatórias):
+       · Formato CSF3 — objetos com `satisfies Meta<typeof X>`, nunca funções CSF2
+       · `backgrounds` com `default: 'claro'` e duas entradas (claro + escuro) em
+         todo `meta` — única permissão de hex resolvido (Storybook não aceita var())
+       · Zero hardcode fora de `backgrounds.values` — sem style inline nos decorators
+         nem nos args; decorators que precisam de estilo usam var(--token) ou classe CSS
 
    [B] GERAR DOCS NO FIGMA (frame "📄 Docs — NomeComponente"):
        - Criar frame dentro da MESMA section do componente original
