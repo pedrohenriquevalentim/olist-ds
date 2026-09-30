@@ -1,3 +1,24 @@
+## v3.22 (2026-09-29) — auditoria de conformidade do core
+
+### Enforcement de tokens semânticos, dark mode e WCAG 2.1 AA
+
+**Arquivos modificados:** `globals.md`, `decisions/technical/TOKENS.md`, `decisions/technical/ACESSIBILIDADE.md`, `references/CHECKLIST_REVISAO.md`, `cases/caso-4-figma.md`
+
+#### Fixed
+
+- **Contradição crítica em `TOKENS.md`:** o exemplo "✅ Correto para Figma Plugin API" mostrava RGB hardcoded (`node.fills = [{ color: { r: 0.039... } }]`), contradizendo diretamente a regra do `globals.md` que proíbe RGB sem binding. Corrigido: o exemplo agora mostra `importVariableByKeyAsync` + `setBoundVariableForPaint` com RGB apenas como fallback de renderização; RGB sem binding explicitamente marcado como `❌ Proibido`.
+- **`CHECKLIST_REVISAO.md` descrevia valores absolutos em vez de tokens:** seções 1 (Tipografia), 2 (Cores), 3 (Espaçamento) e 6 (Estados) usavam pixels, hex e nomes de cor primitivos ("14px", "#fcfbf8", "blue-500", "gray-100", "2px blue-500") em vez de referências a tokens semânticos. Substituídas por nomes de variável CSS reais (`var(--color-background-surface-container)`, `var(--shape-spacing-24px)`, etc.).
+
+#### Added
+
+- **`CHECKLIST_REVISAO.md` — Seção 11: Modo Escuro** (nova): 4 itens de verificação de compatibilidade dark mode, incluindo ausência de hex fixo e contraste 4.5:1 nos dois modos.
+- **`globals.md` — Invariante 7:** "Tokens semânticos são o mecanismo de dark mode — nenhum fill/stroke de cor primitiva ou hex fixo é aceito; verificar compatibilidade nos dois modos antes de concluir qualquer caso que produza UI."
+- **`globals.md` — Invariante 4 atualizado:** reforça que no Figma Plugin API o binding obrigatório é via `importVariableByKeyAsync` + `setBoundVariableForPaint`.
+- **`cases/caso-4-figma.md` — step 11 (checklist final):** dois novos itens obrigatórios — verificação de binding semântico em fills/strokes de frames custom e verificação de dark mode via `get_screenshot`.
+- **`decisions/technical/ACESSIBILIDADE.md`:** "WCAG AA" → "WCAG 2.1 AA"; contraste 4.5:1 explicitamente exigido em modo claro **e** escuro (SC 1.4.3).
+
+---
+
 ## v3.22 (2026-09-25) — 2ª rodada
 
 ### component-registry.json + figma-config.json + globals.md — 2ª rodada de /ds-sync
