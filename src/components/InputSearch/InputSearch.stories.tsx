@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { InputSearch } from './InputSearch';
 
 const meta: Meta<typeof InputSearch> = {
-  title: 'Components/InputSearch',
+  title: 'Components/Forms/InputSearch',
   component: InputSearch,
   parameters: {
     docs: {

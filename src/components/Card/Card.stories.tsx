@@ -3,7 +3,7 @@ import React from 'react';
 import { Card } from './Card';
 
 const meta: Meta<typeof Card> = {
-  title: 'Components/Card',
+  title: 'Components/Display & Feedback/Card',
   component: Card,
   parameters: {
     layout: 'centered',

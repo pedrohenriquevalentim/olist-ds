@@ -4,7 +4,7 @@ import { ItensMenuGlobal } from './ItensMenuGlobal';
 import { MenuGlobal } from '../MenuGlobal';
 
 const meta: Meta<typeof ItensMenuGlobal> = {
-  title: 'Navigation/ItensMenuGlobal',
+  title: 'Components/Navigation/ItensMenuGlobal',
   component: ItensMenuGlobal,
   parameters: {
     layout: 'fullscreen',
