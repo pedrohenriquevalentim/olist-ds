@@ -102,7 +102,7 @@ const MultiWrapper = (args: React.ComponentProps<typeof InputSelect>) => {
    ============================ */
 
 const meta: Meta<typeof InputSelect> = {
-  title: 'Components/InputSelect',
+  title: 'Components/Forms/InputSelect',
   component: InputSelect,
   parameters: {
     layout: 'padded',

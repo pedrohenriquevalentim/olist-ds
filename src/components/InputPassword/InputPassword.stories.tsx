@@ -4,7 +4,7 @@ import { InputPassword } from './InputPassword';
 import { Icon } from '../Icon';
 
 const meta: Meta<typeof InputPassword> = {
-  title: 'Components/InputPassword',
+  title: 'Components/Forms/InputPassword',
   component: InputPassword,
 
   parameters: {

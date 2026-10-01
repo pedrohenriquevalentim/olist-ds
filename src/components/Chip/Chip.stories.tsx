@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Chip } from './Chip';
 
 const meta: Meta<typeof Chip> = {
-  title: 'Components/Chip',
+  title: 'Components/Display & Feedback/Chip',
   component: Chip,
   parameters: {
     layout: 'centered',

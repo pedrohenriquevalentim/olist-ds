@@ -37,7 +37,7 @@ const TODOS_OS_PRODUTOS: ProdutoOlist[] = [
 ];
 
 const meta: Meta<typeof ProdutosOlistIcons> = {
-  title: 'Components/ProdutosOlistIcons',
+  title: 'Components/Brand/ProdutosOlistIcons',
   component: ProdutosOlistIcons,
   decorators: withThemeBackground,
   parameters: {

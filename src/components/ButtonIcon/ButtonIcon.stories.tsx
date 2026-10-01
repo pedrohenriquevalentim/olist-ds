@@ -11,7 +11,7 @@ const iconOptions: Record<string, React.ReactNode> = {
 };
 
 const meta: Meta<typeof ButtonIcon> = {
-  title: 'Components/ButtonIcon',
+  title: 'Components/Actions/ButtonIcon',
   component: ButtonIcon,
   parameters: {
     layout: 'centered',

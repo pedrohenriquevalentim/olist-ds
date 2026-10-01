@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { MenuGlobal } from './MenuGlobal';
 
 const meta: Meta<typeof MenuGlobal> = {
-  title: 'Navigation/MenuGlobal',
+  title: 'Components/Navigation/MenuGlobal',
   component: MenuGlobal,
   parameters: {
     layout: 'fullscreen',
