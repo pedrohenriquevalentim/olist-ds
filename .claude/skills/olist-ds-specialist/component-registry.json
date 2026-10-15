@@ -566,7 +566,18 @@
       "assetType": "component_set",
       "category": "data-display",
       "variantsConfirmed": true,
-      "note": "ATENÇÃO (2026-10-15): table virou component_set com key nova; TableCellExtended/head/simple cell/table column não retornam mais na busca — confirmar estrutura via get_metadata. Componente de referência — NÃO instanciar diretamente para montar tabelas. Usar TableCellExtended (componentKey 8ba1fe2c9d32e56a058c3946e17142223784c557) como unidade construtiva. Sub-componentes internos 'head' (01776494...) e 'simple cell' (23255b80...) são peças internas — não usar isolados."
+      "note": "Usar o component set `table` inteiro na Zona E. Confirmado via get_metadata em 2026-10-15. Peças internas (nunca instanciar): '.[base] table cell' (role: head/body/row header · state: enabled/hover · numeric · striped · type: text/checkbox/image/cta icon) e '.[base] table caption'. Substitui TableCellExtended, head, simple cell e table column. Pendente: confirmar via use_figma como ajustar linhas/colunas e preencher conteúdo.",
+      "figmaNodeId": "11554:26",
+      "variants": {
+        "striped": [
+          "true",
+          "false"
+        ],
+        "caption": [
+          "true",
+          "false"
+        ]
+      }
     },
     "Card": {
       "componentKey": "6c5bbef10eaba4951d287ce61bd29ec4de5683dc",
@@ -1568,7 +1579,8 @@
           "frames primitivos para linhas/colunas"
         ]
       },
-      "note": "Não retornado na busca de 2026-10-15 — pendente de confirmação. Componente OBRIGATÓRIO para tabelas na Zona E. Instanciar via importComponentSetByKeyAsync antes de qualquer use_figma. Nunca substituir por frames primitivos quando este componente está disponível."
+      "note": "SUBSTITUÍDO em 2026-10-15 pelo component set `table` — não é mais publicado; não usar. Componente OBRIGATÓRIO para tabelas na Zona E. Instanciar via importComponentSetByKeyAsync antes de qualquer use_figma. Nunca substituir por frames primitivos quando este componente está disponível.",
+      "deprecated": true
     },
     "Stepper": {
       "componentKey": "6f23a3d906e75906831619c35681e583aa34e828",
@@ -1721,7 +1733,9 @@
       ".[base] single select list",
       ".[base] multi select list",
       ".[base] token box",
-      ".[base] counter"
+      ".[base] counter",
+      ".[base] table cell",
+      ".[base] table caption"
     ]
   },
   "syncDiff": {

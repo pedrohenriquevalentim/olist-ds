@@ -34,16 +34,16 @@ Fora do escopo: backend, APIs, banco, autenticação, regras de negócio.
 - **Action:** Button, Button Icon
 - **Navigation:** Link, Segmented Buttons, menu-global, Tabs, Breadcrumb, Paginator, Logout, Stepper, Accordion, Menu (contextual — variantes a confirmar)
 - **Input:** Input Text, Input Paragraph, Input E-mail, Input Search, Input Token, Input Password, Input Select, Input File, Input Date, Checkbox, Radio Button, Dropdown, Toggle, Chip, Calendar (+ calendar/single)
-- **Data Display:** Tags (+ tag-desktop/mobile/more/delivery), Badge, Table (unidade: `TableCellExtended`), List, Task List, Dashboard, Sort, Reorder, Avatar, Profile, Card, Credit Card, ID Card, Invoice, Inbox
+- **Data Display:** Tags (+ tag-desktop/mobile/more/delivery), Badge, Table (component set `table`, variantes `striped` × `caption`), List, Task List, Dashboard, Sort, Reorder, Avatar, Profile, Card, Credit Card, ID Card, Invoice, Inbox
 - **Data Visualization:** Bar, Chart Bar Up, Chart Bar Down, Chart Bar Variation, Chart Pie
 - **Feedback:** Tooltip, Toast, Alert Dialog, Loading, Alert Bar (intents: brand/informative/neutral/success/error/warning), Cookie, Bell, Money Notification (Overlay: investigar se existe publicado separado do Drawer)
 - **Brand:** Logo Olist, Ícones rebrand 24
 
 ⚠️ **Dark mode — pendente de exportação:** A collection `02. theme tokens` contém modo Dark no Figma, mas a API MCP não expõe os valores por modo. Para ativar dark mode no repositório, usar o plugin de exportação de tokens para gerar `html.dark { ... }` em `src/generated/variables.css`.
 
-⚠️ **Pendente de confirmação (sync 2026-10-15):** `table` virou component set (key `00db8a692d897a905331b50040e4c21e30e531e1`) e `table cell extended`, `head`, `simple cell`, `table column` não aparecem mais na busca. Confirmar via `get_metadata` com link do Figma antes de montar tabelas.
+⚠️ **Tabelas (confirmado via `get_metadata` em 2026-10-15, nó `11554:26`):** usar o component set `table` (key `00db8a692d897a905331b50040e4c21e30e531e1`; variantes `striped=true|false` × `caption=true|false`). Ele substitui `TableCellExtended`, `head`, `simple cell` e `table column`, que deixaram de ser publicados. As peças `.[base] table cell` (role head/body/row header · state enabled/hover · numeric · striped · type text/checkbox/image/cta icon) e `.[base] table caption` são internas — nunca instanciar. Pendente: confirmar via `use_figma` como ajustar linhas/colunas e preencher o conteúdo.
 
-⚠️ Tabelas: usar `TableCellExtended` como unidade construtiva obrigatória — não instanciar `Table`, `Head` ou `Simple Cell` isoladamente.
+⚠️ Tabelas: usar sempre o component set `table` — nunca `TableCellExtended`, `Head` ou `Simple Cell` (não são mais publicados) nem células `.[base]` isoladas.
 
 ## Fonte dos Componentes React (Casos 1, 2, 8)
 
@@ -125,7 +125,7 @@ Fallback: `references/COMPONENTES.md` local.
 - Botão `size=big` ou `size=medium` nas Zonas B e C (só `size=small`)
 - Label do `input search` visível na Zona C (visible = false)
 - Instanciar `menu erp` em qualquer variante (removido — usar sempre `menu-global`)
-- Montar tabelas com sub-componentes isolados — usar `TableCellExtended`
+- Montar tabelas com células/frames isolados — instanciar o component set `table`
 - Omitir `padding: 8px` no frame raiz ERP
 - `#fcfbf8` como fills do frame raiz (frame raiz = `#F1F0E8`)
 - No Caso 7: gerar código/docs sem exibir `metadata.json` completo e obter aprovação explícita
