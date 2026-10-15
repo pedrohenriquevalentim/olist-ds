@@ -279,7 +279,7 @@ A coluna "Proibido" é exaustiva para os casos mais comuns — outros casos deve
 
 | Zona | Nome | Altura | Pode conter | Não pode conter |
 |---|---|---|---|---|
-| **A** | Menu Global | 304px largura, 752px altura | `menu-global` com `Produto=ERP` (instância real) | Qualquer outro componente. NÃO usar `menu erp` com `stage=*` (descontinuado). |
+| **A** | Menu Global | 304px largura, 752px altura | `menu-global` com `Produto=ERP` (instância real) | Qualquer outro componente. Menu é SEMPRE `menu-global` (`menu erp` removido do DS). |
 | **B** | Top Bar + Título | 116px | `breadcrumb` (esquerda do nav header) + `button` secondary × N + `button` primary × 1 (action bar direita, `size=small`); abaixo: título H1 + subtítulo (text styles) | Inputs, formulários, tabelas, cards, badges soltos, ilustrações; `button size=big` ou `size=medium` |
 | **C** | Filter Bar | 72px | `input search` (460px fixo, label oculto) + `button` secondary/tertiary × N `size=small` como filtros rápidos | `tag` como filtro ativo nesta zona; `button` primary; `heading`; label visível no input search |
 | **D** | Tabs | 48px | `tabs` (componente DS real, instância) + `button` secondary (ação contextual) + `button icon` (toggle de modo) | `Segmented Buttons`, qualquer input, breadcrumb, CTAs primários. **Zona D é opcional** — incluir só quando houver sub-navegação |

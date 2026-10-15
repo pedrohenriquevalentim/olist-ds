@@ -58,14 +58,14 @@
     "excludedComponentNamePatterns": [
       {
         "pattern": "^\\.",
-        "reason": "Prefixo '.' oculta o componente do painel de Assets do Figma — indica peça interna de construção de um component set (ex: '.menu erp/stage14', '.[base] single select list', '.[base] multi select list'). Nunca importar/instanciar diretamente; usar sempre o component_set público sem o prefixo de ponto."
+        "reason": "Prefixo '.' oculta o componente do painel de Assets do Figma — indica peça interna de construção de um component set (ex: '.[base] single select list', '.[base] multi select list'). Nunca importar/instanciar diretamente; usar sempre o component_set público sem o prefixo de ponto."
       }
     ],
     "harnessCoverageCheck": {
-      "lastVerifiedAt": "2026-09-30",
+      "lastVerifiedAt": "2026-10-15",
       "againstLibrary": "design system (base)",
       "verifiedVia": "search_design_system real via /ds-sync (Caso 6), busca por 15 categorias + get_metadata do nó 11279:16608",
-      "status": "3ª rodada de sync (2026-09-30): 9 novos componentes adicionados (calendar, alert-bar, inbox, invoice, bell, money-notification, credit-card, id-card, card-notification). Dark mode confirmado em '02. theme tokens' mas valores do modo Dark não exportáveis via MCP — requer plugin do usuário para gerar variables.css com html.dark {}. Atualizações hoje em: link, input paragraph, calendar/single, dropdown.",
+      "status": "4ª rodada de sync (2026-10-15): library republicada. Novos: stepper, toast, alert dialog, input date, accordion. Reestruturados: table (agora component_set, key nova) e calendar (2 component sets; calendar/single não aparece mais). Sumiram da busca: table cell extended, head, simple cell, table column — pendente confirmar via get_metadata. menu erp removido do uso (usar menu-global). Atualizações em massa em 2026-10-15 (updatedAt não discrimina mudança).",
       "keysFixed": [
         "Menu Global: c2a9753... → c76f80e6de1b8c4bd100b60329f3d68d28653e68",
         "Tabs: 6e28a768... → f0c6d6f3695edcc13e25a2a2436f6f1e52429da3",
@@ -90,22 +90,73 @@
         "bell (key 7dab82ab39ba3851c0a436655292b06a385b8ef8) — component_set notificação/sino",
         "money-notification (key 10d1aa5c7b52677107000105f0b705eeed3ddb12) — component_set",
         "credit-card (key 2a4b8e588c7d89308eb60a2d192aafa8a75b0b1e) — component_set",
-        "id-card (key e9329af4b81298c72189fbe98653a40a80e02c10) — component_set"
+        "id-card (key e9329af4b81298c72189fbe98653a40a80e02c10) — component_set",
+        "stepper (key 6f23a3d906e75906831619c35681e583aa34e828) — component_set",
+        "toast (key 014c6c6d68d8a5c172d2763d8d63c6348201967b) — component_set",
+        "alert dialog (key 396a32ed361409679dbfb2172d5520d9cb4a9900) — component_set",
+        "input date (key 5a09ca8ab231310cb18b354f9f36343aa90f9e91) — component_set",
+        "accordion (key 9ad98a94d7f6361cb32127c5cfe30b240fe58105) — component_set",
+        "calendar v2 (key 770014e4c54af91f0809fea72ecff38650278a74) — segundo component_set; c4d9635b… mantido"
       ],
       "confirmed": [
-        "menu-global", "Button", "Button Icon", "Radio Button", "Segmented Buttons", "Link", "Tabs",
-        "Tag (+ tag-desktop, tag-mobile, tag-more, tag-delivery)", "Badge", "Tooltip", "Logo",
-        "Icon (genérico + Product Icon + dezenas de ícones individuais)", "Input Search", "Input Text",
-        "Input Paragraph", "Input E-mail", "Input Token",
-        "Input Password", "Input Select", "Input File", "Dropdown", "Checkbox", "Check", "Toggle", "Chip",
-        "Avatar", "Card", "Breadcrumb", "Profile", "Logout",
-        "Table (+ Table Column, Head, Simple Cell, Spreadsheet, Table Cell Extended)", "Paginator", "Sort", "Reorder",
+        "menu-global",
+        "Button",
+        "Button Icon",
+        "Radio Button",
+        "Segmented Buttons",
+        "Link",
+        "Tabs",
+        "Tag (+ tag-desktop, tag-mobile, tag-more, tag-delivery)",
+        "Badge",
+        "Tooltip",
+        "Logo",
+        "Icon (genérico + Product Icon + dezenas de ícones individuais)",
+        "Input Search",
+        "Input Text",
+        "Input Paragraph",
+        "Input E-mail",
+        "Input Token",
+        "Input Password",
+        "Input Select",
+        "Input File",
+        "Dropdown",
+        "Checkbox",
+        "Check",
+        "Toggle",
+        "Chip",
+        "Avatar",
+        "Card",
+        "Breadcrumb",
+        "Profile",
+        "Logout",
+        "Table (+ Table Column, Head, Simple Cell, Spreadsheet, Table Cell Extended)",
+        "Paginator",
+        "Sort",
+        "Reorder",
         "Bar, Chart Bar Up, Chart Bar Down, Chart Bar Variation, Chart Pie",
-        "List, Task List", "Dashboard", "Loading", "Overlay", "Cookie",
-        "Calendar (+ calendar/single)", "Alert Bar (intents: brand/informative/neutral/success/error/warning)",
-        "Inbox", "Invoice", "Bell", "Money Notification", "Credit Card", "ID Card"
+        "List, Task List",
+        "Dashboard",
+        "Loading",
+        "Overlay",
+        "Cookie",
+        "Calendar (+ calendar/single)",
+        "Alert Bar (intents: brand/informative/neutral/success/error/warning)",
+        "Inbox",
+        "Invoice",
+        "Bell",
+        "Money Notification",
+        "Credit Card",
+        "ID Card",
+        "Stepper",
+        "Toast",
+        "Alert Dialog",
+        "Input Date",
+        "Accordion"
       ],
-      "gaps": [],
+      "gaps": [
+        "Tabela: table cell extended/head/simple cell/table column não retornados na busca de 2026-10-15; table agora é component_set 00db8a69… — confirmar estrutura com link do Figma",
+        "card-notification: sem component set público (só peças internas '.card notification/*', já sumidas)"
+      ],
       "resolvedGaps": [
         {
           "requirement": "Paginator (mencionado como ausente em references/GOVERNANCA_TOKENS.md seção 9 até 2026-07-20)",
@@ -149,9 +200,10 @@
       "Ignorar resultados de blockedLibraries mesmo se aparecerem em buscas sem filtro de libraryKey. Isso inclui AI Components, ERP components, ERP recursos, ERP style guide e [design system] components web — bloqueadas permanentemente desde 2026-07-03.",
       "",
       "=== COMPONENTES INTERNOS '.[base]' — SEMPRE IGNORAR ===",
-      "Componentes cujo name comece com '.' (ponto) são peças ocultas usadas para CONSTRUIR um component set — nunca resultados válidos para importar/instanciar. Confirmado na design system (base): '.menu erp/stage14', '.[base] single select list', '.[base] multi select list'.",
+      "Componentes cujo name comece com '.' (ponto) são peças ocultas usadas para CONSTRUIR um component set — nunca resultados válidos para importar/instanciar. Confirmado na design system (base): '.[base] single select list', '.[base] multi select list'.",
       "Ver excludedComponentNamePatterns acima. Ao processar resultados de search_design_system, descartar qualquer entrada cujo name dê match em algum desses patterns antes de escolher 'o primeiro resultado' da busca.",
-      "Se o único resultado retornado para um componente for um '.[base]/...' ou '.nome', tratar como 'não encontrado' e seguir o fluxo de Seção 4 do HARNEES_TELAS.md (construir com primitivos + documentar gap)."
+      "Se o único resultado retornado para um componente for um '.[base]/...' ou '.nome', tratar como 'não encontrado' e seguir o fluxo de Seção 4 do HARNEES_TELAS.md (construir com primitivos + documentar gap).",
+      "Menu: SEMPRE `menu-global`. `menu erp` (2 component sets publicados, 2026-09-10) está removido do uso por decisão do usuário em 2026-10-15 — nunca instanciar."
     ]
   }
 }

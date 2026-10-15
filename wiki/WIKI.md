@@ -1,8 +1,8 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.81`  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.82`  
 **Skill:** v3.22  
-**Última atualização:** 2026-09-30  
+**Última atualização:** 2026-10-15  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -36,7 +36,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Ícones SVG | 556 |
 | Arquivos da Skill | 26 |
 | Arquivos Figma permitidos | 1 |
-| Versão npm | 1.0.81 |
+| Versão npm | 1.0.82 |
 | Versão skill | 3.22 |
 
 ## Componentes
@@ -660,4 +660,4 @@ O `SKILL.md` original (726 linhas, 53 KB) era carregado integralmente em toda in
 
 ---
 
-*Gerado automaticamente em 2026-09-30 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-10-15 por `generate-wiki.mjs`. Não edite manualmente.*

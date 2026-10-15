@@ -102,7 +102,7 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
 
 **Demais regras:**
 
-- Zona A: componente `menu-global` com `Produto=ERP` — NÃO usar `menu erp` (stage=*) que foi descontinuado
+- Zona A: SEMPRE `menu-global` com `Produto=ERP` — `menu erp` foi removido do DS
 - Zona B: botões da action bar sempre `size=small` — nunca `big` ou `medium`
 - Zona B é dividida internamente: `nav header` (47px) + gap (8px no itemSpacing) + `page title` (49px) = ~116px total
 - Zona C: `input search` sem label visível (layer `"label"` com `visible = false` após `appendChild`)

@@ -6,8 +6,8 @@
     "figmaLibraryKey": "lk-f068a69b8c4ef3c01d6a883806b21c6ebe73213d3565451a399cfba74694fbc0053c2b4226fb206812f098c679b6a971148aa027e97bc14733e29552c4002cb5",
     "extractedAt": "2026-07-03",
     "republishedAt": "2026-07-03T15:16:45Z",
-    "lastSyncAt": "2026-09-25",
-    "totalComponents": 71,
+    "lastSyncAt": "2026-10-15",
+    "totalComponents": 78,
     "published": true,
     "previousSource": {
       "name": "AI-Components",
@@ -562,11 +562,11 @@
       "note": "Variantes não confirmadas via get_metadata — fornecer URL do Figma para mapear. Pode ser variante do Badge (type=tag, intent=*). Confirmar se ainda existe como component_set independente."
     },
     "Table": {
-      "componentKey": "57db0c99d57bcb4da8cdd9b02938a65af734ed67",
-      "assetType": "component",
+      "componentKey": "00db8a692d897a905331b50040e4c21e30e531e1",
+      "assetType": "component_set",
       "category": "data-display",
       "variantsConfirmed": true,
-      "note": "Componente de referência — NÃO instanciar diretamente para montar tabelas. Usar TableCellExtended (componentKey 8ba1fe2c9d32e56a058c3946e17142223784c557) como unidade construtiva. Sub-componentes internos 'head' (01776494...) e 'simple cell' (23255b80...) são peças internas — não usar isolados."
+      "note": "ATENÇÃO (2026-10-15): table virou component_set com key nova; TableCellExtended/head/simple cell/table column não retornam mais na busca — confirmar estrutura via get_metadata. Componente de referência — NÃO instanciar diretamente para montar tabelas. Usar TableCellExtended (componentKey 8ba1fe2c9d32e56a058c3946e17142223784c557) como unidade construtiva. Sub-componentes internos 'head' (01776494...) e 'simple cell' (23255b80...) são peças internas — não usar isolados."
     },
     "Card": {
       "componentKey": "6c5bbef10eaba4951d287ce61bd29ec4de5683dc",
@@ -1568,7 +1568,42 @@
           "frames primitivos para linhas/colunas"
         ]
       },
-      "note": "Componente OBRIGATÓRIO para tabelas na Zona E. Instanciar via importComponentSetByKeyAsync antes de qualquer use_figma. Nunca substituir por frames primitivos quando este componente está disponível."
+      "note": "Não retornado na busca de 2026-10-15 — pendente de confirmação. Componente OBRIGATÓRIO para tabelas na Zona E. Instanciar via importComponentSetByKeyAsync antes de qualquer use_figma. Nunca substituir por frames primitivos quando este componente está disponível."
+    },
+    "Stepper": {
+      "componentKey": "6f23a3d906e75906831619c35681e583aa34e828",
+      "assetType": "component_set",
+      "category": "navigation",
+      "variantsConfirmed": false,
+      "note": "Encontrado em 2026-10-15 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar."
+    },
+    "Toast": {
+      "componentKey": "014c6c6d68d8a5c172d2763d8d63c6348201967b",
+      "assetType": "component_set",
+      "category": "feedback",
+      "variantsConfirmed": false,
+      "note": "Encontrado em 2026-10-15 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar."
+    },
+    "Alert Dialog": {
+      "componentKey": "396a32ed361409679dbfb2172d5520d9cb4a9900",
+      "assetType": "component_set",
+      "category": "feedback",
+      "variantsConfirmed": false,
+      "note": "Encontrado em 2026-10-15 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar."
+    },
+    "Input Date": {
+      "componentKey": "5a09ca8ab231310cb18b354f9f36343aa90f9e91",
+      "assetType": "component_set",
+      "category": "input",
+      "variantsConfirmed": false,
+      "note": "Encontrado em 2026-10-15 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar."
+    },
+    "Accordion": {
+      "componentKey": "9ad98a94d7f6361cb32127c5cfe30b240fe58105",
+      "assetType": "component_set",
+      "category": "navigation",
+      "variantsConfirmed": false,
+      "note": "Encontrado em 2026-10-15 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar."
     }
   },
   "categories": {
@@ -1584,7 +1619,9 @@
       "Tabs",
       "Paginator",
       "Sort",
-      "Context Switch"
+      "Context Switch",
+      "Stepper",
+      "Accordion"
     ],
     "input": [
       "Input Text",
@@ -1599,7 +1636,8 @@
       "Checkbox",
       "Radio Button",
       "Toggle",
-      "Chip"
+      "Chip",
+      "Input Date"
     ],
     "data-display": [
       "Tag",
@@ -1615,7 +1653,9 @@
     "feedback": [
       "Tooltip",
       "Cookie",
-      "Loading"
+      "Loading",
+      "Toast",
+      "Alert Dialog"
     ],
     "data-visualization": [
       "Chart Bar Up",
@@ -1678,7 +1718,6 @@
   "excludedInternal": {
     "note": "Confirmados via search_design_system e get_metadata, nunca usar diretamente — ver _meta.excludedNote",
     "components": [
-      ".menu erp/stage14",
       ".[base] single select list",
       ".[base] multi select list",
       ".[base] token box",
