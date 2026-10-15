@@ -1780,7 +1780,9 @@
       },
       "textProperty": "label (TEXT, default 'Jan')",
       "tokens": "calendar/month/* em 03. component tokens (16 aliases espelhando calendar/day/*)",
-      "createdAt": "2026-10-15"
+      "createdAt": "2026-10-15",
+      "published": true,
+      "verifiedAt": "2026-10-15"
     }
   },
   "syncDiff": {

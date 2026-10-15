@@ -397,7 +397,7 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 #### Pendente
 
-- Publicar a library no Figma (Assets → Publish) para as variáveis `calendar/month/*` ficarem disponíveis a consumidores; `calendar/month/border radius/default` e `calendar/month/font/color/disabled` não apareceram na busca de 2026-10-15 — conferir após publicar.
+- Nenhum. Library publicada e verificada via `search_design_system` em 2026-10-15: as 16 variáveis `calendar/month/*` estão disponíveis (inclui `border radius/default` e `font/color/disabled`, que só apareceram após a segunda publicação). `.[base] calendar month` não é listado na busca por ser peça interna ('.'-prefixada), como o `.[base] calendar day`.
 
 ---
 
