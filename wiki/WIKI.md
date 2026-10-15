@@ -1,6 +1,6 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.82`  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.83`  
 **Skill:** v3.22  
 **Última atualização:** 2026-10-15  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
@@ -36,7 +36,7 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | Ícones SVG | 556 |
 | Arquivos da Skill | 26 |
 | Arquivos Figma permitidos | 1 |
-| Versão npm | 1.0.82 |
+| Versão npm | 1.0.83 |
 | Versão skill | 3.22 |
 
 ## Componentes
@@ -378,6 +378,32 @@ npm install --save-dev PACOTE --legacy-peer-deps
 4. O prompt inclui instrução para ler `figma-config.json` antes do Figma MCP?
 
 ## Changelog
+
+## v3.22 (2026-10-15) — 4ª rodada de /ds-sync
+
+### component-registry.json + figma-config.json + globals.md + referências — library republicada
+
+**Arquivos modificados:** `component-registry.json`, `figma-config.json`, `globals.md`, `references/FIGMA_CONFIG.md`, `references/HARNEES_TELAS.md`, `references/TEMPLATES_PRODUTO.md`, `references/SDD_PARA_TELA.md`, `references/PADROES.md`, `src/components/MenuGlobal/MenuGlobal.metadata.json`
+
+#### Added
+
+- **Novos componentes na `design system (base)`:** `stepper` (`6f23a3d9…`), `toast` (`014c6c6d…`), `alert dialog` (`396a32ed…`), `input date` (`5a09ca8a…`) e `accordion` (`9ad98a94…`). Variantes ainda não mapeadas — confirmar via `get_metadata` com link do Figma.
+- **`calendar`:** segundo component set (`770014e4…`); `c4d9635b…` mantido.
+- **Tabela confirmada via `get_metadata` (nó `11554:26`):** component set `table` (`00db8a69…`, variantes `striped` × `caption`) com peças internas `.[base] table cell` e `.[base] table caption`.
+
+#### Changed
+
+- **Zona E (tabelas):** usar o component set `table` em vez de `TableCellExtended`/`head`/`simple cell`/`table column`, que deixaram de ser publicados (`globals.md`, `HARNEES_TELAS.md`, `TEMPLATES_PRODUTO.md`, registry marca `TableCellExtended` como `deprecated`).
+- **`menu-global` é o único menu:** `menu erp` removido do uso por decisão do usuário (2026-10-15); `globals.md`, `HARNEES_TELAS.md`, `TEMPLATES_PRODUTO.md` e `FIGMA_CONFIG.md` atualizados, e `MenuErp` trocado por `MenuGlobal` em `SDD_PARA_TELA.md` e `PADROES.md`.
+- **`MenuGlobal.metadata.json`:** "usar Menu ERP na Zona B" → "usar o painel secundário do ItensMenuGlobal".
+- **Peças internas `.[base] table cell`/`table caption`** adicionadas a `excludedInternal`; exemplos `.menu erp/stage14` removidos.
+
+#### Pendente
+
+- Confirmar via `use_figma` como ajustar linhas/colunas e preencher o conteúdo do `table`.
+- `card-notification` segue sem component set público (só peças internas, já sumidas da busca).
+
+---
 
 ## v3.22 (2026-09-29) — auditoria de conformidade do core
 
