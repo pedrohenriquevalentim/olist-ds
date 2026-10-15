@@ -279,11 +279,11 @@ A coluna "Proibido" é exaustiva para os casos mais comuns — outros casos deve
 
 | Zona | Nome | Altura | Pode conter | Não pode conter |
 |---|---|---|---|---|
-| **A** | Menu Global | 304px largura, 752px altura | `menu-global` com `Produto=ERP` (instância real) | Qualquer outro componente. NÃO usar `menu erp` com `stage=*` (descontinuado). |
+| **A** | Menu Global | 304px largura, 752px altura | `menu-global` com `Produto=ERP` (instância real) | Qualquer outro componente. Menu é SEMPRE `menu-global` (`menu erp` removido do DS). |
 | **B** | Top Bar + Título | 116px | `breadcrumb` (esquerda do nav header) + `button` secondary × N + `button` primary × 1 (action bar direita, `size=small`); abaixo: título H1 + subtítulo (text styles) | Inputs, formulários, tabelas, cards, badges soltos, ilustrações; `button size=big` ou `size=medium` |
 | **C** | Filter Bar | 72px | `input search` (460px fixo, label oculto) + `button` secondary/tertiary × N `size=small` como filtros rápidos | `tag` como filtro ativo nesta zona; `button` primary; `heading`; label visível no input search |
 | **D** | Tabs | 48px | `tabs` (componente DS real, instância) + `button` secondary (ação contextual) + `button icon` (toggle de modo) | `Segmented Buttons`, qualquer input, breadcrumb, CTAs primários. **Zona D é opcional** — incluir só quando houver sub-navegação |
-| **E** | Content Area | flex | Um padrão de página (ver Seção 3): Tabela (`TableCellExtended`), Form, Dashboard, Detalhe ou Empty State; `card`s dentro do padrão | Breadcrumb, elementos de navegação, CTAs primários soltos; frames primitivos no lugar de `TableCellExtended` |
+| **E** | Content Area | flex | Um padrão de página (ver Seção 3): Tabela (`table`), Form, Dashboard, Detalhe ou Empty State; `card`s dentro do padrão | Breadcrumb, elementos de navegação, CTAs primários soltos; frames primitivos no lugar de `TableCellExtended` |
 | **F** | Bottom Bar | 72px | `Paginator` + text styles para totais | Botões de ação, formulários, conteúdo editorial. **Zona F é opcional** — só aparece com tabelas de múltiplas páginas |
 
 **Regras específicas ERP (atualizadas 2026-08-29):**
@@ -298,7 +298,7 @@ A coluna "Proibido" é exaustiva para os casos mais comuns — outros casos deve
 - Zona C: `input search` com layer `"label"` setado `visible = false` após `appendChild`; botões sempre `size=small`
 - `breadcrumb` na Zona B: instância real do componente DS (`component-registry.json`) — nunca construir com texto solto
 - `tabs` na Zona D: componente DS real (não `Segmented Buttons`) — confirmado no frame Figma `10170:11866`
-- Zona E (tabela): usar `TableCellExtended` (`8ba1fe2c9d32e56a058c3946e17142223784c557`) — nunca `head`/`simple cell` isolados ou frames primitivos
+- Zona E (tabela): usar o component set `table` (`00db8a692d897a905331b50040e4c21e30e531e1`; `striped` × `caption`) — nunca células `.[base] table cell` isoladas ou frames primitivos
 
 ---
 

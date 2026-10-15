@@ -81,19 +81,19 @@ Antes de criar qualquer coisa, leia `MAPA_FONTES.md` e verifique:
 ### Para React (saída em código):
 
 ```tsx
-import { MenuErp, Button, Checkbox } from '@pedrohenriquevalentim/olist-ds';
+import { MenuGlobal, Button, Checkbox } from '@pedrohenriquevalentim/olist-ds';
 import styles from './NomePagina.module.css';
 
 export const NomePagina: React.FC = () => {
   return (
-    <MenuErp>
+    <MenuGlobal>
       <div className={styles.conteudo}>
         <header className={styles.header}>
           <h1 className={styles.titulo}>Título da Página</h1>
           <Button variant="primary">Ação</Button>
         </header>
       </div>
-    </MenuErp>
+    </MenuGlobal>
   );
 };
 ```

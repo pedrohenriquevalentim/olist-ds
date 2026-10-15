@@ -170,7 +170,7 @@ if (textNode) {
 ### ❌ Nunca:
 1. Chamar `search_design_system` sem `includeLibraryKeys`
 2. Usar componentes de `blockedLibraries` mesmo que apareçam sem filtro
-3. Importar/instanciar um componente cujo `name` comece com `.` (ex: `.[base] single select list`, `.menu erp/stage14`) — são peças internas, nunca resultados válidos
+3. Importar/instanciar um componente cujo `name` comece com `.` (ex: `.[base] single select list`) — são peças internas, nunca resultados válidos
 4. Construir Button, Tag, Menu Global etc. manualmente quando existem no DS
 5. Definir `layoutSizingVertical/Horizontal` antes de `appendChild`
 
@@ -186,7 +186,6 @@ O Figma oculta do painel de Assets qualquer componente cujo nome comece com `.` 
 
 | name retornado | filePath | O que é |
 |---|---|---|
-| `.menu erp/stage14` | `components/_menu erp/stage14` | Variante interna usada para montar o component_set público `menu erp` |
 | `.[base] single select list` | `components/__base_ single select list` | Bloco de construção interno do `dropdown` |
 | `.[base] multi select list` | `components/__base_ multi select list` | Bloco de construção interno de listas multi-seleção |
 

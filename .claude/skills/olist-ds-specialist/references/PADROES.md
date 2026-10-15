@@ -7,7 +7,7 @@ Layouts comuns usados nos produtos ERP da Olist. Use como ponto de partida ao co
 Tipo de página mais comum. Lista dados com filtros, ações e paginação.
 
 ```
-┌─ MenuErp ─────────────────────────────────────────────────┐
+┌─ MenuGlobal ─────────────────────────────────────────────────┐
 │ ┌─ Sidebar ─┐ ┌─ Conteúdo ─────────────────────────────┐  │
 │ │           │ │                                         │  │
 │ │ Navegação │ │  Título da Página        [+ Novo] [⋮]  │  │

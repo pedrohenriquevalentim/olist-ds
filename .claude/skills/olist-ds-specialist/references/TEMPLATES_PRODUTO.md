@@ -64,7 +64,7 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
 │ │  ERP      │ ├──────────────────────────────────────────────┤ │
 │ │           │ │                                              │ │
 │ │  Sidebar  │ │  Zona E — Content Area              flex h  │ │
-│ │  fixa à   │ │  TableCellExtended / Form / Cards /          │ │
+│ │  fixa à   │ │  table / Form / Cards /          │ │
 │ │  esquerda │ │  Dashboard                                   │ │
 │ │  752px h  │ │                                              │ │
 │ │           │ ├──────────────────────────────────────────────┤ │
@@ -102,13 +102,13 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
 
 **Demais regras:**
 
-- Zona A: componente `menu-global` com `Produto=ERP` — NÃO usar `menu erp` (stage=*) que foi descontinuado
+- Zona A: SEMPRE `menu-global` com `Produto=ERP` — `menu erp` foi removido do DS
 - Zona B: botões da action bar sempre `size=small` — nunca `big` ou `medium`
 - Zona B é dividida internamente: `nav header` (47px) + gap (8px no itemSpacing) + `page title` (49px) = ~116px total
 - Zona C: `input search` sem label visível (layer `"label"` com `visible = false` após `appendChild`)
 - Zona D (Tabs) é opcional — usar apenas quando houver sub-navegação na página
 - Zona F é opcional — só aparece quando há tabela com muitos itens; quando ausente, Zona E recebe `bottomLeft/bottomRight: 12`
-- Zona E (padrão Tabela): usar `TableCellExtended` (`8ba1fe2c9d32e56a058c3946e17142223784c557`) — nunca frames primitivos nem `head`/`simple cell` isolados
+- Zona E (padrão Tabela): usar o component set `table` (`00db8a692d897a905331b50040e4c21e30e531e1`; `striped` × `caption`) — nunca frames primitivos nem células `.[base] table cell` isoladas
 - Padding lateral interno de todas as zonas: **25px** (content width efetiva 1012px dentro de 1038px de container)
 - Máximo 1 CTA primário na Zona B (action bar)
 - Zona D: usar o componente `tabs` do DS (confirmado no frame real 10170:11866) — **não usar `Segmented Buttons`**
@@ -230,7 +230,7 @@ Se o SDD não especificar o produto: **perguntar ao usuário.**
           },
           {
             "id": "zona-e", "label": "Content Area", "cornerRadius": 0,
-            "tableComponent": "TableCellExtended (8ba1fe2c...)",
+            "tableComponent": "table (00db8a69...)",
             "note": "cornerRadius bottom 12px quando Zona F ausente"
           },
           {
