@@ -379,6 +379,28 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 ## Changelog
 
+## v3.22 (2026-10-15) — calendar month
+
+### component-registry.json + figma-config.json — `.[base] calendar month`
+
+**Arquivos modificados:** `component-registry.json`, `figma-config.json`
+
+#### Added
+
+- **`.[base] calendar month`** (peça interna, nodeId `11829:662`): component set com `state` = enabled, hover, pressed, selected, disabled e propriedade de texto `label`. Compõe a seleção de meses (view=months) do `calendar`, no mesmo papel do `.[base] calendar day` para os dias.
+- **16 variáveis `calendar/month/*`** em `03. component tokens` (altura, radius, padding, 5 fills, tipografia, 5 cores de texto), como alias dos mesmos alvos de `calendar/day/*`.
+- **`Calendar`** no registry (keys `770014e4…` atual e `c4d9635b…` anterior; variantes view × week start × weekday format × state).
+
+#### Changed
+
+- **Views `months` (enabled e disabled) do `calendar`:** os 12 frames soltos de mês de cada view viraram instâncias de `.[base] calendar month`; Out segue selecionado na view enabled.
+
+#### Pendente
+
+- Publicar a library no Figma (Assets → Publish) para as variáveis `calendar/month/*` ficarem disponíveis a consumidores; `calendar/month/border radius/default` e `calendar/month/font/color/disabled` não apareceram na busca de 2026-10-15 — conferir após publicar.
+
+---
+
 ## v3.22 (2026-10-15) — 4ª rodada de /ds-sync
 
 ### component-registry.json + figma-config.json + globals.md + referências — library republicada

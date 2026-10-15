@@ -7,7 +7,7 @@
     "extractedAt": "2026-07-03",
     "republishedAt": "2026-07-03T15:16:45Z",
     "lastSyncAt": "2026-10-15",
-    "totalComponents": 78,
+    "totalComponents": 79,
     "published": true,
     "previousSource": {
       "name": "AI-Components",
@@ -1616,6 +1616,33 @@
       "category": "navigation",
       "variantsConfirmed": false,
       "note": "Encontrado em 2026-10-15 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar."
+    },
+    "Calendar": {
+      "componentKey": "770014e4c54af91f0809fea72ecff38650278a74",
+      "legacyComponentKey": "c4d9635bccfa68edd96151e9a624df3ebdc228ad",
+      "assetType": "component_set",
+      "category": "input",
+      "figmaNodeId": "11582:507",
+      "variantsConfirmed": true,
+      "variants": {
+        "view": [
+          "days",
+          "months"
+        ],
+        "week start": [
+          "sunday",
+          "monday"
+        ],
+        "weekday format": [
+          "short",
+          "initial"
+        ],
+        "state": [
+          "enabled",
+          "disabled"
+        ]
+      },
+      "note": "Dois component sets 'calendar' publicados (770014e4… atual, c4d9635b… anterior). Dias usam instâncias de '.[base] calendar day'; meses (view=months) usam instâncias de '.[base] calendar month' (criado em 2026-10-15). Peças '.[base]' são internas — nunca instanciar."
     }
   },
   "categories": {
@@ -1649,7 +1676,8 @@
       "Radio Button",
       "Toggle",
       "Chip",
-      "Input Date"
+      "Input Date",
+      "Calendar"
     ],
     "data-display": [
       "Tag",
@@ -1735,8 +1763,25 @@
       ".[base] token box",
       ".[base] counter",
       ".[base] table cell",
-      ".[base] table caption"
-    ]
+      ".[base] table caption",
+      ".[base] calendar day",
+      ".[base] calendar month"
+    ],
+    "calendarMonth": {
+      "componentSetNodeId": "11829:662",
+      "variants": {
+        "state": [
+          "enabled",
+          "hover",
+          "pressed",
+          "selected",
+          "disabled"
+        ]
+      },
+      "textProperty": "label (TEXT, default 'Jan')",
+      "tokens": "calendar/month/* em 03. component tokens (16 aliases espelhando calendar/day/*)",
+      "createdAt": "2026-10-15"
+    }
   },
   "syncDiff": {
     "comparedAgainst": "component-registry.json anterior (source: AI-Components, extractedAt: 2026-06-03)",

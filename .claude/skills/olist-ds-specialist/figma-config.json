@@ -65,7 +65,7 @@
       "lastVerifiedAt": "2026-10-15",
       "againstLibrary": "design system (base)",
       "verifiedVia": "search_design_system real via /ds-sync (Caso 6), busca por 15 categorias + get_metadata do nó 11279:16608",
-      "status": "4ª rodada de sync (2026-10-15): library republicada. Novos: stepper, toast, alert dialog, input date, accordion. Reestruturados: table (agora component_set, key nova) e calendar (2 component sets; calendar/single não aparece mais). table confirmada via get_metadata (nó 11554:26): component set `table` (striped × caption) com peças internas `.[base] table cell` e `.[base] table caption`; table cell extended/head/simple cell/table column foram substituídos. menu erp removido do uso (usar menu-global). Atualizações em massa em 2026-10-15 (updatedAt não discrimina mudança).",
+      "status": "4ª rodada de sync (2026-10-15): library republicada. Novos: stepper, toast, alert dialog, input date, accordion. Reestruturados: table (agora component_set, key nova) e calendar (2 component sets; calendar/single não aparece mais). table confirmada via get_metadata (nó 11554:26): component set `table` (striped × caption) com peças internas `.[base] table cell` e `.[base] table caption`; table cell extended/head/simple cell/table column foram substituídos. menu erp removido do uso (usar menu-global). Atualizações em massa em 2026-10-15 (updatedAt não discrimina mudança). | 5ª rodada (2026-10-15, após /ds-construir): criado '.[base] calendar month' (peça interna, state enabled/hover/pressed/selected/disabled; não aparece na busca por ser '.'-prefixado) e 16 variáveis calendar/month/* em '03. component tokens'; as views months do calendar agora usam instâncias dele. Nenhum componente público novo ou removido.",
       "keysFixed": [
         "Menu Global: c2a9753... → c76f80e6de1b8c4bd100b60329f3d68d28653e68",
         "Tabs: 6e28a768... → f0c6d6f3695edcc13e25a2a2436f6f1e52429da3",
@@ -96,7 +96,8 @@
         "alert dialog (key 396a32ed361409679dbfb2172d5520d9cb4a9900) — component_set",
         "input date (key 5a09ca8ab231310cb18b354f9f36343aa90f9e91) — component_set",
         "accordion (key 9ad98a94d7f6361cb32127c5cfe30b240fe58105) — component_set",
-        "calendar v2 (key 770014e4c54af91f0809fea72ecff38650278a74) — segundo component_set; c4d9635b… mantido"
+        "calendar v2 (key 770014e4c54af91f0809fea72ecff38650278a74) — segundo component_set; c4d9635b… mantido",
+        ".[base] calendar month (nodeId 11829:662) — peça interna do calendar, tokens calendar/month/*"
       ],
       "confirmed": [
         "menu-global",
