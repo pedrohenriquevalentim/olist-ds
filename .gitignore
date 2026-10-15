@@ -17,3 +17,5 @@ storybook-static/
 .codex/
 AGENTS.md
 
+# Protótipos locais (exploração, fora do pacote e do release)
+prototypes/

@@ -64,6 +64,13 @@ Tipos: `feat`, `fix`, `refactor`, `test`, `docs`, `chore`
 
 Mantenha os commits focados em uma única alteração lógica.
 
+## Protótipos
+Protótipos e explorações descartáveis (HTML soltos, apps Vite de teste, propostas de layout) vão **sempre** em `prototypes/`, que está no `.gitignore`.
+- Um protótipo por pasta: `prototypes/<nome>/` (apps com `package`/Vite/`dist`) ou `prototypes/html/` (arquivos HTML avulsos)
+- NUNCA crie protótipos na raiz do repositório, em `src/` ou em `.claude/` — arquivos não rastreados na raiz fazem o `npm run release` abortar
+- Protótipos não entram em commit, PR nem no pacote publicado; se um virar componente do DS, siga o fluxo de "Estrutura de Cada Componente"
+- Não importe nada de `prototypes/` em `src/`
+
 ## Comunicação
 Ao concluir uma tarefa, explique a decisão tomada, não o que o código faz. Se encontrou algo inesperado ou tomou uma decisão por julgamento, mencione o raciocínio em 2–3 frases.
 
