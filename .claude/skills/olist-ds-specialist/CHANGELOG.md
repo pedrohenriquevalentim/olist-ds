@@ -1,4 +1,4 @@
-## v3.22 (2026-10-15) — calendar month
+## v3.23 (2026-10-15) — calendar month
 
 ### component-registry.json + figma-config.json — `.[base] calendar month`
 
@@ -20,7 +20,7 @@
 
 ---
 
-## v3.22 (2026-10-15) — 4ª rodada de /ds-sync
+## v3.23 (2026-10-15) — 4ª rodada de /ds-sync
 
 ### component-registry.json + figma-config.json + globals.md + referências — library republicada
 
