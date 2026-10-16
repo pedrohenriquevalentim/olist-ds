@@ -25,18 +25,20 @@ Fora do escopo: backend, APIs, banco, autenticação, regras de negócio.
 - **Filtro .[base]:** descartar resultados com `name` começando com `.` — são peças internas, nunca instâncias válidas (ex: `.[base] single select list`, `.[base] multi select list`)
 - Se único resultado for `.[base]...`: tratar como não encontrado → construir com primitivos + documentar gap
 
-**Menu: SEMPRE `menu-global`** (com `Produto=ERP` na Zona A de telas ERP). O `menu erp` foi removido do DS por decisão do usuário (2026-10-15) — nunca usar, mesmo que ainda apareça na library.
+**Menu: SEMPRE `menu-global`** (com `Produto=ERP` na Zona A de telas ERP). O `menu erp` foi removido do DS por decisão do usuário (2026-10-15) e despublicado da library em 2026-10-16 — nunca usar.
 
 **Gap confirmado:** `Summary Card` (fundo azul) não tem variante dedicada — usar `card` genérico + validar manualmente em telas Envios/Hub/Conta Digital.
 
-## Inventário de Componentes (design system (base), sincronizado 2026-10-15)
+## Inventário de Componentes (design system (base), sincronizado 2026-10-16)
+
+> **Button / Button Icon no Figma:** `size = big | medium | small` (mesmos nomes do React) e `type` inclui `danger`.
 
 - **Action:** Button, Button Icon
 - **Navigation:** Link, Segmented Buttons, menu-global, Tabs, Breadcrumb, Paginator, Logout, Stepper, Accordion, Menu (contextual — variantes a confirmar)
 - **Input:** Input Text, Input Paragraph, Input E-mail, Input Search, Input Token, Input Password, Input Select, Input File, Input Date, Checkbox, Radio Button, Dropdown, Toggle, Chip, Calendar (+ calendar/single)
 - **Data Display:** Tags (+ tag-desktop/mobile/more/delivery), Badge, Table (component set `table`, variantes `striped` × `caption`), List, Task List, Dashboard, Sort, Reorder, Avatar, Profile, Card, Credit Card, ID Card, Invoice, Inbox
 - **Data Visualization:** Bar, Chart Bar Up, Chart Bar Down, Chart Bar Variation, Chart Pie
-- **Feedback:** Tooltip, Toast, Alert Dialog, Loading, Alert Bar (intents: brand/informative/neutral/success/error/warning), Cookie, Bell, Money Notification (Overlay: investigar se existe publicado separado do Drawer)
+- **Feedback:** Tooltip, Toast, Alert Dialog, Loading, Alert Bar (intents: brand/informative/neutral/success/error/warning), Cookie, Bell, Money Notification Overlay (componente `overlay` publicado separado do Drawer — confirmado em 2026-10-16)
 - **Brand:** Logo Olist, Ícones rebrand 24
 
 ⚠️ **Dark mode — pendente de exportação:** A collection `02. theme tokens` contém modo Dark no Figma, mas a API MCP não expõe os valores por modo. Para ativar dark mode no repositório, usar o plugin de exportação de tokens para gerar `html.dark { ... }` em `src/generated/variables.css`.
