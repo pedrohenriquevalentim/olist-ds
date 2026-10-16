@@ -5,9 +5,9 @@
     "figmaFileKey": "HeyN4w209HWh8rfpTDiwyf",
     "figmaLibraryKey": "lk-f068a69b8c4ef3c01d6a883806b21c6ebe73213d3565451a399cfba74694fbc0053c2b4226fb206812f098c679b6a971148aa027e97bc14733e29552c4002cb5",
     "extractedAt": "2026-07-03",
-    "republishedAt": "2026-07-03T15:16:45Z",
-    "lastSyncAt": "2026-10-15",
-    "totalComponents": 79,
+    "republishedAt": "2026-10-16T18:07:53Z",
+    "lastSyncAt": "2026-10-16",
+    "totalComponents": 94,
     "published": true,
     "previousSource": {
       "name": "AI-Components",
@@ -28,9 +28,12 @@
       "Loading": "Adicionado ao registry em 2026-09-25 com key 0d32737a... — variantsConfirmed: false.",
       "ChartComponents": "Chart Bar Up/Down/Variation e Chart Pie adicionados ao registry em 2026-09-25 — category: data-visualization, variantsConfirmed: false para todos.",
       "DrawerComponentKey": "Drawer componentKey resolvido em 2026-09-25 (era null): f466ce17b00d813e1a9e48fdbf4030980371e6c5.",
-      "Overlay": "Overlay mencionado em globals.md feedback mas sem componentKey no registry — possivelmente é o Drawer (sobreposição semântica). Investigar se existe como componente publicado separado.",
+      "Overlay": "RESOLVIDO em 2026-10-16: 'overlay' existe como componente publicado separado do Drawer (key 028e4bf4ce4b5f502d11d77be42fbb72ff1b723a).",
       "Modal": "Modal ainda WIP — componentKey não encontrado em search_design_system (busca 'modal' não retornou modal component_set). Pode não estar publicado.",
-      "TagFamily": "Tag, Tag Desktop, Tag Mobile, Tag More, Tag Delivery confirmados como component_sets independentes em 2026-09-25 (todos retornados por search_design_system)."
+      "TagFamily": "Tag, Tag Desktop, Tag Mobile, Tag More, Tag Delivery confirmados como component_sets independentes em 2026-09-25 (todos retornados por search_design_system).",
+      "ButtonSizeNaming": "RESOLVIDO e PUBLICADO em 2026-10-16T18:07Z: button e button icon usam size = big/medium/small (igual ao React) — confirmado via getPublishStatusAsync (CURRENT) e search_design_system. As regras de telas que dizem 'size=small' estão corretas.",
+      "MenuErp": "RESOLVIDO em 2026-10-16: os 2 sets 'menu erp' (c1b484e1…, 4556c8fd…) foram excluídos das páginas Menu e Menu Playground e a library republicada; a busca por 'menu' / 'menu erp' já não os retorna. Usar sempre menu-global.",
+      "CalendarLegacy": "O set 'calendar' antigo c4d9635b… (6 variantes, updatedAt 2026-10-15) continua listado na library depois da republicação de 2026-10-16, mas é um resíduo órfão: seus nós de origem não existem mais no arquivo (página WIP 11418:52, calendar/single 11420:159 e .[base] day 11418:1564 verificados). Usar SEMPRE a chave 770014e4c54af91f0809fea72ecff38650278a74 — nunca buscar por nome 'calendar', que devolve os dois."
     },
     "excludedNamePattern": "^\\.",
     "excludedNote": "Componentes com name iniciado por '.' (ex: '.menu erp/stage14', '.[base] single select list', '.[base] multi select list', '.[base] token box', '.[base] counter') foram excluídos deste registry — são peças internas de construção de component set, nunca instâncias válidas. Ver figma-config.json > excludedComponentNamePatterns.",
@@ -51,7 +54,8 @@
         "type": [
           "primary",
           "secondary",
-          "tertiary"
+          "tertiary",
+          "danger"
         ],
         "size": [
           "big",
@@ -78,7 +82,16 @@
         ]
       },
       "variantsConfirmed": true,
-      "note": "⚠️ Figma usa 'type' (não 'variant') e 'big/medium/small' (não 'LG/MD/SM'). Slots de ícone são propriedades booleanas separadas. Máximo 1 Button primary por tela."
+      "note": "Figma usa 'type' (não 'variant') e size = big/medium/small — os mesmos nomes do React (renomeado de lg/md/sm em 2026-10-16). Tipo 'danger' (ação destrutiva; fundo red 600 com texto claro, contraste 4,64:1). Slots de ícone são propriedades booleanas separadas. Máximo 1 Button primary por tela.",
+      "componentProperties": {
+        "label": "TEXT",
+        "focus": "BOOLEAN"
+      },
+      "variantsCount": 144,
+      "publishStatusVerified": {
+        "status": "CURRENT",
+        "at": "2026-10-16"
+      }
     },
     "Button Icon": {
       "componentKey": "0a4fdb6997f71ed5c9ed5c9993d682090d55597e",
@@ -89,17 +102,31 @@
         "type": [
           "primary",
           "secondary",
-          "tertiary"
+          "tertiary",
+          "danger"
         ],
         "state": [
           "enabled",
           "hover",
           "pressed",
           "disabled"
+        ],
+        "size": [
+          "big",
+          "medium",
+          "small"
         ]
       },
       "variantsConfirmed": true,
-      "note": "Sem dimensão de tamanho — sempre 48×48px. Figma usa 'type' (não 'variant')."
+      "note": "Tamanhos big/medium/small = 48/40/32 px, sempre quadrado (renomeado de lg/md/sm em 2026-10-16; mesmos nomes do React). Inclui tipo 'danger'. Figma usa 'type' (não 'variant').",
+      "componentProperties": {
+        "focus": "BOOLEAN"
+      },
+      "variantsCount": 48,
+      "publishStatusVerified": {
+        "status": "CURRENT",
+        "at": "2026-10-16"
+      }
     },
     "Menu Global": {
       "componentKey": "c76f80e6de1b8c4bd100b60329f3d68d28653e68",
@@ -1579,36 +1606,101 @@
           "frames primitivos para linhas/colunas"
         ]
       },
-      "note": "SUBSTITUÍDO em 2026-10-15 pelo component set `table` — não é mais publicado; não usar. Componente OBRIGATÓRIO para tabelas na Zona E. Instanciar via importComponentSetByKeyAsync antes de qualquer use_figma. Nunca substituir por frames primitivos quando este componente está disponível.",
-      "deprecated": true
+      "note": "SUBSTITUÍDO em 2026-10-15 pelo component set `table` — não é mais publicado; não usar. Componente OBRIGATÓRIO para tabelas na Zona E. Instanciar via importComponentSetByKeyAsync antes de qualquer use_figma. Nunca substituir por frames primitivos quando este componente está disponível. | 2026-10-16: confirmado — busca 'table cell' não retorna mais este set; não está mais publicado.",
+      "deprecated": true,
+      "removedFromLibrary": "2026-10-16"
     },
     "Stepper": {
       "componentKey": "6f23a3d906e75906831619c35681e583aa34e828",
       "assetType": "component_set",
       "category": "navigation",
-      "variantsConfirmed": false,
-      "note": "Encontrado em 2026-10-15 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar."
+      "variantsConfirmed": true,
+      "note": "Confirmado em 2026-10-16. Lista de passos: o conteúdo entra no slot 'steps' (stepper items). Peça interna '.[base] stepper item' (state: upcoming/active/complete · orientation · connector · description · icon · label/number) — UNPUBLISHED, nunca instanciar diretamente. Indicador de progresso não interativo (aria-current='step' no ativo).",
+      "nodeId": "11577:136",
+      "variants": {
+        "orientation": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      "variantsCount": 2,
+      "componentProperties": {
+        "steps": "SLOT"
+      }
     },
     "Toast": {
       "componentKey": "014c6c6d68d8a5c172d2763d8d63c6348201967b",
       "assetType": "component_set",
       "category": "feedback",
-      "variantsConfirmed": false,
-      "note": "Encontrado em 2026-10-15 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar."
+      "variantsConfirmed": true,
+      "note": "Confirmado em 2026-10-16. Cartão flutuante (360 px) com ícone do DS, título, descrição opcional, ação opcional (button tertiary sm) e fechar (button icon). 'loading' não tem ação nem fechar. Texto sem ponto final.",
+      "nodeId": "11570:467",
+      "variants": {
+        "intent": [
+          "neutral",
+          "informative",
+          "success",
+          "warning",
+          "error",
+          "loading"
+        ]
+      },
+      "variantsCount": 6,
+      "componentProperties": {
+        "title": "TEXT",
+        "description text": "TEXT",
+        "description": "BOOLEAN",
+        "action": "BOOLEAN",
+        "close": "BOOLEAN"
+      }
     },
     "Alert Dialog": {
       "componentKey": "396a32ed361409679dbfb2172d5520d9cb4a9900",
       "assetType": "component_set",
       "category": "feedback",
-      "variantsConfirmed": false,
-      "note": "Encontrado em 2026-10-15 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar."
+      "variantsConfirmed": true,
+      "note": "Confirmado em 2026-10-16. Diálogo (480 px) com título, descrição opcional e dois botões size=medium (40 px) expostos — decisão do usuário em 2026-10-16 (cancelar secondary + confirmar primary; danger no tipo destructive). Sem botão de fechar. O gatilho não faz parte do componente; o fundo usa o componente 'overlay'.",
+      "nodeId": "11568:30121",
+      "variants": {
+        "type": [
+          "default",
+          "destructive"
+        ]
+      },
+      "variantsCount": 2,
+      "componentProperties": {
+        "title": "TEXT",
+        "description text": "TEXT",
+        "description": "BOOLEAN"
+      },
+      "actionButtonSize": "medium"
     },
     "Input Date": {
       "componentKey": "5a09ca8ab231310cb18b354f9f36343aa90f9e91",
       "assetType": "component_set",
       "category": "input",
-      "variantsConfirmed": false,
-      "note": "Encontrado em 2026-10-15 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar."
+      "variantsConfirmed": true,
+      "note": "Confirmado em 2026-10-16. No estado 'focused' abre o calendário (instância de 'calendar' context=popover, 320 px, posição absoluta sob o campo).",
+      "nodeId": "11627:29210",
+      "variants": {
+        "state": [
+          "enabled",
+          "hover",
+          "pressed",
+          "focused",
+          "filled",
+          "disabled"
+        ]
+      },
+      "variantsCount": 6,
+      "componentProperties": {
+        "support text": "TEXT",
+        "placeholder text": "TEXT",
+        "selected text": "TEXT",
+        "label text": "TEXT",
+        "support": "BOOLEAN",
+        "tooltip": "BOOLEAN"
+      }
     },
     "Accordion": {
       "componentKey": "9ad98a94d7f6361cb32127c5cfe30b240fe58105",
@@ -1640,9 +1732,144 @@
         "state": [
           "enabled",
           "disabled"
+        ],
+        "context": [
+          "inline",
+          "popover"
         ]
       },
-      "note": "Dois component sets 'calendar' publicados (770014e4… atual, c4d9635b… anterior). Dias usam instâncias de '.[base] calendar day'; meses (view=months) usam instâncias de '.[base] calendar month' (criado em 2026-10-15). Peças '.[base]' são internas — nunca instanciar."
+      "note": "Component set 'calendar' (770014e4…, publicado em 2026-10-16) com 20 variantes de 320 px: context=inline|popover (popover = com sombra level 3; usado pelo input date). O set anterior (c4d9635b…) ainda aparece publicado — não usar. Dias usam '.[base] calendar day' e meses '.[base] calendar month' (ambas UNPUBLISHED/internas — nunca instanciar). Só são exibidos os dias do mês corrente (outros dias = células vazias).",
+      "componentProperties": {
+        "legend": "BOOLEAN"
+      },
+      "nodeId": "11584:1188",
+      "variantsCount": 20
+    },
+    "Alert Bar": {
+      "componentKey": "be29264c3efa7c8af4ce872925ededed101b44d4",
+      "assetType": "component_set",
+      "category": "feedback",
+      "variantsConfirmed": true,
+      "note": "Confirmado em 2026-10-16. Barra de largura total (894×66 no set) com ícone por intenção, texto, link opcional e botão de fechar. 6 intenções; 'warning'/'error'/'success' etc. usam os tokens de feedback subtle.",
+      "nodeId": "11281:180",
+      "figmaPageUrl": "https://www.figma.com/design/HeyN4w209HWh8rfpTDiwyf/design-system?node-id=11279-16608",
+      "variantsCount": 6,
+      "variants": {
+        "intent": [
+          "brand",
+          "informative",
+          "neutral",
+          "success",
+          "error",
+          "warning"
+        ]
+      },
+      "componentProperties": {
+        "label": "TEXT",
+        "link": "BOOLEAN"
+      }
+    },
+    "Overlay": {
+      "componentKey": "028e4bf4ce4b5f502d11d77be42fbb72ff1b723a",
+      "assetType": "component",
+      "category": "overlay",
+      "variantsConfirmed": true,
+      "note": "Confirmado em 2026-10-16. Componente único (sem variantes nem propriedades): retângulo 666×666 com o token overlay/color/default (40% de #050505). Redimensionar a instância para cobrir a tela e usar atrás de alert dialog, modal e drawer.",
+      "nodeId": "9086:10249",
+      "figmaPageUrl": "https://www.figma.com/design/HeyN4w209HWh8rfpTDiwyf/design-system?node-id=9086-10210",
+      "size": "666x666",
+      "fillToken": "overlay/color/default"
+    },
+    "Bell": {
+      "componentKey": "7dab82ab39ba3851c0a436655292b06a385b8ef8",
+      "assetType": "component_set",
+      "category": "feedback",
+      "variantsConfirmed": false,
+      "note": "Encontrado em 2026-10-16 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar."
+    },
+    "Money Notification": {
+      "componentKey": "10d1aa5c7b52677107000105f0b705eeed3ddb12",
+      "assetType": "component_set",
+      "category": "feedback",
+      "variantsConfirmed": false,
+      "note": "Encontrado em 2026-10-16 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar."
+    },
+    "Invoice": {
+      "componentKey": "69825aa77706f50d7745d04de522917ff4b0d7a7",
+      "assetType": "component_set",
+      "category": "data-display",
+      "variantsConfirmed": false,
+      "note": "Encontrado em 2026-10-16 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar."
+    },
+    "ID Card": {
+      "componentKey": "e9329af4b81298c72189fbe98653a40a80e02c10",
+      "assetType": "component_set",
+      "category": "data-display",
+      "variantsConfirmed": false,
+      "note": "Encontrado em 2026-10-16 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar."
+    },
+    "Credit Card": {
+      "componentKey": "2a4b8e588c7d89308eb60a2d192aafa8a75b0b1e",
+      "assetType": "component_set",
+      "category": "data-display",
+      "variantsConfirmed": false,
+      "note": "Encontrado em 2026-10-16 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar."
+    },
+    "Inbox": {
+      "componentKey": "72528d44096bc3419976ee04ec320e498b51d30b",
+      "assetType": "component_set",
+      "category": "data-display",
+      "variantsConfirmed": false,
+      "note": "Encontrado em 2026-10-16 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar."
+    },
+    "List": {
+      "componentKey": "b78a60eff6363da00b1e5f16ebe291f2c32fc2ba",
+      "assetType": "component_set",
+      "category": "data-display",
+      "variantsConfirmed": false,
+      "note": "Encontrado em 2026-10-16 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar."
+    },
+    "Task List": {
+      "componentKey": "6bbd665be527eadbc5fa494d10851aba481d05bd",
+      "assetType": "component_set",
+      "category": "data-display",
+      "variantsConfirmed": false,
+      "note": "Encontrado em 2026-10-16 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar."
+    },
+    "Dashboard": {
+      "componentKey": "cfa6794f145c8904dcb68ffc622a80f444f34ea5",
+      "assetType": "component_set",
+      "category": "data-display",
+      "variantsConfirmed": false,
+      "note": "Encontrado em 2026-10-16 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar."
+    },
+    "Spreadsheet": {
+      "componentKey": "a830ce61144bb8fd72219614ab494bd74c849ee2",
+      "assetType": "component_set",
+      "category": "data-display",
+      "variantsConfirmed": false,
+      "note": "Encontrado em 2026-10-16 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar."
+    },
+    "Profile": {
+      "componentKey": "3c18c82085e649aee7892c5d468c35e12a51bfc0",
+      "assetType": "component_set",
+      "category": "data-display",
+      "variantsConfirmed": false,
+      "note": "Encontrado em 2026-10-16 via /ds-sync. Existem também profile-add/cancel/folder/lock/manage (provavelmente ícones — não catalogados). Variantes não mapeadas."
+    },
+    "Scale": {
+      "componentKey": "eefee7751fb1a337bf6fbd1b128ff36dece176f8",
+      "assetType": "component_set",
+      "category": "uncategorized",
+      "variantsConfirmed": false,
+      "note": "Encontrado em 2026-10-16 via /ds-sync. Categoria a definir. Variantes não mapeadas."
+    },
+    "Column": {
+      "componentKey": "5f5bbebfee0f2f7748dbdb5f14ea25c573402393",
+      "assetType": "component_set",
+      "category": "uncategorized",
+      "variantsConfirmed": false,
+      "note": "Encontrado em 2026-10-16 via /ds-sync. Categoria a definir. Variantes não mapeadas."
     }
   },
   "categories": {
@@ -1688,14 +1915,26 @@
       "Tag Delivery",
       "Table",
       "Card",
-      "Avatar"
+      "Avatar",
+      "Invoice",
+      "ID Card",
+      "Credit Card",
+      "Inbox",
+      "List",
+      "Task List",
+      "Dashboard",
+      "Spreadsheet",
+      "Profile"
     ],
     "feedback": [
       "Tooltip",
       "Cookie",
       "Loading",
       "Toast",
-      "Alert Dialog"
+      "Alert Dialog",
+      "Alert Bar",
+      "Bell",
+      "Money Notification"
     ],
     "data-visualization": [
       "Chart Bar Up",
@@ -1739,7 +1978,12 @@
     ],
     "overlay": [
       "Drawer",
-      "Modal"
+      "Modal",
+      "Overlay"
+    ],
+    "uncategorized": [
+      "Scale",
+      "Column"
     ]
   },
   "textStyles": {
@@ -1765,7 +2009,8 @@
       ".[base] table cell",
       ".[base] table caption",
       ".[base] calendar day",
-      ".[base] calendar month"
+      ".[base] calendar month",
+      ".[base] stepper item"
     ],
     "calendarMonth": {
       "componentSetNodeId": "11829:662",
@@ -1781,8 +2026,30 @@
       "textProperty": "label (TEXT, default 'Jan')",
       "tokens": "calendar/month/* em 03. component tokens (16 aliases espelhando calendar/day/*)",
       "createdAt": "2026-10-15",
-      "published": true,
-      "verifiedAt": "2026-10-15"
+      "published": false,
+      "verifiedAt": "2026-10-16",
+      "publishStatus": "UNPUBLISHED (verificado em 2026-10-16 via getPublishStatusAsync; peças '.[base]' internas não são publicadas como asset)"
+    },
+    "stepperItem": {
+      "componentSetNodeId": "11576:171",
+      "status": "UNPUBLISHED",
+      "variants": {
+        "state": [
+          "upcoming",
+          "active",
+          "complete"
+        ],
+        "orientation": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      "verifiedAt": "2026-10-16"
+    },
+    "calendarDay": {
+      "componentSetNodeId": "11582:453",
+      "status": "UNPUBLISHED",
+      "verifiedAt": "2026-10-16"
     }
   },
   "syncDiff": {
@@ -1862,6 +2129,80 @@
       "Toggle",
       "Chip",
       "Logo (era 'Logo Olist')"
-    ]
+    ],
+    "ds_sync_2026_10_16": {
+      "comparedAgainst": "component-registry.json de 2026-10-15",
+      "variantsConfirmedViaFigma": [
+        "Alert Bar",
+        "Alert Dialog",
+        "Button",
+        "Button Icon",
+        "Calendar",
+        "Input Date",
+        "Overlay",
+        "Stepper",
+        "Toast"
+      ],
+      "added": [
+        "Alert Bar",
+        "Overlay",
+        "Bell",
+        "Money Notification",
+        "Invoice",
+        "ID Card",
+        "Credit Card",
+        "Inbox",
+        "List",
+        "Task List",
+        "Dashboard",
+        "Spreadsheet",
+        "Profile",
+        "Scale",
+        "Column"
+      ],
+      "removedOrDeprecated": [
+        "TableCellExtended (confirmado fora da library)"
+      ],
+      "changed": {
+        "Button": "type + danger; ganhou size big/medium/small (alinhado ao React em 2026-10-16); 36 → 144 variantes",
+        "Button Icon": "type + danger; ganhou size big/medium/small; 12 → 48 variantes",
+        "Calendar": "+context (inline|popover) e +legend; 10 → 20 variantes; largura 320"
+      },
+      "componentKeysUnchanged": "Todas as chaves já catalogadas permaneceram estáveis",
+      "openIssues": [
+        "Variantes ainda não mapeadas em 13 entradas novas (Bell, Money Notification, Invoice, ID Card, Credit Card, Inbox, List, Task List, Dashboard, Spreadsheet, Profile, Scale, Column)",
+        "calendar antigo c4d9635b… segue listado na library como resíduo órfão (origem excluída do arquivo); resolver pelo diálogo de publicação ou suporte do Figma — risco baixo desde que se use a chave 770014e4…"
+      ],
+      "republishConfirmed": {
+        "at": "2026-10-16T18:07:53Z",
+        "checked": {
+          "button": "CURRENT · 144 variantes · size big/medium/small",
+          "button icon": "CURRENT · 48 variantes · size big/medium/small",
+          "calendar (770014e4…)": "CURRENT · 20 variantes",
+          "toast / alert dialog / input date / stepper": "CURRENT"
+        },
+        "componentKeysChanged": [],
+        "newSinceFirstRound": [
+          "layers (component_set 85f0043d…) = ÍCONE de pilha de camadas (página 'Icones' > quadro 'actions', 6 variantes: fill off/on × 16/24/32 px) — ícones não são catalogados"
+        ]
+      },
+      "deferred": [
+        {
+          "component": "Progress Bar",
+          "componentSetKey": "1a93ef4e0b90caac6de43d60b9e4c1610bb82d4e",
+          "reason": "Em WIP (página '📆 progress bar 〔WIP〕🚧', nó 11753:30208, 48 variantes). Descartado do registry por enquanto a pedido do usuário em 2026-10-16. Atenção: o set aparece como CURRENT, isto é, já está publicado na library."
+        }
+      ],
+      "newSinceFirstRound": [
+        "layers (component_set 85f0043d…) = ÍCONE de pilha de camadas (página 'Icones' > quadro 'actions', 6 variantes: fill off/on × 16/24/32 px) — ícones não são catalogados"
+      ],
+      "resolved": [
+        {
+          "item": "menu erp (2 sets)",
+          "resolvedAt": "2026-10-16",
+          "how": "excluídos das páginas Menu e Menu Playground + library republicada; confirmado via search_design_system"
+        }
+      ]
+    }
   }
 }
