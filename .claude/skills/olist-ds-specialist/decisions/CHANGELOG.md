@@ -3,6 +3,32 @@
 Histórico de atualizações sincronizado com a skill `olist-ds-specialist`.
 Atualizado automaticamente pelo `sync-skill-meta.mjs` a cada `npm run ship`.
 
+## v3.23 (2026-10-16)
+
+> Skill atualizada para v3.23. Referências sincronizadas automaticamente.
+
+ — calendar month
+
+### component-registry.json + figma-config.json — `.[base] calendar month`
+
+**Arquivos modificados:** `component-registry.json`, `figma-config.json`
+
+#### Added
+
+- **`.[base] calendar month`** (peça interna, nodeId `11829:662`): component set com `state` = enabled, hover, pressed, selected, disabled e propriedade de texto `label`. Compõe a seleção de meses (view=months) do `calendar`, no mesmo papel do `.[base] calendar day` para os dias.
+- **16 variáveis `calendar/month/*`** em `03. component tokens` (altura, radius, padding, 5 fills, tipografia, 5 cores de texto), como alias dos mesmos alvos de `calendar/day/*`.
+- **`Calendar`** no registry (keys `770014e4…` atual e `c4d9635b…` anterior; variantes view × week start × weekday format × state).
+
+#### Changed
+
+- **Views `months` (enabled e disabled) do `calendar`:** os 12 frames soltos de mês de cada view viraram instâncias de `.[base] calendar month`; Out segue selecionado na view enabled.
+
+#### Pendente
+
+- Nenhum. Library publicada e verificada via `search_design_system` em 2026-10-15: as 16 variáveis `calendar/month/*` estão disponíveis (inclui `border radius/default` e `font/color/disabled`, que só apareceram após a segunda publicação). `.[base] calendar month` não é listado na busca por ser peça interna ('.'-prefixada), como o `.[base] calendar day`.
+
+---
+
 ## v3.22 (2026-09-29)
 
 > Skill atualizada para v3.22. Referências sincronizadas automaticamente.

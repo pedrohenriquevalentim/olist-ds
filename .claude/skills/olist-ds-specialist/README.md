@@ -1,10 +1,18 @@
-# Olist Design System — Especialista (v3.22 · atualizado em 2026-10-15)
+# Olist Design System — Especialista (v3.23 · atualizado em 2026-10-16)
 
 Skill corporativa para criação de telas, componentes e protótipos a partir de SDDs/PRDs usando o design system da Olist.
 
 ## 📌 Library de referência (decisão permanente desde 2026-07-03)
 
 A [`design system (base)`](https://www.figma.com/design/HeyN4w209HWh8rfpTDiwyf/design-system) é a **única library de referência** para construção de telas, em `figma-config.json`/`searchPriority`. A hierarquia anterior (AI Components, ERP components, ERP recursos, ERP style guide, [design system] components web) foi descontinuada e está em `blockedLibraries` com os dados preservados. Histórico completo da decisão, incluindo checagem de cobertura contra o harness, em `decisions/ux-design/FLUXO_PRD_FIGMA.md`.
+
+## Novidades v3.23 (2026-10-16)
+
+- **`.[base] calendar month`** (peça interna, nodeId `11829:662`): component set com `state` = enabled, hover, pressed, selected, disabled e propriedade de texto `label`. Compõe a seleção de meses (view=months) do `calendar`, no mesmo papel do `.[base] calendar day` para os dias.
+- **16 variáveis `calendar/month/*`** em `03. component tokens` (altura, radius, padding, 5 fills, tipografia, 5 cores de texto), como alias dos mesmos alvos de `calendar/day/*`.
+- **`Calendar`** no registry (keys `770014e4…` atual e `c4d9635b…` anterior; variantes view × week start × weekday format × state).
+- **Views `months` (enabled e disabled) do `calendar`:** os 12 frames soltos de mês de cada view viraram instâncias de `.[base] calendar month`; Out segue selecionado na view enabled.
+- Nenhum. Library publicada e verificada via `search_design_system` em 2026-10-15: as 16 variáveis `calendar/month/*` estão disponíveis (inclui `border radius/default` e `font/color/disabled`, que só apareceram após a segunda publicação). `.[base] calendar month` não é listado na busca por ser peça interna ('.'-prefixada), como o `.[base] calendar day`.
 
 ## Novidades v3.22 (2026-09-29)
 
@@ -133,7 +141,7 @@ olist-ds-specialist/
     └── VISAO_GERAL.md                  # Mapa de navegação — leia sempre primeiro
 ```
 
-> **Raiz:** 7 arquivo(s) · **Decisions:** 13 arquivo(s) · **Referências:** 19 arquivo(s) · **Total:** 39 arquivo(s) — atualizado em 2026-10-15 pelo `sync-skill-meta.mjs`
+> **Raiz:** 7 arquivo(s) · **Decisions:** 13 arquivo(s) · **Referências:** 19 arquivo(s) · **Total:** 39 arquivo(s) — atualizado em 2026-10-16 pelo `sync-skill-meta.mjs`
 ## Libraries do Figma (ordem de prioridade)
 
 | # | Library | Conteúdo |
@@ -180,6 +188,27 @@ Use $olist-ds-specialist para criar UI no Figma:
 ```
 
 ## Changelog
+
+### v3.23 (2026-10-16)
+### component-registry.json + figma-config.json — `.[base] calendar month`
+
+**Arquivos modificados:** `component-registry.json`, `figma-config.json`
+
+#### Added
+
+- **`.[base] calendar month`** (peça interna, nodeId `11829:662`): component set com `state` = enabled, hover, pressed, selected, disabled e propriedade de texto `label`. Compõe a seleção de meses (view=months) do `calendar`, no mesmo papel do `.[base] calendar day` para os dias.
+- **16 variáveis `calendar/month/*`** em `03. component tokens` (altura, radius, padding, 5 fills, tipografia, 5 cores de texto), como alias dos mesmos alvos de `calendar/day/*`.
+- **`Calendar`** no registry (keys `770014e4…` atual e `c4d9635b…` anterior; variantes view × week start × weekday format × state).
+
+#### Changed
+
+- **Views `months` (enabled e disabled) do `calendar`:** os 12 frames soltos de mês de cada view viraram instâncias de `.[base] calendar month`; Out segue selecionado na view enabled.
+
+#### Pendente
+
+- Nenhum. Library publicada e verificada via `search_design_system` em 2026-10-15: as 16 variáveis `calendar/month/*` estão disponíveis (inclui `border radius/default` e `font/color/disabled`, que só apareceram após a segunda publicação). `.[base] calendar month` não é listado na busca por ser peça interna ('.'-prefixada), como o `.[base] calendar day`.
+
+---
 
 ### v3.22 (2026-09-29)
 ### component-registry.json + figma-config.json + globals.md — 2ª rodada de /ds-sync
