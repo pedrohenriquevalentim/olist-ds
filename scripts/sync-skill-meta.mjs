@@ -148,10 +148,15 @@ function updateSkillMdTitle(skillDir, version, date) {
   if (!existsSync(skillMdPath)) return;
   let content = readFileSync(skillMdPath, 'utf-8');
   // Atualiza H1: "v3.6" ou "v3.6 · 2026-06-25"
-  const updated = content.replace(
-    /^(# Olist Design System — Especialista) v[\d.]+(?:\s·\s[\d-]+)?/m,
-    `$1 v${version} · ${date}`
-  );
+  const updated = content
+    .replace(
+      /^(# Olist (?:Design System — Especialista|DS Specialist — Dispatcher)) v[\d.]+(?:\s·\s[\d-]+)?/m,
+      `$1 v${version} · ${date}`
+    )
+    .replace(
+      /^\*\*Versão:\*\* [\d.]+ · \*\*Última atualização:\*\* [\d-]+/m,
+      `**Versão:** ${version} · **Última atualização:** ${date}`
+    );
   if (updated === content) return;
   writeFileSync(skillMdPath, updated, 'utf-8');
   console.log(`   ✅ SKILL.md — H1 title atualizado para v${version} · ${date}`);

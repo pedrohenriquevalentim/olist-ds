@@ -5,7 +5,7 @@ version: 3.24
 lastModified: 2026-10-20
 ---
 
-# Olist DS Specialist — Dispatcher v3.22
+# Olist DS Specialist — Dispatcher v3.24 · 2026-10-20
 
 ## Slash Commands
 
@@ -71,5 +71,5 @@ Para qualquer caso detectado:
 
 ---
 
-**Versão:** 3.22 · **Última atualização:** 2026-09-29
+**Versão:** 3.24 · **Última atualização:** 2026-10-20
 **Changelog:** ver `CHANGELOG.md`
