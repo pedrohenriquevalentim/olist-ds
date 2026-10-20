@@ -130,7 +130,7 @@
         "Breadcrumb",
         "Profile",
         "Logout",
-        "Table (component set striped × caption; células internas .[base]), Spreadsheet",
+        "Table v2 (set `table`, variante `seleção`) + table row, table head row, table cell, table head cell, table toolbar, status pill, column manager; Dataset (organismo de listagem), Spreadsheet",
         "Paginator",
         "Sort",
         "Reorder",
@@ -156,7 +156,7 @@
       ],
       "gaps": [
         "card-notification: sem component set público (só peças internas '.card notification/*', já sumidas)",
-        "Tabela: confirmar via use_figma como ajustar linhas/colunas e preencher conteúdo do component set `table` (metadata só expõe variantes striped × caption)"
+        "Tabela v2 (2026-10-20): resolvido — listagens usam o organismo `dataset`; `table` sozinha só no Record. Peças da tabela são internas ao organismo"
       ],
       "resolvedGaps": [
         {

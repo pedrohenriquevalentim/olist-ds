@@ -43,12 +43,16 @@ Unidade base: 4px. Todo espaçamento deve ser múltiplo de 4 — exceto
 | Token | Valor | Uso típico |
 |---|---|---|
 | `--shape-size-24px` | 24px | Ícone pequeno, avatar pequeno |
-| `--shape-size-32px` | 32px | Input altura SM, botão de ícone SM |
-| `--shape-size-40px` | 40px | Input altura MD, botão altura MD |
-| `--shape-size-48px` | 48px | Input altura LG, botão altura LG, linha de tabela |
+| `--shape-size-32px` | 32px | Botão e botão de ícone `size=small`; Toggle, Chip, Badge, Tooltip e Avatar |
+| `--shape-size-36px` | 36px | Botão e botão de ícone `size=medium` |
+| `--shape-size-40px` | 40px | Botão `size=big` e altura fixa de inputs, select, dropdown, context switch, segmented, paginator, tabs e list; linha de tabela `medium` |
+| `--shape-size-48px` | 48px | Linha de tabela `big`; não é mais altura de controle (escala 40/36/32 desde 2026-10-19) |
+| `--shape-size-52px` | 52px | Product Switch (uso exclusivo no menu) |
 | `--shape-size-56px` | 56px | Linha de tabela confortável |
 | `--shape-size-64px` | 64px | Altura do header |
 | `--shape-size-280px` | 280px | Largura da sidebar |
+
+> **Atenção:** a altura de controle vem de `--globals-size-interaction` (40px), `--globals-size-inside-interaction` (36px) e `--globals-size-smallest` (32px). O `src/generated/variables.css` ainda reflete o export anterior (interaction = 48px) e não tem `--shape-size-36px` nem `--shape-size-52px`; eles chegam depois do próximo export de tokens + `npm run build:tokens`.
 
 ## Padrão de Layout da Página
 

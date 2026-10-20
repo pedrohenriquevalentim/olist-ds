@@ -158,6 +158,24 @@ Não use `brand` (feedback) quando a intenção é "ação primária" — isso �
 
 ---
 
+### 2.4 Cor por produto, overlay em fundo de marca e gráficos (2026-10-20)
+
+- **`color-background-hover-on-brand` / `color-background-pressed-on-brand`**
+  - **purpose:** overlay claro de hover/pressed sobre fundos de marca escura, igual nos dois temas
+  - **useWhen:** controles sobre `brand 02` (Product Switch)
+  - **doNotUseWhen:** superfícies neutras — use `color-background-hover-neutral`/`pressed-neutral`
+- **`color-(background|border)-(hover|selected)-product-<produto>` e `color-text-selected-product-<produto>`**
+  - **purpose:** destaque de cada produto (claro e escuro), derivado das rampas `color-product-<produto>-(50…900)`
+  - **produtos:** `erp`, `hub`, `pdv`, `conta`, `envios`, `ia`, `ecom`, `credito` (Checkout Admin ainda sem paleta)
+  - **useWhen:** hero, tiles e linhas do Product Launcher e do Product Switch
+  - **doNotUseWhen:** qualquer outro componente — a cor do produto não vira cor de botão, tag ou texto corrido; nunca usar a rampa `color-product-*` direto
+- **`color-chart-series-1…6`, `color-chart-series-neutral`, `color-chart-label|axis|grid`**
+  - **purpose:** séries e eixos de gráficos (contraste ≥ 3:1 sobre o fundo, claro e escuro)
+  - **useWhen:** sempre via tokens `chart-*` (seção 9)
+  - **doNotUseWhen:** feedback (sucesso/erro) — use `color-*-feedback-*`; nunca dependa só da cor da série (legenda com rótulo é obrigatória)
+
+---
+
 ## 3. Tipografia
 
 ### 3.1 `font-family-*`
@@ -280,6 +298,7 @@ A escala primitiva tem 7 pesos, com aliases semânticos de nome mais curto:
   não pelo valor em si
 - **doNotUseWhen:** não confunda com `shape-spacing-*` — `size` é dimensão
   de um elemento; `spacing` é distância entre elementos
+- **escala de controles (2026-10-19):** `globals-size-interaction` = 40px (big), `globals-size-inside-interaction` = 36px (medium), `globals-size-smallest` = 32px (small). Botões aceitam os três (`size` = big/medium/small); inputs, select, dropdown, context switch, segmented, paginator, tabs e list ficam em 40px; Toggle, Chip, Badge, Tooltip e Avatar em 32px; Product Switch em 52px (`product-switch-size-height`). O `TOKEN_CATALOG.md` ainda pode mostrar 48/40/32 até ser regenerado (`npm run build:tokens` + `sync:skill`).
 - **note:** a escala é a mesma numericamente até 320px, mas os nomes de
   variável (`size` vs `spacing`) carregam intenção diferente — trocar um
   pelo outro no CSS funciona por acaso hoje, mas comunica errado
@@ -377,12 +396,22 @@ partir de tokens semânticos soltos.
 | `input-base-*` (+ `input-token-*`, `input-paragraph-*`, `input-search-border-radius`, `input-file-input-height`) | Campo de formulário | Todo input de texto/número/arquivo | Cada especialização (`search`, `file`, `paragraph`) sobrescreve só o que muda (ex: `input-search-border-radius` é pill, o resto herda de `input-base-*`) — não redeclare o restante do zero |
 | `checkbox-*` | Seleção múltipla | Marcar 0-N itens | Não use para seleção única exclusiva — isso é `radio-button-*` |
 | `radio-button-*` | Seleção única exclusiva | Marcar 1 de N itens | Não use para toggle on/off — isso é `toggle-*` |
-| `table-*` (`table-cell-*`, `table-head-*`) | Dado tabular | Listagem de registros com colunas | Header (`table-head-*`) e célula (`table-cell-*`) têm tokens de borda distintos — não aplique borda de header na célula |
+| `table-*` (`table-cell-*`, `table-head-*`, `table-row-*`, `table-toolbar-*`) | Tabela v2 e toolbar do Dataset | Listagem de registros com colunas | Sem stroke: a divisão é por tom e por `table-row-gap`; hover/seleção por `table-row-color-*`. `table-toolbar-size-search-width` (280px) é a largura mínima da busca. Não aplique borda na célula |
 | `link-*` | Texto clicável inline | Navegação dentro de frase/parágrafo | Não use para CTA de botão — isso é `button-*` mesmo com aparência de link |
-| `dropdown-*` | Seletor com lista suspensa | Substituir `Input Select` quando o padrão visual é mais compacto (sem borda de input completa) | Não confundir com `input-base` variante select — são dois componentes Figma diferentes, escolha pelo contexto visual pedido no design |
+| `dropdown-*` | Seletor com lista suspensa | Gatilho compacto pill em toolbars e paginador, com borda em todos os estados (`dropdown-border-color|width-*`) e `type` single/multi select | Não confundir com `input-base` variante select — são dois componentes Figma diferentes, escolha pelo contexto visual pedido no design |
 | `toggle-*` | Interruptor on/off imediato (sem confirmação) | Configuração binária com efeito instantâneo | Não use quando a ação precisa de confirmação — nesse caso é `checkbox-*` + botão de salvar |
 | `chip-*` | Filtro selecionável, removível ou não | Barra de filtros, seleção múltipla compacta | Não use para status — isso é `tag-*` (chip é acionável, tag é informativo) |
-| `breadcrumb-*` | Trilha de navegação hierárquica | Zona B (top bar) do template ERP, indicando profundidade | **Note:** o link é `font-weight-bold` (700) e o item atual é `font-weight-regular` (400) — inversão em relação à maioria dos DS (que deixam o atual em destaque) |
+| `breadcrumb-*` | Trilha de navegação hierárquica | Dentro do Page Header (zona B dos templates), indicando profundidade | **Note:** o link é `font-weight-bold` (700) e o item atual é `font-weight-regular` (400) — inversão em relação à maioria dos DS (que deixam o atual em destaque) |
+| `floating-action-bar-*` | Barra flutuante de ação (seleção ou alterações) | Camada do List, Record e Settings | Não use como toolbar fixa nem como toast |
+| `chart-*` (`chart-series-color-1…6`, `chart-axis-*`, `chart-grid-*`, `chart-bar-*`, `chart-line-*`, `chart-legend-*`, `chart-tooltip-*`) | Gráficos estáticos do Figma (bar, line, donut) | Chart Card e KPI Strip | Não use para feedback de status; sempre com legenda com rótulo |
+| `column-manager-*` | Popover de colunas da tabela (`width`, `item-height`) | Toolbar do Dataset | Não use para ordenação (vive no dropdown da toolbar) |
+| `status-pill-*` | Pílula de visão/status (32px) | Toolbar do Dataset | Não use no lugar de `tag-*` (informativo) nem de `chip-*` (filtro avulso) |
+| `product-switch-*` | Seletor de produto do menu (52px) | Só dentro do Menu Global | Não use fora do menu |
+| `product-launcher-*` (`hero`, `tile`, `row`, `group`) | Painel de produtos aberto pelo Product Switch | Troca e descoberta de produtos | Não use como menu de navegação interna |
+| `context-switch-*` | Seletor de contexto (só o texto principal; descrição só nas listas) | Troca de empresa/loja/contexto | Não use para trocar de produto (é o Product Switch) |
+| `stepper-*` | Progresso de etapas | Zona C do Wizard | Não use como tabs |
+| `toast-*` / `alert-bar-*` / `alert-dialog-*` / `modal-*` | Feedback e diálogos | Toast: confirmação momentânea; Alert Bar: aviso persistente (base do Notice Bar); Alert Dialog: confirmação destrutiva; Modal: conteúdo em camada | Não use Toast para erro de campo |
+| `progress-bar-*` / `calendar-*` / `accordion-*` | Progresso, seleção de data e seções expansíveis | Respectivamente: carregamento mensurável, Input Date/Calendar, blocos recolhíveis | Não use Progress Bar para loading sem duração (use `indeterminate`) |
 | `flags-*` | Indicador pequeno de bandeira/idioma | Seletor de idioma/país | Família pequena (3 tokens) — se precisar de mais estados, é gap a reportar, não a improvisar |
 
 **Sobre `Paginator`:** resolvido em 2026-07-20 — o componente `Paginator`

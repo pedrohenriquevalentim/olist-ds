@@ -35,7 +35,7 @@ Fora do escopo: backend, APIs, banco, autenticação, regras de negócio.
 > **Dropdown** tem `type = single select | multi select` e borda em todos os estados.
 
 - **Action:** Button, Button Icon
-- **Navigation:** Link, Segmented Buttons, menu-global (+ Product Switch, uso exclusivo no menu), Context Switch, Tabs, Breadcrumb, Paginator, Logout, Stepper, Accordion, Menu (contextual — variantes a confirmar)
+- **Navigation:** Link, Segmented Buttons, menu-global (+ Product Switch, uso exclusivo no menu), Context Switch, Tabs, Breadcrumb, Paginator, Logout, Stepper, Accordion
 - **Input:** Input Text, Input Paragraph, Input E-mail, Input Search, Input Token, Input Password, Input Select, Input File, Input Date, Checkbox, Radio Button, Dropdown, Toggle, Chip, Calendar (+ calendar/single)
 - **Data Display:** Tags (+ tag-desktop/mobile/more/delivery), Badge, Table v2 (set `table`, variante `seleção`; peças `table row`, `table head row`, `table cell`, `table head cell`), Table Toolbar, Status Pill, Column Manager, List, Task List, Dashboard, Sort, Reorder, Avatar, Profile, Card, Credit Card, ID Card, Invoice, Inbox
 - **Data Visualization:** Metric, Chart Bar, Chart Line, Chart Donut, Chart Legend, Chart Legend Item, Chart Tooltip (+ ícones Chart Bar Up/Down/Variation e Chart Pie)

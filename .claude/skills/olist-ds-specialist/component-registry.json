@@ -226,7 +226,9 @@
       "assetType": "component_set",
       "category": "navigation",
       "variantsConfirmed": false,
-      "note": "Novo componente encontrado em 2026-09-25 via /ds-sync. Distinto de menu-global (navegação lateral) e menu erp (descontinuado). Parece ser um menu contextual ou dropdown de ações — confirmar via get_metadata fornecendo URL do Figma."
+      "note": "Não existe mais no arquivo: a página Menu só tem o `menu-global` (verificado em 2026-10-20). Não usar.",
+      "deprecated": true,
+      "removedFromLibrary": "2026-10-20"
     },
     "Tabs": {
       "componentKey": "f0c6d6f3695edcc13e25a2a2436f6f1e52429da3",
@@ -647,15 +649,14 @@
       "assetType": "component",
       "category": "data-display",
       "variantsConfirmed": true,
-      "note": "Propriedade 'image' está no componente base '.[base] avatar circle'.",
+      "note": "Sem variantes: props `label` (TEXT) e `show label` (BOOLEAN). A propriedade `image` saiu do componente (verificado em 2026-10-20).",
       "nodeId": "56:2400",
-      "variants": {
-        "image": [
-          "on",
-          "off"
-        ]
-      },
-      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+      "variants": {},
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "componentProperties": {
+        "label": "TEXT",
+        "show label": "BOOLEAN"
+      }
     },
     "Tooltip": {
       "componentKey": "90fd1f88654fb8501bdba141445c7ba9ab86a836",
@@ -1563,12 +1564,21 @@
       "category": "overlay",
       "variants": {
         "content": [
+          "media",
           "simple"
         ]
       },
-      "variantsConfirmed": false,
-      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23",
-      "note": "componentKey obtido em 2026-09-25 via /ds-sync. Variantes completas não mapeadas — apenas 1 visível no depth=3; fornecer URL do Figma para confirmar."
+      "variantsConfirmed": true,
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "note": "Canto de 24px (shape/border radius x3). content=media traz caixa de ícone/mídia; simple é só título e corpo. Combina com Overlay.",
+      "componentProperties": {
+        "subtitle": "BOOLEAN",
+        "subtitle text": "TEXT",
+        "title text": "TEXT",
+        "action": "BOOLEAN",
+        "body": "SLOT",
+        "icon box": "BOOLEAN"
+      }
     },
     "Modal": {
       "componentKey": "f3f3939322d751b3306181789e7953d85d7cfee7",
@@ -2509,7 +2519,20 @@
       "variantsSource": "Figma use_figma 2026-10-20",
       "kind": "molecule",
       "note": "Barra de rolagem usada por listas e popovers.",
-      "addedAt": "2026-10-20"
+      "addedAt": "2026-10-20",
+      "internalPieces": {
+        "bar": {
+          "componentSetKey": "eccd6b71a7f412102cf973b61c4838498a001e50",
+          "nodeId": "4975:113",
+          "variants": {
+            "state": [
+              "enabled",
+              "hover",
+              "pressed"
+            ]
+          }
+        }
+      }
     },
     "Progress Bar": {
       "componentKey": "1a93ef4e0b90caac6de43d60b9e4c1610bb82d4e",
