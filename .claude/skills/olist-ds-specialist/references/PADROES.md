@@ -119,6 +119,6 @@ Visualizar um recurso único com tabs.
 
 ## Padrões de Navegação
 
-**Breadcrumbs:** usados na Zona B (Top Bar) do template ERP, via instância real do componente `Breadcrumb` do DS (ver `HARNEES_TELAS.md`). Dentro da Content Area (Zona D), em páginas de Detalhe, continue usando seta de voltar — não duplicar navegação com breadcrumb ali.
+**Breadcrumbs:** vêm dentro do `Page Header` (zona B de todos os templates), via instância real do componente `Breadcrumb` do DS (ver `HARNEES_TELAS.md`). Dentro da zona de conteúdo (C–F), em páginas de Detalhe, continue usando seta de voltar — não duplicar navegação com breadcrumb ali.
 **Tabs:** para sub-navegação dentro da página. Usar SegmentedButtons para 2-3 opções.
 **Sidebar:** sempre presente via MenuSidebar. Item ativo destacado com fundo blue-50.

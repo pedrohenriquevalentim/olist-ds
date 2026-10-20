@@ -5,9 +5,9 @@
     "figmaFileKey": "HeyN4w209HWh8rfpTDiwyf",
     "figmaLibraryKey": "lk-f068a69b8c4ef3c01d6a883806b21c6ebe73213d3565451a399cfba74694fbc0053c2b4226fb206812f098c679b6a971148aa027e97bc14733e29552c4002cb5",
     "extractedAt": "2026-07-03",
-    "republishedAt": "2026-10-16T18:07:53Z",
-    "lastSyncAt": "2026-10-16",
-    "totalComponents": 94,
+    "republishedAt": "2026-10-20T02:17:23Z",
+    "lastSyncAt": "2026-10-20",
+    "totalComponents": 119,
     "published": true,
     "previousSource": {
       "name": "AI-Components",
@@ -57,11 +57,6 @@
           "tertiary",
           "danger"
         ],
-        "size": [
-          "big",
-          "medium",
-          "small"
-        ],
         "state": [
           "enabled",
           "hover",
@@ -73,16 +68,21 @@
           "off"
         ],
         "lead icon": [
-          "on",
-          "off"
+          "off",
+          "on"
         ],
         "action icon": [
-          "on",
-          "off"
+          "off",
+          "on"
+        ],
+        "size": [
+          "big",
+          "medium",
+          "small"
         ]
       },
       "variantsConfirmed": true,
-      "note": "Figma usa 'type' (não 'variant') e size = big/medium/small — os mesmos nomes do React (renomeado de lg/md/sm em 2026-10-16). Tipo 'danger' (ação destrutiva; fundo red 600 com texto claro, contraste 4,64:1). Slots de ícone são propriedades booleanas separadas. Máximo 1 Button primary por tela.",
+      "note": "Figma usa 'type' (não 'variant') e size = big/medium/small — os mesmos nomes do React (renomeado de lg/md/sm em 2026-10-16). Tipo 'danger' (ação destrutiva; fundo red 600 com texto claro, contraste 4,64:1). Slots de ícone são propriedades booleanas separadas. Máximo 1 Button primary por tela. Escala de altura (2026-10-19): big 40px · medium 36px · small 32px.",
       "componentProperties": {
         "label": "TEXT",
         "focus": "BOOLEAN"
@@ -91,7 +91,8 @@
       "publishStatusVerified": {
         "status": "CURRENT",
         "at": "2026-10-16"
-      }
+      },
+      "variantsSource": "Figma use_figma (componentPropertyDefinitions) 2026-10-20"
     },
     "Button Icon": {
       "componentKey": "0a4fdb6997f71ed5c9ed5c9993d682090d55597e",
@@ -118,7 +119,7 @@
         ]
       },
       "variantsConfirmed": true,
-      "note": "Tamanhos big/medium/small = 48/40/32 px, sempre quadrado (renomeado de lg/md/sm em 2026-10-16; mesmos nomes do React). Inclui tipo 'danger'. Figma usa 'type' (não 'variant').",
+      "note": "Tamanhos big/medium/small = 48/40/32 px, sempre quadrado (renomeado de lg/md/sm em 2026-10-16; mesmos nomes do React). Inclui tipo 'danger'. Figma usa 'type' (não 'variant'). Escala de altura (2026-10-19): big 40px · medium 36px · small 32px.",
       "componentProperties": {
         "focus": "BOOLEAN"
       },
@@ -162,13 +163,17 @@
       "note": "Variantes não confirmadas via get_metadata — fornecer URL do Figma para mapear.",
       "nodeId": "6819:7741",
       "variants": {
+        "type": [
+          "paragraph",
+          "description"
+        ],
         "state": [
           "enabled",
           "hover",
           "pressed"
         ]
       },
-      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+      "variantsSource": "Figma use_figma (componentPropertyDefinitions) 2026-10-20"
     },
     "Segmented Buttons": {
       "componentKey": "218c86353f7cb84c5b129ae8bbcf23b28908b43b",
@@ -258,7 +263,7 @@
       "componentKey": "1ea4fd52a3de7a2668dd9954b9070455360fd9c1",
       "assetType": "component_set",
       "category": "navigation",
-      "note": "Novo após republicação — não existia no sync anterior",
+      "note": "Apresenta só o texto (placeholder/filled): a descrição aparece apenas nas listas (`.[base]` list). Altura 40px. O seletor de PRODUTO no menu é o `Product Switch`, não o Context Switch.",
       "variantsConfirmed": true,
       "nodeId": "8749:12167",
       "variants": {
@@ -289,7 +294,8 @@
           "disabled"
         ]
       },
-      "variantsConfirmed": true
+      "variantsConfirmed": true,
+      "nodeId": "4221:117"
     },
     "Input Email": {
       "componentKey": "113a8732adea820838eaa24fbd982791e5ba0a60",
@@ -398,7 +404,8 @@
           "multi autocomplete"
         ]
       },
-      "variantsConfirmed": true
+      "variantsConfirmed": true,
+      "nodeId": "5001:163"
     },
     "Input Paragraph": {
       "componentKey": "1fb4cdce8cbc0d94ba60777e26fa54b1d06234b0",
@@ -430,7 +437,7 @@
       "assetType": "component_set",
       "category": "input",
       "variantsConfirmed": true,
-      "note": "Variantes não confirmadas via get_metadata — fornecer URL do Figma para mapear.",
+      "note": "Gatilho compacto pill de 40px, COM borda em todos os estados (enabled, hover, pressed, filled, disabled; o foco usa o anel do sistema). `type` = single select | multi select (a lista de opções abre no foco; multi mostra checkbox por item). Usado nas toolbars (ordenação e filtros do Dataset) e no Paginator. Tokens de borda: dropdown/border color|width/*.",
       "nodeId": "6974:7448",
       "variants": {
         "state": [
@@ -440,9 +447,13 @@
           "focused",
           "filled",
           "disabled"
+        ],
+        "type": [
+          "single select",
+          "multi select"
         ]
       },
-      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+      "variantsSource": "Figma use_figma (componentPropertyDefinitions) 2026-10-20"
     },
     "Checkbox": {
       "componentKey": "6ae014154ba2196c2fe582d7be8affe07b6ac6c5",
@@ -457,16 +468,22 @@
           "disabled"
         ],
         "checked": [
-          "on",
-          "off"
+          "off",
+          "on"
         ],
         "indeterminate": [
-          "on",
-          "off"
+          "off",
+          "on"
+        ],
+        "size": [
+          "big",
+          "medium",
+          "small"
         ]
       },
       "variantsConfirmed": true,
-      "note": "12 variantes totais (4 estados × 3 combinações checked/indeterminate). Confirmed via get_metadata."
+      "note": "12 variantes totais (4 estados × 3 combinações checked/indeterminate). Confirmed via get_metadata.",
+      "variantsSource": "Figma use_figma (componentPropertyDefinitions) 2026-10-20"
     },
     "Radio Button": {
       "componentKey": "db5515c33452f4b8d09aebcc3fde23a87b086c94",
@@ -483,11 +500,16 @@
           "disabled"
         ],
         "checked": [
-          "on",
-          "off"
+          "off",
+          "on"
+        ],
+        "size": [
+          "big",
+          "medium",
+          "small"
         ]
       },
-      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23"
+      "variantsSource": "Figma use_figma (componentPropertyDefinitions) 2026-10-20"
     },
     "Toggle": {
       "componentKey": "ef0ab115509f94cca96620106fa82bf7d61ae55a",
@@ -589,22 +611,22 @@
       "note": "Variantes não confirmadas via get_metadata — fornecer URL do Figma para mapear. Pode ser variante do Badge (type=tag, intent=*). Confirmar se ainda existe como component_set independente."
     },
     "Table": {
-      "componentKey": "00db8a692d897a905331b50040e4c21e30e531e1",
+      "componentKey": "12ba612d280690ef4136a91d3396da8decc1c42f",
       "assetType": "component_set",
       "category": "data-display",
       "variantsConfirmed": true,
-      "note": "Usar o component set `table` inteiro na Zona E. Confirmado via get_metadata em 2026-10-15. Peças internas (nunca instanciar): '.[base] table cell' (role: head/body/row header · state: enabled/hover · numeric · striped · type: text/checkbox/image/cta icon) e '.[base] table caption'. Substitui TableCellExtended, head, simple cell e table column. Pendente: confirmar via use_figma como ajustar linhas/colunas e preencher conteúdo.",
-      "figmaNodeId": "11554:26",
+      "nodeId": "11949:5837",
+      "figmaNodeId": "11949:5837",
       "variants": {
-        "striped": [
-          "true",
-          "false"
-        ],
-        "caption": [
-          "true",
-          "false"
+        "seleção": [
+          "off",
+          "on"
         ]
-      }
+      },
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "legacyComponentKey": "00db8a692d897a905331b50040e4c21e30e531e1",
+      "note": "Tabela v2 (substitui o set anterior `striped` × `caption`, key 00db8a69…, que saiu da library). Sem stroke: divisão por tom e 2px de espaço; cabeçalho em faixa tonal; hover e seleção por linha; `seleção=on` troca o cabeçalho pela barra de ações em massa. Composta por `table head row` (modo colunas|seleção), N `table row` (estado, tamanho small/medium/big; seleção e ação opcionais), `table cell` (tipo texto, número, checkbox, miniatura, status, ação) e `table head cell` (ordenação, alinhamento). Para LISTAGENS use o `Dataset` (traz toolbar, tabela, paginação e estados); use `table` sozinha só dentro de um Record.",
+      "usage": "Dentro do Record (tabela relacionada). Em listagens, usar o Dataset."
     },
     "Card": {
       "componentKey": "6c5bbef10eaba4951d287ce61bd29ec4de5683dc",
@@ -1549,18 +1571,30 @@
       "note": "componentKey obtido em 2026-09-25 via /ds-sync. Variantes completas não mapeadas — apenas 1 visível no depth=3; fornecer URL do Figma para confirmar."
     },
     "Modal": {
-      "componentKey": null,
-      "nodeId": "9644:23",
+      "componentKey": "f3f3939322d751b3306181789e7953d85d7cfee7",
       "assetType": "component_set",
-      "category": "overlay",
+      "category": "feedback",
+      "variantsConfirmed": true,
+      "nodeId": "9644:23",
+      "figmaNodeId": "9644:23",
       "variants": {
         "content": [
           "simple"
         ]
       },
-      "variantsConfirmed": false,
-      "variantsSource": "get_metadata depth=3 via page URL 2026-08-23",
-      "note": "⚠️ Componente WIP (work-in-progress). A página fornecida como \"accordion\" (9644:22) corresponde na verdade a este modal. Accordion pode não existir ou estar em outra página — investigar. componentKey não coletado."
+      "componentProperties": {
+        "subtitle": "BOOLEAN",
+        "caption": "BOOLEAN",
+        "secondary button": "BOOLEAN",
+        "title text": "TEXT",
+        "subtitle text": "TEXT",
+        "paragraph text": "TEXT",
+        "caption text": "TEXT"
+      },
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "molecule",
+      "note": "Modal simples. Propriedade de slot sem uso removida em 2026-10-20 para permitir a publicação.",
+      "addedAt": "2026-10-20"
     },
     "TableCellExtended": {
       "componentKey": "8ba1fe2c9d32e56a058c3946e17142223784c557",
@@ -1707,7 +1741,18 @@
       "assetType": "component_set",
       "category": "navigation",
       "variantsConfirmed": false,
-      "note": "Encontrado em 2026-10-15 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar."
+      "note": "Encontrado em 2026-10-15 via /ds-sync. Variantes não mapeadas — fornecer URL do Figma para confirmar.",
+      "variants": {
+        "state": [
+          "enabled",
+          "hover",
+          "pressed",
+          "open",
+          "disabled"
+        ]
+      },
+      "variantsSource": "Figma use_figma (componentPropertyDefinitions) 2026-10-20",
+      "nodeId": "9410:16848"
     },
     "Calendar": {
       "componentKey": "770014e4c54af91f0809fea72ecff38650278a74",
@@ -1870,6 +1915,641 @@
       "category": "uncategorized",
       "variantsConfirmed": false,
       "note": "Encontrado em 2026-10-16 via /ds-sync. Categoria a definir. Variantes não mapeadas."
+    },
+    "Table Row": {
+      "componentKey": "696917c485482d4ef1bc2d2a39166fe92c187c67",
+      "assetType": "component_set",
+      "category": "data-display",
+      "variantsConfirmed": true,
+      "nodeId": "11948:5559",
+      "figmaNodeId": "11948:5559",
+      "variants": {
+        "estado": [
+          "enabled",
+          "hover",
+          "selected"
+        ],
+        "tamanho": [
+          "small",
+          "medium",
+          "big"
+        ]
+      },
+      "componentProperties": {
+        "seleção": "BOOLEAN",
+        "ação": "BOOLEAN"
+      },
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "molecule",
+      "note": "Linha da tabela. Sem stroke: hover e selected por tom, com raio nas pontas; a ação à direita só aparece no hover. Peça da `table` — não instanciar fora dela.",
+      "addedAt": "2026-10-20"
+    },
+    "Table Head Row": {
+      "componentKey": "872896b9808c3333e2418735d602a6b1da23c5ad",
+      "assetType": "component_set",
+      "category": "data-display",
+      "variantsConfirmed": true,
+      "nodeId": "11949:5542",
+      "figmaNodeId": "11949:5542",
+      "variants": {
+        "modo": [
+          "colunas",
+          "seleção"
+        ]
+      },
+      "componentProperties": {},
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "molecule",
+      "note": "Cabeçalho da tabela. modo=colunas: faixa tonal com cabeçalhos ordenáveis; modo=seleção: vira a barra de ações em massa. Peça da `table`.",
+      "addedAt": "2026-10-20"
+    },
+    "Table Cell": {
+      "componentKey": "fdc53906ee3fb02752bf9afea504ab38e0493872",
+      "assetType": "component_set",
+      "category": "data-display",
+      "variantsConfirmed": true,
+      "nodeId": "11948:5278",
+      "figmaNodeId": "11948:5278",
+      "variants": {
+        "tipo": [
+          "texto",
+          "número",
+          "checkbox",
+          "miniatura",
+          "status",
+          "ação"
+        ]
+      },
+      "componentProperties": {
+        "texto": "TEXT"
+      },
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "molecule",
+      "note": "Célula da tabela v2. Peça da `table`/`table row`: não instanciar solta.",
+      "addedAt": "2026-10-20"
+    },
+    "Table Head Cell": {
+      "componentKey": "a17425ecd3528dadc581637a897f3f11b14e395f",
+      "assetType": "component_set",
+      "category": "data-display",
+      "variantsConfirmed": true,
+      "nodeId": "11948:5248",
+      "figmaNodeId": "11948:5248",
+      "variants": {
+        "ordenação": [
+          "nenhuma",
+          "hover",
+          "asc",
+          "desc"
+        ],
+        "alinhamento": [
+          "esquerda",
+          "direita"
+        ]
+      },
+      "componentProperties": {
+        "rótulo": "TEXT"
+      },
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "molecule",
+      "note": "Célula de cabeçalho ordenável. Peça da `table head row`.",
+      "addedAt": "2026-10-20"
+    },
+    "Table Toolbar": {
+      "componentKey": "092c813d8244bb000777a0b9f3347a636ba41306",
+      "assetType": "component",
+      "category": "data-display",
+      "variantsConfirmed": true,
+      "nodeId": "11951:6320",
+      "figmaNodeId": "11951:6320",
+      "variants": {},
+      "componentProperties": {},
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "molecule",
+      "note": "Barra da tabela: busca que preenche o espaço livre (mínimo 280px), dropdown de ordenação (single select), dropdown de filtros (multi select), botão de colunas (abre o `column manager`) e pílulas de status. Peça do `Dataset`.",
+      "addedAt": "2026-10-20"
+    },
+    "Status Pill": {
+      "componentKey": "59135ee9563505603af816b1ada516f229f400b8",
+      "assetType": "component_set",
+      "category": "data-display",
+      "variantsConfirmed": true,
+      "nodeId": "11951:6319",
+      "figmaNodeId": "11951:6319",
+      "variants": {
+        "state": [
+          "enabled",
+          "hover",
+          "selected"
+        ],
+        "dot": [
+          "none",
+          "warning",
+          "positive",
+          "neutral",
+          "informative",
+          "negative"
+        ]
+      },
+      "componentProperties": {
+        "rótulo": "TEXT",
+        "contador": "TEXT",
+        "mostrar contador": "BOOLEAN"
+      },
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "molecule",
+      "note": "Visão/status em pílula (formato de chip, 32px, sem stroke). Selecionado usa o tom azul do chip. Usado na table toolbar.",
+      "addedAt": "2026-10-20"
+    },
+    "Column Manager": {
+      "componentKey": "f61ae785ce26efed242a01b927aedc710829ed16",
+      "assetType": "component",
+      "category": "data-display",
+      "variantsConfirmed": true,
+      "nodeId": "11950:5936",
+      "figmaNodeId": "11950:5936",
+      "variants": {},
+      "componentProperties": {},
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "molecule",
+      "note": "Popover de gerenciamento de colunas: filtro rápido e lista de colunas com alça (reordenar) e olho (mostrar/ocultar). A ordenação NÃO fica aqui: vive no dropdown da toolbar. Arrastar é comportamento de código.",
+      "addedAt": "2026-10-20"
+    },
+    "Column Item": {
+      "componentKey": "178aa20759e9af6a77bd5b43d0a773f881e985ba",
+      "assetType": "component_set",
+      "category": "data-display",
+      "variantsConfirmed": true,
+      "nodeId": "11950:5921",
+      "figmaNodeId": "11950:5921",
+      "variants": {
+        "visibilidade": [
+          "visível",
+          "oculta"
+        ]
+      },
+      "componentProperties": {
+        "rótulo": "TEXT"
+      },
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "molecule",
+      "note": "Item do column manager. Peça interna do popover.",
+      "addedAt": "2026-10-20"
+    },
+    "Page Header": {
+      "componentKey": "cbce5fdc2d2fc66eaeb60c434ce0aa92aa3c91a7",
+      "assetType": "component",
+      "category": "organism",
+      "variantsConfirmed": true,
+      "nodeId": "11924:3444",
+      "figmaNodeId": "11924:3444",
+      "variants": {},
+      "componentProperties": {
+        "voltar": "BOOLEAN",
+        "utilitários": "BOOLEAN",
+        "ação terciária": "BOOLEAN",
+        "ação secundária": "BOOLEAN",
+        "ação primária": "BOOLEAN",
+        "mais ações": "BOOLEAN",
+        "badge": "BOOLEAN",
+        "seletor de canal": "BOOLEAN",
+        "descrição": "BOOLEAN",
+        "link": "BOOLEAN",
+        "grupo de ações": "BOOLEAN",
+        "título": "TEXT",
+        "texto da descrição": "TEXT"
+      },
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "organism",
+      "note": "Zona B. Breadcrumb, título, descrição e ações. Sem logo do produto ou da Olist. Utilitários só em produtos que os usam. Máx. 1 ação primária. Topo simples (sem breadcrumb) ainda é variante planejada.",
+      "addedAt": "2026-10-20",
+      "allowedZones": [
+        "B"
+      ]
+    },
+    "Notice Bar": {
+      "componentKey": "f20b1f8f20865a89c7209717dc0c49a42851a4a3",
+      "assetType": "component_set",
+      "category": "organism",
+      "variantsConfirmed": true,
+      "nodeId": "11925:4299",
+      "figmaNodeId": "11925:4299",
+      "variants": {
+        "intent": [
+          "brand",
+          "informative",
+          "neutral",
+          "success",
+          "error",
+          "warning"
+        ],
+        "action": [
+          "none",
+          "link",
+          "button"
+        ],
+        "dismiss": [
+          "on",
+          "off"
+        ]
+      },
+      "componentProperties": {},
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "organism",
+      "note": "Aviso da página: B0 (acima do título), inline ou rodapé global (R). Baseado no Alert Bar. Renderizar só quando a condição for verdadeira; máx. 1 por slot; dispensar com X. Edite o texto no Alert Bar interno.",
+      "addedAt": "2026-10-20",
+      "allowedZones": [
+        "B0",
+        "R",
+        "C-F"
+      ]
+    },
+    "Empty State": {
+      "componentKey": "93cfc128201d0ff2ffc489e895e4203d38616f44",
+      "assetType": "component_set",
+      "category": "organism",
+      "variantsConfirmed": true,
+      "nodeId": "11926:4149",
+      "figmaNodeId": "11926:4149",
+      "variants": {
+        "tipo": [
+          "vazio",
+          "sem resultado",
+          "erro",
+          "sem permissão",
+          "sucesso",
+          "primeiro uso",
+          "educativo"
+        ]
+      },
+      "componentProperties": {},
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "organism",
+      "note": "Estado de uma área sem conteúdo. Usado dentro do Dataset e em páginas (Landing foco e Estados). 1 ação primária no máximo.",
+      "addedAt": "2026-10-20",
+      "allowedZones": [
+        "C-F"
+      ]
+    },
+    "Dataset": {
+      "componentKey": "45d3b3490b104e8be47379e46b8ef35badcae43a",
+      "assetType": "component_set",
+      "category": "organism",
+      "variantsConfirmed": true,
+      "nodeId": "11956:1551",
+      "figmaNodeId": "11956:1551",
+      "variants": {
+        "estado": [
+          "conteúdo",
+          "com seleção",
+          "sem resultado",
+          "erro",
+          "colunas",
+          "primeiro uso",
+          "carregando"
+        ]
+      },
+      "componentProperties": {},
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "organism",
+      "note": "Organismo de listagem: table toolbar (busca, ordenação, filtros, colunas e pílulas de status) + table + paginação; sem resultado e erro trocam a tabela pelo Empty State. Sem stroke nem padding lateral; é hug (a paginação fica sob a tabela). Em seleção aciona o Floating Action Bar. Nunca remontar com toolbar/table soltas.",
+      "addedAt": "2026-10-20",
+      "allowedZones": [
+        "C-F"
+      ]
+    },
+    "Floating Action Bar": {
+      "componentKey": "b40093eefe9b803f9a9d8b4218e77b905db3c2f2",
+      "assetType": "component_set",
+      "category": "organism",
+      "variantsConfirmed": true,
+      "nodeId": "11888:223",
+      "figmaNodeId": "11888:223",
+      "variants": {
+        "mode": [
+          "seleção",
+          "alterações"
+        ]
+      },
+      "componentProperties": {},
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "organism",
+      "note": "Camada flutuante no rodapé. seleção: aparece com ≥1 item marcado (List). alterações: aparece na 1ª edição de formulário (Record, Settings). Sobrepõe o conteúdo sem empurrar o layout. O modo `wizard` (Voltar/Avançar) é planejado.",
+      "addedAt": "2026-10-20",
+      "allowedZones": [
+        "camada"
+      ]
+    },
+    "KPI Strip": {
+      "componentKey": "4a5a0b9dc0f028a14a83f5849a7c43fcf71d63c9",
+      "assetType": "component_set",
+      "category": "organism",
+      "variantsConfirmed": true,
+      "nodeId": "11934:4660",
+      "figmaNodeId": "11934:4660",
+      "variants": {
+        "métricas": [
+          "3",
+          "4",
+          "6"
+        ]
+      },
+      "componentProperties": {},
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "organism",
+      "note": "Faixa de 3, 4 ou 6 indicadores (Metric) separados por divisores, em um card com borda. Zona D do Dashboard.",
+      "addedAt": "2026-10-20",
+      "allowedZones": [
+        "D"
+      ]
+    },
+    "Chart Card": {
+      "componentKey": "2e12c5f525d7c096f390840f88374eda982089b4",
+      "assetType": "component_set",
+      "category": "organism",
+      "variantsConfirmed": true,
+      "nodeId": "11934:4736",
+      "figmaNodeId": "11934:4736",
+      "variants": {
+        "estado": [
+          "conteúdo",
+          "sem dados"
+        ]
+      },
+      "componentProperties": {
+        "título": "TEXT",
+        "valor": "TEXT",
+        "período": "BOOLEAN",
+        "gráfico": "INSTANCE_SWAP",
+        "legenda": "BOOLEAN",
+        "link": "BOOLEAN"
+      },
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "organism",
+      "note": "Card de gráfico: troque a instância do slot `gráfico` por chart bar, chart line ou chart donut; sempre com chart legend. Zona E do Dashboard.",
+      "addedAt": "2026-10-20",
+      "allowedZones": [
+        "E"
+      ]
+    },
+    "Metric": {
+      "componentKey": "413723c83c6718522d8d3423e2d98a08acec7a77",
+      "assetType": "component_set",
+      "category": "data-visualization",
+      "variantsConfirmed": true,
+      "nodeId": "11934:4488",
+      "figmaNodeId": "11934:4488",
+      "variants": {
+        "variação": [
+          "nenhuma",
+          "positiva",
+          "negativa"
+        ],
+        "legenda": [
+          "off",
+          "on"
+        ],
+        "disposição": [
+          "inline",
+          "empilhada"
+        ]
+      },
+      "componentProperties": {
+        "rótulo": "TEXT",
+        "valor": "TEXT",
+        "ajuda": "BOOLEAN"
+      },
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "molecule",
+      "note": "Indicador: rótulo, valor e variação (Badge). Base do KPI Strip e do Chart Card.",
+      "addedAt": "2026-10-20"
+    },
+    "Chart Bar": {
+      "componentKey": "80eea766d5768e70ea384fcbd850edd52d96ebb9",
+      "assetType": "component_set",
+      "category": "data-visualization",
+      "variantsConfirmed": true,
+      "nodeId": "11932:4818",
+      "figmaNodeId": "11932:4818",
+      "variants": {
+        "barras": [
+          "5",
+          "7",
+          "12"
+        ],
+        "tipo": [
+          "simples",
+          "agrupada",
+          "empilhada"
+        ]
+      },
+      "componentProperties": {},
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "molecule",
+      "note": "Gráfico de barras (visual estático; dados reais vêm do código). Cores chart/series/color-1..2. Sempre com chart legend.",
+      "addedAt": "2026-10-20"
+    },
+    "Chart Line": {
+      "componentKey": "4a68de936a053bec39f29c8804560fe9a2ea8dd4",
+      "assetType": "component_set",
+      "category": "data-visualization",
+      "variantsConfirmed": true,
+      "nodeId": "11933:4709",
+      "figmaNodeId": "11933:4709",
+      "variants": {
+        "séries": [
+          "1",
+          "2",
+          "3"
+        ],
+        "área": [
+          "off",
+          "on"
+        ]
+      },
+      "componentProperties": {},
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "molecule",
+      "note": "Gráfico de linha/área. Exceção ao harness: usa vetores vinculados a tokens.",
+      "addedAt": "2026-10-20"
+    },
+    "Chart Donut": {
+      "componentKey": "ba976b3233c622dd3ef10fb7d05cf6cfebcdbb8c",
+      "assetType": "component_set",
+      "category": "data-visualization",
+      "variantsConfirmed": true,
+      "nodeId": "11933:4740",
+      "figmaNodeId": "11933:4740",
+      "variants": {
+        "fatias": [
+          "2",
+          "3",
+          "4",
+          "5"
+        ]
+      },
+      "componentProperties": {},
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "molecule",
+      "note": "Gráfico de rosca. Exceção ao harness: usa elipse com arco (espessura 24px como razão do raio interno 0,76, pois innerRadius não aceita variável).",
+      "addedAt": "2026-10-20"
+    },
+    "Chart Legend": {
+      "componentKey": "de52b30b6bf2385b26b393650c458b70dc2bd2ea",
+      "assetType": "component_set",
+      "category": "data-visualization",
+      "variantsConfirmed": true,
+      "nodeId": "11931:4500",
+      "figmaNodeId": "11931:4500",
+      "variants": {
+        "orientação": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      "componentProperties": {},
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "molecule",
+      "note": "Legenda de gráfico com 3 itens (adicione ou remova chart legend item conforme as séries).",
+      "addedAt": "2026-10-20"
+    },
+    "Chart Legend Item": {
+      "componentKey": "43485ea8f37b98aea44dfbed64b1f03173f220dc",
+      "assetType": "component_set",
+      "category": "data-visualization",
+      "variantsConfirmed": true,
+      "nodeId": "11931:4467",
+      "figmaNodeId": "11931:4467",
+      "variants": {
+        "série": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "neutral"
+        ],
+        "valor": [
+          "off",
+          "on"
+        ]
+      },
+      "componentProperties": {
+        "rótulo": "TEXT",
+        "texto do valor": "TEXT"
+      },
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "molecule",
+      "note": "Item de legenda: marcador de cor da série + rótulo (+ valor). Nunca depender só da cor.",
+      "addedAt": "2026-10-20"
+    },
+    "Chart Tooltip": {
+      "componentKey": "1f1bd5d48ce4179d23e69fbe1bfd2c04ea0a5d6b",
+      "assetType": "component_set",
+      "category": "data-visualization",
+      "variantsConfirmed": true,
+      "nodeId": "11931:4537",
+      "figmaNodeId": "11931:4537",
+      "variants": {
+        "séries": [
+          "1",
+          "2",
+          "3"
+        ]
+      },
+      "componentProperties": {},
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "molecule",
+      "note": "Tooltip de gráfico: título + 1 a 3 séries com valor.",
+      "addedAt": "2026-10-20"
+    },
+    "Product Switch": {
+      "componentKey": "fa8572014d38eb2e6998c300f0069e7bc8f55c61",
+      "assetType": "component_set",
+      "category": "navigation",
+      "variantsConfirmed": true,
+      "nodeId": "12014:47457",
+      "figmaNodeId": "12014:47457",
+      "variants": {
+        "state": [
+          "enabled",
+          "hover",
+          "pressed",
+          "focused"
+        ]
+      },
+      "componentProperties": {
+        "produto": "INSTANCE_SWAP",
+        "nome": "TEXT",
+        "legenda": "TEXT",
+        "mostrar legenda": "BOOLEAN"
+      },
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "organism",
+      "note": "Seletor de produto do menu (52px). Uso EXCLUSIVO na composição do Menu Global. O estado `focused` mostra o Product Launcher aberto (hero do produto ativo, tiles dos contratados, linhas 'Conhecer' dos não ativados).",
+      "addedAt": "2026-10-20"
+    },
+    "Scrollbar": {
+      "componentKey": "d338fbbda9c47e77b361e0c1799ffeb041310678",
+      "assetType": "component_set",
+      "category": "feedback",
+      "variantsConfirmed": true,
+      "nodeId": "4983:222",
+      "figmaNodeId": "4983:222",
+      "variants": {
+        "scroll": [
+          "enabled",
+          "hover",
+          "begin",
+          "end"
+        ]
+      },
+      "componentProperties": {},
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "molecule",
+      "note": "Barra de rolagem usada por listas e popovers.",
+      "addedAt": "2026-10-20"
+    },
+    "Progress Bar": {
+      "componentKey": "1a93ef4e0b90caac6de43d60b9e4c1610bb82d4e",
+      "assetType": "component_set",
+      "category": "feedback",
+      "variantsConfirmed": true,
+      "nodeId": "11753:30208",
+      "figmaNodeId": "11753:30208",
+      "variants": {
+        "format": [
+          "default",
+          "buffer",
+          "indeterminate"
+        ],
+        "status": [
+          "neutral",
+          "warning",
+          "error",
+          "success"
+        ],
+        "label position": [
+          "horizontal",
+          "vertical"
+        ],
+        "indicator position": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      "componentProperties": {
+        "label text": "TEXT",
+        "percentage": "TEXT",
+        "tooltip": "BOOLEAN",
+        "label": "BOOLEAN",
+        "indicator": "BOOLEAN"
+      },
+      "variantsSource": "Figma use_figma 2026-10-20",
+      "kind": "molecule",
+      "note": "Barra de progresso (página marcada WIP no Figma).",
+      "addedAt": "2026-10-20"
     }
   },
   "categories": {
@@ -1887,7 +2567,8 @@
       "Sort",
       "Context Switch",
       "Stepper",
-      "Accordion"
+      "Accordion",
+      "Product Switch"
     ],
     "input": [
       "Input Text",
@@ -1924,7 +2605,15 @@
       "Task List",
       "Dashboard",
       "Spreadsheet",
-      "Profile"
+      "Profile",
+      "Table Row",
+      "Table Head Row",
+      "Table Cell",
+      "Table Head Cell",
+      "Table Toolbar",
+      "Status Pill",
+      "Column Manager",
+      "Column Item"
     ],
     "feedback": [
       "Tooltip",
@@ -1934,13 +2623,23 @@
       "Alert Dialog",
       "Alert Bar",
       "Bell",
-      "Money Notification"
+      "Money Notification",
+      "Scrollbar",
+      "Modal",
+      "Progress Bar"
     ],
     "data-visualization": [
       "Chart Bar Up",
       "Chart Bar Down",
       "Chart Bar Variation",
-      "Chart Pie"
+      "Chart Pie",
+      "Metric",
+      "Chart Bar",
+      "Chart Line",
+      "Chart Donut",
+      "Chart Legend",
+      "Chart Legend Item",
+      "Chart Tooltip"
     ],
     "brand": [
       "Logo"
@@ -1984,6 +2683,15 @@
     "uncategorized": [
       "Scale",
       "Column"
+    ],
+    "organism": [
+      "Page Header",
+      "Notice Bar",
+      "Empty State",
+      "Dataset",
+      "Floating Action Bar",
+      "KPI Strip",
+      "Chart Card"
     ]
   },
   "textStyles": {
@@ -2000,7 +2708,7 @@
     ]
   },
   "excludedInternal": {
-    "note": "Confirmados via search_design_system e get_metadata, nunca usar diretamente — ver _meta.excludedNote",
+    "note": "Confirmados via search_design_system e get_metadata, nunca usar diretamente — ver _meta.excludedNote (2026-10-20: peças do Product Launcher adicionadas; `.[base] settings menu item` e `.[base] menu global · configurações` não estavam mais no arquivo nesta data.)",
     "components": [
       ".[base] single select list",
       ".[base] multi select list",
@@ -2010,7 +2718,13 @@
       ".[base] table caption",
       ".[base] calendar day",
       ".[base] calendar month",
-      ".[base] stepper item"
+      ".[base] stepper item",
+      ".[base] product launcher",
+      ".[base] product launcher hero",
+      ".[base] product launcher tile",
+      ".[base] product launcher row",
+      ".[base] settings menu item",
+      ".[base] menu global · configurações"
     ],
     "calendarMonth": {
       "componentSetNodeId": "11829:662",
@@ -2203,6 +2917,59 @@
           "how": "excluídos das páginas Menu e Menu Playground + library republicada; confirmado via search_design_system"
         }
       ]
+    },
+    "sync_2026_10_20": {
+      "note": "5ª rodada de /ds-sync: library republicada em 2026-10-20 (updatedAt 02:17:23Z).",
+      "added": [
+        "Modal",
+        "Table Row",
+        "Table Head Row",
+        "Table Cell",
+        "Table Head Cell",
+        "Table Toolbar",
+        "Status Pill",
+        "Column Manager",
+        "Column Item",
+        "Page Header",
+        "Notice Bar",
+        "Empty State",
+        "Dataset",
+        "Floating Action Bar",
+        "KPI Strip",
+        "Chart Card",
+        "Metric",
+        "Chart Bar",
+        "Chart Line",
+        "Chart Donut",
+        "Chart Legend",
+        "Chart Legend Item",
+        "Chart Tooltip",
+        "Product Switch",
+        "Scrollbar",
+        "Progress Bar"
+      ],
+      "replaced": [
+        {
+          "component": "Table",
+          "oldKey": "00db8a692d897a905331b50040e4c21e30e531e1",
+          "newKey": "12ba612d280690ef4136a91d3396da8decc1c42f",
+          "note": "Tabela v2 (variante `seleção`) substituiu `striped` × `caption`."
+        }
+      ],
+      "variantsUpdated": [
+        "Button",
+        "Link",
+        "Checkbox",
+        "Radio Button",
+        "Dropdown",
+        "Accordion"
+      ],
+      "propertyFixes": [
+        "Modal: slot sem uso removido",
+        "Chart Legend Item: propriedade de texto `valor` renomeada para `texto do valor`",
+        "Table Toolbar: set de variante única convertido em componente simples (key 092c813d…)"
+      ],
+      "unchangedKeys": "Dropdown, Context Switch e demais componentes mantiveram a key"
     }
   }
 }

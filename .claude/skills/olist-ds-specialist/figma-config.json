@@ -206,5 +206,36 @@
       "Se o único resultado retornado para um componente for um '.[base]/...' ou '.nome', tratar como 'não encontrado' e seguir o fluxo de Seção 4 do HARNEES_TELAS.md (construir com primitivos + documentar gap).",
       "Menu: SEMPRE `menu-global`. `menu erp` (2 component sets publicados, 2026-09-10) está removido do uso por decisão do usuário em 2026-10-15 — nunca instanciar."
     ]
+  },
+  "templates": {
+    "fileKey": "HeyN4w209HWh8rfpTDiwyf",
+    "page": "📐 Templates · placeholders",
+    "pageNodeId": "12045:19",
+    "sectionNodeId": "12053:77045",
+    "specSheetNodeId": "12046:19",
+    "updatedAt": "2026-10-20",
+    "note": "Placeholders de zonas (não são telas). Metadata em references/templates/<id>.json. Substitui o template único ERP (node 8790:9484, removido do arquivo).",
+    "frames": {
+      "landing": "12045:22",
+      "landing-foco": "12045:72",
+      "dashboard": "12045:93",
+      "list": "12045:146",
+      "record": "12045:196",
+      "settings": "12045:255",
+      "wizard": "12045:294",
+      "estados": "12045:332"
+    }
+  },
+  "organismPages": {
+    "Page Header": "12000:54985",
+    "Notice Bar": "12000:54986",
+    "Empty State": "12000:54987",
+    "Dataset": "12000:54988",
+    "Floating Action Bar": "12000:54989",
+    "KPI Strip": "12000:54990",
+    "Chart Card": "12000:54991",
+    "Gráficos (átomos)": "12000:54992",
+    "Table": "11554:26",
+    "Product Switch": "12014:47391"
   }
 }

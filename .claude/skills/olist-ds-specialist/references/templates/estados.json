@@ -1,0 +1,80 @@
+{
+  "id": "estados",
+  "name": "Estados",
+  "purpose": "Telas de estado: vazio, sem resultado, erro, sem permissão e sucesso.",
+  "useWhen": [
+    "página inteira sem conteúdo, com falha, sem acesso ou concluída"
+  ],
+  "doNotUseWhen": [
+    "estado dentro de uma listagem (o Dataset já traz seus estados)"
+  ],
+  "viewport": {
+    "width": 1366,
+    "height": 768,
+    "rootPadding": "8px (shape/spacing/x1)",
+    "gap": "8px (shape/spacing/x1)"
+  },
+  "menu": true,
+  "products": "all",
+  "zones": [
+    {
+      "id": "A",
+      "name": "Menu Global",
+      "required": true,
+      "conditional": false,
+      "allowed": [
+        "menu-global"
+      ],
+      "rule": "Sidebar fixa de 304px; instância de `menu-global` com a prop `Produto` do produto da tela. Nunca outro menu.",
+      "max": 1
+    },
+    {
+      "id": "B0",
+      "name": "Aviso",
+      "required": false,
+      "conditional": true,
+      "allowed": [
+        "notice-bar"
+      ],
+      "rule": "Só renderiza se houver aviso; sem espaço reservado quando ausente. Dispensar sempre com X.",
+      "max": 1
+    },
+    {
+      "id": "B",
+      "name": "Page Header",
+      "required": true,
+      "conditional": false,
+      "allowed": [
+        "page-header"
+      ],
+      "rule": "Breadcrumb, título, descrição e ações. No máximo 1 ação primária. Sem logo do produto ou da Olist.",
+      "max": 1
+    },
+    {
+      "id": "C-F",
+      "name": "Estado",
+      "required": true,
+      "conditional": false,
+      "allowed": [
+        "empty-state"
+      ],
+      "rule": "Empty State com `tipo` = vazio, sem resultado, erro, sem permissão ou sucesso. 1 ação primária.",
+      "max": 1
+    }
+  ],
+  "overlays": [],
+  "modes": [
+    "vazio",
+    "sem resultado",
+    "erro",
+    "sem permissão",
+    "sucesso"
+  ],
+  "figma": {
+    "fileKey": "HeyN4w209HWh8rfpTDiwyf",
+    "page": "📐 Templates · placeholders",
+    "pageNodeId": "12045:19",
+    "frameNodeId": "12045:332",
+    "specSheetNodeId": "12046:19"
+  }
+}

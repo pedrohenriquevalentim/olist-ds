@@ -1,4 +1,4 @@
-# Setup — Olist DS Specialist Skill v3.23
+# Setup — Olist DS Specialist Skill v3.24
 
 Siga este guia para instalar e configurar a skill no seu projeto.
 
@@ -99,6 +99,7 @@ seu-projeto/
 │               ├── ICONES_CATALOGO.md
 │               ├── MAPA_FONTES.md
 │               ├── METADATA_SCHEMA.md
+│               ├── ORGANISMOS.md
 │               ├── PADROES.md
 │               ├── SDD_AVANCADO.md
 │               ├── SDD_PARA_TELA.md

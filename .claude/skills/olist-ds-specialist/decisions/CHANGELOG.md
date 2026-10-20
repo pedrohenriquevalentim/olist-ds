@@ -3,6 +3,45 @@
 Histórico de atualizações sincronizado com a skill `olist-ds-specialist`.
 Atualizado automaticamente pelo `sync-skill-meta.mjs` a cada `npm run ship`.
 
+## v3.24 (2026-10-20)
+
+> Skill atualizada para v3.24. Referências sincronizadas automaticamente.
+
+ — organismos, templates por zonas e componentes novos
+
+### component-registry.json + globals.md + referências + figma-config.json
+
+**Arquivos modificados:** `component-registry.json`, `figma-config.json`, `globals.md`, `references/TEMPLATES_PRODUTO.md`, `references/HARNEES_TELAS.md`, `references/VISAO_GERAL.md`, `references/PADROES.md`, `cases/caso-4-figma.md`, `decisions/INDEX.md`, `decisions/ux-design/COMPONENTES_POR_ZONA.md`
+**Arquivos criados:** `references/ORGANISMOS.md`, `references/templates/{landing,landing-foco,dashboard,list,record,settings,wizard,estados}.json`
+
+#### Added
+
+- **Organismos:** `Page Header`, `Notice Bar`, `Empty State`, `Dataset`, `Floating Action Bar`, `KPI Strip` e `Chart Card`, com keys, variantes e regras em `ORGANISMOS.md` e no registry (`kind: organism`, `allowedZones`).
+- **Tabela v2 e peças:** `Table Row`, `Table Head Row`, `Table Cell`, `Table Head Cell`, `Table Toolbar`, `Status Pill`, `Column Manager`, `Column Item`.
+- **Gráficos:** `Metric`, `Chart Bar`, `Chart Line`, `Chart Donut`, `Chart Legend`, `Chart Legend Item`, `Chart Tooltip`.
+- **Outros:** `Product Switch` (uso exclusivo no Menu Global; o Product Launcher é peça interna), `Scrollbar`, `Modal`, `Progress Bar` (WIP).
+- **8 templates por zonas** (Landing, Landing foco, Dashboard, List, Record, Settings, Wizard, Estados) com metadata em JSON, válidos para todos os produtos: ERP, Conta Digital, New Hub, E-commerce, Capital (Crédito), PDV, Envios e, no futuro, Checkout Admin. Matriz produto → `Menu Global` · `Produto=` → templates prováveis em `TEMPLATES_PRODUTO.md`.
+- **Organismos planejados** (sinalizados com `*` nos templates): Content Card, Form Section, Section Rail, Summary Panel, Onboarding Checklist, Dashboard Toolbar, Hero, topo simples do Page Header, modo wizard do Floating Action Bar.
+
+#### Changed
+
+- **`Table`:** nova key `12ba612d280690ef4136a91d3396da8decc1c42f` (Tabela v2, variante `seleção`); a anterior (`00db8a69…`, `striped` × `caption`) saiu da library. Listagens usam o `Dataset`.
+- **Escala de controles:** `size = big 40px · medium 36px · small 32px` no Button e Button Icon; inputs, Select, Dropdown, Context Switch, Segmented, Paginator, Tabs e List em 40px. `Checkbox` e `Radio Button` ganharam `size`.
+- **`Dropdown`:** `type = single select | multi select` e borda em todos os estados.
+- **`Context Switch`:** só o texto principal; a descrição aparece apenas nas listas.
+- **`HARNEES_TELAS.md` v3.0:** Seção 1 reescrita (zonas globais A, B0, B, C–F, G, R e camadas); limites e contextos por organismo; gate usa produto + template + JSON.
+- **Regras removidas:** alturas fixas de zona (116/72/48px), `#F1F0E8`/`#fcfbf8`, exigência de `size=small` na Zona C e label oculto do `input search` (a busca agora vive dentro do Dataset).
+- **Correções de publicação:** `Modal` (slot sem uso removido), `Chart Legend Item` (propriedade `valor` duplicada renomeada) e `Table Toolbar` (set de variante única convertido em componente).
+
+#### Pendente
+
+- **React:** `size`, tokens novos e `metadata.json` (com `allowedZones`) dos organismos só entram quando o usuário pedir; `COMPONENTES.md` segue gerado só dos 14 componentes React.
+- **`Menu Global`:** sem variante `Produto` para PDV e Checkout Admin.
+- **Organismos planejados** ainda não existem no Figma.
+- Verificar após o `build:tokens` que o `variables.css` não use os 199 tokens podados.
+
+---
+
 ## v3.23 (2026-10-16)
 
 > Skill atualizada para v3.23. Referências sincronizadas automaticamente.

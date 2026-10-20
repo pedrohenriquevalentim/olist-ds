@@ -1,8 +1,8 @@
 # Olist Design System — Wiki
 
 **Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.83`  
-**Skill:** v3.23  
-**Última atualização:** 2026-10-16  
+**Skill:** v3.24  
+**Última atualização:** 2026-10-20  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -34,10 +34,10 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 |---|---|
 | Componentes | 14 |
 | Ícones SVG | 556 |
-| Arquivos da Skill | 26 |
+| Arquivos da Skill | 27 |
 | Arquivos Figma permitidos | 1 |
 | Versão npm | 1.0.83 |
-| Versão skill | 3.23 |
+| Versão skill | 3.24 |
 
 ## Componentes
 
@@ -135,11 +135,11 @@ npm run release
 
 ## Skill Claude
 
-### Versão: v3.23
+### Versão: v3.24
 
 **Localização:** `.claude/skills/olist-ds-specialist/`
 
-### Arquivos da Skill (26 total)
+### Arquivos da Skill (27 total)
 
 **Raiz (7):**
 - `CHANGELOG.md`
@@ -150,7 +150,7 @@ npm run release
 - `figma-config.json`
 - `globals.md`
 
-**Referências (19):**
+**Referências (20):**
 - `CHECKLIST_REVISAO.md`
 - `COMPONENTES.md`
 - `CORES.md`
@@ -162,6 +162,7 @@ npm run release
 - `ICONES_CATALOGO.md`
 - `MAPA_FONTES.md`
 - `METADATA_SCHEMA.md`
+- `ORGANISMOS.md`
 - `PADROES.md`
 - `SDD_AVANCADO.md`
 - `SDD_PARA_TELA.md`
@@ -175,7 +176,7 @@ npm run release
 
 **Auto-gerados** (por `npm run build`): COMPONENTES.md, MAPA_FONTES.md, VISAO_GERAL.md (parcial)
 
-**Manuais** (não são sobrescritos): CHECKLIST_REVISAO.md, CORES.md, ESPACAMENTO.md, FIGMA_CONFIG.md, GLOSSARIO_PAPEIS_TEXTO.md, GOVERNANCA_TOKENS.md, HARNEES_TELAS.md, ICONES_CATALOGO.md, METADATA_SCHEMA.md, PADROES.md, SDD_AVANCADO.md, SDD_PARA_TELA.md, TEMPLATES_PRODUTO.md, TIPOGRAFIA.md, TOKEN_CATALOG.md, UX_WRITING.md, VISAO_GERAL.md
+**Manuais** (não são sobrescritos): CHECKLIST_REVISAO.md, CORES.md, ESPACAMENTO.md, FIGMA_CONFIG.md, GLOSSARIO_PAPEIS_TEXTO.md, GOVERNANCA_TOKENS.md, HARNEES_TELAS.md, ICONES_CATALOGO.md, METADATA_SCHEMA.md, ORGANISMOS.md, PADROES.md, SDD_AVANCADO.md, SDD_PARA_TELA.md, TEMPLATES_PRODUTO.md, TIPOGRAFIA.md, TOKEN_CATALOG.md, UX_WRITING.md, VISAO_GERAL.md
 
 ### Como Usar — Slash Commands
 
@@ -209,7 +210,7 @@ Use $olist-ds-specialist para criar a tela deste SDD:
 2. Customize → Skills → Upload → selecionar pasta da skill
 3. Iniciar conversa e usar um dos slash commands acima
 
-### Regras Críticas v3.23
+### Regras Críticas v3.24
 
 _Seção Regras Críticas não encontrada no SKILL.md_
 
@@ -374,10 +375,45 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 1. `.claude/figma-config.json` existe?
 2. `searchPriority` tem os libraryKeys corretos?
-3. Skill v3.23 instalada?
+3. Skill v3.24 instalada?
 4. O prompt inclui instrução para ler `figma-config.json` antes do Figma MCP?
 
 ## Changelog
+
+## v3.24 (2026-10-20) — organismos, templates por zonas e componentes novos
+
+### component-registry.json + globals.md + referências + figma-config.json
+
+**Arquivos modificados:** `component-registry.json`, `figma-config.json`, `globals.md`, `references/TEMPLATES_PRODUTO.md`, `references/HARNEES_TELAS.md`, `references/VISAO_GERAL.md`, `references/PADROES.md`, `cases/caso-4-figma.md`, `decisions/INDEX.md`, `decisions/ux-design/COMPONENTES_POR_ZONA.md`
+**Arquivos criados:** `references/ORGANISMOS.md`, `references/templates/{landing,landing-foco,dashboard,list,record,settings,wizard,estados}.json`
+
+#### Added
+
+- **Organismos:** `Page Header`, `Notice Bar`, `Empty State`, `Dataset`, `Floating Action Bar`, `KPI Strip` e `Chart Card`, com keys, variantes e regras em `ORGANISMOS.md` e no registry (`kind: organism`, `allowedZones`).
+- **Tabela v2 e peças:** `Table Row`, `Table Head Row`, `Table Cell`, `Table Head Cell`, `Table Toolbar`, `Status Pill`, `Column Manager`, `Column Item`.
+- **Gráficos:** `Metric`, `Chart Bar`, `Chart Line`, `Chart Donut`, `Chart Legend`, `Chart Legend Item`, `Chart Tooltip`.
+- **Outros:** `Product Switch` (uso exclusivo no Menu Global; o Product Launcher é peça interna), `Scrollbar`, `Modal`, `Progress Bar` (WIP).
+- **8 templates por zonas** (Landing, Landing foco, Dashboard, List, Record, Settings, Wizard, Estados) com metadata em JSON, válidos para todos os produtos: ERP, Conta Digital, New Hub, E-commerce, Capital (Crédito), PDV, Envios e, no futuro, Checkout Admin. Matriz produto → `Menu Global` · `Produto=` → templates prováveis em `TEMPLATES_PRODUTO.md`.
+- **Organismos planejados** (sinalizados com `*` nos templates): Content Card, Form Section, Section Rail, Summary Panel, Onboarding Checklist, Dashboard Toolbar, Hero, topo simples do Page Header, modo wizard do Floating Action Bar.
+
+#### Changed
+
+- **`Table`:** nova key `12ba612d280690ef4136a91d3396da8decc1c42f` (Tabela v2, variante `seleção`); a anterior (`00db8a69…`, `striped` × `caption`) saiu da library. Listagens usam o `Dataset`.
+- **Escala de controles:** `size = big 40px · medium 36px · small 32px` no Button e Button Icon; inputs, Select, Dropdown, Context Switch, Segmented, Paginator, Tabs e List em 40px. `Checkbox` e `Radio Button` ganharam `size`.
+- **`Dropdown`:** `type = single select | multi select` e borda em todos os estados.
+- **`Context Switch`:** só o texto principal; a descrição aparece apenas nas listas.
+- **`HARNEES_TELAS.md` v3.0:** Seção 1 reescrita (zonas globais A, B0, B, C–F, G, R e camadas); limites e contextos por organismo; gate usa produto + template + JSON.
+- **Regras removidas:** alturas fixas de zona (116/72/48px), `#F1F0E8`/`#fcfbf8`, exigência de `size=small` na Zona C e label oculto do `input search` (a busca agora vive dentro do Dataset).
+- **Correções de publicação:** `Modal` (slot sem uso removido), `Chart Legend Item` (propriedade `valor` duplicada renomeada) e `Table Toolbar` (set de variante única convertido em componente).
+
+#### Pendente
+
+- **React:** `size`, tokens novos e `metadata.json` (com `allowedZones`) dos organismos só entram quando o usuário pedir; `COMPONENTES.md` segue gerado só dos 14 componentes React.
+- **`Menu Global`:** sem variante `Produto` para PDV e Checkout Admin.
+- **Organismos planejados** ainda não existem no Figma.
+- Verificar após o `build:tokens` que o `variables.css` não use os 199 tokens podados.
+
+---
 
 ## v3.23 (2026-10-15) — calendar month
 
@@ -708,4 +744,4 @@ O `SKILL.md` original (726 linhas, 53 KB) era carregado integralmente em toda in
 
 ---
 
-*Gerado automaticamente em 2026-10-16 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-10-20 por `generate-wiki.mjs`. Não edite manualmente.*

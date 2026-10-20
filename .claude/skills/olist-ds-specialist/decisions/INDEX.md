@@ -28,7 +28,8 @@ Cada decisão referencia o arquivo da skill que governa os detalhes completos.
 | [ux-design/FLUXO_PRD_FIGMA.md](ux-design/FLUXO_PRD_FIGMA.md) | Workflow PRD → Figma e hierarquia de bibliotecas | `references/SDD_PARA_TELA.md`, `references/SDD_AVANCADO.md`, `figma-config.json` |
 | [ux-design/UX_WRITING.md](ux-design/UX_WRITING.md) | Tom de voz, copy e regras de escrita | `references/UX_WRITING.md`, `references/GLOSSARIO_PAPEIS_TEXTO.md` |
 | [ux-design/COMPONENTES_POR_ZONA.md](ux-design/COMPONENTES_POR_ZONA.md) | **Pendente** — ambiguidades de componente por zona pós-republicação (Tag vs Badge, Segmented Buttons vs Tabs, etc.) | `references/TEMPLATES_PRODUTO.md`, `references/HARNEES_TELAS.md`, `component-registry.json` |
-| **2026-08-25 — Template único** | Envios, Hub de Integração e Conta Digital (Internet Banking) passam a usar o template ERP. Removido segundo template (viewport 1440×852, gap 24px, Zonas A–E sem Filter Bar). `TEMPLATES_PRODUTO.md` v1.8 · `HARNEES_TELAS.md` v1.4. | `references/TEMPLATES_PRODUTO.md`, `references/HARNEES_TELAS.md` |
+| **2026-10-20 — Templates por zonas e organismos** | Os templates deixam de ser telas desenhadas: 8 placeholders de zonas para todos os produtos, com organismos permitidos por zona (`references/TEMPLATES_PRODUTO.md` v2.0, `references/templates/*.json`, `references/ORGANISMOS.md`). Substitui o template único ERP. | `references/TEMPLATES_PRODUTO.md` |
+| **2026-08-25 — Template único** (superado em 2026-10-20) | Envios, Hub de Integração e Conta Digital (Internet Banking) passam a usar o template ERP. Removido segundo template (viewport 1440×852, gap 24px, Zonas A–E sem Filter Bar). `TEMPLATES_PRODUTO.md` v1.8 · `HARNEES_TELAS.md` v1.4. | `references/TEMPLATES_PRODUTO.md`, `references/HARNEES_TELAS.md` |
 
 ---
 
@@ -46,4 +47,4 @@ Exemplo:
 
 ---
 
-**Última atualização:** 2026-10-16 — skill v3.23
+**Última atualização:** 2026-10-20 — skill v3.24

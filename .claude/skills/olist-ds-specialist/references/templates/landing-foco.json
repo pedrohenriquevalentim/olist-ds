@@ -1,0 +1,56 @@
+{
+  "id": "landing-foco",
+  "name": "Landing foco",
+  "purpose": "Tela sem menu para um único objetivo (primeiro uso, ativação, convite).",
+  "useWhen": [
+    "primeiro acesso a um produto",
+    "fluxo que não deve ter distrações de navegação"
+  ],
+  "doNotUseWhen": [
+    "tela do dia a dia com menu (use Landing, List ou Dashboard)"
+  ],
+  "viewport": {
+    "width": 1366,
+    "height": 768,
+    "rootPadding": "8px (shape/spacing/x1)",
+    "gap": "8px (shape/spacing/x1)"
+  },
+  "menu": false,
+  "products": "all",
+  "zones": [
+    {
+      "id": "B",
+      "name": "Topo simples",
+      "required": true,
+      "conditional": false,
+      "allowed": [
+        "page-header"
+      ],
+      "rule": "Variante de topo sem breadcrumb (voltar + título). A variante ainda não existe no Page Header: construir com o Page Header com `voltar` e sem utilitários e registrar o gap.",
+      "max": 1,
+      "note": "variante_planejada"
+    },
+    {
+      "id": "C-F",
+      "name": "Conteúdo",
+      "required": true,
+      "conditional": false,
+      "allowed": [
+        "empty-state"
+      ],
+      "rule": "Empty State `tipo=primeiro uso` ou hero de ativação. Uma ação primária por tela.",
+      "planned": [
+        "hero"
+      ]
+    }
+  ],
+  "overlays": [],
+  "modes": [],
+  "figma": {
+    "fileKey": "HeyN4w209HWh8rfpTDiwyf",
+    "page": "📐 Templates · placeholders",
+    "pageNodeId": "12045:19",
+    "frameNodeId": "12045:72",
+    "specSheetNodeId": "12046:19"
+  }
+}
