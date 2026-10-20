@@ -11,7 +11,8 @@ Você:
 2. Ler GLOSSARIO_PAPEIS_TEXTO.md
 3. Verificar se textos usam papéis corretos
 4. Verificar cores, tipografia, espaçamento
-5. Apontar desvios e sugerir correções
+5. Se for uma tela inteira: abrir TEMPLATES_PRODUTO.md + o JSON do template e conferir zonas, organismos permitidos e limites (checklist, seção 12)
+6. Apontar desvios e sugerir correções
 ```
 
-O checklist tem 9 categorias de revisão visual + acessibilidade + seção 10 de UX Writing.
+O checklist tem 12 seções: revisão visual (tipografia, cores, espaçamento, layout, componentes, estados), acessibilidade, border radius, sombras, UX Writing (seção 10), modo escuro (11) e templates e organismos (12).

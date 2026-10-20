@@ -298,7 +298,7 @@ A escala primitiva tem 7 pesos, com aliases semânticos de nome mais curto:
   não pelo valor em si
 - **doNotUseWhen:** não confunda com `shape-spacing-*` — `size` é dimensão
   de um elemento; `spacing` é distância entre elementos
-- **escala de controles (2026-10-19):** `globals-size-interaction` = 40px (big), `globals-size-inside-interaction` = 36px (medium), `globals-size-smallest` = 32px (small). Botões aceitam os três (`size` = big/medium/small); inputs, select, dropdown, context switch, segmented, paginator, tabs e list ficam em 40px; Toggle, Chip, Badge, Tooltip e Avatar em 32px; Product Switch em 52px (`product-switch-size-height`). O `TOKEN_CATALOG.md` ainda pode mostrar 48/40/32 até ser regenerado (`npm run build:tokens` + `sync:skill`).
+- **escala de controles (2026-10-19):** `globals-size-interaction` = 40px (big), `globals-size-inside-interaction` = 36px (medium), `globals-size-smallest` = 32px (small). Botões aceitam os três (`size` = big/medium/small); inputs, select, dropdown, context switch, segmented, paginator, tabs e list ficam em 40px; Toggle, Chip, Badge, Tooltip e Avatar em 32px; Product Switch em 52px (`product-switch-size-height`).
 - **note:** a escala é a mesma numericamente até 320px, mas os nomes de
   variável (`size` vs `spacing`) carregam intenção diferente — trocar um
   pelo outro no CSS funciona por acaso hoje, mas comunica errado

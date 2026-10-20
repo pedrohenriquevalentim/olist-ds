@@ -52,7 +52,7 @@ Unidade base: 4px. Todo espaçamento deve ser múltiplo de 4 — exceto
 | `--shape-size-64px` | 64px | Altura do header |
 | `--shape-size-280px` | 280px | Largura da sidebar |
 
-> **Atenção:** a altura de controle vem de `--globals-size-interaction` (40px), `--globals-size-inside-interaction` (36px) e `--globals-size-smallest` (32px). O `src/generated/variables.css` ainda reflete o export anterior (interaction = 48px) e não tem `--shape-size-36px` nem `--shape-size-52px`; eles chegam depois do próximo export de tokens + `npm run build:tokens`.
+> **Atenção:** a altura de controle vem de `--globals-size-interaction` (40px), `--globals-size-inside-interaction` (36px) e `--globals-size-smallest` (32px) — use estes, não os `--shape-size-*` diretos.
 
 ## Padrão de Layout da Página
 

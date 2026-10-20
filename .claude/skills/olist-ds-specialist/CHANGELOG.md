@@ -24,12 +24,17 @@
 - **Regras removidas:** alturas fixas de zona (116/72/48px), `#F1F0E8`/`#fcfbf8`, exigência de `size=small` na Zona C e label oculto do `input search` (a busca agora vive dentro do Dataset).
 - **Correções de publicação:** `Modal` (slot sem uso removido), `Chart Legend Item` (propriedade `valor` duplicada renomeada) e `Table Toolbar` (set de variante única convertido em componente).
 
+#### Added (2026-10-20, pós-export de tokens)
+
+- **`scripts/generate-token-catalog.mjs`** (chamado por `npm run sync:skill`): gera `references/TOKEN_CATALOG.md` a partir de `src/generated/variables.css`, com valores resolvidos no tema claro e escuro e as famílias novas (chart, floating-action-bar, product switch/launcher, status pill, column manager, table v2, dropdown com borda). Antes o arquivo dizia "auto-gerado", mas nenhum script o gerava.
+- **`CHECKLIST_REVISAO.md`:** validado contra os tokens reais (`--button-color-primary`, `--color-background-disabled-neutral`, `--table-head-font-size` e `--table-head-font-weight` não existem e foram corrigidos), escala de controles 40/36/32, sidebar de 304px, radius por token, alvo de toque (WCAG 2.2, 24×24px) e nova seção 12 (templates e organismos).
+
 #### Pendente
 
 - **React:** `size`, tokens novos e `metadata.json` (com `allowedZones`) dos organismos só entram quando o usuário pedir; `COMPONENTES.md` segue gerado só dos 14 componentes React.
 - **`Menu Global`:** sem variante `Produto` para PDV e Checkout Admin.
 - **Organismos planejados** ainda não existem no Figma.
-- Verificar após o `build:tokens` que o `variables.css` não use os 199 tokens podados.
+- ~~Verificar após o `build:tokens` que o `variables.css` não use os 199 tokens podados.~~ Feito em 2026-10-20: tokens regenerados e `TOKEN_CATALOG.md` regenerado por `scripts/generate-token-catalog.mjs`.
 
 ---
 
