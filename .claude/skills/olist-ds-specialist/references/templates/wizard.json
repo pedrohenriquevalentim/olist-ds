@@ -1,0 +1,87 @@
+{
+  "id": "wizard",
+  "name": "Wizard",
+  "purpose": "Criação guiada em etapas, com progresso e resumo.",
+  "useWhen": [
+    "fluxo de criação com várias decisões (nova etiqueta, solicitação de crédito, conectar canal)"
+  ],
+  "doNotUseWhen": [
+    "edição simples de um registro (use Record)"
+  ],
+  "viewport": {
+    "width": 1366,
+    "height": 768,
+    "rootPadding": "8px (shape/spacing/x1)",
+    "gap": "8px (shape/spacing/x1)"
+  },
+  "menu": false,
+  "products": "all",
+  "zones": [
+    {
+      "id": "B",
+      "name": "Topo simples",
+      "required": true,
+      "conditional": false,
+      "allowed": [
+        "page-header"
+      ],
+      "rule": "Variante de topo sem breadcrumb (voltar + título). A variante ainda não existe no Page Header: construir com o Page Header com `voltar` e sem utilitários e registrar o gap.",
+      "max": 1,
+      "note": "variante_planejada"
+    },
+    {
+      "id": "C",
+      "name": "Progresso",
+      "required": true,
+      "conditional": false,
+      "allowed": [
+        "stepper"
+      ],
+      "rule": "Stepper horizontal no topo do conteúdo.",
+      "max": 1
+    },
+    {
+      "id": "D-F",
+      "name": "Etapa",
+      "required": true,
+      "conditional": false,
+      "allowed": [],
+      "rule": "Uma etapa por vez, com formulário.",
+      "planned": [
+        "form-section"
+      ]
+    },
+    {
+      "id": "G",
+      "name": "Lateral",
+      "required": false,
+      "conditional": false,
+      "allowed": [],
+      "rule": "Resumo do que já foi preenchido.",
+      "planned": [
+        "summary-panel"
+      ],
+      "max": 1
+    }
+  ],
+  "overlays": [
+    {
+      "id": "action-footer",
+      "name": "Action Footer (Voltar/Avançar)",
+      "allowed": [
+        "floating-action-bar"
+      ],
+      "mode": "wizard",
+      "status": "planejado",
+      "placement": "rodapé, centralizado, horizontal; o modo wizard ainda não existe no Floating Action Bar"
+    }
+  ],
+  "modes": [],
+  "figma": {
+    "fileKey": "HeyN4w209HWh8rfpTDiwyf",
+    "page": "📐 Templates · placeholders",
+    "pageNodeId": "12045:19",
+    "frameNodeId": "12045:294",
+    "specSheetNodeId": "12046:19"
+  }
+}

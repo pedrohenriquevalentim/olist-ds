@@ -1,0 +1,113 @@
+{
+  "id": "record",
+  "name": "Record",
+  "purpose": "Detalhe e edição de um registro, com abas e resumo lateral.",
+  "useWhen": [
+    "ver ou editar um pedido, cliente, produto ou contrato"
+  ],
+  "doNotUseWhen": [
+    "listar vários registros (use List)"
+  ],
+  "viewport": {
+    "width": 1366,
+    "height": 768,
+    "rootPadding": "8px (shape/spacing/x1)",
+    "gap": "8px (shape/spacing/x1)"
+  },
+  "menu": true,
+  "products": "all",
+  "zones": [
+    {
+      "id": "A",
+      "name": "Menu Global",
+      "required": true,
+      "conditional": false,
+      "allowed": [
+        "menu-global"
+      ],
+      "rule": "Sidebar fixa de 304px; instância de `menu-global` com a prop `Produto` do produto da tela. Nunca outro menu.",
+      "max": 1
+    },
+    {
+      "id": "B0",
+      "name": "Aviso",
+      "required": false,
+      "conditional": true,
+      "allowed": [
+        "notice-bar"
+      ],
+      "rule": "Só renderiza se houver aviso; sem espaço reservado quando ausente. Dispensar sempre com X.",
+      "max": 1
+    },
+    {
+      "id": "B",
+      "name": "Page Header",
+      "required": true,
+      "conditional": false,
+      "allowed": [
+        "page-header"
+      ],
+      "rule": "Breadcrumb, título, descrição e ações. No máximo 1 ação primária. Sem logo do produto ou da Olist.",
+      "max": 1
+    },
+    {
+      "id": "D",
+      "name": "Abas",
+      "required": false,
+      "conditional": false,
+      "allowed": [
+        "tabs"
+      ],
+      "rule": "Page Tabs: o componente `tabs` do DS. Nunca Segmented Buttons.",
+      "max": 1
+    },
+    {
+      "id": "C-F",
+      "name": "Conteúdo",
+      "required": true,
+      "conditional": false,
+      "allowed": [
+        "dataset"
+      ],
+      "rule": "Seções do registro. Dataset só para tabela relacionada.",
+      "planned": [
+        "form-section"
+      ]
+    },
+    {
+      "id": "G",
+      "name": "Lateral",
+      "required": false,
+      "conditional": false,
+      "allowed": [],
+      "rule": "Âncoras ou resumo do registro.",
+      "planned": [
+        "section-rail",
+        "summary-panel"
+      ],
+      "max": 1
+    }
+  ],
+  "overlays": [
+    {
+      "id": "action-footer",
+      "name": "Action Footer (alterações)",
+      "allowed": [
+        "floating-action-bar"
+      ],
+      "mode": "alterações",
+      "placement": "rodapé, centralizado, horizontal; aparece na 1ª edição do formulário (salvar e descartar)"
+    }
+  ],
+  "modes": [
+    "âncoras",
+    "abas"
+  ],
+  "figma": {
+    "fileKey": "HeyN4w209HWh8rfpTDiwyf",
+    "page": "📐 Templates · placeholders",
+    "pageNodeId": "12045:19",
+    "frameNodeId": "12045:196",
+    "specSheetNodeId": "12046:19"
+  }
+}

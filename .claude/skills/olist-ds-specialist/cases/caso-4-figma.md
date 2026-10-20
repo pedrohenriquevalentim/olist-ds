@@ -10,7 +10,7 @@ Você:
 1. Ler VISAO_GERAL.md
 2. Ler figma-config.json (libraryKeys, searchPriority, blockedLibraries)
 3. Ler FIGMA_CONFIG.md (workflow de busca e import)
-4. Ler TEMPLATES_PRODUTO.md (zonas de layout)
+4. Ler TEMPLATES_PRODUTO.md (produto → template → zonas) e o JSON do template escolhido em `references/templates/`; ler ORGANISMOS.md (organismos permitidos por zona)
 5. Ler HARNEES_TELAS.md (restrições executáveis)
 6. Ler SDD_PARA_TELA.md + SDD_AVANCADO.md (se aplicável)
 7. Ler GLOSSARIO_PAPEIS_TEXTO.md (nomenclatura de layers)

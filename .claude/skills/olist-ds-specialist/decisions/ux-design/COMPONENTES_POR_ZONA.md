@@ -1,5 +1,7 @@
 # Decisão UX/Design: Componentes por Zona nos Templates de Produto
 
+> **Atualização 2026-10-20:** os templates passaram a ser placeholders de zonas por organismo (`references/TEMPLATES_PRODUTO.md` v2.0 e `references/templates/*.json`). As referências a "Zona C/D/E/F" do template ERP abaixo são **históricas**; a regra vigente de componentes por zona está nos JSONs dos templates e em `references/ORGANISMOS.md`.
+
 **Categoria:** UX/Design
 **Status:** Parcialmente resolvida — item 1 confirmado em 2026-07-04, itens 2-5 seguem pendentes
 **Skill de referência:** `references/TEMPLATES_PRODUTO.md`, `references/HARNEES_TELAS.md`, `component-registry.json`

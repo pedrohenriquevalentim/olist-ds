@@ -1,0 +1,100 @@
+{
+  "id": "dashboard",
+  "name": "Dashboard",
+  "purpose": "Visão analítica: indicadores e gráficos de um período.",
+  "useWhen": [
+    "acompanhar métricas, vendas, saldo ou desempenho"
+  ],
+  "doNotUseWhen": [
+    "operar uma coleção de registros (use List)",
+    "detalhe de um registro (use Record)"
+  ],
+  "viewport": {
+    "width": 1366,
+    "height": 768,
+    "rootPadding": "8px (shape/spacing/x1)",
+    "gap": "8px (shape/spacing/x1)"
+  },
+  "menu": true,
+  "products": "all",
+  "zones": [
+    {
+      "id": "A",
+      "name": "Menu Global",
+      "required": true,
+      "conditional": false,
+      "allowed": [
+        "menu-global"
+      ],
+      "rule": "Sidebar fixa de 304px; instância de `menu-global` com a prop `Produto` do produto da tela. Nunca outro menu.",
+      "max": 1
+    },
+    {
+      "id": "B0",
+      "name": "Aviso",
+      "required": false,
+      "conditional": true,
+      "allowed": [
+        "notice-bar"
+      ],
+      "rule": "Só renderiza se houver aviso; sem espaço reservado quando ausente. Dispensar sempre com X.",
+      "max": 1
+    },
+    {
+      "id": "B",
+      "name": "Page Header",
+      "required": true,
+      "conditional": false,
+      "allowed": [
+        "page-header"
+      ],
+      "rule": "Breadcrumb, título, descrição e ações. No máximo 1 ação primária. Sem logo do produto ou da Olist.",
+      "max": 1
+    },
+    {
+      "id": "C",
+      "name": "Dashboard Toolbar",
+      "required": false,
+      "conditional": false,
+      "allowed": [],
+      "rule": "Período e filtros globais do painel.",
+      "planned": [
+        "dashboard-toolbar"
+      ],
+      "max": 1
+    },
+    {
+      "id": "D",
+      "name": "Indicadores",
+      "required": true,
+      "conditional": false,
+      "allowed": [
+        "kpi-strip"
+      ],
+      "rule": "KPI Strip com 3, 4 ou 6 métricas.",
+      "max": 1
+    },
+    {
+      "id": "E",
+      "name": "Gráficos",
+      "required": true,
+      "conditional": false,
+      "allowed": [
+        "chart-card"
+      ],
+      "rule": "Chart Card em grade; cada card usa um chart bar, line ou donut com legenda.",
+      "planned": [
+        "content-card"
+      ]
+    }
+  ],
+  "overlays": [],
+  "modes": [],
+  "figma": {
+    "fileKey": "HeyN4w209HWh8rfpTDiwyf",
+    "page": "📐 Templates · placeholders",
+    "pageNodeId": "12045:19",
+    "frameNodeId": "12045:93",
+    "specSheetNodeId": "12046:19"
+  }
+}

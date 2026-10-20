@@ -119,7 +119,8 @@ Para caminhos dos arquivos, leia `MAPA_FONTES.md`.
 |---|---|---|
 | **VISAO_GERAL.md** | Este arquivo — mapa de navegação | Sempre primeiro |
 | **FIGMA_CONFIG.md** | libraryKeys, componentKeys, workflow de busca e import | **ANTES** de usar `search_design_system` |
-| **TEMPLATES_PRODUTO.md** | Zonas de layout por produto (ERP, Envios, Hub, Conta Digital) | **Antes de criar telas no Figma** |
+| **TEMPLATES_PRODUTO.md** + `templates/*.json` | 8 templates de zonas (válidos para todos os produtos) e organismos permitidos por zona | **Antes de criar telas** |
+| **ORGANISMOS.md** | Catálogo de organismos (Page Header, Notice Bar, Dataset…), regras e organismos planejados | **Antes de preencher uma zona** |
 | **HARNEES_TELAS.md** | Restrições executáveis por zona, gate pré-construção, limites de componentes | **ANTES** de criar qualquer frame no Figma |
 | **CORES.md** | Paleta de cores, regras, DO/DON'T | Ao escolher cores |
 | **TIPOGRAFIA.md** | Tokens de tipografia (tamanho, peso, altura) | Ao estilizar texto |

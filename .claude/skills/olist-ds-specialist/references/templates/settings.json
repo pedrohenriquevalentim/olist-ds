@@ -1,0 +1,84 @@
+{
+  "id": "settings",
+  "name": "Settings",
+  "purpose": "Configurações com menu próprio e formulário em coluna.",
+  "useWhen": [
+    "preferências, integrações e dados da conta"
+  ],
+  "doNotUseWhen": [
+    "dados operacionais (use List ou Record)"
+  ],
+  "viewport": {
+    "width": 1366,
+    "height": 768,
+    "rootPadding": "8px (shape/spacing/x1)",
+    "gap": "8px (shape/spacing/x1)"
+  },
+  "menu": true,
+  "products": "all",
+  "zones": [
+    {
+      "id": "A",
+      "name": "Menu Global · Configurações",
+      "required": true,
+      "conditional": false,
+      "allowed": [
+        "menu-global"
+      ],
+      "rule": "Menu Global do produto no modo Configurações (`Produto=Configuracoes`), com o menu secundário de configurações.",
+      "max": 1
+    },
+    {
+      "id": "B0",
+      "name": "Aviso",
+      "required": false,
+      "conditional": true,
+      "allowed": [
+        "notice-bar"
+      ],
+      "rule": "Só renderiza se houver aviso; sem espaço reservado quando ausente. Dispensar sempre com X.",
+      "max": 1
+    },
+    {
+      "id": "B",
+      "name": "Page Header",
+      "required": true,
+      "conditional": false,
+      "allowed": [
+        "page-header"
+      ],
+      "rule": "Breadcrumb, título, descrição e ações. No máximo 1 ação primária. Sem logo do produto ou da Olist.",
+      "max": 1
+    },
+    {
+      "id": "C-F",
+      "name": "Formulário",
+      "required": true,
+      "conditional": false,
+      "allowed": [],
+      "rule": "Coluna de até 800px com seções de formulário.",
+      "planned": [
+        "form-section"
+      ]
+    }
+  ],
+  "overlays": [
+    {
+      "id": "action-footer",
+      "name": "Action Footer (alterações)",
+      "allowed": [
+        "floating-action-bar"
+      ],
+      "mode": "alterações",
+      "placement": "rodapé, centralizado, horizontal; aparece na 1ª edição do formulário (salvar e descartar)"
+    }
+  ],
+  "modes": [],
+  "figma": {
+    "fileKey": "HeyN4w209HWh8rfpTDiwyf",
+    "page": "📐 Templates · placeholders",
+    "pageNodeId": "12045:19",
+    "frameNodeId": "12045:255",
+    "specSheetNodeId": "12046:19"
+  }
+}

@@ -1,7 +1,7 @@
 # Harness de Construção de Telas
 
-**Versão:** 2.0  
-**Última atualização:** 2026-09-09  
+**Versão:** 3.0  
+**Última atualização:** 2026-10-20 (v3.0 — Seção 1 reescrita para o modelo de zonas por organismo dos 8 templates; limites e contextos atualizados; Dataset substitui montagem solta de tabela)  
 **Leia após:** `TEMPLATES_PRODUTO.md`  
 **Leia antes de:** criar qualquer frame via `use_figma`
 
@@ -254,9 +254,9 @@ Execute este gate antes de criar qualquer frame. Se qualquer item falhar, **reso
 
 ```
 [ ] 0. Protocolo de Inicialização de Arquivo (Seção 0) concluído — arquivo criado, páginas configuradas (☀️ Bom dia · Cover · Telas), sentinel importado, get_libraries e get_variable_defs passando? **BLOQUEANTE**
-[ ] 1. Template identificado (erp — único template para todos os produtos)?
-[ ] 2. Todas as zonas necessárias mapeadas pelo template?
-[ ] 3. Padrão de página da Zona D (Content Area) identificado (Tabela | Form | Dashboard | Detalhe | Empty)?
+[ ] 1. Produto e template identificados (um dos 8 templates de `TEMPLATES_PRODUTO.md`, com o JSON do template aberto)?
+[ ] 2. Todas as zonas do template mapeadas, cada uma com os organismos permitidos (`allowed`) e os `planned` sinalizados?
+[ ] 3. Padrão de página da zona de conteúdo (C–F) identificado (Listagem | Formulário | Dashboard | Detalhe | Estado)?
 [ ] 4. Componentes necessários têm componentKey válido nas libraries autorizadas?
 [ ] 4b. Nenhum componentKey escolhido veio de um resultado com name iniciado por "." (componente interno de construção — ver FIGMA_CONFIG.md)?
 [ ] 5. Nenhuma regra de limite por tela será violada (ver Seção 2)?
@@ -272,33 +272,31 @@ Execute este gate antes de criar qualquer frame. Se qualquer item falhar, **reso
 
 ## Seção 1 — Harness de Zona
 
-Define o que pode e **não pode** entrar em cada zona do template.  
-A coluna "Proibido" é exaustiva para os casos mais comuns — outros casos devem ser consultados com o usuário.
+Define o que pode e **não pode** entrar em cada zona. A estrutura vem dos 8 templates (`TEMPLATES_PRODUTO.md` e `references/templates/<template>.json`); o JSON do template tem precedência sobre esta tabela.
 
-### Template: ERP (`viewport: 1366 × 768px`)
+### Zonas globais (viewport `1366 × 768px`, todos os produtos)
 
-| Zona | Nome | Altura | Pode conter | Não pode conter |
-|---|---|---|---|---|
-| **A** | Menu Global | 304px largura, 752px altura | `menu-global` com `Produto=ERP` (instância real) | Qualquer outro componente. Menu é SEMPRE `menu-global` (`menu erp` removido do DS). |
-| **B** | Top Bar + Título | 116px | `breadcrumb` (esquerda do nav header) + `button` secondary × N + `button` primary × 1 (action bar direita, `size=small`); abaixo: título H1 + subtítulo (text styles) | Inputs, formulários, tabelas, cards, badges soltos, ilustrações; `button size=big` ou `size=medium` |
-| **C** | Filter Bar | 72px | `input search` (460px fixo, label oculto) + `button` secondary/tertiary × N `size=small` como filtros rápidos | `tag` como filtro ativo nesta zona; `button` primary; `heading`; label visível no input search |
-| **D** | Tabs | 48px | `tabs` (componente DS real, instância) + `button` secondary (ação contextual) + `button icon` (toggle de modo) | `Segmented Buttons`, qualquer input, breadcrumb, CTAs primários. **Zona D é opcional** — incluir só quando houver sub-navegação |
-| **E** | Content Area | flex | Um padrão de página (ver Seção 3): Tabela (`table`), Form, Dashboard, Detalhe ou Empty State; `card`s dentro do padrão | Breadcrumb, elementos de navegação, CTAs primários soltos; frames primitivos no lugar de `TableCellExtended` |
-| **F** | Bottom Bar | 72px | `Paginator` + text styles para totais | Botões de ação, formulários, conteúdo editorial. **Zona F é opcional** — só aparece com tabelas de múltiplas páginas |
+| Zona | Nome | Pode conter | Não pode conter |
+|---|---|---|---|
+| **A** | Menu Global | `menu-global` com a prop `Produto` do produto da tela (instância real; 304px de largura) | Qualquer outro componente. Menu é SEMPRE `menu-global`. Ausente no Landing foco e no Wizard. |
+| **B0** | Aviso | `notice-bar` (máx. 1) | Qualquer outro componente. Condicional: sem espaço reservado quando não há aviso. |
+| **B** | Page Header | `page-header` (instância; máx. 1) | Breadcrumb, título ou ações montados com frames soltos; logo do produto ou da Olist; mais de 1 ação primária |
+| **C–F** | Conteúdo | Os organismos do template (ver JSON): `dataset`, `kpi-strip`, `chart-card`, `empty-state`, `tabs`, `stepper`; `card` dentro do padrão | Tabela, toolbar ou paginação montadas com frames soltos; CTAs primários soltos; elementos de navegação fora do Page Header e do Menu |
+| **G** | Lateral | Âncoras ou resumo (organismos planejados) | Conteúdo principal da página |
+| **R** | Rodapé global | `notice-bar` (máx. 1) | Qualquer outro componente. Condicional. |
+| camadas | Camadas flutuantes | `floating-action-bar` (modo conforme o fluxo), `drawer` + `overlay` | Ocupar zona ou empurrar o layout |
 
-**Regras específicas ERP (atualizadas 2026-08-29):**
-- Frame raiz (`1366×768`): `padding: 8px` em todos os lados · `fills: #F1F0E8` · `gap: 8px` entre Zona A e Container
-- Container (Zonas B–F): `cornerRadius: 12px` · `fills: #fcfbf8` · gap `0` entre zonas
-- Zona B: `topLeftRadius: 12` · `topRightRadius: 12` · bottom radii: `0`
-- Zona F: `bottomLeftRadius: 12` · `bottomRightRadius: 12` · top radii: `0`; quando ausente, Zona E recebe `bottomLeft/bottomRight: 12`
-- **Todas as zonas — e todos os frames sem exceção:** `clipsContent: false` · `strokes: []`
-- **Espaçamento entre elementos:** usar `itemSpacing` (gap) com múltiplo de 4px — **nunca frame vazio como spacer**
-- Zona A: componente `menu-global` com `Produto=ERP`, resize para `304×752px`
-- Zona B é dividida internamente: `nav header` (47px) + `page title` (49px) = 116px total; botões sempre `size=small`
-- Zona C: `input search` com layer `"label"` setado `visible = false` após `appendChild`; botões sempre `size=small`
-- `breadcrumb` na Zona B: instância real do componente DS (`component-registry.json`) — nunca construir com texto solto
-- `tabs` na Zona D: componente DS real (não `Segmented Buttons`) — confirmado no frame Figma `10170:11866`
-- Zona E (tabela): usar o component set `table` (`00db8a692d897a905331b50040e4c21e30e531e1`; `striped` × `caption`) — nunca células `.[base] table cell` isoladas ou frames primitivos
+**Regras de layout (todas as zonas):**
+- Frame raiz `1366×768`: padding e gap `shape/spacing/x1` (8px) · fill `color/background/surface/system`
+- Zonas de conteúdo: fill `color/background/surface/container` · raio `shape/border radius/x1_5` · sem stroke
+- **Todo frame, sem exceção:** `clipsContent: false` · `strokes: []` nos frames de zona
+- **Espaçamento entre elementos:** `itemSpacing` (gap) com múltiplo de 4px — **nunca frame vazio como spacer**
+- Altura de zona vem do organismo (hug); não fixar alturas de zona
+- No Page Header, ações em `size=small`; nos demais organismos vale o `size` do próprio organismo
+- `breadcrumb` só dentro do Page Header (instância do DS)
+- `tabs` (componente DS) para sub-navegação no Record — nunca `Segmented Buttons`
+- Listagens: **usar o `dataset` inteiro** (nunca `table`, `table toolbar` ou `paginator` soltos); tabela dentro de um Record usa o set `table` (`12ba612d280690ef4136a91d3396da8decc1c42f`), sem células `.[base]` isoladas
+- Organismo marcado `planned` no JSON do template **não existe**: sinalizar como "— custom" e registrar o gap (Seção 4)
 
 ---
 
@@ -313,50 +311,57 @@ Define limites quantitativos e contextos válidos para cada componente.
 | `Button` — variante primary | **1** | Hierarquia de CTA. Mais de 1 primary = falha crítica. |
 | `Heading` (papel de texto) | **1** | Um único título de página por tela. |
 | `Menu Global` | **1** | Sempre na Zona A. Nunca duplicar. |
-| `Input Search` | **1** | Uma busca por tela. Zona C (Filter Bar). |
-| `tabs` | **1** | Opcional. Zona D, sub-navegação. |
-| `Breadcrumb` | **1** | Sempre na Zona B. |
+| `Page Header` | **1** | Sempre na Zona B. |
+| `Notice Bar` | **1 por slot** | B0, rodapé global (R) ou inline; só quando houver aviso. |
+| `Dataset` | **1** | Zona C–F do List. Traz a própria busca (toolbar): não somar `Input Search`. |
+| `KPI Strip` | **1** | Zona D do Dashboard. |
+| `Floating Action Bar` | **1** | Camada; um modo por vez. |
+| `Input Search` | **1** | Uma busca por tela (a do Dataset conta). |
+| `tabs` | **1** | Opcional. Zona D do Record. |
+| `Breadcrumb` | **1** | Só dentro do Page Header. |
 
 ### Contextos Válidos por Componente
 
-| Componente | Zonas válidas | Zonas proibidas |
+| Componente | Onde é válido | Onde é proibido |
 |---|---|---|
-| `Button` primary | B (Zona B), E sticky (Zona F) | C, D (solto fora de form/modal) |
-| `Button` secondary / icon | B, C (ícone apenas), D (dentro de padrão), E | A |
-| `Tag` / `Badge` de status | Células de tabela (Zona D), Page Header (Zona C, filtro ativo) | Zonas A, B, E; flutuando fora de contexto |
-| `Input Text`, `Input Search`, `Dropdown` | Zona C (ERP, busca), Zona D (dentro de form ou filtro de tabela) | Zonas A, B, E |
-| `Checkbox`, `Radio Button` | Zona D (dentro de tabela ou formulário) | Zonas A, B, C, E |
-| `tabs` (DS real) | Zona D — ERP (sub-navegação em abas) | Zonas A, B, C, E, F |
+| `Button` primary | Page Header (B, máx. 1), dentro de organismos (Notice Bar, Empty State, Floating Action Bar), formulários e modais | Solto no conteúdo fora de organismo, form ou modal |
+| `Button` secondary / icon | Page Header, organismos, formulários | Zona A |
+| `Tag` / `Badge` de status | Células de tabela (`table cell` tipo status), Page Header (`badge`), `status pill` na toolbar do Dataset | Zonas A e B0; flutuando fora de contexto |
+| `Input Text`, `Input Search`, `Dropdown` | Formulários (C–F do Record, Settings e Wizard); busca e filtros **dentro do `dataset`** | Zonas A, B, B0, R |
+| `Checkbox`, `Radio Button` | Tabelas (via `table row`) e formulários | Zonas A, B, B0, R |
+| `tabs` (DS real) | Zona D do Record (sub-navegação em abas) | Zonas A, B, B0, R; Segmented Buttons no lugar |
+| `Stepper` | Zona C do Wizard | Demais templates |
 | `Tooltip` | Qualquer zona, associado a um elemento interativo | Flutuando sem âncora |
-| `Logo Olist` | Zona A, embutido no `Menu Global` (todos os templates) | Zona B, C, D, E — nunca como elemento solto de zona |
-| `Breadcrumb` | Zona B | Zonas A, C, D, E, F |
+| `Logo Olist` | Zona A, embutido no `Menu Global` (todos os templates) | Fora do menu — nunca como elemento solto de zona |
+| `Breadcrumb` | Dentro do `page-header` | Qualquer outro lugar |
+| `Product Switch` | Dentro do `menu-global` | Fora do menu |
 
 ### Variantes Obrigatórias
 
 | Componente | Variante obrigatória | Observação |
 |---|---|---|
-| `Menu Global` | `produto` deve ser definido | Reflete o produto: ERP, Conta Digital, Envios, Ecommerce, Agentes de IA, Minha Conta |
-| `Button` | `size` e `variant` sempre explícitos | Nunca usar defaults implícitos |
+| `Menu Global` | `Produto` deve ser definido | Variantes: ERP, Crédito, HUB, Conta Digital, Envios, Ecommerce, Agentes de IA, Configuracoes (Settings), Menu do Usuario, Notificacoes, Central de Suporte, N0 Only. **PDV e Checkout Admin ainda não têm variante.** |
+| `Button` | `type` e `size` sempre explícitos | `type`: primary, secondary, tertiary, danger · `size`: big (40), medium (36), small (32). Nunca usar defaults implícitos |
 | `Tag` | `color` sempre mapeado ao status semântico | Ver `CORES.md` — Mapa de Cores para Status |
 
 ---
 
-## Seção 3 — Harness de Padrão de Página (Zona D)
+## Seção 3 — Harness de Padrão de Página (zona de conteúdo)
 
-A Zona D deve sempre implementar um dos 5 padrões canônicos. Combinações fora desta lista requerem aprovação explícita do usuário.
+A zona de conteúdo (C–F) deve sempre implementar um dos 5 padrões canônicos, que correspondem aos templates (Listagem = List, Formulário = Record/Settings/Wizard, Dashboard, Detalhe = Record, Estado = Estados/Landing foco). Combinações fora desta lista requerem aprovação explícita do usuário.
 
 | Padrão | Quando usar | Estados obrigatórios |
 |---|---|---|
-| **Tabela de Dados** | Listagem de recursos com filtros e ações | Padrão, Carregando (skeleton), Vazio, Erro, Com seleção |
+| **Listagem** (`dataset`) | Listagem de recursos com busca, filtros e ações | Os 7 estados do Dataset: conteúdo, com seleção, colunas, carregando, primeiro uso, sem resultado, erro |
 | **Formulário** | Criar ou editar um recurso | Vazio (criar), Preenchido (editar), Erros de validação, Enviando (loading) |
 | **Dashboard** | Visão geral de métricas | Padrão, Carregando (skeleton de cards), Sem dados |
 | **Detalhe** | Visualizar um recurso único com tabs | Padrão, Carregando, Erro de carregamento |
 | **Empty State** | Tela inteira sem conteúdo ainda | Ilustração + Heading + Subheading + 1 CTA |
 
-**Proibido na Zona D:**
+**Proibido na zona de conteúdo:**
 - Layout livre sem padrão canônico
 - Mistura de padrões (ex: tabela + formulário lado a lado sem modal/drawer)
-- `Segmented Buttons` em qualquer zona — usar `tabs` (componente DS real) na Zona D do ERP
+- `Segmented Buttons` como sub-navegação de página — usar `tabs` (componente DS real) na Zona D do Record
 
 ---
 
@@ -469,8 +474,8 @@ Nomes de layers são parte do harness — layers mal nomeados indicam construç�
 
 | Tipo de layer | Formato | Exemplo |
 |---|---|---|
-| Frame de template | `[Produto]/[NomeTela]` | `ERP/Pedidos — Lista` |
-| Zona | `Zona [Letra] — [Nome]` | `Zona C — Page Header` |
+| Frame de tela | `[Produto]/[NomeTela]` | `ERP/Pedidos — Lista` |
+| Zona | `Zona [id] — [Nome]` (id do JSON do template) | `Zona B — Page Header`, `Zona C–F — Dataset` |
 | Instância de componente DS | Nome exato do componente | `Button`, `Menu Global`, `Tag` |
 | Componente custom | `[Categoria]/[Nome] — custom` | `Card/SummaryCard — custom` |
 | Frame de padrão | `Padrão/[Tipo]` | `Padrão/Tabela`, `Padrão/Form` |
@@ -548,8 +553,8 @@ Como prefere prosseguir?
 
 | Se precisar de | Leia |
 |---|---|
-| Dimensões e zonas dos templates | `TEMPLATES_PRODUTO.md` |
-| Componentes recomendados por zona (por template) | `TEMPLATES_PRODUTO.md` → seção "Componentes Recomendados por Zona" |
+| Zonas e organismos dos templates | `TEMPLATES_PRODUTO.md` e `references/templates/<template>.json` |
+| Catálogo e regras dos organismos | `ORGANISMOS.md` |
 | componentKeys e libraries | `FIGMA_CONFIG.md` |
 | Tokens de cor para primitivos custom | `CORES.md` |
 | Tokens de tipografia para texto custom | `TIPOGRAFIA.md` |

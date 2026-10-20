@@ -1,0 +1,109 @@
+{
+  "id": "list",
+  "name": "List",
+  "purpose": "Listagem de registros com busca, ordenação, filtros, status, seleção em lote e paginação.",
+  "useWhen": [
+    "catálogo, pedidos, cadastros ou qualquer coleção em massa"
+  ],
+  "doNotUseWhen": [
+    "detalhe de um registro (use Record)",
+    "visão analítica (use Dashboard)"
+  ],
+  "viewport": {
+    "width": 1366,
+    "height": 768,
+    "rootPadding": "8px (shape/spacing/x1)",
+    "gap": "8px (shape/spacing/x1)"
+  },
+  "menu": true,
+  "products": "all",
+  "zones": [
+    {
+      "id": "A",
+      "name": "Menu Global",
+      "required": true,
+      "conditional": false,
+      "allowed": [
+        "menu-global"
+      ],
+      "rule": "Sidebar fixa de 304px; instância de `menu-global` com a prop `Produto` do produto da tela. Nunca outro menu.",
+      "max": 1
+    },
+    {
+      "id": "B0",
+      "name": "Aviso",
+      "required": false,
+      "conditional": true,
+      "allowed": [
+        "notice-bar"
+      ],
+      "rule": "Só renderiza se houver aviso; sem espaço reservado quando ausente. Dispensar sempre com X.",
+      "max": 1
+    },
+    {
+      "id": "B",
+      "name": "Page Header",
+      "required": true,
+      "conditional": false,
+      "allowed": [
+        "page-header"
+      ],
+      "rule": "Breadcrumb, título, descrição e ações. No máximo 1 ação primária. Sem logo do produto ou da Olist.",
+      "max": 1
+    },
+    {
+      "id": "C-F",
+      "name": "Dataset",
+      "required": true,
+      "conditional": false,
+      "allowed": [
+        "dataset"
+      ],
+      "rule": "Organismo único da zona: toolbar + tabela + paginação. Não montar toolbar ou tabela soltas.",
+      "max": 1,
+      "note": "estados: conteúdo, com seleção, colunas, carregando, primeiro uso, sem resultado, erro"
+    },
+    {
+      "id": "R",
+      "name": "Rodapé global",
+      "required": false,
+      "conditional": true,
+      "allowed": [
+        "notice-bar"
+      ],
+      "rule": "Aviso de página inteira, no pé da página. 0–1.",
+      "max": 1
+    }
+  ],
+  "overlays": [
+    {
+      "id": "action-footer",
+      "name": "Action Footer (seleção)",
+      "allowed": [
+        "floating-action-bar"
+      ],
+      "mode": "seleção",
+      "placement": "rodapé, centralizado, horizontal; aparece com ≥1 item marcado e sobrepõe o conteúdo sem empurrar o layout"
+    },
+    {
+      "id": "detail-drawer",
+      "name": "Drawer de detalhe",
+      "allowed": [
+        "drawer",
+        "overlay"
+      ],
+      "placement": "direita, sobre todo o template"
+    }
+  ],
+  "modes": [
+    "com Drawer",
+    "worklist"
+  ],
+  "figma": {
+    "fileKey": "HeyN4w209HWh8rfpTDiwyf",
+    "page": "📐 Templates · placeholders",
+    "pageNodeId": "12045:19",
+    "frameNodeId": "12045:146",
+    "specSheetNodeId": "12046:19"
+  }
+}
