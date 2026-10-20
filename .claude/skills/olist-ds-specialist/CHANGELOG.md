@@ -29,6 +29,8 @@
 - **`scripts/generate-token-catalog.mjs`** (chamado por `npm run sync:skill`): gera `references/TOKEN_CATALOG.md` a partir de `src/generated/variables.css`, com valores resolvidos no tema claro e escuro e as famílias novas (chart, floating-action-bar, product switch/launcher, status pill, column manager, table v2, dropdown com borda). Antes o arquivo dizia "auto-gerado", mas nenhum script o gerava.
 - **`CHECKLIST_REVISAO.md`:** validado contra os tokens reais (`--button-color-primary`, `--color-background-disabled-neutral`, `--table-head-font-size` e `--table-head-font-weight` não existem e foram corrigidos), escala de controles 40/36/32, sidebar de 304px, radius por token, alvo de toque (WCAG 2.2, 24×24px) e nova seção 12 (templates e organismos).
 
+- **Botão small com mais respiro (2026-10-20):** `button/spacing/padding-small` passou de 8px para 12px (alias `shape/spacing/x1_5`), para o texto não ficar colado nas bordas. Novo token `button/spacing/padding-icon-small` (8px) mantém o `button icon` small e o botão só com ícone em 32×32. Medido no Figma: sem novos estouros em Page Header, tabela, toolbar, Notice Bar, Empty State e Toast. `variables.css` e `TOKEN_CATALOG.md` refletem o novo valor só depois do próximo export + `npm run build:tokens` + `sync:skill`.
+
 #### Pendente
 
 - **React:** `size`, tokens novos e `metadata.json` (com `allowedZones`) dos organismos só entram quando o usuário pedir; `COMPONENTES.md` segue gerado só dos 14 componentes React.

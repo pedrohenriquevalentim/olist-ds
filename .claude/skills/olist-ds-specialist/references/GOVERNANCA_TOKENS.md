@@ -385,7 +385,7 @@ partir de tokens semânticos soltos.
 
 | Família | purpose | useWhen | doNotUseWhen |
 |---|---|---|---|
-| `button-*` | 3 variantes (primary/secondary/tertiary) × 4 estados | Botões de ação | Não use `button-*` para link — isso é `link-*` |
+| `button-*` | 4 tipos (primary/secondary/tertiary/danger) × 4 estados × 3 tamanhos | Botões de ação | Não use `button-*` para link — isso é `link-*`. Respiro: padding horizontal 16px (big), 12px (medium) e 12px (small); botão só com ícone small usa `button-spacing-padding-icon-small` (8px, para manter 32×32); gap ícone↔texto 8px (4px no small) |
 | `segmented-button-*` | Grupo de opções exclusivas (2–3) | Sub-navegação, toggle de visualização | Não use para mais de ~4 opções — nesse caso é `Dropdown` ou `Tabs` |
 | `avatar-*` | Círculo de identificação de usuário | Foto/iniciais de pessoa | Não use para ícone de produto — isso é `Product Icon` |
 | `tag-*` | Rótulo de status (pill, 1 categoria de feedback) | Status de pedido, badge de estado | Não use para ação clicável — tag não é botão |
