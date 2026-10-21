@@ -2501,7 +2501,7 @@
       },
       "variantsSource": "Figma use_figma 2026-10-20",
       "kind": "organism",
-      "note": "Seletor de produto do menu. modo=expandido (232×52, menu aberto) e modo=compacto (40×40, só o ícone de 9 pontos, menu recolhido); em ambos o foco abre o Product Launcher (no compacto, à direita do menu). Uso EXCLUSIVO na composição do Menu. Token do compacto: product switch/size/compact (alias globals/size/interaction).",
+      "note": "Seletor de produto do menu. modo=expandido (232×52, menu aberto) e modo=compacto (40×40, só o ícone de 9 pontos, menu recolhido); em ambos o foco abre o Product Launcher (no compacto, à direita do menu). Uso EXCLUSIVO na composição do Menu. Token do compacto: product switch/size/compact (alias globals/size/interaction). Ícones do launcher: fundo na cor do produto (color/background/enabled/product <produto>) com glifo branco.",
       "addedAt": "2026-10-20"
     },
     "Scrollbar": {

@@ -164,6 +164,7 @@ Não use `brand` (feedback) quando a intenção é "ação primária" — isso �
   - **purpose:** overlay claro de hover/pressed sobre fundos de marca escura, igual nos dois temas
   - **useWhen:** controles sobre `brand 02` (Product Switch)
   - **doNotUseWhen:** superfícies neutras — use `color-background-hover-neutral`/`pressed-neutral`
+- **`color-background-enabled-product-<produto>`** (2026-10-21): fundo do ícone de cada produto (claro e escuro, ramp 500; glifo branco do `product icon theme=dark`). Contraste do glifo ≥ 3,4:1. Só no Product Launcher e no Product Switch.
 - **`color-(background|border)-(hover|selected)-product-<produto>` e `color-text-selected-product-<produto>`**
   - **purpose:** destaque de cada produto (claro e escuro), derivado das rampas `color-product-<produto>-(50…900)`
   - **produtos:** `erp`, `hub`, `pdv`, `conta`, `envios`, `ia`, `ecom`, `credito` (Checkout Admin ainda sem paleta)

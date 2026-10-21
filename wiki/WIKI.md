@@ -416,6 +416,8 @@ npm install --save-dev PACOTE --legacy-peer-deps
 
 - **Product Switch compacto (2026-10-21):** nova propriedade `modo` (expandido | compacto). O compacto (40×40, ícone de 9 pontos) serve ao menu recolhido e abre o Product Launcher à direita. Token novo `product switch/size/compact`.
 
+- **Ícones do launcher coloridos (2026-10-21):** o fundo da caixa do ícone no hero, tile e row passa a usar o novo semântico `color/background/enabled/product <produto>` (8 tokens, ramp 500) com o glifo branco (`product icon` `theme=dark`). O token neutro `product launcher/color/icon box` foi removido.
+
 #### Pendente
 
 - **React:** `size`, tokens novos e `metadata.json` (com `allowedZones`) dos organismos só entram quando o usuário pedir; `COMPONENTES.md` segue gerado só dos 14 componentes React.
