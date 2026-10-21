@@ -2482,6 +2482,10 @@
       "nodeId": "12014:47457",
       "figmaNodeId": "12014:47457",
       "variants": {
+        "modo": [
+          "expandido",
+          "compacto"
+        ],
         "state": [
           "enabled",
           "hover",
@@ -2497,7 +2501,7 @@
       },
       "variantsSource": "Figma use_figma 2026-10-20",
       "kind": "organism",
-      "note": "Seletor de produto do menu (52px). Uso EXCLUSIVO na composição do Menu Global. O estado `focused` mostra o Product Launcher aberto (hero do produto ativo, tiles dos contratados, linhas 'Conhecer' dos não ativados).",
+      "note": "Seletor de produto do menu. modo=expandido (232×52, menu aberto) e modo=compacto (40×40, só o ícone de 9 pontos, menu recolhido); em ambos o foco abre o Product Launcher (no compacto, à direita do menu). Uso EXCLUSIVO na composição do Menu. Token do compacto: product switch/size/compact (alias globals/size/interaction).",
       "addedAt": "2026-10-20"
     },
     "Scrollbar": {

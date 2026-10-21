@@ -47,4 +47,4 @@ Exemplo:
 
 ---
 
-**Última atualização:** 2026-10-20 — skill v3.24
+**Última atualização:** 2026-10-21 — skill v3.24

@@ -31,6 +31,8 @@
 
 - **Botão small com mais respiro (2026-10-20):** `button/spacing/padding-small` passou de 8px para 12px (alias `shape/spacing/x1_5`), para o texto não ficar colado nas bordas. Novo token `button/spacing/padding-icon-small` (8px) mantém o `button icon` small e o botão só com ícone em 32×32. Medido no Figma: sem novos estouros em Page Header, tabela, toolbar, Notice Bar, Empty State e Toast. `variables.css` e `TOKEN_CATALOG.md` refletem o novo valor só depois do próximo export + `npm run build:tokens` + `sync:skill`.
 
+- **Product Switch compacto (2026-10-21):** nova propriedade `modo` (expandido | compacto). O compacto (40×40, ícone de 9 pontos) serve ao menu recolhido e abre o Product Launcher à direita. Token novo `product switch/size/compact`.
+
 #### Pendente
 
 - **React:** `size`, tokens novos e `metadata.json` (com `allowedZones`) dos organismos só entram quando o usuário pedir; `COMPONENTES.md` segue gerado só dos 14 componentes React.
