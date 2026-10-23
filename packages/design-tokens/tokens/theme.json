@@ -2,16 +2,13 @@
   "light": {
     "font": {
       "family": {
-        "base": "{base:font/family/jakarta}",
-        "system": "{base:font/family/arial}"
+        "base": "{base:font/family/jakarta}"
       },
       "size": {
         "x1 (8px)": "{base:font/size/8px}",
-        "x1_25 (10px)": "{base:font/size/10px}",
         "x1_5 (12px)": "{base:font/size/12px}",
         "x1_75 (14px)": "{base:font/size/14px}",
         "x2 (16px)": "{base:font/size/16px}",
-        "x2_5 (20px)": "{base:font/size/20px}",
         "x3 (24px)": "{base:font/size/24px}",
         "x4 (32px)": "{base:font/size/32px}",
         "x5 (40px)": "{base:font/size/40px}",
@@ -20,27 +17,21 @@
         "x8 (64px)": "{base:font/size/64px}"
       },
       "weight": {
-        "xlight": "{base:font/weight/200}",
         "light": "{base:font/weight/300}",
         "regular": "{base:font/weight/400}",
         "medium": "{base:font/weight/500}",
         "sbold": "{base:font/weight/600}",
-        "bold": "{base:font/weight/700}",
-        "xbold": "{base:font/weight/800}"
+        "bold": "{base:font/weight/700}"
       },
       "line height": {
-        "x1_5 (12px)": "{base:font/line height/12px}",
         "x1_75 (14px)": "{base:font/line height/14px}",
         "x2 (16px)": "{base:font/line height/16px}",
         "x2_5 (20px)": "{base:font/line height/20px}",
         "x3 (24px)": "{base:font/line height/24px}",
-        "x3_75 (30px)": "{base:font/line height/30px}",
         "x4 (32px)": "{base:font/line height/32px}",
         "x5 (40px)": "{base:font/line height/40px}",
         "x6 (48px)": "{base:font/line height/48px}",
-        "x7  (56px)": "{base:font/line height/56px}",
-        "x8 (64px)": "{base:font/line height/64px}",
-        "x9 (72px)": "{base:font/line height/72px}"
+        "x7  (56px)": "{base:font/line height/56px}"
       }
     },
     "color": {
@@ -55,23 +46,54 @@
           "neutral": "{base:color/gray/gray 0}",
           "utility": "{base:color/gray/gray 200}",
           "transparent": "{base:color/none/transparent}",
-          "full brand": "{base:color/blue/blue 500}"
+          "full brand": "{base:color/blue/blue 500}",
+          "full negative": "{base:color/red/red 600}",
+          "product erp": "{base:color/product/erp 500}",
+          "product hub": "{base:color/product/hub 500}",
+          "product pdv": "{base:color/product/pdv 500}",
+          "product conta": "{base:color/product/conta 500}",
+          "product envios": "{base:color/product/envios 500}",
+          "product ia": "{base:color/product/ia 500}",
+          "product ecom": "{base:color/product/ecom 500}",
+          "product credito": "{base:color/product/credito 500}"
         },
         "hover": {
           "neutral": "{base:effects/hover/gray 900_4}",
           "utility": "{base:effects/hover/gray 900_24}",
           "full brand": "{base:effects/hover/brand 900_8}",
-          "neutral brand": "{base:effects/hover/brand 0_8}"
+          "neutral brand": "{base:effects/hover/brand 0_8}",
+          "full negative": "{base:effects/hover/red 900_24}",
+          "product erp": "{base:color/product/erp 50}",
+          "product hub": "{base:color/product/hub 50}",
+          "product pdv": "{base:color/product/pdv 50}",
+          "product conta": "{base:color/product/conta 50}",
+          "product envios": "{base:color/product/envios 50}",
+          "product ia": "{base:color/product/ia 50}",
+          "product ecom": "{base:color/product/ecom 50}",
+          "product credito": "{base:color/product/credito 50}",
+          "on brand": "{base:effects/pressed/gray 0_12}",
+          "negative": "{base:effects/hover/red 600_8}"
         },
         "pressed": {
           "neutral": "{base:effects/pressed/gray 900_12}",
           "utility": "{base:effects/pressed/gray 900_88}",
           "full brand": "{base:effects/pressed/brand 900_16}",
-          "neutral brand": "{base:effects/pressed/brand 500_16}"
+          "neutral brand": "{base:effects/pressed/brand 500_16}",
+          "full negative": "{base:effects/pressed/red 900_48}",
+          "on brand": "{base:effects/hover/gray 0_24}",
+          "negative": "{base:effects/pressed/red 600_16}"
         },
         "selected": {
           "neutral brand": "{base:color/blue/blue 50}",
-          "full brand": "{base:color/blue/blue 500}"
+          "full brand": "{base:color/blue/blue 500}",
+          "product erp": "{base:color/product/erp 100}",
+          "product hub": "{base:color/product/hub 100}",
+          "product pdv": "{base:color/product/pdv 100}",
+          "product conta": "{base:color/product/conta 100}",
+          "product envios": "{base:color/product/envios 100}",
+          "product ia": "{base:color/product/ia 100}",
+          "product ecom": "{base:color/product/ecom 100}",
+          "product credito": "{base:color/product/credito 100}"
         },
         "disabled": {
           "default": "{base:effects/disabled/gray 0}",
@@ -84,7 +106,8 @@
           },
           "negative": {
             "colored": "{base:color/red/red 500}",
-            "subtle": "{base:color/red/red 100}"
+            "subtle": "{base:color/red/red 100}",
+            "faint": "{base:color/red/red 50}"
           },
           "warning": {
             "colored": "{base:color/yellow/yellow 500}",
@@ -110,6 +133,10 @@
         "utility": {
           "neutral": "{base:color/gray/gray 100}",
           "unread": "{base:color/blue/blue 0}"
+        },
+        "gradient": {
+          "soft start": "{base:color/blue/blue 50}",
+          "soft end": "{base:color/cyan/cyan 50}"
         }
       },
       "border": {
@@ -125,7 +152,15 @@
         "hover": {
           "neutral": "{base:color/gray/gray 500}",
           "utility": "{base:color/gray/gray 100}",
-          "brand": "{base:color/blue/blue 400}"
+          "brand": "{base:color/blue/blue 400}",
+          "product erp": "{base:color/product/erp 200}",
+          "product hub": "{base:color/product/hub 200}",
+          "product pdv": "{base:color/product/pdv 200}",
+          "product conta": "{base:color/product/conta 200}",
+          "product envios": "{base:color/product/envios 200}",
+          "product ia": "{base:color/product/ia 200}",
+          "product ecom": "{base:color/product/ecom 200}",
+          "product credito": "{base:color/product/credito 200}"
         },
         "pressed": {
           "neutral": "{base:color/gray/gray 800}",
@@ -136,8 +171,14 @@
         },
         "selected": {
           "default": "{base:color/blue/blue 500}",
-          "utility": "{base:color/blue/blue 50}",
-          "subtle": "{base:color/blue/blue 300}"
+          "product erp": "{base:color/product/erp 500}",
+          "product hub": "{base:color/product/hub 500}",
+          "product pdv": "{base:color/product/pdv 500}",
+          "product conta": "{base:color/product/conta 500}",
+          "product envios": "{base:color/product/envios 500}",
+          "product ia": "{base:color/product/ia 500}",
+          "product ecom": "{base:color/product/ecom 500}",
+          "product credito": "{base:color/product/credito 500}"
         },
         "feedback": {
           "positive": {
@@ -154,9 +195,6 @@
           },
           "brand": {
             "subtle": "{base:color/blue/blue 800}"
-          },
-          "accent": {
-            "subtle": "{base:color/pink/pink 800}"
           },
           "neutral": {
             "subtle": "{base:color/gray/gray 800}"
@@ -176,17 +214,23 @@
         "enabled": {
           "neutral": "{base:color/gray/gray 600}",
           "on brand": "{base:color/blue/blue 0}",
-          "brand": "{base:color/blue/blue 600}"
+          "brand": "{base:color/blue/blue 600}",
+          "on negative": "{base:color/red/red 0}",
+          "negative": "{base:color/red/red 600}"
         },
         "hover": {
           "neutral": "{base:color/gray/gray 900}",
           "on brand": "{base:color/blue/blue 0}",
-          "brand": "{base:color/blue/blue 700}"
+          "brand": "{base:color/blue/blue 700}",
+          "on negative": "{base:color/red/red 0}",
+          "negative": "{base:color/red/red 700}"
         },
         "pressed": {
           "neutral": "{base:color/gray/gray 900}",
           "on brand": "{base:color/blue/blue 0}",
-          "brand": "{base:color/blue/blue 950}"
+          "brand": "{base:color/blue/blue 950}",
+          "on negative": "{base:color/red/red 0}",
+          "negative": "{base:color/red/red 800}"
         },
         "focused": {
           "neutral": "{base:color/gray/gray 900}"
@@ -196,19 +240,23 @@
         },
         "selected": {
           "neutral": "{base:color/blue/blue 600}",
-          "on brand": "{base:color/blue/blue 0}"
+          "product erp": "{base:color/product/erp 700}",
+          "product hub": "{base:color/product/hub 700}",
+          "product pdv": "{base:color/product/pdv 700}",
+          "product conta": "{base:color/product/conta 700}",
+          "product envios": "{base:color/product/envios 700}",
+          "product ia": "{base:color/product/ia 700}",
+          "product ecom": "{base:color/product/ecom 700}",
+          "product credito": "{base:color/product/credito 700}"
         },
         "feedback": {
           "positive": {
-            "colored": "{base:color/green/green 900}",
             "subtle": "{base:color/green/green 700}"
           },
           "negative": {
-            "colored": "{base:color/red/red 900}",
             "subtle": "{base:color/red/red 700}"
           },
           "warning": {
-            "colored": "{base:color/yellow/yellow 900}",
             "subtle": "{base:color/yellow/yellow 700}"
           },
           "informative": {
@@ -240,22 +288,20 @@
         "enabled": {
           "neutral": "{base:color/gray/gray 600}",
           "on brand": "{base:color/blue/blue 0}",
-          "brand": "{base:color/blue/blue 600}"
+          "brand": "{base:color/blue/blue 600}",
+          "negative": "{base:color/red/red 600}"
         },
         "hover": {
           "neutral": "{base:color/gray/gray 900}",
-          "on brand": "{base:color/blue/blue 0}",
-          "brand": "{base:color/blue/blue 700}"
+          "brand": "{base:color/blue/blue 700}",
+          "negative": "{base:color/red/red 700}"
         },
         "pressed": {
           "neutral": "{base:color/gray/gray 900}",
-          "on brand": "{base:color/blue/blue 0}",
-          "brand": "{base:color/blue/blue 950}"
+          "brand": "{base:color/blue/blue 950}",
+          "negative": "{base:color/red/red 800}"
         },
         "focused": {
-          "neutral": "{base:color/gray/gray 900}"
-        },
-        "filled": {
           "neutral": "{base:color/gray/gray 900}"
         },
         "selected": {
@@ -264,31 +310,22 @@
         },
         "feedback": {
           "positive": {
-            "colored": "{base:color/green/green 900}",
             "subtle": "{base:color/green/green 700}"
           },
           "negative": {
-            "colored": "{base:color/red/red 900}",
             "subtle": "{base:color/red/red 700}"
           },
           "warning": {
-            "colored": "{base:color/yellow/yellow 900}",
             "subtle": "{base:color/yellow/yellow 700}"
           },
           "informative": {
-            "colored": "{base:color/cyan/cyan 0}",
             "subtle": "{base:color/cyan/cyan 700}"
           },
           "brand": {
             "colored": "{base:color/blue/blue 0}",
             "subtle": "{base:color/blue/blue 700}"
           },
-          "accent": {
-            "colored": "{base:color/pink/pink 0}",
-            "subtle": "{base:color/pink/pink 700}"
-          },
           "neutral": {
-            "colored": "{base:color/gray/gray 0}",
             "subtle": "{base:color/gray/gray 700}"
           }
         },
@@ -303,35 +340,37 @@
         "red": "{base:color/red/red 500}",
         "yellow": "{base:color/yellow/yellow 500}",
         "pink": "{base:color/pink/pink 200}",
-        "blue": "{base:color/blue/blue 500}",
         "darkblue": "{base:color/blue/blue 800}"
+      },
+      "chart": {
+        "series": {
+          "1": "{base:color/blue/blue 500}",
+          "2": "{base:color/green/green 500}",
+          "3": "{base:color/pink/pink 500}",
+          "4": "{base:color/cyan/cyan 600}",
+          "5": "{base:color/yellow/yellow 700}",
+          "6": "{base:color/red/red 600}",
+          "neutral": "{base:color/gray/gray 400}"
+        },
+        "label": "{base:color/gray/gray 600}",
+        "axis": "{base:color/gray/gray 300}",
+        "grid": "{base:color/gray/gray 100}"
       }
     },
     "shape": {
       "border radius": {
         "x0 (0px)": "{base:shape/border radius/0px}",
-        "x0_25 (2px)": "{base:shape/border radius/2px}",
         "x0_5 (4px)": "{base:shape/border radius/4px}",
         "x1 (8px)": "{base:shape/border radius/8px}",
         "x1_5 (12px)": "{base:shape/border radius/12px}",
         "x2 (16px)": "{base:shape/border radius/16px}",
-        "x2_5 (20px)": "{base:shape/border radius/20px}",
         "x3 (24px)": "{base:shape/border radius/24px}",
-        "x4 (32px)": "{base:shape/border radius/32px}",
         "x5 (40px)": "{base:shape/border radius/40px}",
         "pill (9999px)": "{base:shape/border radius/9999px}"
       },
-      "border width": {
-        "x0 (0px)": "{base:shape/border width/0px}",
-        "x1 (1px)": "{base:shape/border width/1px}",
-        "x2 (2px)": "{base:shape/border width/2px}",
-        "x4 (4px)": "{base:shape/border width/4px}"
-      },
       "size": {
-        "x0 (0px)": "{base:shape/size/0px}",
         "x0_5 (4px)": "{base:shape/size/4px}",
         "x1 (8px)": "{base:shape/size/8px}",
-        "x1_5 (12px)": "{base:shape/size/12px}",
         "x2 (16px)": "{base:shape/size/16px}",
         "x3 (24px)": "{base:shape/size/24px}",
         "x4 (32px)": "{base:shape/size/32px}",
@@ -339,28 +378,24 @@
         "x6 (48px)": "{base:shape/size/48px}",
         "x7 (56px)": "{base:shape/size/56px}",
         "x8 (64px)": "{base:shape/size/64px}",
-        "x9 (72px)": "{base:shape/size/72px}",
         "x10 (80px)": "{base:shape/size/80px}",
         "x11 (88px)": "{base:shape/size/88px}",
         "x12 (96px)": "{base:shape/size/96px}",
-        "x13 (104px)": "{base:shape/size/104px}",
         "x13_5 (108px)": "{base:shape/size/108px}",
-        "x14 (112px)": "{base:shape/size/112px}",
-        "x15 (120px)": "{base:shape/size/120px}",
-        "x16 (128px)": "{base:shape/size/128px}",
-        "x17 (136px)": "{base:shape/size/136px}",
-        "x18 (144px)": "{base:shape/size/144px}",
         "x19 (152px)": "{base:shape/size/152px}",
         "x20 (160px)": "{base:shape/size/160px}",
         "x21 (168px)": "{base:shape/size/168px}",
-        "x25 (200px)": "{base:shape/size/200px}",
-        "x25_5 (204px)": "{base:shape/size/204px}",
-        "x28 (224px)": "{base:shape/size/224px}",
         "x29 (232px)": "{base:shape/size/232px}",
-        "x30 (240px)": "{base:shape/size/240px}",
         "x31 (248px)": "{base:shape/size/248px}",
         "x35 (280px)": "{base:shape/size/280px}",
-        "x40 (320px)": "{base:shape/size/320px}"
+        "x40 (320px)": "{base:shape/size/320px}",
+        "x4_5 (36px)": "{base:shape/size/36px}",
+        "x45 (360px)": "{base:shape/size/360px}",
+        "x6_5 (52px)": "{base:shape/size/52px}"
+      },
+      "border width": {
+        "x1 (1px)": "{base:shape/border width/1px}",
+        "x2 (2px)": "{base:shape/border width/2px}"
       },
       "spacing": {
         "x0 (0px)": "{base:shape/spacing/0px}",
@@ -372,28 +407,10 @@
         "x3 (24px)": "{base:shape/spacing/24px}",
         "x4 (32px)": "{base:shape/spacing/32px}",
         "x5 (40px)": "{base:shape/spacing/40px}",
-        "x6 (48px)": "{base:shape/spacing/48px}",
-        "x7 (56px)": "{base:shape/spacing/56px}",
         "x8 (64px)": "{base:shape/spacing/64px}",
-        "x9 (72px)": "{base:shape/spacing/72px}",
-        "x10 (80px)": "{base:shape/spacing/80px}",
-        "x11 (88px)": "{base:shape/spacing/88px}",
-        "x12 (96px)": "{base:shape/spacing/96px}",
-        "x13 (104px)": "{base:shape/spacing/104px}",
-        "x14 (112px)": "{base:shape/spacing/112px}",
-        "x15 (120px)": "{base:shape/spacing/120px}",
-        "x16 (128px)": "{base:shape/spacing/128px}",
-        "x17 (136px)": "{base:shape/spacing/136px}",
-        "x18 (144px)": "{base:shape/spacing/144px}",
-        "x19 (152px)": "{base:shape/spacing/152px}",
-        "x20 (160px)": "{base:shape/spacing/160px}",
-        "x25 (200px)": "{base:shape/spacing/200px}"
+        "x2_5 (20px)": "{base:shape/spacing/20px}"
       },
       "opacity": {
-        "none (0%)": "{base:shape/opacity/0%}",
-        "subtle (25%)": "{base:shape/opacity/25%}",
-        "half (50%)": "{base:shape/opacity/50%}",
-        "strong (75%)": "{base:shape/opacity/75%}",
         "full (100%)": "{base:shape/opacity/100%}"
       }
     },
@@ -406,7 +423,6 @@
       },
       "distance": {
         "x0 (0px)": "{base:effects/distance/0px}",
-        "x0_25 (2px)": "{base:effects/distance/2px}",
         "x0_5 (4px)": "{base:effects/distance/4px}",
         "x1 (8px)": "{base:effects/distance/8px}",
         "x2 (16px)": "{base:effects/distance/16px}"
@@ -425,16 +441,13 @@
   "dark": {
     "font": {
       "family": {
-        "base": "{base:font/family/jakarta}",
-        "system": "{base:font/family/arial}"
+        "base": "{base:font/family/jakarta}"
       },
       "size": {
         "x1 (8px)": "{base:font/size/8px}",
-        "x1_25 (10px)": "{base:font/size/10px}",
         "x1_5 (12px)": "{base:font/size/12px}",
         "x1_75 (14px)": "{base:font/size/14px}",
         "x2 (16px)": "{base:font/size/16px}",
-        "x2_5 (20px)": "{base:font/size/20px}",
         "x3 (24px)": "{base:font/size/24px}",
         "x4 (32px)": "{base:font/size/32px}",
         "x5 (40px)": "{base:font/size/40px}",
@@ -443,27 +456,21 @@
         "x8 (64px)": "{base:font/size/64px}"
       },
       "weight": {
-        "xlight": "{base:font/weight/200}",
         "light": "{base:font/weight/300}",
         "regular": "{base:font/weight/400}",
         "medium": "{base:font/weight/500}",
         "sbold": "{base:font/weight/600}",
-        "bold": "{base:font/weight/700}",
-        "xbold": "{base:font/weight/800}"
+        "bold": "{base:font/weight/700}"
       },
       "line height": {
-        "x1_5 (12px)": "{base:font/line height/12px}",
         "x1_75 (14px)": "{base:font/line height/14px}",
         "x2 (16px)": "{base:font/line height/16px}",
         "x2_5 (20px)": "{base:font/line height/20px}",
         "x3 (24px)": "{base:font/line height/24px}",
-        "x3_75 (30px)": "{base:font/line height/30px}",
         "x4 (32px)": "{base:font/line height/32px}",
         "x5 (40px)": "{base:font/line height/40px}",
         "x6 (48px)": "{base:font/line height/48px}",
-        "x7  (56px)": "{base:font/line height/56px}",
-        "x8 (64px)": "{base:font/line height/64px}",
-        "x9 (72px)": "{base:font/line height/72px}"
+        "x7  (56px)": "{base:font/line height/56px}"
       }
     },
     "color": {
@@ -478,23 +485,54 @@
           "neutral": "{base:color/gray/gray 900}",
           "utility": "{base:color/gray/gray 700}",
           "transparent": "{base:color/none/transparent}",
-          "full brand": "{base:color/blue/blue 500}"
+          "full brand": "{base:color/blue/blue 500}",
+          "full negative": "{base:color/red/red 600}",
+          "product erp": "{base:color/product/erp 500}",
+          "product hub": "{base:color/product/hub 500}",
+          "product pdv": "{base:color/product/pdv 500}",
+          "product conta": "{base:color/product/conta 500}",
+          "product envios": "{base:color/product/envios 500}",
+          "product ia": "{base:color/product/ia 500}",
+          "product ecom": "{base:color/product/ecom 500}",
+          "product credito": "{base:color/product/credito 500}"
         },
         "hover": {
           "neutral": "{base:effects/hover/gray 0_4}",
           "utility": "{base:effects/hover/gray 0_24}",
           "full brand": "{base:effects/hover/brand 900_8}",
-          "neutral brand": "{base:effects/hover/brand 900_8}"
+          "neutral brand": "{base:effects/hover/brand 900_8}",
+          "full negative": "{base:effects/hover/red 900_24}",
+          "product erp": "{base:color/product/erp 900}",
+          "product hub": "{base:color/product/hub 900}",
+          "product pdv": "{base:color/product/pdv 900}",
+          "product conta": "{base:color/product/conta 900}",
+          "product envios": "{base:color/product/envios 900}",
+          "product ia": "{base:color/product/ia 900}",
+          "product ecom": "{base:color/product/ecom 900}",
+          "product credito": "{base:color/product/credito 900}",
+          "on brand": "{base:effects/pressed/gray 0_12}",
+          "negative": "{base:effects/hover/red 500_12}"
         },
         "pressed": {
           "neutral": "{base:effects/pressed/gray 0_12}",
           "utility": "{base:effects/pressed/gray 0_88}",
           "full brand": "{base:effects/pressed/brand 900_16}",
-          "neutral brand": "{base:effects/pressed/brand 900_16}"
+          "neutral brand": "{base:effects/pressed/brand 900_16}",
+          "full negative": "{base:effects/pressed/red 900_48}",
+          "on brand": "{base:effects/hover/gray 0_24}",
+          "negative": "{base:effects/pressed/red 500_24}"
         },
         "selected": {
           "neutral brand": "{base:color/blue/blue 900}",
-          "full brand": "{base:color/blue/blue 500}"
+          "full brand": "{base:color/blue/blue 500}",
+          "product erp": "{base:color/product/erp 800}",
+          "product hub": "{base:color/product/hub 800}",
+          "product pdv": "{base:color/product/pdv 800}",
+          "product conta": "{base:color/product/conta 800}",
+          "product envios": "{base:color/product/envios 800}",
+          "product ia": "{base:color/product/ia 800}",
+          "product ecom": "{base:color/product/ecom 800}",
+          "product credito": "{base:color/product/credito 800}"
         },
         "disabled": {
           "default": "{base:effects/disabled/gray 900_8}",
@@ -507,7 +545,8 @@
           },
           "negative": {
             "colored": "{base:color/red/red 500}",
-            "subtle": "{base:color/red/red 900}"
+            "subtle": "{base:color/red/red 900}",
+            "faint": "{base:color/red/red 950}"
           },
           "warning": {
             "colored": "{base:color/yellow/yellow 500}",
@@ -533,6 +572,10 @@
         "utility": {
           "neutral": "{base:color/gray/gray 800}",
           "unread": "{base:color/blue/blue 800}"
+        },
+        "gradient": {
+          "soft start": "{base:color/blue/blue 800}",
+          "soft end": "{base:color/cyan/cyan 900}"
         }
       },
       "border": {
@@ -548,7 +591,15 @@
         "hover": {
           "neutral": "{base:color/gray/gray 400}",
           "utility": "{base:color/gray/gray 700}",
-          "brand": "{base:color/blue/blue 500}"
+          "brand": "{base:color/blue/blue 500}",
+          "product erp": "{base:color/product/erp 700}",
+          "product hub": "{base:color/product/hub 700}",
+          "product pdv": "{base:color/product/pdv 700}",
+          "product conta": "{base:color/product/conta 700}",
+          "product envios": "{base:color/product/envios 700}",
+          "product ia": "{base:color/product/ia 700}",
+          "product ecom": "{base:color/product/ecom 700}",
+          "product credito": "{base:color/product/credito 700}"
         },
         "pressed": {
           "neutral": "{base:color/gray/gray 100}",
@@ -559,8 +610,14 @@
         },
         "selected": {
           "default": "{base:color/blue/blue 500}",
-          "utility": "{base:color/blue/blue 800}",
-          "subtle": "{base:color/blue/blue 300}"
+          "product erp": "{base:color/product/erp 200}",
+          "product hub": "{base:color/product/hub 200}",
+          "product pdv": "{base:color/product/pdv 200}",
+          "product conta": "{base:color/product/conta 200}",
+          "product envios": "{base:color/product/envios 200}",
+          "product ia": "{base:color/product/ia 200}",
+          "product ecom": "{base:color/product/ecom 200}",
+          "product credito": "{base:color/product/credito 200}"
         },
         "feedback": {
           "positive": {
@@ -577,9 +634,6 @@
           },
           "brand": {
             "subtle": "{base:color/blue/blue 100}"
-          },
-          "accent": {
-            "subtle": "{base:color/pink/pink 100}"
           },
           "neutral": {
             "subtle": "{base:color/gray/gray 100}"
@@ -599,17 +653,23 @@
         "enabled": {
           "neutral": "{base:color/gray/gray 300}",
           "on brand": "{base:color/blue/blue 0}",
-          "brand": "{base:color/blue/blue 300}"
+          "brand": "{base:color/blue/blue 300}",
+          "on negative": "{base:color/red/red 0}",
+          "negative": "{base:color/red/red 500}"
         },
         "hover": {
           "neutral": "{base:color/gray/gray 0}",
           "on brand": "{base:color/blue/blue 0}",
-          "brand": "{base:color/blue/blue 200}"
+          "brand": "{base:color/blue/blue 200}",
+          "on negative": "{base:color/red/red 0}",
+          "negative": "{base:color/red/red 400}"
         },
         "pressed": {
           "neutral": "{base:color/gray/gray 0}",
           "on brand": "{base:color/blue/blue 0}",
-          "brand": "{base:color/blue/blue 0}"
+          "brand": "{base:color/blue/blue 0}",
+          "on negative": "{base:color/red/red 0}",
+          "negative": "{base:color/red/red 300}"
         },
         "focused": {
           "neutral": "{base:color/gray/gray 0}"
@@ -619,19 +679,23 @@
         },
         "selected": {
           "neutral": "{base:color/blue/blue 200}",
-          "on brand": "{base:color/blue/blue 0}"
+          "product erp": "{base:color/product/erp 100}",
+          "product hub": "{base:color/product/hub 100}",
+          "product pdv": "{base:color/product/pdv 100}",
+          "product conta": "{base:color/product/conta 100}",
+          "product envios": "{base:color/product/envios 100}",
+          "product ia": "{base:color/product/ia 100}",
+          "product ecom": "{base:color/product/ecom 100}",
+          "product credito": "{base:color/product/credito 100}"
         },
         "feedback": {
           "positive": {
-            "colored": "{base:color/green/green 900}",
             "subtle": "{base:color/green/green 100}"
           },
           "negative": {
-            "colored": "{base:color/red/red 900}",
             "subtle": "{base:color/red/red 100}"
           },
           "warning": {
-            "colored": "{base:color/yellow/yellow 900}",
             "subtle": "{base:color/yellow/yellow 100}"
           },
           "informative": {
@@ -663,22 +727,20 @@
         "enabled": {
           "neutral": "{base:color/gray/gray 300}",
           "on brand": "{base:color/blue/blue 0}",
-          "brand": "{base:color/blue/blue 300}"
+          "brand": "{base:color/blue/blue 300}",
+          "negative": "{base:color/red/red 500}"
         },
         "hover": {
           "neutral": "{base:color/gray/gray 0}",
-          "on brand": "{base:color/blue/blue 0}",
-          "brand": "{base:color/blue/blue 200}"
+          "brand": "{base:color/blue/blue 200}",
+          "negative": "{base:color/red/red 400}"
         },
         "pressed": {
           "neutral": "{base:color/gray/gray 0}",
-          "on brand": "{base:color/blue/blue 0}",
-          "brand": "{base:color/blue/blue 0}"
+          "brand": "{base:color/blue/blue 0}",
+          "negative": "{base:color/red/red 300}"
         },
         "focused": {
-          "neutral": "{base:color/gray/gray 0}"
-        },
-        "filled": {
           "neutral": "{base:color/gray/gray 0}"
         },
         "selected": {
@@ -687,31 +749,22 @@
         },
         "feedback": {
           "positive": {
-            "colored": "{base:color/green/green 900}",
             "subtle": "{base:color/green/green 100}"
           },
           "negative": {
-            "colored": "{base:color/red/red 900}",
             "subtle": "{base:color/red/red 100}"
           },
           "warning": {
-            "colored": "{base:color/yellow/yellow 900}",
             "subtle": "{base:color/yellow/yellow 100}"
           },
           "informative": {
-            "colored": "{base:color/cyan/cyan 0}",
             "subtle": "{base:color/cyan/cyan 100}"
           },
           "brand": {
             "colored": "{base:color/blue/blue 0}",
             "subtle": "{base:color/blue/blue 100}"
           },
-          "accent": {
-            "colored": "{base:color/pink/pink 0}",
-            "subtle": "{base:color/pink/pink 100}"
-          },
           "neutral": {
-            "colored": "{base:color/gray/gray 0}",
             "subtle": "{base:color/gray/gray 100}"
           }
         },
@@ -726,35 +779,37 @@
         "red": "{base:color/red/red 500}",
         "yellow": "{base:color/yellow/yellow 500}",
         "pink": "{base:color/pink/pink 200}",
-        "blue": "{base:color/blue/blue 500}",
         "darkblue": "{base:color/blue/blue 800}"
+      },
+      "chart": {
+        "series": {
+          "1": "{base:color/blue/blue 300}",
+          "2": "{base:color/green/green 400}",
+          "3": "{base:color/pink/pink 300}",
+          "4": "{base:color/cyan/cyan 300}",
+          "5": "{base:color/yellow/yellow 400}",
+          "6": "{base:color/red/red 300}",
+          "neutral": "{base:color/gray/gray 400}"
+        },
+        "label": "{base:color/gray/gray 300}",
+        "axis": "{base:color/gray/gray 700}",
+        "grid": "{base:color/gray/gray 800}"
       }
     },
     "shape": {
       "border radius": {
         "x0 (0px)": "{base:shape/border radius/0px}",
-        "x0_25 (2px)": "{base:shape/border radius/2px}",
         "x0_5 (4px)": "{base:shape/border radius/4px}",
         "x1 (8px)": "{base:shape/border radius/8px}",
         "x1_5 (12px)": "{base:shape/border radius/12px}",
         "x2 (16px)": "{base:shape/border radius/16px}",
-        "x2_5 (20px)": "{base:shape/border radius/20px}",
         "x3 (24px)": "{base:shape/border radius/24px}",
-        "x4 (32px)": "{base:shape/border radius/32px}",
         "x5 (40px)": "{base:shape/border radius/40px}",
         "pill (9999px)": "{base:shape/border radius/9999px}"
       },
-      "border width": {
-        "x0 (0px)": "{base:shape/border width/0px}",
-        "x1 (1px)": "{base:shape/border width/1px}",
-        "x2 (2px)": "{base:shape/border width/2px}",
-        "x4 (4px)": "{base:shape/border width/4px}"
-      },
       "size": {
-        "x0 (0px)": "{base:shape/size/0px}",
         "x0_5 (4px)": "{base:shape/size/4px}",
         "x1 (8px)": "{base:shape/size/8px}",
-        "x1_5 (12px)": "{base:shape/size/12px}",
         "x2 (16px)": "{base:shape/size/16px}",
         "x3 (24px)": "{base:shape/size/24px}",
         "x4 (32px)": "{base:shape/size/32px}",
@@ -762,28 +817,24 @@
         "x6 (48px)": "{base:shape/size/48px}",
         "x7 (56px)": "{base:shape/size/56px}",
         "x8 (64px)": "{base:shape/size/64px}",
-        "x9 (72px)": "{base:shape/size/72px}",
         "x10 (80px)": "{base:shape/size/80px}",
         "x11 (88px)": "{base:shape/size/88px}",
         "x12 (96px)": "{base:shape/size/96px}",
-        "x13 (104px)": "{base:shape/size/104px}",
         "x13_5 (108px)": "{base:shape/size/108px}",
-        "x14 (112px)": "{base:shape/size/112px}",
-        "x15 (120px)": "{base:shape/size/120px}",
-        "x16 (128px)": "{base:shape/size/128px}",
-        "x17 (136px)": "{base:shape/size/136px}",
-        "x18 (144px)": "{base:shape/size/144px}",
         "x19 (152px)": "{base:shape/size/152px}",
         "x20 (160px)": "{base:shape/size/160px}",
         "x21 (168px)": "{base:shape/size/168px}",
-        "x25 (200px)": "{base:shape/size/200px}",
-        "x25_5 (204px)": "{base:shape/size/204px}",
-        "x28 (224px)": "{base:shape/size/224px}",
         "x29 (232px)": "{base:shape/size/232px}",
-        "x30 (240px)": "{base:shape/size/240px}",
         "x31 (248px)": "{base:shape/size/248px}",
         "x35 (280px)": "{base:shape/size/280px}",
-        "x40 (320px)": "{base:shape/size/320px}"
+        "x40 (320px)": "{base:shape/size/320px}",
+        "x4_5 (36px)": "{base:shape/size/36px}",
+        "x45 (360px)": "{base:shape/size/360px}",
+        "x6_5 (52px)": "{base:shape/size/52px}"
+      },
+      "border width": {
+        "x1 (1px)": "{base:shape/border width/1px}",
+        "x2 (2px)": "{base:shape/border width/2px}"
       },
       "spacing": {
         "x0 (0px)": "{base:shape/spacing/0px}",
@@ -795,28 +846,10 @@
         "x3 (24px)": "{base:shape/spacing/24px}",
         "x4 (32px)": "{base:shape/spacing/32px}",
         "x5 (40px)": "{base:shape/spacing/40px}",
-        "x6 (48px)": "{base:shape/spacing/48px}",
-        "x7 (56px)": "{base:shape/spacing/56px}",
         "x8 (64px)": "{base:shape/spacing/64px}",
-        "x9 (72px)": "{base:shape/spacing/72px}",
-        "x10 (80px)": "{base:shape/spacing/80px}",
-        "x11 (88px)": "{base:shape/spacing/88px}",
-        "x12 (96px)": "{base:shape/spacing/96px}",
-        "x13 (104px)": "{base:shape/spacing/104px}",
-        "x14 (112px)": "{base:shape/spacing/112px}",
-        "x15 (120px)": "{base:shape/spacing/120px}",
-        "x16 (128px)": "{base:shape/spacing/128px}",
-        "x17 (136px)": "{base:shape/spacing/136px}",
-        "x18 (144px)": "{base:shape/spacing/144px}",
-        "x19 (152px)": "{base:shape/spacing/152px}",
-        "x20 (160px)": "{base:shape/spacing/160px}",
-        "x25 (200px)": "{base:shape/spacing/200px}"
+        "x2_5 (20px)": "{base:shape/spacing/20px}"
       },
       "opacity": {
-        "none (0%)": "{base:shape/opacity/0%}",
-        "subtle (25%)": "{base:shape/opacity/25%}",
-        "half (50%)": "{base:shape/opacity/50%}",
-        "strong (75%)": "{base:shape/opacity/75%}",
         "full (100%)": "{base:shape/opacity/100%}"
       }
     },
@@ -829,7 +862,6 @@
       },
       "distance": {
         "x0 (0px)": "{base:effects/distance/0px}",
-        "x0_25 (2px)": "{base:effects/distance/2px}",
         "x0_5 (4px)": "{base:effects/distance/4px}",
         "x1 (8px)": "{base:effects/distance/8px}",
         "x2 (16px)": "{base:effects/distance/16px}"
