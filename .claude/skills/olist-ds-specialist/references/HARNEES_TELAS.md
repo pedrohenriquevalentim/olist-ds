@@ -1,7 +1,7 @@
 # Harness de Construção de Telas
 
-**Versão:** 3.0  
-**Última atualização:** 2026-10-20 (v3.0 — Seção 1 reescrita para o modelo de zonas por organismo dos 8 templates; limites e contextos atualizados; Dataset substitui montagem solta de tabela)  
+**Versão:** 3.1  
+**Última atualização:** 2026-10-23 (v3.1 — `Button`, `Button Icon` e `Link` com `type` + `intent`; Content Card e `ilustracao` entram nos limites, contextos e variantes obrigatórias. v3.0 — Seção 1 reescrita para o modelo de zonas por organismo dos 8 templates; limites e contextos atualizados; Dataset substitui montagem solta de tabela)  
 **Leia após:** `TEMPLATES_PRODUTO.md`  
 **Leia antes de:** criar qualquer frame via `use_figma`
 
@@ -308,7 +308,7 @@ Define limites quantitativos e contextos válidos para cada componente.
 
 | Componente | Máximo por tela | Regra |
 |---|---|---|
-| `Button` — variante primary | **1** | Hierarquia de CTA. Mais de 1 primary = falha crítica. |
+| `Button` — `type=primary` | **1** | Hierarquia de CTA (vale para `intent=default` e `intent=danger`: o primary danger também conta). Mais de 1 primary = falha crítica. |
 | `Heading` (papel de texto) | **1** | Um único título de página por tela. |
 | `Menu Global` | **1** | Sempre na Zona A. Nunca duplicar. |
 | `Page Header` | **1** | Sempre na Zona B. |
@@ -316,6 +316,8 @@ Define limites quantitativos e contextos válidos para cada componente.
 | `Dataset` | **1** | Zona C–F do List. Traz a própria busca (toolbar): não somar `Input Search`. |
 | `KPI Strip` | **1** | Zona D do Dashboard. |
 | `Floating Action Bar` | **1** | Camada; um modo por vez. |
+| `ilustracao` | **1 como foco** | Uma ilustração por tela (cena ou objeto em destaque). Objetos 1:1 pequenos em listas e cards compactos não contam. |
+| `Content Card` | sem limite | Em grade nas zonas C–F da Landing e do Dashboard; nunca aninhado em outro Content Card. |
 | `Input Search` | **1** | Uma busca por tela (a do Dataset conta). |
 | `tabs` | **1** | Opcional. Zona D do Record. |
 | `Breadcrumb` | **1** | Só dentro do Page Header. |
@@ -326,6 +328,10 @@ Define limites quantitativos e contextos válidos para cada componente.
 |---|---|---|
 | `Button` primary | Page Header (B, máx. 1), dentro de organismos (Notice Bar, Empty State, Floating Action Bar), formulários e modais | Solto no conteúdo fora de organismo, form ou modal |
 | `Button` secondary / icon | Page Header, organismos, formulários | Zona A |
+| `Button` / `Link` / `Button Icon` com `intent=danger` | Ação destrutiva ou irreversível (excluir, cancelar documento, estornar), de preferência com confirmação (Alert Dialog ou modal) | Ação comum só porque "precisa de destaque"; qualquer botão pintado de vermelho com RGB ou token solto |
+| `Link` | Ação de texto isolada ou inline em frase, parágrafo ou formulário | CTA (é `Button`); lista de ações com divisor (é item de lista/menu) |
+| `ilustracao` | Empty State e telas de estado, onboarding, slot de mídia do Content Card, miniatura em lista (objeto 1:1) | Dentro de botão, input ou menu (é `Icon`); como ícone de produto (é `Product Icon`); em tela densa de tabela ou formulário; recortada, redimensionada ou recolorida à mão |
+| `Content Card` | Zonas C–F da Landing e do Dashboard; blocos de apoio em páginas de detalhe | Gráfico com legenda (é o `Chart Card`); tabela ou lista longa sozinha; aviso (Notice Bar); card dentro de card |
 | `Tag` / `Badge` de status | Células de tabela (`table cell` tipo status), Page Header (`badge`), `status pill` na toolbar do Dataset | Zonas A e B0; flutuando fora de contexto |
 | `Input Text`, `Input Search`, `Dropdown` | Formulários (C–F do Record, Settings e Wizard); busca e filtros **dentro do `dataset`** | Zonas A, B, B0, R |
 | `Checkbox`, `Radio Button` | Tabelas (via `table row`) e formulários | Zonas A, B, B0, R |
@@ -341,7 +347,11 @@ Define limites quantitativos e contextos válidos para cada componente.
 | Componente | Variante obrigatória | Observação |
 |---|---|---|
 | `Menu Global` | `Produto` deve ser definido | Variantes: ERP, Crédito, HUB, Conta Digital, Envios, Ecommerce, Agentes de IA, Configuracoes (Settings), Menu do Usuario, Notificacoes, Central de Suporte, N0 Only. **PDV e Checkout Admin ainda não têm variante.** |
-| `Button` | `type` e `size` sempre explícitos | `type`: primary, secondary, tertiary, danger · `size`: big (40), medium (36), small (32). Nunca usar defaults implícitos |
+| `Button` | `type`, `intent` e `size` sempre explícitos | `type`: primary, secondary, tertiary · `intent`: default, danger · `size`: big (40), medium (36), small (32). `type=danger` **não existe mais** (virou `type=primary` + `intent=danger`). Nunca usar defaults implícitos |
+| `Button Icon` | `type`, `intent` e `size` sempre explícitos | Mesmas dimensões do Button (sem ícones configuráveis por variante) |
+| `Link` | `type` e `intent` explícitos; ícones por booleano | `type`: paragraph, description · `intent`: default, danger · `lead icon` (esquerda, desligado) e `action icon` (direita, ligado por padrão): ajuste os dois conscientemente. O boolean `new page` foi renomeado para `action icon` |
+| `ilustracao` | `tamanho`, `proporção` e `fundo` explícitos | Escolha pelo contexto (`ILUSTRACOES.md`, seção 5) |
+| `Content Card` | `surface`, `layout` e `state` explícitos | Troque a variante antes de preencher os slots (a troca reseta overrides) |
 | `Tag` | `color` sempre mapeado ao status semântico | Ver `CORES.md` — Mapa de Cores para Status |
 
 ---
@@ -356,7 +366,7 @@ A zona de conteúdo (C–F) deve sempre implementar um dos 5 padrões canônicos
 | **Formulário** | Criar ou editar um recurso | Vazio (criar), Preenchido (editar), Erros de validação, Enviando (loading) |
 | **Dashboard** | Visão geral de métricas | Padrão, Carregando (skeleton de cards), Sem dados |
 | **Detalhe** | Visualizar um recurso único com tabs | Padrão, Carregando, Erro de carregamento |
-| **Empty State** | Tela inteira sem conteúdo ainda | Ilustração + Heading + Subheading + 1 CTA |
+| **Empty State** | Tela inteira sem conteúdo ainda | Ilustração (`ilustracao`, cena `md` 4:3) + Heading + Subheading + 1 CTA |
 
 **Proibido na zona de conteúdo:**
 - Layout livre sem padrão canônico
@@ -554,7 +564,8 @@ Como prefere prosseguir?
 | Se precisar de | Leia |
 |---|---|
 | Zonas e organismos dos templates | `TEMPLATES_PRODUTO.md` e `references/templates/<template>.json` |
-| Catálogo e regras dos organismos | `ORGANISMOS.md` |
+| Catálogo e regras dos organismos (inclui Content Card) | `ORGANISMOS.md` |
+| Ilustrações (`ilustracao`): catálogo, contextos e regras do brand | `ILUSTRACOES.md` |
 | componentKeys e libraries | `FIGMA_CONFIG.md` |
 | Tokens de cor para primitivos custom | `CORES.md` |
 | Tokens de tipografia para texto custom | `TIPOGRAFIA.md` |
@@ -567,6 +578,7 @@ Como prefere prosseguir?
 
 **Versão:** 2.1  
 **Criado em:** 2026-06-05  
+**Atualizado em:** 2026-10-23 (v3.1) — `Button`, `Button Icon` e `Link` ganham a dimensão `intent` (default | danger); `type=danger` deixa de existir (vira `type=primary` + `intent=danger`) e o primary danger conta para o limite de 1 primary por tela. Link ganha `disabled`, `lead icon` e `action icon`. Content Card (existente) e `ilustracao` entram em Limites por Tela, Contextos Válidos e Variantes Obrigatórias; o padrão Empty State aponta para a `ilustracao`.  
 **Atualizado em:** 2026-07-04 (2) — Zona B do template Envios/Hub/Conta Digital deixa de permitir "Logo do produto": o logo já é exibido na Zona A via `Menu Global`, e sua duplicação na Zona B foi removida da coluna "Pode conter" e movida para "Não pode conter". A linha `Logo Olist` em "Contextos Válidos por Componente" (Seção 2) foi corrigida para refletir que o logo só existe embutido no `Menu Global` (Zona A, todos os templates), nunca como elemento solto de zona.  
 **Atualizado em:** 2026-07-04 — Zona B (ERP): `Breadcrumb` passa a ser a instância real do componente DS (não mais "texto puro, sem componente"), resolvendo o ponto em aberto #1 de `decisions/ux-design/COMPONENTES_POR_ZONA.md`. Zona C: proibição de `Button` generalizada para qualquer variante com label (antes só "primary"), mantendo o botão de ícone de filtro permitido. Zona D: `conteúdo editorial` e `Card`s avulsos passam a ser permitidos, mantendo `Breadcrumb` e demais elementos de navegação proibidos. Regra de fundo unificada para todas as zonas (A–E), removendo a exceção antes registrada para a Zona A. Seção 2 ganhou linhas de `Breadcrumb` em "Limites por Tela" e "Contextos Válidos por Componente".  
 **Atualizado em:** 2026-07-03 — `Menu ERP` (variante `stage=X`) substituído por `Menu Global` (variante `produto=X`), confirmado após republicação da library. Ver `component-registry.json` para o componentKey e a lista completa de produtos.  

@@ -1,0 +1,682 @@
+{
+  "_meta": {
+    "description": "Catálogo legível por máquina das artes da `ilustracao` (moldura pública). As peças `.[base]` são internas e não aparecem na busca; as keys servem para referência e para trocar a arte da moldura (swapComponent) dentro do arquivo da library.",
+    "figmaFileKey": "HeyN4w209HWh8rfpTDiwyf",
+    "frame": {
+      "name": "ilustracao",
+      "componentSetKey": "a0281dd6a727a0f8e64baac00bcea4789dab7ff3",
+      "nodeId": "12175:65251",
+      "variants": {
+        "tamanho": [
+          "2xs",
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ],
+        "proporção": [
+          "4:3",
+          "1:1",
+          "16:9",
+          "3:1"
+        ],
+        "fundo": [
+          "nenhum",
+          "neutro",
+          "destaque",
+          "claro"
+        ]
+      },
+      "property": "ilustração (INSTANCE_SWAP)"
+    },
+    "scenesSet": {
+      "name": ".[base] illustration",
+      "componentSetKey": "28c7d1b4bfd599a9c39fe766b8f0c25fc89713a3",
+      "nodeId": "12174:62049",
+      "count": 60
+    },
+    "assetsSet": {
+      "name": ".[base] illustration asset",
+      "componentSetKey": "a46e3ed6bcc9cecf1b3562272357e0ac5477a694",
+      "nodeId": "12174:62050",
+      "count": 30
+    },
+    "generatedAt": "2026-10-23",
+    "note": "Pares base/recolor sem 'Recolor' no nome do brand (Finanças 01 e PDV 01, 03, 04 color) foram atribuídos pela posição no arquivo (esquerda = base, direita = recolor); confirmar com o brand. `01b` é a segunda versão da Logística outline 01 (com círculo na porta do caminhão)."
+  },
+  "scenes": [
+    {
+      "categoria": "logística",
+      "estilo": "color",
+      "cena": "01",
+      "paleta": "base",
+      "variantName": "categoria=logística, estilo=color, cena=01, paleta=base",
+      "componentKey": "3f97e9b49e1e08e9f24f0fee03453bdd61c2e6d3"
+    },
+    {
+      "categoria": "logística",
+      "estilo": "color",
+      "cena": "01",
+      "paleta": "recolor",
+      "variantName": "categoria=logística, estilo=color, cena=01, paleta=recolor",
+      "componentKey": "6003039a50699364e8ee4f3c71b227d26e37561b"
+    },
+    {
+      "categoria": "logística",
+      "estilo": "color",
+      "cena": "02",
+      "paleta": "base",
+      "variantName": "categoria=logística, estilo=color, cena=02, paleta=base",
+      "componentKey": "dc02fcd6692265f831899ee48944773ba95fe7d1"
+    },
+    {
+      "categoria": "logística",
+      "estilo": "color",
+      "cena": "02",
+      "paleta": "recolor",
+      "variantName": "categoria=logística, estilo=color, cena=02, paleta=recolor",
+      "componentKey": "86845a3fbcc20e2c4003decee090945b7e1630df"
+    },
+    {
+      "categoria": "logística",
+      "estilo": "color",
+      "cena": "03",
+      "paleta": "base",
+      "variantName": "categoria=logística, estilo=color, cena=03, paleta=base",
+      "componentKey": "6b755047b9ff824cc0247f674da36edea8a0fd64"
+    },
+    {
+      "categoria": "logística",
+      "estilo": "color",
+      "cena": "03",
+      "paleta": "recolor",
+      "variantName": "categoria=logística, estilo=color, cena=03, paleta=recolor",
+      "componentKey": "44d4e03217d8b434a06e6937dfcc1f69b861e56f"
+    },
+    {
+      "categoria": "logística",
+      "estilo": "color",
+      "cena": "04",
+      "paleta": "base",
+      "variantName": "categoria=logística, estilo=color, cena=04, paleta=base",
+      "componentKey": "79c920923ca602b19b688ed78ffd5833152395d7"
+    },
+    {
+      "categoria": "logística",
+      "estilo": "color",
+      "cena": "04",
+      "paleta": "recolor",
+      "variantName": "categoria=logística, estilo=color, cena=04, paleta=recolor",
+      "componentKey": "f260a4f2a0f2168d5cf571f1d2045f72613cb6e1"
+    },
+    {
+      "categoria": "logística",
+      "estilo": "color",
+      "cena": "05",
+      "paleta": "base",
+      "variantName": "categoria=logística, estilo=color, cena=05, paleta=base",
+      "componentKey": "eadf171531cbe5115242d0e0af1c58cde60c8b35"
+    },
+    {
+      "categoria": "logística",
+      "estilo": "color",
+      "cena": "05",
+      "paleta": "recolor",
+      "variantName": "categoria=logística, estilo=color, cena=05, paleta=recolor",
+      "componentKey": "335fb957611efb73992c4d7edd276d4318210e7e"
+    },
+    {
+      "categoria": "finanças",
+      "estilo": "color",
+      "cena": "01",
+      "paleta": "base",
+      "variantName": "categoria=finanças, estilo=color, cena=01, paleta=base",
+      "componentKey": "6b26e2724c33933ecba98b1cac5e51a7f2faf7d0"
+    },
+    {
+      "categoria": "finanças",
+      "estilo": "color",
+      "cena": "01",
+      "paleta": "recolor",
+      "variantName": "categoria=finanças, estilo=color, cena=01, paleta=recolor",
+      "componentKey": "0d9510650039658ac384fef28bc446b626cbf56f"
+    },
+    {
+      "categoria": "finanças",
+      "estilo": "color",
+      "cena": "02",
+      "paleta": "base",
+      "variantName": "categoria=finanças, estilo=color, cena=02, paleta=base",
+      "componentKey": "8c9be23e52a999418de72f8f76a59b0839225c6f"
+    },
+    {
+      "categoria": "finanças",
+      "estilo": "color",
+      "cena": "02",
+      "paleta": "recolor",
+      "variantName": "categoria=finanças, estilo=color, cena=02, paleta=recolor",
+      "componentKey": "13e49151ac55287a5b5d5759ffa14fc706a6e98d"
+    },
+    {
+      "categoria": "finanças",
+      "estilo": "color",
+      "cena": "03",
+      "paleta": "base",
+      "variantName": "categoria=finanças, estilo=color, cena=03, paleta=base",
+      "componentKey": "f5f94696c8114d9c58c3610c897a784d058388c7"
+    },
+    {
+      "categoria": "finanças",
+      "estilo": "color",
+      "cena": "03",
+      "paleta": "recolor",
+      "variantName": "categoria=finanças, estilo=color, cena=03, paleta=recolor",
+      "componentKey": "5f00c6452e0576e2e1b7ef607d51b129ed8bb81e"
+    },
+    {
+      "categoria": "finanças",
+      "estilo": "color",
+      "cena": "04",
+      "paleta": "base",
+      "variantName": "categoria=finanças, estilo=color, cena=04, paleta=base",
+      "componentKey": "4c246dc9f29e02705b7594380a72a1d58b33108b"
+    },
+    {
+      "categoria": "finanças",
+      "estilo": "color",
+      "cena": "04",
+      "paleta": "recolor",
+      "variantName": "categoria=finanças, estilo=color, cena=04, paleta=recolor",
+      "componentKey": "ea7068447b3e666fe68a82a53bb653763d35ded1"
+    },
+    {
+      "categoria": "finanças",
+      "estilo": "color",
+      "cena": "05",
+      "paleta": "base",
+      "variantName": "categoria=finanças, estilo=color, cena=05, paleta=base",
+      "componentKey": "e42110e81e73f974f65ace7a071efd4eddf1511f"
+    },
+    {
+      "categoria": "finanças",
+      "estilo": "color",
+      "cena": "05",
+      "paleta": "recolor",
+      "variantName": "categoria=finanças, estilo=color, cena=05, paleta=recolor",
+      "componentKey": "dbe8ab34ac9c4dd082d22a6486e41a9d6d7f8bf6"
+    },
+    {
+      "categoria": "seller",
+      "estilo": "color",
+      "cena": "01",
+      "paleta": "base",
+      "variantName": "categoria=seller, estilo=color, cena=01, paleta=base",
+      "componentKey": "31c5dd9e7d54337e1dc0f32fe9ca228d125ff374"
+    },
+    {
+      "categoria": "seller",
+      "estilo": "color",
+      "cena": "01",
+      "paleta": "recolor",
+      "variantName": "categoria=seller, estilo=color, cena=01, paleta=recolor",
+      "componentKey": "bd8b048ae82f613e94cd75e009fc69e989b243a6"
+    },
+    {
+      "categoria": "seller",
+      "estilo": "color",
+      "cena": "02",
+      "paleta": "base",
+      "variantName": "categoria=seller, estilo=color, cena=02, paleta=base",
+      "componentKey": "4061eee3e3d6724dbf291bd29e7c2c983b1768d3"
+    },
+    {
+      "categoria": "seller",
+      "estilo": "color",
+      "cena": "02",
+      "paleta": "recolor",
+      "variantName": "categoria=seller, estilo=color, cena=02, paleta=recolor",
+      "componentKey": "e6b18e395c95dfdf4c5e3face028a574eb076517"
+    },
+    {
+      "categoria": "seller",
+      "estilo": "color",
+      "cena": "03",
+      "paleta": "base",
+      "variantName": "categoria=seller, estilo=color, cena=03, paleta=base",
+      "componentKey": "dd2bb130ed770ee9bb30df5f86e30fffce79893f"
+    },
+    {
+      "categoria": "seller",
+      "estilo": "color",
+      "cena": "03",
+      "paleta": "recolor",
+      "variantName": "categoria=seller, estilo=color, cena=03, paleta=recolor",
+      "componentKey": "a6d1e41aa40198908794cba4f748cb20ff920ac9"
+    },
+    {
+      "categoria": "seller",
+      "estilo": "color",
+      "cena": "04",
+      "paleta": "base",
+      "variantName": "categoria=seller, estilo=color, cena=04, paleta=base",
+      "componentKey": "fe598af74bc8ee61b54e9e662e2b3ea99bcaaa72"
+    },
+    {
+      "categoria": "seller",
+      "estilo": "color",
+      "cena": "04",
+      "paleta": "recolor",
+      "variantName": "categoria=seller, estilo=color, cena=04, paleta=recolor",
+      "componentKey": "8e6ff380a19a67bf757dbeed4a852f4931ce1f42"
+    },
+    {
+      "categoria": "seller",
+      "estilo": "color",
+      "cena": "05",
+      "paleta": "base",
+      "variantName": "categoria=seller, estilo=color, cena=05, paleta=base",
+      "componentKey": "6058cd8b6a7e56dae82998128fbbedfb018cfa8e"
+    },
+    {
+      "categoria": "seller",
+      "estilo": "color",
+      "cena": "05",
+      "paleta": "recolor",
+      "variantName": "categoria=seller, estilo=color, cena=05, paleta=recolor",
+      "componentKey": "960b587cb4fd36e262e48a585915e109e309dc78"
+    },
+    {
+      "categoria": "seller",
+      "estilo": "color",
+      "cena": "06",
+      "paleta": "base",
+      "variantName": "categoria=seller, estilo=color, cena=06, paleta=base",
+      "componentKey": "3b306592f8a2f0ed20eedab76a00fbe2b35ca23e"
+    },
+    {
+      "categoria": "seller",
+      "estilo": "color",
+      "cena": "06",
+      "paleta": "recolor",
+      "variantName": "categoria=seller, estilo=color, cena=06, paleta=recolor",
+      "componentKey": "9845b80574fce0ccb8d1435ebc13f5a66f2bd927"
+    },
+    {
+      "categoria": "pdv-buyer",
+      "estilo": "color",
+      "cena": "01",
+      "paleta": "base",
+      "variantName": "categoria=pdv-buyer, estilo=color, cena=01, paleta=base",
+      "componentKey": "8372e20e8f6e2b09160fa39e5cfec2eab866bec2"
+    },
+    {
+      "categoria": "pdv-buyer",
+      "estilo": "color",
+      "cena": "01",
+      "paleta": "recolor",
+      "variantName": "categoria=pdv-buyer, estilo=color, cena=01, paleta=recolor",
+      "componentKey": "a75d7ff1c7986a4966f3ca01ac7c1019b573e1c4"
+    },
+    {
+      "categoria": "pdv-buyer",
+      "estilo": "color",
+      "cena": "02",
+      "paleta": "base",
+      "variantName": "categoria=pdv-buyer, estilo=color, cena=02, paleta=base",
+      "componentKey": "56ca71371991d1953dc89786a9cfb91bd2985afc"
+    },
+    {
+      "categoria": "pdv-buyer",
+      "estilo": "color",
+      "cena": "03",
+      "paleta": "base",
+      "variantName": "categoria=pdv-buyer, estilo=color, cena=03, paleta=base",
+      "componentKey": "a70d5e6ba81809a64fbb8bd1f9e793ea88b014f5"
+    },
+    {
+      "categoria": "pdv-buyer",
+      "estilo": "color",
+      "cena": "03",
+      "paleta": "recolor",
+      "variantName": "categoria=pdv-buyer, estilo=color, cena=03, paleta=recolor",
+      "componentKey": "05c8e8e84850280f9e266e768f1ba6363984e49d"
+    },
+    {
+      "categoria": "pdv-buyer",
+      "estilo": "color",
+      "cena": "04",
+      "paleta": "base",
+      "variantName": "categoria=pdv-buyer, estilo=color, cena=04, paleta=base",
+      "componentKey": "f0bc3a349a7dcd602b5dedb546e3629ee89bbe63"
+    },
+    {
+      "categoria": "pdv-buyer",
+      "estilo": "color",
+      "cena": "04",
+      "paleta": "recolor",
+      "variantName": "categoria=pdv-buyer, estilo=color, cena=04, paleta=recolor",
+      "componentKey": "06a789c0a2b9f5659c0e99307e69bafec9c73798"
+    },
+    {
+      "categoria": "logística",
+      "estilo": "outline",
+      "cena": "01",
+      "paleta": "base",
+      "variantName": "categoria=logística, estilo=outline, cena=01, paleta=base",
+      "componentKey": "b841d9f7e2c95f76969f6b642d752177354e64b5"
+    },
+    {
+      "categoria": "logística",
+      "estilo": "outline",
+      "cena": "01b",
+      "paleta": "base",
+      "variantName": "categoria=logística, estilo=outline, cena=01b, paleta=base",
+      "componentKey": "a5e62eddba4ea289b57eacd9c09b45d9a2c257c7"
+    },
+    {
+      "categoria": "logística",
+      "estilo": "outline",
+      "cena": "02",
+      "paleta": "base",
+      "variantName": "categoria=logística, estilo=outline, cena=02, paleta=base",
+      "componentKey": "fcba6cbd28aca85072f4571aef8cf8206bfc71e4"
+    },
+    {
+      "categoria": "logística",
+      "estilo": "outline",
+      "cena": "03",
+      "paleta": "base",
+      "variantName": "categoria=logística, estilo=outline, cena=03, paleta=base",
+      "componentKey": "f86ea79de06a6340222cf55c05331929b2268fa5"
+    },
+    {
+      "categoria": "logística",
+      "estilo": "outline",
+      "cena": "04",
+      "paleta": "base",
+      "variantName": "categoria=logística, estilo=outline, cena=04, paleta=base",
+      "componentKey": "c0181dc12af192a6df7de504dfab7aa0b9ba8a75"
+    },
+    {
+      "categoria": "logística",
+      "estilo": "outline",
+      "cena": "05",
+      "paleta": "base",
+      "variantName": "categoria=logística, estilo=outline, cena=05, paleta=base",
+      "componentKey": "285e0768bc8f259f8d7f9d5b4be2247616d45574"
+    },
+    {
+      "categoria": "finanças",
+      "estilo": "outline",
+      "cena": "01",
+      "paleta": "base",
+      "variantName": "categoria=finanças, estilo=outline, cena=01, paleta=base",
+      "componentKey": "9e236cdfe8fa4d146a86775ab1ff04be187f7817"
+    },
+    {
+      "categoria": "finanças",
+      "estilo": "outline",
+      "cena": "02",
+      "paleta": "base",
+      "variantName": "categoria=finanças, estilo=outline, cena=02, paleta=base",
+      "componentKey": "d4e751a0f65d5f91a2a88a93f8eb0b13d2f25581"
+    },
+    {
+      "categoria": "finanças",
+      "estilo": "outline",
+      "cena": "03",
+      "paleta": "base",
+      "variantName": "categoria=finanças, estilo=outline, cena=03, paleta=base",
+      "componentKey": "90ed96ec8e52857f130e1776f21cd3ea438b0df1"
+    },
+    {
+      "categoria": "finanças",
+      "estilo": "outline",
+      "cena": "04",
+      "paleta": "base",
+      "variantName": "categoria=finanças, estilo=outline, cena=04, paleta=base",
+      "componentKey": "8dbd2ad65aa2fbaa2df24a15c3e115e9e4aa254d"
+    },
+    {
+      "categoria": "finanças",
+      "estilo": "outline",
+      "cena": "05",
+      "paleta": "base",
+      "variantName": "categoria=finanças, estilo=outline, cena=05, paleta=base",
+      "componentKey": "a722868d0e14f65ec352c7ff7ccdbec43ac37b5b"
+    },
+    {
+      "categoria": "seller",
+      "estilo": "outline",
+      "cena": "01",
+      "paleta": "base",
+      "variantName": "categoria=seller, estilo=outline, cena=01, paleta=base",
+      "componentKey": "04e1f7a3d4ed427ee53ce0b92c716eba0d60f125"
+    },
+    {
+      "categoria": "seller",
+      "estilo": "outline",
+      "cena": "02",
+      "paleta": "base",
+      "variantName": "categoria=seller, estilo=outline, cena=02, paleta=base",
+      "componentKey": "941afd1405b83ffa9f8ffd5f440055a869719d5f"
+    },
+    {
+      "categoria": "seller",
+      "estilo": "outline",
+      "cena": "03",
+      "paleta": "base",
+      "variantName": "categoria=seller, estilo=outline, cena=03, paleta=base",
+      "componentKey": "f789a1c7af5508a6a176832c1020789a8480e825"
+    },
+    {
+      "categoria": "seller",
+      "estilo": "outline",
+      "cena": "04",
+      "paleta": "base",
+      "variantName": "categoria=seller, estilo=outline, cena=04, paleta=base",
+      "componentKey": "76d09290609583727d90ebefe975441e1049c209"
+    },
+    {
+      "categoria": "seller",
+      "estilo": "outline",
+      "cena": "05",
+      "paleta": "base",
+      "variantName": "categoria=seller, estilo=outline, cena=05, paleta=base",
+      "componentKey": "f006ce0f420fd4fc8b4c2d141320e9226b069599"
+    },
+    {
+      "categoria": "seller",
+      "estilo": "outline",
+      "cena": "06",
+      "paleta": "base",
+      "variantName": "categoria=seller, estilo=outline, cena=06, paleta=base",
+      "componentKey": "a56cee0074ab1f3544d82139286558a46ce4ce56"
+    },
+    {
+      "categoria": "pdv-buyer",
+      "estilo": "outline",
+      "cena": "01",
+      "paleta": "base",
+      "variantName": "categoria=pdv-buyer, estilo=outline, cena=01, paleta=base",
+      "componentKey": "8f1d6a6b24a7089173091cfac28a321230d97d6e"
+    },
+    {
+      "categoria": "pdv-buyer",
+      "estilo": "outline",
+      "cena": "02",
+      "paleta": "base",
+      "variantName": "categoria=pdv-buyer, estilo=outline, cena=02, paleta=base",
+      "componentKey": "e275b3c261d0d07c22a1086ccbd3ad7a5d191361"
+    },
+    {
+      "categoria": "pdv-buyer",
+      "estilo": "outline",
+      "cena": "03",
+      "paleta": "base",
+      "variantName": "categoria=pdv-buyer, estilo=outline, cena=03, paleta=base",
+      "componentKey": "74854e3c9fb80515c29cd5752ee8fcf011008b16"
+    },
+    {
+      "categoria": "pdv-buyer",
+      "estilo": "outline",
+      "cena": "04",
+      "paleta": "base",
+      "variantName": "categoria=pdv-buyer, estilo=outline, cena=04, paleta=base",
+      "componentKey": "2272b22525644ac76f48db0bf3dae06cef138039"
+    }
+  ],
+  "objects": [
+    {
+      "objeto": "headset",
+      "variantName": "objeto=headset",
+      "componentKey": "4d8c9cea6fb37d77b65c4e541991bf84f383fafe"
+    },
+    {
+      "objeto": "chaleira",
+      "variantName": "objeto=chaleira",
+      "componentKey": "62b7efe122cabe305e4c387574873ee2e7ef8644"
+    },
+    {
+      "objeto": "furadeira",
+      "variantName": "objeto=furadeira",
+      "componentKey": "d3df74442867feaff1104f5b9bbf2be1448272c5"
+    },
+    {
+      "objeto": "ventilador",
+      "variantName": "objeto=ventilador",
+      "componentKey": "35d2da35373933b66a8637c04895026ee389f205"
+    },
+    {
+      "objeto": "webcam",
+      "variantName": "objeto=webcam",
+      "componentKey": "d28961b32fa01d35296410dd95893efb0b6be57a"
+    },
+    {
+      "objeto": "secador",
+      "variantName": "objeto=secador",
+      "componentKey": "19ef08a321713a5d28bdc9b993112bf544748cfe"
+    },
+    {
+      "objeto": "maquininha",
+      "variantName": "objeto=maquininha",
+      "componentKey": "548ab589f1d8eec513f1860804754ece9eb45155"
+    },
+    {
+      "objeto": "whey",
+      "variantName": "objeto=whey",
+      "componentKey": "90c8b4df2b2691dac7cc5ae82a5b7b2717f8d297"
+    },
+    {
+      "objeto": "garrafa",
+      "variantName": "objeto=garrafa",
+      "componentKey": "711581666a1bdcabd435ea8ab2605de0b2d2618c"
+    },
+    {
+      "objeto": "luz",
+      "variantName": "objeto=luz",
+      "componentKey": "43b469064d3376f38729a552a25d76a0d4178370"
+    },
+    {
+      "objeto": "gato",
+      "variantName": "objeto=gato",
+      "componentKey": "377aac3ba77f0778b0b89754472ea9e95d12b7eb"
+    },
+    {
+      "objeto": "câmera",
+      "variantName": "objeto=câmera",
+      "componentKey": "ad8adfc13a6addb3065fc5b368e0d248b71e6234"
+    },
+    {
+      "objeto": "abajur",
+      "variantName": "objeto=abajur",
+      "componentKey": "f693f8951eda2f978466a699f6c1573d0069a269"
+    },
+    {
+      "objeto": "atendimento",
+      "variantName": "objeto=atendimento",
+      "componentKey": "b9cae948e1173c0838922b69b91a96767a255809"
+    },
+    {
+      "objeto": "impressora",
+      "variantName": "objeto=impressora",
+      "componentKey": "0c7f8c72aa1babf9838720f7aae66c8e5e5c89af"
+    },
+    {
+      "objeto": "caixa",
+      "variantName": "objeto=caixa",
+      "componentKey": "702deb5ae91a9d99155c09624710de6982c2eaff"
+    },
+    {
+      "objeto": "pneu",
+      "variantName": "objeto=pneu",
+      "componentKey": "314b3899b1cd6a5749d90f33e1c624327bb99b76"
+    },
+    {
+      "objeto": "guarda-chuva",
+      "variantName": "objeto=guarda-chuva",
+      "componentKey": "7c2a86033d86f72206a7b3e190706ac3468e4375"
+    },
+    {
+      "objeto": "caneca",
+      "variantName": "objeto=caneca",
+      "componentKey": "dad033dd746e5c360693c71eb2bfff385b1c8a58"
+    },
+    {
+      "objeto": "caixa aberta",
+      "variantName": "objeto=caixa aberta",
+      "componentKey": "6975110321bbf641cd30ef1debdcdc1fd86fc2b3"
+    },
+    {
+      "objeto": "computador",
+      "variantName": "objeto=computador",
+      "componentKey": "3c52ee9a1c06241a7302989f9a982c1c1fa92b6a"
+    },
+    {
+      "objeto": "cabides",
+      "variantName": "objeto=cabides",
+      "componentKey": "0cb0a366e9930155067fa2917eff9c2d6213c6cf"
+    },
+    {
+      "objeto": "controle",
+      "variantName": "objeto=controle",
+      "componentKey": "347cc6dbd0a5e64d404c01a239f198769f52f1ff"
+    },
+    {
+      "objeto": "pia",
+      "variantName": "objeto=pia",
+      "componentKey": "adcd56cecedcb3c45eb75438e8c67bd1b7dbcaa3"
+    },
+    {
+      "objeto": "ferro de passar",
+      "variantName": "objeto=ferro de passar",
+      "componentKey": "c07676120d7b9cb6345f36b41c2c40cc8e717fcb"
+    },
+    {
+      "objeto": "moeda",
+      "variantName": "objeto=moeda",
+      "componentKey": "ecaf320e3cf3681152bb26fe0106afb6b2126eeb"
+    },
+    {
+      "objeto": "lupa",
+      "variantName": "objeto=lupa",
+      "componentKey": "a98e0aaeaeff0a70147c6d7fbdd4a7dcda2ee91e"
+    },
+    {
+      "objeto": "balão",
+      "variantName": "objeto=balão",
+      "componentKey": "e5c487fe7d7e7909114353a134a96200e135322c"
+    },
+    {
+      "objeto": "cartão",
+      "variantName": "objeto=cartão",
+      "componentKey": "29782e2eddd74d73b815ec9bc820952b9fac8de6"
+    },
+    {
+      "objeto": "calculadora",
+      "variantName": "objeto=calculadora",
+      "componentKey": "5a4b44ef4fb1c6440f8a0fc3f002584796fe3b45"
+    }
+  ]
+}

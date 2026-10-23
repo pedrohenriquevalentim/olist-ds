@@ -16,6 +16,8 @@ Fora do escopo: backend, APIs, banco, autenticação, regras de negócio.
 5. **Consultar `references/GLOSSARIO_PAPEIS_TEXTO.md` antes de nomear textos** ("título da página" → Heading, "mensagem de erro" → Error)
 6. **Consultar `references/UX_WRITING.md` ao criar qualquer copy** — protocolo de triagem + 4 pilares
 7. **Tokens semânticos são o mecanismo de dark mode** — nenhum fill/stroke de cor primitiva ou hex fixo é aceito; verificar compatibilidade nos dois modos (claro e escuro) antes de concluir qualquer caso que produza UI
+8. **Hierarquia e intenção são dimensões separadas** — `Button`, `Button Icon` e `Link` têm `type` (ênfase) e `intent` (`default` | `danger`, ação destrutiva). `type=danger` não existe mais; nunca pinte uma ação de vermelho por conta própria
+9. **Ilustrações só pela moldura `ilustracao`** — nunca instancie, recorte, redimensione ou recolora a arte `.[base]`; consultar `references/ILUSTRACOES.md` antes de usar qualquer ilustração
 
 ## Figma — Library e Busca
 
@@ -29,19 +31,20 @@ Fora do escopo: backend, APIs, banco, autenticação, regras de negócio.
 
 **Gap confirmado:** `Summary Card` (fundo azul) não tem variante dedicada — usar `card` genérico + validar manualmente em telas Envios/Hub/Conta Digital.
 
-## Inventário de Componentes (design system (base), sincronizado 2026-10-20)
+## Inventário de Componentes (design system (base), sincronizado 2026-10-23)
 
-> **Button / Button Icon no Figma:** `size = big (40px) | medium (36px) | small (32px)` (mesmos nomes do React) e `type` inclui `danger`. Inputs, Select, Dropdown, Context Switch, Segmented, Paginator, Tabs e List têm altura de 40px; Toggle, Chip, Badge, Tooltip e Avatar ficam em 32px.
+> **Button / Button Icon no Figma:** `size = big (40px) | medium (36px) | small (32px)` (mesmos nomes do React); `type` = primary | secondary | tertiary e `intent` = default | danger (desde 2026-10-22; o antigo `type=danger` virou `type=primary` + `intent=danger`). **Link** tem `type` (paragraph | description), `intent`, `state` com `disabled`, e os booleanos `lead icon` e `action icon`. Inputs, Select, Dropdown, Context Switch, Segmented, Paginator, Tabs e List têm altura de 40px; Toggle, Chip, Badge, Tooltip e Avatar ficam em 32px.
 > **Dropdown** tem `type = single select | multi select` e borda em todos os estados.
 
 - **Action:** Button, Button Icon
-- **Navigation:** Link, Segmented Buttons, menu-global (+ Product Switch, uso exclusivo no menu), Context Switch, Tabs, Breadcrumb, Paginator, Logout, Stepper, Accordion, Menu (contextual — variantes a confirmar)
+- **Navigation:** Link, Segmented Buttons, menu-global (+ Product Switch, uso exclusivo no menu), Context Switch, Tabs, Breadcrumb, Paginator, Logout, Stepper, Accordion
 - **Input:** Input Text, Input Paragraph, Input E-mail, Input Search, Input Token, Input Password, Input Select, Input File, Input Date, Checkbox, Radio Button, Dropdown, Toggle, Chip, Calendar (+ calendar/single)
 - **Data Display:** Tags (+ tag-desktop/mobile/more/delivery), Badge, Table v2 (set `table`, variante `seleção`; peças `table row`, `table head row`, `table cell`, `table head cell`), Table Toolbar, Status Pill, Column Manager, List, Task List, Dashboard, Sort, Reorder, Avatar, Profile, Card, Credit Card, ID Card, Invoice, Inbox
 - **Data Visualization:** Metric, Chart Bar, Chart Line, Chart Donut, Chart Legend, Chart Legend Item, Chart Tooltip (+ ícones Chart Bar Up/Down/Variation e Chart Pie)
-- **Organismos (zonas dos templates):** Page Header, Notice Bar, Empty State, Dataset, Floating Action Bar, KPI Strip, Chart Card — catálogo e regras em `references/ORGANISMOS.md`
+- **Organismos (zonas dos templates):** Page Header, Notice Bar, Empty State, Dataset, Floating Action Bar, KPI Strip, Chart Card, **Content Card** (4 slots; superfícies padrão/sutil/destaque) — catálogo e regras em `references/ORGANISMOS.md`
+- **Menu Accordion (WIP, não usar em telas):** `menu item` (publicado) e `menu accordion` (não publicado) pertencem ao Novo Menu Accordion; o menu das telas continua sendo o `menu-global`.
 - **Feedback:** Tooltip, Toast, Alert Dialog, Modal, Progress Bar (WIP), Scrollbar, Loading, Alert Bar (intents: brand/informative/neutral/success/error/warning), Cookie, Bell, Money Notification Overlay (componente `overlay` publicado separado do Drawer — confirmado em 2026-10-16)
-- **Brand:** Logo Olist, Ícones rebrand 24
+- **Brand:** Logo Olist, Ícones rebrand 24, **Ilustração** (`ilustracao`, moldura das ilustrações do brand: 60 cenas e 30 objetos em peças `.[base]`; catálogo em `references/ILUSTRACOES.md`)
 
 ⚠️ **Dark mode — pendente de exportação:** A collection `02. theme tokens` contém modo Dark no Figma, mas a API MCP não expõe os valores por modo. Para ativar dark mode no repositório, usar o plugin de exportação de tokens para gerar `html.dark { ... }` em `src/generated/variables.css`.
 
@@ -51,7 +54,7 @@ Fora do escopo: backend, APIs, banco, autenticação, regras de negócio.
 
 - Os templates são **8 placeholders de zonas** (Landing, Landing foco, Dashboard, List, Record, Settings, Wizard, Estados), válidos para **todos os produtos** (ERP, Conta Digital, New Hub, E-commerce, Capital/Crédito, PDV, Envios e, no futuro, Checkout Admin). O produto só escolhe a variante do `Menu Global` e a paleta.
 - Fluxo: produto → template (`references/TEMPLATES_PRODUTO.md`) → JSON do template (`references/templates/<id>.json`) → preencher cada zona só com os organismos permitidos (`references/ORGANISMOS.md`).
-- Organismos marcados `planned` (Content Card, Form Section, Section Rail, Summary Panel, Onboarding Checklist, Dashboard Toolbar, Hero, topo simples do Page Header, modo wizard do Floating Action Bar) **não existem**: sinalizar como lacuna, nunca construir à mão.
+- Organismos marcados `planned` (Form Section, Section Rail, Summary Panel, Onboarding Checklist, Dashboard Toolbar, Hero, topo simples do Page Header, modo wizard do Floating Action Bar) **não existem**: sinalizar como lacuna, nunca construir à mão.
 - **Produto sem variante no `Menu Global` (PDV, Checkout Admin):** não inventar a variante; usar a mais próxima, avisar e registrar o gap.
 
 ## Fonte dos Componentes React (Casos 1, 2, 8)
@@ -73,7 +76,8 @@ Fallback: `references/COMPONENTES.md` local.
 | `references/VISAO_GERAL.md` | **Sempre primeiro** |
 | `figma-config.json` + `references/FIGMA_CONFIG.md` | Antes de usar Figma MCP |
 | `references/TEMPLATES_PRODUTO.md` + `references/templates/<id>.json` | Antes de criar telas (escolher template e zonas) |
-| `references/ORGANISMOS.md` | Antes de preencher uma zona de template |
+| `references/ORGANISMOS.md` | Antes de preencher uma zona de template (inclui Content Card) |
+| `references/ILUSTRACOES.md` + `references/ilustracoes-catalogo.json` | Antes de usar qualquer ilustração (moldura `ilustracao`) |
 | `references/HARNEES_TELAS.md` | Antes de qualquer frame no Figma |
 | `references/GLOSSARIO_PAPEIS_TEXTO.md` | Antes de nomear textos |
 | `references/COMPONENTES.md` | Criando telas ou componentes React |
@@ -124,7 +128,7 @@ Fallback: `references/COMPONENTES.md` local.
 ### Nunca:
 - Buscar componentes sem `includeLibraryKeys: searchPriority`
 - Usar libraries de `blockedLibraries`
-- Construir do zero o que já existe no DS (Button, Tag, Menu Global, etc.)
+- Construir do zero o que já existe no DS (Button, Tag, Menu Global, Content Card, ilustrações, etc.)
 - Inventar papéis de texto fora de `GLOSSARIO_PAPEIS_TEXTO.md`
 - Usar plugin Figma intermediário — sempre `use_figma` direto
 - Criar todas as telas de uma vez — sempre workflow faseado
@@ -134,6 +138,10 @@ Fallback: `references/COMPONENTES.md` local.
 - `strokes` diretamente em frames de zona (strokes: [])
 - Mais de 1 ação primária no Page Header
 - Instanciar `menu erp` em qualquer variante (removido — usar sempre `menu-global`)
+- Usar `type=danger` em Button/Button Icon (não existe mais): ação destrutiva é `intent=danger`; nunca simular danger com cor solta, RGB ou token de feedback
+- Instanciar `menu accordion` ou `menu item` (WIP) em telas
+- Usar a arte `.[base] illustration` / `.[base] illustration asset` direto, ou recortar, redimensionar e recolorir uma ilustração: use a `ilustracao`
+- Colocar card dentro de Content Card; montar card próprio com frames soltos quando o Content Card atende
 - Montar tabelas ou listagens com células/frames isolados — usar o `dataset` (listagem) ou o set `table` (dentro de um Record)
 - Remontar um organismo (Page Header, Dataset, KPI Strip, Chart Card…) com frames ou instâncias soltas
 - Instanciar um organismo `planned` como se existisse

@@ -1,6 +1,6 @@
 # Cores
 
-> Para o catálogo completo com todos os 1.194 tokens, use `TOKEN_CATALOG.md`.
+> Para o catálogo completo com todos os 1.537 tokens, use `TOKEN_CATALOG.md`.
 > Este arquivo cobre os tokens de cor mais usados com orientação de uso.
 
 ---
@@ -33,6 +33,10 @@ Três camadas: **primitivo** (valores brutos) → **semântico** (significado) �
 | `--color-background-feedback-positive-colored` | `#779e3d` | Badge/chip sucesso colorido |
 | `--color-background-feedback-positive-subtle` | `#e3edd4` | Fundo sutil de sucesso |
 | `--color-background-feedback-negative-colored` | `#e64e36` | Badge/chip erro colorido |
+| `--color-background-hover-negative` | `rgba(201,65,44,0.08)` (escuro `rgba(230,78,54,0.12)`) | Hover de botão secundário/terciário danger |
+| `--color-background-pressed-negative` | `rgba(201,65,44,0.16)` (escuro `rgba(230,78,54,0.24)`) | Pressed de botão secundário/terciário danger |
+| `--color-background-gradient-soft-start` / `-end` | `#e7edf8` → `#dcf9f9` (escuro `#001647` → `#141f1f`) | Degradê suave do destaque (Content Card, `ilustracao`); único degradê do DS |
+| `--color-background-enabled-product-<produto>` | ramp 500 de cada produto | Fundo do ícone no Product Launcher/Switch (só lá) |
 | `--color-background-feedback-negative-subtle` | `#fbcdc6` | Fundo sutil de erro |
 | `--color-background-feedback-warning-colored` | `#f0a028` | Badge/chip alerta colorido |
 | `--color-background-feedback-warning-subtle` | `#f9e5c7` | Fundo sutil de alerta |
@@ -59,6 +63,8 @@ Três camadas: **primitivo** (valores brutos) → **semântico** (significado) �
 | `--color-text-selected-neutral` | `#043fbe` | Texto de item selecionado |
 | `--color-text-feedback-positive-subtle` | `#425822` | Texto de mensagem de sucesso |
 | `--color-text-feedback-negative-subtle` | `#842d1f` | Texto de mensagem de erro |
+| `--color-text-enabled-negative` | `#c9412c` (escuro `#e64e36`) | Texto de ação danger (`intent=danger` vazado e Link); 4,75:1 sobre `surface-container`, 4,3:1 sobre `surface-system` |
+| `--color-text-hover-negative` / `-pressed-negative` | `#842d1f` / `#5a1f16` (escuro `#ed6e5a` / `#f28d7d`) | Hover e pressed do texto danger |
 | `--color-text-feedback-warning-subtle` | `#8f5c10` | Texto de mensagem de alerta |
 | `--color-text-disabled-default` | `#cecbc0` | Texto desabilitado |
 
@@ -88,6 +94,8 @@ Três camadas: **primitivo** (valores brutos) → **semântico** (significado) �
 | `--color-shape-selected-neutral` | `#043fbe` | Ícone selecionado |
 | `--color-shape-disabled-default` | `#cecbc0` | Ícone desabilitado |
 | `--color-shape-feedback-negative-subtle` | `#842d1f` | Ícone de erro |
+| `--color-shape-enabled-negative` | `#c9412c` (escuro `#e64e36`) | Ícone e borda de ação danger (`intent=danger` vazado e Link) |
+| `--color-shape-hover-negative` / `-pressed-negative` | `#842d1f` / `#5a1f16` (escuro `#ed6e5a` / `#f28d7d`) | Hover e pressed do ícone/borda danger |
 | `--color-shape-feedback-positive-subtle` | `#425822` | Ícone de sucesso |
 | `--color-shape-feedback-warning-subtle` | `#8f5c10` | Ícone de alerta |
 
@@ -198,3 +206,7 @@ Em análise   → fundo: --color-background-feedback-informative-subtle (#bdefef
 - Texto secundário em `gray-gray-0`: usar `gray-gray-600` via semântico (ratio ~4.8:1 ✅ AA)
 - Botão primário: texto branco em `blue-blue-500` (ratio 5.2:1 ✅)
 - Nunca use `gray-gray-300` ou mais claro para texto legível (falha AA)
+- Botão danger preenchido: texto `red-0` em `red-600` (4,64:1 ✅)
+- Texto e borda danger vazados (`color-text-enabled-negative`): red 600 sobre `surface-container` 4,75:1 ✅; sobre `surface-system` 4,3:1 ⚠️ (abaixo de 4,5:1: mova o botão para `container` ou documente a exceção); no escuro red 500 sobre `#10100f`/`#050505` 5:1 ✅
+- Texto escuro sobre o degradê suave `destaque` (blue 50 → cyan 50): acima de 16:1 ✅
+- A cor nunca é o único sinal de `intent=danger`: o rótulo diz a ação

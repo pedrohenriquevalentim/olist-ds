@@ -1,9 +1,9 @@
 # Componentes — API Completa
 
 **Auto-gerado por `npm run build`**
-**Última atualização:** 2026-10-20
+**Última atualização:** 2026-10-23
 **Versão do pacote:** 1.0.83
-**Versão da skill:** 3.24
+**Versão da skill:** 3.25
 
 ---
 

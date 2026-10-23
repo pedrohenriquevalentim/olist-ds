@@ -62,10 +62,10 @@
       }
     ],
     "harnessCoverageCheck": {
-      "lastVerifiedAt": "2026-10-15",
+      "lastVerifiedAt": "2026-10-23",
       "againstLibrary": "design system (base)",
       "verifiedVia": "search_design_system real via /ds-sync (Caso 6), busca por 15 categorias + get_metadata do nó 11279:16608",
-      "status": "4ª rodada de sync (2026-10-15): library republicada. Novos: stepper, toast, alert dialog, input date, accordion. Reestruturados: table (agora component_set, key nova) e calendar (2 component sets; calendar/single não aparece mais). table confirmada via get_metadata (nó 11554:26): component set `table` (striped × caption) com peças internas `.[base] table cell` e `.[base] table caption`; table cell extended/head/simple cell/table column foram substituídos. menu erp removido do uso (usar menu-global). Atualizações em massa em 2026-10-15 (updatedAt não discrimina mudança). | 5ª rodada (2026-10-15, após /ds-construir): criado '.[base] calendar month' (peça interna, state enabled/hover/pressed/selected/disabled; não aparece na busca por ser '.'-prefixado) e 16 variáveis calendar/month/* em '03. component tokens'; as views months do calendar agora usam instâncias dele. Nenhum componente público novo ou removido. | Library publicada e verificada: 16/16 variáveis calendar/month/* disponíveis.",
+      "status": "4ª rodada de sync (2026-10-15): library republicada. Novos: stepper, toast, alert dialog, input date, accordion. Reestruturados: table (agora component_set, key nova) e calendar (2 component sets; calendar/single não aparece mais). table confirmada via get_metadata (nó 11554:26): component set `table` (striped × caption) com peças internas `.[base] table cell` e `.[base] table caption`; table cell extended/head/simple cell/table column foram substituídos. menu erp removido do uso (usar menu-global). Atualizações em massa em 2026-10-15 (updatedAt não discrimina mudança). | 5ª rodada (2026-10-15, após /ds-construir): criado '.[base] calendar month' (peça interna, state enabled/hover/pressed/selected/disabled; não aparece na busca por ser '.'-prefixado) e 16 variáveis calendar/month/* em '03. component tokens'; as views months do calendar agora usam instâncias dele. Nenhum componente público novo ou removido. | Library publicada e verificada: 16/16 variáveis calendar/month/* disponíveis. | 7ª rodada (2026-10-23): library republicada (00:22Z). Novos públicos: content card, ilustracao (moldura) e menu item; button, button icon e link com intent; peças `.[base]` novas (media placeholder, illustration, illustration asset) não aparecem na busca. Menu accordion segue UNPUBLISHED (WIP).",
       "keysFixed": [
         "Menu Global: c2a9753... → c76f80e6de1b8c4bd100b60329f3d68d28653e68",
         "Tabs: 6e28a768... → f0c6d6f3695edcc13e25a2a2436f6f1e52429da3",
@@ -130,7 +130,7 @@
         "Breadcrumb",
         "Profile",
         "Logout",
-        "Table (component set striped × caption; células internas .[base]), Spreadsheet",
+        "Table v2 (set `table`, variante `seleção`) + table row, table head row, table cell, table head cell, table toolbar, status pill, column manager; Dataset (organismo de listagem), Spreadsheet",
         "Paginator",
         "Sort",
         "Reorder",
@@ -156,7 +156,7 @@
       ],
       "gaps": [
         "card-notification: sem component set público (só peças internas '.card notification/*', já sumidas)",
-        "Tabela: confirmar via use_figma como ajustar linhas/colunas e preencher conteúdo do component set `table` (metadata só expõe variantes striped × caption)"
+        "Tabela v2 (2026-10-20): resolvido — listagens usam o organismo `dataset`; `table` sozinha só no Record. Peças da tabela são internas ao organismo"
       ],
       "resolvedGaps": [
         {
@@ -204,7 +204,12 @@
       "Componentes cujo name comece com '.' (ponto) são peças ocultas usadas para CONSTRUIR um component set — nunca resultados válidos para importar/instanciar. Confirmado na design system (base): '.[base] single select list', '.[base] multi select list'.",
       "Ver excludedComponentNamePatterns acima. Ao processar resultados de search_design_system, descartar qualquer entrada cujo name dê match em algum desses patterns antes de escolher 'o primeiro resultado' da busca.",
       "Se o único resultado retornado para um componente for um '.[base]/...' ou '.nome', tratar como 'não encontrado' e seguir o fluxo de Seção 4 do HARNEES_TELAS.md (construir com primitivos + documentar gap).",
-      "Menu: SEMPRE `menu-global`. `menu erp` (2 component sets publicados, 2026-09-10) está removido do uso por decisão do usuário em 2026-10-15 — nunca instanciar."
+      "Menu: SEMPRE `menu-global`. `menu erp` (2 component sets publicados, 2026-09-10) está removido do uso por decisão do usuário em 2026-10-15 — nunca instanciar.",
+      "",
+      "=== INTENÇÃO E ILUSTRAÇÃO (2026-10-23) ===",
+      "Button, Button Icon e Link usam `type` (hierarquia) + `intent` (default | danger). `type=danger` não existe mais: use `type=primary` + `intent=danger`. Procure sempre pelo set (`button`, `button icon`, `link`) e escolha a variante pelo nome das propriedades.",
+      "Ilustrações: o componente público é o set `ilustracao` (key a0281dd6a727a0f8e64baac00bcea4789dab7ff3). As artes são `.[base] illustration` e `.[base] illustration asset` (ignoradas na busca). Catálogo e keys das artes em references/ilustracoes-catalogo.json.",
+      "Content Card (key 10e329f752fa7c913e8a41efb0b3e9e2f9df5332) é organismo (zonas C–F). `.[base] media placeholder` é peça interna do slot de mídia."
     ]
   },
   "templates": {
@@ -236,6 +241,17 @@
     "Chart Card": "12000:54991",
     "Gráficos (átomos)": "12000:54992",
     "Table": "11554:26",
-    "Product Switch": "12014:47391"
+    "Product Switch": "12014:47391",
+    "Content Card": "12148:19",
+    "Ilustrações": "12174:49314",
+    "Button (Button, Button Icon e Link)": "392:12798",
+    "Novo Menu Accordion (WIP)": "12075:77348"
+  },
+  "specSheets": {
+    "Content Card": "12160:1625",
+    "Illustration": "12175:65258",
+    "Button": "11997:495",
+    "Link": "11997:723",
+    "Button Icon": "11997:839"
   }
 }

@@ -59,11 +59,11 @@
       "conditional": false,
       "allowed": [
         "notice-bar",
-        "empty-state"
+        "empty-state",
+        "content-card"
       ],
-      "rule": "Cards de ação e checklist de onboarding. Notice Bar inline permitido.",
+      "rule": "Cards de ação (Content Card) e checklist de onboarding. Notice Bar inline permitido. Content Card compõe átomos do DS nos slots; ilustração só via `ilustracao`.",
       "planned": [
-        "content-card",
         "onboarding-checklist"
       ]
     },

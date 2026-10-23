@@ -3,6 +3,8 @@
 **Arquivo:** `figma-config.json`  
 **Versão:** 3.0 — baseada em libraryKeys
 
+> **Atualização 2026-10-23:** `figma-config.json` ganhou `organismPages` para as páginas `Content Card` (`12148:19`), `Ilustrações` (`12174:49314`), `Button` (`392:12798`, Button, Button Icon e Link) e `Novo Menu Accordion (WIP)`, além de `specSheets` (ids das folhas de especificação). Peças `.[base]` (inclusive `.[base] media placeholder`, `.[base] illustration` e `.[base] illustration asset`) não aparecem na busca nem são publicadas como asset: o componente público das ilustrações é o set `ilustracao`.
+
 ---
 
 ## Os Três Identificadores do Figma

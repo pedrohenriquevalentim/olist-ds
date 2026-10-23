@@ -9,7 +9,8 @@ Use este checklist ao revisar qualquer tela ou componente para consistência vis
 - [ ] Texto de corpo usa `var(--text-paragraph-font-size)` + `var(--font-weight-regular)` + `var(--color-text-container-text)`
 - [ ] Headers usam `var(--font-weight-sbold)` ou `var(--font-weight-bold)` conforme papel semântico
 - [ ] Texto secundário usa `var(--color-text-container-label)` — não `var(--color-text-disabled-default)` nem primitivo
-- [ ] Headers de tabela usam `var(--table-head-font-size)` + `var(--table-head-font-weight)` + `var(--table-head-color)`
+- [ ] Cabeçalho de tabela usa `var(--table-cell-font-size-default)` + `var(--table-cell-font-weight-head)` + `var(--table-head-font-color)`
+- [ ] Texto de apoio (support text) usa o papel `support-text` (12px); placeholder e texto digitado nos inputs usam 14px
 - [ ] Nenhum `text-transform: uppercase`
 - [ ] Nenhum itálico para ênfase
 - [ ] `line-height` sempre via token semântico correspondente ao `font-size` escolhido (ver `TIPOGRAFIA.md`)
@@ -17,14 +18,15 @@ Use este checklist ao revisar qualquer tela ou componente para consistência vis
 ## 2. Cores
 
 - [ ] Nenhum valor hex hardcoded — todas as cores usam `var(--token-semântico)`
-- [ ] Fundo de página usa `var(--color-background-surface-container)`, nunca hex fixo
-- [ ] Ações primárias usam `var(--button-color-primary)` / `var(--color-background-enabled-full-brand)`
+- [ ] Fundo da página usa `var(--color-background-surface-system)` e as zonas/cards usam `var(--color-background-surface-container)`, nunca hex fixo
+- [ ] Ações primárias usam `var(--button-color-primary-enabled)` / `var(--color-background-enabled-full-brand)`
 - [ ] Bordas de container usam `var(--color-border-container-outside)` (leve) ou `var(--color-border-container-inside)` (ênfase)
-- [ ] Elementos desabilitados usam `var(--color-background-disabled-neutral)` + `var(--color-text-disabled-default)`
+- [ ] Elementos desabilitados usam `var(--color-background-disabled-default)` + `var(--color-text-disabled-default)`
 - [ ] Estados de erro: texto/borda via `var(--color-border-feedback-negative-subtle)` + fundo `var(--color-background-feedback-negative-subtle)`
 - [ ] Estados de sucesso: `var(--color-border-feedback-positive-subtle)` + `var(--color-background-feedback-positive-subtle)`
 - [ ] Badges de status seguem o mapa de cores em `CORES.md` (tokens `color-background-feedback-*`)
 - [ ] Contraste passa WCAG 2.1 AA (4.5:1 mínimo para texto) em modo **claro e escuro**
+- [ ] Cor de produto (`--color-*-product-*`) só aparece no Product Switch e no Product Launcher; cores de série de gráfico só via `--chart-*`
 - [ ] Token semântico é da família/estado corretos, não só do valor visual certo (ver `doNotUseWhen` em `GOVERNANCA_TOKENS.md`)
 
 ## 3. Espaçamento
@@ -35,10 +37,12 @@ Use este checklist ao revisar qualquer tela ou componente para consistência vis
 - [ ] Gap dentro de seções usa `var(--shape-spacing-16px)`
 - [ ] Padding de card usa `var(--shape-spacing-16px)` (compacto) ou `var(--shape-spacing-24px)` (padrão)
 - [ ] Nenhum valor fora da escala de 4px (não existem tokens para 5px, 7px, 13px)
+- [ ] Raiz do template e gap entre zonas usam `var(--shape-spacing-8px)`
 
 ## 4. Layout
 
-- [ ] Sidebar tem 280px de largura (se presente)
+- [ ] A tela segue um dos 8 templates (`TEMPLATES_PRODUTO.md`) e cada zona só tem organismos permitidos
+- [ ] Menu Global (zona A) tem 304px de largura (ausente só no Landing foco e no Wizard)
 - [ ] Área de conteúdo preenche a largura restante
 - [ ] Auto Layout usado (sem posicionamento absoluto)
 - [ ] Layers nomeados semanticamente (nunca "Frame 1", "Group 5")
@@ -47,20 +51,23 @@ Use este checklist ao revisar qualquer tela ou componente para consistência vis
 ## 5. Componentes
 
 - [ ] Componentes existentes do DS são reutilizados (não recriados)
-- [ ] Variantes de botão seguem o DS (primary/secondary/tertiary)
+- [ ] Variantes de botão seguem o DS: `type` primary/secondary/tertiary, `intent` default/danger e `size` big (40px) / medium (36px) / small (32px); no máximo 1 primary por tela (o primary danger também conta); `type=danger` não existe mais
+- [ ] Alturas de controle seguem a escala `--globals-size-*` (inputs, select, dropdown, segmented, paginator e tabs em 40px); nenhum controle com 48px
 - [ ] Estilos de input seguem tokens do DS (borda, radius, padding, fonte)
 - [ ] Nenhum componente existe fora da estrutura `src/components/`
 - [ ] Novos componentes seguem as regras de COMPONENTES.md
+- [ ] Listagens usam o organismo Dataset inteiro (nunca tabela, toolbar ou paginação soltas); a ordenação fica no dropdown da toolbar
 
 ## 6. Estados
 
 - [ ] Estado padrão existe
 - [ ] Estado de carregamento existe (placeholders skeleton)
-- [ ] Estado vazio existe (mensagem + ação opcional)
+- [ ] Estado vazio existe (Empty State: mensagem + ação opcional)
 - [ ] Estado de erro existe (mensagem + tentar novamente)
+- [ ] Listagens cobrem os estados do Dataset: conteúdo, com seleção, carregando, primeiro uso, sem resultado e erro
 - [ ] Estados de hover usam `var(--color-background-hover-*)` (não `effects-hover-*` diretamente)
 - [ ] Estados de foco têm outline via `var(--focus-border-width-default)` + `var(--focus-border-color-default)` no `:focus-visible`
-- [ ] Estados desabilitados usam `var(--color-background-disabled-neutral)` + `var(--color-text-disabled-default)` — sem opacidade arbitrária
+- [ ] Estados desabilitados usam `var(--color-background-disabled-default)` + `var(--color-text-disabled-default)` — sem opacidade arbitrária
 - [ ] Estados ativos/pressed usam `var(--color-background-pressed-*)` (não `effects-pressed-*` diretamente)
 
 ## 7. Acessibilidade
@@ -69,16 +76,16 @@ Use este checklist ao revisar qualquer tela ou componente para consistência vis
 - [ ] Imagens têm alt text
 - [ ] Cor não é o único meio de transmitir informação (ícone + cor para status)
 - [ ] Ordem de foco é lógica (segue ordem visual)
-- [ ] Áreas de toque têm mínimo 44x44px
+- [ ] Alvos de toque têm no mínimo 24×24px (WCAG 2.2 AA, SC 2.5.8) e 8px de espaço entre alvos; para toque, prefira controles `size=big` (40px)
+- [ ] Gráficos têm legenda com rótulo (nunca só cor) e alternativa textual dos valores
 - [ ] Botões funcionam com Enter e Space
 - [ ] Formulários têm labels associados aos inputs
 - [ ] Mensagens de erro associadas via aria-describedby
 
 ## 8. Border Radius
 
-- [ ] Elementos padrão usam 8px
-- [ ] Elementos pequenos (badges, chips) usam 4px
-- [ ] Formas pill usam 9999px
+- [ ] Radius vem dos tokens: `var(--globals-border-radius-interaction)` (12px), `var(--globals-border-radius-inside-interaction)` (8px), `var(--globals-border-radius-smallest)` (4px) e `var(--globals-border-radius-pill)` (9999px)
+- [ ] Zonas de conteúdo do template usam raio de 12px; Drawer usa 24px
 - [ ] Consistente dentro do mesmo componente (sem radii misturados)
 
 ## 9. Sombras
@@ -118,6 +125,30 @@ Use este checklist ao revisar qualquer tela ou componente para consistência vis
 - [ ] Contraste 4.5:1 verificado também com o tema escuro ativo (WCAG 2.1 AA SC 1.4.3)
 - [ ] Nenhum valor de cor hardcoded no CSS ou na Figma Plugin API (nem em fallback)
 - [ ] Componentes testados visualmente nos dois modos antes do merge
+
+## 12. Templates e Organismos
+
+- [ ] Produto identificado e variante do Menu Global (`Produto=`) correta; produto sem variante (PDV, Checkout Admin) foi sinalizado como gap, não improvisado
+- [ ] Template escolhido pelo objetivo da tela (Landing, Landing foco, Dashboard, List, Record, Settings, Wizard, Estados)
+- [ ] Cada zona só tem organismos de `allowed` no JSON do template; nenhum organismo `planned` foi tratado como existente
+- [ ] 1 Page Header, 1 Dataset, 1 KPI Strip, no máximo 1 Notice Bar por slot (B0, rodapé, inline) e no máximo 1 ação primária por tela
+- [ ] Notice Bar só renderiza quando há aviso, sem espaço reservado, e é dispensável com X
+- [ ] Floating Action Bar no modo certo (seleção no List; alterações no Record e no Settings) e sem empurrar o layout
+- [ ] Organismos não foram remontados com frames ou instâncias soltas
+- [ ] Product Switch só dentro do Menu Global
+
+## 13. Intenção (danger), Ilustrações e Content Card
+
+- [ ] `intent=danger` só em ação destrutiva ou irreversível (excluir, cancelar documento, estornar); ação comum que "precisa de destaque" usa `type=primary` ou `secondary` com `intent=default`
+- [ ] Ação danger tem rótulo que diz a ação ("Cancelar NFC-e", não "Confirmar") e, se irreversível, pede confirmação (Alert Dialog ou modal): a cor nunca é o único sinal
+- [ ] Nenhum botão, link ou ícone vermelho com RGB ou token solto: sempre `intent=danger` (tokens `negative` só dentro de `button-*` e `link-*`)
+- [ ] Texto danger sobre `surface/container` (4,75:1); sobre `surface/system` o contraste de red 600 é 4,3:1 (abaixo de 4,5:1): prefira container ou documente a exceção
+- [ ] Link: `lead icon` e `action icon` conscientes (a seta de nova página vem ligada por padrão); Link disabled sem sublinhado; lista de ações com divisor usa item de lista, não Link
+- [ ] Ilustração entra só pela `ilustracao` (nunca arte `.[base]` direta, nunca recortada, redimensionada ou recolorida à mão); `tamanho`, `proporção` e `fundo` escolhidos pelo contexto (`ILUSTRACOES.md`, seção 5)
+- [ ] Uma ilustração como foco por tela, um estilo (`color` ou `outline`) por tela, no máximo 3 a 4 cores e sem azul + amarelo + verde juntos (regras do brand)
+- [ ] Ilustração `color` no tema escuro usa `fundo=claro`; `alt` vazio quando decorativa e `alt` curto quando informativa; o único texto de uma instrução nunca fica dentro da imagem
+- [ ] Content Card: superfície `padrão`, `sutil` ou `destaque`; sem card dentro de card; átomos do DS nos slots (nada remontado à mão); layout horizontal só com objeto `xs` 1:1
+- [ ] Content Card clicável é um único elemento interativo e selecionável usa `role="radio"` ou `"checkbox"` com `aria-checked`
 
 ## Níveis de Severidade
 

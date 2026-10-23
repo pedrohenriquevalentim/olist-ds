@@ -33,6 +33,11 @@ Todo componente interativo deve atender ao mínimo **WCAG 2.1 AA**. Acessibilida
 | Select / Dropdown | `ArrowUp` / `ArrowDown` (navegar), `Enter` (selecionar), `Escape` (fechar), `Space` (abrir/selecionar) |
 | Modal / Dialog | `Escape` (fechar), foco aprisionado dentro enquanto aberto |
 
+### Intenção, ilustração e card
+- `intent=danger`: a cor nunca é o único sinal; o rótulo diz a ação e ações irreversíveis pedem confirmação. Texto danger vazado exige 4,5:1 (red 600 sobre `surface/container` = 4,75:1; sobre `surface/system` = 4,3:1: evitar)
+- Ilustração decorativa: `alt=""` e `aria-hidden="true"`; informativa: `alt` curto sem "imagem de"; o texto da tela repete a mensagem
+- Content Card clicável: um único elemento interativo (link ou button); selecionável com `role="radio"`/`"checkbox"` e `aria-checked`; desabilitado com `aria-disabled` e fora da ordem de foco
+
 ### HTML semântico
 - Usar `<nav>`, `<main>`, `<section>`, `<article>` nos componentes de layout
 - Nunca usar `<div>` onde um elemento semântico existe
@@ -46,11 +51,12 @@ Cobrir obrigatoriamente nos testes:
 
 ## Referências na Skill
 
-- Checklist completo de revisão (9 categorias) → `references/CHECKLIST_REVISAO.md`
+- Checklist completo de revisão (13 categorias) → `references/CHECKLIST_REVISAO.md`
 - Visão geral dos princípios → `references/VISAO_GERAL.md` (seção "Acessível por padrão")
 
 ---
 
 ## Histórico
 
+- 2026-10-23 v1.1 — Regras de intenção danger, ilustração e Content Card.
 - 2026-06-23 v1.0 — Decisão inicial extraída do CLAUDE.md

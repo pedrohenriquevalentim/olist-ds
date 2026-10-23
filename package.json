@@ -30,7 +30,7 @@
   "scripts": {
     "validate:icons": "node scripts/validate-icon-migration.mjs",
     "validate:tokens": "node scripts/validate-tokens.mjs",
-    "sync:skill": "node scripts/sync-skill.mjs",
+    "sync:skill": "node scripts/generate-token-catalog.mjs && node scripts/sync-skill.mjs",
     "build:tokens": "npm run build --workspace=packages/design-tokens && node scripts/copy-tokens.mjs",
     "build:tokens:sd": "npm run build:sd --workspace=packages/design-tokens",
     "clean": "rm -rf dist",

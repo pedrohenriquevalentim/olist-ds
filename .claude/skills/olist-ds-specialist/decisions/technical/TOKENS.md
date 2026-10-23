@@ -212,7 +212,7 @@ npm run build:tokens
 
 ## Referências na Skill
 
-- **Catálogo completo (todos os 1.194 tokens)** → `references/TOKEN_CATALOG.md`
+- **Catálogo completo (todos os 1.537 tokens)** → `references/TOKEN_CATALOG.md`
 - Paleta de cores com exemplos de uso → `references/CORES.md`
 - Escala tipográfica → `references/TIPOGRAFIA.md`
 - Hierarquia de espaçamento → `references/ESPACAMENTO.md`
@@ -222,6 +222,7 @@ npm run build:tokens
 
 ## Histórico
 
+- 2026-10-23 v1.5 — Famílias novas no `TOKEN_CATALOG.md` (`content-card`, `media-placeholder`, `illustration`, `color-*-negative` de ação, `effects-*-red-*`, degradê `color-background-gradient-soft-*`); tokens do `intent=danger` renomeados (`button-*-danger-*` → `button-*-primary-danger-*`); tokens `illustration-size-*` em `rem`; o nome CSS de `media placeholder/border radius/ilustração` perde o acento (`…-ilustrao`). Regenerar com `npm run build:tokens` e `npm run sync:skill`.
 - 2026-09-30 v1.4 — Adicionado suporte a dark mode: nova estrutura de arquivos (tokens-light/dark.json), documentação do CSS gerado (`:root` + `@media` + `[data-theme]`), regras de uso de tokens semânticos vs primitivos em contexto dark, e exports JS `light`/`dark`.
 - 2026-09-29 v1.3 — Corrigida contradição crítica no exemplo Figma Plugin API: RGB hardcoded **não é** a forma correta — é proibida. A abordagem correta é `importVariableByKeyAsync` + `setBoundVariableForPaint` com o RGB apenas como fallback no objeto paint. Alinhado com regra equivalente em globals.md.
 - 2026-08-23 v1.2 — Corrigida contradição sobre hardcode hex (só proibido em CSS, necessário na Figma Plugin API). Adicionada hierarquia de três camadas, nomes corretos dos primitivos (segmento duplicado), referência ao TOKEN_CATALOG.md como fonte primária sem repo. Removida referência exclusiva a `src/generated/variables.css`.

@@ -148,10 +148,15 @@ function updateSkillMdTitle(skillDir, version, date) {
   if (!existsSync(skillMdPath)) return;
   let content = readFileSync(skillMdPath, 'utf-8');
   // Atualiza H1: "v3.6" ou "v3.6 · 2026-06-25"
-  const updated = content.replace(
-    /^(# Olist Design System — Especialista) v[\d.]+(?:\s·\s[\d-]+)?/m,
-    `$1 v${version} · ${date}`
-  );
+  const updated = content
+    .replace(
+      /^(# Olist (?:Design System — Especialista|DS Specialist — Dispatcher)) v[\d.]+(?:\s·\s[\d-]+)?/m,
+      `$1 v${version} · ${date}`
+    )
+    .replace(
+      /^\*\*Versão:\*\* [\d.]+ · \*\*Última atualização:\*\* [\d-]+/m,
+      `**Versão:** ${version} · **Última atualização:** ${date}`
+    );
   if (updated === content) return;
   writeFileSync(skillMdPath, updated, 'utf-8');
   console.log(`   ✅ SKILL.md — H1 title atualizado para v${version} · ${date}`);
@@ -193,7 +198,13 @@ const FILE_DESCRIPTIONS = {
   'MAPA_FONTES.md':         'Estrutura de pastas do repositório (auto-gerado)',
   'SDD_PARA_TELA.md':       '10 passos para traduzir SDD/PRD em decisões de UI',
   'SDD_AVANCADO.md':        'RNFs, DACI, Métricas, Rollout, Observabilidade → UI',
-  'CHECKLIST_REVISAO.md':   '10 categorias de revisão visual, acessibilidade e UX Writing',
+  'CHECKLIST_REVISAO.md':   '13 categorias de revisão visual, acessibilidade, UX Writing, intenção danger, ilustrações e Content Card',
+  'ORGANISMOS.md':          'Catálogo de organismos (Page Header, Dataset, Content Card…) e regras por zona',
+  'ILUSTRACOES.md':         'Moldura ilustracao, 60 cenas, 30 objetos, contextos de uso e regras do brand',
+  'GOVERNANCA_TOKENS.md':   'Intenção de uso por família de token (purpose, useWhen, doNotUseWhen)',
+  'TOKEN_CATALOG.md':       'Catálogo completo de tokens com valores claro/escuro (auto-gerado)',
+  'METADATA_SCHEMA.md':     'Schema do metadata.json de componente (Caso 7)',
+  'ICONES_CATALOGO.md':     'Catálogo de ícones do DS',
 };
 
 // Descrições de subpastas de decisions/
@@ -212,6 +223,9 @@ const DECISIONS_DESCRIPTIONS = {
   'PRINCIPIOS.md':         'Princípios de design Olist',
   'TIPOGRAFIA.md':         'Escala tipográfica e tokens',
   'UX_WRITING.md':         'Tom de voz, 4 pilares, diretrizes B2B/B2C',
+  'COMPONENTES_POR_ZONA.md': 'Componentes por zona dos templates (pontos em aberto)',
+  'INTENCAO_ACOES.md':     'Intenção (danger) em Button, Button Icon e Link',
+  'ILUSTRACOES_E_CONTENT_CARD.md': 'Ilustrações do brand e Content Card com slots',
 };
 
 function buildStructureSection(skillDir, dirName, version) {

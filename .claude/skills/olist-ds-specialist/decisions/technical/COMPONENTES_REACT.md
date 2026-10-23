@@ -58,6 +58,8 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 ### Variantes e Estados
 - Replicar TODAS as variantes visíveis no Figma (tamanho, cor, estado)
 - CSS Modules com tokens para cada variante/estado
+- **Hierarquia e intenção são props separadas** (como no Figma): `variant` (`primary` | `secondary` | `tertiary`) e `intent` (`'default'` | `'danger'`, default `'default'`). Nunca crie `variant="danger"`. Disabled ignora a intenção
+- Ícones à esquerda e à direita do `Link` são `ReactNode` opcionais (`leadIcon`, `actionIcon`), como no Button; ilustrações entram como `ReactNode` no slot de mídia do Content Card
 
 ### Componentes Complexos (Select, Dropdown, Autocomplete)
 - Separar Trigger e Popover/List em responsabilidades distintas (funções auxiliares ou sub-componentes no mesmo arquivo)
@@ -161,6 +163,7 @@ Ver `SKILL.md` Caso 7 e `CLAUDE.md` passo 10 para o script completo via `use_fig
 
 ## Histórico
 
+- 2026-10-23 v1.2 — Regra de `intent` separado de `variant` (Button, Button Icon, Link) e de ícones/ilustração como `ReactNode`. React ainda não implementa `intent`, Link nem Content Card (pendente).
 - 2026-09-30 v1.3 — Storybook: CSF3 obrigatório, `backgrounds` claro/escuro obrigatório em todo `meta`, zero hardcode em stories (exceção documentada para `backgrounds.values`).
 - 2026-06-25 v1.1 — Adicionada seção sobre geração de docs no Figma (fluxo unificado v3.7)
 - 2026-06-23 v1.0 — Decisão inicial extraída do CLAUDE.md

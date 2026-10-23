@@ -58,7 +58,7 @@ A Olist é uma plataforma B2B de e-commerce para sellers. A linguagem visual com
 --shape-border-radius-8px: 8px;
 ```
 
-Para o catálogo completo com todos os 1.194 tokens e valores Figma RGB → `TOKEN_CATALOG.md`.
+Para o catálogo completo com todos os 1.537 tokens e valores Figma RGB → `TOKEN_CATALOG.md`.
 
 ### Componentes Existentes
 
@@ -80,7 +80,7 @@ Para caminhos dos arquivos, leia `MAPA_FONTES.md`.
 
 #### Criando ou revisando componentes React:
 1. `COMPONENTES.md` — props, tokens, estados de cada componente
-2. `TOKEN_CATALOG.md` — catálogo completo de 1.194 tokens com nomes corretos e valores
+2. `TOKEN_CATALOG.md` — catálogo completo de 1.537 tokens com nomes corretos e valores
 3. `CORES.md` — paleta de cores com tokens semânticos e regras de uso
 4. `TIPOGRAFIA.md` — tokens de tipografia (tamanho, peso, altura)
 5. `GLOSSARIO_PAPEIS_TEXTO.md` —  como nomear cada tipo de texto (Heading, Label, Error, etc.)
@@ -99,7 +99,7 @@ Para caminhos dos arquivos, leia `MAPA_FONTES.md`.
 4. `TOKEN_CATALOG.md` → Seção 1 — valores Figma RGB prontos para fills na Plugin API
 
 #### Revisando qualidade de UI:
-1. `CHECKLIST_REVISAO.md` — 9 categorias de revisão + UX Writing
+1. `CHECKLIST_REVISAO.md` — 13 categorias de revisão (inclui intenção danger, ilustrações e Content Card) + UX Writing
 2. `CORES.md` — verificar uso correto de cores
 3. `TIPOGRAFIA.md` + `GLOSSARIO_PAPEIS_TEXTO.md` — verificar nomes e tokens de texto
 4. `UX_WRITING.md` — verificar tom, copy e diretrizes de escrita
@@ -108,12 +108,18 @@ Para caminhos dos arquivos, leia `MAPA_FONTES.md`.
 1. `UX_WRITING.md` — protocolo de triagem, 4 pilares, 12 tipos de texto, regras por tipo
 2. `GLOSSARIO_PAPEIS_TEXTO.md` — papéis visuais de texto (Heading, Label, Error, etc.)
 
+#### Usando ilustrações, Content Card ou ações com intenção (danger):
+1. `ILUSTRACOES.md` — escolher cena ou objeto, tamanho, proporção e fundo pela moldura `ilustracao`
+2. `ORGANISMOS.md` — regras do Content Card (slots, superfícies, layouts)
+3. `GOVERNANCA_TOKENS.md` seção 2.5 — tokens `negative` do `intent=danger`
+4. `HARNEES_TELAS.md` Seção 2 — limites e variantes obrigatórias de Button, Link e `ilustracao`
+
 #### Navegando no código-fonte:
 1. `MAPA_FONTES.md` — estrutura de pastas do repositório
 
 ---
 
-## Arquivos de Referência (16 total)
+## Arquivos de Referência (17 total)
 
 | Arquivo | O que contém | Quando consultar |
 |---|---|---|
@@ -121,6 +127,7 @@ Para caminhos dos arquivos, leia `MAPA_FONTES.md`.
 | **FIGMA_CONFIG.md** | libraryKeys, componentKeys, workflow de busca e import | **ANTES** de usar `search_design_system` |
 | **TEMPLATES_PRODUTO.md** + `templates/*.json` | 8 templates de zonas (válidos para todos os produtos) e organismos permitidos por zona | **Antes de criar telas** |
 | **ORGANISMOS.md** | Catálogo de organismos (Page Header, Notice Bar, Dataset…), regras e organismos planejados | **Antes de preencher uma zona** |
+| **ILUSTRACOES.md** + `ilustracoes-catalogo.json` | Moldura `ilustracao` (tamanho, proporção, fundo), 60 cenas, 30 objetos, contexto de uso e regras do brand | **Antes de usar qualquer ilustração** |
 | **HARNEES_TELAS.md** | Restrições executáveis por zona, gate pré-construção, limites de componentes | **ANTES** de criar qualquer frame no Figma |
 | **CORES.md** | Paleta de cores, regras, DO/DON'T | Ao escolher cores |
 | **TIPOGRAFIA.md** | Tokens de tipografia (tamanho, peso, altura) | Ao estilizar texto |
@@ -133,7 +140,17 @@ Para caminhos dos arquivos, leia `MAPA_FONTES.md`.
 | **SDD_PARA_TELA.md** | 10 passos para traduzir SDD em UI | Ao ler SDD/PRD |
 | **SDD_AVANCADO.md** | Traduzir seções avançadas do SDD (RNFs, DACI, Métricas, Rollout) | Ao ler SDDs complexos |
 | **MAPA_FONTES.md** | Estrutura de pastas do repositório | Ao navegar no código |
-| **CHECKLIST_REVISAO.md** | 9 categorias de revisão de qualidade + UX Writing | Ao revisar UI |
+| **CHECKLIST_REVISAO.md** | 13 categorias de revisão de qualidade + UX Writing | Ao revisar UI |
+
+---
+
+## Novidades (v3.25 — 2026-10-23)
+
+- **Intenção `danger` em Button, Button Icon e Link:** `type` (primary, secondary, tertiary) é a hierarquia e `intent` (default, danger) é o significado. `type=danger` virou `type=primary` + `intent=danger`. Secundário e terciário danger são novos; o Link ganhou `disabled`, `lead icon` e `action icon` (antes `new page`). Tokens `negative` em `GOVERNANCA_TOKENS.md` seção 2.5.
+- **Content Card** (organismo, zonas C–F): card com 4 slots (mídia, ação, corpo, rodapé) para compor átomos do DS; superfícies padrão, sutil e destaque; layouts vertical, horizontal e horizontal invertido. Regras em `ORGANISMOS.md`.
+- **Ilustrações do brand:** moldura `ilustracao` (nome sem acento) com 60 cenas e 30 objetos em peças internas `.[base]`. Catálogo e regras em `ILUSTRACOES.md`.
+- **Tokens novos:** `content-card-*`, `media-placeholder-*`, `illustration-*`, `color-*-negative` de ação, `effects-*-red-*` e degradê `color-background-gradient-soft-*`. `scripts/generate-token-catalog.mjs` passou a catalogar as três famílias novas.
+- **Pendente:** React (Button `intent`, Link, Content Card), Novo Menu Accordion (WIP, não usar em telas) e confirmação do brand sobre os pares base/recolor.
 
 ---
 

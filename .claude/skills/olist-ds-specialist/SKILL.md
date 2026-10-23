@@ -1,11 +1,11 @@
 ---
 name: olist-ds-specialist
 description: Use esta skill para TODO trabalho de UI/UX da Olist — criação de telas a partir de SDDs/PRDs, geração de componentes React, revisão de consistência visual, criação de protótipos no Figma, manutenção do design system e criação/revisão de textos de UI (UX Writing, copy, tom de voz). Acione quando alguém mencionar interface Olist, design system, tokens, componentes, telas, layouts, SDD, PRD, protótipo, wireframe, Figma, Storybook, copy, texto de botão, mensagem de erro, empty state, toast, label, placeholder ou qualquer tarefa de criação ou revisão de UI/copy para produtos Olist. NÃO use para backend, APIs, banco de dados, autenticação ou lógica de negócio sem relação com UI.
-version: 3.24
-lastModified: 2026-10-20
+version: 3.25
+lastModified: 2026-10-23
 ---
 
-# Olist DS Specialist — Dispatcher v3.22
+# Olist DS Specialist — Dispatcher v3.25 · 2026-10-23
 
 ## Slash Commands
 
@@ -58,6 +58,12 @@ Para qualquer caso detectado:
 2. Ler o arquivo do caso correspondente em `cases/`
 3. Executar os passos do caso na íntegra
 
+Regras que valem para todo caso que produza UI (detalhes em `globals.md`):
+
+- **Ação destrutiva = `intent=danger`** em `Button`, `Button Icon` e `Link` (`type` é só a hierarquia; `type=danger` não existe mais).
+- **Ilustração só pela moldura `ilustracao`** (ler `references/ILUSTRACOES.md`); nunca recortar, redimensionar ou recolorir a arte.
+- **Content Card** é um organismo existente (zonas C–F): compor átomos do DS nos slots, sem card dentro de card (ler `references/ORGANISMOS.md`).
+
 | Caso | Arquivo |
 |---|---|
 | 1, 2 (tela React) | `cases/caso-1-2-tela-react.md` |
@@ -71,5 +77,5 @@ Para qualquer caso detectado:
 
 ---
 
-**Versão:** 3.22 · **Última atualização:** 2026-09-29
+**Versão:** 3.25 · **Última atualização:** 2026-10-23
 **Changelog:** ver `CHANGELOG.md`
