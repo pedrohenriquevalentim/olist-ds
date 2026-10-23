@@ -5,9 +5,9 @@
     "figmaFileKey": "HeyN4w209HWh8rfpTDiwyf",
     "figmaLibraryKey": "lk-f068a69b8c4ef3c01d6a883806b21c6ebe73213d3565451a399cfba74694fbc0053c2b4226fb206812f098c679b6a971148aa027e97bc14733e29552c4002cb5",
     "extractedAt": "2026-07-03",
-    "republishedAt": "2026-10-20T02:17:23Z",
-    "lastSyncAt": "2026-10-20",
-    "totalComponents": 119,
+    "republishedAt": "2026-10-23T00:22:58Z",
+    "lastSyncAt": "2026-10-23",
+    "totalComponents": 123,
     "published": true,
     "previousSource": {
       "name": "AI-Components",
@@ -54,7 +54,10 @@
         "type": [
           "primary",
           "secondary",
-          "tertiary",
+          "tertiary"
+        ],
+        "intent": [
+          "default",
           "danger"
         ],
         "state": [
@@ -82,17 +85,18 @@
         ]
       },
       "variantsConfirmed": true,
-      "note": "Figma usa 'type' (não 'variant') e size = big/medium/small — os mesmos nomes do React (renomeado de lg/md/sm em 2026-10-16). Tipo 'danger' (ação destrutiva; fundo red 600 com texto claro, contraste 4,64:1). Slots de ícone são propriedades booleanas separadas. Máximo 1 Button primary por tela. Escala de altura (2026-10-19): big 40px · medium 36px · small 32px.",
+      "note": "Figma usa 'type' (não 'variant') e size = big/medium/small — os mesmos nomes do React. Desde 2026-10-22 hierarquia e intenção são dimensões separadas: `type` = primary | secondary | tertiary (ênfase) e `intent` = default | danger (significado; danger = ação destrutiva, ex.: Excluir, Cancelar NFC-e, Estornar pagamento). O antigo `type=danger` virou `type=primary` + `intent=danger` (sem mudança visual; instâncias existentes migraram sozinhas). Secundário e terciário danger são novos (texto/borda red 600 no claro e red 500 no escuro, hover/pressed com tint vermelho). Disabled ignora a intenção. Slots de ícone são variantes on/off separadas. Máximo 1 Button primary por tela. Escala de altura: big 40px · medium 36px · small 32px. Escolha o `intent` pelo significado da ação, nunca pela cor desejada.",
       "componentProperties": {
         "label": "TEXT",
         "focus": "BOOLEAN"
       },
-      "variantsCount": 144,
+      "variantsCount": 216,
       "publishStatusVerified": {
         "status": "CURRENT",
-        "at": "2026-10-16"
+        "at": "2026-10-23"
       },
-      "variantsSource": "Figma use_figma (componentPropertyDefinitions) 2026-10-20"
+      "variantsSource": "Figma use_figma (componentPropertyDefinitions) 2026-10-20",
+      "intentAddedAt": "2026-10-22"
     },
     "Button Icon": {
       "componentKey": "0a4fdb6997f71ed5c9ed5c9993d682090d55597e",
@@ -103,7 +107,10 @@
         "type": [
           "primary",
           "secondary",
-          "tertiary",
+          "tertiary"
+        ],
+        "intent": [
+          "default",
           "danger"
         ],
         "state": [
@@ -119,15 +126,16 @@
         ]
       },
       "variantsConfirmed": true,
-      "note": "Tamanhos big/medium/small = 48/40/32 px, sempre quadrado (renomeado de lg/md/sm em 2026-10-16; mesmos nomes do React). Inclui tipo 'danger'. Figma usa 'type' (não 'variant'). Escala de altura (2026-10-19): big 40px · medium 36px · small 32px.",
+      "note": "Tamanhos big/medium/small = 40/36/32 px, sempre quadrado (mesmos nomes do React). Mesmo modelo do Button: `type` = hierarquia e `intent` = default | danger (2026-10-22; o antigo `type=danger` virou `type=primary` + `intent=danger`). Figma usa 'type' (não 'variant'). O glifo de secundário/terciário agora usa o token de cor do texto (antes ficava com cor fixa no hover/pressed e não acompanhava o tema escuro).",
       "componentProperties": {
         "focus": "BOOLEAN"
       },
-      "variantsCount": 48,
+      "variantsCount": 72,
       "publishStatusVerified": {
         "status": "CURRENT",
-        "at": "2026-10-16"
-      }
+        "at": "2026-10-23"
+      },
+      "intentAddedAt": "2026-10-22"
     },
     "Menu Global": {
       "componentKey": "c76f80e6de1b8c4bd100b60329f3d68d28653e68",
@@ -160,20 +168,36 @@
       "assetType": "component_set",
       "category": "navigation",
       "variantsConfirmed": true,
-      "note": "Variantes não confirmadas via get_metadata — fornecer URL do Figma para mapear.",
-      "nodeId": "6819:7741",
+      "note": "Texto clicável inline. `type` = paragraph | description (tamanho do texto); `intent` = default | danger (ação destrutiva isolada, ex.: Excluir, Estornar pagamento); `state` agora inclui disabled (sem sublinhado). Ícones são booleanos independentes: `lead icon` (esquerda, desligado por padrão, vem com seta) e `action icon` (direita, ligado por padrão, abrir em nova página; substitui o antigo boolean `new page`). Troque o glifo sobrescrevendo a instância interna. Em listas de ações use o item de lista, não o Link. Link não vira botão: CTA é Button.",
+      "nodeId": "6819:7742",
       "variants": {
         "type": [
           "paragraph",
           "description"
         ],
+        "intent": [
+          "default",
+          "danger"
+        ],
         "state": [
           "enabled",
           "hover",
-          "pressed"
+          "pressed",
+          "disabled"
         ]
       },
-      "variantsSource": "Figma use_figma (componentPropertyDefinitions) 2026-10-20"
+      "variantsSource": "Figma use_figma 2026-10-23",
+      "variantsCount": 16,
+      "componentProperties": {
+        "label": "TEXT",
+        "lead icon": "BOOLEAN",
+        "action icon": "BOOLEAN"
+      },
+      "intentAddedAt": "2026-10-22",
+      "publishStatusVerified": {
+        "status": "CURRENT",
+        "at": "2026-10-23"
+      }
     },
     "Segmented Buttons": {
       "componentKey": "218c86353f7cb84c5b129ae8bbcf23b28908b43b",
@@ -2577,6 +2601,247 @@
       "kind": "molecule",
       "note": "Barra de progresso (página marcada WIP no Figma).",
       "addedAt": "2026-10-20"
+    },
+    "Content Card": {
+      "componentKey": "10e329f752fa7c913e8a41efb0b3e9e2f9df5332",
+      "assetType": "component_set",
+      "category": "organism",
+      "variantsConfirmed": true,
+      "nodeId": "12151:1832",
+      "figmaNodeId": "12151:1832",
+      "variants": {
+        "surface": [
+          "padrão",
+          "sutil",
+          "destaque"
+        ],
+        "state": [
+          "enabled",
+          "hover",
+          "focused",
+          "selected",
+          "disabled"
+        ],
+        "layout": [
+          "vertical",
+          "horizontal",
+          "horizontal invertido"
+        ]
+      },
+      "variantsCount": 45,
+      "componentProperties": {
+        "título": "TEXT",
+        "descrição": "TEXT",
+        "mostrar cabeçalho": "BOOLEAN",
+        "mostrar descrição": "BOOLEAN",
+        "mostrar mídia": "BOOLEAN",
+        "mostrar ação": "BOOLEAN",
+        "mostrar corpo": "BOOLEAN",
+        "mostrar rodapé": "BOOLEAN",
+        "mostrar divisor": "BOOLEAN",
+        "slot mídia": "SLOT",
+        "slot ação": "SLOT",
+        "slot corpo": "SLOT",
+        "slot rodapé": "SLOT"
+      },
+      "variantsSource": "Figma use_figma 2026-10-23",
+      "kind": "organism",
+      "allowedZones": [
+        "C-F"
+      ],
+      "addedAt": "2026-10-22",
+      "note": "Card com 4 slots (mídia, ação, corpo, rodapé) para compor átomos reais do DS (Metric, Badge, Progress Bar, Checkbox, Radio, Input, tabela, Button…). Evolui o `card` editorial, que agora é só uma composição (mídia + textos + dois botões). Superfícies: padrão, sutil e destaque (degradê suave blue 50 → cyan 50; escuro blue 800 → cyan 900). Estados: enabled, hover (sombra nível 2), focused, selected (borda 2px) e disabled. Layouts: vertical, horizontal (mídia fixa de 96px: só cabe objeto 1:1 xs da `ilustracao`) e horizontal invertido. Padding por override de instância com 4 tokens (none, compact, default, comfortable). Sombra de repouso `.shadow/.level 1`, hover `.shadow/.level 2`. Não aninhar card em card; gráfico com legenda é o Chart Card. O `card` antigo permanece até a migração. Em superfícies não há variante escura nem botão inverso.",
+      "figmaPage": "12148:19",
+      "specSheetNodeId": "12160:1625",
+      "publishStatusVerified": {
+        "status": "CURRENT",
+        "at": "2026-10-23"
+      }
+    },
+    "Ilustracao": {
+      "componentKey": "a0281dd6a727a0f8e64baac00bcea4789dab7ff3",
+      "assetType": "component_set",
+      "category": "brand",
+      "variantsConfirmed": true,
+      "nodeId": "12175:65251",
+      "figmaNodeId": "12175:65251",
+      "variants": {
+        "tamanho": [
+          "2xs",
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ],
+        "proporção": [
+          "4:3",
+          "1:1",
+          "16:9",
+          "3:1"
+        ],
+        "fundo": [
+          "nenhum",
+          "neutro",
+          "destaque",
+          "claro"
+        ]
+      },
+      "variantsCount": 96,
+      "componentProperties": {
+        "ilustração": "INSTANCE_SWAP"
+      },
+      "variantsSource": "Figma use_figma 2026-10-23",
+      "addedAt": "2026-10-22",
+      "note": "Moldura das ilustrações do brand (nome no Figma: `ilustracao`, sem acento). Escolha `tamanho` (largura por token illustration/size: 2xs 64, xs 96, sm 160, md 240, lg 360, xl 480 px), `proporção` (4:3, 1:1, 16:9, banner 3:1) e `fundo` (nenhum, neutro acompanha o tema, destaque degradê suave, claro fixo mesmo no tema escuro) e troque a arte pela propriedade `ilustração` (INSTANCE_SWAP; 90 artes como valores preferidos). A arte nunca é cortada: ajusta-se ao espaço (contain). Cenas (60): 4 categorias (logística, finanças, seller, pdv-buyer) × estilo (color, outline) × cena × paleta (base, recolor). Objetos (30): artes soltas em 1:1. Outline acompanha o tema (traço em `illustration/color/stroke`, máscara em `illustration/color/mask`); color mantém a paleta do brand: no tema escuro use o fundo `claro`. Ilustração é decorativa (alt vazio) ou informativa (alt curto). Não substitui Icon nem Product Icon.",
+      "internalSets": {
+        ".[base] illustration": {
+          "nodeId": "12174:62049",
+          "key": "28c7d1b4bfd599a9c39fe766b8f0c25fc89713a3",
+          "variants": {
+            "categoria": [
+              "logística",
+              "finanças",
+              "seller",
+              "pdv-buyer"
+            ],
+            "estilo": [
+              "color",
+              "outline"
+            ],
+            "cena": [
+              "01",
+              "02",
+              "03",
+              "04",
+              "05",
+              "06",
+              "01b"
+            ],
+            "paleta": [
+              "base",
+              "recolor"
+            ]
+          },
+          "count": 60
+        },
+        ".[base] illustration asset": {
+          "nodeId": "12174:62050",
+          "key": "a46e3ed6bcc9cecf1b3562272357e0ac5477a694",
+          "variants": {
+            "objeto": [
+              "headset",
+              "chaleira",
+              "furadeira",
+              "ventilador",
+              "webcam",
+              "secador",
+              "maquininha",
+              "whey",
+              "garrafa",
+              "luz",
+              "gato",
+              "câmera",
+              "abajur",
+              "atendimento",
+              "impressora",
+              "caixa",
+              "pneu",
+              "guarda-chuva",
+              "caneca",
+              "caixa aberta",
+              "computador",
+              "cabides",
+              "controle",
+              "pia",
+              "ferro de passar",
+              "moeda",
+              "lupa",
+              "balão",
+              "cartão",
+              "calculadora"
+            ]
+          },
+          "count": 30
+        }
+      },
+      "figmaPage": "12174:49314",
+      "specSheetNodeId": "12175:65258",
+      "publishStatusVerified": {
+        "status": "CURRENT",
+        "at": "2026-10-23"
+      }
+    },
+    "Menu Item": {
+      "componentKey": "8080cfaac0217f5b4c317f639121efaaccb310bd",
+      "assetType": "component_set",
+      "category": "navigation",
+      "variantsConfirmed": true,
+      "nodeId": "12097:45227",
+      "figmaNodeId": "12097:45227",
+      "variants": {
+        "level": [
+          "N1",
+          "N2"
+        ],
+        "mode": [
+          "label",
+          "icon"
+        ],
+        "state": [
+          "enabled",
+          "hover",
+          "pressed",
+          "selected"
+        ],
+        "open": [
+          "false",
+          "true"
+        ]
+      },
+      "variantsCount": 16,
+      "componentProperties": {
+        "label": "TEXT",
+        "icon": "INSTANCE_SWAP"
+      },
+      "variantsSource": "Figma use_figma 2026-10-23",
+      "addedAt": "2026-10-21",
+      "note": "Item do Novo Menu Accordion (ERP): N1/N2, label ou só ícone (menu recolhido); N1 selecionado usa ícone azul (e preenchido no recolhido). Peça do menu accordion em WIP: NÃO usar em telas; o menu das telas continua sendo o `menu-global`.",
+      "wip": true,
+      "publishStatusVerified": {
+        "status": "CURRENT",
+        "at": "2026-10-23"
+      }
+    },
+    "Menu Accordion": {
+      "assetType": "component_set",
+      "category": "navigation",
+      "variantsConfirmed": true,
+      "nodeId": "12099:569",
+      "figmaNodeId": "12099:569",
+      "componentKey": "c6cd62682c2a9b41c28e5030b65f67eca030cd2f",
+      "variants": {
+        "mode": [
+          "expanded",
+          "icon only"
+        ],
+        "module": [
+          "none",
+          "vendas",
+          "produtos"
+        ]
+      },
+      "variantsCount": 6,
+      "variantsSource": "Figma use_figma 2026-10-23",
+      "addedAt": "2026-10-21",
+      "note": "Menu accordion migrado do arquivo ERP — Menu Accordion (Proposta A), página 'Novo Menu Accordion' (WIP). Header usa `product switch` (expandido ou compacto). UNPUBLISHED: não usar em telas. Decisão pendente: substitui ou não o `menu-global`.",
+      "wip": true,
+      "deprecated": false,
+      "publishStatusVerified": {
+        "status": "UNPUBLISHED",
+        "at": "2026-10-23"
+      },
+      "figmaPage": "12075:77348"
     }
   },
   "categories": {
@@ -2595,7 +2860,9 @@
       "Context Switch",
       "Stepper",
       "Accordion",
-      "Product Switch"
+      "Product Switch",
+      "Menu Item",
+      "Menu Accordion"
     ],
     "input": [
       "Input Text",
@@ -2669,7 +2936,8 @@
       "Chart Tooltip"
     ],
     "brand": [
-      "Logo"
+      "Logo",
+      "Ilustracao"
     ],
     "icon": [
       "Icon",
@@ -2718,7 +2986,8 @@
       "Dataset",
       "Floating Action Bar",
       "KPI Strip",
-      "Chart Card"
+      "Chart Card",
+      "Content Card"
     ]
   },
   "textStyles": {
@@ -2751,7 +3020,10 @@
       ".[base] product launcher tile",
       ".[base] product launcher row",
       ".[base] settings menu item",
-      ".[base] menu global · configurações"
+      ".[base] menu global · configurações",
+      ".[base] media placeholder",
+      ".[base] illustration",
+      ".[base] illustration asset"
     ],
     "calendarMonth": {
       "componentSetNodeId": "11829:662",
@@ -2791,6 +3063,34 @@
       "componentSetNodeId": "11582:453",
       "status": "UNPUBLISHED",
       "verifiedAt": "2026-10-16"
+    },
+    "mediaPlaceholder": {
+      "componentSetNodeId": "12148:45430",
+      "key": "f89b2dbd2d339965cd019a7df055103b3088bb01",
+      "variants": {
+        "tipo": [
+          "imagem",
+          "ilustração"
+        ],
+        "tom": [
+          "claro"
+        ]
+      },
+      "createdAt": "2026-10-22",
+      "usedBy": "slot mídia do Content Card (placeholder de imagem ou ilustração)",
+      "status": "interno"
+    },
+    "illustrationArt": {
+      "scenes": {
+        "componentSetNodeId": "12174:62049",
+        "count": 60
+      },
+      "objects": {
+        "componentSetNodeId": "12174:62050",
+        "count": 30
+      },
+      "createdAt": "2026-10-22",
+      "note": "Arte vetorial normalizada em prancheta 4:3 (480×360), contain, alinhada embaixo (objetos centralizados); constraints SCALE em todos os descendentes; raios, traços e texto convertidos em vetor para escalar sem distorcer. Só entram por meio do `ilustracao`."
     }
   },
   "syncDiff": {
@@ -2997,6 +3297,44 @@
         "Table Toolbar: set de variante única convertido em componente simples (key 092c813d…)"
       ],
       "unchangedKeys": "Dropdown, Context Switch e demais componentes mantiveram a key"
+    },
+    "sync_2026_10_23": {
+      "note": "6ª rodada: library republicada em 2026-10-23 (updatedAt 00:22Z). Verificada via search_design_system e use_figma (key, variantes e publicação).",
+      "added": [
+        "Content Card",
+        "Ilustracao",
+        "Menu Item"
+      ],
+      "addedUnpublished": [
+        "Menu Accordion (WIP)"
+      ],
+      "variantsUpdated": {
+        "Button": "type 4 → 3 + intent (default, danger); 144 → 216 variantes",
+        "Button Icon": "type 4 → 3 + intent; 48 → 72",
+        "Link": "6 → 16 variantes (+ intent, + state disabled); boolean new page → action icon; novo boolean lead icon",
+        "Product Switch": "modo expandido | compacto (2026-10-21)"
+      },
+      "tokensAdded": [
+        "color/(text|shape)/(enabled|hover|pressed)/negative",
+        "color/background/(hover|pressed)/negative",
+        "color/background/gradient/soft start|end",
+        "color/background/enabled/product <produto> (8)",
+        "effects/(hover|pressed)/red 600_8|16 e red 500_12|24",
+        "content card/*",
+        "media placeholder/*",
+        "illustration/*",
+        "button/*/(secondary|tertiary) danger *",
+        "link/*/danger * e disabled",
+        "menu/container/spacing/gap item|indent",
+        "product launcher/tile/size/label height",
+        "product launcher/row/border radius icon box"
+      ],
+      "tokensRenamed": {
+        "button/color/danger *": "button/color/primary danger *",
+        "button/font/font color/danger *": "button/font/font color/primary danger *"
+      },
+      "unchangedKeys": "Button, Button Icon, Link, Product Switch e demais componentes mantiveram a key",
+      "searchNote": "Peças `.[base]` (media placeholder, illustration, illustration asset) não aparecem na busca, como esperado. O set público da moldura chama-se `ilustracao`."
     }
   }
 }

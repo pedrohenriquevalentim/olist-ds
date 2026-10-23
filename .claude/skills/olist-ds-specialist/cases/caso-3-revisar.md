@@ -7,7 +7,7 @@ Usuário: Revise se esta tela segue o DS Olist:
 [código ou screenshot]
 
 Você:
-1. Ler CHECKLIST_REVISAO.md
+1. Ler CHECKLIST_REVISAO.md (13 seções: inclui intenção danger, ilustrações e Content Card na seção 13)
 2. Ler GLOSSARIO_PAPEIS_TEXTO.md
 3. Verificar se textos usam papéis corretos
 4. Verificar cores, tipografia, espaçamento

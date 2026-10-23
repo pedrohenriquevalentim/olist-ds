@@ -97,7 +97,7 @@ const FAMILIES = [
   'menu', 'button', 'input', 'chip', 'badges', 'card', 'tabs', 'checkbox', 'toggle', 'link',
   'dropdown', 'tooltip', 'breadcrumb', 'paginator', 'table', 'avatar', 'accordion', 'drawer',
   'list', 'logo', 'icon', 'scrollbar', 'overlay', 'shadow', 'flags', 'modal', 'calendar', 'toast',
-  'stepper', 'chart',
+  'stepper', 'chart', 'content-card', 'media-placeholder', 'illustration',
 ].sort((a, b) => b.length - a.length);
 const familyOf = (n) => FAMILIES.find((f) => n.startsWith(`--${f}-`));
 const componentNames = names.filter((n) => !SHARED.test(n) && familyOf(n));

@@ -1,3 +1,45 @@
+## v3.25 (2026-10-23) — Content Card, ilustrações e intenção (danger)
+
+### component-registry.json + referências + decisões + scripts
+
+**Arquivos modificados:** `component-registry.json`, `figma-config.json`, `globals.md`, `SKILL.md`, `references/{ORGANISMOS,HARNEES_TELAS,CHECKLIST_REVISAO,GOVERNANCA_TOKENS,CORES,ESPACAMENTO,UX_WRITING,TEMPLATES_PRODUTO,VISAO_GERAL,FIGMA_CONFIG}.md`, `references/templates/{landing,dashboard}.json`, `references/TOKEN_CATALOG.md` (regenerado), `cases/{caso-3-revisar,caso-4-figma,caso-5-construir}.md`, `decisions/{INDEX,CHANGELOG}.md`, `decisions/technical/{TOKENS,COMPONENTES_REACT,ACESSIBILIDADE}.md`, `decisions/ux-design/COMPONENTES_POR_ZONA.md`, `../../../scripts/{generate-token-catalog,sync-skill-meta}.mjs`
+**Arquivos criados:** `references/ILUSTRACOES.md`, `references/ilustracoes-catalogo.json`, `decisions/ux-design/INTENCAO_ACOES.md`, `decisions/ux-design/ILUSTRACOES_E_CONTENT_CARD.md`
+
+#### Added
+
+- **Intenção `danger` em Button, Button Icon e Link (2026-10-22):** `type` = primary, secondary, tertiary (hierarquia) e `intent` = default, danger (significado), no mesmo vocabulário de Badge, Toast e Alert Bar. Button 144 → 216 variantes, Button Icon 48 → 72, Link 6 → 16. Secundário e terciário danger são novos; disabled ignora a intenção. Decisão em `decisions/ux-design/INTENCAO_ACOES.md`.
+- **Link com `disabled`, `lead icon` e `action icon`:** o boolean `new page` foi renomeado para `action icon` (valores preservados); `lead icon` (esquerda, desligado por padrão) é novo.
+- **Tokens da intenção:** semânticos `color-(text|shape)-(enabled|hover|pressed)-negative` e `color-background-(hover|pressed)-negative`; base `effects-(hover|pressed)-red-600-8|16` e `red-500-12|24`; componente `button-*-(secondary|tertiary)-danger-*`, `button-border-color-secondary-danger-*`, `link-*-danger-*`, `link-*-disabled`, `link-shape-color-hover`. Contraste de red 600: 4,75:1 sobre `surface-container`, 4,3:1 sobre `surface-system`.
+- **Content Card (organismo, zonas C–F, 2026-10-22):** card com 4 slots (mídia, ação, corpo, rodapé) para compor átomos do DS; 45 variantes (`surface` padrão/sutil/destaque × `state` enabled/hover/focused/selected/disabled × `layout` vertical/horizontal/horizontal invertido); padding por override com 4 tokens; sombra de repouso `.shadow/.level 1` e hover `.level 2`; 14 composições de referência no Figma. Entra na Landing e no Dashboard (`templates/landing.json` e `dashboard.json`). Peça interna `.[base] media placeholder`.
+- **`ilustracao` (moldura das ilustrações do brand, 2026-10-22):** `tamanho` (2xs 64 a xl 480) × `proporção` (4:3, 1:1, 16:9, 3:1) × `fundo` (nenhum, neutro, destaque, claro) + propriedade `ilustração` (INSTANCE_SWAP, 90 artes como valores preferidos). Peças internas `.[base] illustration` (60 cenas: 4 categorias × color/outline × cena × paleta base/recolor) e `.[base] illustration asset` (30 objetos), em prancheta 4:3. Outline acompanha o tema por tokens; color usa `fundo=claro` no escuro. Catálogo e regras em `references/ILUSTRACOES.md` e `references/ilustracoes-catalogo.json`.
+- **Tokens novos:** famílias `content-card-*`, `media-placeholder-*` e `illustration-*`; degradê suave `color-background-gradient-soft-start|end` (claro blue 50 → cyan 50; escuro blue 800 → cyan 900), único degradê do DS; `shape-spacing-20px`; `menu-container-spacing-gap-item|indent` e `menu-menu-item-shape-color-hover|pressed` (Novo Menu Accordion); `product-launcher-tile-size-label-height` (rótulo de 2 linhas, tile de 98px) e `product-launcher-row-border-radius-icon-box`.
+- **Registry:** `Content Card`, `Ilustracao` e `Menu Item` adicionados; `Menu Accordion` registrado como WIP (não publicado); `.[base] media placeholder`, `.[base] illustration` e `.[base] illustration asset` em `excludedInternal`; `syncDiff.sync_2026_10_23`. Library republicada em 2026-10-23 (00:22Z) e verificada por `search_design_system` e `use_figma`.
+- **`CHECKLIST_REVISAO.md` seção 13** (intenção danger, ilustrações e Content Card) e linhas de UX Writing para ação danger e texto alternativo de ilustração.
+- **`caso-5-construir.md`:** lições práticas da Plugin API (adicionar dimensão de variante renomeando, mover clones para o set, mapear tokens por nome, constraints SCALE em arte vetorial, converter raios/traços/texto em vetor, `outlineStroke` devolve o nó na página, slots e modo de tema forçado).
+
+#### Changed
+
+- **Button / Button Icon:** `type=danger` deixou de existir; o antigo danger é `type=primary` + `intent=danger` (sem mudança visual, instâncias migraram sozinhas). Tokens `button-(color|font-font-color)-danger-*` renomeados para `…-primary-danger-*`. No Button Icon, o glifo de secundário e terciário passou a usar o token de cor do texto (antes cor fixa no hover/pressed, sem tema escuro).
+- **`HARNEES_TELAS.md` v3.1:** o primary danger conta para o limite de 1 primary por tela; variantes obrigatórias e contextos de Button, Link, `ilustracao` e Content Card; padrão Empty State usa a `ilustracao`.
+- **Content Card deixa de ser organismo `planned`:** `ORGANISMOS.md` v1.1, `globals.md`, `TEMPLATES_PRODUTO.md` v2.1 e os JSONs de Landing e Dashboard.
+- **`TOKEN_CATALOG.md`:** 1.537 variáveis (937 de componente); `scripts/generate-token-catalog.mjs` passou a catalogar `content-card`, `media-placeholder` e `illustration`. `scripts/sync-skill-meta.mjs` ganhou descrições dos novos arquivos.
+- **`globals.md`:** invariantes 8 (hierarquia e intenção separadas) e 9 (ilustração só pela moldura), inventário e regras "Nunca" atualizados.
+
+#### Removed
+
+- **Degradês fortes (marca e profundo) e a superfície `marca` do Content Card:** avaliados e retirados por ficarem pesados; o layout "mídia de fundo" saiu junto (dependia da superfície marca). Variáveis `content card/color/*` correspondentes, `color/background/gradient/(marca|profundo|overlay)`, `effects/overlay/brand 0%` e os tokens escuros do `media placeholder` foram apagados.
+
+#### Pendente
+
+- **React:** `Button` com `intent`, `Link` (não existe em React) e Content Card só entram quando o usuário pedir; `COMPONENTES.md` segue gerado só dos componentes React existentes.
+- **Item de lista/menu com `intent`** (print "Estornar pagamento" em lista de ações) e **Alert Dialog** (`type=destructive`) ainda usam outro vocabulário.
+- **Novo Menu Accordion (WIP):** `menu accordion` não publicado; `menu item` publicado mas não usar em telas. Decisão pendente sobre substituir ou não o `menu-global`.
+- **Ilustrações:** confirmar com o brand os pares base/recolor atribuídos por posição (Finanças 01 e PDV 01, 03, 04 color); sem versão escura das cenas color; mídia horizontal do Content Card fixa em 96px (só objeto `xs`).
+- **Content Card:** `card` editorial antigo mantido até a migração; sem átomos de timeline ou skeleton.
+- **Ícone de 28px da linha do Product Launcher:** token ainda pendente.
+
+---
+
 ## v3.24 (2026-10-20) — organismos, templates por zonas e componentes novos
 
 ### component-registry.json + globals.md + referências + figma-config.json

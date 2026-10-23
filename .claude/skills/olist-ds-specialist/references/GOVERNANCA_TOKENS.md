@@ -175,6 +175,23 @@ Não use `brand` (feedback) quando a intenção é "ação primária" — isso �
   - **useWhen:** sempre via tokens `chart-*` (seção 9)
   - **doNotUseWhen:** feedback (sucesso/erro) — use `color-*-feedback-*`; nunca dependa só da cor da série (legenda com rótulo é obrigatória)
 
+### 2.5 Intenção `danger`, degradê suave e mídia (2026-10-22)
+
+- **`color-(text|shape)-(enabled|hover|pressed)-negative`**
+  - **purpose:** texto e ícone/borda de **ações** com intenção destrutiva (secundário e terciário danger do Button e do Button Icon, Link danger)
+  - **valores:** claro `enabled` red 600 · `hover` red 700 · `pressed` red 800; escuro `enabled` red 500 · `hover` red 400 · `pressed` red 300
+  - **useWhen:** só via `button-*` e `link-*` (tokens `secondary danger`, `tertiary danger`, `link-*-danger-*`)
+  - **doNotUseWhen:** mensagem, tag, alerta ou campo com erro — use `color-*-feedback-negative-*` (seção 2.3); texto sobre fundo vermelho preenchido — use `color-text-*-on-negative`
+  - **note:** red 600 dá 4,75:1 sobre `surface-container` e 4,3:1 sobre `surface-system` (abaixo de 4,5:1): em fundo `system`, prefira mover o botão para `container` ou documente a exceção
+- **`color-background-(hover|pressed)-negative`**
+  - **purpose:** tint de hover/pressed do fundo de botão secundário/terciário danger (red 600 a 8% e 16% no claro; red 500 a 12% e 24% no escuro, via `effects-hover-red-600-8`, `effects-pressed-red-600-16`, `effects-hover-red-500-12`, `effects-pressed-red-500-24`)
+  - **doNotUseWhen:** botão danger preenchido (primary) — use `color-background-(hover|pressed)-full-negative`
+  - **pairsWith:** `color-text-<estado>-negative` e `color-shape-<estado>-negative` do mesmo estado
+- **`color-background-gradient-soft-start` / `-end`**
+  - **purpose:** degradê suave diagonal azul → ciano (claro blue 50 → cyan 50; escuro blue 800 → cyan 900), único degradê do DS
+  - **useWhen:** superfície `destaque` do Content Card e fundo `destaque` da `ilustracao` (via `content-card-color-gradient-soft-*` e `illustration-color-gradient-*`)
+  - **doNotUseWhen:** qualquer outro componente; degradês fortes (marca, profundo) foram avaliados e **removidos** por ficarem pesados — não recriar sem decisão do mantenedor
+
 ---
 
 ## 3. Tipografia
@@ -265,6 +282,7 @@ A escala primitiva tem 7 pesos, com aliases semânticos de nome mais curto:
 - **purpose:** gaps e paddings, base 4px
 - **useWhen:** ver tabela de uso comum em `ESPACAMENTO.md`
 - **doNotUseWhen:** não use valores fora da escala (múltiplos de 4)
+- **note (2026-10-21):** `shape-spacing-20px` (e o semântico `shape-spacing-x2-5-20px`) existe para o recuo dos itens N2 do menu (`menu-container-spacing-indent`)
 - **note:** a escala vai de `0px` a `200px` — acima de `64px` é raro fora de
   layout de página inteira (margens de topo/rodapé), não de componente
 
@@ -332,6 +350,7 @@ A escala primitiva tem 7 pesos, com aliases semânticos de nome mais curto:
 - **note:** `effects-shadow-80/88/96` (rgba muito escuro) são para
   backdrop/overlay de modal, não para sombra de elemento — fácil de
   confundir com os níveis de elevação por estarem na mesma família
+- **note (2026-10-22):** `--effects-hover-red-600-8`, `--effects-pressed-red-600-16`, `--effects-hover-red-500-12` e `--effects-pressed-red-500-24` são os overlays de hover/pressed do botão danger vazado; consuma-os só via `color-background-(hover|pressed)-negative` (seção 2.5)
 - **note:** `--overlay-color-default` (resolve para `--effects-overlay-40`,
   rgba(5,5,5,0.40)) é o token dedicado de backdrop de modal/drawer — prefira
   esse em vez de `--effects-shadow-80/88/96` quando o caso for
@@ -386,19 +405,19 @@ partir de tokens semânticos soltos.
 
 | Família | purpose | useWhen | doNotUseWhen |
 |---|---|---|---|
-| `button-*` | 4 tipos (primary/secondary/tertiary/danger) × 4 estados × 3 tamanhos | Botões de ação | Não use `button-*` para link — isso é `link-*`. Respiro: padding horizontal 16px (big), 12px (medium) e 12px (small); botão só com ícone small usa `button-spacing-padding-icon-small` (8px, para manter 32×32); gap ícone↔texto 8px (4px no small) |
+| `button-*` | 3 tipos (primary/secondary/tertiary) × 2 intenções (default/danger) × 4 estados × 3 tamanhos | Botões de ação. Danger: `button-color-primary-danger-*` e `button-font-font-color-primary-danger-*` (preenchido, antes `danger`), `button-color/font-font-color/border-color-secondary-danger-*` e `button-color/font-font-color-tertiary-danger-*` (vazados). Disabled ignora a intenção | Não use `button-*` para link — isso é `link-*`. Respiro: padding horizontal 16px (big), 12px (medium) e 12px (small); botão só com ícone small usa `button-spacing-padding-icon-small` (8px, para manter 32×32); gap ícone↔texto 8px (4px no small) |
 | `segmented-button-*` | Grupo de opções exclusivas (2–3) | Sub-navegação, toggle de visualização | Não use para mais de ~4 opções — nesse caso é `Dropdown` ou `Tabs` |
 | `avatar-*` | Círculo de identificação de usuário | Foto/iniciais de pessoa | Não use para ícone de produto — isso é `Product Icon` |
 | `tag-*` | Rótulo de status (pill, 1 categoria de feedback) | Status de pedido, badge de estado | Não use para ação clicável — tag não é botão |
 | `tooltip-*` | Texto de apoio contextual on-hover/focus | Explicar ícone/rótulo ambíguo | Não use para conteúdo essencial — tooltip pode não ser lido (acessibilidade) |
 | `list-*` (`list-list-item-*`) | Lista vertical de itens selecionáveis | Menu de opções, lista de navegação | Não use para tabela de dados — isso é `table-*` |
 | `scrollbar-*` | Barra de rolagem customizada | Containers com overflow controlado | Não sobrescreva a scrollbar nativa fora de containers internos da UI |
-| `menu-*` (`container`/`menu-item`/`notification-dot`/`section-divider`) | Navegação global (sidebar) | Menu principal do produto | Não confundir `menu-item` com `list-list-item` — são famílias e componentes diferentes mesmo parecendo iguais |
+| `menu-*` (`container`/`menu-item`/`notification-dot`/`section-divider`) | Navegação global (sidebar). `menu-container-spacing-gap-item` (4px) e `menu-container-spacing-indent` (20px) servem ao Novo Menu Accordion (WIP); `menu-menu-item-shape-color-hover/pressed` colorem o ícone do item | Menu principal do produto | Não confundir `menu-item` com `list-list-item` — são famílias e componentes diferentes mesmo parecendo iguais |
 | `input-base-*` (+ `input-token-*`, `input-paragraph-*`, `input-search-border-radius`, `input-file-input-height`) | Campo de formulário | Todo input de texto/número/arquivo | Cada especialização (`search`, `file`, `paragraph`) sobrescreve só o que muda (ex: `input-search-border-radius` é pill, o resto herda de `input-base-*`) — não redeclare o restante do zero |
 | `checkbox-*` | Seleção múltipla | Marcar 0-N itens | Não use para seleção única exclusiva — isso é `radio-button-*` |
 | `radio-button-*` | Seleção única exclusiva | Marcar 1 de N itens | Não use para toggle on/off — isso é `toggle-*` |
 | `table-*` (`table-cell-*`, `table-head-*`, `table-row-*`, `table-toolbar-*`) | Tabela v2 e toolbar do Dataset | Listagem de registros com colunas | Sem stroke: a divisão é por tom e por `table-row-gap`; hover/seleção por `table-row-color-*`. `table-toolbar-size-search-width` (280px) é a largura mínima da busca. Não aplique borda na célula |
-| `link-*` | Texto clicável inline | Navegação dentro de frase/parágrafo | Não use para CTA de botão — isso é `button-*` mesmo com aparência de link |
+| `link-*` | Texto clicável inline, com `intent` default/danger, estado `disabled` e ícones à esquerda e à direita | Navegação ou ação isolada dentro de frase/parágrafo. Tokens: `link-font-font-color-(enabled/hover/pressed/disabled/danger-*)`, `link-shape-color-(enabled/hover/pressed/disabled/danger-*)` | Não use para CTA de botão — isso é `button-*` mesmo com aparência de link; lista de ações com divisor é item de lista/menu |
 | `dropdown-*` | Seletor com lista suspensa | Gatilho compacto pill em toolbars e paginador, com borda em todos os estados (`dropdown-border-color|width-*`) e `type` single/multi select | Não confundir com `input-base` variante select — são dois componentes Figma diferentes, escolha pelo contexto visual pedido no design |
 | `toggle-*` | Interruptor on/off imediato (sem confirmação) | Configuração binária com efeito instantâneo | Não use quando a ação precisa de confirmação — nesse caso é `checkbox-*` + botão de salvar |
 | `chip-*` | Filtro selecionável, removível ou não | Barra de filtros, seleção múltipla compacta | Não use para status — isso é `tag-*` (chip é acionável, tag é informativo) |
@@ -408,7 +427,10 @@ partir de tokens semânticos soltos.
 | `column-manager-*` | Popover de colunas da tabela (`width`, `item-height`) | Toolbar do Dataset | Não use para ordenação (vive no dropdown da toolbar) |
 | `status-pill-*` | Pílula de visão/status (32px) | Toolbar do Dataset | Não use no lugar de `tag-*` (informativo) nem de `chip-*` (filtro avulso) |
 | `product-switch-*` | Seletor de produto do menu (52px) | Só dentro do Menu Global | Não use fora do menu |
-| `product-launcher-*` (`hero`, `tile`, `row`, `group`) | Painel de produtos aberto pelo Product Switch | Troca e descoberta de produtos | Não use como menu de navegação interna |
+| `product-launcher-*` (`hero`, `tile`, `row`, `group`) | Painel de produtos aberto pelo Product Switch. O tile tem altura de rótulo fixa para 2 linhas (`product-launcher-tile-size-label-height`, 98px no total) e a linha usa `product-launcher-row-border-radius-icon-box` na caixa do ícone | Troca e descoberta de produtos | Não use como menu de navegação interna |
+| `content-card-*` (`spacing-padding-none/compact/default/comfortable`, `spacing-gap`, `size-media-width` 96px, `border-width-default/selected`, `color-default/subtle/disabled/gradient-soft-*`, `border-color-default/selected/divider`, `font-color-title/text/disabled`) | Content Card (slots de átomos): padding por override com os quatro `spacing-padding-*` | Cards de conteúdo nas zonas C–F | Não use para gráfico com legenda (`chart-*`/Chart Card) nem para card dentro de card; `size-media-width` fixa a mídia horizontal em 96px |
+| `media-placeholder-*` | Placeholder de imagem ou ilustração do slot de mídia (peça interna `.[base] media placeholder`) | Só dentro do Content Card, enquanto não houver arte | Não use como imagem final em tela; nome de token `border-radius-ilustrao` perde o acento no CSS |
+| `illustration-*` (`size-2xs/xs/sm/md/lg/xl`, `spacing-padding-xsmall/small/default`, `border-radius-default`, `color-background-neutro/claro`, `color-gradient-start/end`, `color-stroke`, `color-mask`) | Moldura `ilustracao`; `size-*` em `rem` (4, 6, 10, 15, 22,5 e 30) | Qualquer ilustração do brand em tela | Não aplique em ícone (`icon-*`); `color-stroke` e `color-mask` só colorem o outline (a arte `color` não tem token); `color-background-claro` resolve para `surface-system`, e a variante `fundo=claro` fixa o tema claro |
 | `context-switch-*` | Seletor de contexto (só o texto principal; descrição só nas listas) | Troca de empresa/loja/contexto | Não use para trocar de produto (é o Product Switch) |
 | `stepper-*` | Progresso de etapas | Zona C do Wizard | Não use como tabs |
 | `toast-*` / `alert-bar-*` / `alert-dialog-*` / `modal-*` | Feedback e diálogos | Toast: confirmação momentânea; Alert Bar: aviso persistente (base do Notice Bar); Alert Dialog: confirmação destrutiva; Modal: conteúdo em camada | Não use Toast para erro de campo |

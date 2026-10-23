@@ -80,12 +80,10 @@
       "required": true,
       "conditional": false,
       "allowed": [
-        "chart-card"
-      ],
-      "rule": "Chart Card em grade; cada card usa um chart bar, line ou donut com legenda.",
-      "planned": [
+        "chart-card",
         "content-card"
-      ]
+      ],
+      "rule": "Chart Card em grade; cada card usa um chart bar, line ou donut com legenda. Content Card permitido para blocos de apoio (oferta, checklist), sem competir com os gráficos."
     }
   ],
   "overlays": [],

@@ -1,6 +1,6 @@
 # TOKEN_CATALOG — Catálogo Completo de Tokens
 
-> Auto-gerado por `node scripts/generate-token-catalog.mjs` (chamado por `npm run sync:skill`) a partir de `src/generated/variables.css`. Última geração: 2026-10-20.
+> Auto-gerado por `node scripts/generate-token-catalog.mjs` (chamado por `npm run sync:skill`) a partir de `src/generated/variables.css`. Última geração: 2026-10-23.
 > **ATENÇÃO:** Nomes primitivos têm segmento duplicado (ex: `--color-gray-gray-0`). Tokens semânticos são os corretos para uso em componentes.
 > Valores resolvidos no tema claro; a coluna "escuro" aparece quando o valor muda em `prefers-color-scheme: dark`.
 
@@ -211,6 +211,14 @@ Base das cores por produto (`erp`, `hub`, `pdv`, `conta`, `envios`, `ia`, `ecom`
 | `--color-background-enabled-transparent` | `rgba(255, 255, 255, 0.00)` | — |
 | `--color-background-enabled-full-brand` | `#0a4ee4` | — |
 | `--color-background-enabled-full-negative` | `#c9412c` | — |
+| `--color-background-enabled-product-erp` | `#2a60df` | — |
+| `--color-background-enabled-product-hub` | `#1a95ad` | — |
+| `--color-background-enabled-product-pdv` | `#762adf` | — |
+| `--color-background-enabled-product-conta` | `#179b6f` | — |
+| `--color-background-enabled-product-envios` | `#c86d1e` | — |
+| `--color-background-enabled-product-ia` | `#de21de` | — |
+| `--color-background-enabled-product-ecom` | `#df2a76` | — |
+| `--color-background-enabled-product-credito` | `#6c9717` | — |
 | `--color-background-hover-neutral` | `rgba(31, 31, 30, 0.04)` | `rgba(242, 240, 232, 0.04)` |
 | `--color-background-hover-utility` | `rgba(31, 31, 30, 0.24)` | `rgba(242, 240, 232, 0.24)` |
 | `--color-background-hover-full-brand` | `rgba(0, 22, 71, 0.24)` | — |
@@ -225,12 +233,14 @@ Base das cores por produto (`erp`, `hub`, `pdv`, `conta`, `envios`, `ia`, `ecom`
 | `--color-background-hover-product-ecom` | `#fbeef4` | `#3a091d` |
 | `--color-background-hover-product-credito` | `#f7fbee` | `#293a09` |
 | `--color-background-hover-on-brand` | `rgba(242, 240, 232, 0.12)` | — |
+| `--color-background-hover-negative` | `rgba(201, 65, 44, 0.08)` | `rgba(230, 78, 54, 0.12)` |
 | `--color-background-pressed-neutral` | `rgba(31, 31, 30, 0.12)` | `rgba(242, 240, 232, 0.12)` |
 | `--color-background-pressed-utility` | `rgba(31, 31, 30, 0.88)` | `rgba(242, 240, 232, 0.88)` |
 | `--color-background-pressed-full-brand` | `rgba(0, 22, 71, 0.48)` | — |
 | `--color-background-pressed-neutral-brand` | `rgba(10, 78, 228, 0.16)` | `rgba(0, 22, 71, 0.48)` |
 | `--color-background-pressed-full-negative` | `rgba(48, 18, 13, 0.48)` | — |
 | `--color-background-pressed-on-brand` | `rgba(242, 240, 232, 0.24)` | — |
+| `--color-background-pressed-negative` | `rgba(201, 65, 44, 0.16)` | `rgba(230, 78, 54, 0.24)` |
 | `--color-background-selected-neutral-brand` | `#e7edf8` | `#000c29` |
 | `--color-background-selected-full-brand` | `#0a4ee4` | — |
 | `--color-background-selected-product-erp` | `#dae2f6` | `#0d2459` |
@@ -260,6 +270,8 @@ Base das cores por produto (`erp`, `hub`, `pdv`, `conta`, `envios`, `ia`, `ecom`
 | `--color-background-feedback-neutral-subtle` | `#e7e4da` | `#201f1d` |
 | `--color-background-utility-neutral` | `#e7e4da` | `#201f1d` |
 | `--color-background-utility-unread` | `#f8f9fc` | `#001647` |
+| `--color-background-gradient-soft-start` | `#e7edf8` | `#001647` |
+| `--color-background-gradient-soft-end` | `#dcf9f9` | `#141f1f` |
 
 ### color-text-*
 
@@ -273,14 +285,17 @@ Base das cores por produto (`erp`, `hub`, `pdv`, `conta`, `envios`, `ia`, `ecom`
 | `--color-text-enabled-on-brand` | `#f8f9fc` | — |
 | `--color-text-enabled-brand` | `#043fbe` | `#6791ea` |
 | `--color-text-enabled-on-negative` | `#fef7f5` | — |
+| `--color-text-enabled-negative` | `#c9412c` | `#e64e36` |
 | `--color-text-hover-neutral` | `#10100f` | `#fcfbf8` |
 | `--color-text-hover-on-brand` | `#f8f9fc` | — |
 | `--color-text-hover-brand` | `#002d8f` | `#a1b9ed` |
 | `--color-text-hover-on-negative` | `#fef7f5` | — |
+| `--color-text-hover-negative` | `#842d1f` | `#ed6e5a` |
 | `--color-text-pressed-neutral` | `#10100f` | `#fcfbf8` |
 | `--color-text-pressed-on-brand` | `#f8f9fc` | — |
 | `--color-text-pressed-brand` | `#000614` | `#f8f9fc` |
 | `--color-text-pressed-on-negative` | `#fef7f5` | — |
+| `--color-text-pressed-negative` | `#5a1f16` | `#f28d7d` |
 | `--color-text-focused-neutral` | `#10100f` | `#fcfbf8` |
 | `--color-text-filled-neutral` | `#10100f` | `#fcfbf8` |
 | `--color-text-selected-neutral` | `#043fbe` | `#a1b9ed` |
@@ -354,10 +369,13 @@ Base das cores por produto (`erp`, `hub`, `pdv`, `conta`, `envios`, `ia`, `ecom`
 | `--color-shape-enabled-neutral` | `#615f56` | `#afada2` |
 | `--color-shape-enabled-on-brand` | `#f8f9fc` | — |
 | `--color-shape-enabled-brand` | `#043fbe` | `#6791ea` |
+| `--color-shape-enabled-negative` | `#c9412c` | `#e64e36` |
 | `--color-shape-hover-neutral` | `#10100f` | `#fcfbf8` |
 | `--color-shape-hover-brand` | `#002d8f` | `#a1b9ed` |
+| `--color-shape-hover-negative` | `#842d1f` | `#ed6e5a` |
 | `--color-shape-pressed-neutral` | `#10100f` | `#fcfbf8` |
 | `--color-shape-pressed-brand` | `#000614` | `#f8f9fc` |
+| `--color-shape-pressed-negative` | `#5a1f16` | `#f28d7d` |
 | `--color-shape-focused-neutral` | `#10100f` | `#fcfbf8` |
 | `--color-shape-selected-neutral` | `#043fbe` | `#a1b9ed` |
 | `--color-shape-selected-on-brand` | `#f8f9fc` | — |
@@ -416,6 +434,8 @@ Base das cores por produto (`erp`, `hub`, `pdv`, `conta`, `envios`, `ia`, `ecom`
 | `--effects-hover-brand-9008` | `rgba(0, 22, 71, 0.24)` | — |
 | `--effects-hover-brand-08` | `rgba(10, 78, 228, 0.08)` | — |
 | `--effects-hover-red-90024` | `rgba(48, 18, 13, 0.24)` | — |
+| `--effects-hover-red-6008` | `rgba(201, 65, 44, 0.08)` | — |
+| `--effects-hover-red-50012` | `rgba(230, 78, 54, 0.12)` | — |
 | `--effects-pressed-gray-012` | `rgba(242, 240, 232, 0.12)` | — |
 | `--effects-pressed-gray-90012` | `rgba(31, 31, 30, 0.12)` | — |
 | `--effects-pressed-gray-088` | `rgba(242, 240, 232, 0.88)` | — |
@@ -423,6 +443,8 @@ Base das cores por produto (`erp`, `hub`, `pdv`, `conta`, `envios`, `ia`, `ecom`
 | `--effects-pressed-brand-90016` | `rgba(0, 22, 71, 0.48)` | — |
 | `--effects-pressed-brand-50016` | `rgba(10, 78, 228, 0.16)` | — |
 | `--effects-pressed-red-90048` | `rgba(48, 18, 13, 0.48)` | — |
+| `--effects-pressed-red-60016` | `rgba(201, 65, 44, 0.16)` | — |
+| `--effects-pressed-red-50024` | `rgba(230, 78, 54, 0.24)` | — |
 | `--effects-disabled-gray-9008` | `rgba(126, 125, 119, 0.08)` | — |
 | `--effects-disabled-gray-0` | `rgba(126, 125, 119, 0.08)` | — |
 | `--effects-distance-0px` | `0` | — |
@@ -486,6 +508,7 @@ Base das cores por produto (`erp`, `hub`, `pdv`, `conta`, `envios`, `ia`, `ecom`
 | `--shape-spacing-128px` | `8rem` |
 | `--shape-spacing-160px` | `10rem` |
 | `--shape-spacing-200px` | `12.5rem` |
+| `--shape-spacing-20px` | `1.25rem` |
 | `--shape-spacing-x0-0px` | `0` |
 | `--shape-spacing-x025-2px` | `0.125rem` |
 | `--shape-spacing-x05-4px` | `0.25rem` |
@@ -496,6 +519,7 @@ Base das cores por produto (`erp`, `hub`, `pdv`, `conta`, `envios`, `ia`, `ecom`
 | `--shape-spacing-x4-32px` | `2rem` |
 | `--shape-spacing-x5-40px` | `2.5rem` |
 | `--shape-spacing-x8-64px` | `4rem` |
+| `--shape-spacing-x25-20px` | `1.25rem` |
 
 ### Border Radius
 
@@ -817,15 +841,24 @@ Tokens específicos de cada componente. Prefira tokens semânticos de cor (Seç�
 | `--button-color-primary-disabled` | `rgba(126, 125, 119, 0.08)` | — |
 | `--button-color-secondary-disabled` | `rgba(255, 255, 255, 0.00)` | — |
 | `--button-color-tertiary-disabled` | `rgba(255, 255, 255, 0.00)` | — |
-| `--button-color-danger-enabled` | `#c9412c` | — |
-| `--button-color-danger-hover` | `rgba(48, 18, 13, 0.24)` | — |
-| `--button-color-danger-pressed` | `rgba(48, 18, 13, 0.48)` | — |
-| `--button-color-danger-disabled` | `rgba(126, 125, 119, 0.08)` | — |
+| `--button-color-primary-danger-enabled` | `#c9412c` | — |
+| `--button-color-primary-danger-hover` | `rgba(48, 18, 13, 0.24)` | — |
+| `--button-color-primary-danger-pressed` | `rgba(48, 18, 13, 0.48)` | — |
+| `--button-color-primary-danger-disabled` | `rgba(126, 125, 119, 0.08)` | — |
+| `--button-color-secondary-danger-enabled` | `#fcfbf8` | `#10100f` |
+| `--button-color-tertiary-danger-enabled` | `rgba(255, 255, 255, 0.00)` | — |
+| `--button-color-secondary-danger-hover` | `rgba(201, 65, 44, 0.08)` | `rgba(230, 78, 54, 0.12)` |
+| `--button-color-tertiary-danger-hover` | `rgba(201, 65, 44, 0.08)` | `rgba(230, 78, 54, 0.12)` |
+| `--button-color-secondary-danger-pressed` | `rgba(201, 65, 44, 0.16)` | `rgba(230, 78, 54, 0.24)` |
+| `--button-color-tertiary-danger-pressed` | `rgba(201, 65, 44, 0.16)` | `rgba(230, 78, 54, 0.24)` |
+| `--button-color-secondary-danger-disabled` | `rgba(255, 255, 255, 0.00)` | — |
+| `--button-color-tertiary-danger-disabled` | `rgba(255, 255, 255, 0.00)` | — |
 | `--button-spacing-gap` | `0.5rem` | — |
 | `--button-spacing-padding` | `1rem` | — |
 | `--button-spacing-padding-medium` | `0.75rem` | — |
-| `--button-spacing-padding-small` | `0.5rem` | — |
+| `--button-spacing-padding-small` | `0.75rem` | — |
 | `--button-spacing-gap-small` | `0.25rem` | — |
+| `--button-spacing-padding-icon-small` | `0.5rem` | — |
 | `--button-border-radius-pill` | `624.9375rem` | — |
 | `--button-border-width-enabled` | `0.0625rem` | — |
 | `--button-border-width-hover` | `0.0625rem` | — |
@@ -835,6 +868,10 @@ Tokens específicos de cada componente. Prefira tokens semânticos de cor (Seç�
 | `--button-border-color-hover` | `#827f73` | `#918e83` |
 | `--button-border-color-pressed` | `#201f1d` | `#e7e4da` |
 | `--button-border-color-disabled` | `#e7e4da` | `#403f3b` |
+| `--button-border-color-secondary-danger-enabled` | `#c9412c` | `#e64e36` |
+| `--button-border-color-secondary-danger-hover` | `#842d1f` | `#ed6e5a` |
+| `--button-border-color-secondary-danger-pressed` | `#5a1f16` | `#f28d7d` |
+| `--button-border-color-secondary-danger-disabled` | `#e7e4da` | `#403f3b` |
 | `--button-shape-color-primary-enabled` | `#f8f9fc` | — |
 | `--button-shape-color-secondary-enabled` | `#615f56` | `#afada2` |
 | `--button-shape-color-tertiary-enabled` | `#615f56` | `#afada2` |
@@ -850,10 +887,18 @@ Tokens específicos de cada componente. Prefira tokens semânticos de cor (Seç�
 | `--button-font-font-color-primary-disabled` | `#cecbc0` | `#615f56` |
 | `--button-font-font-color-secondary-disabled` | `#cecbc0` | `#615f56` |
 | `--button-font-font-color-tertiary-disabled` | `#cecbc0` | `#615f56` |
-| `--button-font-font-color-danger-enabled` | `#fef7f5` | — |
-| `--button-font-font-color-danger-hover` | `#fef7f5` | — |
-| `--button-font-font-color-danger-pressed` | `#fef7f5` | — |
-| `--button-font-font-color-danger-disabled` | `#cecbc0` | `#615f56` |
+| `--button-font-font-color-primary-danger-enabled` | `#fef7f5` | — |
+| `--button-font-font-color-primary-danger-hover` | `#fef7f5` | — |
+| `--button-font-font-color-primary-danger-pressed` | `#fef7f5` | — |
+| `--button-font-font-color-primary-danger-disabled` | `#cecbc0` | `#615f56` |
+| `--button-font-font-color-secondary-danger-enabled` | `#c9412c` | `#e64e36` |
+| `--button-font-font-color-tertiary-danger-enabled` | `#c9412c` | `#e64e36` |
+| `--button-font-font-color-secondary-danger-hover` | `#842d1f` | `#ed6e5a` |
+| `--button-font-font-color-tertiary-danger-hover` | `#842d1f` | `#ed6e5a` |
+| `--button-font-font-color-secondary-danger-pressed` | `#5a1f16` | `#f28d7d` |
+| `--button-font-font-color-tertiary-danger-pressed` | `#5a1f16` | `#f28d7d` |
+| `--button-font-font-color-secondary-danger-disabled` | `#cecbc0` | `#615f56` |
+| `--button-font-font-color-tertiary-danger-disabled` | `#cecbc0` | `#615f56` |
 | `--button-font-size` | `0.875rem` | — |
 | `--button-font-weight` | `500` | — |
 | `--button-font-line-height` | `1rem` | — |
@@ -1069,7 +1114,7 @@ Tokens específicos de cada componente. Prefira tokens semânticos de cor (Seç�
 | `--context-switch-border-color-enabled` | `#afada2` | `#615f56` |
 | `--context-switch-border-color-hover` | `#827f73` | `#918e83` |
 | `--context-switch-border-color-pressed` | `#201f1d` | `#e7e4da` |
-| `--context-switch-border-color-filled` | `#10100f` | `#fcfbf8` |
+| `--context-switch-border-color-filled` | `#afada2` | `#615f56` |
 | `--context-switch-border-color-disabled` | `#e7e4da` | `#403f3b` |
 | `--context-switch-shape-color-enabled` | `#615f56` | `#afada2` |
 | `--context-switch-shape-color-focused` | `#10100f` | `#fcfbf8` |
@@ -1104,6 +1149,8 @@ Tokens específicos de cada componente. Prefira tokens semânticos de cor (Seç�
 | `--menu-container-spacing-action-area-padding` | `1rem` | — |
 | `--menu-container-spacing-gap-action-area` | `1rem` | — |
 | `--menu-container-spacing-gap-profile` | `1rem` | — |
+| `--menu-container-spacing-gap-item` | `0.25rem` | — |
+| `--menu-container-spacing-indent` | `1.25rem` | — |
 | `--menu-container-opacity-default` | `100` | — |
 | `--menu-container-border-radius-default` | `0` | — |
 | `--menu-container-border-radius-expanded` | `1rem` | — |
@@ -1124,6 +1171,8 @@ Tokens específicos de cada componente. Prefira tokens semânticos de cor (Seç�
 | `--menu-menu-item-border-radius-default` | `0.5rem` | — |
 | `--menu-menu-item-shape-color-enabled` | `#615f56` | `#afada2` |
 | `--menu-menu-item-shape-color-selected` | `#043fbe` | `#a1b9ed` |
+| `--menu-menu-item-shape-color-hover` | `#10100f` | `#fcfbf8` |
+| `--menu-menu-item-shape-color-pressed` | `#10100f` | `#fcfbf8` |
 | `--menu-menu-item-font-color-enabled` | `#615f56` | `#afada2` |
 | `--menu-menu-item-font-color-hover` | `#10100f` | `#fcfbf8` |
 | `--menu-menu-item-font-color-pressed` | `#10100f` | `#fcfbf8` |
@@ -1305,6 +1354,11 @@ Tokens específicos de cada componente. Prefira tokens semânticos de cor (Seç�
 | `--link-font-font-color-enabled` | `#043fbe` | `#6791ea` |
 | `--link-font-font-color-hover` | `#002d8f` | `#a1b9ed` |
 | `--link-font-font-color-pressed` | `#000614` | `#f8f9fc` |
+| `--link-font-font-color-disabled` | `#cecbc0` | `#615f56` |
+| `--link-font-font-color-danger-enabled` | `#c9412c` | `#e64e36` |
+| `--link-font-font-color-danger-hover` | `#842d1f` | `#ed6e5a` |
+| `--link-font-font-color-danger-pressed` | `#5a1f16` | `#f28d7d` |
+| `--link-font-font-color-danger-disabled` | `#cecbc0` | `#615f56` |
 | `--link-font-font-size-paragraph` | `1rem` | — |
 | `--link-font-font-size-description` | `0.875rem` | — |
 | `--link-font-weight` | `400` | — |
@@ -1312,13 +1366,17 @@ Tokens específicos de cada componente. Prefira tokens semânticos de cor (Seç�
 | `--link-spacing-gap` | `0.5rem` | — |
 | `--link-shape-color-enabled` | `#043fbe` | `#6791ea` |
 | `--link-shape-color-pressed` | `#000614` | `#f8f9fc` |
+| `--link-shape-color-disabled` | `#cecbc0` | `#615f56` |
+| `--link-shape-color-hover` | `#002d8f` | `#a1b9ed` |
+| `--link-shape-color-danger-enabled` | `#c9412c` | `#e64e36` |
+| `--link-shape-color-danger-hover` | `#842d1f` | `#ed6e5a` |
+| `--link-shape-color-danger-pressed` | `#5a1f16` | `#f28d7d` |
+| `--link-shape-color-danger-disabled` | `#cecbc0` | `#615f56` |
 
 ### toggle
 
 | Token | Valor (claro) | Valor (escuro) |
 |---|---|---|
-| `--toggle-size-height` | `2rem` | — |
-| `--toggle-size-width` | `3.5rem` | — |
 | `--toggle-color-dot` | `#fcfbf8` | `#10100f` |
 | `--toggle-color-enabled` | `#cecbc0` | `#403f3b` |
 | `--toggle-color-hover` | `rgba(31, 31, 30, 0.04)` | `rgba(242, 240, 232, 0.04)` |
@@ -1327,6 +1385,8 @@ Tokens específicos de cada componente. Prefira tokens semânticos de cor (Seç�
 | `--toggle-color-selected-hover` | `rgba(0, 22, 71, 0.24)` | — |
 | `--toggle-color-selected-pressed` | `rgba(0, 22, 71, 0.48)` | — |
 | `--toggle-color-disabled` | `rgba(126, 125, 119, 0.08)` | — |
+| `--toggle-size-height` | `2rem` | — |
+| `--toggle-size-width` | `3.5rem` | — |
 | `--toggle-border-radius-pill` | `624.9375rem` | — |
 | `--toggle-border-color-enabled` | `#afada2` | `#615f56` |
 | `--toggle-border-color-hover` | `#827f73` | `#918e83` |
@@ -1737,6 +1797,7 @@ Tokens específicos de cada componente. Prefira tokens semânticos de cor (Seç�
 |---|---|
 | `--product-switch-size-height` | `3.25rem` |
 | `--product-switch-size-icon-box` | `2rem` |
+| `--product-switch-size-compact` | `2.5rem` |
 | `--product-switch-spacing-padding` | `0.75rem` |
 | `--product-switch-spacing-gap` | `0.75rem` |
 | `--product-switch-spacing-gap-content` | `0.125rem` |
@@ -1771,8 +1832,8 @@ Tokens específicos de cada componente. Prefira tokens semânticos de cor (Seç�
 | `--product-launcher-hero-font-font-size-name` | `1rem` | — |
 | `--product-launcher-hero-font-line-height-name` | `1.25rem` | — |
 | `--product-launcher-hero-font-font-weight-name` | `600` | — |
-| `--product-launcher-tile-size-height` | `5.5rem` | — |
 | `--product-launcher-tile-size-icon-box` | `2rem` | — |
+| `--product-launcher-tile-size-label-height` | `2rem` | — |
 | `--product-launcher-tile-spacing-padding-y` | `0.75rem` | — |
 | `--product-launcher-tile-spacing-padding-x` | `0.5rem` | — |
 | `--product-launcher-tile-spacing-gap` | `0.5rem` | — |
@@ -1789,6 +1850,7 @@ Tokens específicos de cada componente. Prefira tokens semânticos de cor (Seç�
 | `--product-launcher-row-font-font-size-name` | `0.875rem` | — |
 | `--product-launcher-row-font-line-height-name` | `1rem` | — |
 | `--product-launcher-row-font-font-weight-name` | `400` | — |
+| `--product-launcher-row-border-radius-icon-box` | `0.5rem` | — |
 | `--product-launcher-group-spacing-padding-x` | `0.5rem` | — |
 | `--product-launcher-group-font-font-size-label` | `0.75rem` | — |
 | `--product-launcher-group-font-line-height-label` | `0.875rem` | — |
@@ -1796,7 +1858,6 @@ Tokens específicos de cada componente. Prefira tokens semânticos de cor (Seç�
 | `--product-launcher-border-width-focused` | `0.125rem` | — |
 | `--product-launcher-color-panel` | `#fcfbf8` | `#10100f` |
 | `--product-launcher-color-tile` | `#fcfbf8` | `#10100f` |
-| `--product-launcher-color-icon-box` | `#f2f0e8` | `#050505` |
 | `--product-launcher-border-color-tile` | `#f2f0e8` | `#201f1d` |
 | `--product-launcher-border-color-focused` | `#0a4ee4` | — |
 | `--product-launcher-font-font-color-default` | `#615f56` | `#afada2` |
@@ -1806,6 +1867,68 @@ Tokens específicos de cada componente. Prefira tokens semânticos de cor (Seç�
 | Token | Valor |
 |---|---|
 | `--status-pill-radius-dot` | `624.9375rem` |
+
+### content-card
+
+| Token | Valor (claro) | Valor (escuro) |
+|---|---|---|
+| `--content-card-border-radius-default` | `0.75rem` | — |
+| `--content-card-spacing-padding-none` | `0` | — |
+| `--content-card-spacing-padding-compact` | `0.75rem` | — |
+| `--content-card-spacing-padding-default` | `1rem` | — |
+| `--content-card-spacing-padding-comfortable` | `1.5rem` | — |
+| `--content-card-spacing-gap` | `0.75rem` | — |
+| `--content-card-spacing-gap-compact` | `0.5rem` | — |
+| `--content-card-spacing-title-gap` | `0.25rem` | — |
+| `--content-card-spacing-action-gap` | `0.5rem` | — |
+| `--content-card-border-width-default` | `0.0625rem` | — |
+| `--content-card-border-width-selected` | `0.125rem` | — |
+| `--content-card-size-media-width` | `6rem` | — |
+| `--content-card-size-media-height` | `10rem` | — |
+| `--content-card-size-min-width` | `17.5rem` | — |
+| `--content-card-color-default` | `#fcfbf8` | `#10100f` |
+| `--content-card-color-subtle` | `#f2f0e8` | `#050505` |
+| `--content-card-color-disabled` | `rgba(126, 125, 119, 0.08)` | — |
+| `--content-card-color-gradient-soft-start` | `#e7edf8` | `#001647` |
+| `--content-card-color-gradient-soft-end` | `#dcf9f9` | `#141f1f` |
+| `--content-card-border-color-default` | `#e7e4da` | `#10100f` |
+| `--content-card-border-color-selected` | `#0a4ee4` | — |
+| `--content-card-border-color-divider` | `#f2f0e8` | `#201f1d` |
+| `--content-card-font-color-title` | `#10100f` | `#fcfbf8` |
+| `--content-card-font-color-text` | `#403f3b` | `#cecbc0` |
+| `--content-card-font-color-disabled` | `#cecbc0` | `#615f56` |
+
+### media-placeholder
+
+| Token | Valor (claro) | Valor (escuro) |
+|---|---|---|
+| `--media-placeholder-color-default` | `#d6dff5` | `#001647` |
+| `--media-placeholder-border-color-default` | `#a1b9ed` | `#002d8f` |
+| `--media-placeholder-font-color-default` | `#002d8f` | `#d6dff5` |
+| `--media-placeholder-border-width-default` | `0.0625rem` | — |
+| `--media-placeholder-border-radius-imagem` | `0` | — |
+| `--media-placeholder-border-radius-ilustrao` | `0.5rem` | — |
+
+### illustration
+
+| Token | Valor (claro) | Valor (escuro) |
+|---|---|---|
+| `--illustration-size-xs` | `6rem` | — |
+| `--illustration-size-sm` | `10rem` | — |
+| `--illustration-size-md` | `15rem` | — |
+| `--illustration-size-lg` | `22.5rem` | — |
+| `--illustration-size-xl` | `30rem` | — |
+| `--illustration-size-2xs` | `4rem` | — |
+| `--illustration-spacing-padding-small` | `0.5rem` | — |
+| `--illustration-spacing-padding-default` | `1rem` | — |
+| `--illustration-spacing-padding-xsmall` | `0.25rem` | — |
+| `--illustration-border-radius-default` | `0.75rem` | — |
+| `--illustration-color-stroke` | `#043fbe` | `#6791ea` |
+| `--illustration-color-background-neutro` | `#fcfbf8` | `#10100f` |
+| `--illustration-color-background-claro` | `#f2f0e8` | `#050505` |
+| `--illustration-color-gradient-start` | `#e7edf8` | `#001647` |
+| `--illustration-color-gradient-end` | `#dcf9f9` | `#141f1f` |
+| `--illustration-color-mask` | `#f2f0e8` | `#050505` |
 
 ### focus
 

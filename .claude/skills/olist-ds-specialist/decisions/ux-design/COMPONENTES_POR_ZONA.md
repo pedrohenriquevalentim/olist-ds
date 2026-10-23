@@ -67,6 +67,7 @@ Este arquivo existe para que essas perguntas não se percam entre sessões. **Ne
 
 ## Histórico
 
+- 2026-10-23 v1.4 — Content Card existe e entra nas zonas C–F da Landing e do Dashboard (`references/ORGANISMOS.md`, `references/templates/landing.json` e `dashboard.json`); ilustrações só pela `ilustracao`.
 - 2026-08-25 v1.3 — Template unificado: todos os produtos passam a usar o template ERP. Referências a "templates Envios/Hub/Conta Digital" atualizadas para refletir template único. Item 4 (`Context Switch`) revisado.
 - 2026-07-04 v1.2 — Confirmado que a Zona B (Top Bar) dos templates Envios/Hub/Conta Digital **não exibe o logo do produto** — o logo já faz parte do componente `Menu Global` na Zona A. `HARNEES_TELAS.md` e `TEMPLATES_PRODUTO.md` corrigidos (removido `Logo` das colunas "Pode conter"/"Componentes Recomendados" da Zona B); hipótese do item 4 (`Context Switch`) ajustada para não mencionar mais `Logo` como vizinho de zona.
 - 2026-07-04 v1.1 — Item 1 (`Breadcrumb`) resolvido: passa a ser a instância real do componente DS na Zona B do ERP. Itens 2-5 seguem pendentes.

@@ -1,8 +1,8 @@
 # Organismos — Catálogo
 
-**Versão:** 1.0
-**Última atualização:** 2026-10-20
-**Fonte Figma:** arquivo `HeyN4w209HWh8rfpTDiwyf` (`design system (base)`), páginas `🧩 …`, `📊 Gráficos (átomos)` e `Table`
+**Versão:** 1.1
+**Última atualização:** 2026-10-23
+**Fonte Figma:** arquivo `HeyN4w209HWh8rfpTDiwyf` (`design system (base)`), páginas `🧩 …` (inclui `🧩 Content Card`, `12148:19`), `📊 Gráficos (átomos)` e `Table`
 **Leia junto com:** `TEMPLATES_PRODUTO.md` (onde cada organismo entra) · `component-registry.json` (keys)
 
 Organismo é uma composição de átomos e moléculas do DS que resolve uma parte inteira da página. **Em uma tela, use o organismo inteiro: nunca remonte a composição com frames ou instâncias soltas.** Para cada organismo, a coluna "Zonas" diz em qual zona de template ele pode entrar (ver `references/templates/*.json`).
@@ -22,6 +22,7 @@ Organismo é uma composição de átomos e moléculas do DS que resolve uma part
 | **Floating Action Bar** | `b40093eefe9b803f9a9d8b4218e77b905db3c2f2` | set | `mode` (seleção, alterações) | camada (rodapé) |
 | **KPI Strip** | `4a5a0b9dc0f028a14a83f5849a7c43fcf71d63c9` | set | `métricas` (3, 4, 6) | D do Dashboard |
 | **Chart Card** | `2e12c5f525d7c096f390840f88374eda982089b4` | set | `estado` (conteúdo, sem dados) · slot `gráfico` (INSTANCE_SWAP) · booleanos período, legenda, link | E do Dashboard |
+| **Content Card** | `10e329f752fa7c913e8a41efb0b3e9e2f9df5332` | set | `surface` (padrão, sutil, destaque) × `state` (enabled, hover, focused, selected, disabled) × `layout` (vertical, horizontal, horizontal invertido) · slots `mídia`, `ação`, `corpo`, `rodapé` · booleanos mostrar cabeçalho, descrição, mídia, ação, corpo, rodapé, divisor · texto: título, descrição | C–F (Landing, Dashboard) |
 | **Product Switch** | `fa8572014d38eb2e6998c300f0069e7bc8f55c61` | set | `state` (enabled, hover, pressed, focused) | só dentro do Menu Global |
 
 ### Composição interna (átomos usados)
@@ -33,6 +34,7 @@ Organismo é uma composição de átomos e moléculas do DS que resolve uma part
 | table | `table head row` (`modo` = colunas, seleção) + N `table row` (`estado`, `tamanho`; `seleção` e `ação` opcionais) com `table cell` (`tipo`) |
 | KPI Strip | N `metric` separadas por divisores |
 | Chart Card | `metric`, `chart bar` / `chart line` / `chart donut` (troca por instância), `chart legend`, `chart tooltip` |
+| Content Card | slots que recebem átomos do DS: mídia (`ilustracao`, imagem ou `.[base] media placeholder`), ação (`button icon`, `link`), corpo (`metric`, `badge`, `progress bar`, `checkbox`, `radio button`, `input text`, `table`…), rodapé (`button` secundário e primário, small) |
 | Product Switch | abre o Product Launcher (`.[base] product launcher`, interno) |
 
 ---
@@ -70,6 +72,19 @@ Organismo é uma composição de átomos e moléculas do DS que resolve uma part
 - **Chart Card:** troque a instância do slot `gráfico` por `chart bar`, `chart line` ou `chart donut`; sempre acompanhar de `chart legend` (nunca depender só da cor). Cores das séries: `chart/series/color-1..6` (tema claro e escuro).
 - Exceções registradas ao harness: `chart line` usa vetores e `chart donut` usa elipse com arco; ambos vinculados a tokens.
 
+### Content Card (zonas C–F)
+- **Usar quando:** agrupar um conteúdo relacionado com título, ação e rodapé (dashboards e páginas de detalhe); card selecionável (escolha entre opções, com Radio); oferta, venda cruzada ou produto; checklist de onboarding; estado vazio contido em uma área.
+- **Não usar:** gráfico com período e legenda (use o Chart Card); tabela ou lista longa sozinha (use `table`/`dataset` direto, sem card); aviso ou erro (Notice Bar, Alert Bar, Toast); **card dentro de card** (use divisor ou agrupamento).
+- **Composição:** o card é a moldura; o conteúdo vem dos átomos do DS colocados nos slots. Nunca remonte o card com frames soltos nem desenhe átomos próprios dentro dele. O card editorial antigo (`card`) agora é só uma composição (mídia, textos e dois botões) e continua no DS até a migração.
+- **Superfícies:** `padrão` (container), `sutil` (system) e `destaque` (degradê suave blue 50 → cyan 50; escuro blue 800 → cyan 900). **Não existe superfície escura de marca nem botão "inverso".** Texto e átomos acompanham o tema.
+- **Estados:** `hover` sobe a sombra de nível 1 para o 2; `focused` usa o anel de foco do DS; `selected` usa borda de 2px (`content-card-border-width-selected`); `disabled` atenua conteúdo e remove a sombra.
+- **Layouts:** `vertical` (mídia no topo), `horizontal` e `horizontal invertido` (mídia nas laterais). **A mídia horizontal é fixa em 96px** (`content-card-size-media-width`) e a largura não aceita override: use só objeto `xs` 1:1 da `ilustracao`; cenas pedem o layout vertical.
+- **Padding:** por override de instância com um destes quatro tokens: `none` (mídia até a borda), `compact` (12px, listas densas), `default` (16px) e `comfortable` (24px, campanhas e estados vazios). Não há variante de padding.
+- **Acessibilidade:** card clicável vira um único elemento interativo (link ou button) e os controles internos não competem com ele; selecionável usa `role="radio"`/`"checkbox"` com `aria-checked`; `disabled` usa `aria-disabled` e não recebe foco; imagem de mídia exige alternativa textual ou marcação decorativa.
+- **Ao trocar a variante de uma instância, os overrides de texto e o conteúdo dos slots são resetados:** reaplique.
+- **Composições de referência** (Figma, página `🧩 Content Card`): A–C ação e cabeçalho (menu, Metric, Badge), D–E indicadores e progresso, G–I tabela, formulário e Input, J checklist de onboarding (Progress Bar, Checkbox), K selecionável (Radio, Badge), L produto Olist (Product Icon, horizontal), M destaque (oferta de antecipação), N estado vazio (Empty State), O editorial (mídia, textos, dois botões).
+- Lacunas: sem átomos de timeline ou skeleton para estado de carregamento.
+
 ### Product Switch
 - **Uso exclusivo** na composição do Menu Global. Abre o Product Launcher (hero do produto ativo, tiles dos contratados e linhas "Conhecer" dos não ativados). Altura 52px. Não instanciar fora do menu.
 
@@ -81,7 +96,6 @@ Aparecem como `*` nos placeholders de template. Não construir à mão numa tela
 
 | Planejado | Zona | Observação |
 |---|---|---|
-| Content Card | C–F (Landing, Dashboard) | Card de conteúdo com título e ação |
 | Form Section | C–F (Record, Settings, Wizard) | Seção de formulário, coluna até 800px |
 | Section Rail | G (Record) | Âncoras das seções |
 | Summary Panel | G (Record, Wizard) | Resumo lateral |
@@ -95,4 +109,4 @@ Aparecem como `*` nos placeholders de template. Não construir à mão numa tela
 
 ## Metadata de organismo
 
-Cada organismo ganha, quando for implementado no React, o campo `allowedZones` no `.metadata.json` (ver `METADATA_SCHEMA.md`): Page Header → `["B"]`; Notice Bar → `["B0","R","C-F"]`; Dataset → `["C-F"]`; KPI Strip → `["D"]`; Chart Card → `["E"]`; Floating Action Bar → `["camada"]`.
+Cada organismo ganha, quando for implementado no React, o campo `allowedZones` no `.metadata.json` (ver `METADATA_SCHEMA.md`): Page Header → `["B"]`; Notice Bar → `["B0","R","C-F"]`; Dataset → `["C-F"]`; Content Card → `["C-F"]`; KPI Strip → `["D"]`; Chart Card → `["E"]`; Floating Action Bar → `["camada"]`.

@@ -1,7 +1,7 @@
 # Templates de Página
 
-**Versão:** 2.0
-**Última atualização:** 2026-10-20 (v2.0 — os templates deixam de ser telas desenhadas e passam a ser **placeholders de zonas**: cada template diz quais organismos entram em cada zona. Vale para todos os produtos. Substitui o template único ERP v1.8, com Zonas A–F de altura fixa.)
+**Versão:** 2.1
+**Última atualização:** 2026-10-23 (v2.1 — Content Card existe e entra na Landing e no Dashboard; ilustrações pela `ilustracao`. v2.0 — os templates deixam de ser telas desenhadas e passam a ser **placeholders de zonas**: cada template diz quais organismos entram em cada zona. Vale para todos os produtos. Substitui o template único ERP v1.8, com Zonas A–F de altura fixa.)
 **Fonte Figma:** `HeyN4w209HWh8rfpTDiwyf` (`design system (base)`), página `📐 Templates · placeholders` (`12045:19`), section `Templates Produtos Olist` (`12053:77045`) e folha `Folha de especificação · Templates` (`12046:19`)
 **Metadata legível por máquina:** `references/templates/<template>.json` (8 arquivos)
 
@@ -44,9 +44,9 @@ Um template é um frame de **1366 × 768** com a sidebar à esquerda e uma colun
 
 | Template | Quando usar | Zonas | Organismos principais | Camadas | Frame |
 |---|---|---|---|---|---|
-| **Landing** | Início do produto, atalhos e onboarding | A, B0, B, C–F, R | Page Header, Notice Bar, Content Card\*, Onboarding Checklist\* | — | `12045:22` |
+| **Landing** | Início do produto, atalhos e onboarding | A, B0, B, C–F, R | Page Header, Notice Bar, Content Card, Onboarding Checklist\* | — | `12045:22` |
 | **Landing foco** | Tela sem menu para um objetivo (primeiro uso, ativação) | B (topo simples), C–F | Empty State (primeiro uso), Hero\* | — | `12045:72` |
-| **Dashboard** | Indicadores e gráficos de um período | A, B0, B, C, D, E | KPI Strip, Chart Card, Dashboard Toolbar\* | — | `12045:93` |
+| **Dashboard** | Indicadores e gráficos de um período | A, B0, B, C, D, E | KPI Strip, Chart Card, Content Card, Dashboard Toolbar\* | — | `12045:93` |
 | **List** | Coleção de registros com busca, filtros, seleção e paginação | A, B0, B, C–F, R | Dataset | Action Footer (seleção), Drawer + Overlay | `12045:146` |
 | **Record** | Detalhe e edição de um registro | A, B0, B, D, C–F, G | Tabs, Form Section\*, Dataset, Section Rail\*, Summary Panel\* | Action Footer (alterações) | `12045:196` |
 | **Settings** | Configurações com menu próprio | A (Configurações), B0, B, C–F | Form Section\* | Action Footer (alterações) | `12045:255` |

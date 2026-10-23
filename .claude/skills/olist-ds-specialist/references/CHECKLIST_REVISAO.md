@@ -51,7 +51,7 @@ Use este checklist ao revisar qualquer tela ou componente para consistência vis
 ## 5. Componentes
 
 - [ ] Componentes existentes do DS são reutilizados (não recriados)
-- [ ] Variantes de botão seguem o DS: `type` primary/secondary/tertiary/danger e `size` big (40px) / medium (36px) / small (32px); no máximo 1 primary por tela
+- [ ] Variantes de botão seguem o DS: `type` primary/secondary/tertiary, `intent` default/danger e `size` big (40px) / medium (36px) / small (32px); no máximo 1 primary por tela (o primary danger também conta); `type=danger` não existe mais
 - [ ] Alturas de controle seguem a escala `--globals-size-*` (inputs, select, dropdown, segmented, paginator e tabs em 40px); nenhum controle com 48px
 - [ ] Estilos de input seguem tokens do DS (borda, radius, padding, fonte)
 - [ ] Nenhum componente existe fora da estrutura `src/components/`
@@ -136,6 +136,19 @@ Use este checklist ao revisar qualquer tela ou componente para consistência vis
 - [ ] Floating Action Bar no modo certo (seleção no List; alterações no Record e no Settings) e sem empurrar o layout
 - [ ] Organismos não foram remontados com frames ou instâncias soltas
 - [ ] Product Switch só dentro do Menu Global
+
+## 13. Intenção (danger), Ilustrações e Content Card
+
+- [ ] `intent=danger` só em ação destrutiva ou irreversível (excluir, cancelar documento, estornar); ação comum que "precisa de destaque" usa `type=primary` ou `secondary` com `intent=default`
+- [ ] Ação danger tem rótulo que diz a ação ("Cancelar NFC-e", não "Confirmar") e, se irreversível, pede confirmação (Alert Dialog ou modal): a cor nunca é o único sinal
+- [ ] Nenhum botão, link ou ícone vermelho com RGB ou token solto: sempre `intent=danger` (tokens `negative` só dentro de `button-*` e `link-*`)
+- [ ] Texto danger sobre `surface/container` (4,75:1); sobre `surface/system` o contraste de red 600 é 4,3:1 (abaixo de 4,5:1): prefira container ou documente a exceção
+- [ ] Link: `lead icon` e `action icon` conscientes (a seta de nova página vem ligada por padrão); Link disabled sem sublinhado; lista de ações com divisor usa item de lista, não Link
+- [ ] Ilustração entra só pela `ilustracao` (nunca arte `.[base]` direta, nunca recortada, redimensionada ou recolorida à mão); `tamanho`, `proporção` e `fundo` escolhidos pelo contexto (`ILUSTRACOES.md`, seção 5)
+- [ ] Uma ilustração como foco por tela, um estilo (`color` ou `outline`) por tela, no máximo 3 a 4 cores e sem azul + amarelo + verde juntos (regras do brand)
+- [ ] Ilustração `color` no tema escuro usa `fundo=claro`; `alt` vazio quando decorativa e `alt` curto quando informativa; o único texto de uma instrução nunca fica dentro da imagem
+- [ ] Content Card: superfície `padrão`, `sutil` ou `destaque`; sem card dentro de card; átomos do DS nos slots (nada remontado à mão); layout horizontal só com objeto `xs` 1:1
+- [ ] Content Card clicável é um único elemento interativo e selecionável usa `role="radio"` ou `"checkbox"` com `aria-checked`
 
 ## Níveis de Severidade
 

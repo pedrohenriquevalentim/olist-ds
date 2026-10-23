@@ -47,6 +47,7 @@ Você:
    - Todos os estados obrigatórios do padrão de página entregues
    - **Todos os fills/strokes de frames custom vinculados a variáveis semânticas** via
      `importVariableByKeyAsync` + `setBoundVariableForPaint` — nenhum RGB hardcoded
+   - **Intenção e ilustração:** ação destrutiva usa `intent=danger` (nunca `type=danger`, que não existe, nem cor solta); ilustração só pela moldura `ilustracao` (ver `ILUSTRACOES.md`); Content Card só com átomos do DS nos slots (ver `ORGANISMOS.md`)
    - **Compatibilidade dark mode:** usar get_screenshot com o tema escuro ativo e confirmar
      que nenhum fill/stroke aparece como hex solto no painel de inspeção do Figma
 ```
