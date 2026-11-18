@@ -1,0 +1,68 @@
+{
+  "name": "NotificationCard",
+  "purpose": "Card de uma notificação da central de notificações (ERP e Conta Digital): mostra criticidade, origem, data, mensagem e ações, e indica se já foi lida.",
+  "useWhen": [
+    "Listar um evento individual na central de notificações (Pix recebido, boleto vencendo, falha de integração)",
+    "A notificação precisa comunicar criticidade (informativa, positiva, atenção ou crítica) e estado de leitura",
+    "O usuário precisa agir direto do card: ver detalhes, executar uma ação ou marcar como lida/dispensar"
+  ],
+  "doNotUseWhen": [
+    "Feedback imediato após uma ação do usuário — usar Toast",
+    "Aviso persistente no topo da página ou de uma seção — usar Alert Bar / Notice Bar",
+    "Mensagem que bloqueia o fluxo e exige decisão — usar Alert Dialog ou Modal",
+    "Várias notificações do mesmo tipo em sequência (ex.: vários Pix) — usar NotificationStack para agrupar",
+    "Card genérico de conteúdo — usar Card ou Content Card"
+  ],
+  "pairsWith": [
+    "NotificationStack (agrupa cards do mesmo tipo)",
+    "ButtonIcon (gatilho do menu ⋯)",
+    "Icon (ícone de criticidade, relógio do prazo)",
+    "Bell (ponto de entrada da central)"
+  ],
+  "note": "Lida vs. não lida é por fundo: não lida usa surface/container + ponto azul no ícone; lida usa surface/system e título em texto secundário. Barra lateral de 4px só em warning (yellow-500) e negative (red-500); as demais severidades não têm barra. O menu abre à esquerda do gatilho (240px) com 'Marcar como lida/não lida' (alterna conforme `read`) e 'Dispensar notificação'. O conteúdo reserva 44px à direita para o gatilho do menu.",
+  "variants": {
+    "severity": ["informative", "positive", "warning", "negative"],
+    "read": ["unread", "read"]
+  },
+  "states": {
+    "unread": "Não lida: fundo surface/container, ponto azul sobre o ícone, título em cor de título.",
+    "read": "Lida: fundo surface/system, sem ponto, título em texto secundário.",
+    "menuOpen": "Menu ⋯ aberto: gatilho com anel de foco e lista de ações ancorada à direita."
+  },
+  "slots": {
+    "icon": { "type": "ReactNode", "required": false, "description": "Ícone da criticidade dentro do tile de 40px. Se omitido, usa o ícone padrão da severidade." },
+    "product": { "type": "string", "required": false, "description": "Nome do produto de origem (ex.: Conta Digital)." },
+    "user": { "type": "string", "required": false, "description": "Nome do usuário que originou o evento, ao lado do produto." },
+    "dateTime": { "type": "string", "required": true, "description": "Data e hora já formatadas." },
+    "title": { "type": "string", "required": true, "description": "Título da notificação." },
+    "body": { "type": "ReactNode", "required": false, "description": "Descrição do que aconteceu e o que fazer." },
+    "value": { "type": "string", "required": false, "description": "Valor monetário em destaque (H4), com `valueDetail` como legenda." },
+    "deadline": { "type": "string", "required": false, "description": "Prazo exibido em tag neutra com ícone de relógio." },
+    "status": { "type": "string", "required": false, "description": "Rótulo de status (ex.: pendente) à direita da linha de topo." },
+    "actions": { "type": "ReactNode", "required": false, "description": "Link e/ou botão secundário de ação." },
+    "menuItems": { "type": "NotificationCardMenuItem[]", "required": false, "description": "Itens do menu ⋯. Padrão: marcar como lida/não lida e dispensar." }
+  },
+  "tokens": {
+    "new": [],
+    "existing": [
+      "--color-background-surface-container",
+      "--color-background-surface-system",
+      "--color-border-container-outside",
+      "--color-background-feedback-{informative|positive|warning|negative}-subtle",
+      "--color-background-feedback-{warning|negative}-colored",
+      "--color-text-container-title",
+      "--color-text-container-text",
+      "--color-text-feedback-positive-subtle",
+      "--text-description-*",
+      "--list-*",
+      "--shadow-*",
+      "--focus-border-*",
+      "--badges-notification-size-dot"
+    ]
+  },
+  "figma": {
+    "fileKey": "owpgSb1cmVFt53096jfjvZ",
+    "nodeId": "171:11223",
+    "componentKey": ""
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "name": "NotificationStack",
+  "purpose": "Agrupa notificações do mesmo tipo (ex.: Pix recebidos) em um card-resumo empilhado que expande para a lista de cards individuais.",
+  "useWhen": [
+    "Várias notificações do mesmo tipo chegam em sequência e poluiriam a central (Pix recebidos no dia)",
+    "O usuário precisa do resumo (quantidade, total, tarifas) antes de abrir o detalhe",
+    "A central precisa indicar se o grupo tem itens ainda não lidos"
+  ],
+  "doNotUseWhen": [
+    "Há apenas uma notificação — usar NotificationCard direto",
+    "As notificações são de tipos diferentes ou criticidades diferentes — listar cada uma como NotificationCard",
+    "Agrupar por data, não por tipo — usar cabeçalho de seção da lista",
+    "Conteúdo agrupado que não é notificação — usar Accordion"
+  ],
+  "pairsWith": [
+    "NotificationCard (itens do grupo expandido)",
+    "Link (mostrar todos / mostrar menos)"
+  ],
+  "note": "Recolhido: card-resumo com duas camadas atrás (a mais larga na frente), 16px de respiro inferior. Expandido: cabeçalho com título do grupo + 'mostrar menos', cards recuados 36px com linha-guia vertical de 2px. `leitura=mixed` pinta as camadas atrás com tons de neutro/surface-system e o último card como lido. No DS, a variante `mixed` depende de os itens carregarem seu próprio estado de leitura.",
+  "variants": {
+    "state": ["collapsed", "expanded"],
+    "leitura": ["unread", "mixed"]
+  },
+  "states": {
+    "collapsed": "Resumo do grupo com camadas empilhadas e link 'mostrar todos'.",
+    "expanded": "Cabeçalho do grupo e lista de NotificationCard recuada com linha-guia.",
+    "unread": "Todos os itens do grupo não lidos.",
+    "mixed": "Grupo com itens lidos e não lidos."
+  },
+  "slots": {
+    "groupTitle": { "type": "string", "required": true, "description": "Título do grupo no estado expandido (ex.: Pix recebidos hoje)." },
+    "summary": { "type": "ReactNode", "required": true, "description": "Conteúdo do card-resumo: contagem, valor total e detalhe." },
+    "children": { "type": "ReactNode", "required": true, "description": "NotificationCard dos itens do grupo, exibidos quando expandido." }
+  },
+  "tokens": {
+    "new": [],
+    "existing": [
+      "--color-background-surface-container",
+      "--color-background-surface-system",
+      "--color-background-feedback-neutral-subtle",
+      "--color-border-container-outside",
+      "--color-border-container-inside",
+      "--color-text-container-title",
+      "--text-link-*"
+    ]
+  },
+  "figma": {
+    "fileKey": "owpgSb1cmVFt53096jfjvZ",
+    "nodeId": "207:2379",
+    "componentKey": ""
+  }
+}
