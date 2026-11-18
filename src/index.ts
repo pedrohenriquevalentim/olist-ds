@@ -3,6 +3,8 @@
 // Auto-generated — NÃO edite manualmente
 
 export * from './components/Button';
+export * from './components/ButtonIcon';
+export * from './components/Card';
 export * from './components/Checkbox';
 export * from './components/Chip';
 export * from './components/Icon';
@@ -13,4 +15,6 @@ export * from './components/InputText';
 export * from './components/ItensMenuGlobal';
 export * from './components/Logo';
 export * from './components/MenuGlobal';
+export * from './components/NotificationCard';
+export * from './components/NotificationStack';
 export * from './components/ProdutosOlistIcons';

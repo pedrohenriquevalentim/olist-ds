@@ -2,6 +2,8 @@
 
 export const componentNames = [
   "Button",
+  "ButtonIcon",
+  "Card",
   "Checkbox",
   "Chip",
   "Icon",
@@ -12,6 +14,8 @@ export const componentNames = [
   "ItensMenuGlobal",
   "Logo",
   "MenuGlobal",
+  "NotificationCard",
+  "NotificationStack",
   "ProdutosOlistIcons"
 ] as const;
 

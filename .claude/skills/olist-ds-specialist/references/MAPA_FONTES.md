@@ -1,7 +1,7 @@
 # Mapa de Fontes — Estrutura do Repositório
 
 **Auto-gerado por `npm run build`**  
-**Última atualização:** 2026-10-23  
+**Última atualização:** 2026-11-18  
 **Versão da skill:** 3.25
 
 ---
@@ -110,6 +110,21 @@ src/
 │   │       ├── MenuGlobal.test.tsx
 │   │       ├── MenuGlobal.tsx
 │   │       └── index.ts
+│   ├── NotificationCard/
+│   │       ├── NotificationCard.metadata.json
+│   │       ├── NotificationCard.module.css
+│   │       ├── NotificationCard.stories.module.css
+│   │       ├── NotificationCard.stories.tsx
+│   │       ├── NotificationCard.test.tsx
+│   │       ├── NotificationCard.tsx
+│   │       └── index.ts
+│   ├── NotificationStack/
+│   │       ├── NotificationStack.metadata.json
+│   │       ├── NotificationStack.module.css
+│   │       ├── NotificationStack.stories.tsx
+│   │       ├── NotificationStack.test.tsx
+│   │       ├── NotificationStack.tsx
+│   │       └── index.ts
 │   ├── ProdutosOlistIcons/
 │   │       ├── ProdutosOlistIcons.mdx
 │   │       ├── ProdutosOlistIcons.metadata.json
@@ -142,5 +157,7 @@ src/
 - **ItensMenuGlobal:** `src/components/ItensMenuGlobal/ItensMenuGlobal.tsx`
 - **Logo:** `src/components/Logo/Logo.tsx`
 - **MenuGlobal:** `src/components/MenuGlobal/MenuGlobal.tsx`
+- **NotificationCard:** `src/components/NotificationCard/NotificationCard.tsx`
+- **NotificationStack:** `src/components/NotificationStack/NotificationStack.tsx`
 - **ProdutosOlistIcons:** `src/components/ProdutosOlistIcons/ProdutosOlistIcons.tsx`
 - **Toggle:** `src/components/Toggle/` ⚠️ incompleto

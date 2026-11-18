@@ -1,6 +1,6 @@
 # TOKEN_CATALOG — Catálogo Completo de Tokens
 
-> Auto-gerado por `node scripts/generate-token-catalog.mjs` (chamado por `npm run sync:skill`) a partir de `src/generated/variables.css`. Última geração: 2026-10-23.
+> Auto-gerado por `node scripts/generate-token-catalog.mjs` (chamado por `npm run sync:skill`) a partir de `src/generated/variables.css`. Última geração: 2026-11-18.
 > **ATENÇÃO:** Nomes primitivos têm segmento duplicado (ex: `--color-gray-gray-0`). Tokens semânticos são os corretos para uso em componentes.
 > Valores resolvidos no tema claro; a coluna "escuro" aparece quando o valor muda em `prefers-color-scheme: dark`.
 
