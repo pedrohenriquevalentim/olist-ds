@@ -5,9 +5,6 @@
    ============================ */
 
 .stack {
-  --stack-layer-back-bg: var(--color-background-surface-container);
-  --stack-layer-front-bg: var(--color-background-surface-container);
-
   position: relative;
   display: flex;
   flex-direction: column;
@@ -15,12 +12,6 @@
   box-sizing: border-box;
   width: 100%;
   font-family: var(--font-family-base);
-}
-
-/* Grupo com itens lidos: camadas atrás em tons neutros */
-.mixed {
-  --stack-layer-back-bg: var(--color-background-feedback-neutral-subtle);
-  --stack-layer-front-bg: var(--color-background-surface-system);
 }
 
 /* ============================
@@ -50,14 +41,23 @@
 .layerBack {
   left: var(--shape-spacing-x25-20px);
   right: var(--shape-spacing-x25-20px);
-  background-color: var(--stack-layer-back-bg);
+  background-color: var(--color-background-surface-container);
 }
 
 .layerFront {
   bottom: var(--shape-spacing-x1-8px);
   left: var(--shape-spacing-x1-8px);
   right: var(--shape-spacing-x1-8px);
-  background-color: var(--stack-layer-front-bg);
+  background-color: var(--color-background-surface-container);
+}
+
+/* Grupo com itens lidos: camadas atrás em tons neutros */
+.mixed .layerBack {
+  background-color: var(--color-background-feedback-neutral-subtle);
+}
+
+.mixed .layerFront {
+  background-color: var(--color-background-surface-system);
 }
 
 /* ============================
