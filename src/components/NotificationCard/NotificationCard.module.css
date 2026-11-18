@@ -5,10 +5,6 @@
    ============================ */
 
 .card {
-  --notification-accent: transparent;
-  --notification-tile-bg: var(--color-background-feedback-informative-subtle);
-  --notification-tile-color: var(--color-shape-feedback-informative-subtle);
-
   position: relative;
   box-sizing: border-box;
   width: 100%;
@@ -21,7 +17,7 @@
   content: '';
   position: absolute;
   inset: -1px;
-  border-left: var(--shape-size-x05-4px) solid var(--notification-accent);
+  border-left: var(--shape-size-x05-4px) solid transparent;
   border-radius: inherit;
   clip-path: inset(0 calc(100% - var(--shape-border-radius-x15-12px)) 0 0);
   pointer-events: none;
@@ -55,26 +51,32 @@
    Severidade
    ============================ */
 
-.informative {
-  --notification-tile-bg: var(--color-background-feedback-informative-subtle);
-  --notification-tile-color: var(--color-shape-feedback-informative-subtle);
+.informative .iconTile {
+  background-color: var(--color-background-feedback-informative-subtle);
+  color: var(--color-shape-feedback-informative-subtle);
 }
 
-.positive {
-  --notification-tile-bg: var(--color-background-feedback-positive-subtle);
-  --notification-tile-color: var(--color-shape-feedback-positive-subtle);
+.positive .iconTile {
+  background-color: var(--color-background-feedback-positive-subtle);
+  color: var(--color-shape-feedback-positive-subtle);
 }
 
-.warning {
-  --notification-accent: var(--color-background-feedback-warning-colored);
-  --notification-tile-bg: var(--color-background-feedback-warning-subtle);
-  --notification-tile-color: var(--color-shape-feedback-warning-subtle);
+.warning .iconTile {
+  background-color: var(--color-background-feedback-warning-subtle);
+  color: var(--color-shape-feedback-warning-subtle);
 }
 
-.negative {
-  --notification-accent: var(--color-background-feedback-negative-colored);
-  --notification-tile-bg: var(--color-background-feedback-negative-subtle);
-  --notification-tile-color: var(--color-shape-feedback-negative-subtle);
+.negative .iconTile {
+  background-color: var(--color-background-feedback-negative-subtle);
+  color: var(--color-shape-feedback-negative-subtle);
+}
+
+.warning::before {
+  border-left-color: var(--color-background-feedback-warning-colored);
+}
+
+.negative::before {
+  border-left-color: var(--color-background-feedback-negative-colored);
 }
 
 /* ============================
@@ -96,8 +98,6 @@
   width: var(--shape-size-x5-40px);
   height: var(--shape-size-x5-40px);
   border-radius: var(--shape-border-radius-x1-8px);
-  background-color: var(--notification-tile-bg);
-  color: var(--notification-tile-color);
 }
 
 .dot {
