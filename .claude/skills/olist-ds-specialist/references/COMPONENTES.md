@@ -1,15 +1,15 @@
 # Componentes — API Completa
 
 **Auto-gerado por `npm run build`**
-**Última atualização:** 2026-10-23
-**Versão do pacote:** 1.0.83
+**Última atualização:** 2026-11-18
+**Versão do pacote:** 1.0.84
 **Versão da skill:** 3.25
 
 ---
 
 Este arquivo contém a API completa de todos os componentes do design system.
 
-## Componentes Disponíveis (14)
+## Componentes Disponíveis (16)
 
 ### Button
 
@@ -470,6 +470,96 @@ className?: string;
 ```
 
 **Caminho:** `src/components/MenuGlobal/`
+
+---
+
+### NotificationCard
+
+Card de uma notificação da central de notificações (ERP e Conta Digital): mostra criticidade, origem, data, mensagem e ações, e indica se já foi lida.
+
+**Quando usar:**
+- Listar um evento individual na central de notificações (Pix recebido, boleto vencendo, falha de integração)
+- A notificação precisa comunicar criticidade (informativa, positiva, atenção ou crítica) e estado de leitura
+- O usuário precisa agir direto do card: ver detalhes, executar uma ação ou marcar como lida/dispensar
+
+**Quando NÃO usar:**
+- Feedback imediato após uma ação do usuário — usar Toast
+- Aviso persistente no topo da página ou de uma seção — usar Alert Bar / Notice Bar
+- Mensagem que bloqueia o fluxo e exige decisão — usar Alert Dialog ou Modal
+- Várias notificações do mesmo tipo em sequência (ex.: vários Pix) — usar NotificationStack para agrupar
+- Card genérico de conteúdo — usar Card ou Content Card
+
+**Combina com:** NotificationStack (agrupa cards do mesmo tipo), ButtonIcon (gatilho do menu ⋯), Icon (ícone de criticidade, relógio do prazo), Bell (ponto de entrada da central)
+
+> **Nota:** Lida vs. não lida é por fundo: não lida usa surface/container + ponto azul no ícone; lida usa surface/system e título em texto secundário. Barra lateral de 4px só em warning (yellow-500) e negative (red-500); as demais severidades não têm barra. O menu abre à esquerda do gatilho (240px) com 'Marcar como lida/não lida' (alterna conforme `read`) e 'Dispensar notificação'. O conteúdo reserva 44px à direita para o gatilho do menu.
+
+**Props:**
+```typescript
+severity?: NotificationSeverity;
+isRead?: boolean;
+icon?: React.ReactNode;
+product?: string;
+user?: string;
+dateTime: string;
+title: string;
+body?: React.ReactNode;
+value?: string;
+valueDetail?: string;
+deadline?: string;
+status?: string;
+linkLabel?: string;
+linkHref?: string;
+onLinkClick?: React.MouseEventHandler<HTMLElement>;
+actions?: React.ReactNode;
+menuItems?: NotificationCardMenuItem[];
+isMenuOpen?: boolean;
+onMenuOpenChange?: (isOpen: boolean) => void;
+onToggleRead?: () => void;
+onDismiss?: () => void;
+menuLabel?: string;
+```
+
+**Variantes:**
+```typescript
+type NotificationSeverity = 'informative' | 'positive' | 'warning' | 'negative'
+```
+
+**Caminho:** `src/components/NotificationCard/`
+
+---
+
+### NotificationStack
+
+Agrupa notificações do mesmo tipo (ex.: Pix recebidos) em um card-resumo empilhado que expande para a lista de cards individuais.
+
+**Quando usar:**
+- Várias notificações do mesmo tipo chegam em sequência e poluiriam a central (Pix recebidos no dia)
+- O usuário precisa do resumo (quantidade, total, tarifas) antes de abrir o detalhe
+- A central precisa indicar se o grupo tem itens ainda não lidos
+
+**Quando NÃO usar:**
+- Há apenas uma notificação — usar NotificationCard direto
+- As notificações são de tipos diferentes ou criticidades diferentes — listar cada uma como NotificationCard
+- Agrupar por data, não por tipo — usar cabeçalho de seção da lista
+- Conteúdo agrupado que não é notificação — usar Accordion
+
+**Combina com:** NotificationCard (itens do grupo expandido), Link (mostrar todos / mostrar menos)
+
+> **Nota:** Recolhido: card-resumo com duas camadas atrás (a mais larga na frente), 16px de respiro inferior. Expandido: cabeçalho com título do grupo + 'mostrar menos', cards recuados 36px com linha-guia vertical de 2px. `leitura=mixed` pinta as camadas atrás com tons de neutro/surface-system e o último card como lido. No DS, a variante `mixed` depende de os itens carregarem seu próprio estado de leitura.
+
+**Props:**
+```typescript
+groupTitle: string;
+summary: React.ReactElement<NotificationCardProps>;
+children: React.ReactNode;
+isExpanded?: boolean;
+defaultExpanded?: boolean;
+onExpandedChange?: (isExpanded: boolean) => void;
+expandLabel?: string;
+collapseLabel?: string;
+```
+
+**Caminho:** `src/components/NotificationStack/`
 
 ---
 

@@ -1,8 +1,8 @@
 # Olist Design System — Wiki
 
-**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.83`  
+**Pacote:** `@pedrohenriquevalentim/olist-ds@1.0.84`  
 **Skill:** v3.25  
-**Última atualização:** 2026-10-23  
+**Última atualização:** 2026-11-18  
 **Gerado por:** `npm run wiki` (generate-wiki.mjs)
 
 ---
@@ -32,16 +32,16 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 
 | Métrica | Valor |
 |---|---|
-| Componentes | 14 |
+| Componentes | 16 |
 | Ícones SVG | 556 |
 | Arquivos da Skill | 28 |
 | Arquivos Figma permitidos | 1 |
-| Versão npm | 1.0.83 |
+| Versão npm | 1.0.84 |
 | Versão skill | 3.25 |
 
 ## Componentes
 
-### Lista Completa (14)
+### Lista Completa (16)
 
 - `Button` — `src/components/Button/`
 - `ButtonIcon` — `src/components/ButtonIcon/`
@@ -56,6 +56,8 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 - `ItensMenuGlobal` — `src/components/ItensMenuGlobal/`
 - `Logo` — `src/components/Logo/`
 - `MenuGlobal` — `src/components/MenuGlobal/`
+- `NotificationCard` — `src/components/NotificationCard/`
+- `NotificationStack` — `src/components/NotificationStack/`
 - `ProdutosOlistIcons` — `src/components/ProdutosOlistIcons/`
 
 ### Status de Migração de Ícones
@@ -75,6 +77,8 @@ Combina componentes React, Storybook, skill para Claude, integração com Figma 
 | ItensMenuGlobal | ➖ Sem ícones |
 | Logo | ➖ Sem ícones |
 | MenuGlobal | ➖ Sem ícones |
+| NotificationCard | ➖ Sem ícones |
+| NotificationStack | ➖ Sem ícones |
 | ProdutosOlistIcons | ➖ Sem ícones |
 
 ## Pipeline de Build e Release
@@ -799,4 +803,4 @@ O `SKILL.md` original (726 linhas, 53 KB) era carregado integralmente em toda in
 
 ---
 
-*Gerado automaticamente em 2026-10-23 por `generate-wiki.mjs`. Não edite manualmente.*
+*Gerado automaticamente em 2026-11-18 por `generate-wiki.mjs`. Não edite manualmente.*

@@ -194,7 +194,7 @@ olist-ds/
 │   ├── generated/                       # Cópia do dist/ de packages/design-tokens/ (não editar)
 │   │   ├── variables.css
 │   │   └── tokens.js
-│   ├── components/                      # <!-- AUTO:component-count -->14<!-- /AUTO:component-count --> componentes
+│   ├── components/                      # <!-- AUTO:component-count -->16<!-- /AUTO:component-count --> componentes
 │   │   └── [ComponentName]/
 │   │       ├── ComponentName.tsx
 │   │       ├── ComponentName.module.css
@@ -222,7 +222,7 @@ olist-ds/
 ### Componentes disponíveis
 
 <!-- AUTO:component-list-start -->
-Button, ButtonIcon, Card, Checkbox, Chip, Icon, InputPassword, InputSearch, InputSelect, InputText, ItensMenuGlobal, Logo, MenuGlobal, ProdutosOlistIcons
+Button, ButtonIcon, Card, Checkbox, Chip, Icon, InputPassword, InputSearch, InputSelect, InputText, ItensMenuGlobal, Logo, MenuGlobal, NotificationCard, NotificationStack, ProdutosOlistIcons
 <!-- AUTO:component-list-end -->
 
 ---
